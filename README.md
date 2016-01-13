@@ -21,6 +21,7 @@ This course is designed as a preparation routine for graduate students in Life S
 ### Grading
 
 Participation = 40%
+
 Final project = 60%
 
 ----
@@ -56,7 +57,7 @@ Final project = 60%
 25 | Metagenomics II: Community analysis
 26 | Practicum: Metagenomics
 27 | Project Presentations
-28 | Project presentations
+28 | Project Presentations
 
 -----
 
