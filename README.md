@@ -20,9 +20,8 @@ This course is designed as a preparation routine for graduate students in Life S
 
 ### Grading
 
-Participation = 40%
-
-Final project = 60%
+* Participation = 40%
+* Final project = 60%
 
 ----
 
