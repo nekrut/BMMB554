@@ -1,7 +1,7 @@
 # BMMB554
 ## Introduction to data driven life sciences
 -----
-Schedule/Syllabus
+### Schedule/Syllabus
  
  # | Lecture 
 ---:|:----
