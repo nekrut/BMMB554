@@ -1,19 +1,30 @@
 # BMMB554
 ## Introduction to data driven life sciences
+
 -----
+
 ### Instructor
+
 **Anton Nekrutenko**
 [aun1@psu.edu](mailto:aun1@psu.edu?Subject=BMMB554)
 Wartik 505
 Office hours by appointment only
+
 ----
+
 ### Course description
+
 This course is designed as a preparation routine for graduate students in Life Sciences. It has several focus areas including evolution of life sciences as well as in-depth overview of sequencing technologies and their applications.
+
 ----
+
 ### Grading
+
 Participation = 40%
 Final project = 60%
+
 ----
+
 ### Schedule/Syllabus
  
  # | Lecture 
