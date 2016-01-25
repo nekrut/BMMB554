@@ -31,7 +31,7 @@ This course is designed as a preparation routine for graduate students in Life S
 ---:|:----
 1 | Introduction, Structure, and Grading
 2 | [History I: Genetics and Molecular Biology](https://github.com/nekrut/BMMB554/wiki/Lecture-1)
-3 | History II: Genomics
+3 | [History II: Genomics](https://github.com/nekrut/BMMB554/wiki/Lecture-2)
 4 | Alignment and Assembly I
 5 | Alignment and Assembly II
 6 | Galaxy: Writing your own tools
