@@ -1,0 +1,150 @@
+ digraph 4.22 {
+ orientation=landscape;
+ size = 10;
+ fontname="Helvetica";
+ compound=true;
+
+a1 [shape=circle, label="start", style="filled", color="green"];
+a2 [shape=circle, label=""];
+a3 [shape=circle, label=""];
+a4 [shape=circle, label=""];
+a5 [shape=circle, label=""];
+a6 [shape=circle, label=""];
+a7 [shape=circle, label=""];
+
+b1 [shape=circle, label="end", style="filled", color="green"];
+b2 [shape=circle, label=""];
+b3 [shape=circle, label=""];
+b4 [shape=circle, label=""];
+b5 [shape=circle, label=""];
+b6 [shape=circle, label=""];
+b7 [shape=circle, label=""];
+
+c1 [shape=circle, label=""];
+c2 [shape=circle, label="new\nstart", style="filled", color="cadetblue1"];
+c3 [shape=circle, label=""];
+c4 [shape=circle, label=""];
+c5 [shape=circle, label=""];
+c6 [shape=circle, label=""];
+c7 [shape=circle, label=""];
+
+d1 [shape=circle, label=""];
+d2 [shape=circle, label="new\nend", style="filled", color="cadetblue1"];
+d3 [shape=circle, label=""];
+d4 [shape=circle, label=""];
+d5 [shape=circle, label=""];
+d6 [shape=circle, label=""];
+d7 [shape=circle, label=""];
+
+e1 [shape=circle, label=""];
+e2 [shape=circle, label=""];
+e3 [shape=circle, label=""];
+e4 [shape=circle, label=""];
+e5 [shape=circle, label=""];
+e6 [shape=circle, label=""];
+e7 [shape=circle, label="new\nstart", style="filled", color="red"];
+
+f1 [shape=circle, label=""];
+f2 [shape=circle, label=""];
+f3 [shape=circle, label=""];
+f4 [shape=circle, label=""];
+f5 [shape=circle, label=""];
+f6 [shape=circle, label=""];
+f7 [shape=circle, label="The\nEnd", style="filled", color="red"];
+
+
+subgraph f { 
+label="F";
+f1 -> f2 [color="green", label="1"];
+f2 -> f3 [color="green", label="2"];
+f2 -> f4 [color="blue", label="5"];
+f3 -> f4 [color="green", label="3"];
+f4 -> f1 [color="green", label="4"];
+f4 -> f5 [color="blue", label="6"];
+f5 -> f6 [color="red", label="10"];
+f5 -> f7 [color="blue", label="7"];
+f6 -> f7 [color="red", label="11"];
+f7 -> f2 [color="blue", label="8"];
+f7 -> f5 [color="red", label="9"];
+}
+
+subgraph e { 
+label="E";
+e1 -> e2 [color="green", label="1"];
+e2 -> e3 [color="green", label="2"];
+e2 -> e4 [color="blue", label="5"];
+e3 -> e4 [color="green", label="3"];
+e4 -> e1 [color="green", label="4"];
+e4 -> e5 [color="blue", label="6"];
+e5 -> e6;
+e5 -> e7 [color="blue", label="7"];
+e6 -> e7;
+e7 -> e2 [color="blue", label="8"];
+e7 -> e5;
+}
+
+subgraph d { 
+label="D";
+d1 -> d2 [color="green", label="1"];
+d2 -> d3 [color="green", label="2"];
+d2 -> d4 [color="blue", label="5"];
+d3 -> d4 [color="green", label="3"];
+d4 -> d1 [color="green", label="4"];
+d4 -> d5 [color="blue", label="6"];
+d5 -> d6;
+d5 -> d7 [color="blue", label="7"];
+d6 -> d7;
+d7 -> d2 [color="blue", label="8"];
+d7 -> d5;
+}
+
+subgraph c { 
+label="C";
+c1 -> c2 [color="green", label="1"];
+c2 -> c3 [color="green", label="2"];
+c2 -> c4;
+c3 -> c4 [color="green", label="3"];
+c4 -> c1 [color="green", label="4"];
+c4 -> c5;
+c5 -> c6;
+c5 -> c7;
+c6 -> c7;
+c7 -> c2;
+c7 -> c5;
+}
+
+subgraph b { 
+label="B";
+b1 -> b2 [color="green", label="1"];
+b2 -> b3 [color="green", label="2"];
+b2 -> b4;
+b3 -> b4 [color="green", label="3"];
+b4 -> b1 [color="green", label="4"];
+b4 -> b5;
+b5 -> b6;
+b5 -> b7;
+b6 -> b7;
+b7 -> b2;
+b7 -> b5;
+}
+
+subgraph a { 
+label="A";
+a1 -> a2;
+a2 -> a3;
+a2 -> a4;
+a3 -> a4;
+a4 -> a1;
+a4 -> a5;
+a5 -> a6;
+a5 -> a7;
+a6 -> a7;
+a7 -> a2;
+a7 -> a5;
+}
+
+
+
+
+
+ }

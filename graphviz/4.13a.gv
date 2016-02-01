@@ -1,0 +1,24 @@
+ digraph 4.12 {
+ rankdir=LR;
+ orientation=landscape;
+ size = 10;
+
+a1 [shape=circle, label=""];
+a2 [shape=circle, label=""];
+a3 [shape=circle, label=""];
+a4 [shape=circle, label=""];
+a5 [shape=circle, label=""];
+a6 [shape=circle, label=""];
+a7 [shape=circle, label=""];
+
+a1 -> a2;
+a2 -> a3;
+a3 -> a4;
+a3 -> a7;
+a4 -> a5;
+a5 -> a3;
+a5 -> a7;
+a7 -> a6;
+a6 -> a5;
+
+ }

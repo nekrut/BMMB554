@@ -1,0 +1,47 @@
+ digraph 4.20 {
+ rankdir=LR;
+ orientation=landscape;
+ size = 10;
+ fontname="helvetica";
+
+a1 [shape=circle, label=""];
+a2 [shape=circle, label=""];
+a3 [shape=circle, label=""];
+a4 [shape=circle, label=""];
+a5 [shape=circle, label=""];
+a6 [shape=circle, label=""];
+a7 [shape=circle, label=""];
+b1 [shape=circle, label=""];
+b2 [shape=circle, label=""];
+b3 [shape=circle, label="", style="filled", color="red"];
+b4 [shape=circle, label=""];
+b5 [shape=circle, label=""];
+b6 [shape=circle, label=""];
+b7 [shape=circle, label="", style="filled", color="blue"];
+
+subgraph a { 
+a1 -> a2;
+a2 -> a3;
+a3 -> a4;
+a3 -> a7;
+a4 -> a5;
+a5 -> a3;
+a5 -> a7;
+a7 -> a6;
+a6 -> a5;
+a7 -> a1;
+}
+
+subgraph b { 
+b1 -> b2;
+b2 -> b3;
+b3 -> b4;
+b4 -> b5;
+b5 -> b3;
+b5 -> b7;
+b7 -> b6;
+b6 -> b5;
+b7 -> b1;
+}
+
+ }

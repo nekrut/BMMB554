@@ -1,0 +1,50 @@
+ digraph 4.9 {
+ rankdir=LR;
+ orientation=landscape;
+ size = 10;
+ TAA [shape=circle, label="TAA"];
+ AAT [shape=circle,label="AAT"];
+ ATG1 [shape=circle,label="ATG", fontcolor="green"];
+ TGC [shape=circle,label="TGC"];
+ GCC [shape=circle,label="GCC"];
+ CCA [shape=circle,label="CCA"];
+ CAT [shape=circle,label="CAT"];
+ ATG2 [shape=circle,label="ATG", fontcolor="blue"];
+ TGG [shape=circle,label="TGG"];
+ GGG [shape=circle,label="GGG"];
+ GGA [shape=circle,label="GGA"];
+ GAT [shape=circle,label="GAT"];
+ ATG3 [shape=circle,label="ATG", fontcolor="red"];
+ TGT [shape=circle,label="TGT"];
+ GTT [shape=circle,label="GTT"];
+
+ AAT -> ATG1;
+ AAT -> ATG2 [color="grey"];
+ AAT -> ATG3 [color="grey"];
+ ATG1 -> TGC [color="grey"];
+ ATG1 -> TGG;
+ ATG1 -> TGT [color="grey"];
+ ATG2 -> TGC;
+ ATG2 -> TGG [color="grey"];
+ ATG2 -> TGT [color="grey"];
+ ATG3 -> TGC [color="grey"];
+ ATG3 -> TGG [color="grey"];
+ ATG3 -> TGT;
+ CAT -> ATG1 [color="grey"];
+ CAT -> ATG2 [color="grey"];
+ CAT -> ATG3;
+ CCA -> CAT;
+ GAT -> ATG1 [color="grey"];
+ GAT -> ATG2;
+ GAT -> ATG3 [color="grey"];
+ GCC -> CCA;
+ GGA -> GAT;
+ GGG -> GGA;
+ GGG -> GGG;
+ TAA -> AAT;
+ TGC -> GCC;
+ TGG -> GGG;
+ TGG -> GGA [color="grey"];
+ TGT -> GTT;
+
+ }

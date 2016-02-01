@@ -1,0 +1,40 @@
+ digraph 4.12 {
+ rankdir=LR;
+ orientation=landscape;
+ size = 10;
+
+TA   [shape=circle, label="TA"];
+AA   [shape=circle, label="AA"];
+AT1  [shape=circle, label="AT"];
+TG1  [shape=circle, label="TG"];
+GC   [shape=circle, label="GC"];
+CC   [shape=circle, label="CC"];
+CA   [shape=circle, label="CA"];
+AT2  [shape=circle, label="AT"];
+TG2  [shape=circle, label="TG"];
+GG1  [shape=circle, label="GG"];
+GG2  [shape=circle, label="GG"];
+GA   [shape=circle, label="GA"];
+AT3  [shape=circle, label="AT"];
+TG3  [shape=circle, label="TG"];
+GT   [shape=circle, label="GT"];
+TT   [shape=circle, label="TT"];
+
+
+ TA -> AA [label="TAA"];
+ AA -> AT1 [label="AAT"];
+ AT1 -> TG1 [label="ATG"];
+ TG1 -> GC [label="TGC"];
+ GC -> CC [label="GCC"];
+ CC -> CA [label="CCA"];
+ CA -> AT2 [label="CAT"];
+ AT2 -> TG2 [label="ATG"];
+ TG2 -> GG1 [label="TGG"];
+ GG1 -> GG2 [label="GGG"];
+ GG2 -> GA [label="GGA"];
+ GA -> AT3 [label="GAT"];
+ AT3 -> TG3 [label="ATG"];
+ TG3 -> GT [label="TGT"];
+ GT -> TT [label="GTT"];
+
+ }
