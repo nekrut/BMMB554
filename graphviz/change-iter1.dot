@@ -1,0 +1,23 @@
+ digraph change {
+ 	orientation=landscape;
+ 	size = 10;
+ 	fontname="Helvetica";
+ 	compound=true;
+
+	63 [shape=circle, label="63", style="filled", color="green"];
+	62 [shape=circle, label="62"];
+	58 [shape=circle, label="58"];
+	53 [shape=circle, label="53"];
+	42 [shape=circle, label="42"];
+	38 [shape=circle, label="38"];
+	13 [shape=circle, label="13"];
+
+
+	63 -> 62;
+	63 -> 58;
+	63 -> 53;
+	63 -> 42;
+	63 -> 38;
+	63 -> 13;
+
+ }

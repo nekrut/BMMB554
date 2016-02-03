@@ -1,0 +1,38 @@
+ digraph change2 {
+ 	orientation=landscape;
+ 	size = 10;
+ 	fontname="Helvetica";
+ 	compound=true;
+
+	63 [shape=circle, label="63", style="filled", color="green"];
+	62 [shape=circle, label="62"];
+	58 [shape=circle, label="58"];
+	53 [shape=circle, label="53"];
+	42 [shape=circle, label="42"];
+	38 [shape=circle, label="38"];
+	13 [shape=circle, label="13"];
+
+	61 [shape=circle, label="61", style="filled", color="red"];
+	57 [shape=circle, label="57"];
+	52 [shape=circle, label="52"];
+	41 [shape=circle, label="41"];
+	37 [shape=circle, label="37"];
+	12 [shape=circle, label="12"];
+
+
+	63 -> 62;
+	63 -> 58;
+	63 -> 53;
+	63 -> 42;
+	63 -> 38;
+	63 -> 13;
+
+	62 -> 61;
+	62 -> 57;
+	62 -> 52;
+	62 -> 41;
+	62 -> 37;
+	62 -> 12;
+
+
+ }
