@@ -35,26 +35,27 @@ This course is designed as a preparation routine for graduate students in Life S
 4 | [Alignment and Assembly I: Assembly basics](https://github.com/nekrut/BMMB554/wiki/Lecture-3)
 5 | [Alignment and Assembly II: Alignment basics](https://github.com/nekrut/BMMB554/wiki/Lecture-4)
 6 | [Sequencing: From 454 to PacBio](https://github.com/nekrut/BMMB554/wiki/Lecture-5)
-7 | Galaxy: Writing your own tools
-8 | Nanopores and more
-9 | Re-sequencing I: Dioplid genomes 
-10 | Re-sequencing II: Non-diploid mixtures
-11 | Practicum: Re-sequencing
-12 | Transcriptomics I: Refrence-based
-13 | Transcriptomics II: Reference-free
-14 | Practicum: Transcriptomics
-15 | RNA analysis: RiboSeq and ShapeSeq
-16 | Practicum: RNA analysis
-17 | DNA/Protein interactions I: Approaches
-18 | DNA/Protein interactions II: ENCODE Project
-19 | Practicum: DNA/Protein interactions
-20 | Genome conformation analysis
-21 | Practicum: Genome conformation analysis
-22 | Metagenomics I: Approaches
-23 | Metagenomics II: Community analysis
-24 | Practicum: Metagenomics
-25 | Project Presentations
+7 | [Galaxy: An introduction](http://usegalaxy.org/galaxy101)
+8 | [Galaxy: Writing your own tools](https://planemo.readthedocs.org/en/latest/)
+9 | Nanopores and more
+10 | Re-sequencing I: Dioplid genomes 
+11 | Re-sequencing II: Non-diploid mixtures
+12 | Practicum: Re-sequencing
+13 | Transcriptomics I: Refrence-based
+14 | Transcriptomics II: Reference-free
+15 | Practicum: Transcriptomics
+16 | RNA analysis: RiboSeq and ShapeSeq
+17 | Practicum: RNA analysis
+18 | DNA/Protein interactions I: Approaches
+19 | DNA/Protein interactions II: ENCODE Project
+20 | Practicum: DNA/Protein interactions
+21 | Genome conformation analysis
+22 | Practicum: Genome conformation analysis
+23 | Metagenomics I: Approaches
+24 | Metagenomics II: Community analysis
+25 | Practicum: Metagenomics
 26 | Project Presentations
+27 | Project Presentations
 
 -----
 
