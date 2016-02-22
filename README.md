@@ -37,7 +37,7 @@ This course is designed as a preparation routine for graduate students in Life S
 6 | [Sequencing: From 454 to PacBio](https://github.com/nekrut/BMMB554/wiki/Lecture-5)
 7 | [Galaxy: An introduction](http://usegalaxy.org/galaxy101)
 8 | [Galaxy: Writing your own tools](https://planemo.readthedocs.org/en/latest/writing_appliance.html)
-9 | Nanopores and more
+9 | [Nanopores and more](https://github.com/nekrut/BMMB554/wiki/Lecture-6)
 10 | Re-sequencing I: Dioplid genomes 
 11 | Re-sequencing II: Non-diploid mixtures
 12 | Practicum: Re-sequencing
