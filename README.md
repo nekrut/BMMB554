@@ -38,8 +38,8 @@ This course is designed as a preparation routine for graduate students in Life S
 7 | [Galaxy: An introduction](http://usegalaxy.org/galaxy101)
 8 | [Galaxy: Writing your own tools](https://planemo.readthedocs.org/en/latest/writing_appliance.html)
 9 | [Nanopores and more](https://github.com/nekrut/BMMB554/wiki/Lecture-6)
-10 | Re-sequencing I: Dioplid genomes 
-11 | Re-sequencing II: Non-diploid mixtures
+10 | Re-sequencing I: Non-dioplid mixtures 
+11 | Re-sequencing II: Diploid genomes
 12 | Practicum: Re-sequencing
 13 | Transcriptomics I: Refrence-based
 14 | Transcriptomics II: Reference-free
