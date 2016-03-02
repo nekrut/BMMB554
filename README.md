@@ -40,7 +40,7 @@ This course is designed as a preparation routine for graduate students in Life S
 9 | [Nanopores and more](https://github.com/nekrut/BMMB554/wiki/Lecture-6)
 10 | [Re-sequencing I: Introduction and non-diploid case](https://github.com/nekrut/BMMB554/wiki/7.-NGS-Processing:-QC,-Mapping,-etc.)
 11 | Re-sequencing II: Diploid genomes
-12 | [Practicum: Re-sequencing](https://github.com/nekrut/BMMB554/wiki/7.-NGS-Processing:-QC,-Mapping,-etc.)
+12 | [Practicum: Re-sequencing](https://github.com/nekrut/BMMB554/wiki/8.-Non-diploid-variant-calling)
 13 | Transcriptomics I: Refrence-based
 14 | Transcriptomics II: Reference-free
 15 | Practicum: Transcriptomics
