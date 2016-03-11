@@ -1,0 +1,54 @@
+ graph trie_a {
+ rankdir=LR;
+ orientation=landscape;
+ size = 10;
+
+1   [shape=circle, label="root"];
+2   [shape=circle, label=""];
+3   [shape=circle, label=""];
+4   [shape=circle, label=""];
+5   [shape=circle, label=""];
+6   [shape=circle, label=""];
+7   [shape=circle, label=""];
+8   [shape=circle, label="",color="green"];
+9   [shape=circle, label="",color="green"];
+10  [shape=circle, label="",color="green"];
+11  [shape=circle, label="",color="green"];
+12  [shape=circle, label="",color="green"];
+13  [shape=circle, label="",color="green"];
+14  [shape=circle, label="",color="green"];
+15  [shape=circle, label=""];
+16  [shape=circle, label=""];
+17  [shape=circle, label=""];
+18  [shape=circle, label=""];
+19  [shape=circle, label="", color="blue"];
+20  [shape=circle, label=""];
+21  [shape=circle, label=""];
+22  [shape=circle, label=""];
+
+ 1 -- 2 [label="b"];
+ 2 -- 3 [label="a"];
+ 3 -- 4 [label="a"];
+ 4 -- 5 [label="b"];
+ 5 -- 6 [label="a"];
+ 6 -- 7 [label="$"];
+
+ 1 -- 8 [label="a", color="green", penwidth=3.0];
+ 8 -- 9 [label="b", color="green",penwidth=3.0];
+ 9 -- 10 [label="a", color="green", penwidth=3.0];
+ 10 -- 11 [label="a", color="green", penwidth=3.0];
+ 11 -- 12 [label="b", color="green", penwidth=3.0];
+ 12 -- 13 [label="a", color="green", penwidth=3.0];
+ 13 -- 14 [label="$", color="green", penwidth=3.0];
+
+ 8 -- 15 [label="a"];
+ 15 -- 16  [label="b"];
+ 16 -- 17 [label="a"];
+ 17 -- 18 [label="$"];
+
+ 8 -- 22 [label="$"];
+ 10 -- 21 [label="$"];
+ 1 -- 19 [label="$", color="blue", penwidth=3.0];
+ 3 -- 20 [label="$"];
+
+ }
