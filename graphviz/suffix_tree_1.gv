@@ -1,0 +1,28 @@
+ graph tree_1 {
+ rankdir=LR;
+ orientation=landscape;
+ size = 10;
+
+1   [shape=circle, label="root"];
+2   [shape=circle, label=""];
+3   [shape=circle, label="", style="filled", color="black"];
+4   [shape=circle, label=""];
+5   [shape=circle, label=""];
+6   [shape=circle, label="", style="filled", color="black"];
+7   [shape=circle, label="", style="filled", color="black"];
+8   [shape=circle, label="", style="filled", color="black"];
+9   [shape=circle, label="", style="filled", color="black"];
+
+ 1 -- 2 [label="ba"];
+ 2 -- 3 [label="aba$"];
+ 
+ 1 -- 4 [label="a"];
+ 4 -- 5 [label="ba"];
+ 5 -- 6 [label="aba$"];
+
+ 1 -- 7 [label="$"];
+ 2 -- 8 [label="$"];
+ 5 -- 9 [label="$"];
+  
+
+ }
