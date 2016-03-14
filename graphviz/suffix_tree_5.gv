@@ -15,8 +15,8 @@
 10  [shape="square", label="0", color="green"];
 11  [shape="square", label="6"];
 
- 1 -- 2 [label="BA"];
- 2 -- 3 [label="Aba$"];
+ 1 -- 2 [label="ba"];
+ 2 -- 3 [label="aba$"];
  2 -- 4 [label="$"];
  
  1 -- 5 [label="a",color="green", penwidth="3.0"];
