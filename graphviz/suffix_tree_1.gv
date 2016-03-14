@@ -3,17 +3,17 @@
  orientation=landscape;
  size = 10;
 
-1   [shape=circle, label="root"];
-2   [shape=circle, label=""];
-3   [shape=circle, label="", style="filled", color="black"];
-4   [shape=circle, label=""];
-5   [shape=circle, label=""];
-6   [shape=circle, label="", style="filled", color="black"];
-7   [shape=circle, label="", style="filled", color="black"];
-8   [shape=circle, label=""];
-9   [shape=circle, label="", style="filled", color="black"];
-10  [shape=circle, label="", style="filled", color="black"];
-11  [shape=circle, label="", style="filled", color="black"];
+1   [shape="circle", label="root"];
+2   [shape="circle", label=""];
+3   [shape="circle", style="filled", color="black", label=""];
+4   [shape="circle", style="filled", color="black", label=""];
+5   [shape="circle", label=""];
+6   [shape="circle", style="filled", color="black", label=""];
+7   [shape="circle", style="filled", color="black", label=""];
+8   [shape="circle", label=""];
+9   [shape="circle", style="filled", color="black", label=""];
+10  [shape="circle", style="filled", color="black", label=""];
+11  [shape="circle", style="filled", color="black", label=""];
 
  1 -- 2 [label="ba"];
  2 -- 3 [label="aba$"];

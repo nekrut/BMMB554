@@ -3,26 +3,31 @@
  orientation=landscape;
  size = 10;
 
-1   [shape=circle, label="root"];
-2   [shape=circle, label=""];
-3   [shape=circle, label="", style="filled", color="black"];
-4   [shape=circle, label=""];
-5   [shape=circle, label=""];
-6   [shape=circle, label="", style="filled", color="black"];
-7   [shape=circle, label="", style="filled", color="black"];
-8   [shape=circle, label="", style="filled", color="black"];
-9   [shape=circle, label="", style="filled", color="black"];
+1   [shape="circle", label="root"];
+2   [shape="circle", label=""];
+3   [shape="square", label="1"];
+4   [shape="square", label="4"];
+5   [shape="circle", label=""];
+6   [shape="square", label="5"];
+7   [shape="square", label="2"];
+8   [shape="circle", label=""];
+9   [shape="square", label="3"];
+10  [shape="square", label="0"];
+11  [shape="square", label="6"];
 
- 1 -- 2 [label="(1,2)"];
- 2 -- 3 [label="(3,4)"];
+ 1 -- 2 [label="ba"];
+ 2 -- 3 [label="aba$"];
+ 2 -- 4 [label="$"];
  
- 1 -- 4 [label="(0,1)"];
- 4 -- 5 [label="(1,2)"];
- 5 -- 6 [label="(3,4)"];
+ 1 -- 5 [label="a"];
+ 5 -- 6 [label="$"];
+ 5 -- 7 [label="aba$"];
+ 5 -- 8 [label="ba"];
+ 8 -- 9 [label="$"];
+ 8 -- 10 [label="aba$"];
 
- 1 -- 7 [label="(6,1)"];
- 2 -- 8 [label="(6,1)"];
- 5 -- 9 [label="(6,1)"];
+ 1 -- 11 [label="$"];
+ 
   
 
  }
