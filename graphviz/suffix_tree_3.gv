@@ -1,0 +1,33 @@
+ graph tree_3 {
+ rankdir=LR;
+ orientation=landscape;
+ size = 10;
+
+1   [shape="circle", label="root"];
+2   [shape="circle", label=""];
+3   [shape="square", label="1"];
+4   [shape="square", label="4"];
+5   [shape="circle", label=""];
+6   [shape="square", label="5"];
+7   [shape="square", label="2"];
+8   [shape="circle", label=""];
+9   [shape="square", label="3"];
+10  [shape="square", label="0"];
+11  [shape="square", label="6"];
+
+ 1 -- 2 [label="BA", color="blue", penwidth="3.0"];
+ 2 -- 3 [label="Aba$", color="blue", penwidth="3.0"];
+ 2 -- 4 [label="$"];
+ 
+ 1 -- 5 [label="a"];
+ 5 -- 6 [label="$"];
+ 5 -- 7 [label="aba$"];
+ 5 -- 8 [label="ba"];
+ 8 -- 9 [label="$"];
+ 8 -- 10 [label="aba$"];
+
+ 1 -- 11 [label="$"];
+ 
+  
+
+ }
