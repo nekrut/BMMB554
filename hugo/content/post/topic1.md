@@ -75,7 +75,7 @@ Delbück and Luria's experience with estimating such ratio has proven to be diff
 
 Average | Variance
 :----|:------------
-{{< figure src="/img/average.png">}} | {{< figure src="/img/variance.png">}} 
+{{< figure src="img/average.png">}} | {{< figure src="img/variance.png">}} 
 Notation 6-3 | Notation 6-4 (from Stent's Molecular Genetics)
 
 The behaviour of ratio of `variance/average` is critical to distinguishing between hypothesis (1) and (2). If (1) is true we expect low fluctuation and the ratio will be close to 1. If (2) is true the variation will be considerable and the ratio will be much higher than one. Look at Fig. 1 below. 
@@ -84,7 +84,7 @@ The behaviour of ratio of `variance/average` is critical to distinguishing betwe
 
 Figure 1 | Table 1
 :----|:------------
-{{< figure src="/img/luria.png">}} | {{< figure src="/img/stent.png">}}
+{{< figure src="img/luria.png">}} | {{< figure src="img/stent.png">}}
 Fig. 6-4 | Table 6-1 (from Stent's Molecular Genetics)
 
 Table 1 settles these issues. Here one can a significant fluctuation across 20 independent experiments with the main of `11.3` and variance/mean ratio of `61`. This table also show the result of plating aliquots from a bulk culture. In this case 10 ml culture was incubated for the same duration as the 20 independent cultures. Small amount from this culture wete then plated on 10 independent plates. Because these cells share their genetic ancestry there is very little variation across these platings. 
