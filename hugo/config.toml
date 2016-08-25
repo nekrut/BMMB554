@@ -1,0 +1,53 @@
+baseurl = "http://nekrut.github.io/BMMB554/"
+languageCode = "en-us"
+title = "BMMB554 | Fall 2016"
+theme = "hugo-type-theme"
+# Enable comments by entering your Disqus shortname
+#disqusShortname = "spf13"
+# Add your tracking code to enable Google Analytics
+#googleAnalytics = ""
+# Posts per page
+paginate = 10
+
+
+[params]
+	author = "Anton Nekrutenko"
+	description = "Introduction to data driven life sciences"
+	# The keywords will be added as a meta tag. Delimit them with a comma.
+	keywords = "genomes, genetics, ngs, data analysis"
+	# Either show custom avatar on the top
+	# left by adding the filename in below
+	avatar = "img/gxy.png"
+	# or use Gravatar by adding your email address to generate a unique avatar
+	#gravatar = "your@email.com"
+
+	headerText = "This course is designed as a preparation routine for graduate students in Life Sciences. It has several focus areas including evolution of life sciences as well as in-depth overview of sequencing technologies and their applications. It is organized as a blog: each new lecture will appear as a new post."
+	# To add a header background to the main site, save your image under static/img/.
+	# If now image path is provided, a orange background will be shown instead.
+	headerImage = ""
+	copyright = "Released under the MIT license<br>Powered by [Hugo](//gohugo.io/) with the [Type Theme](//github.com/digitalcraftsman/hugo-type-theme)"
+
+
+	[params.social]
+		# Insert your accout name and the icon will be shown in the right menu
+		#rss = true
+		homepage = true
+		email = "aun1@psu.edu"
+		behance = ""
+		bitbucket  =""
+		dribbble = ""
+		facebook = ""
+		flickr = ""
+		github = "nekrut"
+		googleplus = ""
+		instagram = ""
+		linkedin = ""
+		pinterest = ""
+		reddit = ""
+		soundcloud = ""
+		stackexchange = ""
+		steam = ""
+		tumblr = ""
+		twitter = "galaxyproject"
+		wordpress = ""
+		youtube = ""
