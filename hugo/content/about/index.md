@@ -34,8 +34,8 @@ This course is designed as a preparation routine for graduate students in Life S
 We will cover a breadth of topics. Below is the approaximate list. Keep in mind that this field is very dymanic. To account for that we may skip or extend some of the subjects.
 
 
-1. Introduction, Structure, and Grading
-2. History I: Genetics and Molecular Biology
+
+1. History I: Genetics and Molecular Biology
 3. History II: Genomics
 4. Alignment and Assembly I: Assembly basics
 5. Alignment and Assembly II: Alignment basics
