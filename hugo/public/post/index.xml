@@ -124,16 +124,16 @@
 &lt;li&gt;The resistance is preserved when descendants of these cells are incubated.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;This can, in principle, be explained by two mutually exclusive hypothesis:&lt;/p&gt;
+&lt;p&gt;This can, in principle, be explained by two mutually exclusive hypotheses:&lt;/p&gt;
 
-&lt;h2 id=&#34;acquired-resistance-vs-spontaneous-mutation-two-hypothesis&#34;&gt;Acquired resistance vs. spontaneous mutation: Two hypothesis&lt;/h2&gt;
+&lt;h2 id=&#34;acquired-resistance-vs-spontaneous-mutation&#34;&gt;Acquired resistance vs. spontaneous mutation&lt;/h2&gt;
 
 &lt;ol&gt;
-&lt;li&gt;direct action of phage on bacteria triggers &amp;ldquo;acquisition&amp;rdquo; of resistance;&lt;/li&gt;
+&lt;li&gt;direct action of phage on bacteria triggers &amp;ldquo;acquisition&amp;rdquo; of the resistance;&lt;/li&gt;
 &lt;li&gt;some cells in a population already have a mutation conferring the resistance and the exposure to the phage merely brings carriers of such mutations to prominence by killing off all sensitive cells.&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;How can we distinguish between these two alternative hypothesis. Let&amp;rsquo;s try to put hypothesis (1) into quantitative framework:&lt;/p&gt;
+&lt;p&gt;How can we distinguish between these two alternative possibilities? Let&amp;rsquo;s try to put hypothesis (1) into quantitative framework:&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;There are two bacterial phenotypes: &lt;code&gt;S&lt;/code&gt; - sensitive (is lysed by the phage) and &lt;code&gt;R&lt;/code&gt; - resistant (is not lysed and does not absorb phage)&lt;/li&gt;
@@ -141,7 +141,7 @@
 &lt;li&gt;The probability of changing from &lt;code&gt;S&lt;/code&gt; to &lt;code&gt;R&lt;/code&gt; is &lt;em&gt;&lt;code&gt;a&lt;/code&gt;&lt;/em&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;So, if one grows &lt;code&gt;S&lt;/code&gt; bacteria in a culture and then plates them on agar containing excess of phage, where will be &lt;em&gt;&lt;code&gt;n&lt;/code&gt;&lt;/em&gt; of &lt;code&gt;R&lt;/code&gt; colonies, where &lt;em&gt;&lt;code&gt;n&lt;/code&gt;&lt;/em&gt; = &lt;em&gt;&lt;code&gt;aN&lt;/code&gt;&lt;/em&gt;. Since we can estimate &lt;em&gt;&lt;code&gt;n&lt;/code&gt;&lt;/em&gt; directly (by counting) and &lt;em&gt;&lt;code&gt;N&lt;/code&gt;&lt;/em&gt; is also known (a function of the number of generations) the fraction of &lt;code&gt;R&lt;/code&gt; individuals in a population is going to be same for all stages of the population:&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;So, if one grows &lt;code&gt;S&lt;/code&gt; bacteria in a culture and then plates them on agar containing excess of phage, where will be &lt;em&gt;&lt;code&gt;n&lt;/code&gt;&lt;/em&gt; of &lt;code&gt;R&lt;/code&gt; colonies, where &lt;em&gt;&lt;code&gt;n&lt;/code&gt;&lt;/em&gt; = &lt;em&gt;&lt;code&gt;aN&lt;/code&gt;&lt;/em&gt;. Since we can estimate &lt;em&gt;&lt;code&gt;n&lt;/code&gt;&lt;/em&gt; directly (by counting colonies on the plate) and &lt;em&gt;&lt;code&gt;N&lt;/code&gt;&lt;/em&gt; is also known (a function of the number of generations) the fraction of &lt;code&gt;R&lt;/code&gt; individuals in a population is going to be same for all stages of the population:&lt;br&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;&lt;code&gt;n/N&lt;/code&gt;&lt;/em&gt; = &lt;em&gt;&lt;code&gt;a&lt;/code&gt;&lt;/em&gt;&lt;/p&gt;
 
@@ -223,7 +223,7 @@
 &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;p&gt;Table 1 settles these issues. Here one can a significant fluctuation across 20 independent experiments with the main of &lt;code&gt;11.3&lt;/code&gt; and variance/mean ratio of &lt;code&gt;61&lt;/code&gt;. This table also show the result of plating aliquots from a bulk culture. In this case 10 ml culture was incubated for the same duration as the 20 independent cultures. Small amount from this culture wete then plated on 10 independent plates. Because these cells share their genetic ancestry there is very little variation across these platings.&lt;/p&gt;
+&lt;p&gt;Table 1 settles these issues. Here one can see a significant fluctuation across 20 independent experiments with the main of &lt;code&gt;11.3&lt;/code&gt; and variance/mean ratio of &lt;code&gt;61&lt;/code&gt;. This table also show the result of plating aliquots from a bulk culture. In this case 10 ml culture was incubated for the same duration as the 20 independent cultures. Small amount from this culture were then plated on 10 independent plates. Because these cells share their genetic ancestry there is very little variation across these platings.&lt;/p&gt;
 
 &lt;p&gt;This paper settled one of the most contentious issues in biology and won the Nobel prize to its authors.&lt;/p&gt;
 
@@ -260,7 +260,7 @@
 
 &lt;p&gt;Complete &lt;a href=&#34;https://goo.gl/forms/V6xQ1DMsWPc27yZq1&#34;&gt;this Quiz&lt;/a&gt;. You have a week (until the midnight of Sept 6) to finish it.&lt;/p&gt;
 
-&lt;h1 id=&#34;sequencing-is-our-next-topic&#34;&gt;Sequencing is our next topic&lt;/h1&gt;
+&lt;h1 id=&#34;next-generation-sequencing-ngs-is-our-next-topic&#34;&gt;Next Generation Sequencing (NGS) is our next topic&lt;/h1&gt;
 
 &lt;p&gt;To be posted Sept 1.&lt;/p&gt;
 </description>

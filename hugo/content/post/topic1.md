@@ -57,20 +57,20 @@ It has been know for some time that:
 * Bacteria sensitive (infectable) by phage becomes resistant as a result of exposure to bacteriophage;
 * The resistance is preserved when descendants of these cells are incubated.
 
-This can, in principle, be explained by two mutually exclusive hypothesis:
+This can, in principle, be explained by two mutually exclusive hypotheses:
 
-## Acquired resistance vs. spontaneous mutation: Two hypothesis
+## Acquired resistance vs. spontaneous mutation
 
-1. direct action of phage on bacteria triggers "acquisition" of resistance;
+1. direct action of phage on bacteria triggers "acquisition" of the resistance;
 2. some cells in a population already have a mutation conferring the resistance and the exposure to the phage merely brings carriers of such mutations to prominence by killing off all sensitive cells. 
 
-How can we distinguish between these two alternative hypothesis. Let's try to put hypothesis (1) into quantitative framework:
+How can we distinguish between these two alternative possibilities? Let's try to put hypothesis (1) into quantitative framework:
 
 * There are two bacterial phenotypes: `S` - sensitive (is lysed by the phage) and `R` - resistant (is not lysed and does not absorb phage)
 * Bacterial population progresses from a single cell to _`N`_ cells
 * The probability of changing from `S` to `R` is _`a`_
 
-So, if one grows `S` bacteria in a culture and then plates them on agar containing excess of phage, where will be _`n`_ of `R` colonies, where _`n`_ = _`aN`_. Since we can estimate _`n`_ directly (by counting) and _`N`_ is also known (a function of the number of generations) the fraction of `R` individuals in a population is going to be same for all stages of the population:<br>
+So, if one grows `S` bacteria in a culture and then plates them on agar containing excess of phage, where will be _`n`_ of `R` colonies, where _`n`_ = _`aN`_. Since we can estimate _`n`_ directly (by counting colonies on the plate) and _`N`_ is also known (a function of the number of generations) the fraction of `R` individuals in a population is going to be same for all stages of the population:<br>
 
 _`n/N`_ = _`a`_
 
@@ -92,7 +92,7 @@ Figure 1 | Table 1
 {{< figure src="img/luria.png">}} | {{< figure src="img/stent.png">}}
 Fig. 6-4 | Table 6-1 (from Stent's Molecular Genetics)
 
-Table 1 settles these issues. Here one can a significant fluctuation across 20 independent experiments with the main of `11.3` and variance/mean ratio of `61`. This table also show the result of plating aliquots from a bulk culture. In this case 10 ml culture was incubated for the same duration as the 20 independent cultures. Small amount from this culture wete then plated on 10 independent plates. Because these cells share their genetic ancestry there is very little variation across these platings. 
+Table 1 settles these issues. Here one can see a significant fluctuation across 20 independent experiments with the main of `11.3` and variance/mean ratio of `61`. This table also show the result of plating aliquots from a bulk culture. In this case 10 ml culture was incubated for the same duration as the 20 independent cultures. Small amount from this culture were then plated on 10 independent plates. Because these cells share their genetic ancestry there is very little variation across these platings. 
 
 This paper settled one of the most contentious issues in biology and won the Nobel prize to its authors.
 
@@ -123,6 +123,6 @@ Read two following papers:
 
 Complete [this Quiz](https://goo.gl/forms/V6xQ1DMsWPc27yZq1). You have a week (until the midnight of Sept 6) to finish it.
 
-# Sequencing is our next topic 
+# Next Generation Sequencing (NGS) is our next topic 
 
 To be posted Sept 1.
