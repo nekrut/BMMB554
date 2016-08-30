@@ -35,11 +35,10 @@ We will cover a breadth of topics. Below is the approaximate list. Keep in mind 
 
 
 
-1. History I: Genetics and Molecular Biology
-3. History II: Genomics
+1. History: From Genetics to Genomics
+2. Sequencing: From Sanger to Nanopores
 4. Alignment and Assembly I: Assembly basics
 5. Alignment and Assembly II: Alignment basics
-6. Sequencing: From 454 to PacBio
 7. Galaxy: An introduction
 8. Galaxy: Writing your own tools
 9. Nanopores and more
