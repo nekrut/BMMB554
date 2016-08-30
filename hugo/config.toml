@@ -5,7 +5,7 @@ theme = "hugo-type-theme"
 # Enable comments by entering your Disqus shortname
 #disqusShortname = "spf13"
 # Add your tracking code to enable Google Analytics
-#googleAnalytics = ""
+googleAnalytics = "UA-83364979-1"
 # Posts per page
 paginate = 10
 
