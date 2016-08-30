@@ -6,6 +6,7 @@ featureimage = "img/luria_small.png"
 menu = ""
 tags = ["history","genetics","DNA"]
 title = "History"
+description = "Topic 1 | History. From Genetics to Genomics"
 
 +++
 
@@ -16,6 +17,8 @@ title = "History"
 3. Browse through slides at the bottom;
 4. In the beginning of next week (August 29) I will post a video and the first homework;
 5. Next lecture will be poseted on Thursday Sept 1st.
+
+------
 
 # Why history?
 
@@ -42,6 +45,8 @@ Year | Publication
 2001 | [The double helix](http://www.amazon.com/The-Double-Helix-Discovery-Structure/dp/074321630X)
 2005 | [The Third Man of the Double Helix](http://www.amazon.com/Third-Man-Double-Helix-Autobiography/dp/019280667X)
 2014 | [Brave Genius](http://www.amazon.com/Brave-Genius-Philosopher-Adventures-Resistance/dp/0307952347)
+
+------
 
 # Publication highlight | The fluctuation test
 
@@ -91,10 +96,33 @@ Table 1 settles these issues. Here one can a significant fluctuation across 20 i
 
 This paper settled one of the most contentious issues in biology and won the Nobel prize to its authors.
 
+-----
+
 # Slides
 
-Browse through these. A full video with these slides will be posted late on Monday.
+Slides covering material for Topic 1
 
 {{< speakerdeck 7726e8b8b3ee41f0a2a1497128d59ca0 >}}
 
+------
 
+# Video
+
+Video presentation (actual lecture). Uses slides from above.
+
+{{< vimeo 180735569 >}}
+
+------
+
+# Homework
+
+Read two following papers:
+
+* "DNA sequencing with chain-terminating inhibitors" by Sanger, Nicklen, and Coulson ([1977](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC431765/pdf/pnas00043-0271.pdf))
+* "A new method for sequencing DNA" by Maxam and Gilbert ([1977](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC392330/pdf/pnas00024-0174.pdf))
+
+Complete [this Quiz](https://goo.gl/forms/V6xQ1DMsWPc27yZq1). You have a week (until the midnight of Sept 6) to finish it.
+
+# Sequencing is our next topic 
+
+To be posted Sept 1.
