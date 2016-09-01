@@ -16,25 +16,21 @@ Knowing history is essential for understanding how we arrived to the current sta
 
 ## Classical publications
 
-Year | Publication
-----:|:------------
-1965 | [A history of genetics](http://www.amazon.com/A-History-Genetics-A-H-Sturtevant/dp/0879696079)
-1943 | [Delbruck & Luria](http://www.bx.psu.edu/~anton/bioinf1-2014/delbruck-luria-1943.pdf)
-1944 | [Avery, MacLeod, & McCarty](http://www.bx.psu.edu/~anton/bioinf1-2014/avery-1944.pdf)
-1952 | [Herhey & Chase](http://www.bx.psu.edu/~anton/bioinf1-2014/hershey-chase-1952.pdf)
-1953 | [Watson & Crick](http://www.bx.psu.edu/~anton/bioinf1-2014/watsoncrick.pdf)
-1958 | [Meselson & Stahl](http://www.bx.psu.edu/~anton/bioinf1-2014/Proc%20Natl%20Acad%20Sci%20USA%201958%20Meselson.pdf)
-1960 | [Jacob and Monod](http://www.bx.psu.edu/~anton/bioinf1-2014/jacob-monod-1961.pdf)
+* 1965 | [A history of genetics](http://www.amazon.com/A-History-Genetics-A-H-Sturtevant/dp/0879696079)
+* 1943 | [Delbruck & Luria](http://www.bx.psu.edu/~anton/bioinf1-2014/delbruck-luria-1943.pdf)
+* 1944 | [Avery, MacLeod, & McCarty](http://www.bx.psu.edu/~anton/bioinf1-2014/avery-1944.pdf)
+* 1952 | [Herhey & Chase](http://www.bx.psu.edu/~anton/bioinf1-2014/hershey-chase-1952.pdf)
+* 1953 | [Watson & Crick](http://www.bx.psu.edu/~anton/bioinf1-2014/watsoncrick.pdf)
+* 1958 | [Meselson & Stahl](http://www.bx.psu.edu/~anton/bioinf1-2014/Proc%20Natl%20Acad%20Sci%20USA%201958%20Meselson.pdf)
+* 1960 | [Jacob and Monod](http://www.bx.psu.edu/~anton/bioinf1-2014/jacob-monod-1961.pdf)
 
 ## Popular (yet very informative) literature
 
 Get one of these and read it on a plane:
 
-Year | Publication
-----:|:------------
-2001 | [The double helix](http://www.amazon.com/The-Double-Helix-Discovery-Structure/dp/074321630X)
-2005 | [The Third Man of the Double Helix](http://www.amazon.com/Third-Man-Double-Helix-Autobiography/dp/019280667X)
-2014 | [Brave Genius](http://www.amazon.com/Brave-Genius-Philosopher-Adventures-Resistance/dp/0307952347)
+* 2001 | [The double helix](http://www.amazon.com/The-Double-Helix-Discovery-Structure/dp/074321630X)
+* 2005 | [The Third Man of the Double Helix](http://www.amazon.com/Third-Man-Double-Helix-Autobiography/dp/019280667X)
+* 2014 | [Brave Genius](http://www.amazon.com/Brave-Genius-Philosopher-Adventures-Resistance/dp/0307952347)
 
 ------
 
