@@ -29,6 +29,8 @@ In the original [Sanger paper](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4317
 
 {{< figure src="img/pgem3z.png">}} 
 
+> ##### Image from Promega, Inc. 
+
 Until the invention of NGS the above protocol was followed witn some degree of automation. But you can see that it was quite laborious if the large number of fragements needed to be sequenced. This is becuase each of them needed to be subcloned and handled separately. This is in part why Human Genome Project, a subject of our next lecture, took so much time to complete. 
 
 ## Evolution of sequencing machines
