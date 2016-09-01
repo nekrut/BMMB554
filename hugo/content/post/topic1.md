@@ -6,19 +6,9 @@ featureimage = "img/luria_small.png"
 menu = ""
 tags = ["history","genetics","DNA"]
 title = "History"
-description = "Topic 1 | History. From Genetics to Genomics"
+description = "Topic 1 | History: From Genetics to Genomics"
 
 +++
-
-# What do you need to do?
-
-1. Download and read Delbruck & Luria [classical paper](http://www.bx.psu.edu/~anton/bioinf1-2014/delbruck-luria-1943.pdf) on spontaneous nature of mutations;
-2. Read the rest of this page;
-3. Browse through slides at the bottom;
-4. In the beginning of next week (August 29) I will post a video and the first homework;
-5. Next lecture will be poseted on Thursday Sept 1st.
-
-------
 
 # Why history?
 
@@ -122,7 +112,3 @@ Read two following papers:
 * "A new method for sequencing DNA" by Maxam and Gilbert ([1977](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC392330/pdf/pnas00024-0174.pdf))
 
 Complete [this Quiz](https://goo.gl/forms/V6xQ1DMsWPc27yZq1). You have a week (until the midnight of Sept 6) to finish it.
-
-# Next Generation Sequencing (NGS) is our next topic 
-
-To be posted Sept 1.
