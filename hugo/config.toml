@@ -51,4 +51,5 @@ paginate = 10
 		twitter = "galaxyproject"
 		wordpress = ""
 		youtube = ""
-		vimeo = "galaxyproject"
+		vimeo = ""
+		vimeo_channel = "1125236"
