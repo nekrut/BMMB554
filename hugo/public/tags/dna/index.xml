@@ -88,7 +88,7 @@
 
 &lt;h2 id=&#34;ngs&#34;&gt;NGS!&lt;/h2&gt;
 
-&lt;p&gt;384 samples may sound like a lot, but it is nothing if we are sequencing an entire genome. The beauty of NSG is that these technologies are not bound by sample handling logistics. They still require preparation of libraries, but once a library is made (which can be automated) it is processed more or less automatically to generate multiple copies of each fragment (in the case of 454, Illumina, and Ion Torrent) and loaded onto the machine, where millions of individual fragments are sequenced simultaneously. The following videos and slides explains how these technologies work.&lt;/p&gt;
+&lt;p&gt;384 samples may sound like a lot, but it is nothing if we are sequencing an entire genome. The beauty of NGS is that these technologies are not bound by sample handling logistics. They still require preparation of libraries, but once a library is made (which can be automated) it is processed more or less automatically to generate multiple copies of each fragment (in the case of 454, Illumina, and Ion Torrent) and loaded onto the machine, where millions of individual fragments are sequenced simultaneously. The following videos and slides explains how these technologies work.&lt;/p&gt;
 
 &lt;h2 id=&#34;watch-introductory-video&#34;&gt;Watch introductory video&lt;/h2&gt;
 
