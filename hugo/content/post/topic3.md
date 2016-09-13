@@ -12,7 +12,7 @@ description = "Topic 3 | Aligning DNA sequences: An introduction to algorithmic 
 
 # Introduction
 
-In the previous lecture we have seen several ways in which DNA sequence data can be accumulated. Because sequencing machines (especially the ones made by Illumina) generate billions of sequences (called reads) from every run, the real challenge is what one does with all this data once sequencing is done. So before we get into details of technology and its application we need to introduce some basic algorithmic concepts related to sequence analysis. Today we will start with **dynamic programming**. 
+In the previous lecture we have seen several ways in which DNA sequence data can be accumulated (the reason for having Manhattan in the figure above will be apparent a bit later). Because sequencing machines (especially the ones made by Illumina) generate billions of sequences (called reads) from every run, the real challenge is what one does with all this data once sequencing is done. So before we get into details of technology and its application we need to introduce some basic algorithmic concepts related to sequence analysis. Today we will start with **dynamic programming**. 
 
 ## Dynamic programming for the change problem
 
@@ -145,7 +145,7 @@ Now let's get into a multi(2)-dimensional world beautifully elaborated in Jones 
 
 >![](http://www.bx.psu.edu/~anton/bioinf-images/6.3.png)|
 >
-> Figure 5 | Reproduced from [JP](http://www.amazon.com/Introduction-Bioinformatics-Algorithms-Computational-Molecular/dp/0262101068/)
+> **Figure 5** | Reproduced from [JP](http://www.amazon.com/Introduction-Bioinformatics-Algorithms-Computational-Molecular/dp/0262101068/)
 
 The goal of this game is to visit the **maximum number** of attractions along a stroll across Manhattan.
 Let's formalize this a bit:
@@ -184,6 +184,10 @@ This will result in the following progression:
 |From [JP](http://www.amazon.com/Introduction-Bioinformatics-Algorithms-Computational-Molecular/dp/0262101068/)| |
 
 You can see that wandering from the source may get us into a dead end. However, backtracking from the sink will always get us to source along the longest path! This by pre-computing the matrix we can easily solve the Manhattan tourist problem. Now we are ready to tackle sequence alignment problems.
+
+# Video
+
+{{< vimeo 182594750 >}}
 
 
 

@@ -19,7 +19,7 @@
 
 &lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
 
-&lt;p&gt;In the previous lecture we have seen several ways in which DNA sequence data can be accumulated. Because sequencing machines (especially the ones made by Illumina) generate billions of sequences (called reads) from every run, the real challenge is what one does with all this data once sequencing is done. So before we get into details of technology and its application we need to introduce some basic algorithmic concepts related to sequence analysis. Today we will start with &lt;strong&gt;dynamic programming&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;In the previous lecture we have seen several ways in which DNA sequence data can be accumulated (the reason for having Manhattan in the figure above will be apparent a bit later). Because sequencing machines (especially the ones made by Illumina) generate billions of sequences (called reads) from every run, the real challenge is what one does with all this data once sequencing is done. So before we get into details of technology and its application we need to introduce some basic algorithmic concepts related to sequence analysis. Today we will start with &lt;strong&gt;dynamic programming&lt;/strong&gt;.&lt;/p&gt;
 
 &lt;h2 id=&#34;dynamic-programming-for-the-change-problem&#34;&gt;Dynamic programming for the change problem&lt;/h2&gt;
 
@@ -167,7 +167,7 @@ $$numCoins = min\begin{cases} 1 + numCoins(original\_amount - 1)
 &lt;blockquote&gt;
 &lt;p&gt;&lt;img src=&#34;http://www.bx.psu.edu/~anton/bioinf-images/6.3.png&#34; alt=&#34;&#34; /&gt;|&lt;/p&gt;
 
-&lt;p&gt;Figure 5 | Reproduced from &lt;a href=&#34;http://www.amazon.com/Introduction-Bioinformatics-Algorithms-Computational-Molecular/dp/0262101068/&#34;&gt;JP&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Figure 5&lt;/strong&gt; | Reproduced from &lt;a href=&#34;http://www.amazon.com/Introduction-Bioinformatics-Algorithms-Computational-Molecular/dp/0262101068/&#34;&gt;JP&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;The goal of this game is to visit the &lt;strong&gt;maximum number&lt;/strong&gt; of attractions along a stroll across Manhattan.
@@ -248,6 +248,14 @@ $$s_i,_j = max\begin{cases} s_{i-1,j} + weight\ of\ the\ edge\ between\ (i - 1, 
 &lt;/table&gt;
 
 &lt;p&gt;You can see that wandering from the source may get us into a dead end. However, backtracking from the sink will always get us to source along the longest path! This by pre-computing the matrix we can easily solve the Manhattan tourist problem. Now we are ready to tackle sequence alignment problems.&lt;/p&gt;
+
+&lt;h1 id=&#34;video&#34;&gt;Video&lt;/h1&gt;
+
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;//player.vimeo.com/video/182594750&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%;&#34; webkitallowfullscreen mozallowfullscreen allowfullscreen&gt;&lt;/iframe&gt;
+ &lt;/div&gt;
+
 </description>
     </item>
     
@@ -424,8 +432,6 @@ $$s_i,_j = max\begin{cases} s_{i-1,j} + weight\ of\ the\ edge\ between\ (i - 1, 
 &lt;h3 id=&#34;slides&#34;&gt;Slides&lt;/h3&gt;
 
 &lt;script async class=&#39;speakerdeck-embed&#39; data-id=&#39;3895a3069bc64ad5bc74c972a0353911&#39; data-ratio=&#39;1.33333333333333&#39; src=&#39;//speakerdeck.com/assets/embed.js&#39;&gt;&lt;/script&gt;
-
-&lt;p&gt;Video will posted early next week&lt;/p&gt;
 
 &lt;h3 id=&#34;reading-3&#34;&gt;Reading&lt;/h3&gt;
 

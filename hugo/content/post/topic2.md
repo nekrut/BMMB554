@@ -125,8 +125,6 @@ Oxford nanopore is another dramatically different technology that threads single
 
 {{< speakerdeck 3895a3069bc64ad5bc74c972a0353911 >}}
 
-Video will posted early next week
-
 ### Reading
 
 * 2016 | [The promises and challenges of solid-state sequencing](http://nature.com/nnano/journal/v11/n2/full/nnano.2016.9.html)
