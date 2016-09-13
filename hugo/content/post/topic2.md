@@ -1,5 +1,5 @@
 +++
-categories = []
+#categories = []
 date = "2016-09-01T11:17:20-04:00"
 #draft = true
 featureimage = "img/illumina_pseudocolor.png"

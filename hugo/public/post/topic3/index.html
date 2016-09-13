@@ -1,0 +1,429 @@
+		<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<title>Sequence alignment: Introductory concepts &middot; BMMB554 | Fall 2016</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-Frame-Options" content="sameorigin">
+	<meta name="author" content="Anton Nekrutenko">
+	<meta name="description" content="Introduction to data driven life sciences">
+	<meta name="keywords" content="genomes, genetics, ngs, data analysis">
+	<meta name="generator" content="Hugo 0.16" />
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="http://nekrut.github.io/BMMB554/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="http://nekrut.github.io/BMMB554/favicon.ico" type="image/x-icon">
+
+	<!-- RSS -->
+	
+
+	<!-- Font Awesome -->
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<!-- Google Fonts -->
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+</head>
+		<body>
+			<header class="site-header">
+	<div class="branding">
+		<a href="http://nekrut.github.io/BMMB554/">
+		
+			<img class="avatar" src="http://nekrut.github.io/BMMB554/img/gxy.png" alt=""/>
+		
+		</a>
+		<h1 class="site-title">
+			<a href="http://nekrut.github.io/BMMB554/">BMMB554 | Fall 2016</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+	      	
+	        	<li><a href="/BMMB554/about/"> Syllabus </a></li>
+	      	
+
+	      	
+<li>
+	<a href="http://nekrut.github.io/BMMB554/" title="">
+		<i class="fa fa-fw fa-home"></i>
+	</a>
+</li>
+
+
+
+
+
+<li>
+	<a href="mailto:aun1@psu.edu" title="Email">
+		<i class="fa fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://vimeo.com/channels/1125236" title="">
+		<i class="fa fa-fw fa-vimeo-square"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/nekrut" title="Github">
+		<i class="fa fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/galaxyproject" title="Twitter">
+		<i class="fa fa-fw fa-twitter"></i>
+	</a>
+</li>
+
+
+
+
+
+
+	    </ul>
+	</nav>
+</header>
+
+			<div class="content">
+				
+				<article class="feature-image">
+					<header style="background-image: url('http://nekrut.github.io/BMMB554/img/nyc.jpg')">
+						<h1 class="title">Sequence alignment: Introductory concepts</h1>
+					</header>
+				
+
+				<section class="post-content">
+					
+
+<h1 id="introduction">Introduction</h1>
+
+<p>In the previous lecture we have seen several ways in which DNA sequence data can be accumulated. Because sequencing machines (especially the ones made by Illumina) generate billions of sequences (called reads) from every run, the real challenge is what one does with all this data once sequencing is done. So before we get into details of technology and its application we need to introduce some basic algorithmic concepts related to sequence analysis. Today we will start with <strong>dynamic programming</strong>.</p>
+
+<h2 id="dynamic-programming-for-the-change-problem">Dynamic programming for the change problem</h2>
+
+<p>When introducing algorithmic concepts to biological audience it often becomes critical to use good examples. One of the people who probably succeeded most in this endeavor is <a href="http://cseweb.ucsd.edu/~ppevzner/">Pavel Pevzner</a>, a Ronald R. Taylor Professor of Computer Science at UCSD, who (together with <a href="http://compeau.cbd.cmu.edu/">Phillip Compeau</a>) published a very informatics (and entertaining) <a href="https://www.amazon.com/Bioinformatics-Algorithms-Active-Learning-Approach/dp/0990374602">book</a> on the subject of computational biology. The example I use below comes from this book.</p>
+
+<hr />
+
+<p>Suppose you are a cashier who&rsquo;s job is, generally speaking, to receive money and to give out change. Suppose that someone buys something that costs \$9.37 and gives you a 10 dollar bill. You need to give \$0.63 back in smallest possible number of coins. The US coin denominations are:</p>
+
+<ul>
+<li>100 (1 dollar)</li>
+<li>50 (half-dollar)</li>
+<li>25 (quarter)</li>
+<li>10 (dime)</li>
+<li>5 (nickel)</li>
+<li>1 (penny)</li>
+</ul>
+
+<p>So, given these coins you will:</p>
+
+<ol>
+<li>start with the largest coin smaller than the amount you need to give back = <strong>50 Cents</strong></li>
+<li>repeat for the remaining $0.13 and select <strong>10 Cents</strong>  (<strong>NOTE</strong>: this is recursion happening)</li>
+<li>finish with three 1 cent counts thus you ended up with 5 (<strong>50</strong> + <strong>10</strong> + 3x<strong>1</strong>) coins.</li>
+</ol>
+
+<h3 id="solving-problem-exhaustively">Solving problem exhaustively</h3>
+
+<p>Now (as suggested <a href="http://interactivepython.org/runestone/static/pythonds/Recursion/DynamicProgramming.html">here</a>) suppose you are a cashier in a strange country where there is also a <strong>21</strong> cent coin in circulation. By using the algorithm above you will still give your customer 5 coins, while the &ldquo;correct&rdquo; solution will certainly be giving him/her 3 <strong>21</strong> cent coins. So the algorithm we used above simply does not work.</p>
+
+<p>Let&rsquo;s rephrase the problem. The smallest number of coins summing up to $0.63 cents (in our strange country with a <strong>21</strong> cent coin) will be:</p>
+
+<ul>
+<li>a minimal collection of coins summing up to $0.62 plus a <strong>1</strong> cent coin</li>
+<li>a minimal collection of coins summing up to $0.58 plus a <strong>5</strong> cent coin</li>
+<li>a minimal collection of coins summing up to $0.53 plus a <strong>10</strong> cent coin</li>
+<li>a minimal collection of coins summing up to $0.42 plus a <strong>21</strong> cent coin</li>
+<li>a minimal collection of coins summing up to $0.38 plus a <strong>25</strong> cent coin</li>
+<li>a minimal collection of coins summing up to $0.13 plus a <strong>50</strong> cent coin</li>
+</ul>
+
+<blockquote>
+<p><img src="http://www.bx.psu.edu/~anton/bioinf-images/change1.png" alt="" /></p>
+
+<p><strong>Figure 1</strong> | First iteration</p>
+</blockquote>
+
+<p>Next, for each of these possibilities we will repeat this again. For example for $0.62 will consider:</p>
+
+<ul>
+<li>a minimal collection of coins summing up to $0.61 plus a <strong>1</strong> cent coin</li>
+<li>a minimal collection of coins summing up to $0.57 plus a <strong>5</strong> cent coin</li>
+<li>a minimal collection of coins summing up to $0.52 plus a <strong>10</strong> cent coin</li>
+<li>a minimal collection of coins summing up to $0.41 plus a <strong>21</strong> cent coin</li>
+<li>a minimal collection of coins summing up to $0.37 plus a <strong>25</strong> cent coin</li>
+<li>a minimal collection of coins summing up to $0.12 plus a <strong>50</strong> cent coin</li>
+</ul>
+
+<blockquote>
+<p><img src="http://www.bx.psu.edu/~anton/bioinf-images/change2.png" alt="" /></p>
+
+<p><strong>Figure 2</strong> | Second iteration</p>
+</blockquote>
+
+<p>And again. For $0.58 we will have:</p>
+
+<blockquote>
+<p><img src="http://www.bx.psu.edu/~anton/bioinf-images/change3.png" alt="" /></p>
+
+<p><strong>Figure 3</strong> | Note that amounts highlighted in red are repeated. Below we explain why this is <strong>really bad</strong></p>
+</blockquote>
+
+<p>and so on. Basically, as every iteration we are trying to find:</p>
+
+<div>
+
+$$numCoins = min\begin{cases} 1 + numCoins(original\_amount - 1) 
+                         & \\ 1 + numCoins(original\_amount - 5) 
+                         & \\ 1 + numCoins(original\_amount - 10) 
+                         & \\ 1 + numCoins(original\_amount - 21) 
+                         & \\ 1 + numCoins(original\_amount - 25) 
+                         & \\ 1 + numCoins(original\_amount - 50) 
+                 \end{cases}$$
+
+</div>
+
+<p>While this algorithm will find us the smallest number of coins necessary to give out a particular amount in change, it does this at a horrific price: it is extremely inefficient as it recomputes all possibilities at every iteration. For instance, if we ask the algorithm to compute the minimal number of coins necessary to give out 63 cents in change in a country with only four coins (1, 5, 10, and 25 cents) it will take <strong>67,716,925</strong> iterations (recursive calls). As a result you will probably loose all of your customers while they are waiting for the change.</p>
+
+<p>The code snippet below implements this algorithm (do not worry if you don&rsquo;t quire understand python. It is OK for now). If you execute it (press the play button) your browser will likely crash as it will get tired waiting for result to come back (try it anyway):</p>
+
+<iframe src="https://trinket.io/embed/python/a74fb5b988?toggleCode=true" width="100%" height="400" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+
+<h3 id="caching-helps-a-bit">Caching helps a bit</h3>
+
+<p>One potential way to solve our problem in a reasonable amount of time is to take advantage of red nodes shown in Figure 3. What if before calling the function we check if a minimum number of coins for a particular amount was already computed? Apparently this speeds things up quite dramatically:</p>
+
+<iframe src="https://trinket.io/embed/python/efcc5b3667?toggleCode=true" width="100%" height="400" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+
+<p>Now you can see that it takes under a second to find that it takes 3 coins to give 63 cents in change in a country with 1, 5, 10, 21, and 25 cent coins. Yet this script still makes 221 calls (better than 67,716,925, but still a lot) for find the answer.</p>
+
+<h3 id="introducing-dynamic-programming">Introducing dynamic programming</h3>
+
+<p>Let&rsquo;s flip things around. Instead of starting from <strong>63</strong> cents and going down through the tree as shown in Figs 1 - 3 we will instead compute the minimal number of coins for every value from 1 to 63. To save space, let&rsquo;s instead assume that we need to give 11 cents in change. Let&rsquo;s compute a dynamic programming array for minimal number of coins between 1 and 11 (you may need to scroll sideways if your screen is small):</p>
+
+<blockquote>
+<pre><code>Amount                   0  1  2  3  4  5  6  7  8  9 10 11
+Minimum number of coins  0  1  2  3  4  1  2  3  4  5  1  2
+</code></pre>
+
+<p><strong>Table 1</strong></p>
+</blockquote>
+
+<p>for amounts between <strong>1</strong> and <strong>4</strong>, we have no choice, since we have only pennies. At <strong>5</strong> we can either use 5 pennies or 1 nickel. According to this strategy (for a country with 1, 5, 10, and 25 cent coins):</p>
+
+<div>
+
+$$numCoins = min\begin{cases} 1 + numCoins(original\_amount - 1) 
+                         & \\ 1 + numCoins(original\_amount - 5) 
+                         & \\ 1 + numCoins(original\_amount - 10) 
+                         & \\ 1 + numCoins(original\_amount - 25) 
+                                         \end{cases}$$
+
+</div>
+
+<p>nickel wins (needs just 1 coin). From <strong>6</strong> to <strong>9</strong> we can either use all pennies (values will be 6, 7, 8, and 9) or a combination of nickel and pennies (values will be 2, 3, 4, 5). Again, smaller values win.</p>
+
+<p>Let&rsquo;s now use this table to decide what is the minimum number of coins necessary to give 11 cents in change:</p>
+
+<blockquote>
+<p><img src="http://www.bx.psu.edu/~anton/bioinf-images/change4.png" alt="" /></p>
+
+<p><strong>Figure 4</strong> | Making change for 11 cents. Let&rsquo;s look at leftmost branch. If you give 1 cent in change, you are left with 10 more to give. You consult Table 1 above and see that 10 cents can be given with 1 coin, so it will be 1 + 1 = 2 coins. In the center branch we give 5 cents in one coin and have 6 more cents to give. Looking at Table 1 tells us that 6 cents can be given in 2 coins, so 1 + 2 = 3 coins. Finally, in the rightmost branch giving 10 cents as one coin leaves 1 cent to give in change, which is also 1 coin, so 1 + 1 = 2. Thus we can either give 10 cents + 1 cent or 1 cent + 10 cents, which is equivalent since in both cases we give only 2 coins.</p>
+</blockquote>
+
+<p>The following python code implements a function called <code>dynamicCoinChange</code> which computes a table (like Table 1) for any amount. In line 20 of the script we print a value corresponding to the amount we need to give back. That value is the minimum number of coins. Note that this program takes virtually no time to run.</p>
+
+<iframe src="https://trinket.io/embed/python/81c07a3750?toggleCode=true" width="100%" height="400" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+
+<p><strong>So</strong>, dynamic programming is a methodology where complex problems are broken down to simple subproblems, that are computed just once and then used to solve the complete problem. In this example, we first pre-compute the number of coins needed to make change for any amount up to the required one, and then produce the answer.</p>
+
+<h2 id="dynamic-programming-for-manhattan-tourist-problem">Dynamic programming for Manhattan tourist problem</h2>
+
+<p>Now let&rsquo;s get into a multi(2)-dimensional world beautifully elaborated in Jones and Pevzner (<a href="http://www.amazon.com/Introduction-Bioinformatics-Algorithms-Computational-Molecular/dp/0262101068/">2004</a>) book:</p>
+
+<blockquote>
+<p><img src="http://www.bx.psu.edu/~anton/bioinf-images/6.3.png" alt="" />|</p>
+
+<p>Figure 5 | Reproduced from <a href="http://www.amazon.com/Introduction-Bioinformatics-Algorithms-Computational-Molecular/dp/0262101068/">JP</a></p>
+</blockquote>
+
+<p>The goal of this game is to visit the <strong>maximum number</strong> of attractions along a stroll across Manhattan.
+Let&rsquo;s formalize this a bit:</p>
+
+<ul>
+<li>city = <em>n</em> x <em>m</em> directed graph</li>
+<li>node = intersection</li>
+<li>edge = block</li>
+<li>edge weight = number of attractions along a city block</li>
+<li>start node = source</li>
+<li>end node = sink</li>
+</ul>
+
+<table>
+<thead>
+<tr>
+<th align="right"></th>
+<th align="center"></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="right"><img src="http://www.bx.psu.edu/~anton/bioinf-images/6.4a.png" alt="" /></td>
+<td align="center"><img src="http://www.bx.psu.edu/~anton/bioinf-images/6.4b.png" alt="" /></td>
+</tr>
+
+<tr>
+<td align="right">The city</td>
+<td align="center">and a path through it (Figure 6.4 from <a href="http://www.amazon.com/Introduction-Bioinformatics-Algorithms-Computational-Molecular/dp/0262101068/">JP</a>)</td>
+</tr>
+</tbody>
+</table>
+
+<p>The figure above provides a path from source to the sink, yet this path is not the longest. We can identify the optimal path recursively, but just like in the case if the change problem we will end up with a very inefficient code. Let&rsquo;s instead pre-fill our matrix using the following logic:</p>
+
+<div>
+
+$$s_i,_j = max\begin{cases} s_{i-1,j} + weight\ of\ the\ edge\ between\ (i - 1, j)\ and\ (i,j)
+                         & \\ s_{i,j-1} + weight\ of\ the\ edge\ between\ (i, j - 1)\ and\ (i,j)
+                 
+                 \end{cases}$$
+
+</div>
+
+<p>This will result in the following progression:</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="http://www.bx.psu.edu/~anton/bioinf-images/grid1.png" alt="" /></td>
+<td><img src="http://www.bx.psu.edu/~anton/bioinf-images/grid2.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><img src="http://www.bx.psu.edu/~anton/bioinf-images/grid2.png" alt="" /></td>
+<td><img src="http://www.bx.psu.edu/~anton/bioinf-images/grid4.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><img src="http://www.bx.psu.edu/~anton/bioinf-images/grid3.png" alt="" /></td>
+<td><img src="http://www.bx.psu.edu/~anton/bioinf-images/grid6.png" alt="" /></td>
+</tr>
+
+<tr>
+<td>From <a href="http://www.amazon.com/Introduction-Bioinformatics-Algorithms-Computational-Molecular/dp/0262101068/">JP</a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+<p>You can see that wandering from the source may get us into a dead end. However, backtracking from the sink will always get us to source along the longest path! This by pre-computing the matrix we can easily solve the Manhattan tourist problem. Now we are ready to tackle sequence alignment problems.</p>
+
+
+				<hr>
+
+				
+				</section>
+
+			</article>
+			
+
+<footer class="site-footer">
+	<p class="text">&copy; 2016 - Released under the MIT license<br>Powered by <a href="//gohugo.io/">Hugo</a> with the <a href="//github.com/digitalcraftsman/hugo-type-theme">Type Theme</a></p>
+</footer>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+
+
+</script>
+
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-83364979-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+		</div>
+	</body>
+</html>

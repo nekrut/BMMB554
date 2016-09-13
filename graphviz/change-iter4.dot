@@ -1,0 +1,15 @@
+ digraph change3 {
+ 	orientation=landscape;
+ 	size = 10;
+ 	fontname="Helvetica";
+ 	compound=true;
+
+	origin [shape=circle, label="11", style="filled", color="green"];
+	10 [shape=circle, label="10"];
+	6 [shape=circle, label="6"];
+	1 [shape=circle, label="1"];
+
+	origin -> 10 [label="1"];
+	origin -> 6 [label="5"];
+	origin -> 1 [label="10"];
+ }
