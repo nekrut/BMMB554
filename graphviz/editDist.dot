@@ -1,0 +1,23 @@
+ digraph edist {
+ 	orientation=landscape;
+ 	size = 10;
+ 	fontname="Helvetica";
+ 	compound=true;
+
+	1 [shape=square, label="TAG,TAC"];
+	2 [shape=square, label="TAG,TA"];
+	3 [shape=square, label="TA,TA",style="filled", color="red"];
+	4 [shape=square, label="TA,TAC"];
+	5 [shape=square, label="TAG,T"];
+	6 [shape=square, label="TA,T"];
+	7 [shape=square, label="TA,TA",style="filled", color="red"];
+
+
+	1 -> 2
+	1 -> 3
+	1 -> 4
+	2 -> 5
+	2 -> 6
+	2 -> 7
+
+ }
