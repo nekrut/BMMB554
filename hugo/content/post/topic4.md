@@ -114,12 +114,11 @@ So this approach to the edit distance problem will hardly help us on the genome-
 
 Let's recall Manhattan tourist problem. The objective of the problem was to find a path through Manhattant that visits the highest number of langdmarks. If you remember, we represented mahattan as a matrix where each edge was representing a block and was lebelled with the number of landmarks within that block. Here, we will use a similar idea to find an optimal **alignment** between two sequences. Note that so far this is the first time we use the term **alignment** in this section. It turns out that in order to find the alignemnt we first need to learn how to compute edit distances between sequences efficiently. So, suppose we have two sequences that deliberately have different lenghts:
 
-<div>
-	$$
-		\texttt{G C T A T A C}\\
-		\texttt{G C G T A T G C}
-	$$
-</div>
+$\texttt{G C T A T A C}$
+
+and 
+
+$\texttt{G C G T A T G C}$
 
 Let's represent them as the following matrix where the first character $\epsilon$ represents an empty string:
 
@@ -225,7 +224,7 @@ In this specific case:
 
 <div>
 
-$$Edit\ Distance(\alpha\texttt{\epsionG},\beta\texttt{epsilonG}) = min\begin{cases} 
+$$Edit\ Distance(\epsilon\texttt{G},\epsilon\texttt{G}) = min\begin{cases} 
 					\color{red}{Edit\ Distance(\epsilon,\epsilon) + \delta(G,G)\ or\ 0\ +\ 0\ =\ 0} & \\
 					\color{blue}{Edit\ Distance(\epsilon\texttt{G},\epsilon) + 1\ or\ 1\ +\ 1\ =\ 2} & \\
 					\color{green}{Edit\ Distance(\epsilon,\epsilon\texttt{G}) + 1\ or\ 1\ +\ 1\ =\ 2}
@@ -296,3 +295,105 @@ The lower rightmost cell highlighted in red is special. It contains the value fo
 <iframe src="https://trinket.io/embed/python3/1bec8f9150?toggleCode=true" width="100%" height="400" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
 
 # From edit distance to alignment
+
+In the previous lectures we have spent time talking about sequencing technologies and then suddenly jumped to algorithms. Why? Well, with sequecning technologies we have seen how to generate impressive amounts of data. In many cases the way this data is analyzed is by aligning reads produced by NGS machines against existing genomic assemblies. Although, as we will see in the future lectures, modern high performance read aligners/mappers use approaches we have not yet discussed, dynamic programming offers powerful framework for finding if one sequence matches another. In fact, a lot of practical things that we will be doing in this course will involve aligning a short sequence (an NGS read) against a much larger genomic sequence. So, how can we use dynamic programming to find an approximate match between two sequences $\it\texttt{P}$ and $\texttt{T}$?
+
+Suppose we have two strings:
+
+$\it{T} = \texttt{T A T T G G C T A T A C G G T T}$
+
+and
+
+$\it{P} = \texttt{G C G T A T G C}$
+
+Let's construct the following matrix:
+
+<div>
+$$
+	\begin{array}{ c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c }
+  					\epsilon & T & A & T & T & G & G & C & T & A & T & A & C & G & G & T & T\\
+  					\hline
+  					           \\
+  					\hline
+ 					          G\\
+ 					\hline
+ 					          C\\
+ 					\hline
+ 					          G\\
+ 					\hline
+ 					          T\\
+ 					\hline
+ 					          A\\
+ 					\hline
+ 					          T\\
+ 					\hline
+ 					          G\\
+ 					\hline
+ 					          C\\
+
+ \end{array}
+ $$
+
+</div>
+
+Let me remind you that our goal is to find where $\it\texttt{P}$ matches $\texttt{T}$. *A priori* we do not know when it may be, so will start by filling the entire first row with zeroes. The first column we will initialize the same way we did previously: with increasing sequence of numbers:
+
+<div>
+$$
+	\begin{array}{ c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c }
+  					\epsilon & T & A & T & T & G & G & C & T & A & T & A & C & G & G & T & T\\
+  					\hline
+ 					          G & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+ 					\hline
+ 					          C & 1\\
+ 					\hline
+ 					          G & 2\\
+ 					\hline
+ 					          T & 3\\
+ 					\hline
+ 					          A & 4\\
+ 					\hline
+ 					          T & 5\\
+ 					\hline
+ 					          G & 6\\
+ 					\hline
+ 					          C & 7\\
+
+ \end{array}
+ $$
+
+</div>
+
+Now let's fill this matrix in using the same logic we used before:
+
+<div>
+$$
+	\begin{array}{ c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c }
+  					\epsilon & T & A & T & T & G & G & C & T & A & T & A & C & G & G & T & T\\
+  					\hline
+ 					          G & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+ 					\hline
+ 					          C & 1 1 1 1 1 0 1 0 1 0 1 1 0 1 1 1 0 0 1 1 1
+ 					\hline
+ 					          G & 1 1 2 2 2 1 0 1 1 1 1 1 1 1 2 2 1 1 1 2 1
+ 					\hline
+ 					          T & 2 2 1 2 2 2 1 1 2 2 1 2 2 2 1 2 2 2 2 2 2
+ 					\hline
+ 					          A & 3 3 2 2 3 3 2 2 1 2 2 2 3 2 2 2 3 3 2 2 3
+ 					\hline
+ 					          T & 4 4 3 3 3 3 3 2 2 1 2 3 2 3 3 3 2 3 3 3 3
+ 					\hline
+ 					          G & 5 5 4 3 3 4 4 3 3 2 1 2 3 3 3 3 3 3 4 4 4
+ 					\hline
+ 					          C & 6 5 5 4 4 4 4 4 4 3 2 1 2 3 4 4 4 4 4 5 4
+
+ 					          7 6 6 5 5 5 5 5 4 4 3 2 2 2 3 4 5 5 4 4 5
+
+ 					          8 7 6 6 5 6 6 6 5 5 4 3 3 3 2 3 4 5 5 5 5
+
+ \end{array}
+ $$
+
+</div>
+
+
