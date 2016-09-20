@@ -6,6 +6,7 @@ featureimage = "img/topic4_cover.jpg"
 menu = ""
 tags = []
 title = "Aligning sequences with dynamic programming"
+description = "Topic 4 | Aligning DNA sequences: From edit distance to local alignment"
 
 +++
 
