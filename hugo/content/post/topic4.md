@@ -47,7 +47,7 @@ A C A T G C C T A -
 A C - T G C C T A C
 ```
 
-In this case the [**edit distance**](https://en.wikipedia.org/wiki/Edit_distance) between two sequences is 2. It is defined as the minimum number of operations (substitutions, insertions, and develetions) requited to turn one string into another. The comparted strings do not have to be of the same length to be able to compute the edit distance as we can compensate for length differences using deletions and insertions. While the situation above (where we inserted two dashes) is biologically much more meaningful (and realistic), it is much more difficult to find. 
+In this case the [**edit distance**](https://en.wikipedia.org/wiki/Edit_distance) between two sequences is 2. It is defined as the minimum number of operations (substitutions, insertions, and deletions) requited to turn one string into another. The compared strings do not have to be of the same length to be able to compute the edit distance as we can compensate for length differences using deletions and insertions. While the situation above (where we inserted two dashes) is biologically much more meaningful (and realistic), it is much more difficult to find. 
 
 # Generalizing the problem
 
@@ -508,7 +508,7 @@ $$
 
 \\
 
-\textbf{Note}: sequence\ \texttt{T}\ is\ vertical\ while\ \texttt{P}\ is\ horizontal.
+\textbf{Note}: sequence\ \texttt{T}\ is\ horizontal\ while\ \texttt{P}\ is\ vertical.
 
  $$
 
@@ -952,11 +952,11 @@ We are now looking for **maximum** and use *0* to prevent having negative values
 
 Now, let's align two sequences:
 
-$\it{X} = \texttt{T A T A T G C G G C G T T T}$
+$\texttt{T A T A T G C G G C G T T T}$
 
 and
 
-$\it{Y} = \texttt{G G T A T G C T G G C G C T A}$
+$\texttt{G G T A T G C T G G C G C T A}$
 
 Dynamic programming matrix with initialized first row and column will look like this:
 

@@ -47,7 +47,7 @@ A C T G C C T A C
 A C - T G C C T A C
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;In this case the &lt;a href=&#34;https://en.wikipedia.org/wiki/Edit_distance&#34;&gt;&lt;strong&gt;edit distance&lt;/strong&gt;&lt;/a&gt; between two sequences is 2. It is defined as the minimum number of operations (substitutions, insertions, and develetions) requited to turn one string into another. The comparted strings do not have to be of the same length to be able to compute the edit distance as we can compensate for length differences using deletions and insertions. While the situation above (where we inserted two dashes) is biologically much more meaningful (and realistic), it is much more difficult to find.&lt;/p&gt;
+&lt;p&gt;In this case the &lt;a href=&#34;https://en.wikipedia.org/wiki/Edit_distance&#34;&gt;&lt;strong&gt;edit distance&lt;/strong&gt;&lt;/a&gt; between two sequences is 2. It is defined as the minimum number of operations (substitutions, insertions, and deletions) requited to turn one string into another. The compared strings do not have to be of the same length to be able to compute the edit distance as we can compensate for length differences using deletions and insertions. While the situation above (where we inserted two dashes) is biologically much more meaningful (and realistic), it is much more difficult to find.&lt;/p&gt;
 
 &lt;h1 id=&#34;generalizing-the-problem&#34;&gt;Generalizing the problem&lt;/h1&gt;
 
@@ -507,7 +507,7 @@ $$
 
 \\
 
-\textbf{Note}: sequence\ \texttt{T}\ is\ vertical\ while\ \texttt{P}\ is\ horizontal.
+\textbf{Note}: sequence\ \texttt{T}\ is\ horizontal\ while\ \texttt{P}\ is\ vertical.
 
  $$
 
@@ -947,11 +947,11 @@ $$D(\alpha\texttt{x},\beta\texttt{y}) = max\begin{cases}
 
 &lt;p&gt;Now, let&amp;rsquo;s align two sequences:&lt;/p&gt;
 
-&lt;p&gt;$\it{X} = \texttt{T A T A T G C G G C G T T T}$&lt;/p&gt;
+&lt;p&gt;$\texttt{T A T A T G C G G C G T T T}$&lt;/p&gt;
 
 &lt;p&gt;and&lt;/p&gt;
 
-&lt;p&gt;$\it{Y} = \texttt{G G T A T G C T G G C G C T A}$&lt;/p&gt;
+&lt;p&gt;$\texttt{G G T A T G C T G G C G C T A}$&lt;/p&gt;
 
 &lt;p&gt;Dynamic programming matrix with initialized first row and column will look like this:&lt;/p&gt;
 
