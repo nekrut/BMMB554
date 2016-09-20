@@ -6,8 +6,1104 @@
     <description>Recent content on BMMB554 | Fall 2016</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 12 Sep 2016 10:43:18 -0400</lastBuildDate>
+    <lastBuildDate>Mon, 19 Sep 2016 10:12:04 -0400</lastBuildDate>
     <atom:link href="http://nekrut.github.io/BMMB554/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Aligning sequences with dynamic programming</title>
+      <link>http://nekrut.github.io/BMMB554/post/topic4/</link>
+      <pubDate>Mon, 19 Sep 2016 10:12:04 -0400</pubDate>
+      
+      <guid>http://nekrut.github.io/BMMB554/post/topic4/</guid>
+      <description>
+
+&lt;h1 id=&#34;sequence-alignment&#34;&gt;Sequence alignment&lt;/h1&gt;
+
+&lt;p&gt;In the previous lecture we have seen the principle behind dynamic programming. This approach is extremely useful for comparing biological sequences, which is coincidentally one of the main point of this course. This lecture explain how this is done. In writing this text I heavily relied on wonderful &lt;a href=&#34;http://www.langmead-lab.org/teaching-materials/&#34;&gt;course&lt;/a&gt; taught by Ben Langmead at Johns Hopkins. The cover image shows pairwise alignments for human, mouse, and dog &lt;em&gt;KIF3&lt;/em&gt; locus from &lt;a href=&#34;http://genome.cshlp.org/content/10/9/1304.long&#34;&gt;Dubchak et al. 2000&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h1 id=&#34;how-different-are-two-sequences&#34;&gt;How different are two sequences?&lt;/h1&gt;
+
+&lt;p&gt;Suppose you have two sequences of the same length:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;A C A T G C C T A
+A C T G C C T A C
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;How different are they? In other words, how many bases should be change to turn one sequence onto the other:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;A C A T G C C T A
+| | * * * | * * *
+A C T G C C T A C
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;the vertical lines above indicate positions that are identical between the two sequences, while asterisks show differences. It will take six substitutions to turn one sequence into the other. This number &amp;ndash; six substitutions &amp;ndash; is called &lt;a href=&#34;https://en.wikipedia.org/wiki/Hamming_distance&#34;&gt;&lt;em&gt;Hamming distance&lt;/em&gt;&lt;/a&gt; or the &lt;em&gt;minimal&lt;/em&gt; number of substitutions required to turn one string into another. The code below computes the Hamming distance. Try it. You can change &lt;code&gt;seq1&lt;/code&gt; and &lt;code&gt;seq2&lt;/code&gt; into whatever you want except that they should have the same length.&lt;/p&gt;
+
+&lt;iframe src=&#34;https://trinket.io/embed/python/99a02b790a?toggleCode=true&#34; width=&#34;100%&#34; height=&#34;400&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;p&gt;Now in addition to &lt;em&gt;substitutions&lt;/em&gt; (i.e., changing one character into another) let&amp;rsquo;s allow &lt;strong&gt;instertions&lt;/strong&gt; and &lt;strong&gt;deletions&lt;/strong&gt;. This will essentially allow us to insert dashes (gaps) between characters:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;A C A T G C C T A -
+| | * | | | | | | *
+A C - T G C C T A C
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In this case the &lt;a href=&#34;https://en.wikipedia.org/wiki/Edit_distance&#34;&gt;&lt;strong&gt;edit distance&lt;/strong&gt;&lt;/a&gt; between two sequences is 2. It is defined as the minimum number of operations (substitutions, insertions, and develetions) requited to turn one string into another. The comparted strings do not have to be of the same length to be able to compute the edit distance as we can compensate for length differences using deletions and insertions. While the situation above (where we inserted two dashes) is biologically much more meaningful (and realistic), it is much more difficult to find.&lt;/p&gt;
+
+&lt;h1 id=&#34;generalizing-the-problem&#34;&gt;Generalizing the problem&lt;/h1&gt;
+
+&lt;p&gt;Before we can develop an algorithm that will help us to compute the edit distance let&amp;rsquo;s develop a general framework that would allow us to think about the problem in exact terms. Let&amp;rsquo;s look at a pair of VERY long sequences. So long, that we do not even see the left end &amp;ndash; it disappears into $\infty$:&lt;/p&gt;
+
+&lt;div&gt;
+    $$
+        \color{red}{\texttt{.....A C T G C C T A}}\texttt{ G}\\
+        \color{red}{\texttt{.....A C T G C C T A}}\texttt{ C}\\
+    $$
+&lt;/div&gt;
+
+&lt;p&gt;the red parts of the two sequences represent &lt;strong&gt;prefixes&lt;/strong&gt; for the last nucleotides shown in black. Let&amp;rsquo;s assume that the edit distance between the two prefixes is known (don&amp;rsquo;t ask how we know, we just do). For simplicity let&amp;rsquo;s &amp;ldquo;compact&amp;rdquo; the prefix of the first sequence into $\alpha$ and the prefix of the second sequence into $\beta$:&lt;/p&gt;
+
+&lt;div&gt;
+    $$
+        \alpha \texttt{G}\\
+        \beta  \texttt{C}
+    $$
+&lt;/div&gt;
+
+&lt;p&gt;again, the edit distance between $\alpha$ and $\beta$ is known to us. The three possibilities for computing the edit distance between $\alpha G$ and $\beta C$ are:&lt;/p&gt;
+
+&lt;div&gt;
+
+$$Edit\ Distance(\alpha\texttt{G},\beta\texttt{C})  = min\begin{cases} 
+                    Edit\ Distance(\alpha,\beta) + 1 \leftarrow\ because\ they\ do\ not\ match&amp; \\
+                    Edit\ Distance(\alpha\texttt{G},\beta) + 1 \leftarrow\ because\ we\ are\ adding\ a\ gap&amp; \\
+                    Edit\ Distance(\alpha,\beta\texttt{C}) + 1 \leftarrow\ because\ we\ are\ adding\ a\ gap
+             \end{cases}$$
+
+&lt;/div&gt;
+
+&lt;p&gt;but we not always have $\texttt{G}$ and $\texttt{C}$ as two last nucleotiodes, so for the general case:&lt;/p&gt;
+
+&lt;div&gt;
+
+$$Edit\ Distance(\alpha\texttt{x},\beta\texttt{y}) = min\begin{cases} 
+                    Edit\ Distance(\alpha,\beta) + \delta(x,y) &amp; \\
+                    Edit\ Distance(\alpha\texttt{x},\beta) + 1 &amp; \\
+                    Edit\ Distance(\alpha,\beta\texttt{y}) + 1
+             \end{cases}$$
+
+&lt;/div&gt;
+
+&lt;p&gt;where $\delta(x,y) = 0$ if $x = y$ (nucleotides match) and $\delta(x,y) = 1$ if $x \neq y$ (nucleotides do not match). The $\delta(x,y)$ has a particular meaning. If the two nucleotides at the end are equal to each other, there is nothing to be done &amp;ndash; no substitution operation is necessary. If a substitution is necessary however, we will record this by adding 1. When we will be talking about global and local alignment below the power of $\delta(x,y)$ will become even more clear.&lt;/p&gt;
+
+&lt;p&gt;Recall the change problem from the previous lecture. We can write an algorithm that would exhaustively evaluate the above expression for all possible suffixes. This algorithm is below. Try executing it. It will take roughly ~30 seconds to find the edit distance between the two sequences used in the beginning of this lecture:&lt;/p&gt;
+
+&lt;iframe src=&#34;https://trinket.io/embed/python/eff3a798bf?toggleCode=true&#34; width=&#34;100%&#34; height=&#34;400&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;p&gt;Again, don&amp;rsquo;t worry if Python looks scary to you. The take-home-message here is that it takes a very long time to compute the edit distance between two sequences that are only &lt;strong&gt;nine&lt;/strong&gt; nucleotides long! Why is this happening? Figure 1 below shows a small subset of situations the algorithm is evaluating for two very short strings $\texttt{TAG}$ and $\texttt{TAC}$:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.bx.psu.edu/~anton/bioinf-images/editDist.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Figure 1&lt;/strong&gt; | A fraction of situations evaluated by the naïve algorithm for computing the edit distance. Just like in the case of the change problem discussed in the previous lecture a lot of time is wasted on computing distances between suffixes that has been seen more than once (shown in red).&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;To understand the magnitude of this problem let&amp;rsquo;s look at slightly modified version of the previous Python code below. All we do here is keeping track how many times a particular pair of suffixes (in this case $\texttt{AC}$ and $\texttt{AC}$) are seen by the program. The number is staggering: 48,639. So this algorithm is &lt;strong&gt;extremely&lt;/strong&gt; wasteful.&lt;/p&gt;
+
+&lt;iframe src=&#34;https://trinket.io/embed/python/8994bfe46e?toggleCode=true&#34; width=&#34;100%&#34; height=&#34;400&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;p&gt;While this approach to the edit distance problem is correct, it will hardly help us on the genome-wide scale. Just like in case of the change problem and Manhattan tourist problem dynamic programming is going to save the day.&lt;/p&gt;
+
+&lt;h1 id=&#34;dynamic-programming-to-the-rescue&#34;&gt;Dynamic programming to the rescue&lt;/h1&gt;
+
+&lt;p&gt;Let&amp;rsquo;s recall Manhattan tourist problem. The objective of the problem was to find a path through Manhattan that visits the highest number of landmarks. If you remember, we represented Manhattan as a matrix where each edge was representing a block and was labeled with the number of landmarks within that block. Here, we will use a similar idea to find an optimal &lt;strong&gt;alignment&lt;/strong&gt; between two sequences. Note that so far this is the first time we use the term &lt;strong&gt;alignment&lt;/strong&gt; in this section. It turns out that in order to find the alignment we first need to learn how to compute edit distances between sequences efficiently. So, suppose we have two sequences that deliberately have different lengths:&lt;/p&gt;
+
+&lt;p&gt;$\texttt{G C T A T A C}$&lt;/p&gt;
+
+&lt;p&gt;and&lt;/p&gt;
+
+&lt;p&gt;$\texttt{G C G T A T G C}$&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s represent them as the following matrix where the first character $\epsilon$ represents an empty string:&lt;/p&gt;
+
+&lt;div&gt;
+    $$
+    \begin{array}{ c | c | c | c | c | c | c}
+                     &amp; \epsilon &amp; G &amp; C &amp; T &amp; A &amp; T &amp; A &amp; C\\
+                    \hline
+                    \epsilon\\
+                    \hline
+                    G\\
+                    \hline
+                    C\\
+                    \hline
+                    G\\
+                    \hline
+                    T\\
+                    \hline
+                    A\\
+                    \hline
+                    T\\
+                    \hline
+                    G\\
+                    \hline
+                    C
+
+ \end{array}
+
+  \\
+
+\textbf{Note}: sequence\ \texttt{X}\ is\ vertical\ and\ sequence\ \texttt{Y}\ is\ horizontal.
+
+    $$
+&lt;/div&gt;
+
+&lt;p&gt;Let&amp;rsquo;s fill the first column and first raw of the matrix. Because the distance between a string and an empty string is equal to the length of the string (e.g., a distance between string $\texttt{TAG}$ and an empty string is 3) this resulting matrix will look like this:&lt;/p&gt;
+
+&lt;div&gt;
+    $$
+    \begin{array}{ c | c | c | c | c | c | c}
+                     &amp; \epsilon &amp; G &amp; C &amp; T &amp; A &amp; T &amp; A &amp; C\\
+                    \hline
+                    \epsilon &amp; 0 &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 &amp; 6 &amp; 7\\
+                    \hline
+                    G &amp; 1\\
+                    \hline
+                    C &amp; 2\\
+                    \hline
+                    G &amp; 3\\
+                    \hline
+                    T &amp; 4\\
+                    \hline
+                    A &amp; 5\\
+                    \hline
+                    T &amp; 6\\
+                    \hline
+                    G &amp; 7\\
+                    \hline
+                    C &amp; 8
+
+ \end{array}
+
+  \\
+
+\textbf{Note}: sequence\ \texttt{X}\ is\ vertical\ and\ sequence\ \texttt{Y}\ is\ horizontal.
+
+    $$
+&lt;/div&gt;
+
+&lt;p&gt;Now, let&amp;rsquo;s fill in the cell between $\texttt{G}$ and $\texttt{G}$. Recall that:&lt;/p&gt;
+
+&lt;div&gt;
+
+$$Edit\ Distance(\alpha\texttt{x},\beta\texttt{y}) = min\begin{cases} 
+                    \color{red}{Edit\ Distance(\alpha,\beta) + \delta(x,y)} &amp; \\
+                    \color{blue}{Edit\ Distance(\alpha\texttt{x},\beta) + 1} &amp; \\
+                    \color{green}{Edit\ Distance(\alpha,\beta\texttt{y}) + 1}
+             \end{cases}$$
+
+&lt;/div&gt;
+
+&lt;p&gt;where $\delta(x,y) = 0$ if $x = y$ and $\delta(x,y) = 1$ if $x \neq y$. And now let&amp;rsquo;s color each of the cells corresponding to each part of the above expression:&lt;/p&gt;
+
+&lt;div&gt;
+    $$
+    \begin{array}{ c | c | c | c | c | c | c}
+                     &amp; \epsilon &amp; G &amp; C &amp; T &amp; A &amp; T &amp; A &amp; C\\
+                    \hline
+                    \epsilon &amp; \color{red}0 &amp; \color{green}1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 &amp; 6 &amp; 7\\
+                    \hline
+                    G &amp; \color{blue}1\\
+                    \hline
+                    C &amp; 2\\
+                    \hline
+                    G &amp; 3\\
+                    \hline
+                    T &amp; 4\\
+                    \hline
+                    A &amp; 5\\
+                    \hline
+                    T &amp; 6\\
+                    \hline
+                    G &amp; 7\\
+                    \hline
+                    C &amp; 8
+
+ \end{array}
+
+  \\
+
+\textbf{Note}: sequence\ \texttt{X}\ is\ vertical\ and\ sequence\ \texttt{Y}\ is\ horizontal.
+
+    $$
+&lt;/div&gt;
+
+&lt;p&gt;In this specific case:&lt;/p&gt;
+
+&lt;div&gt;
+
+$$Edit\ Distance(\epsilon\texttt{G},\epsilon\texttt{G}) = min\begin{cases} 
+                    \color{red}{Edit\ Distance(\epsilon,\epsilon) + \delta(G,G)\ or\ 0\ +\ 0\ =\ 0} &amp; \\
+                    \color{blue}{Edit\ Distance(\epsilon\texttt{G},\epsilon) + 1\ or\ 1\ +\ 1\ =\ 2} &amp; \\
+                    \color{green}{Edit\ Distance(\epsilon,\epsilon\texttt{G}) + 1\ or\ 1\ +\ 1\ =\ 2}
+             \end{cases}$$
+
+&lt;/div&gt;
+
+&lt;p&gt;This minimum of 0, 2, and 2 will be 0, so we are putting zero into that cell:&lt;/p&gt;
+
+&lt;div&gt;
+    $$
+    \begin{array}{ c | c | c | c | c | c | c}
+                     &amp; \epsilon &amp; G &amp; C &amp; T &amp; A &amp; T &amp; A &amp; C \\
+                    \hline
+                    \epsilon &amp; \color{red}0 &amp; \color{green}1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 &amp; 6 &amp; 7\\
+                    \hline
+                    G &amp; \color{blue}1 &amp; \color{red}0\\
+                    \hline
+                    C &amp; 2\\
+                    \hline
+                    G &amp; 3\\
+                    \hline
+                    T &amp; 4\\
+                    \hline
+                    A &amp; 5\\
+                    \hline
+                    T &amp; 6\\
+                    \hline
+                    G &amp; 7\\
+                    \hline
+                    C &amp; 8
+
+ \end{array}
+
+ \\
+
+\textbf{Note}: sequence\ \texttt{X}\ is\ vertical\ and\ sequence\ \texttt{Y}\ is\ horizontal.
+
+    $$
+&lt;/div&gt;
+
+&lt;p&gt;Using this uncomplicated logic we can fill the entire matrix like this:&lt;/p&gt;
+
+&lt;div&gt;
+    $$
+    \begin{array}{ c | c | c | c | c | c | c}
+                     &amp; \epsilon &amp; G &amp; C &amp; T &amp; A &amp; T &amp; A &amp; C\\
+                    \hline
+                    \epsilon &amp; 0 &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 &amp; 6 &amp; 7\\
+                    \hline
+                           G &amp; 1 &amp; 0 &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 &amp; 6\\
+                    \hline
+                           C &amp; 2 &amp; 1 &amp; 0 &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5\\
+                    \hline
+                           G &amp; 3 &amp; 2 &amp; 1 &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5\\
+                    \hline
+                           T &amp; 4 &amp; 3 &amp; 2 &amp; 1 &amp; 2 &amp; 2 &amp; 3 &amp; 4\\
+                    \hline
+                           A &amp; 5 &amp; 4 &amp; 3 &amp; 2 &amp; 1 &amp; 2 &amp; 2 &amp; 3\\
+                    \hline
+                           T &amp; 6 &amp; 5 &amp; 4 &amp; 3 &amp; 2 &amp; 1 &amp; 2 &amp; 3\\
+                    \hline
+                           G &amp; 7 &amp; 6 &amp; 5 &amp; 4 &amp; 3 &amp; 2 &amp; 2 &amp; 3\\
+                    \hline
+                           C &amp; 8 &amp; 7 &amp; 6 &amp; 5 &amp; 4 &amp; 3 &amp; 3 &amp; \color{red}2
+
+ \end{array}
+
+ \\
+
+\textbf{Note}: sequence\ \texttt{X}\ is\ vertical\ and\ sequence\ \texttt{Y}\ is\ horizontal.
+
+    $$
+&lt;/div&gt;
+
+&lt;p&gt;The lower rightmost cell highlighted in red is special. It contains the value for the edit distance between the two strings. The following Python script implements this idea. You can see that it is essentially instantaneous:&lt;/p&gt;
+
+&lt;iframe src=&#34;https://trinket.io/embed/python3/1bec8f9150?toggleCode=true&#34; width=&#34;100%&#34; height=&#34;400&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;h1 id=&#34;from-edit-distance-to-alignment&#34;&gt;From edit distance to alignment&lt;/h1&gt;
+
+&lt;p&gt;In the previous section we have filled the dynamic programming matrix to find out that the edit distance between the sequences is 2. But in biological applications we are most often interested not in edit distance &lt;em&gt;per se&lt;/em&gt; but in the actual &lt;strong&gt;alignment&lt;/strong&gt; between two sequences.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-traceback&#34;&gt;The traceback&lt;/h2&gt;
+
+&lt;p&gt;We can use the dynamic programming matrix to reconstruct the alignment. This is done using &lt;strong&gt;traceback&lt;/strong&gt; procedure. Let&amp;rsquo;s look at the rightmost bottom cell of the matrix highlighted in &lt;strong&gt;bold&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;div&gt;
+    $$
+    \begin{array}{ c | c | c | c | c | c | c}
+                     &amp; \epsilon &amp; G &amp; C &amp; T &amp; A &amp; T &amp; A &amp; C\\
+                    \hline
+                    \epsilon &amp; 0 &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 &amp; 6 &amp; 7\\
+                    \hline
+                           G &amp; 1 &amp; 0 &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 &amp; 6\\
+                    \hline
+                           C &amp; 2 &amp; 1 &amp; 0 &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5\\
+                    \hline
+                           G &amp; 3 &amp; 2 &amp; 1 &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5\\
+                    \hline
+                           T &amp; 4 &amp; 3 &amp; 2 &amp; 1 &amp; 2 &amp; 2 &amp; 3 &amp; 4\\
+                    \hline
+                           A &amp; 5 &amp; 4 &amp; 3 &amp; 2 &amp; 1 &amp; 2 &amp; 2 &amp; 3\\
+                    \hline
+                           T &amp; 6 &amp; 5 &amp; 4 &amp; 3 &amp; 2 &amp; 1 &amp; 2 &amp; 3\\
+                    \hline
+                           G &amp; 7 &amp; 6 &amp; 5 &amp; 4 &amp; 3 &amp; 2 &amp; 2 &amp; 3\\
+                    \hline
+                           C &amp; 8 &amp; 7 &amp; 6 &amp; 5 &amp; 4 &amp; 3 &amp; 3 &amp; \textbf{2}
+
+ \end{array}
+
+    $$
+&lt;/div&gt;
+
+&lt;p&gt;When we were filling this matrix did we come to this point from above ($\color{green}3$), from the left ($\color{blue}3$), or diagonally ($\color{red}2$):&lt;/p&gt;
+
+&lt;div&gt;
+    $$
+    \begin{array}{ | c | c }
+                \hline
+                   \color{red}2 &amp; \color{green}3\\
+                \hline
+                   \color{blue}3 &amp; \textbf{2}
+    \end{array}
+    $$
+&lt;/div&gt;
+
+&lt;p&gt;Remembering the fact that when filling the matrix we are trying to minimize the expression for edit distance, we clearly arrived to this point diagonally from $\color{red}2$. This because arriving from top ($\color{green}3$) or left ($\color{blue}3$) would add 1. So we highlight diagonal cell in red:&lt;/p&gt;
+
+&lt;div&gt;
+    $$
+    \begin{array}{ c | c | c | c | c | c | c}
+                     &amp; \epsilon &amp; G &amp; C &amp; T &amp; A &amp; T &amp; A &amp; C\\
+                    \hline
+                    \epsilon &amp; 0 &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 &amp; 6 &amp; 7\\
+                    \hline
+                           G &amp; 1 &amp; 0 &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 &amp; 6\\
+                    \hline
+                           C &amp; 2 &amp; 1 &amp; 0 &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5\\
+                    \hline
+                           G &amp; 3 &amp; 2 &amp; 1 &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5\\
+                    \hline
+                           T &amp; 4 &amp; 3 &amp; 2 &amp; 1 &amp; 2 &amp; 2 &amp; 3 &amp; 4\\
+                    \hline
+                           A &amp; 5 &amp; 4 &amp; 3 &amp; 2 &amp; 1 &amp; 2 &amp; 2 &amp; 3\\
+                    \hline
+                           T &amp; 6 &amp; 5 &amp; 4 &amp; 3 &amp; 2 &amp; 1 &amp; 2 &amp; 3\\
+                    \hline
+                           G &amp; 7 &amp; 6 &amp; 5 &amp; 4 &amp; 3 &amp; 2 &amp; \color{red}2 &amp; 3\\
+                    \hline
+                           C &amp; 8 &amp; 7 &amp; 6 &amp; 5 &amp; 4 &amp; 3 &amp; 3 &amp; \color{red}2
+
+ \end{array}
+    $$
+&lt;/div&gt;
+
+&lt;p&gt;Continuing this idea we will draw a trace like the one below until we hit an interesting point:&lt;/p&gt;
+
+&lt;div&gt;
+    $$
+    \begin{array}{ c | c | c | c | c | c | c}
+                     &amp; \epsilon &amp; G &amp; C &amp; T &amp; A &amp; T &amp; A &amp; C\\
+                    \hline
+                    \epsilon &amp; 0 &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 &amp; 6 &amp; 7\\
+                    \hline
+                           G &amp; 1 &amp; 0 &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 &amp; 6\\
+                    \hline
+                           C &amp; 2 &amp; 1 &amp; 0 &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5\\
+                    \hline
+                           G &amp; 3 &amp; 2 &amp; \color{red}1 &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5\\
+                    \hline
+                           T &amp; 4 &amp; 3 &amp; 2 &amp; \color{red}1 &amp; 2 &amp; 2 &amp; 3 &amp; 4\\
+                    \hline
+                           A &amp; 5 &amp; 4 &amp; 3 &amp; 2 &amp; \color{red}1 &amp; 2 &amp; 2 &amp; 3\\
+                    \hline
+                           T &amp; 6 &amp; 5 &amp; 4 &amp; 3 &amp; 2 &amp; \color{red}1 &amp; 2 &amp; 3\\
+                    \hline
+                           G &amp; 7 &amp; 6 &amp; 5 &amp; 4 &amp; 3 &amp; 2 &amp; \color{red}2 &amp; 3\\
+                    \hline
+                           C &amp; 8 &amp; 7 &amp; 6 &amp; 5 &amp; 4 &amp; 3 &amp; 3 &amp; \color{red}2
+
+ \end{array}
+    $$
+&lt;/div&gt;
+
+&lt;p&gt;At this point we have arrived to this value from the top because 0 + 1 = 1. If we were arriving diagonally it would be 1 + 1 = 0 since $\texttt{G}\ \neq\ \texttt{C}$, so we are turning traceback upward and then again diagonally:&lt;/p&gt;
+
+&lt;div&gt;
+    $$
+    \begin{array}{ c | c | c | c | c | c | c}
+                     &amp; \epsilon &amp; G &amp; C &amp; T &amp; A &amp; T &amp; A &amp; C\\
+                    \hline
+                    \epsilon &amp; \color{red}0 &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 &amp; 6 &amp; 7\\
+                    \hline
+                           G &amp; 1 &amp; \color{red}0 &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 &amp; 6\\
+                    \hline
+                           C &amp; 2 &amp; 1 &amp; \color{red}0 &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5\\
+                    \hline
+                           G &amp; 3 &amp; 2 &amp; \color{red}1 &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5\\
+                    \hline
+                           T &amp; 4 &amp; 3 &amp; 2 &amp; \color{red}1 &amp; 2 &amp; 2 &amp; 3 &amp; 4\\
+                    \hline
+                           A &amp; 5 &amp; 4 &amp; 3 &amp; 2 &amp; \color{red}1 &amp; 2 &amp; 2 &amp; 3\\
+                    \hline
+                           T &amp; 6 &amp; 5 &amp; 4 &amp; 3 &amp; 2 &amp; \color{red}1 &amp; 2 &amp; 3\\
+                    \hline
+                           G &amp; 7 &amp; 6 &amp; 5 &amp; 4 &amp; 3 &amp; 2 &amp; \color{red}2 &amp; 3\\
+                    \hline
+                           C &amp; 8 &amp; 7 &amp; 6 &amp; 5 &amp; 4 &amp; 3 &amp; 3 &amp; \color{red}2
+
+ \end{array}
+    $$
+&lt;/div&gt;
+
+&lt;p&gt;Now going through traceback line from the top we are getting the following alignment between two two sequences:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;G C - T A T A C
+| | * | | | * |
+G C G T A T G C
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;approximate-matching&#34;&gt;Approximate matching&lt;/h2&gt;
+
+&lt;p&gt;Let&amp;rsquo;s now get a bit more practical. In many real biological applications we are trying to see if one sequence is contained within another. So, how can we use dynamic programming to find if there is an approximate match between two sequences $\it\texttt{P}$ and $\texttt{T}$?&lt;/p&gt;
+
+&lt;p&gt;Suppose we have two strings:&lt;/p&gt;
+
+&lt;p&gt;$\it{T} = \texttt{A A C C C T A T G T C A T G C C T T G G A}$&lt;/p&gt;
+
+&lt;p&gt;and&lt;/p&gt;
+
+&lt;p&gt;$\it{P} = \texttt{T A C G T C A G C}$&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s construct the following matrix:&lt;/p&gt;
+
+&lt;div&gt;
+$$
+    \begin{array}{ c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c }
+                    &amp; \epsilon &amp; A &amp; A &amp; C &amp; C &amp; C &amp; T &amp; A &amp; T &amp; G &amp; T &amp; C &amp; A &amp; T &amp; G &amp; C &amp; C &amp; T &amp; T &amp; G &amp; G &amp; A\\
+                    \hline
+                               \\
+                    \hline
+                              T\\
+                    \hline
+                              A\\
+                    \hline
+                              C\\
+                    \hline
+                              G\\
+                    \hline
+                              T\\
+                    \hline
+                              C\\
+                    \hline
+                              A\\
+                    \hline
+                              G\\
+                    \hline
+                              C\\
+
+ \end{array}
+
+\\
+
+\textbf{Note}: sequence\ \texttt{T}\ is\ vertical\ while\ \texttt{P}\ is\ horizontal.
+
+ $$
+
+&lt;/div&gt;
+
+&lt;p&gt;Let me remind you that our goal is to find where $\it\texttt{P}$ matches $\texttt{T}$. &lt;em&gt;A priori&lt;/em&gt; we do not know when it may be, so we will start by filling the entire first row with zeroes. This is because the match between $\it\texttt{P}$ and $\texttt{T}$ may start at any point up there. The first column we will initialize the same way we did previously: with increasing sequence of numbers:&lt;/p&gt;
+
+&lt;div&gt;
+$$
+    \begin{array}{ c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c }
+                    &amp; \epsilon &amp; A &amp; A &amp; C &amp; C &amp; C &amp; T &amp; A &amp; T &amp; G &amp; T &amp; C &amp; A &amp; T &amp; G &amp; C &amp; C &amp; T &amp; T &amp; G &amp; G &amp; A\\
+                    \hline
+                             &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0\\
+                    \hline
+                         T &amp; 1\\
+                    \hline
+                         A &amp; 2\\
+                    \hline
+                         C &amp; 3\\
+                    \hline
+                         G &amp; 4\\
+                    \hline
+                         T &amp; 5\\
+                    \hline
+                         C &amp; 6\\
+                    \hline
+                         A &amp; 7\\
+                    \hline
+                         G &amp; 8\\
+                    \hline
+                         C &amp; 9\\
+
+ \end{array}
+ $$
+
+&lt;/div&gt;
+
+&lt;p&gt;Now let&amp;rsquo;s fill this matrix in using the same logic we used before:&lt;/p&gt;
+
+&lt;div&gt;
+$$
+    \begin{array}{ c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c }
+                    &amp; \epsilon &amp; A &amp; A &amp; C &amp; C &amp; C &amp; T &amp; A &amp; T &amp; G &amp; T &amp; C &amp; A &amp; T &amp; G &amp; C &amp; C &amp; T &amp; T &amp; G &amp; G &amp; A\\
+                    \hline
+                             &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0\\
+                    \hline
+                           T &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 0 &amp; 1 &amp; 0 &amp; 1 &amp; 0 &amp; 1 &amp; 1 &amp; 0 &amp; 1 &amp; 1 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; 1\\
+                    \hline
+                           A &amp; 2 &amp; 1 &amp; 1 &amp; 2 &amp; 2 &amp; 2 &amp; 1 &amp; 0 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 2 &amp; 2 &amp; 1 &amp; 1 &amp; 1 &amp; 2 &amp; 1\\
+                    \hline
+                           C &amp; 3 &amp; 2 &amp; 2 &amp; 1 &amp; 2 &amp; 2 &amp; 2 &amp; 1 &amp; 1 &amp; 2 &amp; 2 &amp; 1 &amp; 2 &amp; 2 &amp; 2 &amp; 1 &amp; 2 &amp; 2 &amp; 2 &amp; 2 &amp; 2 &amp; 2\\
+                    \hline
+                           G &amp; 4 &amp; 3 &amp; 3 &amp; 2 &amp; 2 &amp; 3 &amp; 3 &amp; 2 &amp; 2 &amp; 1 &amp; 2 &amp; 2 &amp; 2 &amp; 3 &amp; 2 &amp; 2 &amp; 2 &amp; 3 &amp; 3 &amp; 2 &amp; 2 &amp; 3\\
+                    \hline
+                           T &amp; 5 &amp; 4 &amp; 4 &amp; 3 &amp; 3 &amp; 3 &amp; 3 &amp; 3 &amp; 2 &amp; 2 &amp; 1 &amp; 2 &amp; 3 &amp; 2 &amp; 3 &amp; 3 &amp; 3 &amp; 2 &amp; 3 &amp; 3 &amp; 3 &amp; 3\\
+                    \hline
+                           C &amp; 6 &amp; 5 &amp; 5 &amp; 4 &amp; 3 &amp; 3 &amp; 4 &amp; 4 &amp; 3 &amp; 3 &amp; 2 &amp; 1 &amp; 2 &amp; 3 &amp; 3 &amp; 3 &amp; 3 &amp; 3 &amp; 3 &amp; 4 &amp; 4 &amp; 4\\
+                    \hline
+                           A &amp; 7 &amp; 6 &amp; 5 &amp; 5 &amp; 4 &amp; 4 &amp; 4 &amp; 4 &amp; 4 &amp; 4 &amp; 3 &amp; 2 &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 4 &amp; 4 &amp; 4 &amp; 4 &amp; 5 &amp; 4\\
+                    \hline
+                           G &amp; 8 &amp; 7 &amp; 6 &amp; 6 &amp; 5 &amp; 5 &amp; 5 &amp; 5 &amp; 5 &amp; 4 &amp; 4 &amp; 3 &amp; 2 &amp; 2 &amp; 2 &amp; 3 &amp; 4 &amp; 5 &amp; 5 &amp; 4 &amp; 4 &amp; 5\\
+                    \hline
+                           C &amp; 9 &amp; 8 &amp; 7 &amp; 6 &amp; 6 &amp; 5 &amp; 6 &amp; 6 &amp; 6 &amp; 5 &amp; 5 &amp; 4 &amp; 3 &amp; 3 &amp; 3 &amp; 2 &amp; 3 &amp; 4 &amp; 5 &amp; 5 &amp; 5 &amp; 5
+
+ \end{array}
+ $$
+
+&lt;/div&gt;
+
+&lt;p&gt;Now that we have filled in the complete matrix let&amp;rsquo;s look at the bottom row. Instead of using the rightmost cell we will find a cell with the lowest number. That would be 2 (highlighted in red):&lt;/p&gt;
+
+&lt;div&gt;
+$$
+    \begin{array}{ c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c }
+                    &amp; \epsilon &amp; A &amp; A &amp; C &amp; C &amp; C &amp; T &amp; A &amp; T &amp; G &amp; T &amp; C &amp; A &amp; T &amp; G &amp; C &amp; C &amp; T &amp; T &amp; G &amp; G &amp; A\\
+                    \hline
+                             &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0\\
+                    \hline
+                           T &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 0 &amp; 1 &amp; 0 &amp; 1 &amp; 0 &amp; 1 &amp; 1 &amp; 0 &amp; 1 &amp; 1 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; 1\\
+                    \hline
+                           A &amp; 2 &amp; 1 &amp; 1 &amp; 2 &amp; 2 &amp; 2 &amp; 1 &amp; 0 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 2 &amp; 2 &amp; 1 &amp; 1 &amp; 1 &amp; 2 &amp; 1\\
+                    \hline
+                           C &amp; 3 &amp; 2 &amp; 2 &amp; 1 &amp; 2 &amp; 2 &amp; 2 &amp; 1 &amp; 1 &amp; 2 &amp; 2 &amp; 1 &amp; 2 &amp; 2 &amp; 2 &amp; 1 &amp; 2 &amp; 2 &amp; 2 &amp; 2 &amp; 2 &amp; 2\\
+                    \hline
+                           G &amp; 4 &amp; 3 &amp; 3 &amp; 2 &amp; 2 &amp; 3 &amp; 3 &amp; 2 &amp; 2 &amp; 1 &amp; 2 &amp; 2 &amp; 2 &amp; 3 &amp; 2 &amp; 2 &amp; 2 &amp; 3 &amp; 3 &amp; 2 &amp; 2 &amp; 3\\
+                    \hline
+                           T &amp; 5 &amp; 4 &amp; 4 &amp; 3 &amp; 3 &amp; 3 &amp; 3 &amp; 3 &amp; 2 &amp; 2 &amp; 1 &amp; 2 &amp; 3 &amp; 2 &amp; 3 &amp; 3 &amp; 3 &amp; 2 &amp; 3 &amp; 3 &amp; 3 &amp; 3\\
+                    \hline
+                           C &amp; 6 &amp; 5 &amp; 5 &amp; 4 &amp; 3 &amp; 3 &amp; 4 &amp; 4 &amp; 3 &amp; 3 &amp; 2 &amp; 1 &amp; 2 &amp; 3 &amp; 3 &amp; 3 &amp; 3 &amp; 3 &amp; 3 &amp; 4 &amp; 4 &amp; 4\\
+                    \hline
+                           A &amp; 7 &amp; 6 &amp; 5 &amp; 5 &amp; 4 &amp; 4 &amp; 4 &amp; 4 &amp; 4 &amp; 4 &amp; 3 &amp; 2 &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 4 &amp; 4 &amp; 4 &amp; 4 &amp; 5 &amp; 4\\
+                    \hline
+                           G &amp; 8 &amp; 7 &amp; 6 &amp; 6 &amp; 5 &amp; 5 &amp; 5 &amp; 5 &amp; 5 &amp; 4 &amp; 4 &amp; 3 &amp; 2 &amp; 2 &amp; 2 &amp; 3 &amp; 4 &amp; 5 &amp; 5 &amp; 4 &amp; 4 &amp; 5\\
+                    \hline
+                           C &amp; 9 &amp; 8 &amp; 7 &amp; 6 &amp; 6 &amp; 5 &amp; 6 &amp; 6 &amp; 6 &amp; 5 &amp; 5 &amp; 4 &amp; 3 &amp; 3 &amp; 3 &amp; \color{red}2 &amp; 3 &amp; 4 &amp; 5 &amp; 5 &amp; 5 &amp; 5
+
+ \end{array}
+ $$
+
+&lt;/div&gt;
+
+&lt;p&gt;Starting already familiar traceback procedure at that cell we will get the following path through the matrix:&lt;/p&gt;
+
+&lt;div&gt;
+$$
+    \begin{array}{ c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c }
+                    &amp; \epsilon &amp; A &amp; A &amp; C &amp; C &amp; C &amp; T &amp; A &amp; T &amp; G &amp; T &amp; C &amp; A &amp; T &amp; G &amp; C &amp; C &amp; T &amp; T &amp; G &amp; G &amp; A\\
+                    \hline
+                             &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; \color{red}0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0\\
+                    \hline
+                           T &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; \color{red}0 &amp; 1 &amp; 0 &amp; 1 &amp; 0 &amp; 1 &amp; 1 &amp; 0 &amp; 1 &amp; 1 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; 1\\
+                    \hline
+                           A &amp; 2 &amp; 1 &amp; 1 &amp; 2 &amp; 2 &amp; 2 &amp; 1 &amp; \color{red}0 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 2 &amp; 2 &amp; 1 &amp; 1 &amp; 1 &amp; 2 &amp; 1\\
+                    \hline
+                           C &amp; 3 &amp; 2 &amp; 2 &amp; 1 &amp; 2 &amp; 2 &amp; 2 &amp; 1 &amp; \color{red}1 &amp; 2 &amp; 2 &amp; 1 &amp; 2 &amp; 2 &amp; 2 &amp; 1 &amp; 2 &amp; 2 &amp; 2 &amp; 2 &amp; 2 &amp; 2\\
+                    \hline
+                           G &amp; 4 &amp; 3 &amp; 3 &amp; 2 &amp; 2 &amp; 3 &amp; 3 &amp; 2 &amp; 2 &amp; \color{red}1 &amp; 2 &amp; 2 &amp; 2 &amp; 3 &amp; 2 &amp; 2 &amp; 2 &amp; 3 &amp; 3 &amp; 2 &amp; 2 &amp; 3\\
+                    \hline
+                           T &amp; 5 &amp; 4 &amp; 4 &amp; 3 &amp; 3 &amp; 3 &amp; 3 &amp; 3 &amp; 2 &amp; 2 &amp; \color{red}1 &amp; 2 &amp; 3 &amp; 2 &amp; 3 &amp; 3 &amp; 3 &amp; 2 &amp; 3 &amp; 3 &amp; 3 &amp; 3\\
+                    \hline
+                           C &amp; 6 &amp; 5 &amp; 5 &amp; 4 &amp; 3 &amp; 3 &amp; 4 &amp; 4 &amp; 3 &amp; 3 &amp; 2 &amp; \color{red}1 &amp; \color{red}2 &amp; 3 &amp; 3 &amp; 3 &amp; 3 &amp; 3 &amp; 3 &amp; 4 &amp; 4 &amp; 4\\
+                    \hline
+                           A &amp; 7 &amp; 6 &amp; 5 &amp; 5 &amp; 4 &amp; 4 &amp; 4 &amp; 4 &amp; 4 &amp; 4 &amp; 3 &amp; 2 &amp; 1 &amp; \color{red}2 &amp; 3 &amp; 4 &amp; 4 &amp; 4 &amp; 4 &amp; 4 &amp; 5 &amp; 4\\
+                    \hline
+                           G &amp; 8 &amp; 7 &amp; 6 &amp; 6 &amp; 5 &amp; 5 &amp; 5 &amp; 5 &amp; 5 &amp; 4 &amp; 4 &amp; 3 &amp; 2 &amp; 2 &amp; \color{red}2 &amp; 3 &amp; 4 &amp; 5 &amp; 5 &amp; 4 &amp; 4 &amp; 5\\
+                    \hline
+                           C &amp; 9 &amp; 8 &amp; 7 &amp; 6 &amp; 6 &amp; 5 &amp; 6 &amp; 6 &amp; 6 &amp; 5 &amp; 5 &amp; 4 &amp; 3 &amp; 3 &amp; 3 &amp; \color{red}2 &amp; 3 &amp; 4 &amp; 5 &amp; 5 &amp; 5 &amp; 5
+
+ \end{array}
+ $$
+
+&lt;/div&gt;
+
+&lt;p&gt;for a corresponding alignment:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;A A C C C T A T G T C A T G C C T T G G A
+          | | * | | | | * | | 
+          T A C G T C A - G C
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;global-alignment&#34;&gt;Global alignment&lt;/h2&gt;
+
+&lt;p&gt;So far in filling the dynamic programming matrix we were using the following expression to compute the number within each cell:&lt;/p&gt;
+
+&lt;div&gt;
+
+$$Edit\ Distance(\alpha\texttt{x},\beta\texttt{y}) = min\begin{cases} 
+                    \color{red}{Edit\ Distance(\alpha,\beta) + \delta(x,y)} &amp; \\
+                    \color{blue}{Edit\ Distance(\alpha\texttt{x},\beta) + 1} &amp; \\
+                    \color{green}{Edit\ Distance(\alpha,\beta\texttt{y}) + 1}
+             \end{cases}$$
+
+&lt;/div&gt;
+
+&lt;p&gt;Basically we were adding 1 if there was a mismatch (the $\delta$ function) and also adding 1 for every gap. This however is not biologically realistic. If we look at the rates of different rates of mutations in the human genome we will see that they vary dramatically. Let&amp;rsquo;s look at substitutions first:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;http://www.bx.psu.edu/~anton/bioinf-images/TsTv.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Figure 2&lt;/strong&gt; | There are two kinds of nucleotide substitutions: Transitions and Transversions. Transitions are substitutions between nucleotides belonging to the same chemical group. For example, a substitution of Adenine, a purine, to Guanine, also a purine, is a transition. Transversions, on the other hand, occur between chemically dissimilar nucleotides. For example, any substitution of a purine to a pyrimidine and vice verse will be a transition. (Image from &lt;a href=&#34;https://en.wikipedia.org/wiki/Transversion&#34;&gt;Wikipedia&lt;/a&gt;)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;you can see that there are move ways in which we can have a transversion. Despite this fact transversions are significantly less frequent that transitions. In fact in human the so called &lt;em&gt;Transition/Transversion ratio&lt;/em&gt; ($Ts:Tv$) is close to &lt;a href=&#34;http://www.pnas.org/content/107/3/961.long&#34;&gt;2&lt;/a&gt; (or even higher in &lt;a href=&#34;http://genomebiology.biomedcentral.com/articles/10.1186/gb-2011-12-9-r84&#34;&gt;coding regions&lt;/a&gt;).&lt;/p&gt;
+
+&lt;p&gt;The situation with insertions and deletions (that are often called &lt;em&gt;indels&lt;/em&gt;) is similar in that are relatively rare and their rarity increases with size. A single nucleotide indel may occur every 1,000 bases on average, while a two-nucleotide deletion occurs every 3,000 bases and so on (see &lt;a href=&#34;http://genome.cshlp.org/content/23/5/749.abstract&#34;&gt;Montgomery et al. 2013&lt;/a&gt; for a more detailed statistics).&lt;/p&gt;
+
+&lt;p&gt;As a result it is simply unrealistic to use &amp;ldquo;1&amp;rdquo; is all cases. Instead, we need to &lt;em&gt;penalize&lt;/em&gt; rare events more than we penalize frequent, more probable events. Let&amp;rsquo;s create a &lt;em&gt;penalty matrix&lt;/em&gt; to achieve this goal:&lt;/p&gt;
+
+&lt;div&gt;
+    $$
+    \begin{array}{ c | c  c  c  c  c }
+                     &amp; A &amp; C &amp; G &amp; T &amp; -\\
+                  \hline
+                   A &amp; 0 &amp; \color{blue}4 &amp; \color{red}2 &amp; \color{blue}4 &amp; \color{orange}8\\  
+                   C &amp; \color{blue}4 &amp; 0 &amp; \color{blue}4 &amp; \color{red}2 &amp; \color{orange}8\\
+                   G &amp; \color{red}2 &amp; \color{blue}4 &amp; 0 &amp; \color{blue}4 &amp; \color{orange}8\\
+                   T &amp; \color{blue}4 &amp; \color{red}2 &amp; \color{blue}4 &amp; 0 &amp; \color{orange}8\\
+                   - &amp; \color{orange}8 &amp; \color{orange}8 &amp; \color{orange}8 &amp; \color{orange}8 &amp; \\
+                \hline
+                   
+    \end{array}
+    $$
+&lt;/div&gt;
+
+&lt;p&gt;Here if two nucleotides match, the penalty is 0. For a transitional substitution we pay $\color{red}2$ and for a transversional we pay $\color{blue}4$. The gap is the most expensive at $\color{orange}8$.&lt;/p&gt;
+
+&lt;p&gt;Now, let&amp;rsquo;s align two sequences:&lt;/p&gt;
+
+&lt;p&gt;$\it{X} = \texttt{T A T G T C A T G C}$&lt;/p&gt;
+
+&lt;p&gt;and&lt;/p&gt;
+
+&lt;p&gt;$\it{Y} = \texttt{T A C G T C A G C}$&lt;/p&gt;
+
+&lt;p&gt;First, we need to fill the following dynamic programming matrix:&lt;/p&gt;
+
+&lt;div&gt;
+    $$
+    \begin{array}{ c | c | c | c | c | c | c}
+                     &amp; \epsilon &amp; T &amp; A &amp; T &amp; G &amp; T &amp; C &amp; A &amp; T &amp; G &amp; C\\
+                    \hline
+                    \epsilon \\
+                    \hline
+                           T \\
+                    \hline
+                           A \\
+                    \hline
+                           C \\
+                    \hline
+                           G \\
+                    \hline
+                           T \\
+                    \hline
+                           C \\
+                    \hline
+                           A \\
+                    \hline
+                           G \\
+                    \hline
+                           C 
+
+ \end{array}
+
+\\
+
+\textbf{Note}: sequence\ \texttt{X}\ is\ vertical\ and\ sequence\ \texttt{Y}\ is\ horizontal.
+
+    $$
+&lt;/div&gt;
+
+&lt;p&gt;But now we using penalty matrix generated above to calculate values in each cell. Specifically, before we were using this expression:&lt;/p&gt;
+
+&lt;div&gt;
+
+$$Edit\ Distance(\alpha\texttt{x},\beta\texttt{y}) = min\begin{cases} 
+                    Edit\ Distance(\alpha,\beta) + \delta(x,y) &amp; \\
+                    Edit\ Distance(\alpha\texttt{x},\beta) + 1 &amp; \\
+                    Edit\ Distance(\alpha,\beta\texttt{y}) + 1
+             \end{cases}$$
+&lt;/div&gt;
+
+&lt;p&gt;but now, we will change it into this:&lt;/p&gt;
+
+&lt;div&gt;
+
+$$D(\alpha\texttt{x},\beta\texttt{y}) = min\begin{cases} 
+                    D(\alpha,\beta) + p\texttt{(x,y)} &amp; \\
+                    D(\alpha\texttt{x},\beta) + p\texttt{(x,-)} &amp; \\
+                    D(\alpha,\beta\texttt{y}) + p\texttt{(-,y)}
+             \end{cases}$$
+
+&lt;/div&gt;
+
+&lt;p&gt;where $p\texttt{(x,y)}$, $p\texttt{(x,-)}$, and $p\texttt{(-,y)}$ are taken directly from penalty matrix. Let&amp;rsquo;s start with the first row. In this row we can only fill from the left were we essentially inserting a gap every time. Since the gap penalty is 8 we will get:&lt;/p&gt;
+
+&lt;div&gt;
+    $$
+    \begin{array}{ c | c | c | c | c | c | c}
+                     &amp; \epsilon &amp; T &amp; A &amp; T &amp; G &amp; T &amp; C &amp; A &amp; T &amp; G &amp; C\\
+                    \hline
+                \epsilon &amp; 0 &amp; 8 &amp; 16 &amp; 24 &amp; 32 &amp; 40 &amp; 48 &amp; 56 &amp; 64 &amp; 72 &amp; 80\\
+                    \hline
+                           T \\
+                    \hline
+                           A \\
+                    \hline
+                           C \\
+                    \hline
+                           G \\
+                    \hline
+                           T \\
+                    \hline
+                           C \\
+                    \hline
+                           A \\
+                    \hline
+                           G \\
+                    \hline
+                           C 
+
+ \end{array}
+
+\\
+
+\textbf{Note}: sequence\ \texttt{X}\ is\ vertical\ and\ sequence\ \texttt{Y}\ is\ horizontal.
+
+    $$
+&lt;/div&gt;
+
+&lt;p&gt;Similarly, for the first column we get:&lt;/p&gt;
+
+&lt;div&gt;
+    $$
+    \begin{array}{ c | c | c | c | c | c | c}
+                     &amp; \epsilon &amp; T &amp; A &amp; T &amp; G &amp; T &amp; C &amp; A &amp; T &amp; G &amp; C\\
+                    \hline
+                \epsilon &amp; 0 &amp; 8 &amp; 16 &amp; 24 &amp; 32 &amp; 40 &amp; 48 &amp; 56 &amp; 64 &amp; 72 &amp; 80\\
+                    \hline
+                           T &amp; 8\\
+                    \hline
+                           A &amp; 16\\
+                    \hline
+                           C &amp; 24\\
+                    \hline
+                           G &amp; 32\\
+                    \hline
+                           T &amp; 40\\
+                    \hline
+                           C &amp; 48\\
+                    \hline
+                           A &amp; 56\\
+                    \hline
+                           G &amp; 64\\
+                    \hline
+                           C &amp; 72
+
+ \end{array}
+    $$
+&lt;/div&gt;
+
+&lt;p&gt;and finally the full matrix:&lt;/p&gt;
+
+&lt;div&gt;
+    $$
+    \begin{array}{ c | c | c | c | c | c | c}
+                     &amp; \epsilon &amp; T &amp; A &amp; T &amp; G &amp; T &amp; C &amp; A &amp; T &amp; G &amp; C\\
+                    \hline
+                \epsilon &amp; 0 &amp; 8 &amp; 16 &amp; 24 &amp; 32 &amp; 40 &amp; 48 &amp; 56 &amp; 64 &amp; 72 &amp; 80\\
+                    \hline
+                           T &amp; 8 &amp; 0 &amp; 8 &amp; 16 &amp; 24 &amp; 32 &amp; 40 &amp; 48 &amp; 56 &amp; 64 &amp; 72\\
+                    \hline
+                           A &amp; 16 &amp; 8 &amp; 0 &amp; 8 &amp; 16 &amp; 24 &amp; 32 &amp; 40 &amp; 48 &amp; 56 &amp; 64\\
+                    \hline
+                           C &amp; 24 &amp; 16 &amp; 8 &amp; 2 &amp; 10 &amp; 18 &amp; 24 &amp; 32 &amp; 40 &amp; 48 &amp; 56\\
+                    \hline
+                           G &amp; 32 &amp; 24 &amp; 16 &amp; 10 &amp; 2 &amp; 10 &amp; 18 &amp; 26 &amp; 34 &amp; 40 &amp; 48\\
+                    \hline
+                           T &amp; 40 &amp; 32 &amp; 24 &amp; 16 &amp; 10 &amp; 2 &amp; 10 &amp; 18 &amp; 26 &amp; 34 &amp; 42\\
+                    \hline
+                           C &amp; 48 &amp; 40 &amp; 32 &amp; 24 &amp; 18 &amp; 10 &amp; 2 &amp; 10 &amp; 18 &amp; 26 &amp; 34\\
+                    \hline
+                           A &amp; 56 &amp; 48 &amp; 40 &amp; 32 &amp; 26 &amp; 18 &amp; 10 &amp; 2 &amp; 10 &amp; 18 &amp; 26\\
+                    \hline
+                           G &amp; 64 &amp; 56 &amp; 48 &amp; 40 &amp; 32 &amp; 26 &amp; 18 &amp; 10 &amp; 6 &amp; 10 &amp; 18\\
+                    \hline
+                           C &amp; 72 &amp; 64 &amp; 56 &amp; 48 &amp; 40 &amp; 34 &amp; 26 &amp; 18 &amp; 12 &amp; 10 &amp; 10
+
+ \end{array}
+    $$
+&lt;/div&gt;
+
+&lt;p&gt;Drawing a traceback through this matrix will give us:&lt;/p&gt;
+
+&lt;div&gt;
+    $$
+    \begin{array}{ c | c | c | c | c | c | c}
+                     &amp; \epsilon &amp; T &amp; A &amp; T &amp; G &amp; T &amp; C &amp; A &amp; T &amp; G &amp; C\\
+                    \hline
+                \epsilon &amp; \color{red}0 &amp; 8 &amp; 16 &amp; 24 &amp; 32 &amp; 40 &amp; 48 &amp; 56 &amp; 64 &amp; 72 &amp; 80\\
+                    \hline
+                           T &amp; 8 &amp; \color{red}0 &amp; 8 &amp; 16 &amp; 24 &amp; 32 &amp; 40 &amp; 48 &amp; 56 &amp; 64 &amp; 72\\
+                    \hline
+                           A &amp; 16 &amp; 8 &amp; \color{red}0 &amp; 8 &amp; 16 &amp; 24 &amp; 32 &amp; 40 &amp; 48 &amp; 56 &amp; 64\\
+                    \hline
+                           C &amp; 24 &amp; 16 &amp; 8 &amp; \color{red}2 &amp; 10 &amp; 18 &amp; 24 &amp; 32 &amp; 40 &amp; 48 &amp; 56\\
+                    \hline
+                           G &amp; 32 &amp; 24 &amp; 16 &amp; 10 &amp; \color{red}2 &amp; 10 &amp; 18 &amp; 26 &amp; 34 &amp; 40 &amp; 48\\
+                    \hline
+                           T &amp; 40 &amp; 32 &amp; 24 &amp; 16 &amp; 10 &amp; \color{red}2 &amp; 10 &amp; 18 &amp; 26 &amp; 34 &amp; 42\\
+                    \hline
+                           C &amp; 48 &amp; 40 &amp; 32 &amp; 24 &amp; 18 &amp; 10 &amp; \color{red}2 &amp; 10 &amp; 18 &amp; 26 &amp; 34\\
+                    \hline
+                           A &amp; 56 &amp; 48 &amp; 40 &amp; 32 &amp; 26 &amp; 18 &amp; 10 &amp; \color{red}2 &amp; \color{red}{10} &amp; 18 &amp; 26\\
+                    \hline
+                           G &amp; 64 &amp; 56 &amp; 48 &amp; 40 &amp; 32 &amp; 26 &amp; 18 &amp; 10 &amp; 6 &amp; \color{red}{10} &amp; 18\\
+                    \hline
+                           C &amp; 72 &amp; 64 &amp; 56 &amp; 48 &amp; 40 &amp; 34 &amp; 26 &amp; 18 &amp; 12 &amp; 10 &amp; \color{red}{10}
+
+ \end{array}
+    $$
+&lt;/div&gt;
+
+&lt;p&gt;This corresponds to the following alignment:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;T A C G T C A - G C
+| | * | | | | * | | 
+T A T G T C A T G C
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The following Python code implements Global alignment approach we have seen above. Note that the first function, &lt;code&gt;exampleCost&lt;/code&gt;, can be changed to set different value for the penalty matrix. You can play with it here:&lt;/p&gt;
+
+&lt;iframe src=&#34;https://trinket.io/embed/python3/911a7ddd2e?toggleCode=true&#34; width=&#34;100%&#34; height=&#34;600&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;h2 id=&#34;local-alignment&#34;&gt;Local alignment&lt;/h2&gt;
+
+&lt;p&gt;Global alignment discussed above works only in cases when we truly expect sequences to match across their entire lengths. In majority of biological application this is rarely the case. For instance, suppose you want to compare two bacterial genomes to figure out if they have matching sequences. Local alignment algorithm helps with this challenge. Surprisingly, it is almost identical to the approaches we used before. So here is our problem:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Sequence 1: ##################################################
+                              |||||||||||||||||
+Sequence 2:         #################################################
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;there are two sequences (shown with # characters) and they share a region of high similarity (indicated by vertical lines). How do we find this region? We cannot use global alignment logic here because across the majority of their lengths these sequences are dissimilar.&lt;/p&gt;
+
+&lt;p&gt;To approach this problem we will change our penalty strategy. Instead of giving a high value for each mismatch we will instead give negative penalties. Only matches get positive rewards. Here is an example of such &lt;em&gt;scoring matrix&lt;/em&gt; (as opposed to the &lt;em&gt;penalty matrix&lt;/em&gt; we&amp;rsquo;ve used before):&lt;/p&gt;
+
+&lt;div&gt;
+    $$
+    \begin{array}{ c | c  c  c  c  c }
+                     &amp; A &amp; C &amp; G &amp; T &amp; -\\
+                  \hline
+                   A &amp; 2 &amp; \color{blue}{-4} &amp; \color{red}{-4} &amp; \color{blue}{-4} &amp; \color{orange}{-6}\\  
+                   C &amp; \color{blue}{-4} &amp; 2 &amp; \color{blue}{-4} &amp; \color{red}{-4}  &amp; \color{orange}{-6}\\
+                   G &amp; \color{red}{-4} &amp; \color{blue}{-4} &amp; 2 &amp; \color{blue}{-4}  &amp; \color{orange}{-6}\\
+                   T &amp; \color{blue}{-4} &amp; \color{red}{-4} &amp; \color{blue}{-4}  &amp; 2 &amp; \color{orange}{-6}\\
+                   - &amp; \color{orange}{-6} &amp; \color{orange}{-6} &amp; \color{orange}{-6} &amp; \color{orange}{-6} &amp; \\
+                \hline
+                   
+    \end{array}
+    $$
+&lt;/div&gt;
+
+&lt;p&gt;Our scoring logic will also change:&lt;/p&gt;
+
+&lt;div&gt;
+
+$$D(\alpha\texttt{x},\beta\texttt{y}) = max\begin{cases} 
+                    D(\alpha,\beta) + s\texttt{(x,y)} &amp; \\
+                    D(\alpha\texttt{x},\beta) + s\texttt{(x,-)} &amp; \\
+                    D(\alpha,\beta\texttt{y}) + s\texttt{(-,y)} &amp; \\
+                    0
+             \end{cases}$$
+
+&lt;/div&gt;
+
+&lt;p&gt;We are now looking for &lt;strong&gt;maximum&lt;/strong&gt; and use &lt;em&gt;0&lt;/em&gt; to prevent having negative values in the matrix. This also implies that the first row and column will now be filled with zeros. Let apply this to two sequences:&lt;/p&gt;
+
+&lt;p&gt;Now, let&amp;rsquo;s align two sequences:&lt;/p&gt;
+
+&lt;p&gt;$\it{X} = \texttt{T A T A T G C G G C G T T T}$&lt;/p&gt;
+
+&lt;p&gt;and&lt;/p&gt;
+
+&lt;p&gt;$\it{Y} = \texttt{G G T A T G C T G G C G C T A}$&lt;/p&gt;
+
+&lt;p&gt;Dynamic programming matrix with initialized first row and column will look like this:&lt;/p&gt;
+
+&lt;div&gt;
+    $$
+    \begin{array}{ c | c | c | c | c | c | c | c | c | c | c | c | c | c }
+                     &amp; \epsilon &amp; T &amp; A &amp; T &amp; A &amp; T &amp; G &amp; C &amp; G &amp; G &amp; C &amp; G &amp; T &amp; T &amp; T\\
+                     \hline
+                   \epsilon &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0\\
+                    \hline
+                          G &amp; 0\\
+                    \hline
+                          G &amp; 0\\
+                    \hline
+                          T &amp; 0\\
+                    \hline
+                          A &amp; 0\\ 
+                    \hline
+                          T &amp; 0\\
+                    \hline
+                          G &amp; 0\\
+                    \hline
+                          C &amp; 0\\
+                    \hline
+                          T &amp; 0\\
+                    \hline
+                          G &amp; 0\\
+                    \hline
+                          G &amp; 0\\
+                    \hline
+                          C &amp; 0\\
+                    \hline
+                          G &amp; 0\\
+                    \hline
+                          C &amp; 0\\
+                    \hline
+                          T &amp; 0\\
+                    \hline
+                          A &amp; 0\\
+                   
+\end{array}
+
+\\
+
+\textbf{Remember}: sequence\ \texttt{X}\ is\ vertical\ while\ \texttt{Y}\ is\ horizontal.
+
+
+    $$
+&lt;/div&gt;
+
+&lt;p&gt;Filling it completely will yield the following matrix. Note that clues to where the local alignment may be are given off by positive numbers in the sea of 0s:&lt;/p&gt;
+
+&lt;div&gt;
+    $$
+    \begin{array}{ c | c | c | c | c | c | c | c | c | c | c | c | c | c }
+                     &amp; \epsilon &amp; T &amp; A &amp; T &amp; A &amp; T &amp; G &amp; C &amp; G &amp; G &amp; C &amp; G &amp; T &amp; T &amp; T\\
+                     \hline
+                   \epsilon &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0\\
+                    \hline
+                          G &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 2 &amp; 0 &amp; 2 &amp; 2 &amp; 0 &amp; 2 &amp; 0 &amp; 0 &amp; 0\\
+                    \hline
+                          G &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 2 &amp; 0 &amp; 2 &amp; 4 &amp; 0 &amp; 2 &amp; 0 &amp; 0 &amp; 0\\
+                    \hline
+                          T &amp; 0 &amp; 2 &amp; 0 &amp; 2 &amp; 0 &amp; 2 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 4 &amp; 2 &amp; 2\\
+                    \hline
+                          A &amp; 0 &amp; 0 &amp; 4 &amp; 0 &amp; 4 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0\\ 
+                    \hline
+                          T &amp; 0 &amp; 2 &amp; 0 &amp; 6 &amp; 0 &amp; 6 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 2 &amp; 2 &amp; 2\\
+                    \hline
+                          G &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 2 &amp; 0 &amp; 8 &amp; 2 &amp; 2 &amp; 2 &amp; 0 &amp; 2 &amp; 0 &amp; 0 &amp; 0\\
+                    \hline
+                          C &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 2 &amp; 10 &amp; 4 &amp; 0 &amp; 4 &amp; 0 &amp; 0 &amp; 0 &amp; 0\\
+                    \hline
+                          T &amp; 0 &amp; 2 &amp; 0 &amp; 2 &amp; 0 &amp; 2 &amp; 0 &amp; 4 &amp; 6 &amp; 0 &amp; 0 &amp; 0 &amp; 2 &amp; 2 &amp; 2\\
+                    \hline
+                          G &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 4 &amp; 0 &amp; 6 &amp; 8 &amp; 2 &amp; 2 &amp; 0 &amp; 0 &amp; 0\\
+                    \hline
+                          G &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 2 &amp; 0 &amp; 2 &amp; 8 &amp; 4 &amp; 4 &amp; 0 &amp; 0 &amp; 0\\
+                    \hline
+                          C &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 4 &amp; 0 &amp; 2 &amp; 10 &amp; 4 &amp; 0 &amp; 0 &amp; 0\\
+                    \hline
+                          G &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 2 &amp; 0 &amp; 6 &amp; 2 &amp; 4 &amp; \color{red}{12} &amp; 6 &amp; 0 &amp; 0\\
+                    \hline
+                          C &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 4 &amp; 0 &amp; 2 &amp; 4 &amp; 6 &amp; 8 &amp; 2 &amp; 0\\
+                    \hline
+                          T &amp; 0 &amp; 2 &amp; 0 &amp; 2 &amp; 0 &amp; 2 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 8 &amp; 10 &amp; 4\\
+                    \hline
+                          A &amp; 0 &amp; 0 &amp; 4 &amp; 0 &amp; 4 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 2 &amp; 4 &amp; 6\\
+                   
+\end{array}
+    $$
+&lt;/div&gt;
+
+&lt;p&gt;To identify to boundary of the local alignment we need to identify the cell with the &lt;strong&gt;highest&lt;/strong&gt; value. This cell has value of $\color{red}{12}$ and is highlighted above. Using traceback procedure we will find:&lt;/p&gt;
+
+&lt;div&gt;
+    $$
+    \begin{array}{ c | c | c | c | c | c | c | c | c | c | c | c | c | c }
+                     &amp; \epsilon &amp; T &amp; A &amp; T &amp; A &amp; T &amp; G &amp; C &amp; G &amp; G &amp; C &amp; G &amp; T &amp; T &amp; T\\
+                     \hline
+                   \epsilon &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0\\
+                    \hline
+                          G &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 2 &amp; 0 &amp; 2 &amp; 2 &amp; 0 &amp; 2 &amp; 0 &amp; 0 &amp; 0\\
+                    \hline
+                          G &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 2 &amp; 0 &amp; 2 &amp; 4 &amp; 0 &amp; 2 &amp; 0 &amp; 0 &amp; 0\\
+                    \hline
+                          T &amp; 0 &amp; 2 &amp; 0 &amp; \color{red}2 &amp; 0 &amp; 2 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 4 &amp; 2 &amp; 2\\
+                    \hline
+                          A &amp; 0 &amp; 0 &amp; 4 &amp; 0 &amp; \color{red}4 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0\\ 
+                    \hline
+                          T &amp; 0 &amp; 2 &amp; 0 &amp; 6 &amp; 0 &amp; \color{red}6 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 2 &amp; 2 &amp; 2\\
+                    \hline
+                          G &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 2 &amp; 0 &amp; \color{red}8 &amp; 2 &amp; 2 &amp; 2 &amp; 0 &amp; 2 &amp; 0 &amp; 0 &amp; 0\\
+                    \hline
+                          C &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 2 &amp; \color{red}{10} &amp; 4 &amp; 0 &amp; 4 &amp; 0 &amp; 0 &amp; 0 &amp; 0\\
+                    \hline
+                          T &amp; 0 &amp; 2 &amp; 0 &amp; 2 &amp; 0 &amp; 2 &amp; 0 &amp; \color{red}4 &amp; 6 &amp; 0 &amp; 0 &amp; 0 &amp; 2 &amp; 2 &amp; 2\\
+                    \hline
+                          G &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 4 &amp; 0 &amp; \color{red}6 &amp; 8 &amp; 2 &amp; 2 &amp; 0 &amp; 0 &amp; 0\\
+                    \hline
+                          G &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 2 &amp; 0 &amp; 2 &amp; \color{red}8 &amp; 4 &amp; 4 &amp; 0 &amp; 0 &amp; 0\\
+                    \hline
+                          C &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 4 &amp; 0 &amp; 2 &amp; \color{red}{10} &amp; 4 &amp; 0 &amp; 0 &amp; 0\\
+                    \hline
+                          G &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 2 &amp; 0 &amp; 6 &amp; 2 &amp; 4 &amp; \color{red}{12} &amp; 6 &amp; 0 &amp; 0\\
+                    \hline
+                          C &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 4 &amp; 0 &amp; 2 &amp; 4 &amp; 6 &amp; 8 &amp; 2 &amp; 0\\
+                    \hline
+                          T &amp; 0 &amp; 2 &amp; 0 &amp; 2 &amp; 0 &amp; 2 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 8 &amp; 10 &amp; 4\\
+                    \hline
+                          A &amp; 0 &amp; 0 &amp; 4 &amp; 0 &amp; 4 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 2 &amp; 4 &amp; 6\\
+                   
+\end{array}
+    $$
+&lt;/div&gt;
+
+&lt;p&gt;This corresponds to the best local alignment between the two sequences:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; T A T A T G C - G G C G T T T
+     | | | | | * | | | |
+ G G T A T G C T G G C G C T A
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here is a Python representation of this approach:&lt;/p&gt;
+
+&lt;iframe src=&#34;https://trinket.io/embed/python3/aa05b81499?toggleCode=true&#34; width=&#34;100%&#34; height=&#34;600&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;p&gt;This algorithm was developed by &lt;a href=&#34;http://dornsife.usc.edu/assets/sites/516/docs/papers/msw_papers/msw-042.pdf&#34;&gt;Temple Smith and Michael Waterman&lt;/a&gt; in 1981. This is why it is most often called Smith Waterman local alignment algorithm.&lt;/p&gt;
+
+&lt;p&gt;In the next lecture we will learn about speeding sequence searches with indexing and talk about &lt;a href=&#34;http://blast.ncbi.nlm.nih.gov/Blast.cgi&#34;&gt;BLAST&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Sequence alignment: Introductory concepts</title>
