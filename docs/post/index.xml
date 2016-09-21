@@ -21,7 +21,7 @@
 
 &lt;p&gt;In the previous lecture we have seen the principle behind dynamic programming. This approach is extremely useful for comparing biological sequences, which is coincidentally one of the main point of this course. This lecture explain how this is done. In writing this text I heavily relied on wonderful &lt;a href=&#34;http://www.langmead-lab.org/teaching-materials/&#34;&gt;course&lt;/a&gt; taught by Ben Langmead at Johns Hopkins. The cover image shows pairwise alignments for human, mouse, and dog &lt;em&gt;KIF3&lt;/em&gt; locus from &lt;a href=&#34;http://genome.cshlp.org/content/10/9/1304.long&#34;&gt;Dubchak et al. 2000&lt;/a&gt;.&lt;/p&gt;
 
-&lt;h1 id=&#34;how-different-are-two-sequences&#34;&gt;How different are two sequences?&lt;/h1&gt;
+&lt;h2 id=&#34;how-different-are-two-sequences&#34;&gt;How different are two sequences?&lt;/h2&gt;
 
 &lt;p&gt;Suppose you have two sequences of the same length:&lt;/p&gt;
 
@@ -112,6 +112,14 @@ $$Edit\ Distance(\alpha\texttt{x},\beta\texttt{y}) = min\begin{cases}
 &lt;iframe src=&#34;https://trinket.io/embed/python/8994bfe46e?toggleCode=true&#34; width=&#34;100%&#34; height=&#34;400&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; allowfullscreen&gt;&lt;/iframe&gt;
 
 &lt;p&gt;While this approach to the edit distance problem is correct, it will hardly help us on the genome-wide scale. Just like in case of the change problem and Manhattan tourist problem dynamic programming is going to save the day.&lt;/p&gt;
+
+&lt;h2 id=&#34;video&#34;&gt;Video&lt;/h2&gt;
+
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;//player.vimeo.com/video/183583352&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%;&#34; webkitallowfullscreen mozallowfullscreen allowfullscreen&gt;&lt;/iframe&gt;
+ &lt;/div&gt;
+
 
 &lt;h1 id=&#34;dynamic-programming-to-the-rescue&#34;&gt;Dynamic programming to the rescue&lt;/h1&gt;
 
@@ -320,6 +328,14 @@ $$Edit\ Distance(\epsilon\texttt{G},\epsilon\texttt{G}) = min\begin{cases}
 &lt;p&gt;The lower rightmost cell highlighted in red is special. It contains the value for the edit distance between the two strings. The following Python script implements this idea. You can see that it is essentially instantaneous:&lt;/p&gt;
 
 &lt;iframe src=&#34;https://trinket.io/embed/python3/1bec8f9150?toggleCode=true&#34; width=&#34;100%&#34; height=&#34;400&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;h2 id=&#34;video-1&#34;&gt;Video&lt;/h2&gt;
+
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;//player.vimeo.com/video/183583042&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%;&#34; webkitallowfullscreen mozallowfullscreen allowfullscreen&gt;&lt;/iframe&gt;
+ &lt;/div&gt;
+
 
 &lt;h1 id=&#34;from-edit-distance-to-alignment&#34;&gt;From edit distance to alignment&lt;/h1&gt;
 
@@ -647,6 +663,14 @@ $$
           | | * | | | | * | | 
           T A C G T C A - G C
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;video-2&#34;&gt;Video&lt;/h2&gt;
+
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;//player.vimeo.com/video/183587535&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%;&#34; webkitallowfullscreen mozallowfullscreen allowfullscreen&gt;&lt;/iframe&gt;
+ &lt;/div&gt;
+
 
 &lt;h2 id=&#34;global-alignment&#34;&gt;Global alignment&lt;/h2&gt;
 
@@ -1100,6 +1124,16 @@ $$D(\alpha\texttt{x},\beta\texttt{y}) = max\begin{cases}
 &lt;iframe src=&#34;https://trinket.io/embed/python3/aa05b81499?toggleCode=true&#34; width=&#34;100%&#34; height=&#34;600&#34; frameborder=&#34;0&#34; marginwidth=&#34;0&#34; marginheight=&#34;0&#34; allowfullscreen&gt;&lt;/iframe&gt;
 
 &lt;p&gt;This algorithm was developed by &lt;a href=&#34;http://dornsife.usc.edu/assets/sites/516/docs/papers/msw_papers/msw-042.pdf&#34;&gt;Temple Smith and Michael Waterman&lt;/a&gt; in 1981. This is why it is most often called Smith Waterman local alignment algorithm.&lt;/p&gt;
+
+&lt;h2 id=&#34;video-3&#34;&gt;Video&lt;/h2&gt;
+
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;//player.vimeo.com/video/183588416&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%;&#34; webkitallowfullscreen mozallowfullscreen allowfullscreen&gt;&lt;/iframe&gt;
+ &lt;/div&gt;
+
+
+&lt;h1 id=&#34;next&#34;&gt;Next&amp;hellip;&lt;/h1&gt;
 
 &lt;p&gt;In the next lecture we will learn about speeding sequence searches with indexing and talk about &lt;a href=&#34;http://blast.ncbi.nlm.nih.gov/Blast.cgi&#34;&gt;BLAST&lt;/a&gt;.&lt;/p&gt;
 </description>

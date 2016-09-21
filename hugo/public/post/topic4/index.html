@@ -1,10 +1,9 @@
-		<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en-us">
 <head>
-	<title>Aligning sequences with dynamic programming &middot; BMMB554 | Fall 2016</title>
+	<title>Aligning sequences with dynamic programming&middot; BMMB554 | Fall 2016</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="X-Frame-Options" content="sameorigin">
 	<meta name="author" content="Anton Nekrutenko">
 	<meta name="description" content="Introduction to data driven life sciences">
 	<meta name="keywords" content="genomes, genetics, ngs, data analysis">
@@ -24,14 +23,17 @@
 
 	<!-- Google Fonts -->
 	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
 </head>
-		<body>
-			<header class="site-header">
+
+<body>
+    <header class="site-header">
 	<div class="branding">
 		<a href="http://nekrut.github.io/BMMB554/">
-		
-			<img class="avatar" src="http://nekrut.github.io/BMMB554/img/gxy.png" alt=""/>
-		
+		<img class="avatar" src="http://nekrut.github.io/BMMB554/img/gxy.png" alt=""/>
 		</a>
 		<h1 class="site-title">
 			<a href="http://nekrut.github.io/BMMB554/">BMMB554 | Fall 2016</a>
@@ -39,18 +41,13 @@
 	</div>
 	<nav class="site-nav">
 		<ul>
-	      	
-	        	<li><a href="/BMMB554/about/"> Syllabus </a></li>
-	      	
+	      	<li><a href="/BMMB554/about/"> Syllabus </a></li>
 
-	      	
-<li>
+	      	<li>
 	<a href="http://nekrut.github.io/BMMB554/" title="">
 		<i class="fa fa-fw fa-home"></i>
 	</a>
 </li>
-
-
 
 
 
@@ -60,19 +57,6 @@
 	</a>
 </li>
 
-
-
-
-
-
-
-
-
-<li>
-	<a href="https://vimeo.com/channels/1125236" title="">
-		<i class="fa fa-fw fa-vimeo-square"></i>
-	</a>
-</li>
 
 
 
@@ -107,8 +91,6 @@
 
 
 
-
-
 <li>
 	<a href="https://twitter.com/galaxyproject" title="Twitter">
 		<i class="fa fa-fw fa-twitter"></i>
@@ -119,27 +101,25 @@
 
 
 
-
 	    </ul>
 	</nav>
 </header>
 
-			<div class="content">
-				
-				<article class="feature-image">
-					<header style="background-image: url('http://nekrut.github.io/BMMB554/img/topic4_cover.jpg')">
-						<h1 class="title">Aligning sequences with dynamic programming</h1>
-					</header>
-				
 
-				<section class="post-content">
-					
+    <div class="content">
+    <article class="feature-image">
+		<header style="background-image: url('http://nekrut.github.io/BMMB554/img/topic4_cover.jpg')">
+			<h1 class="title">Aligning sequences with dynamic programming</h1>
+		</header>
+
+	<section class="post-content">
+		
 
 <h1 id="sequence-alignment">Sequence alignment</h1>
 
 <p>In the previous lecture we have seen the principle behind dynamic programming. This approach is extremely useful for comparing biological sequences, which is coincidentally one of the main point of this course. This lecture explain how this is done. In writing this text I heavily relied on wonderful <a href="http://www.langmead-lab.org/teaching-materials/">course</a> taught by Ben Langmead at Johns Hopkins. The cover image shows pairwise alignments for human, mouse, and dog <em>KIF3</em> locus from <a href="http://genome.cshlp.org/content/10/9/1304.long">Dubchak et al. 2000</a>.</p>
 
-<h1 id="how-different-are-two-sequences">How different are two sequences?</h1>
+<h2 id="how-different-are-two-sequences">How different are two sequences?</h2>
 
 <p>Suppose you have two sequences of the same length:</p>
 
@@ -230,6 +210,14 @@ $$Edit\ Distance(\alpha\texttt{x},\beta\texttt{y}) = min\begin{cases}
 <iframe src="https://trinket.io/embed/python/8994bfe46e?toggleCode=true" width="100%" height="400" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
 
 <p>While this approach to the edit distance problem is correct, it will hardly help us on the genome-wide scale. Just like in case of the change problem and Manhattan tourist problem dynamic programming is going to save the day.</p>
+
+<h2 id="video">Video</h2>
+
+
+<div style="position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;">
+  <iframe src="//player.vimeo.com/video/183583352" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+ </div>
+
 
 <h1 id="dynamic-programming-to-the-rescue">Dynamic programming to the rescue</h1>
 
@@ -438,6 +426,14 @@ $$Edit\ Distance(\epsilon\texttt{G},\epsilon\texttt{G}) = min\begin{cases}
 <p>The lower rightmost cell highlighted in red is special. It contains the value for the edit distance between the two strings. The following Python script implements this idea. You can see that it is essentially instantaneous:</p>
 
 <iframe src="https://trinket.io/embed/python3/1bec8f9150?toggleCode=true" width="100%" height="400" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+
+<h2 id="video-1">Video</h2>
+
+
+<div style="position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;">
+  <iframe src="//player.vimeo.com/video/183583042" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+ </div>
+
 
 <h1 id="from-edit-distance-to-alignment">From edit distance to alignment</h1>
 
@@ -765,6 +761,14 @@ $$
           | | * | | | | * | | 
           T A C G T C A - G C
 </code></pre>
+
+<h2 id="video-2">Video</h2>
+
+
+<div style="position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;">
+  <iframe src="//player.vimeo.com/video/183587535" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+ </div>
+
 
 <h2 id="global-alignment">Global alignment</h2>
 
@@ -1219,26 +1223,28 @@ $$D(\alpha\texttt{x},\beta\texttt{y}) = max\begin{cases}
 
 <p>This algorithm was developed by <a href="http://dornsife.usc.edu/assets/sites/516/docs/papers/msw_papers/msw-042.pdf">Temple Smith and Michael Waterman</a> in 1981. This is why it is most often called Smith Waterman local alignment algorithm.</p>
 
+<h2 id="video-3">Video</h2>
+
+
+<div style="position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;">
+  <iframe src="//player.vimeo.com/video/183588416" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+ </div>
+
+
+<h1 id="next">Next&hellip;</h1>
+
 <p>In the next lecture we will learn about speeding sequence searches with indexing and talk about <a href="http://blast.ncbi.nlm.nih.gov/Blast.cgi">BLAST</a>.</p>
 
+	</section>
+    </div>
 
-				<hr>
-
-				
-				</section>
-
-			</article>
-			
-
-<footer class="site-footer">
+    <footer class="site-footer">
 	<p class="text">&copy; 2016 - Released under the MIT license<br>Powered by <a href="//gohugo.io/">Hugo</a> with the <a href="//github.com/digitalcraftsman/hugo-type-theme">Type Theme</a></p>
-</footer>
 
-<script type="text/javascript"
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
-<script type="text/x-mathjax-config">
+	<script type="text/javascript"
+    	src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+	</script>
+	<script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
     inlineMath: [['$','$'], ['\\(','\\)']],
@@ -1262,10 +1268,8 @@ MathJax.Hub.Config({
         all[i].SourceElement().parentNode.className += ' has-jax';
     }
 });
-
-
 </script>
-
+</footer>
 
 
 <script>
@@ -1278,6 +1282,5 @@ ga('create', 'UA-83364979-1', 'auto');
 ga('send', 'pageview');
 </script>
 
-		</div>
-	</body>
+</body>
 </html>

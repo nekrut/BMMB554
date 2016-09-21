@@ -14,7 +14,7 @@ description = "Topic 4 | Aligning DNA sequences: From edit distance to local ali
 
 In the previous lecture we have seen the principle behind dynamic programming. This approach is extremely useful for comparing biological sequences, which is coincidentally one of the main point of this course. This lecture explain how this is done. In writing this text I heavily relied on wonderful [course](http://www.langmead-lab.org/teaching-materials/) taught by Ben Langmead at Johns Hopkins. The cover image shows pairwise alignments for human, mouse, and dog *KIF3* locus from [Dubchak et al. 2000](http://genome.cshlp.org/content/10/9/1304.long).
 
-# How different are two sequences?
+## How different are two sequences?
 
 Suppose you have two sequences of the same length:
 
@@ -110,6 +110,10 @@ To understand the magnitude of this problem let's look at slightly modified vers
 <iframe src="https://trinket.io/embed/python/8994bfe46e?toggleCode=true" width="100%" height="400" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
 
 While this approach to the edit distance problem is correct, it will hardly help us on the genome-wide scale. Just like in case of the change problem and Manhattan tourist problem dynamic programming is going to save the day.
+
+## Video
+
+{{< vimeo 183583352 >}}
 
 # Dynamic programming to the rescue
 
@@ -319,6 +323,10 @@ Using this uncomplicated logic we can fill the entire matrix like this:
 The lower rightmost cell highlighted in red is special. It contains the value for the edit distance between the two strings. The following Python script implements this idea. You can see that it is essentially instantaneous:
 
 <iframe src="https://trinket.io/embed/python3/1bec8f9150?toggleCode=true" width="100%" height="400" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+
+## Video
+
+{{< vimeo 183583042 >}}
 
 # From edit distance to alignment
 
@@ -650,6 +658,10 @@ A A C C C T A T G T C A T G C C T T G G A
           | | * | | | | * | | 
           T A C G T C A - G C
 ```
+
+## Video
+
+{{< vimeo 183587535 >}}
 
 ## Global alignment
 
@@ -1108,6 +1120,12 @@ Here is a Python representation of this approach:
 
 This algorithm was developed by [Temple Smith and Michael Waterman](http://dornsife.usc.edu/assets/sites/516/docs/papers/msw_papers/msw-042.pdf) in 1981. This is why it is most often called Smith Waterman local alignment algorithm. 
 
+## Video
+
+{{< vimeo 183588416 >}}
+
+
+# Next...
 
 In the next lecture we will learn about speeding sequence searches with indexing and talk about [BLAST](http://blast.ncbi.nlm.nih.gov/Blast.cgi). 
 
