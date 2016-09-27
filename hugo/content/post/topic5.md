@@ -515,7 +515,7 @@ For human genome with DNA alphabet of four nucleotides, saving checkpoint every 
 
 ### Watch more
 
-As was mentioned in the beginning this materials follows a series of lectures by Ben Langmead. Below are two of his amazing videos on the subject:
+As was mentioned in the beginning, this materials follows a series of lectures by Ben Langmead. Below are two of his amazing videos on the subject:
 
 #### BWT and its properties
 

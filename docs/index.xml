@@ -705,7 +705,7 @@ baaba$a
 
 &lt;h3 id=&#34;watch-more&#34;&gt;Watch more&lt;/h3&gt;
 
-&lt;p&gt;As was mentioned in the beginning this materials follows a series of lectures by Ben Langmead. Below are two of his amazing videos on the subject:&lt;/p&gt;
+&lt;p&gt;As was mentioned in the beginning, this materials follows a series of lectures by Ben Langmead. Below are two of his amazing videos on the subject:&lt;/p&gt;
 
 &lt;h4 id=&#34;bwt-and-its-properties&#34;&gt;BWT and its properties&lt;/h4&gt;
 
@@ -1364,9 +1364,9 @@ $$
                     \hline
                            T &amp; 5 &amp; 4 &amp; 4 &amp; 3 &amp; 3 &amp; 3 &amp; 3 &amp; 3 &amp; 2 &amp; 2 &amp; \color{red}1 &amp; 2 &amp; 3 &amp; 2 &amp; 3 &amp; 3 &amp; 3 &amp; 2 &amp; 3 &amp; 3 &amp; 3 &amp; 3\\
                     \hline
-                           C &amp; 6 &amp; 5 &amp; 5 &amp; 4 &amp; 3 &amp; 3 &amp; 4 &amp; 4 &amp; 3 &amp; 3 &amp; 2 &amp; \color{red}1 &amp; \color{red}2 &amp; 3 &amp; 3 &amp; 3 &amp; 3 &amp; 3 &amp; 3 &amp; 4 &amp; 4 &amp; 4\\
+                           C &amp; 6 &amp; 5 &amp; 5 &amp; 4 &amp; 3 &amp; 3 &amp; 4 &amp; 4 &amp; 3 &amp; 3 &amp; 2 &amp; \color{red}1 &amp; 2 &amp; 3 &amp; 3 &amp; 3 &amp; 3 &amp; 3 &amp; 3 &amp; 4 &amp; 4 &amp; 4\\
                     \hline
-                           A &amp; 7 &amp; 6 &amp; 5 &amp; 5 &amp; 4 &amp; 4 &amp; 4 &amp; 4 &amp; 4 &amp; 4 &amp; 3 &amp; 2 &amp; 1 &amp; \color{red}2 &amp; 3 &amp; 4 &amp; 4 &amp; 4 &amp; 4 &amp; 4 &amp; 5 &amp; 4\\
+                           A &amp; 7 &amp; 6 &amp; 5 &amp; 5 &amp; 4 &amp; 4 &amp; 4 &amp; 4 &amp; 4 &amp; 4 &amp; 3 &amp; 2 &amp; \color{red}1 &amp; \color{red}2 &amp; 3 &amp; 4 &amp; 4 &amp; 4 &amp; 4 &amp; 4 &amp; 5 &amp; 4\\
                     \hline
                            G &amp; 8 &amp; 7 &amp; 6 &amp; 6 &amp; 5 &amp; 5 &amp; 5 &amp; 5 &amp; 5 &amp; 4 &amp; 4 &amp; 3 &amp; 2 &amp; 2 &amp; \color{red}2 &amp; 3 &amp; 4 &amp; 5 &amp; 5 &amp; 4 &amp; 4 &amp; 5\\
                     \hline
