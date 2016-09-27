@@ -1127,7 +1127,7 @@ This algorithm was developed by [Temple Smith and Michael Waterman](http://dorns
 
 # Next...
 
-In the next lecture we will learn about speeding sequence searches with indexing and talk about [BLAST](http://blast.ncbi.nlm.nih.gov/Blast.cgi). 
+In the next lecture we will learn about speeding sequence searches with indexing and talk about mappers. 
 
 
 
