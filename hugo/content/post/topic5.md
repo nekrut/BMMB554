@@ -521,7 +521,7 @@ As was mentioned in the beginning, this materials follows a series of lectures b
 
 {{<youtube 4n7NPk5lwbI>}}
 
-#### FM index and it is practical applications
+#### FM index and its practical applications
 
 {{<youtube kvVGj5V65io>}}
 
