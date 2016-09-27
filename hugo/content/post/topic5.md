@@ -376,6 +376,10 @@ Below is the entire procedure as one slide:
 >
 >Burrows-Wheeler transform. Image by [Ben Langmead](http://www.cs.jhu.edu/~langmea/resources/lecture_notes/indexing_with_substrings.pdf)
 
+#### Video
+
+{{< vimeo 184566773>}}
+
 It has three important features that make it ideas for creating searchable compact representations of genomic data:
 
  * It can be compressed
@@ -406,11 +410,15 @@ This ranking is done based on the order of the characters in the text (T-ranking
 >
 > Burrows-Wheeler transform with B-rankings. Image by [Ben Langmead](http://www.cs.jhu.edu/~langmea/resources/lecture_notes/indexing_with_substrings.pdf)
 
-A very important implication of this is that we can quickly jump from L to F:
+Look at the A very important implication of this is that we can quickly jump from L to F:
 
 >![](http://www.bx.psu.edu/~anton/bioinf-images/f_from_l.png)
 >
 >L/F jumping. Image by [Ben Langmead](http://www.cs.jhu.edu/~langmea/resources/lecture_notes/indexing_with_substrings.pdf)
+
+#### Video
+
+{{< vimeo 184569791>}}
 
 ### Reversing BTW
 
@@ -425,14 +433,101 @@ Because of the LF mapping property was can also easily reconstruct original text
 >
 > Reversing BWT. Image by [Ben Langmead](http://www.cs.jhu.edu/~langmea/resources/lecture_notes/indexing_with_substrings.pdf)
 
+#### Video
+
+{{< vimeo 184568361>}}
+
 ### Searching BWT
 
+Let's try to find is the string `aba` is present in a "genome" stored as a BWT.
 
+>We start with suffix of $ab\color{red}a$ shown in red. This gives us a range of characters in the F column (all **a**s)
+>
 >![](http://www.bx.psu.edu/~anton/bioinf-images/bwt_q1.png)
+>
+>We now extend to $a\color{red}{ba}$ and see how many of **a**s have preceding **b**s:
+>
 >![](http://www.bx.psu.edu/~anton/bioinf-images/bwt_q2.png)
+>
+>Finally we extend to the entire string $\color{red}{aba}$:
+>
 >![](http://www.bx.psu.edu/~anton/bioinf-images/bwt_q3.png)
+>
+>This tells us the range [3,5) but, as opposed to suffix array, this does not tell us where these matches occur in the actual sequence. We will come back to this problem shortly.
+>
 >![](http://www.bx.psu.edu/~anton/bioinf-images/bwt_q4.png)
+>
+>The shide below shows what happens when a match is **not** present in the "genome":
+>
 >![](http://www.bx.psu.edu/~anton/bioinf-images/bwt_q5.png)
 >
 >Querying BWT. Images from [Ben Langmead](http://www.cs.jhu.edu/~langmea/resources/lecture_notes/bwt_and_fm_index.pdf) 
+
+#### Video
+
+{{<vimeo 184568259>}}
+
+### Practicalities of using BWT 
+
+As we have seen BWT is **very** compact but has few shortcomings such as, for example, the difficulty is seeing where the matches are in the actual genome as well as some performance limitations. Combining BWT with auxiliary data structures creates [FM-index](https://en.wikipedia.org/wiki/FM-index) (where FM stands for Full-text index in Minute space; curiously, the names of FM-index creators are [Ferrigina and Manzini](http://dl.acm.org/citation.cfm?id=796543)). The components of FM-index used for aligning reads to a genome are:
+
+```
+  BWT               Tally        Check    
+                                 points 
+
+  F       L         a b          a b       SA    
+  ---------        -----        -----     ----       
+  $ abaab a         1 0          1 0       6 $
+  a $abaa b         1 1                    5 a$
+  a aba$a b         1 2                    2 aaba$
+  a ba$ab a         2 2          2 2       3 aba$
+  a baaba $         2 2                    0 abaaba$
+> b a$aba a         3 2                    4 ba$
+  b aaba$ a         4 2          4 2       1 baaba$
+```
+Where:
+
+#### BWT
+
+BWT - the BWT (L column from above) is stored and the first column (F) can be easily reconstructed as it is simply a list of all characters (4 in the case of DNA) and their counts.
+
+#### Tally 
+
+Because we do not explicitly store ranks they can simply be obtained by counting occurrences of individual characters from the top of L column. Yet this is computationally expensive. Instead we store a tally table. At every row of the BWT matrix it shows how many times each character has been seen up to this point. For example at row marked with `>` there were 3 As and 2 Bs up to this point. In reality, to save space, only a subset of Tally entries is stored as *Checkpoints* recorded in regular intervals as shown above.
+
+#### SA Sample
+
+Finally, to find coordinates of matches in the genome offsets from an SA index are stored as SA sample (actual suffixes are not stored). This allows quickly finding location of a match within the genome by a direct look up. Similarly to Checkpoints only a fraction of these is stored to save space.
+
+Thus the final list of components is:
+
+* First column = integers corresponding to character type counts. In case of DNA four integers: number of As, Cs, Gs, and Ts.
+* Last column = the BWT transform. Size is equal to the length of the original text
+* Checkpoints = length of text $\times$ number of character types  $\times$ sampling fraction (how sparse rows are sampled)
+* SA sample = length of text $\times$ fraction of the rows kept
+
+For human genome with DNA alphabet of four nucleotides, saving checkpoint every 128<sup>th</sup> row, and saving SA offsets every 32<sup>nd</sup> row we will have:
+
+* First column = 16 bytes
+* Last column = 2bit $\times$ 3 billion characters = 750 MB
+* Checkpoints = 3 billion $\times$ 4 bytes/char / 128 = 100 MB
+* SA sample = 3 billion $\times$ 4 bytes/char /32 = 400 MB
+
+### Watch more
+
+As was mentioned in the beginning this materials follows a series of lectures by Ben Langmead. Below are two of his amazing videos on the subject:
+
+#### BWT and its properties
+
+{{<youtube 4n7NPk5lwbI>}}
+
+#### FM index and it is practical applications
+
+{{<youtube kvVGj5V65io>}}
+
+# Next
+
+Enough theory for now. Next time we are start handling actual data...
+
+
 
