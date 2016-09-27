@@ -527,7 +527,7 @@ As was mentioned in the beginning, this materials follows a series of lectures b
 
 # Next
 
-Enough theory for now. Next time we are start handling actual data...
+Enough theory for now. Next time we will start handling actual data...
 
 
 
