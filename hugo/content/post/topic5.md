@@ -6,7 +6,7 @@ featureimage = "img/topic5_cover.png"
 menu = ""
 tags = []
 title = "Aligning many sequences quickly"
-description = "Topic 5 | Aligning DNA sequences: Aligning billions of reads"
+description = "**Topic 5** | Aligning DNA sequences: Aligning billions of reads"
 
 +++
 

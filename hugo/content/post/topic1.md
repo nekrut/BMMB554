@@ -6,7 +6,7 @@ featureimage = "img/luria_small.png"
 menu = ""
 tags = ["history","genetics","DNA"]
 title = "History"
-description = "Topic 1 | History: From Genetics to Genomics"
+description = "**Topic 1** | History: From Genetics to Genomics"
 
 +++
 

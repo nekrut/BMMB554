@@ -6,7 +6,7 @@ featureimage = "img/illumina_pseudocolor.png"
 menu = ""
 tags = ["NGS","sequencing","DNA"]
 title = "DNA sequencing"
-description = "Topic 2 | DNA sequencing: From Cambridge (Sanger) to Oxford (Nanopore)"
+description = "**Topic 2** | DNA sequencing: From Cambridge (Sanger) to Oxford (Nanopore)"
 +++
 
 # Introduction

@@ -6,7 +6,7 @@ featureimage = "img/nyc.jpg"
 menu = ""
 tags = []
 title = "Sequence alignment: Introductory concepts"
-description = "Topic 3 | Aligning DNA sequences: An introduction to algorithmic principles"
+description = "**Topic 3** | Aligning DNA sequences: An introduction to algorithmic principles"
 
 +++
 
