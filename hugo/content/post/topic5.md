@@ -510,8 +510,8 @@ For human genome with DNA alphabet of four nucleotides, saving checkpoint every 
 
 * First column = 16 bytes
 * Last column = 2bit $\times$ 3 billion characters = 750 MB
-* Checkpoints = 3 billion $\times$ 4 bytes/char / 128 = 100 MB
-* SA sample = 3 billion $\times$ 4 bytes/char /32 = 400 MB
+* Checkpoints = 3 billion $\times$ 4 bytes/char / 128 &#x2248; 100 MB
+* SA sample = 3 billion $\times$ 4 bytes/char /32 &#x2248; 400 MB
 
 ### Watch more
 
