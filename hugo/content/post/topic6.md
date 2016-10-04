@@ -94,6 +94,10 @@ Now we will rename the two history items to "Exons" and "SNPs" by clicking on th
 
 ![Rename](http://galaxy.psu.edu/galaxy101/rename.png)
 
+### Video
+
+{{<vimeo 185523444>}}
+
 ## 2. Finding Exons with the highest number of SNPs
 ### 2.0. Joining exons with SNPs
 Let's remind ourselves that our objective was to find which exon contains the most SNPs. This first step in answering this question will be joining exons with SNPs (a fancy word for printing exons and SNPs that overlap side by side). This is done using **Operate on Genomics Intervals &#8594; Join** tool:
@@ -182,6 +186,10 @@ For example, clicking on **display at UCSC main** will show something like this:
 
 ![](http://galaxy.psu.edu/galaxy101/ucsc.png)
 
+### Video
+
+{{<vimeo 185538367>}}
+
 ## 3. Understanding histories
 
 In Galaxy your analysis steps are represented as a list called *History*:
@@ -209,6 +217,8 @@ Here, the current history is on the left (**Galaxy 101 (2015)**) and your (or mi
 ![History list](http://galaxyproject.org/galaxy101/orderingHistories.png)
 
 You can also scroll sideways using trackpad gestures, move datasets across histories by simply clicking and dragging, and search for histories and individual datasets. This interface also allows you to switch to any existing history (i.e., making it current). Click **Done** once you're done.
+
+A comprehensive overview of Galaxy's history functions is found [here](https://wiki.galaxyproject.org/Histories).
 
 ## 4. Creating and editing a workflow
 ### 4.0. Extracting a workflow
