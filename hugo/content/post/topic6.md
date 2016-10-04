@@ -360,9 +360,9 @@ From there you can import histories and workflows to make them your own. For exa
 
 ![Final view](http://galaxy.psu.edu/galaxy101/importHistory.png)
 
-## 7. If things don't work...
-...you need to complain. Use [Galaxy's BioStar Channel](https://usegalaxy.org/biostar/biostar_redirect) to do this. 
+# Next
 
+We will start using Galaxy to process and map NGS data.
 
 
 
