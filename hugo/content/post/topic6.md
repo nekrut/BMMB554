@@ -10,7 +10,7 @@ description = "**Topic 6** | Introduction to Galaxy platform for data manipulati
 
 +++
 
-# Galaxy 101
+# Introduction to Galaxy
 
 In this lecture we will introduce you to bare basics of Galaxy:
 
