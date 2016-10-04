@@ -12,7 +12,7 @@ description = "**Topic 6** | Introduction to Galaxy platform for data manipulati
 
 # Galaxy 101
 
-In this very simple example we will introduce you to bare basics of Galaxy:
+In this lecture we will introduce you to bare basics of Galaxy:
 
 * Getting data from external databases such as UCSC
 * Performing simple data manipulation
@@ -21,7 +21,11 @@ In this very simple example we will introduce you to bare basics of Galaxy:
 
 ## What are we trying to do?
 
-Suppose you get the following question: ` Mom (or Dad) ... Which coding exon has the highest number of single nucleotide polymorphisms on chromosome 22?`.  You think to yourself "Wow! This is a simple question ... I know exactly where the data is (at UCSC) but how do I actually compute this?" The truth is, there is really no straightforward way of answering this question in a time frame comparable to the attention span of a 7-year-old. Well ... actually there is and it is called Galaxy. So let's try it...
+Suppose you get the following question: 
+
+> *Mom (or Dad) ... Which coding exon has the highest number of single nucleotide polymorphisms on chromosome 22?*
+
+You think to yourself "Wow! This is a simple question ... I know exactly where the data is (at UCSC) but how do I actually compute this?" The truth is, there is really no straightforward way of answering this question in a time frame comparable to the attention span of a 7-year-old. Well ... actually there is and it is called Galaxy. So let's try it...
 
 ## 0. Organizing your windows and setting up Galaxy account
 
@@ -102,7 +106,7 @@ make sure your **Exons** are first and **SNPs** are second and click **Execute**
 
 ### 2.1. Counting the number of SNPs per exon
 
-Let's look at the data obtained from the join operation above (you can do it by clicking the "eye" icon adjacent to the dataset). Below is a subsample of rows from the joined datasets:
+Let's look at the data obtained from the join operation above (you can do it by clicking the "eye" icon adjacent to the dataset). Below is a subsample of rows from the joined datasets (you may need to scroll sideways to see the entire length of the rows below):
 
 ----
 
@@ -126,7 +130,7 @@ chr22 15719659 15719777 uc062bej.1_cds_10_0_chr22_15719660_f 0 + chr22 15719751 
 ```
 ----
 
-Look at the rows highlighted in red. They all correspond to the same exon (id = `uc062bej.1_cds_9_0_chr22_15710868_f`) that overlaps seven distinct SNPs (ids: `rs568292779`, `rs544633418`, `rs548691624`, `rs530488686`, `rs563306354`, `rs559431407`, `rs532940301`). In other words this means that this exon contains seven SNPs. Since our intermediate goal is to count the number of SNPs per exon we can simply do this by counting how many times an exon's id appears in pur dataset. This can be easily done with the **Join, Subtract, and Group &#8594; Group** tool:
+Look at the rows highlighted in red. They all correspond to the same exon (id = `uc062bej.1_cds_9_0_chr22_15710868_f`) that overlaps seven distinct SNPs (ids: `rs568292779`, `rs544633418`, `rs548691624`, `rs530488686`, `rs563306354`, `rs559431407`, `rs532940301`). In other words this means that this exon contains seven SNPs. Since our ultimate goal is to count the number of SNPs per exon we can simply do this by counting how many times an exon's id appears in pur dataset. This can be easily done with the **Join, Subtract, and Group &#8594; Group** tool:
 
 ![Group](http://galaxy.psu.edu/galaxy101/group1.png)
 
@@ -172,18 +176,19 @@ this adds the seventh dataset to the history:
 
 The best way to learn about these exons is to look at their genomic surrounding. There is really no better way to do this than using genome browsers. Because this analysis was performed on "standard" human genome (`hg38` in this case), you have two choices - [UCSC Genome Browser](http://genomes.ucsc.edu) and [IGV](https://www.broadinstitute.org/igv/):
 
-http://galaxy.psu.edu/galaxy101/browsers.png
+![](http://galaxy.psu.edu/galaxy101/browsers.png)
 
 For example, clicking on **display at UCSC main** will show something like this:
 
-http://galaxy.psu.edu/galaxy101/ucsc.png
+![](http://galaxy.psu.edu/galaxy101/ucsc.png)
 
 ## 3. Understanding histories
-In Galaxy your analyses live in histories such as this one:
 
-http://galaxy.psu.edu/galaxy101/seventhHistoryItem.png
+In Galaxy your analysis steps are represented as a list called *History*:
 
-Histories can be very large, you can have as many histories as you want, and all history behavior is controlled by the ![refresh](http://galaxyproject.org/galaxy101/fa-refresh.png), ![cog](http://galaxyproject.org/galaxy101/fa-cog.png), and ![refresh](http://galaxyproject.org/galaxy101/fa-columns.png) buttons on the top of the History pane:
+![](http://galaxy.psu.edu/galaxy101/seventhHistoryItem.png)
+
+Histories can be very large, you can have as many histories as you want, and all history behavior is controlled by the ![refresh](http://galaxyproject.org/galaxy101/fa-refresh.png), ![cog](http://galaxyproject.org/galaxy101/fa-cog.png), and ![multi_history](http://galaxyproject.org/galaxy101/fa-columns.png) buttons on the top of the History pane:
 
 ![History detail](http://galaxyproject.org/galaxy101/historyDetail.png)
 
@@ -205,15 +210,9 @@ Here, the current history is on the left (**Galaxy 101 (2015)**) and your (or mi
 
 You can also scroll sideways using trackpad gestures, move datasets across histories by simply clicking and dragging, and search for histories and individual datasets. This interface also allows you to switch to any existing history (i.e., making it current). Click **Done** once you're done.
 
-## :point_right: Continue to [Galaxy 101-2](https://github.com/nekrut/galaxy/wiki/Galaxy101-2)
-
-
-
-
-# Galaxy 101-2: Getting to know workflows
-
 ## 4. Creating and editing a workflow
 ### 4.0. Extracting a workflow
+
 Lets take a look at the history again:
 
 ![Collapsed history](http://galaxy.psu.edu/galaxy101/historyCollapsed.png)
@@ -248,6 +247,7 @@ Once you do this the representation of the workflow in the bottom right corner o
 ![Workflow Overview](http://galaxy.psu.edu/galaxy101/workflowOverview.png)
 
 ### 4.3. Renaming inputs
+
 Right now both inputs to the workflow look exactly the same. This is a problem as will be very confusing which input should be **Exons** and which should be **SNPs**:
 
 ![Naming inputs 1](http://galaxy.psu.edu/galaxy101/namingInputs1.png)
@@ -261,6 +261,7 @@ Then click on the second input dataset and rename it "Features" (this would make
 ![Rename features](http://galaxy.psu.edu/galaxy101/renameFeatures.png)
 
 ### 4.4. Renaming outputs
+
 Finally let's rename the workflow's output. For this:
 
 * click on the last dataset (**Compare two Queries**)
@@ -270,6 +271,7 @@ Finally let's rename the workflow's output. For this:
 ![Top exons](http://galaxy.psu.edu/galaxy101/topExons.png)
 
 ### 4.5. Setting parameters "at runtime"
+
 What we are trying to do here is do design a generic workflow. This means that time to time you will need to change parameters within this workflow. For instance, in this tutorial we were selecting 5 exons containing the highest number of SNPs. But what if you need to select 10? Thus it makes sense to leave these types of parameters adjustable. To do this: 
 
 First, select a tool in which you want to set parameters at runtime (`Select first` in this case):
@@ -288,6 +290,7 @@ Now let's save the changes we've made by clicking ![cog](http://galaxyproject.or
 ![wfSave](http://galaxy.psu.edu/galaxy101/wfSave.png)
 
 ## 5. Run workflow on whole genome data
+
 Now that we have a workflow, let's do something grand like, for example, finding exons with the highest number of repetitive elements across the entire human genome. 
 
 ### 5.0. Create a new history
@@ -297,6 +300,7 @@ First go back into analysis view by clicking **Analyze Data** on top of the Gala
 ![Create new history](http://galaxy.psu.edu/galaxy101/createNewHistory.png)
 
 ### 5.1. Get Exons
+
 Now let's get coding exons for the entire genome by going to **Get Data &#8594; UCSC Main** and setting up parameters as shown below. Note that this time `region` radio button is set to **genome**:
 
 ![Get all genes](http://galaxy.psu.edu/galaxy101/getAllGenes.png)
@@ -308,6 +312,7 @@ Click **get output** and you will get the next page (if it looks different from 
 Choose **Coding exons** and click **Send query to Galaxy**.
 
 ## 5.2. Get Repeats
+
 Go again to **Get Data &#8594; UCSC Main** and make sure the following settings are selected (in particular `group` = **Repeats** and `track` = **RepeatMasker**):
 
 ![All repeats](http://galaxy.psu.edu/galaxy101/allRepeats.png)
@@ -319,6 +324,7 @@ Click **get output** and you will get the next page (if it looks different from 
 Select **Whole gene** and click **Send Query to Galaxy**.
 
 ### 5.3. Start the Workflow
+
 At this point you will have two items in your history - one with exons and one with repeats. These datasets are large (especially repeats) and it will take some time for them to become green. Luckily you do not have to wait as Galaxy will automatically start jobs once uploads have ended. So nothing stops us from starting the workflow we have created. First, click on the **Workflow link** at the top of Galaxy interface, mouse over **galaxy101-2015**, click, and select **Run**. Center pane will change to allow you launching the workflow. Select appropriate datasets for `Repeats` and `Exon` inputs as shown below. Now scroll to **Step 6** and will see that we can set up `Select first` parameter at *Runtime* (meaning Now!). So lets put `20` in there (or anything else you want) and scroll further down to click ![Run workflow](http://galaxy.psu.edu/galaxy101/runWorkflowButton.png) to see this:
 
 ![Launch workflow](http://galaxy.psu.edu/galaxy101/launchWorkflow.png)
@@ -333,6 +339,7 @@ As we mentioned above this will take some time, so go get coffee. At last you wi
 ![Final view](http://galaxy.psu.edu/galaxy101/final.png)
 
 ## 6. We did not fake this:
+
 The two histories and the workflow described in this page are accessible directly from this page below:
 
 * History [**Galaxy 101 (2015)**](https://usegalaxy.org/u/aun1/h/galaxy-101-2015)
@@ -345,9 +352,6 @@ From there you can import histories and workflows to make them your own. For exa
 
 ## 7. If things don't work...
 ...you need to complain. Use [Galaxy's BioStar Channel](https://usegalaxy.org/biostar/biostar_redirect) to do this. 
-
-## :clap: The End
-
 
 
 
