@@ -10,6 +10,8 @@ description = "**Topic 7** | Handling NGS data: from FASTQ to BAM"
 
 +++
 
+In this section we will look at practical aspects of manipulation of next-generation sequencing data. We will start with Fastq format produced by most sequencing machines and will finish with SAM/BAM format representing mapped reads. The cover image above shows a screen dump of a SAM dataset. 
+
 # Getting NGS data in
 
 You can data in Galaxy using one of five ways:
@@ -43,6 +45,18 @@ This is the best way to upload published datasets deposited to EBI SRA. The prob
 Finally, datasets can be uploaded directly from NCBI's short read archive:
 
 {{<vimeo 121190377>}}
+
+### <font color="red">Try it yourself</font>
+
+- Create a new Galaxy history at http://usegalaxy.org (don't forget to log in).
+- Import the following two datasets (for help see the above video "*From the Web*"):
+
+>http://www.bx.psu.edu/~anton/share/ng_test_data/var/raw_mother-ds-1.fq.gz
+>http://www.bx.psu.edu/~anton/share/ng_test_data/var/raw_mother-ds-2.fq.gz
+
+These are paired end data (see below for explanation of what paired-end is) for a single Illumina run.
+
+Keep Galaxy history for later. We will need it again in a few minutes. 
 
 # Fastq manipulation and quality control
 
@@ -90,58 +104,59 @@ Thus in both cases (paired-end and mate-pair) a single physical piece of DNA (or
 
 #### Two single files
 
-> **File 1**
->
->```
-> @M02286:19:000000000-AA549:1:1101:12677:1273 1:N:0:23
-> CCTACGGGTGGCAGCAGTGAGGAATATTGGTCAATGGACGGAAGTCT
-> +
-> ABC8C,:@F:CE8,B-,C,-6-9-C,CE9-CC--C-<-C++,,+;CE
-> @M02286:19:000000000-AA549:1:1101:15048:1299 1:N:0:23
-> CCTACGGGTGGCTGCAGTGAGGAATATTGGACAATGGTCGGAAGACT
-> +
-> ABC@CC77CFCEG;F9<F89<9--C,CE,--C-6C-,CE:++7:,CF
->```
->
->------
->
-> **File 2**
->
->```
->@M02286:19:000000000-AA549:1:1101:12677:1273 2:N:0:23
->CACTACCCGTGTATCTAATCCTGTTTGATACCCGCACCTTCGAGCTTA
->+
->--8A,CCE+,,;,<CC,,<CE@,CFD,,C,CFF+@+@CCEF,,,B+C,
->@M02286:19:000000000-AA549:1:1101:15048:1299 2:N:0:23
->CACTACCGGGGTATCTAATCCTGTTCGCTCCCCACGCTTTCGTCCATC
->+
->-6AC,EE@::CF7CFF<<FFGGDFFF,@FGGGG?F7FEGGGDEFF>FF
->```
->----
->Note that read ID are **identical** in two files and they are listed in **the same** order. In some cases read IDs in the first and second file may be appended with `/1` and `/2` tags, respectively. 
+**File 1**
+
+```
+ @M02286:19:000000000-AA549:1:1101:12677:1273 1:N:0:23
+ CCTACGGGTGGCAGCAGTGAGGAATATTGGTCAATGGACGGAAGTCT
+ +
+ ABC8C,:@F:CE8,B-,C,-6-9-C,CE9-CC--C-<-C++,,+;CE
+ @M02286:19:000000000-AA549:1:1101:15048:1299 1:N:0:23
+ CCTACGGGTGGCTGCAGTGAGGAATATTGGACAATGGTCGGAAGACT
+ +
+ ABC@CC77CFCEG;F9<F89<9--C,CE,--C-6C-,CE:++7:,CF
+```
+
+------
+
+ **File 2**
+
+```
+@M02286:19:000000000-AA549:1:1101:12677:1273 2:N:0:23
+CACTACCCGTGTATCTAATCCTGTTTGATACCCGCACCTTCGAGCTTA
++
+--8A,CCE+,,;,<CC,,<CE@,CFD,,C,CFF+@+@CCEF,,,B+C,
+@M02286:19:000000000-AA549:1:1101:15048:1299 2:N:0:23
+CACTACCGGGGTATCTAATCCTGTTCGCTCCCCACGCTTTCGTCCATC
++
+-6AC,EE@::CF7CFF<<FFGGDFFF,@FGGGG?F7FEGGGDEFF>FF
+```
+----
+
+Note that read ID are **identical** in two files and they are listed in **the same** order. In some cases read IDs in the first and second file may be appended with `/1` and `/2` tags, respectively. 
 
 #### Interleaved file
 
->```
->@1/1
->AGGGATGTGTTAGGGTTAGGGTTAGGGTTAGGGTTAGGGTTAGGGTTA
->+
->EGGEGGGDFGEEEAEECGDEGGFEEGEFGBEEDDECFEFDD@CDD<ED
->@1/2
->CCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAAC
->+
->GHHHDFDFGFGEGFBGEGGEGEGGGHGFGHFHFHHHHHHHEF?EFEFF
->@2/1
->AGGGATGTGTTAGGGTTAGGGTTAGGGTTAGGGTTAGGGTTAGGGTTA
->+
->HHHHHHEGFHEEFEEHEEHHGGEGGGGEFGFGGGGHHHHFBEEEEEFG
->@2/2
->CCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAAC
->+
->HHHHHHHHHHHHHGHHHHHHGHHHHHHHHHHHFHHHFHHHHHHHHHHH
->```
->----
->Here the first and the second reads are identified with `/1` and `/2` tags.
+```
+@1/1
+AGGGATGTGTTAGGGTTAGGGTTAGGGTTAGGGTTAGGGTTAGGGTTA
++
+EGGEGGGDFGEEEAEECGDEGGFEEGEFGBEEDDECFEFDD@CDD<ED
+@1/2
+CCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAAC
++
+GHHHDFDFGFGEGFBGEGGEGEGGGHGFGHFHFHHHHHHHEF?EFEFF
+@2/1
+AGGGATGTGTTAGGGTTAGGGTTAGGGTTAGGGTTAGGGTTAGGGTTA
++
+HHHHHHEGFHEEFEEHEEHHGGEGGGGEFGFGGGGHHHHFBEEEEEFG
+@2/2
+CCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAAC
++
+HHHHHHHHHHHHHGHHHHHHGHHHHHHHHHHHFHHHFHHHHHHHHHHH
+```
+----
+Here the first and the second reads are identified with `/1` and `/2` tags.
 
 <font color="red">&#10148;</font> **Note**: Fastq format is not strictly defined and its variations will always cause headache for you. See [this page](https://www.ncbi.nlm.nih.gov/books/NBK242622/) for more information.
 
@@ -183,6 +198,13 @@ One of the first steps in the analysis of NGS data is seeing how good the data a
 **A.** Excellent quality | **B.** Hmmm...OK
 
 Here you can see FastQC base quality reports (the tools gives you many other types of data) for two datasets: **A** and **B**. The **A** dataset has long reads (250 bp) and very good quality profile with no qualities dropping below [phred score](http://www.phrap.com/phred/) of 30. The **B** dataset is significantly worse with ends of the reads dipping below phred score of 20. The **B** reads may need to be trimmed for further processing. 
+
+{{<vimeo 123453134>}}
+
+### <font color="red">Try it yourself</font>
+
+QC datasets you have uploaded before.
+
 ## Mapping your data
 
 Mapping of NGS reads against reference sequences is one of the key steps of the analysis. In [Topic 5](/post/topic5/) we covered basic principles behind mapping of sequencing reads against large genomes. Now it is time to see how this is done in practice. Below is a list of key publications highlighting popular mapping tools:
@@ -209,3 +231,189 @@ The following video show mapping using BWA:
 
 {{<vimeo 123102338>}}
 
+### <font color="red">Try it yourself</font>
+
+Map datasets uploaded before using BWA against `hg38` version of the human genome. 
+
+### What if pre-computed index does not exist?
+
+If Galaxy does not have a genome you need to map against, you can upload your genome sequence as a FASTA file and use it in the mapper directly as shown below (**Load reference genome** is set to `History`). 
+
+>
+> {{< figure src="/BMMB554/img/uploaded_genome.png" >}}
+>
+> Mapping against a pre-computed index in Galaxy
+
+In this case Galaxy will first create an index from this dataset and then run mapping analysis against it. The following video shows how this works in practice:
+
+{{<vimeo 123108417>}}
+
+## SAM/BAM datasets
+
+The [SAM/BAM](https://samtools.github.io/hts-specs/SAMv1.pdf) format is an accepted standard for storing aligned reads (it can also store unaligned reads and some mappers such as BWA are accepting unaligned BAM as input). The binary form of the format (BAM) is compact and can be rapidly searched (if indexed). In Galaxy BAM datasets are always indexed (accompanies by a .bai file) and sorted in coordinate order. In the following duscussion I once again rely on [tutorial](http://chagall.med.cornell.edu/RNASEQcourse/Intro2RNAseq.pdf) by Friederike D&uuml;ndar, Luce Skrabanek, and Paul Zumbo.
+
+The output option of STAR already indicates that the results of the alignment will be stored in a SAM or BAM file. The Sequence Alignment/Map (SAM) format is, in fact, a generic nucleotide alignment format that describes the alignment of sequencing reads (or query sequences) to a reference. The human readable, TABdelimited SAM files can be compressed into the Binary Alignment/Map format. These BAM files are bigger than simply gzipped SAM files, because they have been optimized for fast random access rather than size reduction. Position-sorted BAM files can be indexed so that all reads aligning to a locus can be efficiently retrieved without loading the entire file into memory.
+
+As shown below, SAM files typically contain a short header section and a very long alignment section where each row represents a single read alignment. The following sections will explain the SAM format in a bit more detail. For the most comprehensive and updated information go to https://github.com/samtools/hts-specs.
+
+{{< figure src="/BMMB554/img/bam_structure.png" >}}
+
+Schematic representation of a SAM file. Each line of the optional header section starts with “@”, followed by the appropriate abbreviation (e.g., SQ for sequence dictionary which lists all chromosomes names (SN) and their lengths (LN)). The vast majority of lines within a SAM file typically correspond to read alignments where each read is described by the 11 mandatory entries (black font) and a variable number of optional fields (grey font). 
+
+### SAM Header
+
+The header section includes information about how the alignment was generated and stored. All lines in the header section are tab-delimited and begin with the “@” character, followed by tag:value pairs, where tag is a two-letter string that defines the content and the format of value. For example, the “@SQ” line in the header section contains the information about the names and lengths of the *reference sequences to which the reads were aligned. For a hypothetical organism with three chromosomes of length 1,000 bp, the SAM header should contain the following three lines:
+
+```
+@SQ SN:chr1 LN:1000
+@SQ SN:chr2 LN:1000
+@SQ SN:chr3 LN:1000
+```
+
+### SAM alignment section
+
+The optional header section is followed by the alignment section where each line corresponds to one sequenced read. For each read, there are 11 mandatory fields that always appear in the same order:
+
+```
+<QNAME> <FLAG> <RNAME> <POS> <MAPQ> <CIGAR> <MRNM> <MPOS> <ISIZE> <SEQ> <QUAL>
+```
+
+If the corresponding information is unavailable or irrelevant, field values can be ‘0’ or ‘*’ (depending on the field, see below), but they cannot be missing! After the 11 mandatory fields, a variable number of optional fields can be present. Here’s an example of one single line of a real-life SAM file (you may need to scroll sideways):
+
+```
+ERR458493 .552967 16 chrI 140 255 12 M61232N37M2S * 0 0 CCACTCGTTCACCAGGGCCGGCGGGCTGATCACTTTATCGTGCATCTTGGC BB?HHJJIGHHJIGIIJJIJGIJIJJIIIGHBJJJJJJHHHHFFDDDA1+B NH:i:1 HI:i:1 AS:i:41 nM:i:2
+```
+
+The following table explains the format and content of each field. The `FLAG`, `CIGAR`, and the optional fields (marked in blue) are explained in more detail below. The number of optional fields can vary widely between different SAM files and even between reads within in the same file. The field types marked in blue are explained in more detail in the main text below.
+
+{{< figure src="/BMMB554/img/sam_fields.png" >}}
+
+#### `FLAG` field
+
+The FLAG field encodes various pieces of information about the individual read, which is particularly important for PE reads. It contains an integer that is generated from a sequence of Boolean bits (0, 1). This way, answers to multiple binary (Yes/No) questions can be compactly stored as a series of bits, where each of the single bits can be addressed and assigned separately.
+
+The following table gives an overview of the different properties that can be encoded in the FLAG field. The developers of the SAM format and samtools tend to use the hexadecimal encoding as a means to refer to the different bits in their documentation. The value of the FLAG field in a given SAM file, however, will always be the decimal representation of the sum of the underlying binary values (as shown in Table below, row 2).
+
+{{< figure src="/BMMB554/img/sam_flag.png" >}}
+
+The `FLAG` field of SAM files stores information about the respective read alignment in one single decimal number. The decimal number is the sum of all the answers to the Yes/No questions associated with each binary bit. The hexadecimal representation is used to refer to the individual bits (questions). A bit is set if the corresponding state is true. For example, if a read is paired, `0x1` will be set, returning the decimal value of 1. Therefore, all `FLAG` values associated with paired reads must be uneven decimal numbers. Conversely, if the `0x1` bit is unset (= read is not paired), no assumptions can be made about `0x2`, `0x8`, `0x20`, `0x40` and `0x80` because they refer to paired reads.
+
+In a run with single reads, the flags you most commonly see are:
+
+- 0: This read has been mapped to the forward strand. (None of the bit-wise flags have been set.)
+- 4: The read is unmapped (`0x4` is set).
+- 16: The read is mapped to the reverse strand (`0x10` is set)
+
+(`0x100`, `0x200` and `0x400` are not used by most aligners/mappers, but could, in principle be set for single reads.) Some common `FLAG` values that you may see in a PE experiment include:
+
+
+ | 
+---|---
+**69** (= 1 + 4 + 64) | The read is paired, is the first read in the pair, and is unmapped.
+**77** (= 1 + 4 + 8 + 64) | The read is paired, is the first read in the pair, both are unmapped.
+**83** (= 1 + 2 + 16 + 64) | The read is paired, mapped in a proper pair, is the first read in the pair, and it is mapped to the reverse strand.
+**99** (= 1 + 2 + 32 + 64) | The read is paired, mapped in a proper pair, is the first read in the pair, and its mate is mapped to the reverse strand.
+**133** (= 1 + 4 + 128) | The read is paired, is the second read in the pair, and it is unmapped.
+**137** (= 1 + 8 + 128) | The read is paired, is the second read in the pair, and it is mapped while its mate is not.
+**141** (= 1 + 4 + 8 + 128) | The read is paired, is the second read in the pair, but both are unmapped.
+**147** (= 1 + 2 + 16 + 128) | The read is paired, mapped in a proper pair, is the second read in the pair, and mapped to the reverse strand.
+**163** (= 1 + 2 + 32 + 128) | The read is paired, mapped in a proper pair, is the second read in the pair, and its mate is mapped to the reverse strand.
+
+A useful website for quickly translating the FLAG integers into plain English explanations like the ones shown above is: https://broadinstitute.github.io/picard/explain-flags.html
+
+#### `CIGAR` string
+
+`CIGAR` stands for *Concise Idiosyncratic Gapped Alignment Report*. This sixth field of a SAM file
+contains a so-called CIGAR string indicating which operations were necessary to map the read to the reference sequence at that particular locus.
+
+The following operations are defined in CIGAR format (also see figure below):
+
+- **M** - Alignment (can be a sequence match or mismatch!)
+- **I** - Insertion in the read compared to the reference
+- **D** - Deletion in the read compared to the reference
+- **N** - Skipped region from the reference. For mRNA-to-genome alignments, an N operation represents an intron. For other types of alignments, the interpretation of N is not defined.
+- **S** - Soft clipping (clipped sequences are present in read); S may only have H operations between them and the ends of the string
+- **H** - Hard clipping (clipped sequences are NOT present in the alignment record); can only be present as the first and/or last operation
+- **P** - Padding (silent deletion from padded reference)
+- **=** - Sequence match (not widely used)
+- **X** - Sequence mismatch (not widely used)
+
+The sum of lengths of the **M**, **I**, **S**, **=**, **X** operations must equal the length of the read. Here are some examples:
+
+{{< figure src="/BMMB554/img/cigar.png" >}}
+
+#### Optional fields
+
+Following the eleven mandatory SAM file fields, the optional fields are presented as key-value
+pairs in the format of `<TAG>:<TYPE>:<VALUE>`, where `TYPE` is one of:
+
+- `A` - Character
+- `i` - Integer
+- `f` - Float number
+- `Z` - String
+- `H` - Hex string
+
+The information stored in these optional fields will vary widely depending on the mapper and new tags can be added freely. In addition, reads within the same SAM file may have different numbers of optional fields, depending on the program that generated the SAM file. Commonly used optional tags include:
+
+- `AS:i` - Alignment score
+- `BC:Z` - Barcode sequence
+- `HI:i` - Match is i-th hit to the read
+- `NH:i` - Number of reported alignments for the query sequence
+- `NM:i` - Edit distance of the query to the reference
+- `MD:Z` - String that contains the exact positions of mismatches (should complement the CIGAR string)
+- `RG:Z` - Read group (should match the entry after ID if @RG is present in the header.
+
+Thus, for example, we can use the NM:i:0 tag to select only those reads which map perfectly to the reference(i.e., have no mismatches). While the optional fields listed above are fairly standardized, tags that begin with `X`, `Y`, and `Z` are reserved for particularly free usage and will never be part of the official SAM file format specifications. `XS`, for example, is used by TopHat (an RNA-seq analysis tool we will discuss later) to encode the strand information (e.g., `XS:A:+`) while Bowtie2 and BWA use `XS:i:` for reads with multiple alignments to store the alignment score for the next-best-scoring alignment (e.g., `XS:i:30`).
+
+### Read Groups
+
+One of the key features of SAM/BAM format is the ability to label individual reads with readgroup tags. This allows pooling results of multiple experiments into a single BAM dataset. This significantly simplifies downstream logistics: instead of dealing with multiple datasets one can handle just one. Many downstream analysis tools such as variant callers are designed to recognize readgroup data and output results on per-readgroup basis. 
+
+One of the best descriptions of BAM readgroups is on [GATK support site](http://gatkforums.broadinstitute.org/discussion/1317/collected-faqs-about-bam-files). We have gratefully stolen two tables describing the most important readgroup tags - `ID`, `SM`, `LB`, and `PL` - from GATK forum and provide them here:
+
+{{< figure src="/BMMB554/img/rg.png" >}}
+
+As further described in the GATK forum:"_A concrete example may be instructive. Suppose I have a trio of samples: MOM, DAD, and KID. Each has two DNA libraries prepared, one with 400 bp inserts and another with 200 bp inserts. Each of these libraries is run on two lanes of an Illumina machine, requiring 3 x 2 x 2 = 12 lanes of data. When the data come off the sequencer, I would create 12 bam files, with the following @RG fields in the header_":
+
+{{< figure src="/BMMB554/img/rg_example.png" >}}
+
+Too see an example of read group manipulation in Galaxy see the following [clip](https://player.vimeo.com/video/123102338#t=1:40).
+
+## Manipulating SAM/BAM datasets
+
+We support four major toolsets for processing of SAM/BAM datasets:
+
+ * [DeepTools](https://deeptools.github.io/) - a suite of user-friendly tools for the visualization, quality control and normalization of data from deep-sequencing DNA sequencing experiments.
+ * [SAMtools]([http://www.htslib.org/) - various utilities for manipulating alignments in the SAM/BAM format, including sorting, merging, indexing and generating alignments in a per-position format.
+ * [BAMtools](https://github.com/pezmaster31/bamtools/wiki/Tutorial_Toolkit_BamTools-1.0.pdf) - a toolkit for reading, writing, and manipulating BAM (genome alignment) files.
+ * [Picard](http://broadinstitute.github.io/picard/) - a set of Java tools for manipulating high-throughput sequencing data (HTS) data and formats.
+
+ The following video highlights de-duplication, filtering, and cleaning of a BAM dataset using BAMtools and Picard tools:
+
+ {{<vimeo 123113197>}}
+
+### <font color="red">Try it yourself</font>
+
+Perform a similar analyses with your own data. 
+
+## The challenge of read duplicates
+
+### PCR duplicates
+
+Preparation of sequencing libraries (at least at the time of writing) for technologies such as Illumina (used in this examples) involves PCR amplification. It is required to generate sufficient number of sequencing templates so that a reliable detection can be performed by base callers. Yet PCR has it's biases, which are especially profound in cases of multitemplate PCR used for construction of sequencing libraries (Kanagawa et al. [2003](http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Abstract&list_uids=16233530)). 
+
+>
+> {{< figure src="/BMMB554/img/pcr-duplicates.png" >}}
+> Analyzing molecules aligning with the same outer coordinates, a mapping quality of at least 30 and a length of at least 30nt, resulted in an average coverage of 12.9 per PCR duplicate and an empirical coverage distribution similar to an exponential/power law distribution (left upper panel). This indicates that many molecules are only observed for deeper sequencing while other molecules are available at higher frequencies. Analyzing length (left middle panel) and GC content (left lower panel) patterns as well as the combination (right panel) shows higher PCR duplicate counts for a GC content between 30% to 70% as well as for shorter molecules compared to longer molecules. This effect may be due to an amplification bias from the polymerase or the cluster generation process necessary for Illumina sequencing. From Ph.D. dissertation of [Martin Kircher](http://www.qucosa.de/fileadmin/data/qucosa/documents/7110/pflichtexemplar_final.pdf)).
+
+Duplicates can be identified based on their outer alignment coordinates or using sequence-based clustering. One of the common ways for identification of duplicate reads is the `MarkDuplicates` utility from [Picard](https://broadinstitute.github.io/picard/command-line-overview.html) package. It is designed to identify both PCR and optical duplicates:
+
+>Duplicates are identified as read pairs having identical 5' positions (coordinate and strand) for both reads in a mate pair (and optionally, matching unique molecular identifier reads; see BARCODE_TAG option). Optical, or more broadly Sequencing, duplicates are duplicates that appear clustered together spatially during sequencing and can arise from optical/imagine-processing artifacts or from bio-chemical processes during clonal amplification and sequencing; they are identified using the READ_NAME_REGEX and the OPTICAL_DUPLICATE_PIXEL_DISTANCE options. The tool's main output is a new SAM or BAM file in which duplicates have been identified in the SAM flags field, or optionally removed (see REMOVE_DUPLICATE and REMOVE_SEQUENCING_DUPLICATES), and optionally marked with a duplicate type in the 'DT' optional attribute. In addition, it also outputs a metrics file containing the numbers of READ_PAIRS_EXAMINED, UNMAPPED_READS, UNPAIRED_READS, UNPAIRED_READ DUPLICATES, READ_PAIR_DUPLICATES, and READ_PAIR_OPTICAL_DUPLICATES. Usage example: java -jar picard.jar MarkDuplicates I=input.bam \ O=marked_duplicates.bam M=marked_dup_metrics.txt.`
+
+### Sampling coincidence duplicates
+
+However, one has to be careful when removing duplicates in cases when the sequencing targets are small (e.g., sequencing of bacterial, viral, or organellar genomes as well as amplicons). This is because when sequencing target is small reads will have the same coordinates by chance and not because of PCR amplification issues. The figure below illustrates the fine balance between estimates allele frequency, coverage, and variation in insert size:
+
+>
+> {{< figure src="/BMMB554/img/sampling-bias.png" >}}
+> The Variant Allele Frequency (VAF) bias determined by coverage and insert size variance. Reads are paired-end and read length is 76. The insert size distribution is modeled as a Gaussian distribution with mean at 200 and standard deviation shown on the x-axis. The true VAF is 0.05. The darkness at each position indicates the magnitude of the bias in the VAF. (From Zhou et al. [2013](http://bioinformatics.oxfordjournals.org/content/30/8/1073)).
