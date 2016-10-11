@@ -6,8 +6,634 @@
     <description>Recent content in Posts on BMMB554 | Fall 2016</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 30 Sep 2016 10:39:09 -0400</lastBuildDate>
+    <lastBuildDate>Mon, 10 Oct 2016 11:26:49 -0400</lastBuildDate>
     <atom:link href="http://nekrut.github.io/BMMB554/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>NGS data: Practicalities</title>
+      <link>http://nekrut.github.io/BMMB554/post/topic7/</link>
+      <pubDate>Mon, 10 Oct 2016 11:26:49 -0400</pubDate>
+      
+      <guid>http://nekrut.github.io/BMMB554/post/topic7/</guid>
+      <description>
+
+&lt;p&gt;In this section we will look at practical aspects of manipulation of next-generation sequencing data. We will start with Fastq format produced by most sequencing machines and will finish with SAM/BAM format representing mapped reads. The cover image above shows a screen dump of a SAM dataset.&lt;/p&gt;
+
+&lt;h1 id=&#34;getting-ngs-data-in&#34;&gt;Getting NGS data in&lt;/h1&gt;
+
+&lt;p&gt;You can data in Galaxy using one of five ways:&lt;/p&gt;
+
+&lt;h2 id=&#34;from-your-computer&#34;&gt;From your computer&lt;/h2&gt;
+
+&lt;p&gt;This works well for small files because web browser do not like lengthy file transfers:&lt;/p&gt;
+
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;//player.vimeo.com/video/120901536&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%;&#34; webkitallowfullscreen mozallowfullscreen allowfullscreen&gt;&lt;/iframe&gt;
+ &lt;/div&gt;
+
+
+&lt;h2 id=&#34;using-ftp&#34;&gt;Using FTP&lt;/h2&gt;
+
+&lt;p&gt;FTP (&lt;a href=&#34;https://en.wikipedia.org/wiki/File_Transfer_Protocol&#34;&gt;file transfer protocol&lt;/a&gt;) allows transferring large collection of files:&lt;/p&gt;
+
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;//player.vimeo.com/video/120972739&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%;&#34; webkitallowfullscreen mozallowfullscreen allowfullscreen&gt;&lt;/iframe&gt;
+ &lt;/div&gt;
+
+
+&lt;h2 id=&#34;from-the-web&#34;&gt;From the Web&lt;/h2&gt;
+
+&lt;p&gt;Upload from the web works when URL (addresses) of data files are known:&lt;/p&gt;
+
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;//player.vimeo.com/video/120973708&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%;&#34; webkitallowfullscreen mozallowfullscreen allowfullscreen&gt;&lt;/iframe&gt;
+ &lt;/div&gt;
+
+
+&lt;h2 id=&#34;from-ebi-short-read-archive&#34;&gt;From EBI short read archive&lt;/h2&gt;
+
+&lt;p&gt;This is the best way to upload published datasets deposited to EBI SRA. The problem is that not all datasets are available from EBI. Next option (below) explain how to deal with NCBI SRA datasets:&lt;/p&gt;
+
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;//player.vimeo.com/video/121187220&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%;&#34; webkitallowfullscreen mozallowfullscreen allowfullscreen&gt;&lt;/iframe&gt;
+ &lt;/div&gt;
+
+
+&lt;h2 id=&#34;from-ncbi-short-read-archive&#34;&gt;From NCBI short read archive&lt;/h2&gt;
+
+&lt;p&gt;Finally, datasets can be uploaded directly from NCBI&amp;rsquo;s short read archive:&lt;/p&gt;
+
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;//player.vimeo.com/video/121190377&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%;&#34; webkitallowfullscreen mozallowfullscreen allowfullscreen&gt;&lt;/iframe&gt;
+ &lt;/div&gt;
+
+
+&lt;h3 id=&#34;font-color-red-try-it-yourself-font&#34;&gt;&lt;font color=&#34;red&#34;&gt;Try it yourself&lt;/font&gt;&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Create a new Galaxy history at &lt;a href=&#34;http://usegalaxy.org&#34;&gt;http://usegalaxy.org&lt;/a&gt; (don&amp;rsquo;t forget to log in).&lt;/li&gt;
+&lt;li&gt;Import the following two datasets (for help see the above video &amp;ldquo;&lt;em&gt;From the Web&lt;/em&gt;&amp;rdquo;):&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.bx.psu.edu/~anton/share/ng_test_data/var/raw_mother-ds-1.fq.gz&#34;&gt;http://www.bx.psu.edu/~anton/share/ng_test_data/var/raw_mother-ds-1.fq.gz&lt;/a&gt;
+&lt;a href=&#34;http://www.bx.psu.edu/~anton/share/ng_test_data/var/raw_mother-ds-2.fq.gz&#34;&gt;http://www.bx.psu.edu/~anton/share/ng_test_data/var/raw_mother-ds-2.fq.gz&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;These are paired end data (see below for explanation of what paired-end is) for a single Illumina run.&lt;/p&gt;
+
+&lt;p&gt;Keep Galaxy history for later. We will need it again in a few minutes.&lt;/p&gt;
+
+&lt;h1 id=&#34;fastq-manipulation-and-quality-control&#34;&gt;Fastq manipulation and quality control&lt;/h1&gt;
+
+&lt;h2 id=&#34;what-is-fastq&#34;&gt;What is Fastq?&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://en.wikipedia.org/wiki/FASTQ_format&#34;&gt;FastQ&lt;/a&gt; is not a very well defined format. In the beginning various manufacturers of sequencing instruments were free to interpret fastq as they saw fit, resulting in a multitude of fastq flavors. This variation stemmed primarily from different ways of encoding quality values as described &lt;a href=&#34;http://en.wikipedia.org/wiki/FASTQ_format&#34;&gt;here&lt;/a&gt; (below you will explanation of quality scores and their meaning). Today, &lt;a href=&#34;http://www.ncbi.nlm.nih.gov/pubmed/20015970&#34;&gt;fastq Sanger&lt;/a&gt; version of the format is considered to be the standard form of fastq. Galaxy is using fastq sanger as the only legitimate input for downstream processing tools and provides &lt;a href=&#34;http://www.ncbi.nlm.nih.gov/pubmed/20562416&#34;&gt;a number of utilities for converting fastq files&lt;/a&gt; into this form (see &lt;strong&gt;NGS: QC and manipulation&lt;/strong&gt; section of Galaxy tools).&lt;/p&gt;
+
+&lt;p&gt;Fastq format looks like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;
+@M02286:19:000000000-AA549:1:1101:12677:1273 1:N:0:23
+CCTACGGGTGGCAGCAGTGAGGAATATTGGTCAATGGACGGAAGTCTGAACCAGCCAAGTAGCGTGCAG
++
+ABC8C,:@F:CE8,B-,C,-6-9-C,CE9-CC--C-&amp;lt;-C++,,+;CE&amp;lt;,,CD,CEFC,@E9&amp;lt;FCFCF?9
+@M02286:19:000000000-AA549:1:1101:15048:1299 1:N:0:23
+CCTACGGGTGGCTGCAGTGAGGAATATTGGACAATGGTCGGAAGACTGATCCAGCCATGCCGCGTGCAG
++
+ABC@CC77CFCEG;F9&amp;lt;F89&amp;lt;9--C,CE,--C-6C-,CE:++7:,CF&amp;lt;,CEF,CFGGD8FFCFCFEGCF
+@M02286:19:000000000-AA549:1:1101:11116:1322 1:N:0:23
+CCTACGGGAGGCAGCAGTAGGGAATCTTCGGCAATGGACGGAAGTCTGACCGAGCAACGCCGCGTGAGT
++
+AAC&amp;lt;CCF+@@&amp;gt;CC,C9,F9C9@9-CFFFE@7@:+CC8-C@:7,@EFE,6CF:+8F7EFEEF@EGGGEEE
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Each sequencing read is represented by four lines:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;@ followed by read ID and optional information about sequencing run&lt;/li&gt;
+&lt;li&gt;sequenced bases&lt;/li&gt;
+&lt;li&gt;+ (optionally followed by the read ID and some additional info)&lt;/li&gt;
+&lt;li&gt;quality scores for each base of the sequence encoded as &lt;a href=&#34;https://en.wikipedia.org/wiki/ASCII&#34;&gt;ASCII symbols&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;paired-end-data&#34;&gt;Paired end data&lt;/h2&gt;
+
+&lt;p&gt;It is common to prepare pair-end and mate-pair sequencing libraries. This is highly beneficial for a number of applications discussed in subsequent topics. For now let&amp;rsquo;s just briefly discuss what these are and how they manifest themselves in fastq form.&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/pe_mp.png&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;&lt;strong&gt;Paired-end and mate-pair reads&lt;/strong&gt;. In paired end sequencing (left) the actual ends of rather short DNA molecules (&amp;lt;1kb) are determined, while for mate pair sequencing (right) the ends of long molecules are joined and prepared in special sequencing libraries. In these mate pair protocols, the ends of long, size-selected molecules are connected with an internal adapter sequence (i.e. linker, yellow) in a circularization reaction. The circular molecule is then processed using restriction enzymes or fragmentation. Fragments are enriched for the linker and outer library adapters are added around the two combined molecule ends. The internal adapter can then be used as a second priming site for an additional sequencing reaction in the same orientation or sequencing can be performed from the second adapter, from the reverse strand. (From Ph.D. dissertation by &lt;a href=&#34;https://core.ac.uk/download/pdf/35186947.pdf&#34;&gt;Martin Kircher&lt;/a&gt;)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Thus in both cases (paired-end and mate-pair) a single physical piece of DNA (or RNA in the case of RNA-seq) is sequenced from two ends and so generates two reads. These can be represented as separate files (two fastq files with first and second reads) or a single file were reads for each end are interleaved. Here are examples:&lt;/p&gt;
+
+&lt;h4 id=&#34;two-single-files&#34;&gt;Two single files&lt;/h4&gt;
+
+&lt;p&gt;&lt;strong&gt;File 1&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; @M02286:19:000000000-AA549:1:1101:12677:1273 1:N:0:23
+ CCTACGGGTGGCAGCAGTGAGGAATATTGGTCAATGGACGGAAGTCT
+ +
+ ABC8C,:@F:CE8,B-,C,-6-9-C,CE9-CC--C-&amp;lt;-C++,,+;CE
+ @M02286:19:000000000-AA549:1:1101:15048:1299 1:N:0:23
+ CCTACGGGTGGCTGCAGTGAGGAATATTGGACAATGGTCGGAAGACT
+ +
+ ABC@CC77CFCEG;F9&amp;lt;F89&amp;lt;9--C,CE,--C-6C-,CE:++7:,CF
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;File 2&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;@M02286:19:000000000-AA549:1:1101:12677:1273 2:N:0:23
+CACTACCCGTGTATCTAATCCTGTTTGATACCCGCACCTTCGAGCTTA
++
+--8A,CCE+,,;,&amp;lt;CC,,&amp;lt;CE@,CFD,,C,CFF+@+@CCEF,,,B+C,
+@M02286:19:000000000-AA549:1:1101:15048:1299 2:N:0:23
+CACTACCGGGGTATCTAATCCTGTTCGCTCCCCACGCTTTCGTCCATC
++
+-6AC,EE@::CF7CFF&amp;lt;&amp;lt;FFGGDFFF,@FGGGG?F7FEGGGDEFF&amp;gt;FF
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Note that read ID are &lt;strong&gt;identical&lt;/strong&gt; in two files and they are listed in &lt;strong&gt;the same&lt;/strong&gt; order. In some cases read IDs in the first and second file may be appended with &lt;code&gt;/1&lt;/code&gt; and &lt;code&gt;/2&lt;/code&gt; tags, respectively.&lt;/p&gt;
+
+&lt;h4 id=&#34;interleaved-file&#34;&gt;Interleaved file&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;@1/1
+AGGGATGTGTTAGGGTTAGGGTTAGGGTTAGGGTTAGGGTTAGGGTTA
++
+EGGEGGGDFGEEEAEECGDEGGFEEGEFGBEEDDECFEFDD@CDD&amp;lt;ED
+@1/2
+CCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAAC
++
+GHHHDFDFGFGEGFBGEGGEGEGGGHGFGHFHFHHHHHHHEF?EFEFF
+@2/1
+AGGGATGTGTTAGGGTTAGGGTTAGGGTTAGGGTTAGGGTTAGGGTTA
++
+HHHHHHEGFHEEFEEHEEHHGGEGGGGEFGFGGGGHHHHFBEEEEEFG
+@2/2
+CCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAAC
++
+HHHHHHHHHHHHHGHHHHHHGHHHHHHHHHHHFHHHFHHHHHHHHHHH
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Here the first and the second reads are identified with &lt;code&gt;/1&lt;/code&gt; and &lt;code&gt;/2&lt;/code&gt; tags.&lt;/p&gt;
+
+&lt;p&gt;&lt;font color=&#34;red&#34;&gt;&amp;#10148;&lt;/font&gt; &lt;strong&gt;Note&lt;/strong&gt;: Fastq format is not strictly defined and its variations will always cause headache for you. See &lt;a href=&#34;https://www.ncbi.nlm.nih.gov/books/NBK242622/&#34;&gt;this page&lt;/a&gt; for more information.&lt;/p&gt;
+
+&lt;h2 id=&#34;what-are-base-qualities&#34;&gt;What are base qualities?&lt;/h2&gt;
+
+&lt;p&gt;As we&amp;rsquo;ve seen above, fastq datasets contain two types of information:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;sequence of the read&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;base qualities&lt;/em&gt; for each nucleotide in the read.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The base qualities allow us to judge how trustworthy each base in a sequencing read is. The following excerpt from an excellent &lt;a href=&#34;http://chagall.med.cornell.edu/RNASEQcourse/Intro2RNAseq.pdf&#34;&gt;tutorial&lt;/a&gt; by Friederike D&amp;uuml;ndar, Luce Skrabanek, Paul Zumbo explains what base qualities are:&lt;/p&gt;
+
+&lt;p&gt;Illumina sequencing is based on identifying the individual nucleotides by the fluorescence signal emitted upon their incorporation into the growing sequencing read. Once the fluorescence intensities are extracted and translated into the four letter code. The deduction of nucleotide sequences from the images acquired during sequencing is commonly referred to as base calling. Due to the imperfect nature of the sequencing process and limitations of the optical instruments, base calling will always have inherent uncertainty. This is the reason why FASTQ files store the DNA sequence of each read together with a position-specific quality score that represents the error probability, i.e., how likely it is that an individual base call may be incorrect. The score is called &lt;a href=&#34;http://www.phrap.com/phred/&#34;&gt;Phred score&lt;/a&gt;, $Q$, which is proportional to the probability $p$ that a base call is incorrect, where $Q = −10lg(p)$. For example, a Phred score of 10 corresponds to one error in every ten base calls ($Q = −10lg(0.1)$), or 90% accuracy; a Phred score of 20 corresponds to one error in every 100 base calls, or 99% accuracy. A higher Phred score thus reflects higher confidence in the reported base. To assign each base a unique score identifier (instead of numbers of varying character length), Phred scores are typically represented as ASCII characters. At &lt;a href=&#34;http://ascii-code.com/&#34;&gt;http://ascii-code.com/&lt;/a&gt; you can see which characters are assigned to what number. For raw reads, the range of scores will depend on the sequencing technology and the base caller used (Illumina, for example, used a tool called Bustard, or, more recently, RTA). Unfortunately, Illumina has been anything but consistent in how they a) calculated and b) ASCII-encoded the Phred score (see below)! In addition, Illumina now allows Phred scores for base calls with as high as 45, while 41 used to be the maximum score until the HiSeq X. This may cause issues with downstream sapplications that expect an upper limit of 41.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/illumina_qs.png&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;Base call quality scores are represented with the Phred range. Different Illumina (formerly Solexa) versions
+used different scores and ASCII offsets. Starting with Illumina format 1.8, the score now represents the standard
+Sanger/Phred format that is also used by other sequencing platforms and the sequencing archives.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/fastq_qs.png&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;The ASCII interpretation and ranges of the different Phred score notations used by Illumina and the original
+Sanger interpretation. Although the Sanger format allows a theoretical score of 93, raw sequencing
+reads typically do not exceed a Phred score of 60. In fact, most Illumina-based sequencing will result in maximum
+scores of 41 to 45 (image from &lt;a href=&#34;https://en.wikipedia.org/wiki/FASTQ_format&#34;&gt;Wikipedia&lt;/a&gt;).&lt;/p&gt;
+
+&lt;h2 id=&#34;assessing-data-quality&#34;&gt;Assessing data quality&lt;/h2&gt;
+
+&lt;p&gt;One of the first steps in the analysis of NGS data is seeing how good the data actually is. &lt;a href=&#34;http://www.bioinformatics.babraham.ac.uk/projects/fastqc/&#34;&gt;FastqQC&lt;/a&gt; is a fantastic tool allowing you to gauge the quality of fastq datasets (and deciding whether to blame or not to blame whoever has done sequencing for you).&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;left&#34;&gt;&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;img src=&#34;https://galaxyproject.org/ngs101/good_fq.png&#34; alt=&#34;&#34; /&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;img src=&#34;https://galaxyproject.org/ngs101/bad_fq.png&#34; alt=&#34;&#34; /&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;strong&gt;A.&lt;/strong&gt; Excellent quality&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;strong&gt;B.&lt;/strong&gt; Hmmm&amp;hellip;OK&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Here you can see FastQC base quality reports (the tools gives you many other types of data) for two datasets: &lt;strong&gt;A&lt;/strong&gt; and &lt;strong&gt;B&lt;/strong&gt;. The &lt;strong&gt;A&lt;/strong&gt; dataset has long reads (250 bp) and very good quality profile with no qualities dropping below &lt;a href=&#34;http://www.phrap.com/phred/&#34;&gt;phred score&lt;/a&gt; of 30. The &lt;strong&gt;B&lt;/strong&gt; dataset is significantly worse with ends of the reads dipping below phred score of 20. The &lt;strong&gt;B&lt;/strong&gt; reads may need to be trimmed for further processing.&lt;/p&gt;
+
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;//player.vimeo.com/video/123453134&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%;&#34; webkitallowfullscreen mozallowfullscreen allowfullscreen&gt;&lt;/iframe&gt;
+ &lt;/div&gt;
+
+
+&lt;h3 id=&#34;font-color-red-try-it-yourself-font-1&#34;&gt;&lt;font color=&#34;red&#34;&gt;Try it yourself&lt;/font&gt;&lt;/h3&gt;
+
+&lt;p&gt;QC datasets you have uploaded before.&lt;/p&gt;
+
+&lt;h2 id=&#34;mapping-your-data&#34;&gt;Mapping your data&lt;/h2&gt;
+
+&lt;p&gt;Mapping of NGS reads against reference sequences is one of the key steps of the analysis. In &lt;a href=&#34;http://nekrut.github.io/BMMB554/post/topic5/&#34;&gt;Topic 5&lt;/a&gt; we covered basic principles behind mapping of sequencing reads against large genomes. Now it is time to see how this is done in practice. Below is a list of key publications highlighting popular mapping tools:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;2009 Bowtie 1 - &lt;a href=&#34;http://genomebiology.com/content/10/3/R25&#34;&gt;Langmead et al.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;2012 Bowtie 2 - &lt;a href=&#34;http://www.nature.com/nmeth/journal/v9/n4/full/nmeth.1923.htm&#34;&gt;Langmead and Salzberg&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;2009 BWA - &lt;a href=&#34;http://bioinformatics.oxfordjournals.org/content/25/14/1754.long&#34;&gt;Li and Durbin&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;2010 BWA - &lt;a href=&#34;http://bioinformatics.oxfordjournals.org/content/26/5/589&#34;&gt;Li and Durbin&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;2013 BWA-MEM - &lt;a href=&#34;http://arxiv.org/abs/1303.3997&#34;&gt;Li&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;mapping-against-a-pre-computed-genome-index&#34;&gt;Mapping against a pre-computed genome index&lt;/h3&gt;
+
+&lt;p&gt;Mappers usually compare reads against a reference sequence that has been transformed into a highly accessible data structure called genome index. Such indexes should be generated before mapping begins. Galaxy instances typically store indexes for a number of publicly available genome builds.&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/cached_genome.png&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;Mapping against a pre-computed index in Galaxy&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;For example, the image above shows indexes for &lt;code&gt;hg38&lt;/code&gt; version of the human genome. You can see that there are actually three choices: (1) &lt;code&gt;hg38&lt;/code&gt;, (2) &lt;code&gt;hg38 canonical&lt;/code&gt; and (3) &lt;code&gt;hg38 canonical female&lt;/code&gt;. The &lt;code&gt;hg38&lt;/code&gt; contains all chromosomes as well as all unplaced contigs. The &lt;code&gt;hg38 canonical&lt;/code&gt; does not contain unplaced sequences and only consists of chromosomes 1 through 22, X, Y, and mitochondria. The
+&lt;code&gt;hg38 canonical female&lt;/code&gt; contains everything from the canonical set with the exception of chromosome Y.&lt;/p&gt;
+
+&lt;p&gt;The following video show mapping using BWA:&lt;/p&gt;
+
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;//player.vimeo.com/video/123102338&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%;&#34; webkitallowfullscreen mozallowfullscreen allowfullscreen&gt;&lt;/iframe&gt;
+ &lt;/div&gt;
+
+
+&lt;h3 id=&#34;font-color-red-try-it-yourself-font-2&#34;&gt;&lt;font color=&#34;red&#34;&gt;Try it yourself&lt;/font&gt;&lt;/h3&gt;
+
+&lt;p&gt;Map datasets uploaded before using BWA against &lt;code&gt;hg38&lt;/code&gt; version of the human genome.&lt;/p&gt;
+
+&lt;h3 id=&#34;what-if-pre-computed-index-does-not-exist&#34;&gt;What if pre-computed index does not exist?&lt;/h3&gt;
+
+&lt;p&gt;If Galaxy does not have a genome you need to map against, you can upload your genome sequence as a FASTA file and use it in the mapper directly as shown below (&lt;strong&gt;Load reference genome&lt;/strong&gt; is set to &lt;code&gt;History&lt;/code&gt;).&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/uploaded_genome.png&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;Mapping against a pre-computed index in Galaxy&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;In this case Galaxy will first create an index from this dataset and then run mapping analysis against it. The following video shows how this works in practice:&lt;/p&gt;
+
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;//player.vimeo.com/video/123108417&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%;&#34; webkitallowfullscreen mozallowfullscreen allowfullscreen&gt;&lt;/iframe&gt;
+ &lt;/div&gt;
+
+
+&lt;h2 id=&#34;sam-bam-datasets&#34;&gt;SAM/BAM datasets&lt;/h2&gt;
+
+&lt;p&gt;The &lt;a href=&#34;https://samtools.github.io/hts-specs/SAMv1.pdf&#34;&gt;SAM/BAM&lt;/a&gt; format is an accepted standard for storing aligned reads (it can also store unaligned reads and some mappers such as BWA are accepting unaligned BAM as input). The binary form of the format (BAM) is compact and can be rapidly searched (if indexed). In Galaxy BAM datasets are always indexed (accompanies by a .bai file) and sorted in coordinate order. In the following duscussion I once again rely on &lt;a href=&#34;http://chagall.med.cornell.edu/RNASEQcourse/Intro2RNAseq.pdf&#34;&gt;tutorial&lt;/a&gt; by Friederike D&amp;uuml;ndar, Luce Skrabanek, and Paul Zumbo.&lt;/p&gt;
+
+&lt;p&gt;The output option of STAR already indicates that the results of the alignment will be stored in a SAM or BAM file. The Sequence Alignment/Map (SAM) format is, in fact, a generic nucleotide alignment format that describes the alignment of sequencing reads (or query sequences) to a reference. The human readable, TABdelimited SAM files can be compressed into the Binary Alignment/Map format. These BAM files are bigger than simply gzipped SAM files, because they have been optimized for fast random access rather than size reduction. Position-sorted BAM files can be indexed so that all reads aligning to a locus can be efficiently retrieved without loading the entire file into memory.&lt;/p&gt;
+
+&lt;p&gt;As shown below, SAM files typically contain a short header section and a very long alignment section where each row represents a single read alignment. The following sections will explain the SAM format in a bit more detail. For the most comprehensive and updated information go to &lt;a href=&#34;https://github.com/samtools/hts-specs&#34;&gt;https://github.com/samtools/hts-specs&lt;/a&gt;.&lt;/p&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/bam_structure.png&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;Schematic representation of a SAM file. Each line of the optional header section starts with “@”, followed by the appropriate abbreviation (e.g., SQ for sequence dictionary which lists all chromosomes names (SN) and their lengths (LN)). The vast majority of lines within a SAM file typically correspond to read alignments where each read is described by the 11 mandatory entries (black font) and a variable number of optional fields (grey font).&lt;/p&gt;
+
+&lt;h3 id=&#34;sam-header&#34;&gt;SAM Header&lt;/h3&gt;
+
+&lt;p&gt;The header section includes information about how the alignment was generated and stored. All lines in the header section are tab-delimited and begin with the “@” character, followed by tag:value pairs, where tag is a two-letter string that defines the content and the format of value. For example, the “@SQ” line in the header section contains the information about the names and lengths of the *reference sequences to which the reads were aligned. For a hypothetical organism with three chromosomes of length 1,000 bp, the SAM header should contain the following three lines:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;@SQ SN:chr1 LN:1000
+@SQ SN:chr2 LN:1000
+@SQ SN:chr3 LN:1000
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;sam-alignment-section&#34;&gt;SAM alignment section&lt;/h3&gt;
+
+&lt;p&gt;The optional header section is followed by the alignment section where each line corresponds to one sequenced read. For each read, there are 11 mandatory fields that always appear in the same order:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;QNAME&amp;gt; &amp;lt;FLAG&amp;gt; &amp;lt;RNAME&amp;gt; &amp;lt;POS&amp;gt; &amp;lt;MAPQ&amp;gt; &amp;lt;CIGAR&amp;gt; &amp;lt;MRNM&amp;gt; &amp;lt;MPOS&amp;gt; &amp;lt;ISIZE&amp;gt; &amp;lt;SEQ&amp;gt; &amp;lt;QUAL&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If the corresponding information is unavailable or irrelevant, field values can be ‘0’ or ‘*’ (depending on the field, see below), but they cannot be missing! After the 11 mandatory fields, a variable number of optional fields can be present. Here’s an example of one single line of a real-life SAM file (you may need to scroll sideways):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ERR458493 .552967 16 chrI 140 255 12 M61232N37M2S * 0 0 CCACTCGTTCACCAGGGCCGGCGGGCTGATCACTTTATCGTGCATCTTGGC BB?HHJJIGHHJIGIIJJIJGIJIJJIIIGHBJJJJJJHHHHFFDDDA1+B NH:i:1 HI:i:1 AS:i:41 nM:i:2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The following table explains the format and content of each field. The &lt;code&gt;FLAG&lt;/code&gt;, &lt;code&gt;CIGAR&lt;/code&gt;, and the optional fields (marked in blue) are explained in more detail below. The number of optional fields can vary widely between different SAM files and even between reads within in the same file. The field types marked in blue are explained in more detail in the main text below.&lt;/p&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/sam_fields.png&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+&lt;h4 id=&#34;flag-field&#34;&gt;&lt;code&gt;FLAG&lt;/code&gt; field&lt;/h4&gt;
+
+&lt;p&gt;The FLAG field encodes various pieces of information about the individual read, which is particularly important for PE reads. It contains an integer that is generated from a sequence of Boolean bits (0, 1). This way, answers to multiple binary (Yes/No) questions can be compactly stored as a series of bits, where each of the single bits can be addressed and assigned separately.&lt;/p&gt;
+
+&lt;p&gt;The following table gives an overview of the different properties that can be encoded in the FLAG field. The developers of the SAM format and samtools tend to use the hexadecimal encoding as a means to refer to the different bits in their documentation. The value of the FLAG field in a given SAM file, however, will always be the decimal representation of the sum of the underlying binary values (as shown in Table below, row 2).&lt;/p&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/sam_flag.png&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;The &lt;code&gt;FLAG&lt;/code&gt; field of SAM files stores information about the respective read alignment in one single decimal number. The decimal number is the sum of all the answers to the Yes/No questions associated with each binary bit. The hexadecimal representation is used to refer to the individual bits (questions). A bit is set if the corresponding state is true. For example, if a read is paired, &lt;code&gt;0x1&lt;/code&gt; will be set, returning the decimal value of 1. Therefore, all &lt;code&gt;FLAG&lt;/code&gt; values associated with paired reads must be uneven decimal numbers. Conversely, if the &lt;code&gt;0x1&lt;/code&gt; bit is unset (= read is not paired), no assumptions can be made about &lt;code&gt;0x2&lt;/code&gt;, &lt;code&gt;0x8&lt;/code&gt;, &lt;code&gt;0x20&lt;/code&gt;, &lt;code&gt;0x40&lt;/code&gt; and &lt;code&gt;0x80&lt;/code&gt; because they refer to paired reads.&lt;/p&gt;
+
+&lt;p&gt;In a run with single reads, the flags you most commonly see are:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;0: This read has been mapped to the forward strand. (None of the bit-wise flags have been set.)&lt;/li&gt;
+&lt;li&gt;4: The read is unmapped (&lt;code&gt;0x4&lt;/code&gt; is set).&lt;/li&gt;
+&lt;li&gt;16: The read is mapped to the reverse strand (&lt;code&gt;0x10&lt;/code&gt; is set)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;(&lt;code&gt;0x100&lt;/code&gt;, &lt;code&gt;0x200&lt;/code&gt; and &lt;code&gt;0x400&lt;/code&gt; are not used by most aligners/mappers, but could, in principle be set for single reads.) Some common &lt;code&gt;FLAG&lt;/code&gt; values that you may see in a PE experiment include:&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;69&lt;/strong&gt; (= 1 + 4 + 64)&lt;/td&gt;
+&lt;td&gt;The read is paired, is the first read in the pair, and is unmapped.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;77&lt;/strong&gt; (= 1 + 4 + 8 + 64)&lt;/td&gt;
+&lt;td&gt;The read is paired, is the first read in the pair, both are unmapped.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;83&lt;/strong&gt; (= 1 + 2 + 16 + 64)&lt;/td&gt;
+&lt;td&gt;The read is paired, mapped in a proper pair, is the first read in the pair, and it is mapped to the reverse strand.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;99&lt;/strong&gt; (= 1 + 2 + 32 + 64)&lt;/td&gt;
+&lt;td&gt;The read is paired, mapped in a proper pair, is the first read in the pair, and its mate is mapped to the reverse strand.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;133&lt;/strong&gt; (= 1 + 4 + 128)&lt;/td&gt;
+&lt;td&gt;The read is paired, is the second read in the pair, and it is unmapped.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;137&lt;/strong&gt; (= 1 + 8 + 128)&lt;/td&gt;
+&lt;td&gt;The read is paired, is the second read in the pair, and it is mapped while its mate is not.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;141&lt;/strong&gt; (= 1 + 4 + 8 + 128)&lt;/td&gt;
+&lt;td&gt;The read is paired, is the second read in the pair, but both are unmapped.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;147&lt;/strong&gt; (= 1 + 2 + 16 + 128)&lt;/td&gt;
+&lt;td&gt;The read is paired, mapped in a proper pair, is the second read in the pair, and mapped to the reverse strand.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;163&lt;/strong&gt; (= 1 + 2 + 32 + 128)&lt;/td&gt;
+&lt;td&gt;The read is paired, mapped in a proper pair, is the second read in the pair, and its mate is mapped to the reverse strand.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;A useful website for quickly translating the FLAG integers into plain English explanations like the ones shown above is: &lt;a href=&#34;https://broadinstitute.github.io/picard/explain-flags.html&#34;&gt;https://broadinstitute.github.io/picard/explain-flags.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;cigar-string&#34;&gt;&lt;code&gt;CIGAR&lt;/code&gt; string&lt;/h4&gt;
+
+&lt;p&gt;&lt;code&gt;CIGAR&lt;/code&gt; stands for &lt;em&gt;Concise Idiosyncratic Gapped Alignment Report&lt;/em&gt;. This sixth field of a SAM file
+contains a so-called CIGAR string indicating which operations were necessary to map the read to the reference sequence at that particular locus.&lt;/p&gt;
+
+&lt;p&gt;The following operations are defined in CIGAR format (also see figure below):&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;M&lt;/strong&gt; - Alignment (can be a sequence match or mismatch!)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;I&lt;/strong&gt; - Insertion in the read compared to the reference&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;D&lt;/strong&gt; - Deletion in the read compared to the reference&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;N&lt;/strong&gt; - Skipped region from the reference. For mRNA-to-genome alignments, an N operation represents an intron. For other types of alignments, the interpretation of N is not defined.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;S&lt;/strong&gt; - Soft clipping (clipped sequences are present in read); S may only have H operations between them and the ends of the string&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;H&lt;/strong&gt; - Hard clipping (clipped sequences are NOT present in the alignment record); can only be present as the first and/or last operation&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;P&lt;/strong&gt; - Padding (silent deletion from padded reference)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;=&lt;/strong&gt; - Sequence match (not widely used)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;X&lt;/strong&gt; - Sequence mismatch (not widely used)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The sum of lengths of the &lt;strong&gt;M&lt;/strong&gt;, &lt;strong&gt;I&lt;/strong&gt;, &lt;strong&gt;S&lt;/strong&gt;, &lt;strong&gt;=&lt;/strong&gt;, &lt;strong&gt;X&lt;/strong&gt; operations must equal the length of the read. Here are some examples:&lt;/p&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/cigar.png&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+&lt;h4 id=&#34;optional-fields&#34;&gt;Optional fields&lt;/h4&gt;
+
+&lt;p&gt;Following the eleven mandatory SAM file fields, the optional fields are presented as key-value
+pairs in the format of &lt;code&gt;&amp;lt;TAG&amp;gt;:&amp;lt;TYPE&amp;gt;:&amp;lt;VALUE&amp;gt;&lt;/code&gt;, where &lt;code&gt;TYPE&lt;/code&gt; is one of:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;A&lt;/code&gt; - Character&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;i&lt;/code&gt; - Integer&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;f&lt;/code&gt; - Float number&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Z&lt;/code&gt; - String&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;H&lt;/code&gt; - Hex string&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The information stored in these optional fields will vary widely depending on the mapper and new tags can be added freely. In addition, reads within the same SAM file may have different numbers of optional fields, depending on the program that generated the SAM file. Commonly used optional tags include:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;AS:i&lt;/code&gt; - Alignment score&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;BC:Z&lt;/code&gt; - Barcode sequence&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;HI:i&lt;/code&gt; - Match is i-th hit to the read&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;NH:i&lt;/code&gt; - Number of reported alignments for the query sequence&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;NM:i&lt;/code&gt; - Edit distance of the query to the reference&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;MD:Z&lt;/code&gt; - String that contains the exact positions of mismatches (should complement the CIGAR string)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;RG:Z&lt;/code&gt; - Read group (should match the entry after ID if @RG is present in the header.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Thus, for example, we can use the NM:i:0 tag to select only those reads which map perfectly to the reference(i.e., have no mismatches). While the optional fields listed above are fairly standardized, tags that begin with &lt;code&gt;X&lt;/code&gt;, &lt;code&gt;Y&lt;/code&gt;, and &lt;code&gt;Z&lt;/code&gt; are reserved for particularly free usage and will never be part of the official SAM file format specifications. &lt;code&gt;XS&lt;/code&gt;, for example, is used by TopHat (an RNA-seq analysis tool we will discuss later) to encode the strand information (e.g., &lt;code&gt;XS:A:+&lt;/code&gt;) while Bowtie2 and BWA use &lt;code&gt;XS:i:&lt;/code&gt; for reads with multiple alignments to store the alignment score for the next-best-scoring alignment (e.g., &lt;code&gt;XS:i:30&lt;/code&gt;).&lt;/p&gt;
+
+&lt;h3 id=&#34;read-groups&#34;&gt;Read Groups&lt;/h3&gt;
+
+&lt;p&gt;One of the key features of SAM/BAM format is the ability to label individual reads with readgroup tags. This allows pooling results of multiple experiments into a single BAM dataset. This significantly simplifies downstream logistics: instead of dealing with multiple datasets one can handle just one. Many downstream analysis tools such as variant callers are designed to recognize readgroup data and output results on per-readgroup basis.&lt;/p&gt;
+
+&lt;p&gt;One of the best descriptions of BAM readgroups is on &lt;a href=&#34;http://gatkforums.broadinstitute.org/discussion/1317/collected-faqs-about-bam-files&#34;&gt;GATK support site&lt;/a&gt;. We have gratefully stolen two tables describing the most important readgroup tags - &lt;code&gt;ID&lt;/code&gt;, &lt;code&gt;SM&lt;/code&gt;, &lt;code&gt;LB&lt;/code&gt;, and &lt;code&gt;PL&lt;/code&gt; - from GATK forum and provide them here:&lt;/p&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/rg.png&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;As further described in the GATK forum:&amp;rdquo;&lt;em&gt;A concrete example may be instructive. Suppose I have a trio of samples: MOM, DAD, and KID. Each has two DNA libraries prepared, one with 400 bp inserts and another with 200 bp inserts. Each of these libraries is run on two lanes of an Illumina machine, requiring 3 x 2 x 2 = 12 lanes of data. When the data come off the sequencer, I would create 12 bam files, with the following @RG fields in the header&lt;/em&gt;&amp;ldquo;:&lt;/p&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/rg_example.png&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;Too see an example of read group manipulation in Galaxy see the following &lt;a href=&#34;https://player.vimeo.com/video/123102338#t=1:40&#34;&gt;clip&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;manipulating-sam-bam-datasets&#34;&gt;Manipulating SAM/BAM datasets&lt;/h2&gt;
+
+&lt;p&gt;We support four major toolsets for processing of SAM/BAM datasets:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://deeptools.github.io/&#34;&gt;DeepTools&lt;/a&gt; - a suite of user-friendly tools for the visualization, quality control and normalization of data from deep-sequencing DNA sequencing experiments.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;[http://www.htslib.org/&#34;&gt;SAMtools&lt;/a&gt; - various utilities for manipulating alignments in the SAM/BAM format, including sorting, merging, indexing and generating alignments in a per-position format.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/pezmaster31/bamtools/wiki/Tutorial_Toolkit_BamTools-1.0.pdf&#34;&gt;BAMtools&lt;/a&gt; - a toolkit for reading, writing, and manipulating BAM (genome alignment) files.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://broadinstitute.github.io/picard/&#34;&gt;Picard&lt;/a&gt; - a set of Java tools for manipulating high-throughput sequencing data (HTS) data and formats.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The following video highlights de-duplication, filtering, and cleaning of a BAM dataset using BAMtools and Picard tools:&lt;/p&gt;
+
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;//player.vimeo.com/video/123113197&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%;&#34; webkitallowfullscreen mozallowfullscreen allowfullscreen&gt;&lt;/iframe&gt;
+ &lt;/div&gt;
+
+
+&lt;h3 id=&#34;font-color-red-try-it-yourself-font-3&#34;&gt;&lt;font color=&#34;red&#34;&gt;Try it yourself&lt;/font&gt;&lt;/h3&gt;
+
+&lt;p&gt;Perform a similar analyses with your own data.&lt;/p&gt;
+
+&lt;h2 id=&#34;the-challenge-of-read-duplicates&#34;&gt;The challenge of read duplicates&lt;/h2&gt;
+
+&lt;h3 id=&#34;pcr-duplicates&#34;&gt;PCR duplicates&lt;/h3&gt;
+
+&lt;p&gt;Preparation of sequencing libraries (at least at the time of writing) for technologies such as Illumina (used in this examples) involves PCR amplification. It is required to generate sufficient number of sequencing templates so that a reliable detection can be performed by base callers. Yet PCR has it&amp;rsquo;s biases, which are especially profound in cases of multitemplate PCR used for construction of sequencing libraries (Kanagawa et al. &lt;a href=&#34;http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;amp;db=PubMed&amp;amp;dopt=Abstract&amp;amp;list_uids=16233530&#34;&gt;2003&lt;/a&gt;).&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;
+&lt;figure &gt;
+    
+        &lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/pcr-duplicates.png&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+
+Analyzing molecules aligning with the same outer coordinates, a mapping quality of at least 30 and a length of at least 30nt, resulted in an average coverage of 12.9 per PCR duplicate and an empirical coverage distribution similar to an exponential/power law distribution (left upper panel). This indicates that many molecules are only observed for deeper sequencing while other molecules are available at higher frequencies. Analyzing length (left middle panel) and GC content (left lower panel) patterns as well as the combination (right panel) shows higher PCR duplicate counts for a GC content between 30% to 70% as well as for shorter molecules compared to longer molecules. This effect may be due to an amplification bias from the polymerase or the cluster generation process necessary for Illumina sequencing. From Ph.D. dissertation of &lt;a href=&#34;http://www.qucosa.de/fileadmin/data/qucosa/documents/7110/pflichtexemplar_final.pdf&#34;&gt;Martin Kircher&lt;/a&gt;).&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Duplicates can be identified based on their outer alignment coordinates or using sequence-based clustering. One of the common ways for identification of duplicate reads is the &lt;code&gt;MarkDuplicates&lt;/code&gt; utility from &lt;a href=&#34;https://broadinstitute.github.io/picard/command-line-overview.html&#34;&gt;Picard&lt;/a&gt; package. It is designed to identify both PCR and optical duplicates:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Duplicates are identified as read pairs having identical 5&amp;rsquo; positions (coordinate and strand) for both reads in a mate pair (and optionally, matching unique molecular identifier reads; see BARCODE_TAG option). Optical, or more broadly Sequencing, duplicates are duplicates that appear clustered together spatially during sequencing and can arise from optical/imagine-processing artifacts or from bio-chemical processes during clonal amplification and sequencing; they are identified using the READ_NAME_REGEX and the OPTICAL_DUPLICATE_PIXEL_DISTANCE options. The tool&amp;rsquo;s main output is a new SAM or BAM file in which duplicates have been identified in the SAM flags field, or optionally removed (see REMOVE_DUPLICATE and REMOVE_SEQUENCING_DUPLICATES), and optionally marked with a duplicate type in the &amp;lsquo;DT&amp;rsquo; optional attribute. In addition, it also outputs a metrics file containing the numbers of READ_PAIRS_EXAMINED, UNMAPPED_READS, UNPAIRED_READS, UNPAIRED_READ DUPLICATES, READ_PAIR_DUPLICATES, and READ_PAIR_OPTICAL_DUPLICATES. Usage example: java -jar picard.jar MarkDuplicates I=input.bam \ O=marked_duplicates.bam M=marked_dup_metrics.txt.`&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;sampling-coincidence-duplicates&#34;&gt;Sampling coincidence duplicates&lt;/h3&gt;
+
+&lt;p&gt;However, one has to be careful when removing duplicates in cases when the sequencing targets are small (e.g., sequencing of bacterial, viral, or organellar genomes as well as amplicons). This is because when sequencing target is small reads will have the same coordinates by chance and not because of PCR amplification issues. The figure below illustrates the fine balance between estimates allele frequency, coverage, and variation in insert size:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;
+&lt;figure &gt;
+    
+        &lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/sampling-bias.png&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+
+The Variant Allele Frequency (VAF) bias determined by coverage and insert size variance. Reads are paired-end and read length is 76. The insert size distribution is modeled as a Gaussian distribution with mean at 200 and standard deviation shown on the x-axis. The true VAF is 0.05. The darkness at each position indicates the magnitude of the bias in the VAF. (From Zhou et al. &lt;a href=&#34;http://bioinformatics.oxfordjournals.org/content/30/8/1073&#34;&gt;2013&lt;/a&gt;).&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+    </item>
     
     <item>
       <title>Introduction to Galaxy: Exons and Repeats</title>
@@ -396,9 +1022,9 @@ chr22 15719659 15719777 uc062bej.1_cds_10_0_chr22_15719660_f 0 + chr22 15719751 
 
 &lt;p&gt;&lt;img src=&#34;http://galaxy.psu.edu/galaxy101/importHistory.png&#34; alt=&#34;Final view&#34; /&gt;&lt;/p&gt;
 
-&lt;h2 id=&#34;7-if-things-don-t-work&#34;&gt;7. If things don&amp;rsquo;t work&amp;hellip;&lt;/h2&gt;
+&lt;h1 id=&#34;next&#34;&gt;Next&lt;/h1&gt;
 
-&lt;p&gt;&amp;hellip;you need to complain. Use &lt;a href=&#34;https://usegalaxy.org/biostar/biostar_redirect&#34;&gt;Galaxy&amp;rsquo;s BioStar Channel&lt;/a&gt; to do this.&lt;/p&gt;
+&lt;p&gt;We will start using Galaxy to process and map NGS data.&lt;/p&gt;
 </description>
     </item>
     
