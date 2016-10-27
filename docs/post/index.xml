@@ -6,8 +6,513 @@
     <description>Recent content in Posts on BMMB554 | Fall 2016</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 10 Oct 2016 11:26:49 -0400</lastBuildDate>
+    <lastBuildDate>Wed, 26 Oct 2016 11:42:45 -0400</lastBuildDate>
     <atom:link href="http://nekrut.github.io/BMMB554/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Diploid variant calling</title>
+      <link>http://nekrut.github.io/BMMB554/post/topic8/</link>
+      <pubDate>Wed, 26 Oct 2016 11:42:45 -0400</pubDate>
+      
+      <guid>http://nekrut.github.io/BMMB554/post/topic8/</guid>
+      <description>
+
+&lt;p&gt;Today we hear a lot about personalized medicine. Yet the &lt;em&gt;personalization&lt;/em&gt; is defined by the genetic make up of the individual. Today we will discuss how this information can be uncovered from the genomic sequencing data. The figure above shows distribution of rare and common variants in 1,092 human genomes described by the &lt;a href=&#34;http://www.nature.com/nature/journal/v491/n7422/abs/nature11632.html&#34;&gt;1000 Genome Consortium&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h1 id=&#34;calling-variants&#34;&gt;Calling variants&lt;/h1&gt;
+
+&lt;p&gt;Variant calling is a complex field that was significantly propelled by advances in DNA sequencing and efforts of large scientific consortia such as the &lt;a href=&#34;http://www.1000genomes.org&#34;&gt;1000 Genomes&lt;/a&gt;. Here we summarize basic ideas central to Genotype and Variant calling. First, let&amp;rsquo;s contrast the two things although they often go together:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Variant calling&lt;/strong&gt; - identification of positions where the sequenced sample is different from the reference sequence (or &lt;a href=&#34;https://github.com/vgteam/vg&#34;&gt;reference genome graph&lt;/a&gt;);&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Genotype calling&lt;/strong&gt; - identifying individual&amp;rsquo;s genotype at variable sites.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;A typical workflow for variation discovery involves the following steps (e.g., see Nielsen et al. &lt;a href=&#34;http://www.nature.com/nrg/journal/v12/n6/full/nrg2986.html&#34;&gt;2011&lt;/a&gt;):&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Mapping reads against the reference genome&lt;/li&gt;
+&lt;li&gt;Thresholding BAM datasets by, for example, retaining paired, properly mapped reads&lt;/li&gt;
+&lt;li&gt;Performing quality score recalibration&lt;/li&gt;
+&lt;li&gt;Performing realignment&lt;/li&gt;
+&lt;li&gt;Performing variant calling/genotype assignment&lt;/li&gt;
+&lt;li&gt;Performing filtering and genotype quality score recalibration&lt;/li&gt;
+&lt;li&gt;Annotating variants and performing downstream analyses&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;However, continuing evolution of variant detection methods has made some of these steps obsolete. For instance, omitting quality score recalibration and re-alignment (steps 3 and 4 above) when using haplotype-aware variant callers such as &lt;a href=&#34;https://github.com/ekg/freebayes&#34;&gt;FreeBayes&lt;/a&gt; does not have an effect on the resulting calls (see Brad Chapman&amp;rsquo;s methodological comparisons at &lt;a href=&#34;http://bit.ly/1S9kFJN&#34;&gt;bcbio&lt;/a&gt;). Before going forward with an actual genotype calling in Galaxy let&amp;rsquo;s take a look as some basic ideas behind modern variant callers.&lt;/p&gt;
+
+&lt;h3 id=&#34;how-does-snp-calling-and-genotyping-work&#34;&gt;How does SNP calling and genotyping work?&lt;/h3&gt;
+
+&lt;p&gt;Consider a set of sequencing reads derived from a diploid individual:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;REFERENCE: atcatgacggcaGtagcatat
+--------------------------------
+READ1:     atcatgacggcaGtagcatat
+READ2:         tgacggcaGtagcatat
+READ3:     atcatgacggcaAtagca
+READ4:            cggcaGtagcatat
+READ5:     atcatgacggcaGtagc
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The capitalized position contains a G &amp;#8594; A &lt;a href=&#34;https://en.wikipedia.org/wiki/Transition_(genetics)&#34;&gt;transition&lt;/a&gt;. So, in principle this can be a heterozygous site with two alleles &lt;strong&gt;G&lt;/strong&gt; and &lt;strong&gt;A&lt;/strong&gt;. A commonly used naïve procedure would define a site as &lt;em&gt;heterozygous&lt;/em&gt; if there is a non-reference allele with frequency between 20% and 80%. In this case &lt;strong&gt;A&lt;/strong&gt; is present in &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;5&lt;/sub&gt; or 20% of the cases, so we can say that this is a heterozygous site. Yet it is only represented by a single read and thus is hardly reliable. Here are some of the possibilities that would explain this &lt;em&gt;variant&lt;/em&gt;. It can be:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;A true variant&lt;/li&gt;
+&lt;li&gt;Experimental artifact: A library preparation error (e.g., PCR-derived)&lt;/li&gt;
+&lt;li&gt;Base calling error&lt;/li&gt;
+&lt;li&gt;Analysis error: A misalignment (though unlikely in the above example)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The modern variant callers attempt to assign a reliability estimate for each genotype call. This is done using Bayes reasoning (for a great visual explanation see &lt;a href=&#34;https://oscarbonilla.com/2009/05/visualizing-bayes-theorem/&#34;&gt;blog&lt;/a&gt; by Oscar Bonilla). Here we present a SNP-relevant &amp;ldquo;translation&amp;rdquo; on this explanation (with inspiration from &lt;a href=&#34;https://github.com/ekg&#34;&gt;Erik Garrison&lt;/a&gt;).&lt;/p&gt;
+
+&lt;p&gt;Suppose in a population you have $A$ individuals (not to be confused with nucleotide &lt;strong&gt;A&lt;/strong&gt;; in this case $A$ is a number of individuals) with a variant. You are performing re-sequencing and observe a variant in $B$ (again, a number) of your sequencing reads. We want to estimate the probability of having the real polymorphism in th epopulation given our observations in sequencing reads. The logic is as follows:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The probability of having polymorphism &lt;strong&gt;A&lt;/strong&gt; in the population is $P(A) = |A|/|U|$&lt;/li&gt;
+&lt;li&gt;The probability of seeing a variant given our identification approach (i.e., sequencing) is $P(B) = |B|/|U|$&lt;/li&gt;
+&lt;li&gt;Now, the probability of having a variant and it being observed in our sequencing data is the overlap between $A$ and $B$ sets $P(AB) = |AB|/|U|$. This is presented graphically below:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;center&#34;&gt;&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/pA.png&#34; alt=&#34;&#34; /&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/pB.png&#34; alt=&#34;&#34; /&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/pAB.png&#34; alt=&#34;&#34; /&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;$P(A)$ Polymorphisms&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;$P(B)$ &lt;br&gt; Variant calls&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;$P(AB)$ Polymorphisms + Varinat calls&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Now we can ask the following question: &lt;em&gt;What is the probability of a having a real polymorphism&lt;/em&gt; $A$ &lt;em&gt;given our observation of variants in reads&lt;/em&gt; $B$? In other words &lt;em&gt;what is the probability of&lt;/em&gt; $A$ &lt;em&gt;given&lt;/em&gt; $B$? Or, as stated in the original &lt;a href=&#34;https://oscarbonilla.com/2009/05/visualizing-bayes-theorem/&#34;&gt;blog&lt;/a&gt;: &amp;ldquo;&lt;em&gt;given that we are in region $B$ what is the probability that we are in the region $AB$&lt;/em&gt;?&amp;rdquo;:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;$P(A|B) = \frac{|AB|}{|B|}$&lt;/li&gt;
+&lt;li&gt;Dividing by $|U|$: $P(A|B) = \frac{\frac{|AB|}{|U|}}{\frac{|B|}{|U|}}$&lt;/li&gt;
+&lt;li&gt;Because we know that $P(AB) = \frac{|AB|}{|U|}$ and $P(B) = \frac{|B|}{|U|}$ we can rewrite the equation in the previous bullet point as $P(A|B) = \frac{P(AB)}{P(B)}$&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Now, let&amp;rsquo;s ask an opposite question. Given a true polymorphism $A$ what are the chances that we do detect it (i.e., find ourselves in $AB$)? It will be:&lt;/p&gt;
+
+&lt;p&gt;[
+    P(B|A) = \frac{P(AB)}{P(A)}
+]&lt;/p&gt;
+
+&lt;p&gt;So, because we know that $P(A|B) = \frac{P(AB)}{P(B)}$ and we just reasoned that $P(B|A) = \frac{P(AB)}{P(A)}$, we can say that $P(A|B)P(B) = P(B|A)P(A)$ leading us to the &lt;a href=&#34;http://www.math.cornell.edu/~mec/2008-2009/TianyiZheng/Bayes.html&#34;&gt;Bayes formula&lt;/a&gt;:&lt;/p&gt;
+
+&lt;p&gt;[
+    P(A|B) = \frac{P(B|A)P(A)}{P(B)}
+]&lt;/p&gt;
+
+&lt;p&gt;Translating this into &amp;ldquo;genomics terms&amp;rdquo; the probability of having a genotype $G$ given sequencing reads $S$ is: $P(G|S) = \frac{P(S|G)P(G)}{P(S)}$. Because in a given calculation of $P(G|S)$ reads are fixed we can re-write the Bayes formula in the following way:&lt;/p&gt;
+
+&lt;p&gt;$P(G|S) \approx P(S|G)P(G)$&lt;/p&gt;
+
+&lt;p&gt;with $P(S)$ becoming a constant. This leaves us with the need to estimate two things:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;$P(S|G)$, the data likelihood&lt;/li&gt;
+&lt;li&gt;$P(G)$, the prior probability for the variant&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;In the simplest case we can estimate these as follows:&lt;/p&gt;
+
+&lt;h3 id=&#34;p-s-g&#34;&gt;$P(S|G)$&lt;/h3&gt;
+
+&lt;p&gt;Suppose $S_i$ is a base in read $i$ corresponding to a genome position with genotype $G$. The probability of seeing $S_i$ given $G$, or $P(S_i|G)$, is given by the quality score of $S_i$ (the quality scores are given by base calling software and reported as &lt;a href=&#34;https://en.wikipedia.org/wiki/Phred_quality_score&#34;&gt;phred scores&lt;/a&gt;). Thus the genotype likelihood $P(S|G)$ is the product of $P(S_i|G)$ over all $i$. In reality however there are many other sources of uncertainty (in addition to base qualities) that are incorporated in the calculation of data likelihoods including NGS technology-related issues, dependency of error rates on substitution type (e.g., transitions versus transversions), sequencing context etc&amp;hellip;&lt;/p&gt;
+
+&lt;h3 id=&#34;p-g-a-single-sample-case&#34;&gt;$P(G)$ - a single sample case&lt;/h3&gt;
+
+&lt;p&gt;One can assign an equal probability to all possible genotypes, or to source this information based on previously obtained knowledge containing in a database, such as &lt;a href=&#34;http://www.ncbi.nlm.nih.gov/SNP/&#34;&gt;dbSNP&lt;/a&gt;. In this case (as exemplified in &lt;a href=&#34;http://www.nature.com/nrg/journal/v12/n6/full/nrg2986.html&#34;&gt;Nielsen et al. 2011&lt;/a&gt;) we may, for instance, have a site with a &lt;strong&gt;G/T&lt;/strong&gt; polymorphism and genotypes &lt;strong&gt;GG&lt;/strong&gt;, &lt;strong&gt;TT&lt;/strong&gt;, and &lt;strong&gt;GT&lt;/strong&gt; having frequencies of 0.45, 0.45, 0.09, respectively. We will use these values as priors.&lt;/p&gt;
+
+&lt;h3 id=&#34;p-g-a-multi-sample-case&#34;&gt;$P(G)$ - a multi-sample case&lt;/h3&gt;
+
+&lt;p&gt;Genotype calling reliability can be significantly improved when analyzing multiple samples jointly. In this case genotype frequencies can be inferred from allele frequencies using Hardy-Weinberg equilibrium (&lt;a href=&#34;https://en.wikipedia.org/wiki/Hardy%E2%80%93Weinberg_principle&#34;&gt;HWE&lt;/a&gt;). The following example (again from &lt;a href=&#34;http://www.nature.com/nrg/journal/v12/n6/full/nrg2986.html&#34;&gt;Nielsen et al. 2011&lt;/a&gt;) illustrates this idea: suppose you are calling genotypes for a single individual using a combination of multiple samples. There are two genotypes, &lt;strong&gt;AT&lt;/strong&gt; and &lt;strong&gt;AA&lt;/strong&gt;, with equally large genotype likelihoods. If, however, in our collection of multiple samples the frequency of &lt;strong&gt;A&lt;/strong&gt; is 1% ($p = 0.01$; $q = 1 - p = 0.99$), then from the HWE we have:&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;0.0001&lt;/td&gt;
+&lt;td&gt;0.0198&lt;/td&gt;
+&lt;td&gt;0.9801&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;AA&lt;/strong&gt; ($p^2$)&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;AT&lt;/strong&gt; ($2pq$)&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;TT&lt;/strong&gt; ($q^2$)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;This makes it highly unlikely that &lt;strong&gt;AA&lt;/strong&gt; is a true genotype of this individual.&lt;/p&gt;
+
+&lt;h2 id=&#34;calling-with-freebayes&#34;&gt;Calling with FreeBayes&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/ekg/freebayes&#34;&gt;FreeBayes&lt;/a&gt; is an open source variant caller that has been battle-tested by the 1000 Genomes community and is extensively used today (also see &lt;a href=&#34;https://bcbio.wordpress.com/&#34;&gt;bcbio&lt;/a&gt;). It has a number of features that simplify variant discovery workflows. These include (from FreeBayes github page):&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Indel realignment is accomplished internally&lt;/strong&gt; using a read-independent method, and issues resulting from discordant alignments are dramatically reducedy through the direct detection of haplotypes;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;The need for base quality recalibration is avoided&lt;/strong&gt; through the direct detection of haplotypes. Sequencing platform errors tend to cluster (e.g. at the ends of reads), and generate unique, non-repeating haplotypes at a given locus;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Variant quality recalibration is avoided&lt;/strong&gt; by incorporating a number of metrics, such as read placement bias and allele balance, directly into the Bayesian model;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Ability to incorporate non-diploid cases&lt;/strong&gt; such as pooled datasets or data from polyploid samples.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Freebayes is a &lt;em&gt;haplotype-based&lt;/em&gt; variant caller. This implies that instead of looking at an individual positions within an alignment of reads to the reference genome, it looks at a haplotype window, length of which is dynamically determined (see section 3.2. in &lt;a href=&#34;http://arxiv.org/pdf/1207.3907v2.pdf&#34;&gt;FreeBayes manuscript&lt;/a&gt;):&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/freebayes.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Looking at a haplotype window makes misalignments tolerable. In this case a low complexity poly(A) stretch is misaligned. As a result looking at individual positions will result in calling multiple spurious varians. In the case of FreeBayes looking at a haplotype identifies two alleles (this is a diploid example) &lt;code&gt;A(7)&lt;/code&gt; and &lt;code&gt;A(6)&lt;/code&gt;, while &lt;code&gt;A(8)&lt;/code&gt; is likely an error. Image by &lt;a href=&#34;https://github.com/ekg/freebayes&#34;&gt;Erik Garrison&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&#34;let-s-try-it&#34;&gt;Let&amp;rsquo;s try it&lt;/h1&gt;
+
+&lt;h2 id=&#34;the-data&#34;&gt;The data&lt;/h2&gt;
+
+&lt;p&gt;In this example we will perform variant calling and annotation using &lt;a href=&#34;http://jimb.stanford.edu/giab/&#34;&gt;genome in the bottle data&lt;/a&gt;. Specifically, we will use Ashkenazim Father-Mother-Son trio data from the Personal Genome Project:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;HG002 - NA24385 - huAA53E0 (son)&lt;/li&gt;
+&lt;li&gt;HG003 - NA24149 - hu6E4515 (father)&lt;/li&gt;
+&lt;li&gt;HG004 - NA24143 - hu8E87A9 (mother)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Yet for a quick tutorial these datasets are way too big, so we created a downsampled (watered down) dataset. This dataset was produced by mapping the trio reads against the &lt;code&gt;hg19&lt;/code&gt; version of the human genome, merging the resulting bam files together (we use readgroups to label individual reads so they can be traced to each of the original individuals), and restricting alignments to a small portion of chromosome 19 containing the &lt;a href=&#34;http://www.ncbi.nlm.nih.gov/gene?cmd=Retrieve&amp;amp;dopt=Graphics&amp;amp;list_uids=5442&#34;&gt;&lt;em&gt;POLRMT&lt;/em&gt;&lt;/a&gt; gene.&lt;/p&gt;
+
+&lt;p&gt;Here is what to do to load the data:&lt;/p&gt;
+
+&lt;h2 id=&#34;loading-the-data&#34;&gt;Loading the data&lt;/h2&gt;
+
+&lt;p&gt;Go to the &lt;a href=&#34;https://usegalaxy.org/library/list#folders/F9ff2d127cd7ed6bc&#34;&gt;data library&lt;/a&gt; and select both BAM and PED datasets. Then Click &lt;strong&gt;to History&lt;/strong&gt; button:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/library_import.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Galaxy will ask you if you want to import these data into a new history, which you might want (in the case below I called this history &lt;code&gt;genotyping try&lt;/code&gt;):&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/history_import.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The datasets will appear in your history:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/library_import_complete.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;generating-and-post-processing-freebayes-calls&#34;&gt;Generating and post-processing FreeBayes calls&lt;/h2&gt;
+
+&lt;p&gt;Select &lt;strong&gt;FreeBayes&lt;/strong&gt; from &lt;strong&gt;NGS: Variant Analysis&lt;/strong&gt; section of the tool menu (left pane of Galaxy&amp;rsquo;s interface).&lt;/p&gt;
+
+&lt;h3 id=&#34;running-freebayes&#34;&gt;Running FreeBayes&lt;/h3&gt;
+
+&lt;p&gt;Make sure the top part of the interface looks like shown below. Here we selected &lt;code&gt;GIAB-Ashkenazim-Trio-hg19&lt;/code&gt; as input and set &lt;strong&gt;Using reference genome&lt;/strong&gt; to &lt;code&gt;hg19&lt;/code&gt; and &lt;strong&gt;Choose parameter selection level&lt;/strong&gt; to &lt;code&gt;5&lt;/code&gt;. The interface should look like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/FreeBayes_settings.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Scrolling down to &lt;strong&gt;Tweak algorithmic features?&lt;/strong&gt; click &lt;code&gt;Yes&lt;/code&gt; and set &lt;strong&gt;Calculate the marginal probability of genotypes and report as GQ in each sample field in the VCF output&lt;/strong&gt; to &lt;code&gt;Yes&lt;/code&gt;. This would help us evaluating the quality of genotype calls.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://github.com/nekrut/galaxy/wiki/images/freebayes_gq.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Depending on how busy Galaxy is this may take a little bit of time (coffee break?). Eventially this will produce a dataset in &lt;a href=&#34;http://www.1000genomes.org/wiki/Analysis/variant-call-format&#34;&gt;VCF&lt;/a&gt; format containing 35 putative variants. Before we can continue we need to post-process this dataset by breaking compound variants into multiple independent variants with &lt;strong&gt;VcfAllelicPrimitives&lt;/strong&gt; tool found within &lt;strong&gt;NGS: VCF Manipulation&lt;/strong&gt; section. This is necessary for ensuring the smooth sailing through downstream analyses:&lt;/p&gt;
+
+&lt;h3 id=&#34;simplifying-variant-representation&#34;&gt;Simplifying variant representation&lt;/h3&gt;
+
+&lt;p&gt;Select FreeBayes output as the input for this tool and make sure &lt;strong&gt;Maintain site and allele-level annotations when decomposing&lt;/strong&gt; and &lt;strong&gt;Maintain genotype-level annotations when decomposing&lt;/strong&gt; are set to &lt;code&gt;Yes&lt;/code&gt;:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/vcfallelicprimitives.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;VCFAllelicPrimities&lt;/strong&gt; generated a VCF files containing 37 records (the input VCF only contained 35). This is because a multiple nucleotide polymorphism (&lt;code&gt;TAGG|CAGA&lt;/code&gt;) at position 618851 have been converted to two:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Before:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;chr19 618851 . TAGG CAGA 81.7546
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;After:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;chr19 618851 . T C 81.7546
+chr19 618854 . G A 81.7546
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;annotating-variants-with-snpeff&#34;&gt;Annotating variants with SnpEff&lt;/h3&gt;
+
+&lt;p&gt;At this point we are ready to begin annotating variants using &lt;a href=&#34;http://snpeff.sourceforge.net/SnpEff.html&#34;&gt;SnpEff&lt;/a&gt;. SnpEff, a project maintained by &lt;a href=&#34;https://www.linkedin.com/in/pablocingolani&#34;&gt;Pablo Cingolani&lt;/a&gt; &amp;ldquo;&lt;em&gt;&amp;hellip;annotates and predicts the effects of variants on genes (such as amino acid changes)&amp;hellip;&lt;/em&gt;&amp;rdquo; and so is critical for functional interpretation of variation data.&lt;/p&gt;
+
+&lt;p&gt;Select the latest version of annotation database matching genome version against which reads were mapped and VCF produced. In this case it is &lt;code&gt;GRCh37.75: hg19&lt;/code&gt;:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/snpeff.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;SnpEff will generate two outputs: (1) an annotated VCF file and (2) an HTML report. The report contains a number of useful metrics such as distribution of variants across gene features:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/snpeff_chart.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;or changes to codons:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/snpeff_codons.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;manipulating-variation-data-with-gemini&#34;&gt;Manipulating variation data with GEMINI&lt;/h3&gt;
+
+&lt;p&gt;Now that we have an annotated VCF file it is time to peek inside our variation data. &lt;a href=&#34;http://quinlanlab.org/&#34;&gt;Aaron Quinlan&lt;/a&gt;, creator of &lt;a href=&#34;http://gemini.readthedocs.org/en/latest/index.html&#34;&gt;GEMINI&lt;/a&gt;, calls it &lt;em&gt;Detective work&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h4 id=&#34;loading-data-into-gemini&#34;&gt;Loading data into GEMINI&lt;/h4&gt;
+
+&lt;p&gt;The first step is to convert a VCF file we would like to analyze into a GEMINI database. For this we will use &lt;strong&gt;GEMINI Load&lt;/strong&gt; tool from &lt;strong&gt;NGS: GEMINI&lt;/strong&gt; section. GEMINI takes as input a VCF file and a &lt;a href=&#34;http://pngu.mgh.harvard.edu/~purcell/plink/data.shtml&#34;&gt;PED&lt;/a&gt; file describing the relationship between samples. In the case of our dataset the PED file looks like this (accessible from &lt;a href=&#34;https://usegalaxy.org/library/list#folders/F9ff2d127cd7ed6bc/datasets/418b2500e809568b&#34;&gt;here&lt;/a&gt;):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#family_id sample_id            paternal_id          maternal_id         sex phenotype ethnicity
+family1    HG004_NA24143_mother -9                   -9                   2  1         CEU
+family1	   HG003_NA24149_father -9                   -9                   1  1         CEU
+family1	   HG002_NA24385_son	HG003_NA24149_father HG004_NA24143_mother 1  2         CEU
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;So let&amp;rsquo;s load data into GEMINI. Set VCF and PED inputs:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/gemini_load.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This creates a sqlite database. To see the content of the database use &lt;strong&gt;GEMINI_db_info&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/gemini_db_info.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This produce a list of &lt;a href=&#34;https://github.com/nekrut/galaxy/wiki/datasets/gemini_tables.txt&#34;&gt;all tables and fields&lt;/a&gt; in the database.&lt;/p&gt;
+
+&lt;h4 id=&#34;querying-gemini-database&#34;&gt;Querying GEMINI database&lt;/h4&gt;
+
+&lt;p&gt;GEMINI database is queried using the versatile SQL language (more on SQL &lt;a href=&#34;http://swcarpentry.github.io/sql-novice-survey&#34;&gt;here&lt;/a&gt;). In Galaxy&amp;rsquo;s version of GEMINI this is done using &lt;strong&gt;GEMINI_query&lt;/strong&gt; tool. Within this tool SQL commands are typed directly into the &lt;strong&gt;The query to be issued to the database&lt;/strong&gt; text box. Let&amp;rsquo;s begin getting information from some of the tables we discovered with &lt;strong&gt;GEMINI_db_info&lt;/strong&gt; tool above.
+&amp;gt;
+The examples below are taken from &amp;ldquo;&lt;a href=&#34;https://s3.amazonaws.com/gemini-tutorials/Intro-To-Gemini.pdf&#34;&gt;Intro to Gemini&lt;/a&gt;&amp;rdquo; tutorial. For extensive documentation see &amp;ldquo;&lt;a href=&#34;http://gemini.readthedocs.org/en/latest/content/querying.html&#34;&gt;Querying GEMINI&lt;/a&gt;&amp;rdquo;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;h4 id=&#34;are-there-novel-varinats-that-are-not-annotated-in-dbsnp-database&#34;&gt;&lt;em&gt;Are there &amp;ldquo;novel&amp;rdquo; varinats that are not annotated in dbSNP database?&lt;/em&gt;&lt;/h4&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;To answer this question we will type the following query:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;SELECT count(*) FROM variants WHERE in_dbsnp == 0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;into &lt;strong&gt;The query to be issued to the database&lt;/strong&gt; field of the interface:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/gemini_query1.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;As we can see from &lt;a href=&#34;https://usegalaxy.org/datasets/bbd44e69cb8906b51bb37b9032761321/display/?preview=True&#34;&gt;output (Click this link to see it)&lt;/a&gt; there are 21 variants that are not annotated in dbSNP.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;h4 id=&#34;which-variants-are-fount-within-polrmt-gene&#34;&gt;&lt;em&gt;Which variants are fount within POLRMT gene?&lt;/em&gt;&lt;/h4&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;To answer this type:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;SELECT * FROM variants WHERE filter is NULL and gene = &#39;POLRMT&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The above query will produce &lt;a href=&#34;https://usegalaxy.org/datasets/bbd44e69cb8906b5a0bb5b2cc0695697/display/?preview=True&#34;&gt;output&lt;/a&gt; with very large number of columns. To restrict the number of columns to a manageable set let&amp;rsquo;s use this command (you may need to scroll sideways):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;SELECT rs_ids, aaf_esp_ea, impact, clinvar_disease_name, clinvar_sig FROM variants WHERE filter is NULL and gene = &#39;POLRMT&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;(column definitions can be found &lt;a href=&#34;http://gemini.readthedocs.org/en/latest/content/database_schema.html&#34;&gt;here&lt;/a&gt;)&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://usegalaxy.org/datasets/bbd44e69cb8906b540d65297cd1d26bb/display/?preview=True&#34;&gt;Output&lt;/a&gt; shows varinats found within the &lt;em&gt;POLRMT&lt;/em&gt; gene.&lt;/p&gt;
+
+&lt;h4 id=&#34;querying-genotypes&#34;&gt;Querying genotypes&lt;/h4&gt;
+
+&lt;p&gt;GEMINI provides access to genotype, sequencing depth, genotype quality, and genotype likelihoods for each individual (&lt;code&gt;subjectID&lt;/code&gt;):&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;gt_types.subjectID&lt;/code&gt; - three types of genotype types: &lt;code&gt;HOM_REF&lt;/code&gt;, &lt;code&gt;HET&lt;/code&gt;, &amp;lsquo;HOM_ALT`;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;gt_quals.subjectID&lt;/code&gt; - genotype quality&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;gt_depths.subjectID&lt;/code&gt; - total number of reads in this subject at position&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;gt_ref_depths.subjectID&lt;/code&gt; -  number of reference allele reads in this subject at position&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;gt_alt_depths.subjectID&lt;/code&gt; - number of alternate allele reads in this subject at position&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+&lt;h4 id=&#34;at-how-many-sites-does-child-in-our-trio-have-a-non-reference-allele&#34;&gt;&lt;em&gt;At how many sites does child in our trio have a non-reference allele?&lt;/em&gt;&lt;/h4&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;To answer this we will use two fields of &lt;strong&gt;GEMINI_query&lt;/strong&gt; interface. In the &lt;strong&gt;The query to be issued to the database&lt;/strong&gt; we will type:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;SELECT * from variants
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;and in the field &lt;strong&gt;Restrictions to apply to genotype values&lt;/strong&gt; we will enter:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;gt_types.HG002_NA24385_son &amp;lt;&amp;gt; HOM_REF
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/gemini_query2.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This produce &lt;a href=&#34;https://usegalaxy.org/datasets/bbd44e69cb8906b560921700703d0255/display/?preview=True&#34;&gt;a list of sites&lt;/a&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;h4 id=&#34;at-how-many-sites-both-father-and-son-have-non-reference-alleles&#34;&gt;&lt;em&gt;At how many sites both father and son have non reference alleles?&lt;/em&gt;&lt;/h4&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;To answer this we will type the same expression&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;SELECT * from variants
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;into &lt;strong&gt;The query to be issued to the database&lt;/strong&gt; field and&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; (gt_types.HG002_NA24385_son &amp;lt;&amp;gt; HOM_REF AND gt_types.HG003_NA24149_father &amp;lt;&amp;gt; HOM_REF)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;into &lt;strong&gt;Restrictions to apply to genotype values&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;This will produce the following &lt;a href=&#34;https://usegalaxy.org/datasets/bbd44e69cb8906b5aab445b3cd632ba7/display/?preview=True&#34;&gt;output&lt;/a&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;h4 id=&#34;list-genotypes-for-father-and-son-where-they-have-non-reference-alleles&#34;&gt;&lt;em&gt;List genotypes for father and son where they have non-reference alleles.&lt;/em&gt;&lt;/h4&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Type the following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;SELECT gts.HG002_NA24385_son, gts.HG003_NA24149_father from variants
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;into &lt;strong&gt;The query to be issued to the database&lt;/strong&gt; and&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;(gt_types.HG002_NA24385_son &amp;lt;&amp;gt; HOM_REF AND gt_types.HG003_NA24149_father &amp;lt;&amp;gt; HOM_REF)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;into &lt;strong&gt;Restrictions to apply to genotype values&lt;/strong&gt;. Output will look like &lt;a href=&#34;https://usegalaxy.org/datasets/bbd44e69cb8906b543c67f80be21ed02/display/?preview=True&#34;&gt;this&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h4 id=&#34;using-wildcards&#34;&gt;Using wildcards&lt;/h4&gt;
+
+&lt;p&gt;Wilcards simply writing SQL expressions when searching across multiple terms. The syntax for genotype filter wilcards is&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;(COLUMN).(SAMPLE_WILDCARD).(SAMPLE_WILDCARD_RULE).(RULE_ENFORCEMENT)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Let&amp;rsquo;s try a few examples.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;h4 id=&#34;at-which-variants-are-every-sample-heterozygous&#34;&gt;&lt;em&gt;At which variants are every sample heterozygous?&lt;/em&gt;&lt;/h4&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Type&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;SELECT chrom, start, end, ref, alt, gene, impact, (gts).(*) FROM variants
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;into &lt;strong&gt;The query to be issued to the database&lt;/strong&gt; and&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;(gt_types).(*).(==HET).(all)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;into &lt;strong&gt;Restrictions to apply to genotype values&lt;/strong&gt;. Here we use wildcards for the query&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;(gts.*)&lt;/code&gt; = get genotypes for &lt;strong&gt;all&lt;/strong&gt; samples&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;and genotype filtering&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;(gt_types).(*).(==HET).(all)&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;the &lt;a href=&#34;http://gemini.readthedocs.org/en/latest/content/querying.html#the-all-operator&#34;&gt;all operator&lt;/a&gt; implies that want results for &lt;strong&gt;all&lt;/strong&gt; afftected individuals). Output will look like &lt;a href=&#34;https://usegalaxy.org/datasets/bbd44e69cb8906b5819e1404b5e127d1/display/?preview=True&#34;&gt;this&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;going-further&#34;&gt;Going further&lt;/h3&gt;
+
+&lt;p&gt;This short tutorial should give you an overall idea on how generate variant data in Galaxy and process it with GEMINI. Yet there is much more to learn. Below we list GEMINI tutorials and links to Galaxy libraries with relevant data:&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;left&#34;&gt;&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;Introduction&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;a href=&#34;https://s3.amazonaws.com/gemini-tutorials/Intro-To-Gemini.pdf&#34;&gt; PDF &lt;/a&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;a href=&#34;https://usegalaxy.org/library/list#folders/F0283ca691a41c352&#34;&gt; Sample Data &lt;/a&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;a href=&#34;https://usegalaxy.org/u/aun1/h/gemini-introduction&#34;&gt; Galaxy history &lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;Identifying &lt;em&gt;de novo&lt;/em&gt; mutations underlying Mendelian disease&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;a href=&#34;https://s3.amazonaws.com/gemini-tutorials/Gemini-DeNovo-Tutorial.pdf&#34;&gt; PDF &lt;/a&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;a href=&#34;https://usegalaxy.org/library/list#folders/F775008f45cbbf010&#34;&gt; Sample Data &lt;/a&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;a href=&#34;https://usegalaxy.org/u/aun1/h/gemini-de-novo-mutations&#34;&gt; Galaxy history &lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;Identifying autosomal recessive variants underlying Mendelian disease&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;a href=&#34;https://s3.amazonaws.com/gemini-tutorials/Gemini-Recessive-Tutorial.pdf&#34;&gt; PDF &lt;/a&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;a href=&#34;https://usegalaxy.org/library/list#folders/F35b262f5ac8aa63a&#34;&gt; Sample Data &lt;/a&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;a href=&#34;https://usegalaxy.org/u/aun1/h/gemini-autosomal-recessive&#34;&gt; Galaxy history &lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;Identifying autosomal dominant variants underlying Mendelian disease&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;a href=&#34;https://s3.amazonaws.com/gemini-tutorials/Gemini-Dominant-Tutorial.pdf&#34;&gt; PDF &lt;/a&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;a href=&#34;https://usegalaxy.org/library/list#folders/F1c4722ad56892a31&#34;&gt; Sample Data &lt;/a&gt;&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;a href=&#34;https://usegalaxy.org/u/aun1/h/gemini-autosomal-dominant&#34;&gt; Galaxy history &lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h4 id=&#34;how-to-use-these-tutorials&#34;&gt;How to use these tutorials?&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Right click on the &lt;strong&gt;PDF&lt;/strong&gt; link and open tutorial in a new browser tab&lt;/li&gt;
+&lt;li&gt;Right click on &lt;strong&gt;Galaxy history&lt;/strong&gt; link and open Galaxy history in another new browser tab&lt;/li&gt;
+&lt;li&gt;When Galaxy history interface opens you will need to click &lt;strong&gt;Import history&lt;/strong&gt; link highlighted within a red outline in the following figure:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://github.com/nekrut/galaxy/wiki/images/import_history.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;If you have a wide screen arrange browsers tabs side by side:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/side-by-side.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Proceed with tutorial. For example, to repeat the following command from GEMINI tutorial:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/gemini_command.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Use Galaxy&amp;rsquo;s &lt;strong&gt;GEMINI_load&lt;/strong&gt; tool:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/galaxy_command.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;and so on&amp;hellip;.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>NGS data: Practicalities</title>

@@ -4,9 +4,3 @@
 
 /* see #6 */
 .highlighttable td,th{padding:0;border:0;}td.code{width:95%;}
-
-code.has-jax {font: inherit;
-              font-size: 100%;
-              background: inherit;
-              border: inherit;
-              color: black;}

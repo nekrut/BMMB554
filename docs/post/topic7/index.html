@@ -1,10 +1,9 @@
-		<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en-us">
 <head>
-	<title>NGS data: Practicalities &middot; BMMB554 | Fall 2016</title>
+	<title>NGS data: Practicalities&middot; BMMB554 | Fall 2016</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="X-Frame-Options" content="sameorigin">
 	<meta name="author" content="Anton Nekrutenko">
 	<meta name="description" content="Introduction to data driven life sciences">
 	<meta name="keywords" content="genomes, genetics, ngs, data analysis">
@@ -24,14 +23,17 @@
 
 	<!-- Google Fonts -->
 	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
 </head>
-		<body>
-			<header class="site-header">
+
+<body>
+    <header class="site-header">
 	<div class="branding">
 		<a href="http://nekrut.github.io/BMMB554/">
-		
-			<img class="avatar" src="http://nekrut.github.io/BMMB554/img/gxy.png" alt=""/>
-		
+		<img class="avatar" src="http://nekrut.github.io/BMMB554/img/gxy.png" alt=""/>
 		</a>
 		<h1 class="site-title">
 			<a href="http://nekrut.github.io/BMMB554/">BMMB554 | Fall 2016</a>
@@ -39,18 +41,13 @@
 	</div>
 	<nav class="site-nav">
 		<ul>
-	      	
-	        	<li><a href="/BMMB554/about/"> Syllabus </a></li>
-	      	
+	      	<li><a href="/BMMB554/about/"> Syllabus </a></li>
 
-	      	
-<li>
+	      	<li>
 	<a href="http://nekrut.github.io/BMMB554/" title="">
 		<i class="fa fa-fw fa-home"></i>
 	</a>
 </li>
-
-
 
 
 
@@ -60,19 +57,6 @@
 	</a>
 </li>
 
-
-
-
-
-
-
-
-
-<li>
-	<a href="https://vimeo.com/channels/1125236" title="">
-		<i class="fa fa-fw fa-vimeo-square"></i>
-	</a>
-</li>
 
 
 
@@ -107,8 +91,6 @@
 
 
 
-
-
 <li>
 	<a href="https://twitter.com/galaxyproject" title="Twitter">
 		<i class="fa fa-fw fa-twitter"></i>
@@ -120,20 +102,20 @@
 
 
 
+
 	    </ul>
 	</nav>
 </header>
 
-			<div class="content">
-				
-				<article class="feature-image">
-					<header style="background-image: url('http://nekrut.github.io/BMMB554/img/topic7_cover.png')">
-						<h1 class="title">NGS data: Practicalities</h1>
-					</header>
-				
 
-				<section class="post-content">
-					
+    <div class="content">
+    <article class="feature-image">
+		<header style="background-image: url('http://nekrut.github.io/BMMB554/img/topic7_cover.png')">
+			<h1 class="title">NGS data: Practicalities</h1>
+		</header>
+
+	<section class="post-content">
+		
 
 <p>In this section we will look at practical aspects of manipulation of next-generation sequencing data. We will start with Fastq format produced by most sequencing machines and will finish with SAM/BAM format representing mapped reads. The cover image above shows a screen dump of a SAM dataset.</p>
 
@@ -751,51 +733,12 @@ Analyzing molecules aligning with the same outer coordinates, a mapping quality 
 The Variant Allele Frequency (VAF) bias determined by coverage and insert size variance. Reads are paired-end and read length is 76. The insert size distribution is modeled as a Gaussian distribution with mean at 200 and standard deviation shown on the x-axis. The true VAF is 0.05. The darkness at each position indicates the magnitude of the bias in the VAF. (From Zhou et al. <a href="http://bioinformatics.oxfordjournals.org/content/30/8/1073">2013</a>).</p>
 </blockquote>
 
+	</section>
+    </div>
 
-				<hr>
-
-				
-				</section>
-
-			</article>
-			
-
-<footer class="site-footer">
+    <footer class="site-footer">
 	<p class="text">&copy; 2016 - Released under the MIT license<br>Powered by <a href="//gohugo.io/">Hugo</a> with the <a href="//github.com/digitalcraftsman/hugo-type-theme">Type Theme</a></p>
 </footer>
-
-<script type="text/javascript"
-  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    inlineMath: [['$','$'], ['\\(','\\)']],
-    displayMath: [['$$','$$'], ['\[','\]']],
-    processEscapes: true,
-    processEnvironments: true,
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-    TeX: { equationNumbers: { autoNumber: "AMS" },
-         extensions: ["AMSmath.js", "AMSsymbols.js"] }
-  }
-});
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    
-    
-    
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i = 0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-});
-
-
-</script>
-
 
 
 <script>
@@ -808,6 +751,5 @@ ga('create', 'UA-83364979-1', 'auto');
 ga('send', 'pageview');
 </script>
 
-		</div>
-	</body>
+</body>
 </html>
