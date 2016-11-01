@@ -46,7 +46,7 @@ Finally, datasets can be uploaded directly from NCBI's short read archive:
 
 {{<vimeo 121190377>}}
 
-### <font color="red">Try it yourself</font>
+### <font color="red">&#9888; Try it yourself</font>
 
 - Create a new Galaxy history at http://usegalaxy.org (don't forget to log in).
 - Import the following two datasets (for help see the above video "*From the Web*"):
