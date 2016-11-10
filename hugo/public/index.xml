@@ -6,8 +6,304 @@
     <description>Recent content on BMMB554 | Fall 2016</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 31 Oct 2016 10:11:10 -0400</lastBuildDate>
+    <lastBuildDate>Wed, 09 Nov 2016 17:19:07 -0500</lastBuildDate>
     <atom:link href="http://nekrut.github.io/BMMB554/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Duplex sequence analysis</title>
+      <link>http://nekrut.github.io/BMMB554/post/topic10/</link>
+      <pubDate>Wed, 09 Nov 2016 17:19:07 -0500</pubDate>
+      
+      <guid>http://nekrut.github.io/BMMB554/post/topic10/</guid>
+      <description>
+
+&lt;p&gt;This page explains how to perform discovery of low frequency variants from duplex sequencing data. As an example we use the &lt;em&gt;ABL1&lt;/em&gt; dataset published by &lt;a href=&#34;http://www.nature.com/nmeth/journal/v12/n5/full/nmeth.3351.html&#34;&gt;Schmitt and colleagues&lt;/a&gt; (SRA accession &lt;a href=&#34;http://www.ncbi.nlm.nih.gov/sra/?term=SRR1799908&#34;&gt;SRR1799908&lt;/a&gt;).&lt;/p&gt;
+
+&lt;h1 id=&#34;background&#34;&gt;Background&lt;/h1&gt;
+
+&lt;p&gt;Calling low frequency variants from next generation sequencing (NGS) data is challenging due to significant amount of noise characteristic of these technologies. &lt;a href=&#34;http://www.pnas.org/content/109/36/14508.short&#34;&gt;Duplex sequencing&lt;/a&gt; (DS) was designed to address this problem by increasing sequencing accuracy by over four orders of magnitude. DS uses randomly generated barcodes to uniquely tag each molecule in a sample. The tagged fragments are then PCR amplified prior to the preparation of a sequencing library, creating fragment families characterized by unique combination of barcodes at both 5’ and 3’ ends:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.pnas.org/content/109/36/14508/F1.expansion.html&#34;&gt;&lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/ds.png&#34; alt=&#34;duplex&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;The logic of duplex sequencing. From &lt;a href=&#34;http://www.pnas.org/content/109/36/14508.short&#34;&gt;Schmitt:2012&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The computational analysis of DS data (Part &lt;code&gt;C&lt;/code&gt; in the figure above) produces two kinds of output:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Single Strand Consensus Sequences (SSCS; panel &lt;code&gt;iv&lt;/code&gt; in the figure above);&lt;/li&gt;
+&lt;li&gt;Duplex Consensus Sequences (DCS; panel &lt;code&gt;v&lt;/code&gt; in the figure above).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The DCSs have the ultimate accuracy, yet the SSCSs can also be very useful when ampliconic DNA is used as an input to a DS experiment. Let us illustrate the utility of SSCSs with the following example. Suppose one is interested in quantifying variants in a virus that has a very low titer in body fluids. Since DS procedure requires a substantial amount of starting DNA (between &lt;a href=&#34;http://nature.com/nprot/journal/v9/n11/full/nprot.2014.170.html&#34;&gt;between 0.2 and 3 micrograms&lt;/a&gt;) the virus needs to be enriched. This can be done, for example, with a PCR designed to amplify the entire genome of the virus. Yet the problem is that during the amplification heterologous strands will almost certainly realign to some extent forming hetoroduplex molecules:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/het.png&#34; alt=&#34;hd&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Heteroduplex formation in ampliconic templates. Image by Barbara Arbeithuber from &lt;a href=&#34;https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-1039-4&#34;&gt;Stoler:2016&lt;/a&gt;. Here there are two distinct types of viral genomes: carrying &lt;code&gt;A&lt;/code&gt; and &lt;code&gt;G&lt;/code&gt;. Because the population of genomes is enriched via PCR, heteroduplex formation takes place, skewing frequency estimates performed using DCSs.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;In the image above there are two alleles: green (A) and red (G). After PCR a fraction of molecules are in heteroduplex state. If this PCR-derived DNA is now used as the starting material for a DS experiment, the heteroduplex molecules will manifest themselves as having an &lt;code&gt;N&lt;/code&gt; base at this site (because &lt;em&gt;Du Novo&lt;/em&gt; interprets disagreements as &lt;code&gt;N&lt;/code&gt;s during consensus generation). So, DSCs produced from this dataset will have &lt;code&gt;A&lt;/code&gt;, &lt;code&gt;G&lt;/code&gt;, and &lt;code&gt;N&lt;/code&gt; at the polymorphic site. Yet, SSCSs will only have &lt;code&gt;A&lt;/code&gt; and &lt;code&gt;G&lt;/code&gt;. Thus SSCS will give a more accurate estimate of the allele frequency at this site in this particular case. In &lt;em&gt;Du Novo&lt;/em&gt; SSCSs are generated when the &lt;strong&gt;Output single-strand consensus sequences&lt;/strong&gt; option of &lt;strong&gt;Du Novo: Make consensus reads&lt;/strong&gt; tool is set to &lt;code&gt;Yes&lt;/code&gt; (see &lt;a href=&#34;#generating-duplex-consensus-sequences-dcs&#34;&gt;here&lt;/a&gt;).&lt;/p&gt;
+
+&lt;h2 id=&#34;how-to-use-this-tutorial&#34;&gt;How to use this tutorial&lt;/h2&gt;
+
+&lt;p&gt;The entire analysis described here is accessible as a &lt;a href=&#34;https://usegalaxy.org/u/aun1/h/duplex-analysis-abl1&#34;&gt;Galaxy history&lt;/a&gt; (by clicking on this link you can create your own copy and play with it).&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;http://galaxyproject.org/duplex/histItem.png&#34; alt=&#34;History Item&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Each history item has a Rerun &lt;img src=&#34;http://galaxyproject.org/galaxy101/fa-refresh.png&#34; alt=&#34;refresh&#34; /&gt; button. Clicking this button will show you how this tool was run with all parameters filled in exactly.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This analysis (and consequently the Galaxy&amp;rsquo;s history) can be divided into three parts
+ 1. Consensus generation from initial sequencing reads;
+ 2. Analysis of Duplex Consensus Sequences (DCS);
+ 3. Analysis of Single Strand Consensus Sequences (SSCS):&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/steps.png&#34; alt=&#34;steps&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Analysis outline&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&#34;start-generating-consensus-sequences&#34;&gt;Start: Generating consensus sequences&lt;/h1&gt;
+
+&lt;p&gt;The starting point of the analyses are sequencing reads (usually in &lt;a href=&#34;https://en.wikipedia.org/wiki/FASTQ_format&#34;&gt;fastq&lt;/a&gt; format) produced from a duplex sequencing library.&lt;/p&gt;
+
+&lt;h2 id=&#34;getting-data-in-and-assessing-quality&#34;&gt;Getting data in and assessing quality&lt;/h2&gt;
+
+&lt;p&gt;We uploaded &lt;a href=&#34;http://www.nature.com/nmeth/journal/v12/n5/full/nmeth.3351.html&#34;&gt;Schmitt:2015&lt;/a&gt;) data directly from SRA as shown in &lt;a href=&#34;https://vimeo.com/121187220&#34;&gt;this screencast&lt;/a&gt;. This created two datasets in our galaxy history: one for forward reads and one for reverse. We then evaluated the quality of the data by running FastQC on both datasets (forward and reverse) to obtain the following plots:&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;left&#34;&gt;&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/abl1-f-qc.png&#34; alt=&#34;&#34; /&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/abl1-r-qc.png&#34; alt=&#34;&#34; /&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;strong&gt;A&lt;/strong&gt;. Forward&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;strong&gt;B&lt;/strong&gt;. Reverse&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;One can see that these data are of excellent quality and no additional processing is required before we can start the actual analysis.&lt;/p&gt;
+
+&lt;h2 id=&#34;generating-duplex-consensus-sequences-dcs&#34;&gt;Generating Duplex Consensus Sequences (DCS)&lt;/h2&gt;
+
+&lt;p&gt;From tool section &lt;strong&gt;NGS: Du Novo&lt;/strong&gt; we ran:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Make families&lt;/strong&gt; (&lt;code&gt;Tag length = 12&lt;/code&gt;; &lt;code&gt;Invariant sequence length = 5&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Align families&lt;/strong&gt; (This is &lt;strong&gt;the most&lt;/strong&gt; time consuming step of the workflow. It may take multiple days to run. The &lt;em&gt;ABL1&lt;/em&gt; example took 34 hours and 7 minutes to finish. )&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Make consensus reads&lt;/strong&gt; (&lt;code&gt;Minimum reads per family = 3&lt;/code&gt;; &lt;code&gt;Minimum base quality = 20&lt;/code&gt;; &lt;code&gt;FASTQ format = Sanger&lt;/code&gt; ; &lt;code&gt;Output single-strand consensus sequences = Yes&lt;/code&gt; :point_left: This is particularly important as explained below; also see the following image)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;This is the exact image of the &lt;strong&gt;Make consensus reads&lt;/strong&gt; interface:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/makeCons.png&#34; alt=&#34;Make consesni&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Making DCS and SSCS. &lt;strong&gt;Note&lt;/strong&gt; that &lt;strong&gt;Output single-strand consensus sequences&lt;/strong&gt; is set to &lt;code&gt;Yes&lt;/code&gt;. &lt;a href=&#34;#background&#34;&gt;Above&lt;/a&gt; we explained why single-strand consensus sequences (SSCS) may be important in some applications. &lt;a href=&#34;#analysis-of-single-strand-consensus-data&#34;&gt;Below&lt;/a&gt; we show how they can be used.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;filtering-consensuses&#34;&gt;Filtering consensuses&lt;/h2&gt;
+
+&lt;p&gt;The &lt;em&gt;Du Novo&lt;/em&gt; algorithm occasionally inserts&lt;code&gt;N&lt;/code&gt;and/or &lt;a href=&#34;https://en.wikipedia.org/wiki/Nucleic_acid_notation&#34;&gt;IUPAC notations&lt;/a&gt; at sites where a definive base cannot be identified according to the major rule consensus. We however do not want such bases when we call variants. The tool &lt;strong&gt;Sequence Content Trimmer&lt;/strong&gt; will help with filtering these out. Here are the parameters we used:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/contentTrimmer.png&#34; alt=&#34;ContentTrimmer&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Sequence Content Trimmer settings . Where:&lt;br&gt;- &lt;code&gt;Paired reads = Paired&lt;/code&gt; (because DCSs are reported as forward and reverse)&lt;br&gt;- &lt;code&gt;Bases to filter on = NRYSWKMBDHV&lt;/code&gt; (all ambiguous nucleotides)&lt;br&gt;- &lt;code&gt;Frequency threshold = 0.2&lt;/code&gt; (A window /see the next parameter below/ cannot have more than 20% of ambiguous bases)&lt;br&gt;- &lt;code&gt;Size of the window = 10&lt;/code&gt; (Size of the window)&lt;br&gt;- &lt;code&gt;Invert filter bases = No&lt;/code&gt;&lt;br&gt;- &lt;code&gt;Set a minimum read length = 50&lt;/code&gt; (We do not want &lt;em&gt;very&lt;/em&gt; short reads)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;generating-fastq&#34;&gt;Generating fastq&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;#filtering-consensuses&#34;&gt;The previous step&lt;/a&gt; filters forward and reverse DCSs and reports them in &lt;a href=&#34;https://en.wikipedia.org/wiki/FASTA_format&#34;&gt;FASTA&lt;/a&gt; format. Yet the downstream tools require &lt;a href=&#34;https://en.wikipedia.org/wiki/FASTQ_format&#34;&gt;fastq&lt;/a&gt; format. To address this we convert FASTA into fastq using &lt;strong&gt;Combine FASTA and QUAL&lt;/strong&gt; from tool section &lt;strong&gt;NGS: QC and manipulation&lt;/strong&gt;. In this case the quality values are filled in with the maximum allowed value of 93 (essentially we fake them here), which is fine as we will not rely on quality scores in the rest of the analysis.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/combineFandQ.png&#34; alt=&#34;ContentTrimmer&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Combine FASTA and QUAL. &lt;strong&gt;Note&lt;/strong&gt; that here two datasets (#8 and #9) are selected simultaneously because we clicked the multiple datasets button the left of the &lt;strong&gt;FASTA File&lt;/strong&gt; dropdown:&lt;br&gt; &lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/multiDataset.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;calling-variants&#34;&gt;Calling variants&lt;/h2&gt;
+
+&lt;p&gt;At this point we have trimmed DCSs in fastq format. We can now proceed to calling variants. This involves the following steps:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;#align-against-genome-with-bwa-and-bwa-mem&#34;&gt;Align against reference genome&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#merging&#34;&gt;Merge results of multiple mappers&lt;/a&gt; :point_left: This step is only useful if one uses multiple mappers (which we do here to show concordance. But this is not strictly necessary.)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#left-aligning-indels&#34;&gt;Left aligning indels&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#tabulating-the-differences&#34;&gt;Tabulate the differences&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;align-against-genome-with-bwa-and-bwa-mem&#34;&gt;Align against genome with &lt;strong&gt;BWA&lt;/strong&gt; and &lt;strong&gt;BWA-MEM&lt;/strong&gt;&lt;/h3&gt;
+
+&lt;p&gt;Here we use two mappers for added reliability (this is not necessary in most situations as long as you use the right mapper for input data). To differentiate between results produced by each mapper we assign readgroups (this is done by clicking on &lt;strong&gt;Set read groups information&lt;/strong&gt; dropdown). For example, for &lt;strong&gt;BWA-MEM&lt;/strong&gt; you would set parameters like this:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/bwa-mem.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Running BWA-MEM. &lt;strong&gt;Note&lt;/strong&gt; that we are comparing DCSs against human genome version &lt;code&gt;hg38&lt;/code&gt;, use forward and reverse DCSs are the &lt;code&gt;first&lt;/code&gt; and &lt;code&gt;second&lt;/code&gt; set of reads. Readgroup &lt;strong&gt;SM&lt;/strong&gt; and &lt;strong&gt;ID&lt;/strong&gt; tags are set &lt;code&gt;bwa-mem&lt;/code&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;We then repeat essentially the same with &lt;strong&gt;BWA&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/bwa.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Running BWA. &lt;strong&gt;Note&lt;/strong&gt; here we use &lt;code&gt;bwa&lt;/code&gt; as the readgroup &lt;strong&gt;ID&lt;/strong&gt; and &lt;strong&gt;SM&lt;/strong&gt; tags.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;merging&#34;&gt;Merging&lt;/h3&gt;
+
+&lt;p&gt;Since we have used two mappers - we have two BAM datasets. Yet because we have set readgroups we can now merge them into a single BAM dataset. This is because the individual reads will be labelled with readgroups (you will see how it will help later). To merge we use &lt;strong&gt;MergeSamFiles&lt;/strong&gt; from tool section &lt;strong&gt;NGS: Picard&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/mergeSamFiles.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Merging BAM datasets.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;left-aligning-indels&#34;&gt;Left Aligning indels&lt;/h3&gt;
+
+&lt;p&gt;To normalize the positional distribution of indels we use &lt;strong&gt;Left Align&lt;/strong&gt; utility (&lt;strong&gt;NGS: Variant Analysis&lt;/strong&gt;) from &lt;a href=&#34;https://github.com/ekg/freebayes#indels&#34;&gt;FreeBayes&lt;/a&gt; package. This is necessary to avoid erroneous polymorphisms flanking regions with indels (e.g., in low complexity loci):&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/leftAlign.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Left aligning indels. &lt;strong&gt;Note&lt;/strong&gt; here we use &lt;code&gt;hg38&lt;/code&gt; as well. Obviously, one must use the same genome built you have aligned against with &lt;strong&gt;BWA-MEM&lt;/strong&gt; and &lt;strong&gt;BWA&lt;/strong&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;tabulating-the-differences&#34;&gt;Tabulating the differences&lt;/h3&gt;
+
+&lt;p&gt;To identify sites containing variants we use &lt;strong&gt;Naive Variant Caller (NVC)&lt;/strong&gt; (tool section &lt;strong&gt;NGS: Variant Analysis&lt;/strong&gt;) which produces a simple count of differences given coverage and base quality per site (remember that our qualities were &amp;ldquo;faked&amp;rdquo; during the conversion from FASTA to fastq and cannot be used here). So in the case of &lt;em&gt;ABL1&lt;/em&gt; we set parameters as follow:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/nvc.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Finding variants with NVC. Here:&lt;br&gt;- &lt;code&gt;Using reference genome = hg38&lt;/code&gt; (As mentioned above, needs to be set to the same genome one have mapped against.)&lt;br&gt;- &lt;code&gt;Restrict to regions: Chromosome = chr9&lt;/code&gt; (&lt;em&gt;ABL1&lt;/em&gt; is on chromosome 9. We set this to prevent &lt;strong&gt;NVC&lt;/strong&gt; from wandering across the genome to save time.)&lt;br&gt;- &lt;code&gt;Minimum number of reads needed to consider a REF/ALT = 0&lt;/code&gt; (Trying to maximize the number of sites. We can filter later.)&lt;br&gt;- &lt;code&gt;Minimum base quality = 20&lt;/code&gt; (This default and is irrelevant because of &amp;ldquo;faking&amp;rdquo; quality scores during the conversion from FASTA to fastq).&lt;br&gt;- &lt;code&gt;Minimum mapping quality = 20&lt;/code&gt; (This is helpful because it prevents reads mapping to multiple locations from being included in the tabulation. Such reads will have mapping quality of 0.)&lt;br&gt;- &lt;code&gt;Ploidy = 1&lt;/code&gt; (Ploidy is irrelevant here as it is a mixture of multiple genomes)&lt;br&gt;- &lt;code&gt;Only write out positions with possible alternate alleles = No&lt;/code&gt; (We can filter later)&lt;br&gt;- &lt;code&gt;Report counts by strand = Yes&lt;/code&gt; (This will be helpful to gauge the strand bias).&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The &lt;strong&gt;NVC&lt;/strong&gt; generates a &lt;a href=&#34;https://en.wikipedia.org/wiki/Variant_Call_Format&#34;&gt;VCF&lt;/a&gt; file that can be viewed at genome browsers such as &lt;a href=&#34;https://www.broadinstitute.org/igv/&#34;&gt;IGV&lt;/a&gt;. Yet one rarely finds variants by looking at genome browsers. The next step is to generate a tab-delimited dataset of nucleotide counts using &lt;strong&gt;Variant Annotator&lt;/strong&gt; from tool section &lt;strong&gt;NGS: Variant Analysis&lt;/strong&gt;. We ran it with the following parameters:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/va.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Annotating variable sites. Here &lt;code&gt;Coverage threshold = 10&lt;/code&gt; (To reduce noise) and &lt;code&gt;Output stranded base counts = Yes&lt;/code&gt; (to see strand bias)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;There are 3,264 lines in the output, which is clearly too much. Using &lt;strong&gt;Filter&lt;/strong&gt; tool (tool section &lt;strong&gt;Filter and Sort&lt;/strong&gt;) with expression &lt;code&gt;c16 &amp;gt;= 0.01&lt;/code&gt;(because column 16 contains minor allele frequency - MAF - and we are interested in those sites where MAF &amp;gt;= 1%):&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/filter.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Filtering variable sites.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;will get that number to only 4 (showing just some of the columns):&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;left&#34;&gt;Mapper&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Position (chr9)&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;Major allele&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;Minor allele&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;MAF&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;bwa&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;130,872,141&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;G&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;A&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.013&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;bwa-mem&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;130,872,141&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;G&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;A&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.013&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;bwa&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;130,880,141&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;A&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;G&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.479&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;bwa-mem&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;130,880,141&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;A&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;G&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0.479&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;We can see that results of both mappers agree very well. The reason we see these numbers grouped by mappers is because we have set the readgroups while &lt;a href=&#34;#align-against-genome-with-bwa-and-bwa-mem&#34;&gt;mapping&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The polymorphism we are interested in (and the one reported by &lt;a href=&#34;http://www.nature.com/nmeth/journal/v12/n5/full/nmeth.3351.html&#34;&gt;Schmitt:2015&lt;/a&gt;) is at the position 130,872,141 and has a frequency of 1.3%. The other site (position 130,880,141) is a known common variant &lt;a href=&#34;http://www.ncbi.nlm.nih.gov/SNP/snp_ref.cgi?type=rs&amp;amp;rs=rs2227985&#34;&gt;rs2227985&lt;/a&gt;, which is heterozygous in this sample.&lt;/p&gt;
+
+&lt;h1 id=&#34;analysis-of-single-strand-consensus-data&#34;&gt;Analysis of single strand consensus data&lt;/h1&gt;
+
+&lt;p&gt;SSCSs are generated when the &lt;strong&gt;Output single-strand consensus sequences&lt;/strong&gt; option of &lt;strong&gt;Du Novo: Make consensus reads&lt;/strong&gt; tool is set to &lt;code&gt;Yes&lt;/code&gt; (see &lt;a href=&#34;#generating-duplex-consensus-sequences-dcs&#34;&gt;here&lt;/a&gt;). Analysis of SSCS data follows almost exactly the same trajectory. The only difference is that these &lt;strong&gt;do not&lt;/strong&gt; come as forward and reverse. Instead &lt;em&gt;Du Novo&lt;/em&gt; generates a single dataset. With this dataset we go through all the same steps:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#filtering-consensi&#34;&gt;Filtering consensi&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#generating-fastq&#34;&gt;Generating fastq&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#calling-variants&#34;&gt;Calling variants&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#align-against-genome-with-bwa-and-bwa-mem&#34;&gt;Aligning against genome&lt;/a&gt; (here the difference is that one needs to choose a single end option and use a single dataset as input)&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#merging&#34;&gt;Merging&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#left-aligning-indels&#34;&gt;Left aligning indels&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#tabulating-the-differences&#34;&gt;Tabulating the differences&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;repeating-this-analysis-using-workflows&#34;&gt;Repeating this analysis using workflows&lt;/h2&gt;
+
+&lt;p&gt;The analysis described above can be rerun using a workflow. Workflow combined all steps into a single entity that only needs to be executed once. We provide two workflows:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;Du Novo&lt;/em&gt; analysis from reads (import from &lt;a href=&#34;https://usegalaxy.org/u/aun1/w/duplex-analysis-from-reads&#34;&gt;here&lt;/a&gt;). This workflow uses fastq reads as input. It should be used if you analyze data for first time.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Du Novo&lt;/em&gt; analysis from aligned families (import from &lt;a href=&#34;https://usegalaxy.org/u/aun1/w/copy-of-duplex-analysis-from-reads&#34;&gt;here&lt;/a&gt;). This workflow starts with aligned families. It should be used for re-analysis of already generated DCS and SSCS data.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://galaxyproject.org/duplex/fromReads.png&#34;&gt;&lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/fromReads.png&#34; alt=&#34;&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Starting from Reads&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://galaxyproject.org/duplex/fromDCS.png&#34;&gt;&lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/fromDCS.png&#34; alt=&#34;&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Starting from DCS/SSCS data&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;if-things-don-t-work&#34;&gt;If things don&amp;rsquo;t work&amp;hellip;&lt;/h2&gt;
+
+&lt;p&gt;&amp;hellip;you need to complain. Use &lt;a href=&#34;https://usegalaxy.org/biostar/biostar_redirect&#34;&gt;Galaxy&amp;rsquo;s BioStar Channel&lt;/a&gt; to do this.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Non-diploid variant calling</title>
