@@ -6,7 +6,7 @@ featureimage = "img/topic10_cover.png"
 menu = ""
 tags = []
 title = "Duplex sequence analysis"
-description = "**Topic 10** | Finding *really* low frequency varinats"
+description = "**Topic 10** | Finding *really* low frequency variants"
 +++
 
 This page explains how to perform discovery of low frequency variants from duplex sequencing data. As an example we use the _ABL1_ dataset published by [Schmitt and colleagues](http://www.nature.com/nmeth/journal/v12/n5/full/nmeth.3351.html) (SRA accession [SRR1799908](http://www.ncbi.nlm.nih.gov/sra/?term=SRR1799908)). 
