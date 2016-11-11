@@ -1,9 +1,10 @@
-<!DOCTYPE html>
+		<!DOCTYPE html>
 <html lang="en-us">
 <head>
-	<title>Non-diploid variant calling&middot; BMMB554 | Fall 2016</title>
+	<title>Non-diploid variant calling &middot; BMMB554 | Fall 2016</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-Frame-Options" content="sameorigin">
 	<meta name="author" content="Anton Nekrutenko">
 	<meta name="description" content="Introduction to data driven life sciences">
 	<meta name="keywords" content="genomes, genetics, ngs, data analysis">
@@ -23,17 +24,14 @@
 
 	<!-- Google Fonts -->
 	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
-
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
 </head>
-
-<body>
-    <header class="site-header">
+		<body>
+			<header class="site-header">
 	<div class="branding">
 		<a href="http://nekrut.github.io/BMMB554/">
-		<img class="avatar" src="http://nekrut.github.io/BMMB554/img/gxy.png" alt=""/>
+		
+			<img class="avatar" src="http://nekrut.github.io/BMMB554/img/gxy.png" alt=""/>
+		
 		</a>
 		<h1 class="site-title">
 			<a href="http://nekrut.github.io/BMMB554/">BMMB554 | Fall 2016</a>
@@ -41,13 +39,18 @@
 	</div>
 	<nav class="site-nav">
 		<ul>
-	      	<li><a href="/BMMB554/about/"> Syllabus </a></li>
+	      	
+	        	<li><a href="/BMMB554/about/"> Syllabus </a></li>
+	      	
 
-	      	<li>
+	      	
+<li>
 	<a href="http://nekrut.github.io/BMMB554/" title="">
 		<i class="fa fa-fw fa-home"></i>
 	</a>
 </li>
+
+
 
 
 
@@ -57,6 +60,19 @@
 	</a>
 </li>
 
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://vimeo.com/channels/1125236" title="">
+		<i class="fa fa-fw fa-vimeo-square"></i>
+	</a>
+</li>
 
 
 
@@ -91,6 +107,8 @@
 
 
 
+
+
 <li>
 	<a href="https://twitter.com/galaxyproject" title="Twitter">
 		<i class="fa fa-fw fa-twitter"></i>
@@ -102,20 +120,20 @@
 
 
 
-
 	    </ul>
 	</nav>
 </header>
 
+			<div class="content">
+				
+				<article class="feature-image">
+					<header style="background-image: url('http://nekrut.github.io/BMMB554/img/topic9_cover.png')">
+						<h1 class="title">Non-diploid variant calling</h1>
+					</header>
+				
 
-    <div class="content">
-    <article class="feature-image">
-		<header style="background-image: url('http://nekrut.github.io/BMMB554/img/topic9_cover.png')">
-			<h1 class="title">Non-diploid variant calling</h1>
-		</header>
-
-	<section class="post-content">
-		
+				<section class="post-content">
+					
 
 <p>The majority of life on Earth is non-diploid and represented by prokaryotes, viruses and their derivatives such as our own mitochondria or plant&rsquo;s chloroplasts. In non-diploid systems allele frequencies can range anywhere between 0 and 100% and there could be multiple (not just two) alleles per locus. The main challenge associated with non-diploid variant calling is the difficulty in distinguishing between sequencing noise (abundant in all NGS platforms) and true low frequency variants. Some of the early attempts to do this well have been accomplished on human mitochondrial DNA although the same approaches will work equally good on viral and bacterial genomes:</p>
 
@@ -598,14 +616,38 @@ Child    791   767
 
 <p>This entire analysis is available as a <a href="https://usegalaxy.org/u/aun1/h/non-diploid-freebayes">Galaxy history</a> that you can import into your Galaxy account and play with.</p>
 
-<hr />
-
 <p>Now you know how to call variants in non-diploid system, so try it on bacteria, viruses etc&hellip;</p>
 
-	</section>
-    </div>
+<h1 id="exercise">Exercise</h1>
 
-    <footer class="site-footer">
+<p>Suppose you obtained a virus from some source and you would like to see how it is different from its published reference sequence. You have sequenced the virus and obtained two Illumina files (these files are large, so don&rsquo;t open them. Rather copy their addresses (right click) and use them to upload into Galaxy as explained in <em>Hints</em> section below):</p>
+
+<ul>
+<li><a href="http://www.bx.psu.edu/~anton/share/ng_test_data/bmmb554/hw4/f.fq.gz">Forward reads</a></li>
+<li><a href="http://www.bx.psu.edu/~anton/share/ng_test_data/bmmb554/hw4/r.fq.gz">Reverse reads</a></li>
+</ul>
+
+<p>Analyze these files using Galaxy as was explained in this lesson by mapping them against <a href="http://www.bx.psu.edu/~anton/share/ng_test_data/bmmb554/hw4/phix.fa">this reference genome</a> (again right click to copy the address); see <em>Hints</em>).</p>
+
+<p>Use <a href="https://goo.gl/forms/744Z7LovztR36kj22">this form</a> to submit your answer. In your answer describe the site(s) you have found.</p>
+
+<h4 id="hints">Hints</h4>
+
+<ul>
+<li>You need to upload reads and the reference genome into Galaxy (<a href="http://usegalaxy.org">http://usegalaxy.org</a>) as shown in <a href="https://vimeo.com/120973708">this video</a></li>
+<li>You will be mapping reads against an uploaded reference genome as shown in <a href="https://vimeo.com/123108417">this video</a>.</li>
+</ul>
+
+
+				<hr>
+
+				
+				</section>
+
+			</article>
+			
+
+<footer class="site-footer">
 	<p class="text">&copy; 2016 - Released under the MIT license<br>Powered by <a href="//gohugo.io/">Hugo</a> with the <a href="//github.com/digitalcraftsman/hugo-type-theme">Type Theme</a></p>
 </footer>
 
@@ -637,7 +679,10 @@ MathJax.Hub.Config({
         all[i].SourceElement().parentNode.className += ' has-jax';
     }
 });
+
+
 </script>
+
 
 
 <script>
@@ -650,5 +695,6 @@ ga('create', 'UA-83364979-1', 'auto');
 ga('send', 'pageview');
 </script>
 
-</body>
+		</div>
+	</body>
 </html>

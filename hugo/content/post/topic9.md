@@ -440,9 +440,26 @@ Thus the *major* allele in mother (`G`) becomes the *minor* allele in child -- a
 
 This entire analysis is available as a [Galaxy history](https://usegalaxy.org/u/aun1/h/non-diploid-freebayes) that you can import into your Galaxy account and play with.
 
------- 
 
 Now you know how to call variants in non-diploid system, so try it on bacteria, viruses etc...
+
+
+# Exercise
+
+Suppose you obtained a virus from some source and you would like to see how it is different from its published reference sequence. You have sequenced the virus and obtained two Illumina files (these files are large, so don't open them. Rather copy their addresses (right click) and use them to upload into Galaxy as explained in *Hints* section below):
+
+- [Forward reads](http://www.bx.psu.edu/~anton/share/ng_test_data/bmmb554/hw4/f.fq.gz)
+- [Reverse reads](http://www.bx.psu.edu/~anton/share/ng_test_data/bmmb554/hw4/r.fq.gz)
+
+Analyze these files using Galaxy as was explained in this lesson by mapping them against [this reference genome](http://www.bx.psu.edu/~anton/share/ng_test_data/bmmb554/hw4/phix.fa) (again right click to copy the address); see *Hints*). 
+
+Use [this form](https://goo.gl/forms/744Z7LovztR36kj22) to submit your answer. In your answer describe the site(s) you have found. 
+
+#### Hints
+
+- You need to upload reads and the reference genome into Galaxy (http://usegalaxy.org) as shown in [this video](https://vimeo.com/120973708)
+- You will be mapping reads against an uploaded reference genome as shown in [this video](https://vimeo.com/123108417).
+
 
 
 
