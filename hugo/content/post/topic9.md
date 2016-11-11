@@ -436,7 +436,11 @@ Child    791   767
 
 Thus the *major* allele in mother (`G`) becomes the *minor* allele in child -- a remarkable frequency change due to mitochondrial bottleneck!
 
------
+# Take a look at the whole thing
+
+This entire analysis is available as a [Galaxy history](https://usegalaxy.org/u/aun1/h/non-diploid-freebayes) that you can import into your Galaxy account and play with.
+
+------ 
 
 Now you know how to call variants in non-diploid system, so try it on bacteria, viruses etc...
 

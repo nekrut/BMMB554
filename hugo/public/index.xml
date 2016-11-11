@@ -790,6 +790,10 @@ Child    791   767
 
 &lt;p&gt;Thus the &lt;em&gt;major&lt;/em&gt; allele in mother (&lt;code&gt;G&lt;/code&gt;) becomes the &lt;em&gt;minor&lt;/em&gt; allele in child &amp;ndash; a remarkable frequency change due to mitochondrial bottleneck!&lt;/p&gt;
 
+&lt;h1 id=&#34;take-a-look-at-the-whole-thing&#34;&gt;Take a look at the whole thing&lt;/h1&gt;
+
+&lt;p&gt;This entire analysis is available as a &lt;a href=&#34;https://usegalaxy.org/u/aun1/h/non-diploid-freebayes&#34;&gt;Galaxy history&lt;/a&gt; that you can import into your Galaxy account and play with.&lt;/p&gt;
+
 &lt;hr /&gt;
 
 &lt;p&gt;Now you know how to call variants in non-diploid system, so try it on bacteria, viruses etc&amp;hellip;&lt;/p&gt;
