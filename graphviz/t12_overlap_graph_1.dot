@@ -1,0 +1,11 @@
+ digraph t12_1 {
+ rankdir=LR;
+ orientation=landscape;
+ size = 10;
+
+1   [label="CTCTAGGCC"];
+2   [label="TAGGCCCTC"];
+
+ 1 -> 2 [label="6"];
+
+ }
