@@ -1,0 +1,17 @@
+ digraph t12_gr5_alt {
+ rankdir=LR;
+ orientation=landscape;
+ size = 10;
+
+
+1   [shape="square",label="AAAB",color="blue", pos="0,2!"];
+2   [shape="square",label="ABBA",color="blue", pos="2,2!"];
+3   [shape="square",label="BBB",color="blue", pos="0,0!"];
+
+1 -> 2 [label="2"];
+2 -> 1 [label="1"];
+1 -> 3 [label="1"];
+}
+
+
+

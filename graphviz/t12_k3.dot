@@ -1,0 +1,29 @@
+/// DeBruijn graph
+digraph {
+	ATG [label=ATG]
+	GCC [label=GCC]
+	TAA [label=TAA]
+	CCA [label=CCA]
+	TGG [label=TGG]
+	TGC [label=TGC]
+	GGA [label=GGA]
+	GAT [label=GAT]
+	CAT [label=CAT]
+	AAT [label=AAT]
+	TGT [label=TGT]
+	GGG [label=GGG]
+		ATG -> TGC
+		ATG -> TGG
+		ATG -> TGT
+		GCC -> CCA
+		TAA -> AAT
+		CCA -> CAT
+		TGG -> GGG
+		TGC -> GCC
+		GGA -> GAT
+		GAT -> ATG
+		CAT -> ATG
+		AAT -> ATG
+		TGT -> GTT
+		GGG -> GGA
+}

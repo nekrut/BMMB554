@@ -1,0 +1,18 @@
+ digraph t12_gr8 {
+ rankdir=LR;
+ orientation=landscape;
+ size = 10;
+
+
+1   [shape="square",label="AAAB",color="blue", pos="0,2!"];
+2   [shape="square",label="ABBBA",color="blue", pos="2,0!"];
+
+
+1 -> 2 [label="2",color="red",fontcolor="red"];
+2 -> 1 [label="1"];
+
+
+}
+
+
+

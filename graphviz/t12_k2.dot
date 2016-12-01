@@ -1,0 +1,29 @@
+// DeBruijn graph
+// DeBruijn graph
+digraph {
+	GG [label=GG]
+	TA [label=TA]
+	CA [label=CA]
+	GA [label=GA]
+	CC [label=CC]
+	GT [label=GT]
+	AA [label=AA]
+	GC [label=GC]
+	TG [label=TG]
+	AT [label=AT]
+		GG -> GG
+		GG -> GA
+		TA -> AA
+		CA -> AT
+		GA -> AT
+		CC -> CA
+		GT -> TT
+		AA -> AT
+		GC -> CC
+		TG -> GC
+		TG -> GG
+		TG -> GT
+		AT -> TG
+		AT -> TG
+		AT -> TG
+}

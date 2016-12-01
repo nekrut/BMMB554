@@ -1,0 +1,40 @@
+ digraph t12_dg_3 {
+ rankdir=LR;
+ orientation=landscape;
+ size = 10;
+ #splines=true;
+ sep="+25,25";
+ overlap=scalexy;
+ nodesep=0.8;
+ node [fontsize=11];
+
+ TA   [shape=circle, label="TA"];
+ AA   [shape=circle, label="AA"];
+ AT   [shape=circle, label="AT", color="red"];
+ TG  [shape=circle, label="TG", color="blue"];
+ GC   [shape=circle, label="GC"];
+ CC   [shape=circle, label="CC"];
+ CA   [shape=circle, label="CA"];
+ GG  [shape=circle, label="GG", color="green"];
+ GA   [shape=circle, label="GA"];
+ GT   [shape=circle, label="GT"];
+ TT   [shape=circle, label="TT"];
+
+
+ TA -> AA [label="TAA"];
+ AA -> AT [label="AAT"];
+ AT -> TG [label="ATG"];
+ TG -> GC [label="TGC"];
+ GC -> CC [label="GCC"];
+ CC -> CA [label="CCA"];
+ CA -> AT [label="CAT"];
+ AT -> TG [label="ATG"];
+ TG -> GG [label="TGG",color="red"];
+ GG -> GG [label="GGG"];
+ GG -> GA [label="GGA"];
+ GA -> AT [label="GAT"];
+ AT -> TG [label="ATG"];
+ TG -> GT [label="TGT"];
+ GT -> TT [label="GTT"];
+
+ }

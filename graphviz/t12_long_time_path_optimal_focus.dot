@@ -1,0 +1,55 @@
+ digraph long_time {
+ rankdir=LR;
+ orientation=landscape;
+ size = 10;
+ splines=true;
+ sep="+25,25";
+ overlap=scalexy;
+ nodesep=0.8;
+ node [fontsize=11];
+
+"a_long" [shape="square"];#, pos="0,8!"];
+"ng_lon" [shape="square"];#, pos="0,6!"];
+"_long_" [shape="square"];#, pos="4,8!"];
+"long_l" [shape="square"];#, pos="2,5!"];
+"g_long" [shape="square"];#, pos="3,5!"];
+"ong_lo" [shape="square"];#, pos="4,5!"];
+"long_t" [shape="square"];#, pos="5,2!"];
+"ong_ti" [shape="square"];#, pos="6,3!"];
+"ng_tim" [shape="square"];#, pos="7,1!"];
+"g_time" [shape="square"];#, pos="8,0!"];
+
+"a_long" -> "ong_ti" [label="3", style="invis"];
+"a_long" -> "ong_lo" [label="3", style="invis"];
+"a_long" -> "long_l" [label="4", color="red"];
+"a_long" -> "_long_" [label="5", style="invis"];
+"a_long" -> "long_t" [label="4", style="invis"];
+"ng_lon" -> "g_long" [label="5", color="red"];
+"ng_lon" -> "long_t" [label="3", style="invis"];
+"_long_" -> "ng_lon" [label="3", style="invis"];
+"_long_" -> "ong_ti" [label="4", style="invis"];
+"_long_" -> "long_t" [label="5", color="red"];
+"_long_" -> "ng_tim" [label="3", style="invis"];
+"_long_" -> "long_l" [label="5", style="invis"];
+"_long_" -> "ong_lo" [label="4", style="invis"];
+"long_l" -> "ong_lo" [label="5", color="red"];
+"long_l" -> "g_long" [label="3", style="invis"];
+"g_long" -> "long_l" [label="4", style="invis"];
+"g_long" -> "ong_lo" [label="3", style="invis"];
+"g_long" -> "ong_ti" [label="3", style="invis"];
+"g_long" -> "long_t" [label="4", style="invis"];
+"g_long" -> "_long_" [label="5", color="red"];
+"ong_lo" -> "ng_lon" [label="5", color="red"];
+"ong_lo" -> "_long_" [label="3", style="invis"];
+"ong_lo" -> "g_long" [label="4", style="invis"];
+"long_t" -> "ong_ti" [label="5", color="red"];
+"long_t" -> "ng_tim" [label="4", style="invis"];
+"long_t" -> "g_time" [label="3", style="invis"];
+"ong_ti" -> "g_time" [label="4", style="invis"];
+"ong_ti" -> "ng_tim" [label="5", color="red"];
+"ng_tim" -> "g_time" [label="5", color="red"];
+
+}
+
+
+

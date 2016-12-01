@@ -1,0 +1,13 @@
+ digraph t12_gr9 {
+ rankdir=LR;
+ orientation=landscape;
+ size = 10;
+
+
+1   [shape="square",label="AAABBBA",color="blue", pos="1,1!"];
+
+}
+
+
+
+
