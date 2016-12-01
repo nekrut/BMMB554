@@ -12,33 +12,31 @@ featureimage = "img/topic12_cover.png"
 
 +++
 
-Genome assembly is a difficult task. It is especially challenging to describe it without using formal mathematical reasoning. Fortunately, others have been extremely successful in achieving this goal. Perhaps the best explanation of genome  assembly logic for biological audiences was provided by two highly regarded sources:
+Genome assembly is a difficult task. In trying to explain it I will be relying on two highly regarded sources:
 
-- [Ben Langmead](http://www.langmead-lab.org/teaching-materials/)
-- [Pevzner and Compeau](http://www.amazon.com/Bioinformatics-Algorithms-Active-Learning-Approach/dp/0990374602). 
-
-The material in this lecture relies heavily on these two sources. Really, all I've done here was to make it slightly less technical and more biologically centered. 
+- [Ben Langmead's Teaching Materials](http://www.langmead-lab.org/teaching-materials/)
+- [Pevzner and Compeau Bioinformatics Book](http://www.amazon.com/Bioinformatics-Algorithms-Active-Learning-Approach/dp/0990374602). 
 
 
-# Genomes and reads: Strings and $k$-mers
+# Genomes and reads: Strings and *k*-mers
 
-## $k$-mer composition
+## *k*-mer composition
 
-Genomes are strings of text. When we sequence genomes we use sequqneing machines that generate reads. For now let's assume that all reads have the same length $k$. Thus sequencies a genome generates a large list of $k$-mers.  
+Genomes are strings of text. When we sequence genomes we use sequencing machines that generate reads. For now let's assume that all reads have the same length *k* and every *k*-mer is sequenced only once. We will relax these assumptions at the end. Thus sequencing a genome generates a large list of *k*-mers.  
 
-Suppose we are dealing with a *very* short genome $\texttt{TATGGGGTGC}$. Its $k$-mer composition (note the subscript) $Composition_k(Text)$ is the collection of all $k$-mer substrings (including repeated ones). When $k = 3$ we get (basically we split sequence into windows of length 3 sliding window by 1 base every time):
+Suppose we are dealing with a *very* short genome `TATGGGGTGC`. Its *k*-mer composition (note the subscript) $Composition_k(Text)$ is the collection of all $k$-mer substrings (including repeated ones). When *k* = 3 we get (basically we split sequence into windows of length 3 sliding window by 1 base every time):
 
 <div>
-	$$
+$$
 Composition_3(\texttt{TATGGGGTGC}) = \texttt{ATG, GGG, GGG, GGT, GTG, TAT, TGC, TGG}
 $$
 </div>
 
-Note that we have listed $k$-mers in lexicographic order (i.e., how they would appear in a dictionary) rather than in the order of their appearance in $\texttt{TATGGGGTGC}$. We have done this because the correct ordering of the reads is unknown when they are generated (i.e., a sequencing machine does not generate reads in any particular order). 
+Note that we have listed *k*-mers in lexicographic order (i.e., how they would appear in a dictionary) rather than in the order of their appearance in $\texttt{TATGGGGTGC}$. We have done this because the correct ordering of the reads is unknown when they are generated (i.e., a sequencing machine does not generate reads in any particular order). 
 
 ## Assembly by overlap
 
-In the example above we knew what the "genome" sequence was. In real life we don't know that sequence and our goal is to detemine it given a scrambled collection of $k$-mers. Let's consider the following collection of 3-mers representing a hypothetical genome:
+In the example above we know what the "genome" sequence is. In real life we don't know that and our goal is to determine genome sequence given a scrambled collection of *k*-mers. Let's consider the following collection of 3-mers representing a hypothetical genome:
 
 <div>
   $$
@@ -46,7 +44,7 @@ In the example above we knew what the "genome" sequence was. In real life we don
 $$
 </div>
 
-Let's "tile" $k$-mers if they overlap in $k$-1 nucleotides:
+Let's "tile" *k*-mers if they overlap in *k*-1 nucleotides:
 
 
 ```
@@ -55,6 +53,7 @@ TAA
   ATG
    TGT
     GTT
+-------
 TAATGTT
 ```
 
@@ -133,9 +132,9 @@ GGCGTCTATATCTCGGCTCTAGGCCCTCATTTTTT   <- 35 bases
 0         10        20        30  34
 ```
 
-## The First and the Second laws on assembly
+# The First and the Second laws of assembly
 
-The goal of assembly process is to reconstruct unknown genome sequences given a collection of scrambled sequencing reads:
+The goal of assembly process is to reconstruct an unknown genome sequence given a collection of scrambled sequencing reads:
 
 >
 ```
@@ -158,7 +157,7 @@ GGCGTCTATATCT
 
  We've seen that this can (in principle) be accomplished by finding overlaps. We also discussed the concept of the coverage.  We can now formulate the two first assembly laws.
 
-### The First Assembly Law: Overlaps imply co-location
+## The First Assembly Law: Overlaps imply co-location
 
 Let's define terms **Prefix** and **Suffix** using string $\texttt{TAA}$ as an example:
 
@@ -173,7 +172,7 @@ TCTATATCTCGGCTCTAGG    <- read 1
     TATCTCGACTCTAGGCC  <- read 2
 ```
 
-...then they may overlap (may be derived from the same location) within the genome
+...then they may overlap (may be derived from the same location) within the genome.
 
 ```
       TCTATATCTCGGCTCTAGG                  <- read 1
@@ -182,13 +181,14 @@ TCTATATCTCGGCTCTAGG    <- read 1
  -------------------------------------
           TATCTCGACTCTAGGCC                <- read 2
 ```
-Note that in the above example suffix of the first read is *not* exactly identical to the prefix of the second read: they differ by a G-to-A substitution. Such differences are quite common is may be caused by:
+
+Note that in the above example suffix of the first read is *not* exactly identical to the prefix of the second read: they differ by a G-to-A substitution. Such differences are quite common in real life and may be caused by:
 
 * **sequencing errors** - experimental or computational artifacts of DNA sequencing procedures.
 * **allelic differences** - organisms such as human are diploid (and others, such as wheat are hexaploid) which maternal and paternal genomes being different at a number of genomic sites. 
 * **polymorphic sites** - DNA that is being sequenced is usually isolated from a large number of cells (e.g., white blood cells) or individuals (bacterial and viral cultures). Natural variation present in these cell (or viral particle) populations will manifest itself as these differences. 
 
-### The Second Assembly Law: The higher the coverage, the better
+## The Second Assembly Law: The higher the coverage, the better
 
 The Second law states that higher coverage leads to more frequent and longer overlaps:
 
@@ -246,22 +246,22 @@ For example, the following string reconstruction:
 
 can be represented as a following directed graph (or genome path):
 
->![](http://www.bx.psu.edu/~anton/bioinf-images/4.6.png)
+>![](/BMMB554/img/4.6.png)
 >
 >**Genome path**. Trimers composing the $\texttt{TAATGCCATGGGATGTT}$ sequence represented as the "genome" path. (Fig. 4.6 from CP). In this path a suffix of a 3-mer is equal to prefix of the next 3-mer. 
 
 **However**, we do not know the actual genome! All we have in real life is a collection of reads. Let's first build an overlap graph by connecting two 3-mers if suffix of one is equal to the prefix of the other:
 
 
->![](http://www.bx.psu.edu/~anton/bioinf-images/4.7.png)
+>![](/BMMB554/img/4.7.png)
 >
 >**Overlap graph**. All possible overlap connections for our 3-mer collection. (Fig. 4.7 from CP)
 
-In essence, we are looking a path in a graph that visits every node (3-mer) once. Such path is called [Hamiltonial path](https://en.wikipedia.org/wiki/Hamiltonian_path) and it may not be unique. For example for our 3-mer collection there two possible Hamiltonian paths:
+So to determine the sequence of the underlying genome we are looking a path in this graph that visits every node (3-mer) once. Such path is called [Hamiltonial path](https://en.wikipedia.org/wiki/Hamiltonian_path) and it may not be unique. For example for our 3-mer collection there two possible Hamiltonian paths:
 
 
->![](http://www.bx.psu.edu/~anton/bioinf-images/4.9a.png)
->![](http://www.bx.psu.edu/~anton/bioinf-images/4.9b.png)
+>![](/BMMB554/img/4.9a.png)
+>![](/BMMB554/img/4.9b.png)
 >
 >**Two Hamiltonian paths for the 15 3-mers**. Edges spelling "genomes" $\texttt{TAATGCCATGGGATGTT}$ and $\texttt{TAATGGGATGCCATGTT}$ are highlighted in black. (Fig. 4.9. from CP). 
 
@@ -308,7 +308,7 @@ Building an overlap graph with overlap of $length \geq 4$ will give us the follo
 
 ## The Shortest Common Superstring Problem
 
-The problem of reconstructing genome using the overlap graph that we have just illustrated can be initially formulated as the *Shortest Common Superstring (SCS)* problem. It states: *given a collection of strings *S*, find *SCS(S), which is the shortest string that contains all strings from the set *S* as substrings*.
+The problem of reconstructing genome using the overlap graph that we have just illustrated can be initially formulated as the *Shortest Common Superstring (SCS)* problem. It states: *given a collection of strings S, find SCS(S), which is the shortest string that contains all strings from the set S as substrings*.
 
 For simplicity let's suppose that we have the following set of strings $S$:
 
@@ -326,7 +326,7 @@ one way of getting a string that would contain all of these as substrings will s
 $$
 </div>
 
-this, however, is not the *shortest* superstring that contains all strings from $S$. Instead the SCS is:
+this, however, is not the *shortest* superstring that contains all strings from $S$. Instead the SCS is (just trust us here):
 
 <div>
   $$
@@ -334,7 +334,7 @@ this, however, is not the *shortest* superstring that contains all strings from 
   $$
   </div>
 
-It looks like finding SCS for a set of sequencing reads may just be what we need to produce a genome assembly. But how can this work in practice. One potential idea is to order the strings in some way and "reduce" them into a superstring:
+It looks like finding SCS for a set of sequencing reads may just be what we need to produce a genome assembly. But how can this work in practice? One potential idea is to order the strings in some way and "reduce" them into a superstring (following examples are from Ben Langmead):
  
 >![](/BMMB554/img/scs1.png)
 >
@@ -361,7 +361,7 @@ It looks like finding SCS for a set of sequencing reads may just be what we need
 >Now we did better, but maybe we can do even better.
 
 Ultimately we need to try all possible ordering and pick the shortest among all. Using this approach is we have $S$ strings we will need to do $S!$ tries. This can quickly get impossible. For our set of 
-eight strings $8! = 40320$. If we get, say, a 1,000,000 reads from an Illumina machine that the factorial of a million is not going to be an attractive analysis option. 
+eight strings $8! = 40320$. If we get, say, a 1,000,000 reads from an Illumina machine then the factorial of a million is not going to be an attractive analysis option. 
 
 ## Shortest common superstring: Greedy approach
 
@@ -439,9 +439,9 @@ The above procedure can be computed *very* quickly. But there is a catch: it doe
 >
 >![](/BMMB554/img/greedy7_alt.png)
 
-And the SCS of these two will be a concatenation `AAABBABBB` of length 9. Thus a greedy approach may produce different answers. However, it is a sufficient approximation as the superstring yielded this way will not be more than ~2.5 times longer than the true SCS ([Gusfield](https://www.amazon.com/Algorithms-Strings-Trees-Sequences-Computational/dp/0521585198) 16.17.1)
+And the SCS of these two will be a concatenation `AAABBABBB` of length 9. Thus a greedy approach may produce different answers. However, it is a sufficient approximation as the superstring yielded this way will not be more than ~2.5 times longer than the true SCS ([Gusfield](https://www.amazon.com/Algorithms-Strings-Trees-Sequences-Computational/dp/0521585198) 16.17.1).
 
-## The Third Law of Assembly: Repeats are Evil!
+# The Third Law of Assembly: Repeats are Evil!
 
 Let's again apply Greedy SCS to a different "genome". Suppose we want to reconstruct the phrase:
 
@@ -527,13 +527,13 @@ As we've seen above the shortest common superstring (SCS) is:
 
 2. **May be shorter than we want** because if the genome contains repeats that are longer than the reads we are using, Greedy SCS will collapse them and make assembly shorter that the genome we are trying to get. 
 
-Let's talk about an alternative *k*-mer representation.
+Let's talk about an alternative way to represent the relationship between *k*-mers that may give us a more efficient algorithm.
 
 # de Bruijn graphs
 
 [Nicolaas de Bruijn](https://en.wikipedia.org/wiki/Nicolaas_Govert_de_Bruijn) had a purely theoretical interest of constructing _k_-universal strings for an arbitrary value of _k_. A _k_-universal string contains every possible _k_-mer only once:
 
->[![](http://www.bx.psu.edu/~anton/bioinf-images/deBruijn.png)](http://www.nature.com/nbt/journal/v29/n11/abs/nbt.2023.html)
+>[![](/BMMB554/img/deBruijn.png)](http://www.nature.com/nbt/journal/v29/n11/abs/nbt.2023.html)
 >
 >**de Bruijn graph**. From [Compeau:2011](http://www.nature.com/nbt/journal/v29/n11/abs/nbt.2023.html)
 
@@ -546,33 +546,33 @@ TAA AAT ATG TGC GCC CCA CAT ATG TGG GGG GGA GAT ATG TGT GTT
 We will assign 3-mers to _edges_ instead or _nodes_:
 
 
->![](http://www.bx.psu.edu/~anton/bioinf-images/4.12.png)
+>![](/BMMB554/img/4.12.png)
 >
 >**_k_-mers as edges**. Edges represented by 3-mers connect nodes representing the overlaps. (Fig. 4.12 from CP)
 
 This graph can be simplified by gluing identical nodes together:
 
->![](http://www.bx.psu.edu/~anton/bioinf-images/4.13a.png)
+>![](/BMMB554/img/4.13a.png)
 >
->![](http://www.bx.psu.edu/~anton/bioinf-images/4.13b.png)
+>![](/BMMB554/img/4.13b.png)
 >
 >Here the complexity of the graph is reduced by first gluing redundant <font color="red">`AT`</font> nodes
 >
->![](http://www.bx.psu.edu/~anton/bioinf-images/4.13c.png)
+>![](/BMMB554/img/4.13c.png)
 >
->![](http://www.bx.psu.edu/~anton/bioinf-images/4.13d.png)
+>![](/BMMB554/img/4.13d.png)
 >
 >Next, <font color="blue">`TG`</font> nodes are merged
 >
->![](http://www.bx.psu.edu/~anton/bioinf-images/4.13e.png)
+>![](/BMMB554/img/4.13e.png)
 >
->![](http://www.bx.psu.edu/~anton/bioinf-images/4.13f.png)
+>![](/BMMB554/img/4.13f.png)
 >
 >And, finally the two <font color="green">`GG`</font> nodes are resolved. (Fig. 4.13 from CP)
 
 Because we now represent _k_-mers as edges (rather than nodes), our problem has morphed into finding a path that visits every _edge_ once, or an [Eulerian Path](https://en.wikipedia.org/wiki/Eulerian_path):
 
->![](http://www.bx.psu.edu/~anton/bioinf-images/4.15.png)
+>![](/BMMB554/img/4.15.png)
 >
 >**Eulerian paths for the 15 3-mers**. Numbering of edges provides a way to reconstruct the original "genome". (Fig. 4.15 from CP)
 
@@ -591,15 +591,15 @@ Some definitions:
 Let's apply Euler's Theorem to a classical problem: The bridges of Köninsberg problem. Here the question is: *Can you walk through all of Köninsberg traversing every bridge exactly one time?* In other words: *Is there a Eulerian path through the city of Köninsberg?*
 
 
->![](http://www.bx.psu.edu/~anton/bioinf-images/koninsberg.png)
+>![](/BMMB554/img/koninsberg.png)
 >
->**Köninsberg and Euler's Theorem**. (a) A map of old Königsberg, in which each area of the city is labeled with a different color point. (b) The Königsberg Bridge graph, formed by representing each of four land areas as a node and each of the city's seven bridges as an edge. (From [Campeau, Pevzner, and Tesler](http://www.nature.com/nbt/journal/v29/n11/abs/nbt.2023.html#close))
+>**Köninsberg and Euler's Theorem**. (a) A map of old Königsberg, in which each area of the city is labeled with a different color point. (b) The Königsberg Bridge graph, formed by representing each of four land areas as a node and each of the city's seven bridges as an edge. (From [Campeau:2011](http://www.nature.com/nbt/journal/v29/n11/abs/nbt.2023.html#close))
 
-By looking at this graph we can see that it is *unblanaced*. If one arrives to, say, the <font color="orange">orange</font> node from the <font color="blue">blue</font> node there are two ways to get out. Thus there is no way to see all of the City and traverse every bridge once!
+By looking at this graph we can see that it is *unblanaced*. If one arrives to, say, the <font color="orange">orange</font> node from the <font color="blue">blue</font> node there are two ways to get out. Thus there is no way to see all of the city and traverse every bridge once!
 
 ## Repeats are still a challenge
 
-Let's look at the de Bruijn graph from above again. But this time let's drop edge numbering and pretend that the genome is now really known to us (as is usually the case):
+Let's look at the de Bruijn graph from above again. But this time let's drop edge numbering and pretend that the genome is now really known to us (as is usually the case in real life):
 
 >![](/BMMB554/img/dg1.png)
 >
@@ -609,7 +609,7 @@ In the original sequence `TAATGCCATGGGATGTT` *k*-mer <font color="red">`AT`</fon
 
 >![](/BMMB554/img/dg2.png)
 >
->**Possible path #1**.
+>**Possible path #1**. Here after we reach <font color="blue">`TG`</font> node we turn **up**.
 
 The above path spells out:
 
@@ -636,7 +636,8 @@ Yet there is an alternative:
 
 >![](/BMMB554/img/dg3.png)
 >
->**Possible path #2**
+>**Possible path #2**. Here after we reach <font color="blue">`TG`</font> node we turn **dow**.
+
 
 Which spells:
 
@@ -663,9 +664,11 @@ Note how different these are:
 
 ```
 TAATGCCATGGGATGTT
-|||||
+
 TAATGGATGCCATGTTT
 ```
+
+and only one of them is correct. Repeats are evil!
 
 ## *k*-mer size affects repeat resolution
 
@@ -690,6 +693,8 @@ In the above example we have used *k*-mer size of 3. But what if we try 4 or 5? 
 >
 >In this case there is only one path. This because our *k* is larger that the repeat size, so we can resolve it accurately.
 
+This is why technologies producing long sequencing reads stimulate so much enthusiasm - they will allow to resolve and produce accurate assembly of large genomes. 
+
 # Assembly in real life
 
 In this topic we've learned about two ways of representing the relationship between reads derived from a genome we are trying to assemble:
@@ -697,11 +702,11 @@ In this topic we've learned about two ways of representing the relationship betw
 1. **Overlap graphs** - nodes are reads, edges are overlaps between reads.
 2. **DeBruijn graphs** - nodes are overlaps, edges are reads.
 
->![](http://www.bx.psu.edu/~anton/bioinf-images/4.7.png)
+>![](/BMMB554/img/4.7.png)
 >
 >**A**.
 >
->![](http://www.bx.psu.edu/~anton/bioinf-images/4.13f.png)
+>![](/BMMB554/img/4.13f.png)
 >
 >**B.**
 >An overlap (A) and DeBruijn (B) graphs for the same string. 
