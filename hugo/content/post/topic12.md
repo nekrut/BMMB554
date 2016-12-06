@@ -1,7 +1,7 @@
 +++
 date = "2016-11-28T16:20:10-05:00"
 title = "Assembly basics"
-description = "**Topic12** | Challenges of genome (and transcriptome) assembly"
+description = "**Topic 12** | Challenges of genome (and transcriptome) assembly"
 menu = ""
 #draft = true
 tags = [
