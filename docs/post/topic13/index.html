@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<title>Assembly in practice: E. coli C&middot; BMMB554 | Fall 2016</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="author" content="Anton Nekrutenko">
+	<meta name="description" content="Introduction to data driven life sciences">
+	<meta name="keywords" content="genomes, genetics, ngs, data analysis">
+	<meta name="generator" content="Hugo 0.17" />
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="http://nekrut.github.io/BMMB554/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="http://nekrut.github.io/BMMB554/favicon.ico" type="image/x-icon">
+
+	<!-- RSS -->
+	
+
+	<!-- Font Awesome -->
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<!-- Google Fonts -->
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+</head>
+
+<body>
+    <header class="site-header">
+	<div class="branding">
+		<a href="http://nekrut.github.io/BMMB554/">
+		<img class="avatar" src="http://nekrut.github.io/BMMB554/img/gxy.png" alt=""/>
+		</a>
+		<h1 class="site-title">
+			<a href="http://nekrut.github.io/BMMB554/">BMMB554 | Fall 2016</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+	      	<li><a href="/BMMB554/about/"> Syllabus </a></li>
+
+	      	<li>
+	<a href="http://nekrut.github.io/BMMB554/" title="">
+		<i class="fa fa-fw fa-home"></i>
+	</a>
+</li>
+
+
+
+<li>
+	<a href="mailto:aun1@psu.edu" title="Email">
+		<i class="fa fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/nekrut" title="Github">
+		<i class="fa fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/galaxyproject" title="Twitter">
+		<i class="fa fa-fw fa-twitter"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+	    </ul>
+	</nav>
+</header>
+
+
+    <div class="content">
+    <article>
+		<header>
+			<h1 class="title">Assembly in practice: E. coli C</h1>
+			<p class="meta">
+    December 5, 2016 &middot; 12 minute read
+
+    
+        
+</p>
+
+		</header>
+
+	<section class="post-content">
+		
+
+<h1 id="the-data">The data</h1>
+
+<p>In this section we will describe practical aspects of genome assembly. As an example data we will use sequencing reads obtained for E. coli strain <a href="http://cgsc.biology.yale.edu/Strain.php?ID=8232">C-1</a>. Isolated genomic DNA was sequenced on Illumina miSeq and Oxford Nanopore MinION:</p>
+
+<ul>
+<li><strong>miSeq data</strong> - 9,345,897 250 bp read pairs (library preparation performed on genomic DNA fragmented to main size of 600 bp)</li>
+<li><strong>minION data</strong> - 12,738 <a href="http://www.nature.com/nmeth/journal/v12/n4/fig_tab/nmeth.3290_SF13.html">2d-reads</a>. Maximum read length was 27,518. The distribution of reads lengths is shown below:</li>
+</ul>
+
+<blockquote>
+<p><img src="/BMMB554/img/onp_length.png" alt="" /></p>
+</blockquote>
+
+<h1 id="the-assembler">The assembler</h1>
+
+<p>In this example we have two types of data: (1) high quality high coverage but relatively short (250 bp) Illumina data and (2) low quality low coverage but long Oxford Nanopore (ONP) data. This would allow us to perform so called Hybrid assembly. In hybrid assembly long low quality reads produced by ONP will allow bridge contigs assembled from Illumina reads into a fully assembled bacterial genome.</p>
+
+<p>Currently, one of the best performing tools for hybrid assembly is <a href="http://bioinformatics.oxfordjournals.org/content/early/2015/11/20/bioinformatics.btv688.full.pdf+html">hybridSPAdes</a>, a part of <a href="http://cab.spbu.ru/software/spades/">SPAdes family</a> of genome, metagenome, and transcriptome assemblers.</p>
+
+<h2 id="key-spades-innovations">Key SPAdes innovations</h2>
+
+<p>Before briefly explaining some key aspects of the SPAdes assembler we should mention one practical issue. In the previous section we assumed that sequencing reads have identical lengths. In reality this is almost never the case. Thus we cannot assume that reads and <em>k</em>-mers are the same thing. Instead, we derive <em>k</em>-mers from the reads by breaking them into pieces:</p>
+
+<pre><code>atgcgt  &lt;- read
+
+atgc
+ tgcg   &lt;- its k-mers of length 4
+  gcgt
+</code></pre>
+
+<h3 id="multisized-debruijn-graph">Multisized deBruijn graph</h3>
+
+<p>In the previous lecture we have been constructing graphs for <em>k</em>-mers of a fixed size. We have noted that when <em>k</em> is small it is difficult to resolve the repeats. If <em>k</em> is too high a corresponding graph may become fragments (especially if read coverage is low). SPAdes uses several values for <em>k</em> (that are either manually set or inferred automatically) to create a <em>multisized</em> graph that minimized tangledness and fragmentation by combining various <em>k</em>-mers:</p>
+
+<blockquote>
+<p><img src="/BMMB554/img/multiGraph.jpeg" alt="" /></p>
+
+<p><strong>Multisized de Bruijn graph</strong>. A circular Genome CATCAGATAGGA is covered by a set Reads consisting of nine 4-mers, {ACAT, CATC, ATCA, TCAG, CAGA, AGAT, GATA, TAGG, GGAC}. Three out of 12 possible 4-mers from Genome are missing from Reads (namely {ATAG,AGGA,GACA}), but all 3-mers from Genome are present in Reads. (A) The outside circle shows a separate black edge for each 3-mer from Reads. Dotted red lines indicate vertices that will be glued. The inner circle shows the result of applying some of the glues. (B) The graph DB(Reads, 3) resulting from all the glues is tangled. The three h-paths of length 2 in this graph (shown in blue) correspond to h-reads ATAG, AGGA, and GACA. Thus Reads3,4 contains all 4-mers from Genome. &copy; The outside circle shows a separate edge for each of the nine 4-mer reads. The next inner circle shows the graph DB(Reads, 4), and the innermost circle represents the Genome. The graph DB(Reads, 4) is fragmented into 3 connected components. (D) The multisized de Bruijn graph DB(Reads, 3, 4). (From <a href="http://online.liebertpub.com/doi/full/10.1089/cmb.2012.0021">Bankevich:2012</a>).</p>
+</blockquote>
+
+<h3 id="read-pair-utilization">Read pair utilization</h3>
+
+<p>While the use of paired reads and mate pairs is not new (and key) to genome assembly, SPAdes utilizes so called paired DeBruin graphs to take the advantage of the paired end data. One of the key issues with paired DeBruin graphs is the resulting genome assemblies do not tolerate variability in insert sizes (the initial formulation of paired DeBruijn graphs assumed constant distance between pairs of reads). In practice this distance is always variable. SPAdes performs <em>k</em>-bimer (these are <em>k</em>-mers derived from <em>paired</em> reads) adjustment to identify exact of nearly-exact distances for each <em>k</em>-bimer pair:</p>
+
+<blockquote>
+<p><img src="/BMMB554/img/k-bimer.jpeg" alt="" /></p>
+
+<p><strong>k-bimer adjustment</strong>. <strong>A</strong>. Bireads are decomposed into pairs of k-mers with estimated genomic distances (B-transformation). These are tabulated into histograms of estimated genomic distances between pairs of h-edges (H-transformation), and peaks in the histograms and paths in the graph are used to reveal the actual genomic distances between h-edges (A-transformation). This may be converted back to genomic distances between k-mers on pairs of h-paths (E-transformation, used for presentation purposes but not needed in the implementation). <strong>B</strong>. The h-biedge histogram (α|β,&#42;) corresponding to the exact h-biedge (α|β, 72163) in the assembly graph. path(α) is an h-path (condensed edge representing 72049 edges) in the upper right, and path(β) is an h-path (representing 46097 edges) at the lower left. The histogram collects all distance estimates between α and β derived from bireads. The h-biedge histogram was smoothed using the Fast Fourier Transform (red curve). The peak in the smoothed histogram (marked red) well approximates the actual distance (marked blue). <strong>C</strong>. The h-biedge histogram (α|β,&#42;) estimates the distance between h-edges α and β (|path(α)| = 46054, |path(β)| = 72). Because of the directed cycle formed by the two h-paths of lengths 72 and 13, there may be multiple walks through the graph between α and β. The h-biedge histogram has been divided into clusters with centers at 46060 and 46145. Thus SPAdes transforms the entire histogram into two h-biedges: (α|β, 46054) and (α|β, 46139). (From <a href="http://online.liebertpub.com/doi/full/10.1089/cmb.2012.0021">Bankevich:2012</a>).</p>
+</blockquote>
+
+<h3 id="error-correction">Error correction</h3>
+
+<p>Sequencing data contains a substantial number of sequencing errors that manifest themselves as deviations (bulges and non-connected components) within the assembly graph. One of the ways to improve the graph even constructing it is to minimize the amount sequencing errors by performing error correction. SPAdes uses <a href="https://goo.gl/1iGkMe">BayesHammer</a> to correct the reads. Here is a brief summary of what it does:</p>
+
+<ol>
+<li>SPAdes (or rather BayesHammer) counts <em>k</em>-mers in reads and computed <em>k</em>-mer statistics that takes into account base quality values.</li>
+<li><a href="https://en.wikipedia.org/wiki/Hamming_graph">Hamming graph</a> is constructed for <em>k</em>-mers is which <em>k</em>-mers are nodes. In this graph edges connect nodes (<em>k</em>-mers) is they differ from each other by a number of nucleotides up to a certain threshold (the <a href="https://en.wikipedia.org/wiki/Hamming_distance">Hamming distance</a>). The graph is central to the error correction algorithm.</li>
+<li>At this step Bayesian subclustering of the graph produced in the previous step. For each <em>k</em>-mer we now know the center of its subcluster.</li>
+<li><strong>Solid</strong> <em>k</em>-mers are derived from cluster centers and are assumed to be <em>error free</em>.</li>
+<li>Solid <em>k</em>-mers are mapped back to the reads.</li>
+<li>Reads are corrected using solid <em>k</em>-mers:</li>
+</ol>
+
+<blockquote>
+<p><img src="/BMMB554/img/readCorrection.jpeg" alt="" /></p>
+
+<p><strong>Read correction</strong>. Black <em>k</em>-mers are solid. Grey k-mers are non-solid. Red k-mers are the centers of the corresponding clusters (two grey k-mers striked through on the right are non-solid singletons). As a result, one nucleotide is changed based on majority rule. (From <a href="https://goo.gl/1iGkMe">Nikolenko:2013</a>).</p>
+</blockquote>
+
+<p>In the example data we will be using here running SPAdes error correction changed 14,013,757 bases in 3,382,337 reads - a substantial fraction of the ~18 million read dataset.</p>
+
+<h3 id="hybrid-assembly">Hybrid assembly</h3>
+
+<p>SPAdes first construct an assembly graph from high quality high coverage short read data and then utilizes long reads generated with PacBio, Oxford Nanopore, or Illumina&rsquo;s TruSeq Synthetic Long-Read technology to close assembly gaps and to resolve repetitive regions.</p>
+
+<p>To close the gaps it finds long reads spanning a coverage gap in the assembly graph. The challenge with long reads (particularly from PacBio and Oxford Nanopore) is their high error rate. To alleviate this issues SPAdes looks for a collection of long reads spanning a given gap and computed a consensus.</p>
+
+<blockquote>
+<p><img src="/BMMB554/img/repeatResolution.png" alt="" /></p>
+
+<p><strong>Repeat resolution</strong>. This picture represents an example of a collapsed repeat. Somewhere in the genome there are three distinct regions (blue, green, an red) containing a repeat (black). Because black region is highly similar (or identical) among these three regions it is collapsed on the graph as shown here. If we align long reads to this graph we will be able to disentangle this. For example, long reads (dashed lines) span red edges allowing us to partially uncollapse this assembly. (From <a href="http://bioinformatics.oxfordjournals.org/content/early/2015/11/20/bioinformatics.btv688.full.pdf+html">Antipov:2015</a>)</p>
+</blockquote>
+
+<h1 id="applying-spades-to-real-data">Applying SPAdes to real data</h1>
+
+<p>Here we are running SPAdes twice: once using Illumina reads only and once adding Oxford Nanopore reads to improve Illumina assembly.</p>
+
+<h2 id="illumina-only">Illumina only</h2>
+
+<pre><code># contigs (&gt;= 0 bp)             2348     
+# contigs (&gt;= 1000 bp)          104      
+# contigs (&gt;= 5000 bp)          52       
+# contigs (&gt;= 10000 bp)         45       
+# contigs (&gt;= 25000 bp)         39       
+# contigs (&gt;= 50000 bp)         28       
+Total length (&gt;= 0 bp)          5612247  
+Total length (&gt;= 1000 bp)       4559610  
+Total length (&gt;= 5000 bp)       4477328  
+Total length (&gt;= 10000 bp)      4431518  
+Total length (&gt;= 25000 bp)      4332438  
+Total length (&gt;= 50000 bp)      3966974  
+# contigs                       659      
+Largest contig                  434834   
+Total length                    4899255  
+GC (%)                          50.85    
+N50                             129141   
+N75                             82088    
+L50                             13       
+L75                             24       
+# N's per 100 kbp               12.17    
+# predicted genes (unique)      4880     
+# predicted genes (&gt;= 0 bp)     4884     
+# predicted genes (&gt;= 300 bp)   4286     
+# predicted genes (&gt;= 1500 bp)  575      
+# predicted genes (&gt;= 3000 bp)  54       
+
+</code></pre>
+
+<h2 id="illumina-oxford-nanopore">Illumina + Oxford Nanopore</h2>
+
+<pre><code># contigs (&gt;= 0 bp)             2258     
+# contigs (&gt;= 1000 bp)          41       
+# contigs (&gt;= 5000 bp)          4        
+# contigs (&gt;= 10000 bp)         1        
+# contigs (&gt;= 25000 bp)         1        
+# contigs (&gt;= 50000 bp)         1        
+Total length (&gt;= 0 bp)          5682366  
+Total length (&gt;= 1000 bp)       4640835  
+Total length (&gt;= 5000 bp)       4593355  
+Total length (&gt;= 10000 bp)      4576746  
+Total length (&gt;= 25000 bp)      4576746  
+Total length (&gt;= 50000 bp)      4576746  
+# contigs                       586      
+Largest contig                  4576746  
+Total length                    4973843  
+GC (%)                          50.91    
+N50                             4576746  
+N75                             4576746  
+L50                             1        
+L75                             1        
+# N's per 100 kbp               4.83     
+# predicted genes (unique)      4861     
+# predicted genes (&gt;= 0 bp)     4914     
+# predicted genes (&gt;= 300 bp)   4312     
+# predicted genes (&gt;= 1500 bp)  583      
+# predicted genes (&gt;= 3000 bp)  58       
+</code></pre>
+
+<h2 id="what-does-this-mean">What does this mean?</h2>
+
+<p>We do not know how big the genome of <em>E. coli</em> C is, but the guesstimate will put us somewhere close to 4.5 million bases (close to the genome size of <em>E. coli</em> K-12).</p>
+
+<h3 id="n50">N50</h3>
+
+<p>(From <a href="https://en.wikipedia.org/wiki/N50,_L50,_and_related_statistics#N50">Wikipedia</a>)</p>
+
+<p>N50 statistic defines assembly quality. Given a set of contigs, each with its own length, the N50 length is defined as the shortest sequence length at 50% of the genome. It can be thought of as the point of half of the mass of the distribution; the number of bases from all contigs longer than the N50 will be close to the number of bases from all contigs shorter than the N50. For example, 9 contigs with the lengths 2,3,4,5,6,7,8,9,and 10, their sum is 54, half of the sum is 27, the size of the genome also happens to be 54. 50% of this assembly would be 10 + 9 + 8 = 27 (half the length of the sequence). Thus the N50=8, which is the size of the contig which, along with the larger contigs, contain half of sequence of a particular genome. Note: When comparing N50 values from different assemblies, the assembly sizes must be the same size in order for N50 to be meaningful.</p>
+
+<blockquote>
+<p><img src="/BMMB554/img/n50.png" alt="" /></p>
+
+<p><strong>N50 size</strong>. From (<a href="http://schatzlab.cshl.edu/teaching/2015/2015.03.30.GenomeAccess.Sequencing%20and%20Assembly.pdf">Schatz:2015</a>)</p>
+</blockquote>
+
+<p><strong>The higher the N50, the better the assembly!</strong>. In out case for N50 is 129,141 and 4,576,746 for Illumina only and Illumina+ONP assemblies, respectively. Thus this means that the Illumina+ONP assembly is <em>clearly</em> better.</p>
+
+<h1 id="try-for-yourself">Try for yourself</h1>
+
+<h2 id="importing-the-data">Importing the data</h2>
+
+<p><a href="https://test.galaxyproject.org/library/list#/folders/F0dd345537db0c380">Galaxy library</a> contains the following datasets from <em>E. coli</em> C sequencing experiment:</p>
+
+<blockquote>
+<p><img src="/BMMB554/img/assembly_lib.png" alt="" /></p>
+
+<p><strong>Datasets</strong> used for assembly of <em>E. coli</em> C genomes. <code>Ecoli-2_S1_L001_R1_001.fastq</code> are forward Illumina reads, <code>Ecoli-2_S1_L001_R2_001.fastq</code> are reverse Illumina reads, <code>minion_1.2d_pass.fastq</code> are Oxford Nanopore reads.</p>
+</blockquote>
+
+<h2 id="building-the-assembly">Building the assembly</h2>
+
+<p>To run SPAdes is Galaxy select <strong>NGS: Assembly</strong> &#8594; <strong>spades</strong> and set the following parameters:</p>
+
+<blockquote>
+<p><img src="/BMMB554/img/spades_galaxy.png" alt="" /></p>
+
+<p><strong>SPAdes in Galaxy</strong>. SPAdes has been initially designed for single-cell sequencing data, but it is a generally applicable assembler today. Note the selection of <em>k</em>-mer sizes. Because we have long miSeq reads (250 bp paired end configuration) we use <em>k</em>-mers up to half of the read length (SPAdes maximum) as described <a href="http://spades.bioinf.spbau.ru/release3.9.1/manual.html#sec3.4">here</a>. We then choose forward and reverse reads and, finally, add Oxford Nanopore reads as the last input.</p>
+</blockquote>
+
+<h2 id="assessing-the-assembly-quality">Assessing the assembly quality</h2>
+
+<p>In Galaxy spades produces two types of assembly output: <em>contigs</em> and <em>scaffolds</em>. Contigs represent continuous segments of assembly, while scaffolds are built from contigs and represent the next level of assembly. Thus scaffolds are closer to the &ldquo;ultimate truth&rdquo; of what genome sequence is.</p>
+
+<p>Assessing assembly quality in Galaxy can be using  <a href="http://cab.spbu.ru/software/quast/">Quast</a> tool produced and maintained by the same <a href="http://cab.spbu.ru/">group</a> that is responsible for development of SPAdes.</p>
+
+<p>Let&rsquo;s run Quast (<strong>NGS: Assembly</strong> &#8594; <strong>quast</strong>) on the set of scaffolds generates by SPAdes in the previous step:</p>
+
+<blockquote>
+<p><img src="/BMMB554/img/quast_galaxy.png" alt="" /></p>
+
+<p><strong>Quast in Galaxy</strong>. Here scaffolds generated by SPAdes are used as input. We estimate genome size to be around 4.6 Mb (similar to <em>E. coli</em> K12). In fact, we use K12 genome as a reference file to compare our assembly against. This genome is also available form the <a href="https://test.galaxyproject.org/library/list#/folders/F0dd345537db0c380">Galaxy library</a>.</p>
+</blockquote>
+
+<p>It would generate summary statistics including the following report:</p>
+
+<blockquote>
+<p><img src="/BMMB554/img/quast_report.png" alt="" /></p>
+
+<p><strong>Quast report</strong>. This report contains two columns: <code>ont_illumina</code> and <code>ont_illumina broken</code>. Since we used scaffolds that are constructed from contigs often glued together with &ldquo;Ns&rdquo; (unknown nucleotide), Quast &ldquo;breaks&rdquo; them on &ldquo;Ns&rdquo; and aligns these &ldquo;broken&rdquo; scaffolds to the reference&rdquo;. This is done to assess the degree to which scaffolds may be incorrect. Of course in this case we expects some scaffolds to be incorrect in relation to <em>E. coli</em> K12 since we are sequencing and assembling a different strain. Nonetheless this seems to be a good assembly with a long high quality scaffold at 4.5 Mb!</p>
+</blockquote>
+
+<h2 id="annotating-assemblies">Annotating assemblies</h2>
+
+<p>To annotate the assemblies we use <a href="*http://www.vicbioinformatics.com/software.prokka.shtml">Prokka</a> tool (<strong>NGS: Assembly</strong> &#8594; <strong>Prokka</strong>) that was designed for rapid identification of genes in prokaryotic genomes.</p>
+
+<blockquote>
+<p><img src="/BMMB554/img/prokka_galaxy.png" alt="" /></p>
+
+<p><strong>Prokka in Galaxy</strong>. Here we use SPAdes scaffolds as the input and set the minimal contig size to <code>1,000</code>.</p>
+</blockquote>
+
+<p>Prokka produces a large number of datasets representing gene annotations in a variety of formats. Below is a snapshot of its <a href="http://www.ensembl.org/info/website/upload/gff.html">gff</a> output:</p>
+
+<pre><code>gnl|C|L_contig000001	barrnap:0.7	rRNA	11	121	7e-12	-	.	ID=L_00001;Parent=L_00001_gene;locus_tag=L_00001;product=5S ribosomal RNA
+gnl|C|L_contig000001	prokka	gene	11	121	.	-	1	ID=L_00001_gene;locus_tag=L_00001
+gnl|C|L_contig000001	barrnap:0.7	rRNA	220	3120	0	-	.	ID=L_00002;Parent=L_00002_gene;locus_tag=L_00002;product=23S ribosomal RNA
+gnl|C|L_contig000001	prokka	gene	220	3120	.	-	1	ID=L_00002_gene;locus_tag=L_00002
+gnl|C|L_contig000001	Aragorn:1.2	tRNA	3297	3372	.	-	0	ID=L_00003;Parent=L_00003_gene;inference=COORDINATES:profile:Aragorn:1.2;locus_tag=L_00003;product=tRNA-Ala(tgc)
+gnl|C|L_contig000001	prokka	gene	3297	3372	.	-	1	ID=L_00003_gene;locus_tag=L_00003
+gnl|C|L_contig000001	Aragorn:1.2	tRNA	3415	3491	.	-	0	ID=L_00004;Parent=L_00004_gene;inference=COORDINATES:profile:Aragorn:1.2;locus_tag=L_00004;product=tRNA-Ile(gat)
+gnl|C|L_contig000001	prokka	gene	3415	3491	.	-	1	ID=L_00004_gene;locus_tag=L_00004
+gnl|C|L_contig000001	barrnap:0.7	rRNA	3561	5099	0	-	.	ID=L_00005;Parent=L_00005_gene;locus_tag=L_00005;product=16S ribosomal RNA
+gnl|C|L_contig000001	prokka	gene	3561	5099	.	-	1	ID=L_00005_gene;locus_tag=L_00005
+</code></pre>
+
+<h1 id="what-is-next">What is next?</h1>
+
+<p>This course will continue living at this URL and will be continuously updates in the next semester. Please, visit this site again!</p>
+
+	</section>
+    </div>
+
+    <footer class="site-footer">
+	<p class="text">&copy; 2016 - Released under the MIT license<br>Powered by <a href="//gohugo.io/">Hugo</a> with the <a href="//github.com/digitalcraftsman/hugo-type-theme">Type Theme</a></p>
+</footer>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-83364979-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+</body>
+</html>
