@@ -9,13 +9,11 @@ title = "DNA sequencing"
 description = "**Topic 2** | DNA sequencing: From Cambridge (Sanger) to Oxford (Nanopore)"
 +++
 
-# Introduction
-
-## The 60s and the 70s
+# The 60s and the 70s
 
 The first complete nucleic acids being sequenced were RNAs (tRNAs in particular; see pioneering work of [Robert Holley and colleagues](http://www.ncbi.nlm.nih.gov/pubmed/14263761)). The work on finding approaches to sequencing DNA molecules began in late 60s and early 70s. One of the earliest contributions has been made by Ray Wu from Cornell, who used _E. coli_ DNA polymerase to [incorporate radioactively labelled nucleotides into protruding ends of bacteriphage lambda](http://www.sciencedirect.com/science/article/pii/0022283670900045). It took several more years for the development of more "high throughput" technologies by Sanger and Maxam/Gilbert. The Sanger technique has ultimately won over Maxam/Gilbert's protocol due to its relative simplicity (once dideoxynucleotides has become commercially available) and the fact that it required smaller amount of starting material as the polymerase was used to generate fragments necessary for sequence determination. 
 
-## Original approaches were laborious
+# Original approaches were laborious
 
 In the original [Sanger paper](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC431765/pdf/pnas00043-0271.pdf) the authors sequenced bacteriophage phiX174 by using its own restriction fragments as primers. This was an ideal set up to show the proof of principle for the new method. This is because phiX174 DNA is homogeneous and can be isolated in large quantities. Now suppose that you would like to sequence a larger genome (say _E. coli_). Remember that the original version of Sanger method can only sequence fragments up to 200 nucleotides at a time. So to sequence the entire _E. coli_ genome (which by-the-way was not sequenced until [1997](http://science.sciencemag.org/content/277/5331/1453)) you would need to split the genome into multiple pieces and sequence each of them individually. This is hard, because to produce a readable Sanger sequencing gel each sequence must be amplified to a suitable amount (around 1 nanogram) and be homogeneous (you cannot mix multiple DNA fragments in a single reaction as it will be impossible to interpret the gel). Molecular cloning enabled by the availability of commercially available restriction enzymes and cloning vectors simplified this process. Until the onset of next generation sequencing in 2005 the process for sequencing looked something like this:
 
@@ -46,7 +44,7 @@ Here for sequencing each fragment four separate reactions are peformed (with ddA
 
 However, there is still substantial labor involved in pouring the gels, loading them, running machines, and cleaning everything post-run. A significant improvement was offered by the development of capillary electrophoresis allowing automation of liquid handling and sample loading. Although several manufacturers have been developing and selling such machines a _de facto_ standard in this area was (and still is) the Applied Biosystems (ABI) Genetics and DNA Anlayzer systems. The highest throughput ABI system, 3730_xl_, had 96 capillaries and could automatically process 384 samples. 
 
-## NGS!
+# NGS!
 
 384 samples may sound like a lot, but it is nothing if we are sequencing an entire genome. The beauty of NGS is that these technologies are not bound by sample handling logistics. They still require preparation of libraries, but once a library is made (which can be automated) it is processed more or less automatically to generate multiple copies of each fragment (in the case of 454, Illumina, and Ion Torrent) and loaded onto the machine, where millions of individual fragments are sequenced simultaneously. The following videos and slides explains how these technologies work.
 
@@ -62,6 +60,11 @@ However, there is still substantial labor involved in pouring the gels, loading 
 454 Technology is a massively parallel modification of [pyrosequencing](http://genome.cshlp.org/content/11/1/3) technology. Incorporation of nucleotides are registered by a [CCD](https://en.wikipedia.org/wiki/Charge-coupled_device) camera as a flash of light generated from the interaction between ATP and Luciferin. The massive scale of 454 process is enabled by generation of a population of beads carrying multiple copies of the same DNA fragment. The beads are distributed across a microtiter plate where each well of the plate holding just one bead. Thus every unique coordinate (a well) on the plate generates flashes when a nucleotide incorporation event takes plate. This is "monochrome" technique: flash = nucleotide is incorporated; lack of flash = no incorporation. Thus to distinguish between A, C, G, and T individual nucleotides are "washed" across the microtiter plate at discrete times: if **A** is being washed across the plate and a flash of light is emitted, this implies that A is present in the fragment being sequenced. 
 
 454 can generated fragments up 1,000 bases in length. Its biggest weakness is inability to precisely determine the length of [homopolymer runs](https://www.broadinstitute.org/crd/wiki/index.php/Homopolymer). Thus the main type if sequencing error generated by 454 are insertions and deletions (indels).
+
+### Slides
+
+{{< speakerdeck 28bd628499b54d09b4f9c6e7534c7e8f >}}
+
 
 ### Video
 
@@ -79,7 +82,13 @@ Underlying slides are [here](https://speakerdeck.com/nekrut/ngs-technologies-454
 
 ## 2: Illumina sequencing
 
+
+
 Illumina (originally called "Solexa") uses glass flowcells with oligonucleotides permanently attached to internal surface. These oligonucleotides are complementary to sequencing adapters added to DNA fragments being sequenced during library preparation. The DNA fragements that are "stuck" on the flowcell due to complementary interaction between adapters are amplified via "bridge amplification" to form clusters. Sequencing is performed using reversible terminator chemistry with nucleotides modified to carry dyes specific to each nucleotide. As a result all nucleotides can be added at once and are distinguished by colors. Currently, it is possible to sequence up to 300 bases from each end of the fragment being sequenced. Illumina has the highest throughput (and lowest cost per base) of all existing technologies at this moment. The HiSeq 2500 machine can produce [600 billion nucleotides in 5 days](http://www.illumina.com/systems/hiseq_2500_1500/performance_specifications.html). In this course we will most often work with Illumina data.
+
+### Slides
+
+{{< speakerdeck 942908c8c24546d58cf8b61b3598feb3 >}}
 
 ### Video
 
@@ -97,6 +106,10 @@ Underlying slides are [here](https://speakerdeck.com/nekrut/ngs-technologies-ill
 ## 3: PacBio Single Molecule Sequencing
 
 PacBio is a fundamentally different approach to DNA sequencing as it allows reading single molecules. Thus it is an example is so called _Single Molecule Sequencing_ or _SMS_. PacBio uses highly processive DNA polymerase placed at the bottom of each well on a microtiter plate. The plate is fused to the glass slide illuminated by a laser. When polymerase is loaded with template it attracts fluorescently labeled nucleotides to the bottom of the well where they emit light with a wavelength characteristic of each nucleotide. As a result a "movie" is generated for each well recording the sequence and duration of incorporation events. One of the key advantage of PacBio technology is its ability to produce long reads with ones at 10,000 bases being common. 
+
+### Slides
+
+{{< speakerdeck ccb3d34f1a214f66ac7a2d233caedaf5 >}}
 
 ### Video
 

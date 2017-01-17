@@ -18,13 +18,11 @@
       <guid>http://nekrut.github.io/BMMB554/post/topic2/</guid>
       <description>
 
-&lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
-
-&lt;h2 id=&#34;the-60s-and-the-70s&#34;&gt;The 60s and the 70s&lt;/h2&gt;
+&lt;h1 id=&#34;the-60s-and-the-70s&#34;&gt;The 60s and the 70s&lt;/h1&gt;
 
 &lt;p&gt;The first complete nucleic acids being sequenced were RNAs (tRNAs in particular; see pioneering work of &lt;a href=&#34;http://www.ncbi.nlm.nih.gov/pubmed/14263761&#34;&gt;Robert Holley and colleagues&lt;/a&gt;). The work on finding approaches to sequencing DNA molecules began in late 60s and early 70s. One of the earliest contributions has been made by Ray Wu from Cornell, who used &lt;em&gt;E. coli&lt;/em&gt; DNA polymerase to &lt;a href=&#34;http://www.sciencedirect.com/science/article/pii/0022283670900045&#34;&gt;incorporate radioactively labelled nucleotides into protruding ends of bacteriphage lambda&lt;/a&gt;. It took several more years for the development of more &amp;ldquo;high throughput&amp;rdquo; technologies by Sanger and Maxam/Gilbert. The Sanger technique has ultimately won over Maxam/Gilbert&amp;rsquo;s protocol due to its relative simplicity (once dideoxynucleotides has become commercially available) and the fact that it required smaller amount of starting material as the polymerase was used to generate fragments necessary for sequence determination.&lt;/p&gt;
 
-&lt;h2 id=&#34;original-approaches-were-laborious&#34;&gt;Original approaches were laborious&lt;/h2&gt;
+&lt;h1 id=&#34;original-approaches-were-laborious&#34;&gt;Original approaches were laborious&lt;/h1&gt;
 
 &lt;p&gt;In the original &lt;a href=&#34;https://www.ncbi.nlm.nih.gov/pmc/articles/PMC431765/pdf/pnas00043-0271.pdf&#34;&gt;Sanger paper&lt;/a&gt; the authors sequenced bacteriophage phiX174 by using its own restriction fragments as primers. This was an ideal set up to show the proof of principle for the new method. This is because phiX174 DNA is homogeneous and can be isolated in large quantities. Now suppose that you would like to sequence a larger genome (say &lt;em&gt;E. coli&lt;/em&gt;). Remember that the original version of Sanger method can only sequence fragments up to 200 nucleotides at a time. So to sequence the entire &lt;em&gt;E. coli&lt;/em&gt; genome (which by-the-way was not sequenced until &lt;a href=&#34;http://science.sciencemag.org/content/277/5331/1453&#34;&gt;1997&lt;/a&gt;) you would need to split the genome into multiple pieces and sequence each of them individually. This is hard, because to produce a readable Sanger sequencing gel each sequence must be amplified to a suitable amount (around 1 nanogram) and be homogeneous (you cannot mix multiple DNA fragments in a single reaction as it will be impossible to interpret the gel). Molecular cloning enabled by the availability of commercially available restriction enzymes and cloning vectors simplified this process. Until the onset of next generation sequencing in 2005 the process for sequencing looked something like this:&lt;/p&gt;
 
@@ -84,7 +82,7 @@ Figure from Applied Biosystems &lt;a href=&#34;https://www3.appliedbiosystems.co
 
 &lt;p&gt;However, there is still substantial labor involved in pouring the gels, loading them, running machines, and cleaning everything post-run. A significant improvement was offered by the development of capillary electrophoresis allowing automation of liquid handling and sample loading. Although several manufacturers have been developing and selling such machines a &lt;em&gt;de facto&lt;/em&gt; standard in this area was (and still is) the Applied Biosystems (ABI) Genetics and DNA Anlayzer systems. The highest throughput ABI system, 3730&lt;em&gt;xl&lt;/em&gt;, had 96 capillaries and could automatically process 384 samples.&lt;/p&gt;
 
-&lt;h2 id=&#34;ngs&#34;&gt;NGS!&lt;/h2&gt;
+&lt;h1 id=&#34;ngs&#34;&gt;NGS!&lt;/h1&gt;
 
 &lt;p&gt;384 samples may sound like a lot, but it is nothing if we are sequencing an entire genome. The beauty of NGS is that these technologies are not bound by sample handling logistics. They still require preparation of libraries, but once a library is made (which can be automated) it is processed more or less automatically to generate multiple copies of each fragment (in the case of 454, Illumina, and Ion Torrent) and loaded onto the machine, where millions of individual fragments are sequenced simultaneously. The following videos and slides explains how these technologies work.&lt;/p&gt;
 
@@ -103,6 +101,10 @@ Figure from Applied Biosystems &lt;a href=&#34;https://www3.appliedbiosystems.co
 &lt;p&gt;454 Technology is a massively parallel modification of &lt;a href=&#34;http://genome.cshlp.org/content/11/1/3&#34;&gt;pyrosequencing&lt;/a&gt; technology. Incorporation of nucleotides are registered by a &lt;a href=&#34;https://en.wikipedia.org/wiki/Charge-coupled_device&#34;&gt;CCD&lt;/a&gt; camera as a flash of light generated from the interaction between ATP and Luciferin. The massive scale of 454 process is enabled by generation of a population of beads carrying multiple copies of the same DNA fragment. The beads are distributed across a microtiter plate where each well of the plate holding just one bead. Thus every unique coordinate (a well) on the plate generates flashes when a nucleotide incorporation event takes plate. This is &amp;ldquo;monochrome&amp;rdquo; technique: flash = nucleotide is incorporated; lack of flash = no incorporation. Thus to distinguish between A, C, G, and T individual nucleotides are &amp;ldquo;washed&amp;rdquo; across the microtiter plate at discrete times: if &lt;strong&gt;A&lt;/strong&gt; is being washed across the plate and a flash of light is emitted, this implies that A is present in the fragment being sequenced.&lt;/p&gt;
 
 &lt;p&gt;454 can generated fragments up 1,000 bases in length. Its biggest weakness is inability to precisely determine the length of &lt;a href=&#34;https://www.broadinstitute.org/crd/wiki/index.php/Homopolymer&#34;&gt;homopolymer runs&lt;/a&gt;. Thus the main type if sequencing error generated by 454 are insertions and deletions (indels).&lt;/p&gt;
+
+&lt;h3 id=&#34;slides&#34;&gt;Slides&lt;/h3&gt;
+
+&lt;script async class=&#39;speakerdeck-embed&#39; data-id=&#39;28bd628499b54d09b4f9c6e7534c7e8f&#39; data-ratio=&#39;1.33333333333333&#39; src=&#39;//speakerdeck.com/assets/embed.js&#39;&gt;&lt;/script&gt;
 
 &lt;h3 id=&#34;video&#34;&gt;Video&lt;/h3&gt;
 
@@ -128,6 +130,10 @@ Figure from Applied Biosystems &lt;a href=&#34;https://www3.appliedbiosystems.co
 
 &lt;p&gt;Illumina (originally called &amp;ldquo;Solexa&amp;rdquo;) uses glass flowcells with oligonucleotides permanently attached to internal surface. These oligonucleotides are complementary to sequencing adapters added to DNA fragments being sequenced during library preparation. The DNA fragements that are &amp;ldquo;stuck&amp;rdquo; on the flowcell due to complementary interaction between adapters are amplified via &amp;ldquo;bridge amplification&amp;rdquo; to form clusters. Sequencing is performed using reversible terminator chemistry with nucleotides modified to carry dyes specific to each nucleotide. As a result all nucleotides can be added at once and are distinguished by colors. Currently, it is possible to sequence up to 300 bases from each end of the fragment being sequenced. Illumina has the highest throughput (and lowest cost per base) of all existing technologies at this moment. The HiSeq 2500 machine can produce &lt;a href=&#34;http://www.illumina.com/systems/hiseq_2500_1500/performance_specifications.html&#34;&gt;600 billion nucleotides in 5 days&lt;/a&gt;. In this course we will most often work with Illumina data.&lt;/p&gt;
 
+&lt;h3 id=&#34;slides-1&#34;&gt;Slides&lt;/h3&gt;
+
+&lt;script async class=&#39;speakerdeck-embed&#39; data-id=&#39;942908c8c24546d58cf8b61b3598feb3&#39; data-ratio=&#39;1.33333333333333&#39; src=&#39;//speakerdeck.com/assets/embed.js&#39;&gt;&lt;/script&gt;
+
 &lt;h3 id=&#34;video-1&#34;&gt;Video&lt;/h3&gt;
 
 
@@ -150,6 +156,10 @@ Figure from Applied Biosystems &lt;a href=&#34;https://www3.appliedbiosystems.co
 &lt;h2 id=&#34;3-pacbio-single-molecule-sequencing&#34;&gt;3: PacBio Single Molecule Sequencing&lt;/h2&gt;
 
 &lt;p&gt;PacBio is a fundamentally different approach to DNA sequencing as it allows reading single molecules. Thus it is an example is so called &lt;em&gt;Single Molecule Sequencing&lt;/em&gt; or &lt;em&gt;SMS&lt;/em&gt;. PacBio uses highly processive DNA polymerase placed at the bottom of each well on a microtiter plate. The plate is fused to the glass slide illuminated by a laser. When polymerase is loaded with template it attracts fluorescently labeled nucleotides to the bottom of the well where they emit light with a wavelength characteristic of each nucleotide. As a result a &amp;ldquo;movie&amp;rdquo; is generated for each well recording the sequence and duration of incorporation events. One of the key advantage of PacBio technology is its ability to produce long reads with ones at 10,000 bases being common.&lt;/p&gt;
+
+&lt;h3 id=&#34;slides-2&#34;&gt;Slides&lt;/h3&gt;
+
+&lt;script async class=&#39;speakerdeck-embed&#39; data-id=&#39;ccb3d34f1a214f66ac7a2d233caedaf5&#39; data-ratio=&#39;1.33333333333333&#39; src=&#39;//speakerdeck.com/assets/embed.js&#39;&gt;&lt;/script&gt;
 
 &lt;h3 id=&#34;video-2&#34;&gt;Video&lt;/h3&gt;
 
@@ -177,7 +187,7 @@ Figure from Applied Biosystems &lt;a href=&#34;https://www3.appliedbiosystems.co
 
 &lt;p&gt;Oxford nanopore is another dramatically different technology that threads single DNA molecules through biologically-derived (transmembrane proteins) pore in a membrane impermeable to ions. It uses polymerase to control the speed of translocation of the DNA molecule through membrane. In that sense it is not &lt;em&gt;Sequencing by synthesis&lt;/em&gt; we have seen in the other technologies discussed here. This technology generates longest reads possible today: in many instances a single read can be hundreds of thousands if nucleotides in length. It still however suffers from high error rate and relatively low throughput (compared to Illumina). On the upside Oxforde Nanopore sequencing machines are only slightly bigger than a thumb-drive and cost very little.&lt;/p&gt;
 
-&lt;h3 id=&#34;slides&#34;&gt;Slides&lt;/h3&gt;
+&lt;h3 id=&#34;slides-3&#34;&gt;Slides&lt;/h3&gt;
 
 &lt;script async class=&#39;speakerdeck-embed&#39; data-id=&#39;3895a3069bc64ad5bc74c972a0353911&#39; data-ratio=&#39;1.33333333333333&#39; src=&#39;//speakerdeck.com/assets/embed.js&#39;&gt;&lt;/script&gt;
 
