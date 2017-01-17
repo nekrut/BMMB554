@@ -1,6 +1,6 @@
 +++
 #categories = []
-date = "2016-09-01T11:17:20-04:00"
+date = "2017-01-17T11:17:20-04:00"
 #draft = true
 featureimage = "img/illumina_pseudocolor.png"
 menu = ""
@@ -27,27 +27,24 @@ In the original [Sanger paper](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4317
 * (**6**) - Plasmid DNA is isolated from this culture and now can be used for sequencing because it is (1) homogeneous and (2) we now a sufficient amount.
 * (**7**) - It is sequenced using universal primers. For example the image below shows a map for pGEM-3Z plasmid (a pUC18 derivative). Its multiple cloning site is enlarged and sites for **T7** and **SP6** sequencing primers are shown. These are the **pads** I'm referring to in the lecture. These provide universal sites that can be used to sequence any insert in between. 
 
-{{< figure src="img/pgem3z.png">}} 
+>{{< figure src="/BMMB554/img/pgem3z.png">}} 
+>Figure from Promega, Inc. 
 
-> ##### Image from Promega, Inc. 
-
-Until the invention of NGS the above protocol was followed witn some degree of automation. But you can see that it was quite laborious if the large number of fragements needed to be sequenced. This is becuase each of them needed to be subcloned and handled separately. This is in part why Human Genome Project, a subject of our next lecture, took so much time to complete. 
+Until the invention of NGS the above protocol was followed with some degree of automation. But you can see that it was quite laborious if the large number of fragements needed to be sequenced. This is because each of them needed to be subcloned and handled separately. This is in part why Human Genome Project, a subject of our next lecture, took so much time to complete. 
 
 ## Evolution of sequencing machines
 
 The simplest possible sequencing machine is a [gel rig with polyacrylamide gel](https://en.wikipedia.org/wiki/Polyacrylamide_gel_electrophoresis). Sanger used it is his protocol obtaining the following results:
 
-{{< figure src="img/sangerGel.png">}} 
-
-> ##### Figure from [Sanger et al. 1977](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC431765/pdf/pnas00043-0271.pdf).
+>{{< figure src="/BMMB554/img/sangerGel.png">}} 
+>Figure from [Sanger et al. 1977](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC431765/pdf/pnas00043-0271.pdf).
 
 Here for sequencing each fragment four separate reactions are peformed (with ddA, ddT, ggC, and ddG) and four lanes on the gel are used. One simplification of this process that came in the 90s was to use fluorescently labelled dideoxy nucleotides. This is easier because everything can be performed in a single tube and uses a single lane on a gel:
 
-{{< figure src="img/dd_labels.png">}} 
+>{{< figure src="/BMMB554/img/dd_labels.png">}} 
+>Figure from Applied Biosystems [support site](https://www3.appliedbiosystems.com/cms/groups/mcb_support/documents/generaldocuments/cms_041003.pdf).
 
-> ##### Figure from Applied Biosystems [support site](https://www3.appliedbiosystems.com/cms/groups/mcb_support/documents/generaldocuments/cms_041003.pdf).
-
-However, there is still substantial labor involed in pouring the gels, loading them, running machines, and cleaning everything post-run. A significant improvement was offered by the development of capillary electrophoresis allowing automation of liquid handling and sample loading. Although several manufacturers have been developing and selling such machines a _de facto_ standard in this area was (and still is) the Applied Biosystems (ABI) Genetics and DNA Anlayzer systems. The highest throughput ABI system, 3730_xl_, had 96 cappilaries and could automatically process 384 samples. 
+However, there is still substantial labor involved in pouring the gels, loading them, running machines, and cleaning everything post-run. A significant improvement was offered by the development of capillary electrophoresis allowing automation of liquid handling and sample loading. Although several manufacturers have been developing and selling such machines a _de facto_ standard in this area was (and still is) the Applied Biosystems (ABI) Genetics and DNA Anlayzer systems. The highest throughput ABI system, 3730_xl_, had 96 capillaries and could automatically process 384 samples. 
 
 ## NGS!
 
@@ -62,9 +59,9 @@ However, there is still substantial labor involed in pouring the gels, loading t
 
 ## 1: 454 sequencing 
 
-454 Technology is a massively parralel modification of [pyrosequencing](http://genome.cshlp.org/content/11/1/3) technology. Incorporation of nucleotides are registered by a [CCD](https://en.wikipedia.org/wiki/Charge-coupled_device) camera as a flash of light generated from the interaction between ATP and Luciferin. The massive scale of 454 process is enabled by generation of a population of beads carrying multiple copies of the same DNA fragment. The beads are distributed across a microtiter plate where each well of the plate holding just one bead. Thus every unique coordinate (a well) on the plate generates flashes when a nucleotide incorporation event takes plate. This is "monochrome" technique: flash = nucleotid is incorporated; lack of flash = no incorporation. Thus to distinguish between A, C, G, and T individual nucleotides are "washed" across the microtiter plate at discrete times: if **A** is being washed across the plate and a flash of light is emitted, this implies that A is present in the fragment being sequenced. 
+454 Technology is a massively parallel modification of [pyrosequencing](http://genome.cshlp.org/content/11/1/3) technology. Incorporation of nucleotides are registered by a [CCD](https://en.wikipedia.org/wiki/Charge-coupled_device) camera as a flash of light generated from the interaction between ATP and Luciferin. The massive scale of 454 process is enabled by generation of a population of beads carrying multiple copies of the same DNA fragment. The beads are distributed across a microtiter plate where each well of the plate holding just one bead. Thus every unique coordinate (a well) on the plate generates flashes when a nucleotide incorporation event takes plate. This is "monochrome" technique: flash = nucleotide is incorporated; lack of flash = no incorporation. Thus to distinguish between A, C, G, and T individual nucleotides are "washed" across the microtiter plate at discrete times: if **A** is being washed across the plate and a flash of light is emitted, this implies that A is present in the fragment being sequenced. 
 
-454 can generated fragments up 1,000 bases in length. Its biggest weakness is inability to precisely determine the length of [homopolymer runs](https://www.broadinstitute.org/crd/wiki/index.php/Homopolymer). Thus the main type if sequecning error generated by 454 are insertions and deletions (indels).
+454 can generated fragments up 1,000 bases in length. Its biggest weakness is inability to precisely determine the length of [homopolymer runs](https://www.broadinstitute.org/crd/wiki/index.php/Homopolymer). Thus the main type if sequencing error generated by 454 are insertions and deletions (indels).
 
 ### Video
 
@@ -82,7 +79,7 @@ Underlying slides are [here](https://speakerdeck.com/nekrut/ngs-technologies-454
 
 ## 2: Illumina sequencing
 
-Illumina (originally called "Solexa") uses glass flowcells with oligonucleotides permanently attached to internal surface. These oligonucleotides are complementary to sequencing adapters added to DNA fragments being sequenced during library preparation. The DNA fragements that are "stuck" on the flowcell due to complementary intercation between adapters are amplified via "bridge amplification" to form clusters. Sequencing is performed using reversible terminator chemistry with nucleotides modified to carry dyes specific to each nucleotide. As a result all nucleotides can be added at once and are distinguished by colors. Currently, it is possible to sequence up to 300 bases from each end of the fragment being sequenced. Illumina has the highest throughput (and lowest cost per base) of all existing technologies at this moment. The HiSeq 2500 machine can produce [600 billion nucleotides in 5 days](http://www.illumina.com/systems/hiseq_2500_1500/performance_specifications.html). In this course we will most often work with Illumina data.
+Illumina (originally called "Solexa") uses glass flowcells with oligonucleotides permanently attached to internal surface. These oligonucleotides are complementary to sequencing adapters added to DNA fragments being sequenced during library preparation. The DNA fragements that are "stuck" on the flowcell due to complementary interaction between adapters are amplified via "bridge amplification" to form clusters. Sequencing is performed using reversible terminator chemistry with nucleotides modified to carry dyes specific to each nucleotide. As a result all nucleotides can be added at once and are distinguished by colors. Currently, it is possible to sequence up to 300 bases from each end of the fragment being sequenced. Illumina has the highest throughput (and lowest cost per base) of all existing technologies at this moment. The HiSeq 2500 machine can produce [600 billion nucleotides in 5 days](http://www.illumina.com/systems/hiseq_2500_1500/performance_specifications.html). In this course we will most often work with Illumina data.
 
 ### Video
 
@@ -99,7 +96,7 @@ Underlying slides are [here](https://speakerdeck.com/nekrut/ngs-technologies-ill
 
 ## 3: PacBio Single Molecule Sequencing
 
-PacBio is a fundamentally different approach to DNA sequencing as it allows reading single molecules. Thus it is an example is so called _Single Molecule Sequencing_ or _SMS_. PacBio uses highly processive DNA polymerase placed at the bottom of each well on a microtiter plate. The plate is fused to the glass slide illuminated by a laser. When polymerase is loaded with template it attracts fluorescently labelled nucleotides to the bottom of the well where they emit light with a wavelength characteristic of each nucleotide. As a result a "movie" is generated for each well recording the sequence and duration of incorporation events. One of the key advantage of PacBio technology is its ability to produce long reads with ones at 10,000 bases being common. 
+PacBio is a fundamentally different approach to DNA sequencing as it allows reading single molecules. Thus it is an example is so called _Single Molecule Sequencing_ or _SMS_. PacBio uses highly processive DNA polymerase placed at the bottom of each well on a microtiter plate. The plate is fused to the glass slide illuminated by a laser. When polymerase is loaded with template it attracts fluorescently labeled nucleotides to the bottom of the well where they emit light with a wavelength characteristic of each nucleotide. As a result a "movie" is generated for each well recording the sequence and duration of incorporation events. One of the key advantage of PacBio technology is its ability to produce long reads with ones at 10,000 bases being common. 
 
 ### Video
 
@@ -119,7 +116,7 @@ Underlying slides are [here](https://speakerdeck.com/nekrut/ngs-technologies-pac
 
 ## 4: Oxford Nanopore
 
-Oxford nanopore is another dramatically different technology that threads single DNA molecules through biologically-derived (transmembrane proteins) pore in a membrane impermeable to ions. It uses polymerase to control the speed of translocation of the DNA molecule through membrane. In that sense it is not _Sequencing by synthesis_ we have seen in the other technologies discussed here. This technology generates longest reads possible today: in many instances a single read can be hundreds of thousands if nucleotides in length. It still however suffers from high error rate and relatively low throuyghput (compared to Illumina). On the upside Oxforde Nanopore sequencing machines are only slightly bigger than a thumbdrive and cost very little. 
+Oxford nanopore is another dramatically different technology that threads single DNA molecules through biologically-derived (transmembrane proteins) pore in a membrane impermeable to ions. It uses polymerase to control the speed of translocation of the DNA molecule through membrane. In that sense it is not _Sequencing by synthesis_ we have seen in the other technologies discussed here. This technology generates longest reads possible today: in many instances a single read can be hundreds of thousands if nucleotides in length. It still however suffers from high error rate and relatively low throughput (compared to Illumina). On the upside Oxforde Nanopore sequencing machines are only slightly bigger than a thumb-drive and cost very little. 
 
 ### Slides
 
@@ -133,7 +130,3 @@ Oxford nanopore is another dramatically different technology that threads single
 * 2012 | [Reading DNA at single-nucleotide resolution with a mutant MspA nanopore and phi29 DNA polymerase](http://nature.com/nbt/journal/v30/n4/full/nbt.2171.html)
 * Simpson Lab [blog](http://simpsonlab.github.io/2015/04/08/eventalign/)
 * Poretools analysis [suite](http://poretools.readthedocs.org/)
-
-# Homework
-
-To be posted Tuesday Sept 6.

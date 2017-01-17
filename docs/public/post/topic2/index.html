@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<title>DNA sequencing&middot; BMMB554 | Fall 2017</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="author" content="Anton Nekrutenko">
+	<meta name="description" content="Introduction to data driven life sciences">
+	<meta name="keywords" content="genomes, genetics, ngs, data analysis">
+	<meta name="generator" content="Hugo 0.17" />
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="http://nekrut.github.io/BMMB554/css/main.css">
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="http://nekrut.github.io/BMMB554/favicon.ico" type="image/x-icon">
+
+	<!-- RSS -->
+	
+
+	<!-- Font Awesome -->
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<!-- Google Fonts -->
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+</head>
+
+<body>
+    <header class="site-header">
+	<div class="branding">
+		<a href="http://nekrut.github.io/BMMB554/">
+		<img class="avatar" src="http://nekrut.github.io/BMMB554/img/gxy.png" alt=""/>
+		</a>
+		<h1 class="site-title">
+			<a href="http://nekrut.github.io/BMMB554/">BMMB554 | Fall 2017</a>
+		</h1>
+	</div>
+	<nav class="site-nav">
+		<ul>
+	      	<li><a href="/BMMB554/about/"> Syllabus </a></li>
+
+	      	<li>
+	<a href="http://nekrut.github.io/BMMB554/" title="">
+		<i class="fa fa-fw fa-home"></i>
+	</a>
+</li>
+
+
+
+<li>
+	<a href="mailto:aun1@psu.edu" title="Email">
+		<i class="fa fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/nekrut" title="Github">
+		<i class="fa fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/galaxyproject" title="Twitter">
+		<i class="fa fa-fw fa-twitter"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+	    </ul>
+	</nav>
+</header>
+
+
+    <div class="content">
+    <article class="feature-image">
+		<header style="background-image: url('http://nekrut.github.io/BMMB554/img/illumina_pseudocolor.png')">
+			<h1 class="title">DNA sequencing</h1>
+		</header>
+
+	<section class="post-content">
+		
+
+<h1 id="introduction">Introduction</h1>
+
+<h2 id="the-60s-and-the-70s">The 60s and the 70s</h2>
+
+<p>The first complete nucleic acids being sequenced were RNAs (tRNAs in particular; see pioneering work of <a href="http://www.ncbi.nlm.nih.gov/pubmed/14263761">Robert Holley and colleagues</a>). The work on finding approaches to sequencing DNA molecules began in late 60s and early 70s. One of the earliest contributions has been made by Ray Wu from Cornell, who used <em>E. coli</em> DNA polymerase to <a href="http://www.sciencedirect.com/science/article/pii/0022283670900045">incorporate radioactively labelled nucleotides into protruding ends of bacteriphage lambda</a>. It took several more years for the development of more &ldquo;high throughput&rdquo; technologies by Sanger and Maxam/Gilbert. The Sanger technique has ultimately won over Maxam/Gilbert&rsquo;s protocol due to its relative simplicity (once dideoxynucleotides has become commercially available) and the fact that it required smaller amount of starting material as the polymerase was used to generate fragments necessary for sequence determination.</p>
+
+<h2 id="original-approaches-were-laborious">Original approaches were laborious</h2>
+
+<p>In the original <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC431765/pdf/pnas00043-0271.pdf">Sanger paper</a> the authors sequenced bacteriophage phiX174 by using its own restriction fragments as primers. This was an ideal set up to show the proof of principle for the new method. This is because phiX174 DNA is homogeneous and can be isolated in large quantities. Now suppose that you would like to sequence a larger genome (say <em>E. coli</em>). Remember that the original version of Sanger method can only sequence fragments up to 200 nucleotides at a time. So to sequence the entire <em>E. coli</em> genome (which by-the-way was not sequenced until <a href="http://science.sciencemag.org/content/277/5331/1453">1997</a>) you would need to split the genome into multiple pieces and sequence each of them individually. This is hard, because to produce a readable Sanger sequencing gel each sequence must be amplified to a suitable amount (around 1 nanogram) and be homogeneous (you cannot mix multiple DNA fragments in a single reaction as it will be impossible to interpret the gel). Molecular cloning enabled by the availability of commercially available restriction enzymes and cloning vectors simplified this process. Until the onset of next generation sequencing in 2005 the process for sequencing looked something like this:</p>
+
+<ul>
+<li>(<strong>1</strong>) - Generate a collection of fragments you want to sequence. It can be a collection of fragments from a genome that was mechanically sheared or just a single fragment generated by PCR.</li>
+<li>(<strong>2</strong>) - These fragment(s) are then cloned into a plasmid vector (we will talk about other types of vectors such as BACs later in the course).</li>
+<li>(<strong>3</strong>) - Vectors are transformed into bacterial cells and positive colonies (containing vectors with insert) are picked from an agar plate.</li>
+<li>(<strong>4</strong>) - Each colony now represents a unique piece of DNA.</li>
+<li>(<strong>5</strong>) - An individual colony is used to seed a bacterial culture that is grown overnight.</li>
+<li>(<strong>6</strong>) - Plasmid DNA is isolated from this culture and now can be used for sequencing because it is (1) homogeneous and (2) we now a sufficient amount.</li>
+<li>(<strong>7</strong>) - It is sequenced using universal primers. For example the image below shows a map for pGEM-3Z plasmid (a pUC18 derivative). Its multiple cloning site is enlarged and sites for <strong>T7</strong> and <strong>SP6</strong> sequencing primers are shown. These are the <strong>pads</strong> I&rsquo;m referring to in the lecture. These provide universal sites that can be used to sequence any insert in between.</li>
+</ul>
+
+<blockquote>
+<p>
+<figure >
+    
+        <img src="/BMMB554/img/pgem3z.png" />
+    
+    
+</figure>
+
+Figure from Promega, Inc.</p>
+</blockquote>
+
+<p>Until the invention of NGS the above protocol was followed with some degree of automation. But you can see that it was quite laborious if the large number of fragements needed to be sequenced. This is because each of them needed to be subcloned and handled separately. This is in part why Human Genome Project, a subject of our next lecture, took so much time to complete.</p>
+
+<h2 id="evolution-of-sequencing-machines">Evolution of sequencing machines</h2>
+
+<p>The simplest possible sequencing machine is a <a href="https://en.wikipedia.org/wiki/Polyacrylamide_gel_electrophoresis">gel rig with polyacrylamide gel</a>. Sanger used it is his protocol obtaining the following results:</p>
+
+<blockquote>
+<p>
+<figure >
+    
+        <img src="/BMMB554/img/sangerGel.png" />
+    
+    
+</figure>
+
+Figure from <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC431765/pdf/pnas00043-0271.pdf">Sanger et al. 1977</a>.</p>
+</blockquote>
+
+<p>Here for sequencing each fragment four separate reactions are peformed (with ddA, ddT, ggC, and ddG) and four lanes on the gel are used. One simplification of this process that came in the 90s was to use fluorescently labelled dideoxy nucleotides. This is easier because everything can be performed in a single tube and uses a single lane on a gel:</p>
+
+<blockquote>
+<p>
+<figure >
+    
+        <img src="/BMMB554/img/dd_labels.png" />
+    
+    
+</figure>
+
+Figure from Applied Biosystems <a href="https://www3.appliedbiosystems.com/cms/groups/mcb_support/documents/generaldocuments/cms_041003.pdf">support site</a>.</p>
+</blockquote>
+
+<p>However, there is still substantial labor involved in pouring the gels, loading them, running machines, and cleaning everything post-run. A significant improvement was offered by the development of capillary electrophoresis allowing automation of liquid handling and sample loading. Although several manufacturers have been developing and selling such machines a <em>de facto</em> standard in this area was (and still is) the Applied Biosystems (ABI) Genetics and DNA Anlayzer systems. The highest throughput ABI system, 3730<em>xl</em>, had 96 capillaries and could automatically process 384 samples.</p>
+
+<h2 id="ngs">NGS!</h2>
+
+<p>384 samples may sound like a lot, but it is nothing if we are sequencing an entire genome. The beauty of NGS is that these technologies are not bound by sample handling logistics. They still require preparation of libraries, but once a library is made (which can be automated) it is processed more or less automatically to generate multiple copies of each fragment (in the case of 454, Illumina, and Ion Torrent) and loaded onto the machine, where millions of individual fragments are sequenced simultaneously. The following videos and slides explains how these technologies work.</p>
+
+<h2 id="watch-introductory-video">Watch introductory video</h2>
+
+
+<div style="position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;">
+  <iframe src="//player.vimeo.com/video/181072208" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+ </div>
+
+
+<h1 id="ngs-in-depth">NGS in depth</h1>
+
+<h2 id="1-454-sequencing">1: 454 sequencing</h2>
+
+<p>454 Technology is a massively parallel modification of <a href="http://genome.cshlp.org/content/11/1/3">pyrosequencing</a> technology. Incorporation of nucleotides are registered by a <a href="https://en.wikipedia.org/wiki/Charge-coupled_device">CCD</a> camera as a flash of light generated from the interaction between ATP and Luciferin. The massive scale of 454 process is enabled by generation of a population of beads carrying multiple copies of the same DNA fragment. The beads are distributed across a microtiter plate where each well of the plate holding just one bead. Thus every unique coordinate (a well) on the plate generates flashes when a nucleotide incorporation event takes plate. This is &ldquo;monochrome&rdquo; technique: flash = nucleotide is incorporated; lack of flash = no incorporation. Thus to distinguish between A, C, G, and T individual nucleotides are &ldquo;washed&rdquo; across the microtiter plate at discrete times: if <strong>A</strong> is being washed across the plate and a flash of light is emitted, this implies that A is present in the fragment being sequenced.</p>
+
+<p>454 can generated fragments up 1,000 bases in length. Its biggest weakness is inability to precisely determine the length of <a href="https://www.broadinstitute.org/crd/wiki/index.php/Homopolymer">homopolymer runs</a>. Thus the main type if sequencing error generated by 454 are insertions and deletions (indels).</p>
+
+<h3 id="video">Video</h3>
+
+
+<div style="position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;">
+  <iframe src="//player.vimeo.com/video/121286060" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+ </div>
+
+
+<p>Underlying slides are <a href="https://speakerdeck.com/nekrut/ngs-technologies-454#">here</a></p>
+
+<h2 id="reading">Reading</h2>
+
+<ul>
+<li>2001 | <a href="http://genome.cshlp.org/content/11/1/3">Overview of pyrosequencing methodology - Ronaghi</a></li>
+<li>2005 | <a href="http://www.nature.com/nature/journal/v437/n7057/pdf/nature03959.pdf">Description of 454 process - Margulies et al.</a></li>
+<li>2007 | <a href="http://link.springer.com/protocol/10.1385/1-59745-377-3:1">History of pyrosequencing - Pål Nyrén</a></li>
+<li>2007 | <a href="http://genomebiology.com/content/pdf/gb-2007-8-7-r143.pdf">Errors in 454 data - Huse et al. </a></li>
+<li>2010 | <a href="http://bioinformatics.oxfordjournals.org/content/26/18/i420.full.pdf+html">Properties of 454 data - Balzer et al.</a></li>
+</ul>
+
+<h2 id="2-illumina-sequencing">2: Illumina sequencing</h2>
+
+<p>Illumina (originally called &ldquo;Solexa&rdquo;) uses glass flowcells with oligonucleotides permanently attached to internal surface. These oligonucleotides are complementary to sequencing adapters added to DNA fragments being sequenced during library preparation. The DNA fragements that are &ldquo;stuck&rdquo; on the flowcell due to complementary interaction between adapters are amplified via &ldquo;bridge amplification&rdquo; to form clusters. Sequencing is performed using reversible terminator chemistry with nucleotides modified to carry dyes specific to each nucleotide. As a result all nucleotides can be added at once and are distinguished by colors. Currently, it is possible to sequence up to 300 bases from each end of the fragment being sequenced. Illumina has the highest throughput (and lowest cost per base) of all existing technologies at this moment. The HiSeq 2500 machine can produce <a href="http://www.illumina.com/systems/hiseq_2500_1500/performance_specifications.html">600 billion nucleotides in 5 days</a>. In this course we will most often work with Illumina data.</p>
+
+<h3 id="video-1">Video</h3>
+
+
+<div style="position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;">
+  <iframe src="//player.vimeo.com/video/121178846" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+ </div>
+
+
+<p>Underlying slides are <a href="https://speakerdeck.com/nekrut/ngs-technologies-illumina#">here</a></p>
+
+<h3 id="reading-1">Reading</h3>
+
+<ul>
+<li>2008 | <a href="http://www.nature.com/nature/journal/v456/n7218/pdf/nature07517.pdf">Human genome sequencing on Illumina - Bentley et al.</a></li>
+<li>2010 | <a href="http://nar.oxfordjournals.org/content/39/13/e90.full-text-lowres.pdf">Data quality 1 - Nakamura et al.</a></li>
+<li>2011 | <a href="http://genomebiology.com/content/pdf/gb-2011-12-11-r112.pdf">Data quality 2 - Minoche et al.</a></li>
+<li>2011 | <a href="http://www.biomedcentral.com/content/pdf/1471-2164-12-382.pdf">Illumina pitfalls - Kircher et al.</a></li>
+</ul>
+
+<h2 id="3-pacbio-single-molecule-sequencing">3: PacBio Single Molecule Sequencing</h2>
+
+<p>PacBio is a fundamentally different approach to DNA sequencing as it allows reading single molecules. Thus it is an example is so called <em>Single Molecule Sequencing</em> or <em>SMS</em>. PacBio uses highly processive DNA polymerase placed at the bottom of each well on a microtiter plate. The plate is fused to the glass slide illuminated by a laser. When polymerase is loaded with template it attracts fluorescently labeled nucleotides to the bottom of the well where they emit light with a wavelength characteristic of each nucleotide. As a result a &ldquo;movie&rdquo; is generated for each well recording the sequence and duration of incorporation events. One of the key advantage of PacBio technology is its ability to produce long reads with ones at 10,000 bases being common.</p>
+
+<h3 id="video-2">Video</h3>
+
+
+<div style="position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;">
+  <iframe src="//player.vimeo.com/video/121267426" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+ </div>
+
+
+<p>Underlying slides are <a href="https://speakerdeck.com/nekrut/ngs-technologies-pacific-biosceinces">here</a></p>
+
+<h3 id="reading-2">Reading</h3>
+
+<ul>
+<li>2003 | <a href="http://www.sciencemag.org/content/299/5607/682.full.pdf">Single Molecule Analaysis at High Concentration - Levene et al.</a></li>
+<li>2008 | <a href="http://www.pnas.org/content/105/4/1176.full">ZMW nanostructures - Korlach et al.</a></li>
+<li>2009 | <a href="http://www.sciencemag.org/content/323/5910/133.full">Real Time Sequencing with PacBio - Eid et al.</a></li>
+<li>2010 | <a href="http://www.nature.com/nmeth/journal/v7/n6/pdf/nmeth.1459.pdf">Modification detection with PacBio - Flusberg et al.</a></li>
+<li>2012 | <a href="http://www.nature.com/nbt/journal/v30/n7/pdf/nbt.2280.pdf">Error correction of PacBio reads - Koren et al.</a></li>
+<li>2014 | <a href="http://www.pnas.org/cgi/doi/10.1073/pnas.1400447111">Transcriptome with PacBio - Taligner et al.</a></li>
+<li>2015 | <a href="http://dx.doi.org/10.1038/nature13907">Resolving complex regions in Human genomes with PacBio - Chaisson et al.</a></li>
+</ul>
+
+<h2 id="4-oxford-nanopore">4: Oxford Nanopore</h2>
+
+<p>Oxford nanopore is another dramatically different technology that threads single DNA molecules through biologically-derived (transmembrane proteins) pore in a membrane impermeable to ions. It uses polymerase to control the speed of translocation of the DNA molecule through membrane. In that sense it is not <em>Sequencing by synthesis</em> we have seen in the other technologies discussed here. This technology generates longest reads possible today: in many instances a single read can be hundreds of thousands if nucleotides in length. It still however suffers from high error rate and relatively low throughput (compared to Illumina). On the upside Oxforde Nanopore sequencing machines are only slightly bigger than a thumb-drive and cost very little.</p>
+
+<h3 id="slides">Slides</h3>
+
+<script async class='speakerdeck-embed' data-id='3895a3069bc64ad5bc74c972a0353911' data-ratio='1.33333333333333' src='//speakerdeck.com/assets/embed.js'></script>
+
+<h3 id="reading-3">Reading</h3>
+
+<ul>
+<li>2016 | <a href="http://nature.com/nnano/journal/v11/n2/full/nnano.2016.9.html">The promises and challenges of solid-state sequencing</a></li>
+<li>2015 | <a href="http://nature.com/nmeth/journal/v12/n4/full/nmeth.3290.html">Improved data analysis for the minion nanopore sequencer</a></li>
+<li>2015 | <a href="http://www.nature.com/nmeth/journal/v12/n8/full/nmeth.3444.html">A complete bacterial genome assembled de novo using only nanopore sequencing data</a></li>
+<li>2012 | <a href="http://nature.com/nbt/journal/v30/n4/full/nbt.2171.html">Reading DNA at single-nucleotide resolution with a mutant MspA nanopore and phi29 DNA polymerase</a></li>
+<li>Simpson Lab <a href="http://simpsonlab.github.io/2015/04/08/eventalign/">blog</a></li>
+<li>Poretools analysis <a href="http://poretools.readthedocs.org/">suite</a></li>
+</ul>
+
+	</section>
+    </div>
+
+    <footer class="site-footer">
+	<p class="text">&copy; 2017 - Released under the MIT license<br>Powered by <a href="//gohugo.io/">Hugo</a> with the <a href="//github.com/digitalcraftsman/hugo-type-theme">Type Theme</a></p>
+</footer>
+
+<script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-83364979-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+</body>
+</html>
