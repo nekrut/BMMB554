@@ -7,7 +7,7 @@ categories = [
 ]
 featureimage = "img/topic8_cover.png"
 menu = ""
-#draft = true
+draft = true
 description = "**Topic 8** | Finding varinats in the human genome"
 
 +++

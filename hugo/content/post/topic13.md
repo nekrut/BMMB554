@@ -6,7 +6,7 @@ menu = ""
 date = "2016-12-05T12:30:33-05:00"
 title = "Assembly in practice: E. coli C"
 description = "**Topic 13** | Hybrid assembly of a small genome"
-#draft = true
+draft = true
 tags = [
 ]
 

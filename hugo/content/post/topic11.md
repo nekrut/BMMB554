@@ -1,6 +1,6 @@
 +++
 menu = ""
-#draft = true
+draft = true
 tags = [
 ]
 categories = [

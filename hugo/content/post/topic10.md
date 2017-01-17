@@ -1,7 +1,7 @@
 +++
 categories = []
 date = "2016-11-09T17:19:07-05:00"
-#draft = true
+draft = true
 featureimage = "img/topic10_cover.png"
 menu = ""
 tags = []
