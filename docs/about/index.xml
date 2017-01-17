@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>About-rsses on BMMB554 | Fall 2016</title>
+    <title>About-rsses on BMMB554 | Fall 2017</title>
     <link>http://nekrut.github.io/BMMB554/about/index.xml</link>
-    <description>Recent content in About-rsses on BMMB554 | Fall 2016</description>
+    <description>Recent content in About-rsses on BMMB554 | Fall 2017</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Released under the MIT license&lt;br&gt;Powered by [Hugo](//gohugo.io/) with the [Type Theme](//github.com/digitalcraftsman/hugo-type-theme)</copyright>
-    <lastBuildDate>Mon, 25 Jul 2016 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 09 Jan 2017 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://nekrut.github.io/BMMB554/about/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Syllabus</title>
       <link>http://nekrut.github.io/BMMB554/about/</link>
-      <pubDate>Mon, 25 Jul 2016 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 09 Jan 2017 00:00:00 +0000</pubDate>
       
       <guid>http://nekrut.github.io/BMMB554/about/</guid>
       <description>
+
+&lt;p&gt;&lt;a href=&#34;https://xkcd.com/451/&#34;&gt;&lt;img src=&#34;http://imgs.xkcd.com/comics/impostor.png&#34; alt=&#34;&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;h1 id=&#34;instructor&#34;&gt;Instructor&lt;/h1&gt;
 
@@ -26,7 +28,7 @@ Wartik 505&lt;br&gt;
 Office hours by appointment only&lt;/p&gt;
 
 &lt;blockquote&gt;
-&lt;h6 id=&#34;when-contacting-instructor-use-the-above-e-mail-and-include-bmmb554-in-the-subject-line-simply-click-on-e-mail-address&#34;&gt;When contacting instructor use the above e-mail and include &amp;ldquo;BMMB554&amp;rdquo; in the subject line (simply click on e-mail address).&lt;/h6&gt;
+&lt;p&gt;&lt;font color=&#34;orange&#34;&gt;&amp;#9888;&lt;/font&gt; When contacting instructor use the above e-mail and include &amp;ldquo;BMMB554&amp;rdquo; in the subject line (simply click on e-mail address).&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;hr /&gt;
@@ -48,16 +50,18 @@ Office hours by appointment only&lt;/p&gt;
 
 &lt;h1 id=&#34;topics&#34;&gt;Topics&lt;/h1&gt;
 
-&lt;p&gt;We will cover a breadth of topics. Below is the approaximate list. Keep in mind that this field is very dymanic. To account for that we may skip or extend some of the subjects.&lt;/p&gt;
+&lt;p&gt;We will cover a breadth of topics. Below is the approximate list. Keep in mind that this field is very dynamic. To account for that we may skip or extend some of the subjects.&lt;/p&gt;
 
 &lt;ol&gt;
 &lt;li&gt;History: From Genetics to Genomics&lt;/li&gt;
-&lt;li&gt;Sequencing: From Sanger to Nanopores&lt;/li&gt;
-&lt;li&gt;Alignment and Assembly I: Assembly basics&lt;/li&gt;
-&lt;li&gt;Alignment and Assembly II: Alignment basics&lt;/li&gt;
+&lt;li&gt;Sequencing: From Sanger to Nanopores I&lt;/li&gt;
+&lt;li&gt;Sequencing: From Sanger to Nanopores II&lt;/li&gt;
+&lt;li&gt;Algorithms: Alignment Basics&lt;/li&gt;
+&lt;li&gt;Algorithms: Aligning many sequences quickly&lt;/li&gt;
+&lt;li&gt;Algorithms: Assembly I&lt;/li&gt;
+&lt;li&gt;Algorithms: Assembly II&lt;/li&gt;
 &lt;li&gt;Galaxy: An introduction&lt;/li&gt;
 &lt;li&gt;Galaxy: Writing your own tools&lt;/li&gt;
-&lt;li&gt;Nanopores and more&lt;/li&gt;
 &lt;li&gt;Re-sequencing I: Introduction and non-diploid case&lt;/li&gt;
 &lt;li&gt;Re-sequencing II: Diploid genomes&lt;/li&gt;
 &lt;li&gt;Practicum: Re-sequencing&lt;/li&gt;
@@ -79,7 +83,7 @@ Office hours by appointment only&lt;/p&gt;
 &lt;hr /&gt;
 
 &lt;blockquote&gt;
-&lt;h6 id=&#34;in-an-examination-setting-unless-the-instructor-gives-explicit-prior-instructions-to-the-contrary-violations-of-academic-integrity-shall-consist-of-any-attempt-to-receive-assistance-from-written-or-printed-aids-from-any-person-or-papers-or-electronic-devices-or-of-any-attempt-to-give-assistance-whether-the-student-doing-so-has-completed-his-or-her-own-work-or-not-other-violations-include-but-are-not-limited-to-any-attempt-to-gain-an-unfair-advantage-in-regard-to-an-examination-such-as-tampering-with-a-graded-exam-or-claiming-another-s-work-to-be-one-s-own-other-assessments-including-angel-administered-quizzes-and-assessments-as-well-as-homework-assignments-are-expected-to-represent-your-own-independent-work-unless-specifically-stated-otherwise-failure-to-comply-will-lead-to-sanctions-against-the-student-in-accordance-with-the-policy-on-academic-integrity-in-the-eberly-college-of-science-the-eberly-college-of-science-code-of-mutual-respect-and-cooperation-www-science-psu-edu-climate-code-of-mutual-respect-final-pdf-embodies-the-values-that-we-hope-our-faculty-staff-and-students-possess-and-will-endorse-to-make-the-eberly-college-of-science-a-place-where-every-individual-feels-respected-and-valued-as-well-as-challenged-and-rewarded-the-eberly-college-of-science-is-committed-to-the-academic-success-of-students-enrolled-in-the-college-s-courses-and-undergraduate-programs-when-in-need-of-help-students-can-utilize-various-college-and-university-wide-resources-for-learning-assistance-http-www-science-psu-edu-advising-success-penn-state-welcomes-students-with-disabilities-into-the-university-s-educational-programs-if-you-have-a-disability-related-need-for-reasonable-academic-adjustments-in-this-course-contact-the-office-for-disability-services-ods-at-814-863-1807-v-tty-for-further-information-regarding-ods-please-visit-the-office-for-disability-services-web-site-at-http-equity-psu-edu-ods-in-order-to-receive-consideration-for-course-accommodations-you-must-contact-ods-and-provide-documentation-see-the-documentation-guidelines-http-equity-psu-edu-ods-guidelines-documentation-guidelines-if-the-documentation-supports-the-need-for-academic-adjustments-ods-will-provide-a-letter-identifying-appropriate-academic-adjustments-please-share-this-letter-and-discuss-the-adjustments-with-your-instructor-as-early-in-the-course-as-possible-you-must-contact-ods-and-request-academic-adjustment-letters-at-the-beginning-of-each-semester&#34;&gt;In an examination setting, unless the instructor gives explicit prior instructions to the contrary, violations of academic integrity shall consist of any attempt to receive assistance from written or printed aids, from any person or papers or electronic devices, or of any attempt to give assistance, whether the student doing so has completed his or her own work or not. Other violations include, but are not limited to, any attempt to gain an unfair advantage in regard to an examination, such as tampering with a graded exam or claiming another&amp;rsquo;s work to be one&amp;rsquo;s own. Other assessments (including ANGEL-administered quizzes and assessments as well as homework assignments) are expected to represent your own independent work unless specifically stated otherwise. Failure to comply will lead to sanctions against the student in accordance with the Policy on Academic Integrity in the Eberly College of Science. The Eberly College of Science Code of Mutual Respect and Cooperation (www.science.psu.edu/climate/Code-of-Mutual-Respect-final.pdf) embodies the values that we hope our faculty, staff, and students possess and will endorse to make The Eberly College of Science a place where every individual feels respected and valued, as well as challenged and rewarded.   The Eberly College of Science is committed to the academic success of students enrolled in the College&amp;rsquo;s  courses and undergraduate programs. When in need of help, students can utilize various College and University wide resources for learning assistance (&lt;a href=&#34;http://www.science.psu.edu/advising/success&#34;&gt;http://www.science.psu.edu/advising/success&lt;/a&gt;). Penn State welcomes students with disabilities into the University&amp;rsquo;s educational programs. If you have a disability-related need for reasonable academic adjustments in this course, contact the Office for Disability Services (ODS) at 814-863-1807 (V/TTY). For further information regarding ODS, please visit the Office for Disability Services Web site at &lt;a href=&#34;http://equity.psu.edu/ods/.  &#34;&gt;http://equity.psu.edu/ods/.  &lt;/a&gt; In order to receive consideration for course accommodations, you must contact ODS and provide documentation (see the &lt;a href=&#34;http://equity.psu.edu/ods/guidelines/documentation-guidelines&#34;&gt;documentation guidelines&lt;/a&gt;). If the documentation supports the need for academic adjustments, ODS will provide a letter identifying appropriate academic adjustments. Please share this letter and discuss the adjustments with your instructor as early in the course as possible. You must contact ODS and request academic adjustment letters at the beginning of each semester.&lt;/h6&gt;
+&lt;p&gt;In an examination setting, unless the instructor gives explicit prior instructions to the contrary, violations of academic integrity shall consist of any attempt to receive assistance from written or printed aids, from any person or papers or electronic devices, or of any attempt to give assistance, whether the student doing so has completed his or her own work or not. Other violations include, but are not limited to, any attempt to gain an unfair advantage in regard to an examination, such as tampering with a graded exam or claiming another&amp;rsquo;s work to be one&amp;rsquo;s own. Other assessments (including ANGEL-administered quizzes and assessments as well as homework assignments) are expected to represent your own independent work unless specifically stated otherwise. Failure to comply will lead to sanctions against the student in accordance with the Policy on Academic Integrity in the Eberly College of Science. The Eberly College of Science Code of Mutual Respect and Cooperation (www.science.psu.edu/climate/Code-of-Mutual-Respect-final.pdf) embodies the values that we hope our faculty, staff, and students possess and will endorse to make The Eberly College of Science a place where every individual feels respected and valued, as well as challenged and rewarded.   The Eberly College of Science is committed to the academic success of students enrolled in the College&amp;rsquo;s  courses and undergraduate programs. When in need of help, students can utilize various College and University wide resources for learning assistance (&lt;a href=&#34;http://www.science.psu.edu/advising/success&#34;&gt;http://www.science.psu.edu/advising/success&lt;/a&gt;). Penn State welcomes students with disabilities into the University&amp;rsquo;s educational programs. If you have a disability-related need for reasonable academic adjustments in this course, contact the Office for Disability Services (ODS) at 814-863-1807 (V/TTY). For further information regarding ODS, please visit the Office for Disability Services Web site at &lt;a href=&#34;http://equity.psu.edu/ods/.  &#34;&gt;http://equity.psu.edu/ods/.  &lt;/a&gt; In order to receive consideration for course accommodations, you must contact ODS and provide documentation (see the &lt;a href=&#34;http://equity.psu.edu/student-disability-resources/guidelines&#34;&gt;documentation guidelines&lt;/a&gt;). If the documentation supports the need for academic adjustments, ODS will provide a letter identifying appropriate academic adjustments. Please share this letter and discuss the adjustments with your instructor as early in the course as possible. You must contact ODS and request academic adjustment letters at the beginning of each semester.&lt;/p&gt;
 &lt;/blockquote&gt;
 </description>
     </item>

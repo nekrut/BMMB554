@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-us">
 <head>
-	<title>History&middot; BMMB554 | Fall 2016</title>
+	<title>History&middot; BMMB554 | Fall 2017</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="author" content="Anton Nekrutenko">
@@ -36,7 +36,7 @@
 		<img class="avatar" src="http://nekrut.github.io/BMMB554/img/gxy.png" alt=""/>
 		</a>
 		<h1 class="site-title">
-			<a href="http://nekrut.github.io/BMMB554/">BMMB554 | Fall 2016</a>
+			<a href="http://nekrut.github.io/BMMB554/">BMMB554 | Fall 2017</a>
 		</h1>
 	</div>
 	<nav class="site-nav">
@@ -138,6 +138,7 @@
 <p>Get one of these and read it on a plane:</p>
 
 <ul>
+<li>1978 | <a href="https://www.amazon.com/Molecular-Genetics-Introductory-Gunther-Stent/dp/0716700484">Molecular Gemetics: An Itroductory Narrative</a></li>
 <li>2001 | <a href="http://www.amazon.com/The-Double-Helix-Discovery-Structure/dp/074321630X">The double helix</a></li>
 <li>2005 | <a href="http://www.amazon.com/Third-Man-Double-Helix-Autobiography/dp/019280667X">The Third Man of the Double Helix</a></li>
 <li>2014 | <a href="http://www.amazon.com/Brave-Genius-Philosopher-Adventures-Resistance/dp/0307952347">Brave Genius</a></li>
@@ -147,13 +148,13 @@
 
 <h1 id="publication-highlight-the-fluctuation-test">Publication highlight | The fluctuation test</h1>
 
-<p>In a truly collaborative spirit a german physicist <a href="http://www.nobelprize.org/nobel_prizes/medicine/laureates/1969/delbruck-facts.html">Max Delbrück</a> joined forces with an italian microbiologist <a href="http://www.nobelprize.org/nobel_prizes/medicine/laureates/1969/luria-facts.html">Salvador Luria</a> to prove the stochastic nature of mutations and to reject &ldquo;the last stroghold of Lamarckism&rdquo;. This <a href="http://www.bx.psu.edu/~anton/bioinf1-2014/delbruck-luria-1943.pdf">classical work</a> was published in 1943 in journal <em>Genetics</em>. Here we re-examine some of the fundamental aspects of this work. In this we occasionally rely on examples from a classical textbook on <a href="http://www.amazon.com/Molecular-Genetics-Introductory-Gunther-Stent/dp/0716700484">Molecular Genetics</a> by Günther Stent.</p>
+<p>In a truly collaborative spirit a german physicist <a href="http://www.nobelprize.org/nobel_prizes/medicine/laureates/1969/delbruck-facts.html">Max Delbrück</a> joined forces with an italian microbiologist <a href="http://www.nobelprize.org/nobel_prizes/medicine/laureates/1969/luria-facts.html">Salvador Luria</a> to prove the stochastic nature of mutations and to reject &ldquo;the last stroghold of Lamarckism&rdquo;. This <a href="http://www.bx.psu.edu/~anton/bioinf1-2014/delbruck-luria-1943.pdf">classical work</a> was published in 1943 in journal <em>Genetics</em>. Here we re-examine some of the fundamental aspects of this work. In this we occasionally rely on a classical textbook in <a href="http://www.amazon.com/Molecular-Genetics-Introductory-Gunther-Stent/dp/0716700484">Molecular Genetics</a> by Günther Stent.</p>
 
-<p>It has been know for some time that:</p>
+<p>So, it has been know for some time that:</p>
 
 <ul>
-<li>Bacteria sensitive (infectable) by phage becomes resistant as a result of exposure to bacteriophage;</li>
-<li>The resistance is preserved when descendants of these cells are incubated.</li>
+<li>Bacteria sensitive (infectable) by phage becomes resistant as a result of exposure to bacteriophage</li>
+<li>The resistance is preserved when descendants of these cells are incubated</li>
 </ul>
 
 <p>This can, in principle, be explained by two mutually exclusive hypotheses:</p>
@@ -168,89 +169,85 @@
 <p>How can we distinguish between these two alternative possibilities? Let&rsquo;s try to put hypothesis (1) into quantitative framework:</p>
 
 <ul>
-<li>There are two bacterial phenotypes: <code>S</code> - sensitive (is lysed by the phage) and <code>R</code> - resistant (is not lysed and does not absorb phage)</li>
-<li>Bacterial population progresses from a single cell to <em><code>N</code></em> cells</li>
-<li>The probability of changing from <code>S</code> to <code>R</code> is <em><code>a</code></em></li>
+<li>There are two bacterial phenotypes: <em>S</em> - sensitive (is lysed by the phage) and <em>R</em> - resistant (is not lysed and does not absorb phage)</li>
+<li>Bacterial population progresses from a single cell to $N$ cells</li>
+<li>The probability of changing from <em>S</em> to <em>R</em> is $a$</li>
 </ul>
 
-<p>So, if one grows <code>S</code> bacteria in a culture and then plates them on agar containing excess of phage, where will be <em><code>n</code></em> of <code>R</code> colonies, where <em><code>n</code></em> = <em><code>aN</code></em>. Since we can estimate <em><code>n</code></em> directly (by counting colonies on the plate) and <em><code>N</code></em> is also known (a function of the number of generations) the fraction of <code>R</code> individuals in a population is going to be same for all stages of the population:<br></p>
+<p>So, if one grows $S$ bacteria in a culture and then plates them on agar containing excess of phage, where will be $n$ of $R$ colonies, where $n =  aN$. Since we can estimate $n$ directly (by counting colonies on the plate) and $N$ is also known (a function of the number of generations) the fraction of $R$ individuals in a population is going to be same for all stages of the population:</p>
 
-<p><em><code>n/N</code></em> = <em><code>a</code></em></p>
+<div>
+$$
 
-<p>This will not be quite the same for hypothesis (2) since the number of cells carrying the resistance mutation will differ depending on when in population history they occurred and how many generation have passed since their occurrence. After <em><code>g</code></em> generations there will be <br><em><code>N</code></em> = <code>2</code><sup><em><code>g</code></em></sup><br> cells. Consequently, if the probability of mutation is <em><code>a</code></em>, then by <em><code>i</code></em>-th generation there will be <br><em><code>a</code></em><code>2</code><sup><em><code>i</code></em></sup><br> cells carrying mutations and we can arrive to the ratio of <br><em><code>n/N</code></em> = <em><code>ga</code></em></p>
+\frac{n}{N} = a
 
-<p>Delbück and Luria&rsquo;s experience with estimating such ratio has proven to be difficult as they were observing great fluctuation in the number of <code>R</code> cells. They have subsequently realized that such fluctuation was in fact an indirect indication that the mutation hypothesis is likely true. Delbrück has developed a theoretical framework predicting the distribution of mutant phenotypes for both hypotheses. <a href="http://www.amazon.com/Molecular-Genetics-Introductory-Gunther-Stent/dp/0716700484">Stent</a> provides the following elegant description of Delbück&rsquo;s reasonong. It is based on measuring the variance in the number of resistant colonies across a number of replicates. Suppose there are <em><code>C</code></em> <em>E. coli</em> replicates (cultures) started from a single <code>S</code> bacterium. Each is grown for <em><code>g</code></em> generations, and each accumulates <em><code>N</code></em> = <code>2</code><sup><em><code>g</code></em></sup> cells as a result. The entire content of each culture is then spread over agar plate saturated with the phage. The number <em><code>n</code></em> of <code>R</code> colonies is then counted. If <em><code>n</code></em><sub><em><code>j</code></em></sub> is the number of <code>R</code> colonies from culture <em><code>j</code></em>, then the mean of resistant colonies and the variance of the number of resistant colonies are:</p>
+$$
+</div>
+
+<p>This will not be quite the same for hypothesis (2) since the number of cells carrying the resistance mutation will differ depending on when in population history they occurred and how many generation have passed since their occurrence. After $g$ generations there will be</p>
+
+<div>
+$$
+
+N = 2^g
+
+$$
+</div>
+
+<p>cells. Consequently, if the probability of mutation is $a$, then by $i$-th generation there will be $a2^i$ cells carrying mutations and we can arrive to the ratio of</p>
+
+<div>
+$$
+
+\frac{n}{N} = ga
+
+$$
+</div>
+
+<p>Delbück and Luria&rsquo;s experience with estimating such ratio has proven to be difficult as they were observing great fluctuation in the number of $R$ cells. They have subsequently realized that such fluctuation was in fact an indirect indication that the mutation hypothesis is likely true. Delbrück has developed a theoretical framework predicting the distribution of mutant phenotypes for both hypotheses. <a href="http://www.amazon.com/Molecular-Genetics-Introductory-Gunther-Stent/dp/0716700484">Stent</a> provides the following elegant description of Delbück&rsquo;s reasonong. It is based on measuring the variance in the number of resistant colonies across a number of replicates. Suppose there are $c$ <em>E. coli</em> replicates (cultures) started from a single <em>S</em> bacterium. Each is grown for $g$ generations, and each accumulates $N = 2^g$ cells as a result. The entire content of each culture is then spread over agar plate saturated with the phage. The number $n$ of <em>R</em> colonies is then counted. If $n_j$ is the number of <em>R</em> colonies from culture $j$, then the average of the numbner of resistant colonies is:</p>
+
+<div>
+$$
+
+\bar{n} = \frac{\sum_{j=1}^{c}n_j}{c}
+
+$$
+</div>
+
+<p>and the variance is:</p>
+
+<div>
+$$ 
+
+var_n = \frac{\sum_{j=1}^{c}(\bar{n}-n_j)}{c}
+
+$$
+</div>
+
+<p>The behaviour of ratio of <code>variance/average</code> is critical to distinguishing between hypothesis (1) and (2). If (1) is true we expect low fluctuation and the ratio will be close to 1. If (2) is true the variation will be considerable and the ratio will be much higher than one. Look at Fig. 1 below.</p>
+
+<ul>
+<li>In pane A (Hypothesis 1) phage induces changes in the bacteria upon plating and because the probability of changing from <code>S</code> to <code>R</code> is the same for  all cells we would see approximately the same number of <code>R</code> cells. The mean here is <code>2.5</code> and the variance/mean ratio is <code>1.1</code>.<br /></li>
+<li>In pane B (Hypothesis 2) every cell has the same mutation rate, but the mutations may occur at any point during the culture propagation. If they occur early - many resistant colonies will be produced from such culture. If they occur late - just a few. As a result one would expect to see significant fluctuation. Here the mean is the same as in A = <code>2.5</code>, but the variance/mean ratio is much higher at <code>4.3</code>.</li>
+</ul>
 
 <table>
 <thead>
 <tr>
-<th align="left">Average</th>
-<th align="left">Variance</th>
+<th align="left"></th>
+<th align="left"></th>
 </tr>
 </thead>
 
 <tbody>
 <tr>
-<td align="left">
-<figure >
-    
-        <img src="img/average.png" />
-    
-    
-</figure>
-</td>
-<td align="left">
-<figure >
-    
-        <img src="img/variance.png" />
-    
-    
-</figure>
-</td>
+<td align="left"><img src="/BMMB554/img/luria.png" alt="" /></td>
+<td align="left"><img src="/BMMB554/img/stent.png" alt="" /></td>
 </tr>
 
 <tr>
-<td align="left">Notation 6-3</td>
-<td align="left">Notation 6-4 (from Stent&rsquo;s Molecular Genetics)</td>
-</tr>
-</tbody>
-</table>
-
-<p>The behaviour of ratio of <code>variance/average</code> is critical to distinguishing between hypothesis (1) and (2). If (1) is true we expect low fluctuation and the ratio will be close to 1. If (2) is true the variation will be considerable and the ratio will be much higher than one. Look at Fig. 1 below.
-* In pane A (Hypothesis 1) phage induces changes in the bacteria upon plating and because the probability of changing from <code>S</code> to <code>R</code> is the same for all cells we would see approximately the same number of <code>R</code> cells. The mean here is <code>2.5</code> and the variance/mean ratio is <code>1.1</code>.<br />
-* In pane B (Hypothesis 2) every cell has the same mutation rate, but the mutations may occur at any point during the culture propagation. If they occur early - many resistant colonies will be produced from such culture. If they occur late - just a few. As a result one would expect to see significant fluctuation. Here the mean is the same as in A = <code>2.5</code>, but the variance/mean ratio is much higher at <code>4.3</code>.</p>
-
-<table>
-<thead>
-<tr>
-<th align="left">Figure 1</th>
-<th align="left">Table 1</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td align="left">
-<figure >
-    
-        <img src="img/luria.png" />
-    
-    
-</figure>
-</td>
-<td align="left">
-<figure >
-    
-        <img src="img/stent.png" />
-    
-    
-</figure>
-</td>
-</tr>
-
-<tr>
-<td align="left">Fig. 6-4</td>
-<td align="left">Table 6-1 (from Stent&rsquo;s Molecular Genetics)</td>
+<td align="left"><strong>Figure 1</strong> (Fig. 6-4 from Stent)</td>
+<td align="left"><strong>Table 1</strong> (Table 6-1 from Stent)</td>
 </tr>
 </tbody>
 </table>
@@ -263,7 +260,7 @@
 
 <h1 id="slides">Slides</h1>
 
-<p>Slides covering material for Topic 1</p>
+<p>Slides covering material for Lecture 1</p>
 
 <script async class='speakerdeck-embed' data-id='7726e8b8b3ee41f0a2a1497128d59ca0' data-ratio='1.33333333333333' src='//speakerdeck.com/assets/embed.js'></script>
 
@@ -271,7 +268,7 @@
 
 <h1 id="video">Video</h1>
 
-<p>Video presentation (actual lecture). Uses slides from above.</p>
+<p>Video presentation from last year.</p>
 
 
 <div style="position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;">
@@ -281,7 +278,7 @@
 
 <hr />
 
-<h1 id="homework">Homework</h1>
+<h1 id="what-vto-do-before-next-lecture">What vto do before next lecture</h1>
 
 <p>Read two following papers:</p>
 
@@ -290,13 +287,11 @@
 <li>&ldquo;A new method for sequencing DNA&rdquo; by Maxam and Gilbert (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC392330/pdf/pnas00024-0174.pdf">1977</a>)</li>
 </ul>
 
-<p>Complete <a href="https://goo.gl/forms/V6xQ1DMsWPc27yZq1">this Quiz</a>. You have a week (until the midnight of Sept 6) to finish it.</p>
-
 	</section>
     </div>
 
     <footer class="site-footer">
-	<p class="text">&copy; 2016 - Released under the MIT license<br>Powered by <a href="//gohugo.io/">Hugo</a> with the <a href="//github.com/digitalcraftsman/hugo-type-theme">Type Theme</a></p>
+	<p class="text">&copy; 2017 - Released under the MIT license<br>Powered by <a href="//gohugo.io/">Hugo</a> with the <a href="//github.com/digitalcraftsman/hugo-type-theme">Type Theme</a></p>
 </footer>
 
 <script type="text/javascript"

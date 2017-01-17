@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>BMMB554 | Fall 2016</title>
+    <title>BMMB554 | Fall 2017</title>
     <link>http://nekrut.github.io/BMMB554/tags/dna/index.xml</link>
-    <description>Recent content on BMMB554 | Fall 2016</description>
+    <description>Recent content on BMMB554 | Fall 2017</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Released under the MIT license&lt;br&gt;Powered by [Hugo](//gohugo.io/) with the [Type Theme](//github.com/digitalcraftsman/hugo-type-theme)</copyright>
@@ -12,7 +12,7 @@
     <item>
       <title>DNA sequencing</title>
       <link>http://nekrut.github.io/BMMB554/post/topic2/</link>
-      <pubDate>Thu, 01 Sep 2016 11:17:20 -0400</pubDate>
+      <pubDate>Tue, 17 Jan 2017 11:17:20 -0400</pubDate>
       
       <guid>http://nekrut.github.io/BMMB554/post/topic2/</guid>
       <description>
@@ -37,54 +37,51 @@
 &lt;li&gt;(&lt;strong&gt;7&lt;/strong&gt;) - It is sequenced using universal primers. For example the image below shows a map for pGEM-3Z plasmid (a pUC18 derivative). Its multiple cloning site is enlarged and sites for &lt;strong&gt;T7&lt;/strong&gt; and &lt;strong&gt;SP6&lt;/strong&gt; sequencing primers are shown. These are the &lt;strong&gt;pads&lt;/strong&gt; I&amp;rsquo;m referring to in the lecture. These provide universal sites that can be used to sequence any insert in between.&lt;/li&gt;
 &lt;/ul&gt;
 
-
+&lt;blockquote&gt;
+&lt;p&gt;
 &lt;figure &gt;
     
-        &lt;img src=&#34;img/pgem3z.png&#34; /&gt;
+        &lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/pgem3z.png&#34; /&gt;
     
     
 &lt;/figure&gt;
 
-
-&lt;blockquote&gt;
-&lt;h5 id=&#34;image-from-promega-inc&#34;&gt;Image from Promega, Inc.&lt;/h5&gt;
+Figure from Promega, Inc.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;Until the invention of NGS the above protocol was followed witn some degree of automation. But you can see that it was quite laborious if the large number of fragements needed to be sequenced. This is becuase each of them needed to be subcloned and handled separately. This is in part why Human Genome Project, a subject of our next lecture, took so much time to complete.&lt;/p&gt;
+&lt;p&gt;Until the invention of NGS the above protocol was followed with some degree of automation. But you can see that it was quite laborious if the large number of fragements needed to be sequenced. This is because each of them needed to be subcloned and handled separately. This is in part why Human Genome Project, a subject of our next lecture, took so much time to complete.&lt;/p&gt;
 
 &lt;h2 id=&#34;evolution-of-sequencing-machines&#34;&gt;Evolution of sequencing machines&lt;/h2&gt;
 
 &lt;p&gt;The simplest possible sequencing machine is a &lt;a href=&#34;https://en.wikipedia.org/wiki/Polyacrylamide_gel_electrophoresis&#34;&gt;gel rig with polyacrylamide gel&lt;/a&gt;. Sanger used it is his protocol obtaining the following results:&lt;/p&gt;
 
-
+&lt;blockquote&gt;
+&lt;p&gt;
 &lt;figure &gt;
     
-        &lt;img src=&#34;img/sangerGel.png&#34; /&gt;
+        &lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/sangerGel.png&#34; /&gt;
     
     
 &lt;/figure&gt;
 
-
-&lt;blockquote&gt;
-&lt;h5 id=&#34;figure-from-sanger-et-al-1977-https-www-ncbi-nlm-nih-gov-pmc-articles-pmc431765-pdf-pnas00043-0271-pdf&#34;&gt;Figure from &lt;a href=&#34;https://www.ncbi.nlm.nih.gov/pmc/articles/PMC431765/pdf/pnas00043-0271.pdf&#34;&gt;Sanger et al. 1977&lt;/a&gt;.&lt;/h5&gt;
+Figure from &lt;a href=&#34;https://www.ncbi.nlm.nih.gov/pmc/articles/PMC431765/pdf/pnas00043-0271.pdf&#34;&gt;Sanger et al. 1977&lt;/a&gt;.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;Here for sequencing each fragment four separate reactions are peformed (with ddA, ddT, ggC, and ddG) and four lanes on the gel are used. One simplification of this process that came in the 90s was to use fluorescently labelled dideoxy nucleotides. This is easier because everything can be performed in a single tube and uses a single lane on a gel:&lt;/p&gt;
 
-
+&lt;blockquote&gt;
+&lt;p&gt;
 &lt;figure &gt;
     
-        &lt;img src=&#34;img/dd_labels.png&#34; /&gt;
+        &lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/dd_labels.png&#34; /&gt;
     
     
 &lt;/figure&gt;
 
-
-&lt;blockquote&gt;
-&lt;h5 id=&#34;figure-from-applied-biosystems-support-site-https-www3-appliedbiosystems-com-cms-groups-mcb-support-documents-generaldocuments-cms-041003-pdf&#34;&gt;Figure from Applied Biosystems &lt;a href=&#34;https://www3.appliedbiosystems.com/cms/groups/mcb_support/documents/generaldocuments/cms_041003.pdf&#34;&gt;support site&lt;/a&gt;.&lt;/h5&gt;
+Figure from Applied Biosystems &lt;a href=&#34;https://www3.appliedbiosystems.com/cms/groups/mcb_support/documents/generaldocuments/cms_041003.pdf&#34;&gt;support site&lt;/a&gt;.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;However, there is still substantial labor involed in pouring the gels, loading them, running machines, and cleaning everything post-run. A significant improvement was offered by the development of capillary electrophoresis allowing automation of liquid handling and sample loading. Although several manufacturers have been developing and selling such machines a &lt;em&gt;de facto&lt;/em&gt; standard in this area was (and still is) the Applied Biosystems (ABI) Genetics and DNA Anlayzer systems. The highest throughput ABI system, 3730&lt;em&gt;xl&lt;/em&gt;, had 96 cappilaries and could automatically process 384 samples.&lt;/p&gt;
+&lt;p&gt;However, there is still substantial labor involved in pouring the gels, loading them, running machines, and cleaning everything post-run. A significant improvement was offered by the development of capillary electrophoresis allowing automation of liquid handling and sample loading. Although several manufacturers have been developing and selling such machines a &lt;em&gt;de facto&lt;/em&gt; standard in this area was (and still is) the Applied Biosystems (ABI) Genetics and DNA Anlayzer systems. The highest throughput ABI system, 3730&lt;em&gt;xl&lt;/em&gt;, had 96 capillaries and could automatically process 384 samples.&lt;/p&gt;
 
 &lt;h2 id=&#34;ngs&#34;&gt;NGS!&lt;/h2&gt;
 
@@ -102,9 +99,9 @@
 
 &lt;h2 id=&#34;1-454-sequencing&#34;&gt;1: 454 sequencing&lt;/h2&gt;
 
-&lt;p&gt;454 Technology is a massively parralel modification of &lt;a href=&#34;http://genome.cshlp.org/content/11/1/3&#34;&gt;pyrosequencing&lt;/a&gt; technology. Incorporation of nucleotides are registered by a &lt;a href=&#34;https://en.wikipedia.org/wiki/Charge-coupled_device&#34;&gt;CCD&lt;/a&gt; camera as a flash of light generated from the interaction between ATP and Luciferin. The massive scale of 454 process is enabled by generation of a population of beads carrying multiple copies of the same DNA fragment. The beads are distributed across a microtiter plate where each well of the plate holding just one bead. Thus every unique coordinate (a well) on the plate generates flashes when a nucleotide incorporation event takes plate. This is &amp;ldquo;monochrome&amp;rdquo; technique: flash = nucleotid is incorporated; lack of flash = no incorporation. Thus to distinguish between A, C, G, and T individual nucleotides are &amp;ldquo;washed&amp;rdquo; across the microtiter plate at discrete times: if &lt;strong&gt;A&lt;/strong&gt; is being washed across the plate and a flash of light is emitted, this implies that A is present in the fragment being sequenced.&lt;/p&gt;
+&lt;p&gt;454 Technology is a massively parallel modification of &lt;a href=&#34;http://genome.cshlp.org/content/11/1/3&#34;&gt;pyrosequencing&lt;/a&gt; technology. Incorporation of nucleotides are registered by a &lt;a href=&#34;https://en.wikipedia.org/wiki/Charge-coupled_device&#34;&gt;CCD&lt;/a&gt; camera as a flash of light generated from the interaction between ATP and Luciferin. The massive scale of 454 process is enabled by generation of a population of beads carrying multiple copies of the same DNA fragment. The beads are distributed across a microtiter plate where each well of the plate holding just one bead. Thus every unique coordinate (a well) on the plate generates flashes when a nucleotide incorporation event takes plate. This is &amp;ldquo;monochrome&amp;rdquo; technique: flash = nucleotide is incorporated; lack of flash = no incorporation. Thus to distinguish between A, C, G, and T individual nucleotides are &amp;ldquo;washed&amp;rdquo; across the microtiter plate at discrete times: if &lt;strong&gt;A&lt;/strong&gt; is being washed across the plate and a flash of light is emitted, this implies that A is present in the fragment being sequenced.&lt;/p&gt;
 
-&lt;p&gt;454 can generated fragments up 1,000 bases in length. Its biggest weakness is inability to precisely determine the length of &lt;a href=&#34;https://www.broadinstitute.org/crd/wiki/index.php/Homopolymer&#34;&gt;homopolymer runs&lt;/a&gt;. Thus the main type if sequecning error generated by 454 are insertions and deletions (indels).&lt;/p&gt;
+&lt;p&gt;454 can generated fragments up 1,000 bases in length. Its biggest weakness is inability to precisely determine the length of &lt;a href=&#34;https://www.broadinstitute.org/crd/wiki/index.php/Homopolymer&#34;&gt;homopolymer runs&lt;/a&gt;. Thus the main type if sequencing error generated by 454 are insertions and deletions (indels).&lt;/p&gt;
 
 &lt;h3 id=&#34;video&#34;&gt;Video&lt;/h3&gt;
 
@@ -128,7 +125,7 @@
 
 &lt;h2 id=&#34;2-illumina-sequencing&#34;&gt;2: Illumina sequencing&lt;/h2&gt;
 
-&lt;p&gt;Illumina (originally called &amp;ldquo;Solexa&amp;rdquo;) uses glass flowcells with oligonucleotides permanently attached to internal surface. These oligonucleotides are complementary to sequencing adapters added to DNA fragments being sequenced during library preparation. The DNA fragements that are &amp;ldquo;stuck&amp;rdquo; on the flowcell due to complementary intercation between adapters are amplified via &amp;ldquo;bridge amplification&amp;rdquo; to form clusters. Sequencing is performed using reversible terminator chemistry with nucleotides modified to carry dyes specific to each nucleotide. As a result all nucleotides can be added at once and are distinguished by colors. Currently, it is possible to sequence up to 300 bases from each end of the fragment being sequenced. Illumina has the highest throughput (and lowest cost per base) of all existing technologies at this moment. The HiSeq 2500 machine can produce &lt;a href=&#34;http://www.illumina.com/systems/hiseq_2500_1500/performance_specifications.html&#34;&gt;600 billion nucleotides in 5 days&lt;/a&gt;. In this course we will most often work with Illumina data.&lt;/p&gt;
+&lt;p&gt;Illumina (originally called &amp;ldquo;Solexa&amp;rdquo;) uses glass flowcells with oligonucleotides permanently attached to internal surface. These oligonucleotides are complementary to sequencing adapters added to DNA fragments being sequenced during library preparation. The DNA fragements that are &amp;ldquo;stuck&amp;rdquo; on the flowcell due to complementary interaction between adapters are amplified via &amp;ldquo;bridge amplification&amp;rdquo; to form clusters. Sequencing is performed using reversible terminator chemistry with nucleotides modified to carry dyes specific to each nucleotide. As a result all nucleotides can be added at once and are distinguished by colors. Currently, it is possible to sequence up to 300 bases from each end of the fragment being sequenced. Illumina has the highest throughput (and lowest cost per base) of all existing technologies at this moment. The HiSeq 2500 machine can produce &lt;a href=&#34;http://www.illumina.com/systems/hiseq_2500_1500/performance_specifications.html&#34;&gt;600 billion nucleotides in 5 days&lt;/a&gt;. In this course we will most often work with Illumina data.&lt;/p&gt;
 
 &lt;h3 id=&#34;video-1&#34;&gt;Video&lt;/h3&gt;
 
@@ -151,7 +148,7 @@
 
 &lt;h2 id=&#34;3-pacbio-single-molecule-sequencing&#34;&gt;3: PacBio Single Molecule Sequencing&lt;/h2&gt;
 
-&lt;p&gt;PacBio is a fundamentally different approach to DNA sequencing as it allows reading single molecules. Thus it is an example is so called &lt;em&gt;Single Molecule Sequencing&lt;/em&gt; or &lt;em&gt;SMS&lt;/em&gt;. PacBio uses highly processive DNA polymerase placed at the bottom of each well on a microtiter plate. The plate is fused to the glass slide illuminated by a laser. When polymerase is loaded with template it attracts fluorescently labelled nucleotides to the bottom of the well where they emit light with a wavelength characteristic of each nucleotide. As a result a &amp;ldquo;movie&amp;rdquo; is generated for each well recording the sequence and duration of incorporation events. One of the key advantage of PacBio technology is its ability to produce long reads with ones at 10,000 bases being common.&lt;/p&gt;
+&lt;p&gt;PacBio is a fundamentally different approach to DNA sequencing as it allows reading single molecules. Thus it is an example is so called &lt;em&gt;Single Molecule Sequencing&lt;/em&gt; or &lt;em&gt;SMS&lt;/em&gt;. PacBio uses highly processive DNA polymerase placed at the bottom of each well on a microtiter plate. The plate is fused to the glass slide illuminated by a laser. When polymerase is loaded with template it attracts fluorescently labeled nucleotides to the bottom of the well where they emit light with a wavelength characteristic of each nucleotide. As a result a &amp;ldquo;movie&amp;rdquo; is generated for each well recording the sequence and duration of incorporation events. One of the key advantage of PacBio technology is its ability to produce long reads with ones at 10,000 bases being common.&lt;/p&gt;
 
 &lt;h3 id=&#34;video-2&#34;&gt;Video&lt;/h3&gt;
 
@@ -177,7 +174,7 @@
 
 &lt;h2 id=&#34;4-oxford-nanopore&#34;&gt;4: Oxford Nanopore&lt;/h2&gt;
 
-&lt;p&gt;Oxford nanopore is another dramatically different technology that threads single DNA molecules through biologically-derived (transmembrane proteins) pore in a membrane impermeable to ions. It uses polymerase to control the speed of translocation of the DNA molecule through membrane. In that sense it is not &lt;em&gt;Sequencing by synthesis&lt;/em&gt; we have seen in the other technologies discussed here. This technology generates longest reads possible today: in many instances a single read can be hundreds of thousands if nucleotides in length. It still however suffers from high error rate and relatively low throuyghput (compared to Illumina). On the upside Oxforde Nanopore sequencing machines are only slightly bigger than a thumbdrive and cost very little.&lt;/p&gt;
+&lt;p&gt;Oxford nanopore is another dramatically different technology that threads single DNA molecules through biologically-derived (transmembrane proteins) pore in a membrane impermeable to ions. It uses polymerase to control the speed of translocation of the DNA molecule through membrane. In that sense it is not &lt;em&gt;Sequencing by synthesis&lt;/em&gt; we have seen in the other technologies discussed here. This technology generates longest reads possible today: in many instances a single read can be hundreds of thousands if nucleotides in length. It still however suffers from high error rate and relatively low throughput (compared to Illumina). On the upside Oxforde Nanopore sequencing machines are only slightly bigger than a thumb-drive and cost very little.&lt;/p&gt;
 
 &lt;h3 id=&#34;slides&#34;&gt;Slides&lt;/h3&gt;
 
@@ -193,17 +190,13 @@
 &lt;li&gt;Simpson Lab &lt;a href=&#34;http://simpsonlab.github.io/2015/04/08/eventalign/&#34;&gt;blog&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Poretools analysis &lt;a href=&#34;http://poretools.readthedocs.org/&#34;&gt;suite&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;h1 id=&#34;homework&#34;&gt;Homework&lt;/h1&gt;
-
-&lt;p&gt;To be posted Tuesday Sept 6.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>History</title>
       <link>http://nekrut.github.io/BMMB554/post/topic1/</link>
-      <pubDate>Thu, 25 Aug 2016 11:41:14 -0500</pubDate>
+      <pubDate>Wed, 11 Jan 2017 11:41:14 -0500</pubDate>
       
       <guid>http://nekrut.github.io/BMMB554/post/topic1/</guid>
       <description>
@@ -229,6 +222,7 @@
 &lt;p&gt;Get one of these and read it on a plane:&lt;/p&gt;
 
 &lt;ul&gt;
+&lt;li&gt;1978 | &lt;a href=&#34;https://www.amazon.com/Molecular-Genetics-Introductory-Gunther-Stent/dp/0716700484&#34;&gt;Molecular Gemetics: An Itroductory Narrative&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;2001 | &lt;a href=&#34;http://www.amazon.com/The-Double-Helix-Discovery-Structure/dp/074321630X&#34;&gt;The double helix&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;2005 | &lt;a href=&#34;http://www.amazon.com/Third-Man-Double-Helix-Autobiography/dp/019280667X&#34;&gt;The Third Man of the Double Helix&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;2014 | &lt;a href=&#34;http://www.amazon.com/Brave-Genius-Philosopher-Adventures-Resistance/dp/0307952347&#34;&gt;Brave Genius&lt;/a&gt;&lt;/li&gt;
@@ -238,13 +232,13 @@
 
 &lt;h1 id=&#34;publication-highlight-the-fluctuation-test&#34;&gt;Publication highlight | The fluctuation test&lt;/h1&gt;
 
-&lt;p&gt;In a truly collaborative spirit a german physicist &lt;a href=&#34;http://www.nobelprize.org/nobel_prizes/medicine/laureates/1969/delbruck-facts.html&#34;&gt;Max Delbrück&lt;/a&gt; joined forces with an italian microbiologist &lt;a href=&#34;http://www.nobelprize.org/nobel_prizes/medicine/laureates/1969/luria-facts.html&#34;&gt;Salvador Luria&lt;/a&gt; to prove the stochastic nature of mutations and to reject &amp;ldquo;the last stroghold of Lamarckism&amp;rdquo;. This &lt;a href=&#34;http://www.bx.psu.edu/~anton/bioinf1-2014/delbruck-luria-1943.pdf&#34;&gt;classical work&lt;/a&gt; was published in 1943 in journal &lt;em&gt;Genetics&lt;/em&gt;. Here we re-examine some of the fundamental aspects of this work. In this we occasionally rely on examples from a classical textbook on &lt;a href=&#34;http://www.amazon.com/Molecular-Genetics-Introductory-Gunther-Stent/dp/0716700484&#34;&gt;Molecular Genetics&lt;/a&gt; by Günther Stent.&lt;/p&gt;
+&lt;p&gt;In a truly collaborative spirit a german physicist &lt;a href=&#34;http://www.nobelprize.org/nobel_prizes/medicine/laureates/1969/delbruck-facts.html&#34;&gt;Max Delbrück&lt;/a&gt; joined forces with an italian microbiologist &lt;a href=&#34;http://www.nobelprize.org/nobel_prizes/medicine/laureates/1969/luria-facts.html&#34;&gt;Salvador Luria&lt;/a&gt; to prove the stochastic nature of mutations and to reject &amp;ldquo;the last stroghold of Lamarckism&amp;rdquo;. This &lt;a href=&#34;http://www.bx.psu.edu/~anton/bioinf1-2014/delbruck-luria-1943.pdf&#34;&gt;classical work&lt;/a&gt; was published in 1943 in journal &lt;em&gt;Genetics&lt;/em&gt;. Here we re-examine some of the fundamental aspects of this work. In this we occasionally rely on a classical textbook in &lt;a href=&#34;http://www.amazon.com/Molecular-Genetics-Introductory-Gunther-Stent/dp/0716700484&#34;&gt;Molecular Genetics&lt;/a&gt; by Günther Stent.&lt;/p&gt;
 
-&lt;p&gt;It has been know for some time that:&lt;/p&gt;
+&lt;p&gt;So, it has been know for some time that:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Bacteria sensitive (infectable) by phage becomes resistant as a result of exposure to bacteriophage;&lt;/li&gt;
-&lt;li&gt;The resistance is preserved when descendants of these cells are incubated.&lt;/li&gt;
+&lt;li&gt;Bacteria sensitive (infectable) by phage becomes resistant as a result of exposure to bacteriophage&lt;/li&gt;
+&lt;li&gt;The resistance is preserved when descendants of these cells are incubated&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;This can, in principle, be explained by two mutually exclusive hypotheses:&lt;/p&gt;
@@ -259,89 +253,85 @@
 &lt;p&gt;How can we distinguish between these two alternative possibilities? Let&amp;rsquo;s try to put hypothesis (1) into quantitative framework:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;There are two bacterial phenotypes: &lt;code&gt;S&lt;/code&gt; - sensitive (is lysed by the phage) and &lt;code&gt;R&lt;/code&gt; - resistant (is not lysed and does not absorb phage)&lt;/li&gt;
-&lt;li&gt;Bacterial population progresses from a single cell to &lt;em&gt;&lt;code&gt;N&lt;/code&gt;&lt;/em&gt; cells&lt;/li&gt;
-&lt;li&gt;The probability of changing from &lt;code&gt;S&lt;/code&gt; to &lt;code&gt;R&lt;/code&gt; is &lt;em&gt;&lt;code&gt;a&lt;/code&gt;&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;There are two bacterial phenotypes: &lt;em&gt;S&lt;/em&gt; - sensitive (is lysed by the phage) and &lt;em&gt;R&lt;/em&gt; - resistant (is not lysed and does not absorb phage)&lt;/li&gt;
+&lt;li&gt;Bacterial population progresses from a single cell to $N$ cells&lt;/li&gt;
+&lt;li&gt;The probability of changing from &lt;em&gt;S&lt;/em&gt; to &lt;em&gt;R&lt;/em&gt; is $a$&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;So, if one grows &lt;code&gt;S&lt;/code&gt; bacteria in a culture and then plates them on agar containing excess of phage, where will be &lt;em&gt;&lt;code&gt;n&lt;/code&gt;&lt;/em&gt; of &lt;code&gt;R&lt;/code&gt; colonies, where &lt;em&gt;&lt;code&gt;n&lt;/code&gt;&lt;/em&gt; = &lt;em&gt;&lt;code&gt;aN&lt;/code&gt;&lt;/em&gt;. Since we can estimate &lt;em&gt;&lt;code&gt;n&lt;/code&gt;&lt;/em&gt; directly (by counting colonies on the plate) and &lt;em&gt;&lt;code&gt;N&lt;/code&gt;&lt;/em&gt; is also known (a function of the number of generations) the fraction of &lt;code&gt;R&lt;/code&gt; individuals in a population is going to be same for all stages of the population:&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;So, if one grows $S$ bacteria in a culture and then plates them on agar containing excess of phage, where will be $n$ of $R$ colonies, where $n =  aN$. Since we can estimate $n$ directly (by counting colonies on the plate) and $N$ is also known (a function of the number of generations) the fraction of $R$ individuals in a population is going to be same for all stages of the population:&lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;&lt;code&gt;n/N&lt;/code&gt;&lt;/em&gt; = &lt;em&gt;&lt;code&gt;a&lt;/code&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;div&gt;
+$$
 
-&lt;p&gt;This will not be quite the same for hypothesis (2) since the number of cells carrying the resistance mutation will differ depending on when in population history they occurred and how many generation have passed since their occurrence. After &lt;em&gt;&lt;code&gt;g&lt;/code&gt;&lt;/em&gt; generations there will be &lt;br&gt;&lt;em&gt;&lt;code&gt;N&lt;/code&gt;&lt;/em&gt; = &lt;code&gt;2&lt;/code&gt;&lt;sup&gt;&lt;em&gt;&lt;code&gt;g&lt;/code&gt;&lt;/em&gt;&lt;/sup&gt;&lt;br&gt; cells. Consequently, if the probability of mutation is &lt;em&gt;&lt;code&gt;a&lt;/code&gt;&lt;/em&gt;, then by &lt;em&gt;&lt;code&gt;i&lt;/code&gt;&lt;/em&gt;-th generation there will be &lt;br&gt;&lt;em&gt;&lt;code&gt;a&lt;/code&gt;&lt;/em&gt;&lt;code&gt;2&lt;/code&gt;&lt;sup&gt;&lt;em&gt;&lt;code&gt;i&lt;/code&gt;&lt;/em&gt;&lt;/sup&gt;&lt;br&gt; cells carrying mutations and we can arrive to the ratio of &lt;br&gt;&lt;em&gt;&lt;code&gt;n/N&lt;/code&gt;&lt;/em&gt; = &lt;em&gt;&lt;code&gt;ga&lt;/code&gt;&lt;/em&gt;&lt;/p&gt;
+\frac{n}{N} = a
 
-&lt;p&gt;Delbück and Luria&amp;rsquo;s experience with estimating such ratio has proven to be difficult as they were observing great fluctuation in the number of &lt;code&gt;R&lt;/code&gt; cells. They have subsequently realized that such fluctuation was in fact an indirect indication that the mutation hypothesis is likely true. Delbrück has developed a theoretical framework predicting the distribution of mutant phenotypes for both hypotheses. &lt;a href=&#34;http://www.amazon.com/Molecular-Genetics-Introductory-Gunther-Stent/dp/0716700484&#34;&gt;Stent&lt;/a&gt; provides the following elegant description of Delbück&amp;rsquo;s reasonong. It is based on measuring the variance in the number of resistant colonies across a number of replicates. Suppose there are &lt;em&gt;&lt;code&gt;C&lt;/code&gt;&lt;/em&gt; &lt;em&gt;E. coli&lt;/em&gt; replicates (cultures) started from a single &lt;code&gt;S&lt;/code&gt; bacterium. Each is grown for &lt;em&gt;&lt;code&gt;g&lt;/code&gt;&lt;/em&gt; generations, and each accumulates &lt;em&gt;&lt;code&gt;N&lt;/code&gt;&lt;/em&gt; = &lt;code&gt;2&lt;/code&gt;&lt;sup&gt;&lt;em&gt;&lt;code&gt;g&lt;/code&gt;&lt;/em&gt;&lt;/sup&gt; cells as a result. The entire content of each culture is then spread over agar plate saturated with the phage. The number &lt;em&gt;&lt;code&gt;n&lt;/code&gt;&lt;/em&gt; of &lt;code&gt;R&lt;/code&gt; colonies is then counted. If &lt;em&gt;&lt;code&gt;n&lt;/code&gt;&lt;/em&gt;&lt;sub&gt;&lt;em&gt;&lt;code&gt;j&lt;/code&gt;&lt;/em&gt;&lt;/sub&gt; is the number of &lt;code&gt;R&lt;/code&gt; colonies from culture &lt;em&gt;&lt;code&gt;j&lt;/code&gt;&lt;/em&gt;, then the mean of resistant colonies and the variance of the number of resistant colonies are:&lt;/p&gt;
+$$
+&lt;/div&gt;
+
+&lt;p&gt;This will not be quite the same for hypothesis (2) since the number of cells carrying the resistance mutation will differ depending on when in population history they occurred and how many generation have passed since their occurrence. After $g$ generations there will be&lt;/p&gt;
+
+&lt;div&gt;
+$$
+
+N = 2^g
+
+$$
+&lt;/div&gt;
+
+&lt;p&gt;cells. Consequently, if the probability of mutation is $a$, then by $i$-th generation there will be $a2^i$ cells carrying mutations and we can arrive to the ratio of&lt;/p&gt;
+
+&lt;div&gt;
+$$
+
+\frac{n}{N} = ga
+
+$$
+&lt;/div&gt;
+
+&lt;p&gt;Delbück and Luria&amp;rsquo;s experience with estimating such ratio has proven to be difficult as they were observing great fluctuation in the number of $R$ cells. They have subsequently realized that such fluctuation was in fact an indirect indication that the mutation hypothesis is likely true. Delbrück has developed a theoretical framework predicting the distribution of mutant phenotypes for both hypotheses. &lt;a href=&#34;http://www.amazon.com/Molecular-Genetics-Introductory-Gunther-Stent/dp/0716700484&#34;&gt;Stent&lt;/a&gt; provides the following elegant description of Delbück&amp;rsquo;s reasonong. It is based on measuring the variance in the number of resistant colonies across a number of replicates. Suppose there are $c$ &lt;em&gt;E. coli&lt;/em&gt; replicates (cultures) started from a single &lt;em&gt;S&lt;/em&gt; bacterium. Each is grown for $g$ generations, and each accumulates $N = 2^g$ cells as a result. The entire content of each culture is then spread over agar plate saturated with the phage. The number $n$ of &lt;em&gt;R&lt;/em&gt; colonies is then counted. If $n_j$ is the number of &lt;em&gt;R&lt;/em&gt; colonies from culture $j$, then the average of the numbner of resistant colonies is:&lt;/p&gt;
+
+&lt;div&gt;
+$$
+
+\bar{n} = \frac{\sum_{j=1}^{c}n_j}{c}
+
+$$
+&lt;/div&gt;
+
+&lt;p&gt;and the variance is:&lt;/p&gt;
+
+&lt;div&gt;
+$$ 
+
+var_n = \frac{\sum_{j=1}^{c}(\bar{n}-n_j)}{c}
+
+$$
+&lt;/div&gt;
+
+&lt;p&gt;The behaviour of ratio of &lt;code&gt;variance/average&lt;/code&gt; is critical to distinguishing between hypothesis (1) and (2). If (1) is true we expect low fluctuation and the ratio will be close to 1. If (2) is true the variation will be considerable and the ratio will be much higher than one. Look at Fig. 1 below.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;In pane A (Hypothesis 1) phage induces changes in the bacteria upon plating and because the probability of changing from &lt;code&gt;S&lt;/code&gt; to &lt;code&gt;R&lt;/code&gt; is the same for  all cells we would see approximately the same number of &lt;code&gt;R&lt;/code&gt; cells. The mean here is &lt;code&gt;2.5&lt;/code&gt; and the variance/mean ratio is &lt;code&gt;1.1&lt;/code&gt;.&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;In pane B (Hypothesis 2) every cell has the same mutation rate, but the mutations may occur at any point during the culture propagation. If they occur early - many resistant colonies will be produced from such culture. If they occur late - just a few. As a result one would expect to see significant fluctuation. Here the mean is the same as in A = &lt;code&gt;2.5&lt;/code&gt;, but the variance/mean ratio is much higher at &lt;code&gt;4.3&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
-&lt;th align=&#34;left&#34;&gt;Average&lt;/th&gt;
-&lt;th align=&#34;left&#34;&gt;Variance&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;&lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
 
 &lt;tbody&gt;
 &lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;
-&lt;figure &gt;
-    
-        &lt;img src=&#34;img/average.png&#34; /&gt;
-    
-    
-&lt;/figure&gt;
-&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;
-&lt;figure &gt;
-    
-        &lt;img src=&#34;img/variance.png&#34; /&gt;
-    
-    
-&lt;/figure&gt;
-&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/luria.png&#34; alt=&#34;&#34; /&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/stent.png&#34; alt=&#34;&#34; /&gt;&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;Notation 6-3&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Notation 6-4 (from Stent&amp;rsquo;s Molecular Genetics)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;The behaviour of ratio of &lt;code&gt;variance/average&lt;/code&gt; is critical to distinguishing between hypothesis (1) and (2). If (1) is true we expect low fluctuation and the ratio will be close to 1. If (2) is true the variation will be considerable and the ratio will be much higher than one. Look at Fig. 1 below.
-* In pane A (Hypothesis 1) phage induces changes in the bacteria upon plating and because the probability of changing from &lt;code&gt;S&lt;/code&gt; to &lt;code&gt;R&lt;/code&gt; is the same for all cells we would see approximately the same number of &lt;code&gt;R&lt;/code&gt; cells. The mean here is &lt;code&gt;2.5&lt;/code&gt; and the variance/mean ratio is &lt;code&gt;1.1&lt;/code&gt;.&lt;br /&gt;
-* In pane B (Hypothesis 2) every cell has the same mutation rate, but the mutations may occur at any point during the culture propagation. If they occur early - many resistant colonies will be produced from such culture. If they occur late - just a few. As a result one would expect to see significant fluctuation. Here the mean is the same as in A = &lt;code&gt;2.5&lt;/code&gt;, but the variance/mean ratio is much higher at &lt;code&gt;4.3&lt;/code&gt;.&lt;/p&gt;
-
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th align=&#34;left&#34;&gt;Figure 1&lt;/th&gt;
-&lt;th align=&#34;left&#34;&gt;Table 1&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;
-&lt;figure &gt;
-    
-        &lt;img src=&#34;img/luria.png&#34; /&gt;
-    
-    
-&lt;/figure&gt;
-&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;
-&lt;figure &gt;
-    
-        &lt;img src=&#34;img/stent.png&#34; /&gt;
-    
-    
-&lt;/figure&gt;
-&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;left&#34;&gt;Fig. 6-4&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Table 6-1 (from Stent&amp;rsquo;s Molecular Genetics)&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;strong&gt;Figure 1&lt;/strong&gt; (Fig. 6-4 from Stent)&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;strong&gt;Table 1&lt;/strong&gt; (Table 6-1 from Stent)&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -354,7 +344,7 @@
 
 &lt;h1 id=&#34;slides&#34;&gt;Slides&lt;/h1&gt;
 
-&lt;p&gt;Slides covering material for Topic 1&lt;/p&gt;
+&lt;p&gt;Slides covering material for Lecture 1&lt;/p&gt;
 
 &lt;script async class=&#39;speakerdeck-embed&#39; data-id=&#39;7726e8b8b3ee41f0a2a1497128d59ca0&#39; data-ratio=&#39;1.33333333333333&#39; src=&#39;//speakerdeck.com/assets/embed.js&#39;&gt;&lt;/script&gt;
 
@@ -362,7 +352,7 @@
 
 &lt;h1 id=&#34;video&#34;&gt;Video&lt;/h1&gt;
 
-&lt;p&gt;Video presentation (actual lecture). Uses slides from above.&lt;/p&gt;
+&lt;p&gt;Video presentation from last year.&lt;/p&gt;
 
 
 &lt;div style=&#34;position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;&#34;&gt;
@@ -372,7 +362,7 @@
 
 &lt;hr /&gt;
 
-&lt;h1 id=&#34;homework&#34;&gt;Homework&lt;/h1&gt;
+&lt;h1 id=&#34;what-vto-do-before-next-lecture&#34;&gt;What vto do before next lecture&lt;/h1&gt;
 
 &lt;p&gt;Read two following papers:&lt;/p&gt;
 
@@ -380,8 +370,6 @@
 &lt;li&gt;&amp;ldquo;DNA sequencing with chain-terminating inhibitors&amp;rdquo; by Sanger, Nicklen, and Coulson (&lt;a href=&#34;https://www.ncbi.nlm.nih.gov/pmc/articles/PMC431765/pdf/pnas00043-0271.pdf&#34;&gt;1977&lt;/a&gt;)&lt;/li&gt;
 &lt;li&gt;&amp;ldquo;A new method for sequencing DNA&amp;rdquo; by Maxam and Gilbert (&lt;a href=&#34;https://www.ncbi.nlm.nih.gov/pmc/articles/PMC392330/pdf/pnas00024-0174.pdf&#34;&gt;1977&lt;/a&gt;)&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;p&gt;Complete &lt;a href=&#34;https://goo.gl/forms/V6xQ1DMsWPc27yZq1&#34;&gt;this Quiz&lt;/a&gt;. You have a week (until the midnight of Sept 6) to finish it.&lt;/p&gt;
 </description>
     </item>
     
