@@ -129,17 +129,22 @@ Underlying slides are [here](https://speakerdeck.com/nekrut/ngs-technologies-pac
 
 ## 4: Oxford Nanopore
 
-Oxford nanopore is another dramatically different technology that threads single DNA molecules through biologically-derived (transmembrane proteins) pore in a membrane impermeable to ions. It uses polymerase to control the speed of translocation of the DNA molecule through membrane. In that sense it is not _Sequencing by synthesis_ we have seen in the other technologies discussed here. This technology generates longest reads possible today: in many instances a single read can be hundreds of thousands if nucleotides in length. It still however suffers from high error rate and relatively low throughput (compared to Illumina). On the upside Oxforde Nanopore sequencing machines are only slightly bigger than a thumb-drive and cost very little. 
+Oxford nanopore is another dramatically different technology that threads single DNA molecules through biologically-derived (transmembrane proteins) pore in a membrane impermeable to ions. It uses polymerase to control the speed of translocation of the DNA molecule through membrane. In that sense it is not _Sequencing by synthesis_ we have seen in the other technologies discussed here. This technology generates longest reads possible today: in many instances a single read can be hundreds of thousands if nucleotides in length. It still however suffers from high error rate and relatively low throughput (compared to Illumina). On the upside Oxford Nanopore sequencing machines are only slightly bigger than a thumb-drive and cost very little. 
 
 ### Slides
 
 {{< speakerdeck 3895a3069bc64ad5bc74c972a0353911 >}}
 
+A recent overview of latest developments at Oxford Nanopore can be found [here](https://github.com/lmmx/talk-transcripts/blob/master/Nanopore/NoThanksIveAlreadyGotOne.md) as well as in the following video
+
+{{< youtube nizGyutn6v4 >}}
+
 ### Reading
 
 * 2016 | [The promises and challenges of solid-state sequencing](http://nature.com/nnano/journal/v11/n2/full/nnano.2016.9.html)
 * 2015 | [Improved data analysis for the minion nanopore sequencer](http://nature.com/nmeth/journal/v12/n4/full/nmeth.3290.html)
-* 2015 | [A complete bacterial genome assembled de novo using only nanopore sequencing data](http://www.nature.com/nmeth/journal/v12/n8/full/nmeth.3444.html)
+* 2015 | [MinION Analysis and Reference Consortium](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4722697/)
+* 2015 | [A complete bacterial genome assembled *de novo* using only nanopore sequencing data](http://www.nature.com/nmeth/journal/v12/n8/full/nmeth.3444.html)
 * 2012 | [Reading DNA at single-nucleotide resolution with a mutant MspA nanopore and phi29 DNA polymerase](http://nature.com/nbt/journal/v30/n4/full/nbt.2171.html)
 * Simpson Lab [blog](http://simpsonlab.github.io/2015/04/08/eventalign/)
 * Poretools analysis [suite](http://poretools.readthedocs.org/)
