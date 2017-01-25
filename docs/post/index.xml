@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on BMMB554 | Fall 2017</title>
+    <title>Posts on BMMB 554 / 2017</title>
     <link>http://nekrut.github.io/BMMB554/post/index.xml</link>
-    <description>Recent content in Posts on BMMB554 | Fall 2017</description>
+    <description>Recent content in Posts on BMMB 554 / 2017</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>Released under the MIT license&lt;br&gt;Powered by [Hugo](//gohugo.io/) with the [Type Theme](//github.com/digitalcraftsman/hugo-type-theme)</copyright>
     <lastBuildDate>Wed, 25 Jan 2017 11:12:04 -0400</lastBuildDate>
     <atom:link href="http://nekrut.github.io/BMMB554/post/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>Aligning sequences with dynamic programming</title>
+      <title>4. Aligning sequences with dynamic programming</title>
       <link>http://nekrut.github.io/BMMB554/post/topic4/</link>
       <pubDate>Wed, 25 Jan 2017 11:12:04 -0400</pubDate>
       
       <guid>http://nekrut.github.io/BMMB554/post/topic4/</guid>
       <description>
+
+&lt;p&gt;&lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/topic4_cover.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
 &lt;h1 id=&#34;sequence-alignment&#34;&gt;Sequence alignment&lt;/h1&gt;
 
@@ -121,6 +122,8 @@ $$Edit\ Distance(\alpha\texttt{x},\beta\texttt{y}) = min\begin{cases}
   &lt;iframe src=&#34;//player.vimeo.com/video/183583352&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%;&#34; webkitallowfullscreen mozallowfullscreen allowfullscreen&gt;&lt;/iframe&gt;
  &lt;/div&gt;
 
+
+&lt;hr /&gt;
 
 &lt;h1 id=&#34;dynamic-programming-to-the-rescue&#34;&gt;Dynamic programming to the rescue&lt;/h1&gt;
 
@@ -337,6 +340,8 @@ $$Edit\ Distance(\epsilon\texttt{G},\epsilon\texttt{G}) = min\begin{cases}
   &lt;iframe src=&#34;//player.vimeo.com/video/183583042&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%;&#34; webkitallowfullscreen mozallowfullscreen allowfullscreen&gt;&lt;/iframe&gt;
  &lt;/div&gt;
 
+
+&lt;hr /&gt;
 
 &lt;h1 id=&#34;from-edit-distance-to-alignment&#34;&gt;From edit distance to alignment&lt;/h1&gt;
 
@@ -673,7 +678,9 @@ $$
  &lt;/div&gt;
 
 
-&lt;h2 id=&#34;global-alignment&#34;&gt;Global alignment&lt;/h2&gt;
+&lt;hr /&gt;
+
+&lt;h1 id=&#34;global-alignment&#34;&gt;Global alignment&lt;/h1&gt;
 
 &lt;p&gt;So far in filling the dynamic programming matrix we were using the following expression to compute the number within each cell:&lt;/p&gt;
 
@@ -1134,6 +1141,8 @@ $$D(\alpha\texttt{x},\beta\texttt{y}) = max\begin{cases}
  &lt;/div&gt;
 
 
+&lt;hr /&gt;
+
 &lt;h1 id=&#34;next&#34;&gt;Next&amp;hellip;&lt;/h1&gt;
 
 &lt;p&gt;In the next lecture we will learn about speeding sequence searches with indexing and talk about mappers.&lt;/p&gt;
@@ -1141,12 +1150,14 @@ $$D(\alpha\texttt{x},\beta\texttt{y}) = max\begin{cases}
     </item>
     
     <item>
-      <title>Sequence alignment: Introductory concepts</title>
+      <title>3. Sequence alignment: Introductory concepts</title>
       <link>http://nekrut.github.io/BMMB554/post/topic3/</link>
       <pubDate>Wed, 25 Jan 2017 10:43:18 -0400</pubDate>
       
       <guid>http://nekrut.github.io/BMMB554/post/topic3/</guid>
       <description>
+
+&lt;p&gt;&lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/nyc.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
 &lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
 
@@ -1391,12 +1402,14 @@ $$s_i,_j = max\begin{cases} s_{i-1,j} + weight\ of\ the\ edge\ between\ (i - 1, 
     </item>
     
     <item>
-      <title>DNA sequencing</title>
+      <title>2. DNA sequencing</title>
       <link>http://nekrut.github.io/BMMB554/post/topic2/</link>
       <pubDate>Tue, 17 Jan 2017 11:17:20 -0400</pubDate>
       
       <guid>http://nekrut.github.io/BMMB554/post/topic2/</guid>
       <description>
+
+&lt;p&gt;&lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/illumina_pseudocolor.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
 &lt;h1 id=&#34;the-60s-and-the-70s&#34;&gt;The 60s and the 70s&lt;/h1&gt;
 
@@ -1620,12 +1633,14 @@ Figure from Applied Biosystems &lt;a href=&#34;https://www3.appliedbiosystems.co
     </item>
     
     <item>
-      <title>History</title>
+      <title>1. History</title>
       <link>http://nekrut.github.io/BMMB554/post/topic1/</link>
       <pubDate>Wed, 11 Jan 2017 11:41:14 -0500</pubDate>
       
       <guid>http://nekrut.github.io/BMMB554/post/topic1/</guid>
       <description>
+
+&lt;p&gt;&lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/luria_small.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
 &lt;h1 id=&#34;why-history&#34;&gt;Why history?&lt;/h1&gt;
 
@@ -1788,7 +1803,7 @@ $$
 
 &lt;hr /&gt;
 
-&lt;h1 id=&#34;what-vto-do-before-next-lecture&#34;&gt;What vto do before next lecture&lt;/h1&gt;
+&lt;h1 id=&#34;what-to-do-before-next-lecture&#34;&gt;What to do before next lecture&lt;/h1&gt;
 
 &lt;p&gt;Read two following papers:&lt;/p&gt;
 
@@ -1796,6 +1811,84 @@ $$
 &lt;li&gt;&amp;ldquo;DNA sequencing with chain-terminating inhibitors&amp;rdquo; by Sanger, Nicklen, and Coulson (&lt;a href=&#34;https://www.ncbi.nlm.nih.gov/pmc/articles/PMC431765/pdf/pnas00043-0271.pdf&#34;&gt;1977&lt;/a&gt;)&lt;/li&gt;
 &lt;li&gt;&amp;ldquo;A new method for sequencing DNA&amp;rdquo; by Maxam and Gilbert (&lt;a href=&#34;https://www.ncbi.nlm.nih.gov/pmc/articles/PMC392330/pdf/pnas00024-0174.pdf&#34;&gt;1977&lt;/a&gt;)&lt;/li&gt;
 &lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Syllabus</title>
+      <link>http://nekrut.github.io/BMMB554/post/syllabus/</link>
+      <pubDate>Mon, 09 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://nekrut.github.io/BMMB554/post/syllabus/</guid>
+      <description>
+
+&lt;p&gt;&lt;a href=&#34;https://xkcd.com/451/&#34;&gt;&lt;img src=&#34;http://imgs.xkcd.com/comics/impostor.png&#34; alt=&#34;&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;instructor&#34;&gt;Instructor&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;Anton Nekrutenko&lt;/strong&gt;&lt;br&gt;
+&lt;a href=&#34;mailto:aun1@psu.edu?Subject=BMMB554&#34;&gt;aun1@psu.edu&lt;/a&gt;&lt;br&gt;
+Wartik 505&lt;br&gt;
+Office hours by appointment only&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;font color=&#34;orange&#34;&gt;&amp;#9888;&lt;/font&gt; When contacting instructor use the above e-mail and include &amp;ldquo;BMMB554&amp;rdquo; in the subject line (simply click on e-mail address).&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&#34;course-description&#34;&gt;Course description&lt;/h1&gt;
+
+&lt;p&gt;This course is designed as a preparation routine for graduate students in Life Sciences. It has several focus areas including evolution of life sciences as well as in-depth overview of sequencing technologies and their applications.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&#34;grading&#34;&gt;Grading&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Homework = 50%&lt;/li&gt;
+&lt;li&gt;Final project = 50%&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&#34;topics&#34;&gt;Topics&lt;/h1&gt;
+
+&lt;p&gt;We will cover a breadth of topics. Below is the approximate list. Keep in mind that this field is very dynamic. To account for that we may skip or extend some of the subjects.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;History: From Genetics to Genomics&lt;/li&gt;
+&lt;li&gt;Sequencing: From Sanger to Nanopores I&lt;/li&gt;
+&lt;li&gt;Sequencing: From Sanger to Nanopores II&lt;/li&gt;
+&lt;li&gt;Algorithms: Alignment Basics&lt;/li&gt;
+&lt;li&gt;Algorithms: Aligning many sequences quickly&lt;/li&gt;
+&lt;li&gt;Algorithms: Assembly I&lt;/li&gt;
+&lt;li&gt;Algorithms: Assembly II&lt;/li&gt;
+&lt;li&gt;Galaxy: An introduction&lt;/li&gt;
+&lt;li&gt;Galaxy: Writing your own tools&lt;/li&gt;
+&lt;li&gt;Re-sequencing I: Introduction and non-diploid case&lt;/li&gt;
+&lt;li&gt;Re-sequencing II: Diploid genomes&lt;/li&gt;
+&lt;li&gt;Practicum: Re-sequencing&lt;/li&gt;
+&lt;li&gt;Transcriptomics I: Refrence-based&lt;/li&gt;
+&lt;li&gt;Transcriptomics II: Reference-free&lt;/li&gt;
+&lt;li&gt;Practicum: Transcriptomics&lt;/li&gt;
+&lt;li&gt;RNA analysis: RiboSeq and ShapeSeq&lt;/li&gt;
+&lt;li&gt;Practicum: RNA analysis&lt;/li&gt;
+&lt;li&gt;DNA/Protein interactions I: Approaches&lt;/li&gt;
+&lt;li&gt;DNA/Protein interactions II: ENCODE Project&lt;/li&gt;
+&lt;li&gt;Practicum: DNA/Protein interactions&lt;/li&gt;
+&lt;li&gt;Genome conformation analysis&lt;/li&gt;
+&lt;li&gt;Practicum: Genome conformation analysis&lt;/li&gt;
+&lt;li&gt;Metagenomics I: Approaches&lt;/li&gt;
+&lt;li&gt;Metagenomics II: Community analysis&lt;/li&gt;
+&lt;li&gt;Practicum: Metagenomics&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;In an examination setting, unless the instructor gives explicit prior instructions to the contrary, violations of academic integrity shall consist of any attempt to receive assistance from written or printed aids, from any person or papers or electronic devices, or of any attempt to give assistance, whether the student doing so has completed his or her own work or not. Other violations include, but are not limited to, any attempt to gain an unfair advantage in regard to an examination, such as tampering with a graded exam or claiming another&amp;rsquo;s work to be one&amp;rsquo;s own. Other assessments (including ANGEL-administered quizzes and assessments as well as homework assignments) are expected to represent your own independent work unless specifically stated otherwise. Failure to comply will lead to sanctions against the student in accordance with the Policy on Academic Integrity in the Eberly College of Science. The Eberly College of Science Code of Mutual Respect and Cooperation (www.science.psu.edu/climate/Code-of-Mutual-Respect-final.pdf) embodies the values that we hope our faculty, staff, and students possess and will endorse to make The Eberly College of Science a place where every individual feels respected and valued, as well as challenged and rewarded.   The Eberly College of Science is committed to the academic success of students enrolled in the College&amp;rsquo;s  courses and undergraduate programs. When in need of help, students can utilize various College and University wide resources for learning assistance (&lt;a href=&#34;http://www.science.psu.edu/advising/success&#34;&gt;http://www.science.psu.edu/advising/success&lt;/a&gt;). Penn State welcomes students with disabilities into the University&amp;rsquo;s educational programs. If you have a disability-related need for reasonable academic adjustments in this course, contact the Office for Disability Services (ODS) at 814-863-1807 (V/TTY). For further information regarding ODS, please visit the Office for Disability Services Web site at &lt;a href=&#34;http://equity.psu.edu/ods/.  &#34;&gt;http://equity.psu.edu/ods/.  &lt;/a&gt; In order to receive consideration for course accommodations, you must contact ODS and provide documentation (see the &lt;a href=&#34;http://equity.psu.edu/student-disability-resources/guidelines&#34;&gt;documentation guidelines&lt;/a&gt;). If the documentation supports the need for academic adjustments, ODS will provide a letter identifying appropriate academic adjustments. Please share this letter and discuss the adjustments with your instructor as early in the course as possible. You must contact ODS and request academic adjustment letters at the beginning of each semester.&lt;/p&gt;
+&lt;/blockquote&gt;
 </description>
     </item>
     

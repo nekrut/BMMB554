@@ -5,10 +5,12 @@ date = "2017-01-25T10:43:18-04:00"
 featureimage = "img/nyc.jpg"
 menu = ""
 tags = []
-title = "Sequence alignment: Introductory concepts"
+title = "3. Sequence alignment: Introductory concepts"
 description = "**Topic 3** | Aligning DNA sequences: An introduction to algorithmic principles"
 
 +++
+
+![](/BMMB554/img/nyc.jpg)
 
 # Introduction
 

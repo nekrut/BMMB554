@@ -5,9 +5,11 @@ date = "2017-01-17T11:17:20-04:00"
 featureimage = "img/illumina_pseudocolor.png"
 menu = ""
 tags = ["NGS","sequencing","DNA"]
-title = "DNA sequencing"
+title = "2. DNA sequencing"
 description = "**Topic 2** | DNA sequencing: From Cambridge (Sanger) to Oxford (Nanopore)"
 +++
+
+![](/BMMB554/img/illumina_pseudocolor.png)
 
 # The 60s and the 70s
 

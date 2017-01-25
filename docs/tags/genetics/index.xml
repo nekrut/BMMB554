@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Genetics on BMMB554 | Fall 2017</title>
+    <title>Genetics on BMMB 554 / 2017</title>
     <link>http://nekrut.github.io/BMMB554/tags/genetics/index.xml</link>
-    <description>Recent content in Genetics on BMMB554 | Fall 2017</description>
+    <description>Recent content in Genetics on BMMB 554 / 2017</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>Released under the MIT license&lt;br&gt;Powered by [Hugo](//gohugo.io/) with the [Type Theme](//github.com/digitalcraftsman/hugo-type-theme)</copyright>
     <atom:link href="http://nekrut.github.io/BMMB554/tags/genetics/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>History</title>
+      <title>1. History</title>
       <link>http://nekrut.github.io/BMMB554/post/topic1/</link>
       <pubDate>Wed, 11 Jan 2017 11:41:14 -0500</pubDate>
       
       <guid>http://nekrut.github.io/BMMB554/post/topic1/</guid>
       <description>
+
+&lt;p&gt;&lt;img src=&#34;http://nekrut.github.io/BMMB554/BMMB554/img/luria_small.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
 &lt;h1 id=&#34;why-history&#34;&gt;Why history?&lt;/h1&gt;
 
@@ -178,7 +179,7 @@ $$
 
 &lt;hr /&gt;
 
-&lt;h1 id=&#34;what-vto-do-before-next-lecture&#34;&gt;What vto do before next lecture&lt;/h1&gt;
+&lt;h1 id=&#34;what-to-do-before-next-lecture&#34;&gt;What to do before next lecture&lt;/h1&gt;
 
 &lt;p&gt;Read two following papers:&lt;/p&gt;
 

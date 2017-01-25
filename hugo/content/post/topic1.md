@@ -5,10 +5,12 @@ date = "2017-01-11T11:41:14-05:00"
 featureimage = "img/luria_small.png"
 menu = ""
 tags = ["history","genetics","DNA"]
-title = "History"
+title = "1. History"
 description = "**Topic 1** | History: From Genetics to Genomics"
 
 +++
+
+![](/BMMB554/img/luria_small.png)
 
 # Why history?
 
@@ -142,7 +144,7 @@ Video presentation from last year.
 
 ------
 
-# What vto do before next lecture
+# What to do before next lecture
 
 Read two following papers:
 

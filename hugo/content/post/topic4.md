@@ -5,10 +5,12 @@ date = "2017-01-25T11:12:04-04:00"
 featureimage = "img/topic4_cover.jpg"
 menu = ""
 tags = []
-title = "Aligning sequences with dynamic programming"
+title = "4. Aligning sequences with dynamic programming"
 description = "**Topic 4** | Aligning DNA sequences: From edit distance to local alignment"
 
 +++
+
+![](/BMMB554/img/topic4_cover.jpg)
 
 # Sequence alignment
 
@@ -114,6 +116,8 @@ While this approach to the edit distance problem is correct, it will hardly help
 ## Video
 
 {{< vimeo 183583352 >}}
+
+------
 
 # Dynamic programming to the rescue
 
@@ -327,6 +331,8 @@ The lower rightmost cell highlighted in red is special. It contains the value fo
 ## Video
 
 {{< vimeo 183583042 >}}
+
+------
 
 # From edit distance to alignment
 
@@ -663,7 +669,9 @@ A A C C C T A T G T C A T G C C T T G G A
 
 {{< vimeo 183587535 >}}
 
-## Global alignment
+------
+
+# Global alignment
 
 So far in filling the dynamic programming matrix we were using the following expression to compute the number within each cell:
 
@@ -1124,6 +1132,7 @@ This algorithm was developed by [Temple Smith and Michael Waterman](http://dorns
 
 {{< vimeo 183588416 >}}
 
+-----
 
 # Next...
 

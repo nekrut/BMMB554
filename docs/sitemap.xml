@@ -22,14 +22,8 @@
   </url>
   
   <url>
-    <loc>http://nekrut.github.io/BMMB554/about/</loc>
+    <loc>http://nekrut.github.io/BMMB554/post/syllabus/</loc>
     <lastmod>2017-01-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://nekrut.github.io/BMMB554/about/</loc>
-    <lastmod>2017-01-09T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -71,6 +65,12 @@
   <url>
     <loc>http://nekrut.github.io/BMMB554/tags/sequencing/</loc>
     <lastmod>2017-01-17T11:17:20-04:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://nekrut.github.io/BMMB554/tags/syllabus/</loc>
+    <lastmod>2017-01-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
