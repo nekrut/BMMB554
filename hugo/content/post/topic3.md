@@ -1,7 +1,7 @@
 +++
 #categories = []
-date = "2016-09-12T10:43:18-04:00"
-draft = true
+date = "2017-01-25T10:43:18-04:00"
+#draft = true
 featureimage = "img/nyc.jpg"
 menu = ""
 tags = []

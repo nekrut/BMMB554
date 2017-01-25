@@ -1,7 +1,7 @@
 +++
 categories = []
-date = "2016-09-19T10:12:04-04:00"
-draft = true
+date = "2017-01-25T11:12:04-04:00"
+#draft = true
 featureimage = "img/topic4_cover.jpg"
 menu = ""
 tags = []
@@ -12,7 +12,7 @@ description = "**Topic 4** | Aligning DNA sequences: From edit distance to local
 
 # Sequence alignment
 
-In the previous lecture we have seen the principle behind dynamic programming. This approach is extremely useful for comparing biological sequences, which is coincidentally one of the main point of this course. This lecture explain how this is done. In writing this text I heavily relied on wonderful [course](http://www.langmead-lab.org/teaching-materials/) taught by Ben Langmead at Johns Hopkins. The cover image shows pairwise alignments for human, mouse, and dog *KIF3* locus from [Dubchak et al. 2000](http://genome.cshlp.org/content/10/9/1304.long).
+In the previous lecture we have seen the principle behind dynamic programming. This approach is extremely useful for comparing biological sequences, which is coincidentally one of the main points of this course. This lecture explain how this is done. In writing this text I heavily relied on wonderful [course](http://www.langmead-lab.org/teaching-materials/) taught by Ben Langmead at Johns Hopkins. The cover image shows pairwise alignments for human, mouse, and dog *KIF3* locus from [Dubchak et al. 2000](http://genome.cshlp.org/content/10/9/1304.long).
 
 ## How different are two sequences?
 
@@ -160,7 +160,7 @@ Let's represent them as the following matrix where the first character $\epsilon
   	$$
 </div>
 
-Let's fill the first column and first raw of the matrix. Because the distance between a string and an empty string is equal to the length of the string (e.g., a distance between string $\texttt{TAG}$ and an empty string is 3) this resulting matrix will look like this:
+Let's fill the first column and first raw of the matrix. Because the distance between a string and an empty string is equal to the length of the string (e.g., a distance between string $\texttt{TCG}$ and an empty string is 3) this resulting matrix will look like this:
 
 <div>
 	$$
@@ -435,7 +435,7 @@ Continuing this idea we will draw a trace like the one below until we hit an int
   	$$
 </div>
 
-At this point we have arrived to this value from the top because 0 + 1 = 1. If we were arriving diagonally it would be 1 + 1 = 0 since $\texttt{G}\ \neq\ \texttt{C}$, so we are turning traceback upward and then again diagonally:
+At this point we have arrived to this value from the top because 0 + 1 = 1. If we were arriving diagonally it would be 1 + 1 = 2 since $\texttt{G}\ \neq\ \texttt{C}$, so we are turning traceback upward and then again diagonally:
 
 
 <div>
