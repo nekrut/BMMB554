@@ -4,7 +4,7 @@ date = "2017-01-25T10:43:18-04:00"
 #draft = true
 featureimage = "img/nyc.jpg"
 menu = ""
-tags = []
+tags = ['dynamic programming']
 title = "3. Sequence alignment: Introductory concepts"
 description = "**Topic 3** | Aligning DNA sequences: An introduction to algorithmic principles"
 

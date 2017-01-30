@@ -1,4 +1,4 @@
-baseurl = "http://nekrut.github.io/BMMB554/"
+baseurl = "https://nekrut.github.io/BMMB554/"
 languageCode = "en-us"
 title = "BMMB 554 / 2017"
 theme = "hugo-theme-blueberry-detox"

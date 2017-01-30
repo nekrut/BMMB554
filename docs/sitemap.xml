@@ -2,80 +2,109 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://nekrut.github.io/BMMB554/post/topic4/</loc>
+    <loc>https://nekrut.github.io/BMMB554/post/topic5/</loc>
+    <lastmod>2017-01-30T10:13:02-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nekrut.github.io/BMMB554/post/topic4/</loc>
     <lastmod>2017-01-25T11:12:04-04:00</lastmod>
   </url>
   
   <url>
-    <loc>http://nekrut.github.io/BMMB554/post/topic3/</loc>
+    <loc>https://nekrut.github.io/BMMB554/post/topic3/</loc>
     <lastmod>2017-01-25T10:43:18-04:00</lastmod>
   </url>
   
   <url>
-    <loc>http://nekrut.github.io/BMMB554/post/topic2/</loc>
+    <loc>https://nekrut.github.io/BMMB554/post/topic2/</loc>
     <lastmod>2017-01-17T11:17:20-04:00</lastmod>
   </url>
   
   <url>
-    <loc>http://nekrut.github.io/BMMB554/post/topic1/</loc>
+    <loc>https://nekrut.github.io/BMMB554/post/topic1/</loc>
     <lastmod>2017-01-11T11:41:14-05:00</lastmod>
   </url>
   
   <url>
-    <loc>http://nekrut.github.io/BMMB554/post/syllabus/</loc>
+    <loc>https://nekrut.github.io/BMMB554/post/syllabus/</loc>
     <lastmod>2017-01-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://nekrut.github.io/BMMB554/</loc>
-    <lastmod>2017-01-25T11:12:04-04:00</lastmod>
+    <loc>https://nekrut.github.io/BMMB554/tags/alignment/</loc>
+    <lastmod>2017-01-30T10:13:02-04:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://nekrut.github.io/BMMB554/tags/dna/</loc>
+    <loc>https://nekrut.github.io/BMMB554/</loc>
+    <lastmod>2017-01-30T10:13:02-04:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://nekrut.github.io/BMMB554/tags/burrows-wheeler-transform/</loc>
+    <lastmod>2017-01-30T10:13:02-04:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://nekrut.github.io/BMMB554/tags/dna/</loc>
     <lastmod>2017-01-17T11:17:20-04:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://nekrut.github.io/BMMB554/tags/genetics/</loc>
+    <loc>https://nekrut.github.io/BMMB554/tags/dynamic-programming/</loc>
+    <lastmod>2017-01-25T10:43:18-04:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://nekrut.github.io/BMMB554/tags/genetics/</loc>
     <lastmod>2017-01-11T11:41:14-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://nekrut.github.io/BMMB554/tags/history/</loc>
+    <loc>https://nekrut.github.io/BMMB554/tags/history/</loc>
     <lastmod>2017-01-11T11:41:14-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://nekrut.github.io/BMMB554/tags/ngs/</loc>
+    <loc>https://nekrut.github.io/BMMB554/tags/mapping/</loc>
+    <lastmod>2017-01-30T10:13:02-04:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://nekrut.github.io/BMMB554/tags/ngs/</loc>
     <lastmod>2017-01-17T11:17:20-04:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://nekrut.github.io/BMMB554/post/</loc>
-    <lastmod>2017-01-25T11:12:04-04:00</lastmod>
+    <loc>https://nekrut.github.io/BMMB554/post/</loc>
+    <lastmod>2017-01-30T10:13:02-04:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://nekrut.github.io/BMMB554/tags/sequencing/</loc>
+    <loc>https://nekrut.github.io/BMMB554/tags/sequencing/</loc>
     <lastmod>2017-01-17T11:17:20-04:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://nekrut.github.io/BMMB554/tags/syllabus/</loc>
+    <loc>https://nekrut.github.io/BMMB554/tags/syllabus/</loc>
     <lastmod>2017-01-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://nekrut.github.io/BMMB554/tags/</loc>
+    <loc>https://nekrut.github.io/BMMB554/tags/</loc>
     <priority>0</priority>
   </url>
   

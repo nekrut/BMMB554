@@ -1,14 +1,16 @@
 +++
 categories = []
-date = "2016-09-26T10:13:02-04:00"
-draft = true
+date = "2017-01-30T10:13:02-04:00"
+#draft = true
 featureimage = "img/topic5_cover.png"
 menu = ""
-tags = []
-title = "Aligning many sequences quickly"
+tags = ['mapping','alignment','burrows-wheeler transform']
+title = "5. Aligning many sequences quickly"
 description = "**Topic 5** | Aligning DNA sequences: Aligning billions of reads"
 
 +++
+
+![](/BMMB554/img/topic5_cover.png)
 
 # Speeding things up
 
@@ -249,7 +251,7 @@ Note, that the trie would look **dramatically** different had we not added the `
 
 >![](http://www.bx.psu.edu/~anton/bioinf-images/suffix_trie_2.png)
 
-In suffix trie every edge is labeled with a single character and nodes have no labels in our representation. However, you can think of every node as being labelled with a string that spells out all characters occurring along a path from the root up to the that node. For example, the blue node `baa` spells out characters `b`, `a`, and `a` along a path from the root.
+In suffix trie every edge is labeled with a single character and nodes have no labels in our representation. However, you can think of every node as being labeled with a string that spells out all characters occurring along a path from the root up to the that node. For example, the blue node `baa` spells out characters `b`, `a`, and `a` along a path from the root.
 
 >![](http://www.bx.psu.edu/~anton/bioinf-images/suffix_trie_3.png)
 
@@ -513,21 +515,6 @@ For human genome with DNA alphabet of four nucleotides, saving checkpoint every 
 * Checkpoints = 3 billion $\times$ 4 bytes/char / 128 &#x2248; 100 MB
 * SA sample = 3 billion $\times$ 4 bytes/char /32 &#x2248; 400 MB
 
-### Watch more
+## Next
 
-As was mentioned in the beginning, this materials follows a series of lectures by Ben Langmead. Below are two of his amazing videos on the subject:
-
-#### BWT and its properties
-
-{{<youtube 4n7NPk5lwbI>}}
-
-#### FM index and its practical applications
-
-{{<youtube kvVGj5V65io>}}
-
-# Next
-
-Enough theory for now. Next time we will start handling actual data...
-
-
-
+We will start pitting these ideas into practice.
