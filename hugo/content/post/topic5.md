@@ -14,11 +14,11 @@ description = "**Topic 5** | Aligning DNA sequences: Aligning billions of reads"
 
 # Speeding things up
 
-The topics we discussed in the past lecture explain fundamental ideas behind analysis of biological sequences. They are essential for understanding how current high throughput approaches evolved. Today, we will be talking about advanced concepts implementation of which allows aligning billions of sequencing reads against reference genomes very quickly. Similarly to the previous lecture I have borrowed heavily from the [course](http://www.langmead-lab.org/teaching-materials/) taught by Ben Langmead at Johns Hopkins. The cover image is from [Wikpedia article](https://en.wikipedia.org/wiki/Burrows%E2%80%93Wheeler_transform) on Burrows-Wheeler transform. 
+The topics we discussed in the past lecture explain fundamental concepts behind analysis of biological sequences. Today, we will be talking about algorithms that allow aligning billions of sequencing reads against reference genomes. Similarly to the previous lecture I have borrowed heavily from the [course](http://www.langmead-lab.org/teaching-materials/) taught by Ben Langmead at Johns Hopkins. The cover image is from [Wikpedia article](https://en.wikipedia.org/wiki/Burrows%E2%80%93Wheeler_transform) on Burrows-Wheeler transform. 
 
 ## The challenge of really large datasets
 
-In the previous lecture we have seen how dynamic programming helps aligning sequences. Unfortunately in reality this approach is not practical for aligning billion of sequencing reads that are routinely generated with NGS technologies. 
+In the previous lecture we have seen how dynamic programming helps aligning sequences. Unfortunately in reality this approach is not practical for aligning billions of sequencing reads that are routinely generated with NGS technologies. 
 
 If you recall the previous lecture, we were finding alignments using the following approach:
 
@@ -56,11 +56,11 @@ The performance of this approach expressed as the [big O notation](https://en.wi
 
 $\mathcal{O}(mn)$
 
-where $n$ is the read length and $m$ is the genome length. The $m$ is large. For instance, in the case of human genome it is $3\times10^9$. On top of that we *very many* reads. The latest Illumina HiSeq 2500 machine can produce as much as $6\times10^9$ 100 bp reads. Taking this into account our big O notation becomes:
+where $n$ is the read length and $m$ is the genome length. $m$ can be **very** large. For instance, in the case of human genome it is $3\times10^9$. On top of that we *very many* reads. The latest Illumina HiSeq 2500 machine can produce as much as $6\times10^9$ 100 bp reads. Taking this into account our big O notation becomes:
 
  $\mathcal{O}(dmn)$
 
- where $d\times m\times n = 2\times10^{21}$ ($d$ stands for *depth*). In other words to compute alignments between a genome and all these reads we need to perform $2\times10^{21}$ cell updates in the dynamic programming matrices even before we start the traceback. On a 1,000 CPU cluster with 3MHz processors this will take over **2** years! 
+ where $d\times m\times n = 2\times10^{21}$ ($d$ stands for *depth*). In other words to compute alignments between a genome and all these reads we need to perform $2\times10^{21}$ cell updates in the dynamic programming matrices even before we start the traceback. On a cluster containing 1,000 3GHz CPUs this will take over **2** years! 
 
 ## Mapping versus alignment
 
@@ -94,7 +94,7 @@ Indexing is not a new idea. Most books have an index where a word is *mapped* ba
 >Forward index. (From [Wikipedia](https://en.wikipedia.org/wiki/Search_engine_indexing)).
 
 
-For what we are interested in (searching for the best location of a read in the reference genome) we will use *inverted index*. We will refer to it simply as *index*. So to find a pattern in string using an index we first need to create that index. To create an index for a string *T* (i.e., a genome) we will need to:
+For what we are interested in (searching for the best location of a read in the reference genome) we will use *inverted index*. We will refer to it simply as *index*. So to find a pattern in a string using an index we first need to create that index. To create an index for a string *T* (i.e., a genome) we will need to:
 
  * extract substrings of length *L* and record where these substrings occur;
  * organize the list of substrings and their coordinates and an easily accessible data structure (a *map*).
@@ -229,12 +229,12 @@ Let's now use these rules to build a suffix trie for a much simpler text *T* = `
 
 ```
 abaaba$
-baaba$
-aaba$
-aba$
-ba$
-a$
-$
+ baaba$
+  aaba$
+   aba$
+    ba$
+     a$
+      $
 ```
 
 now let's create a trie:

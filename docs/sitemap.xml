@@ -57,7 +57,7 @@
   
   <url>
     <loc>https://nekrut.github.io/BMMB554/tags/dynamic-programming/</loc>
-    <lastmod>2017-01-25T10:43:18-04:00</lastmod>
+    <lastmod>2017-01-25T11:12:04-04:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -68,8 +68,20 @@
   </url>
   
   <url>
+    <loc>https://nekrut.github.io/BMMB554/tags/global-alignment/</loc>
+    <lastmod>2017-01-25T11:12:04-04:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://nekrut.github.io/BMMB554/tags/history/</loc>
     <lastmod>2017-01-11T11:41:14-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://nekrut.github.io/BMMB554/tags/local-alignment/</loc>
+    <lastmod>2017-01-25T11:12:04-04:00</lastmod>
     <priority>0</priority>
   </url>
   

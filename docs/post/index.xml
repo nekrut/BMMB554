@@ -21,11 +21,11 @@
 
 &lt;h1 id=&#34;speeding-things-up&#34;&gt;Speeding things up&lt;/h1&gt;
 
-&lt;p&gt;The topics we discussed in the past lecture explain fundamental ideas behind analysis of biological sequences. They are essential for understanding how current high throughput approaches evolved. Today, we will be talking about advanced concepts implementation of which allows aligning billions of sequencing reads against reference genomes very quickly. Similarly to the previous lecture I have borrowed heavily from the &lt;a href=&#34;http://www.langmead-lab.org/teaching-materials/&#34;&gt;course&lt;/a&gt; taught by Ben Langmead at Johns Hopkins. The cover image is from &lt;a href=&#34;https://en.wikipedia.org/wiki/Burrows%E2%80%93Wheeler_transform&#34;&gt;Wikpedia article&lt;/a&gt; on Burrows-Wheeler transform.&lt;/p&gt;
+&lt;p&gt;The topics we discussed in the past lecture explain fundamental concepts behind analysis of biological sequences. Today, we will be talking about algorithms that allow aligning billions of sequencing reads against reference genomes. Similarly to the previous lecture I have borrowed heavily from the &lt;a href=&#34;http://www.langmead-lab.org/teaching-materials/&#34;&gt;course&lt;/a&gt; taught by Ben Langmead at Johns Hopkins. The cover image is from &lt;a href=&#34;https://en.wikipedia.org/wiki/Burrows%E2%80%93Wheeler_transform&#34;&gt;Wikpedia article&lt;/a&gt; on Burrows-Wheeler transform.&lt;/p&gt;
 
 &lt;h2 id=&#34;the-challenge-of-really-large-datasets&#34;&gt;The challenge of really large datasets&lt;/h2&gt;
 
-&lt;p&gt;In the previous lecture we have seen how dynamic programming helps aligning sequences. Unfortunately in reality this approach is not practical for aligning billion of sequencing reads that are routinely generated with NGS technologies.&lt;/p&gt;
+&lt;p&gt;In the previous lecture we have seen how dynamic programming helps aligning sequences. Unfortunately in reality this approach is not practical for aligning billions of sequencing reads that are routinely generated with NGS technologies.&lt;/p&gt;
 
 &lt;p&gt;If you recall the previous lecture, we were finding alignments using the following approach:&lt;/p&gt;
 
@@ -63,11 +63,11 @@ $$
 
 &lt;p&gt;$\mathcal{O}(mn)$&lt;/p&gt;
 
-&lt;p&gt;where $n$ is the read length and $m$ is the genome length. The $m$ is large. For instance, in the case of human genome it is $3\times10^9$. On top of that we &lt;em&gt;very many&lt;/em&gt; reads. The latest Illumina HiSeq 2500 machine can produce as much as $6\times10^9$ 100 bp reads. Taking this into account our big O notation becomes:&lt;/p&gt;
+&lt;p&gt;where $n$ is the read length and $m$ is the genome length. $m$ can be &lt;strong&gt;very&lt;/strong&gt; large. For instance, in the case of human genome it is $3\times10^9$. On top of that we &lt;em&gt;very many&lt;/em&gt; reads. The latest Illumina HiSeq 2500 machine can produce as much as $6\times10^9$ 100 bp reads. Taking this into account our big O notation becomes:&lt;/p&gt;
 
 &lt;p&gt;$\mathcal{O}(dmn)$&lt;/p&gt;
 
-&lt;p&gt;where $d\times m\times n = 2\times10^{21}$ ($d$ stands for &lt;em&gt;depth&lt;/em&gt;). In other words to compute alignments between a genome and all these reads we need to perform $2\times10^{21}$ cell updates in the dynamic programming matrices even before we start the traceback. On a 1,000 CPU cluster with 3MHz processors this will take over &lt;strong&gt;2&lt;/strong&gt; years!&lt;/p&gt;
+&lt;p&gt;where $d\times m\times n = 2\times10^{21}$ ($d$ stands for &lt;em&gt;depth&lt;/em&gt;). In other words to compute alignments between a genome and all these reads we need to perform $2\times10^{21}$ cell updates in the dynamic programming matrices even before we start the traceback. On a cluster containing 1,000 3GHz CPUs this will take over &lt;strong&gt;2&lt;/strong&gt; years!&lt;/p&gt;
 
 &lt;h2 id=&#34;mapping-versus-alignment&#34;&gt;Mapping versus alignment&lt;/h2&gt;
 
@@ -105,7 +105,7 @@ $$
 &lt;p&gt;Forward index. (From &lt;a href=&#34;https://en.wikipedia.org/wiki/Search_engine_indexing&#34;&gt;Wikipedia&lt;/a&gt;).&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;For what we are interested in (searching for the best location of a read in the reference genome) we will use &lt;em&gt;inverted index&lt;/em&gt;. We will refer to it simply as &lt;em&gt;index&lt;/em&gt;. So to find a pattern in string using an index we first need to create that index. To create an index for a string &lt;em&gt;T&lt;/em&gt; (i.e., a genome) we will need to:&lt;/p&gt;
+&lt;p&gt;For what we are interested in (searching for the best location of a read in the reference genome) we will use &lt;em&gt;inverted index&lt;/em&gt;. We will refer to it simply as &lt;em&gt;index&lt;/em&gt;. So to find a pattern in a string using an index we first need to create that index. To create an index for a string &lt;em&gt;T&lt;/em&gt; (i.e., a genome) we will need to:&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;extract substrings of length &lt;em&gt;L&lt;/em&gt; and record where these substrings occur;&lt;/li&gt;
@@ -353,12 +353,12 @@ $$
 &lt;p&gt;Let&amp;rsquo;s now use these rules to build a suffix trie for a much simpler text &lt;em&gt;T&lt;/em&gt; = &lt;code&gt;abaaba&lt;/code&gt;. It is much smaller than the text we used above and so it will be easier to get the point across. First, let&amp;rsquo;s add &lt;code&gt;$&lt;/code&gt; and create a list of all suffixes:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;abaaba$
-baaba$
-aaba$
-aba$
-ba$
-a$
-$
+ baaba$
+  aaba$
+   aba$
+    ba$
+     a$
+      $
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;now let&amp;rsquo;s create a trie:&lt;/p&gt;

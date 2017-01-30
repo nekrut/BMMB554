@@ -4,7 +4,7 @@ date = "2017-01-25T11:12:04-04:00"
 #draft = true
 featureimage = "img/topic4_cover.jpg"
 menu = ""
-tags = []
+tags = ['global alignment','local alignment','dynamic programming']
 title = "4. Aligning sequences with dynamic programming"
 description = "**Topic 4** | Aligning DNA sequences: From edit distance to local alignment"
 
