@@ -1,14 +1,16 @@
 +++
 categories = []
-date = "2016-10-10T11:26:49-04:00"
-draft = true
+date = "2017-02-01T11:26:49-04:00"
+#draft = true
 featureimage = "img/topic7_cover.png"
 menu = ""
 tags = []
-title = "NGS data: Practicalities"
+title = "7. NGS data: Practicalities"
 description = "**Topic 7** | Handling NGS data: from FASTQ to BAM"
 
 +++
+
+![](/BMMB554/img/topic7_cover.png)
 
 In this section we will look at practical aspects of manipulation of next-generation sequencing data. We will start with Fastq format produced by most sequencing machines and will finish with SAM/BAM format representing mapped reads. The cover image above shows a screen dump of a SAM dataset. 
 

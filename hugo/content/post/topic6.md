@@ -1,14 +1,16 @@
 +++
 categories = []
-date = "2016-09-30T10:39:09-04:00"
-draft = true
+date = "2017-02-01T10:39:09-04:00"
+#draft = true
 featureimage = "img/topic6_cover.png"
 menu = ""
 tags = []
-title = "Introduction to Galaxy: Exons and Repeats"
+title = "6. Introduction to Galaxy: Exons and Repeats"
 description = "**Topic 6** | Introduction to Galaxy platform for data manipulation and analysis"
 
 +++
+
+![](/BMMB554/img/topic6_cover.png)
 
 # Introduction to Galaxy
 
