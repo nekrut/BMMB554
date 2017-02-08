@@ -6,13 +6,13 @@
     <description>Recent content in Posts on BMMB 554 / 2017</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 01 Feb 2017 11:26:49 -0400</lastBuildDate>
+    <lastBuildDate>Wed, 08 Feb 2017 11:26:49 -0400</lastBuildDate>
     <atom:link href="https://nekrut.github.io/BMMB554/post/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>7. NGS data: Practicalities</title>
       <link>https://nekrut.github.io/BMMB554/post/topic7/</link>
-      <pubDate>Wed, 01 Feb 2017 11:26:49 -0400</pubDate>
+      <pubDate>Wed, 08 Feb 2017 11:26:49 -0400</pubDate>
       
       <guid>https://nekrut.github.io/BMMB554/post/topic7/</guid>
       <description>
@@ -578,7 +578,7 @@ pairs in the format of &lt;code&gt;&amp;lt;TAG&amp;gt;:&amp;lt;TYPE&amp;gt;:&amp
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://deeptools.github.io/&#34;&gt;DeepTools&lt;/a&gt; - a suite of user-friendly tools for the visualization, quality control and normalization of data from deep-sequencing DNA sequencing experiments.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;[http://www.htslib.org/&#34;&gt;SAMtools&lt;/a&gt; - various utilities for manipulating alignments in the SAM/BAM format, including sorting, merging, indexing and generating alignments in a per-position format.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.htslib.org/&#34;&gt;SAMtools&lt;/a&gt; - various utilities for manipulating alignments in the SAM/BAM format, including sorting, merging, indexing and generating alignments in a per-position format.&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/pezmaster31/bamtools/wiki/Tutorial_Toolkit_BamTools-1.0.pdf&#34;&gt;BAMtools&lt;/a&gt; - a toolkit for reading, writing, and manipulating BAM (genome alignment) files.&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;http://broadinstitute.github.io/picard/&#34;&gt;Picard&lt;/a&gt; - a set of Java tools for manipulating high-throughput sequencing data (HTS) data and formats.&lt;/li&gt;
 &lt;/ul&gt;
