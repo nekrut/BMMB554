@@ -1,13 +1,13 @@
 +++
-date = "2016-10-26T11:42:45-04:00"
-title = "Diploid variant calling"
+date = "2017-02-12T11:42:45-04:00"
+title = "8. Diploid variant calling"
 tags = [
 ]
 categories = [
 ]
 featureimage = "img/topic8_cover.png"
 menu = ""
-draft = true
+#draft = true
 description = "**Topic 8** | Finding varinats in the human genome"
 
 +++
@@ -56,7 +56,7 @@ The capitalized position contains a G &#8594; A [transition](https://en.wikipedi
 
 The modern variant callers attempt to assign a reliability estimate for each genotype call. This is done using Bayes reasoning (for a great visual explanation see [blog](https://oscarbonilla.com/2009/05/visualizing-bayes-theorem/) by Oscar Bonilla). Here we present a SNP-relevant "translation" on this explanation (with inspiration from [Erik Garrison](https://github.com/ekg)).
 
-Suppose in a population you have $A$ individuals (not to be confused with nucleotide **A**; in this case $A$ is a number of individuals) with a variant. You are performing re-sequencing and observe a variant in $B$ (again, a number) of your sequencing reads. We want to estimate the probability of having the real polymorphism in th epopulation given our observations in sequencing reads. The logic is as follows:
+Suppose in a population you have $A$ individuals (not to be confused with nucleotide **A**; in this case $A$ is a number of individuals) with a variant. You are performing re-sequencing and observe a variant in $B$ (again, a number) of your sequencing reads. We want to estimate the probability of having the real polymorphism in the population given our observations in sequencing reads. The logic is as follows:
 
  * The probability of having polymorphism **A** in the population is $P(A) = |A|/|U|$
  * The probability of seeing a variant given our identification approach (i.e., sequencing) is $P(B) = |B|/|U|$
@@ -258,7 +258,7 @@ into **The query to be issued to the database** field of the interface:
 
 As we can see from [output (Click this link to see it)](https://usegalaxy.org/datasets/bbd44e69cb8906b51bb37b9032761321/display/?preview=True) there are 21 variants that are not annotated in dbSNP.
 
-> #### *Which variants are fount within POLRMT gene?* 
+> #### *Which variants are found within POLRMT gene?* 
 
 To answer this type:
 
@@ -350,7 +350,7 @@ Wilcards simply writing SQL expressions when searching across multiple terms. Th
 Let's try a few examples.
 
 
-> #### *At which variants are every sample heterozygous?*
+> #### *At which variants all samples are heterozygous?*
 
 Type
 

@@ -1,13 +1,13 @@
 +++
-draft = true
+#draft = true
 tags = [
 ]
 categories = [
 ]
 featureimage = "img/topic9_cover.png"
 menu = ""
-date = "2016-10-31T10:11:10-04:00"
-title = "Non-diploid variant calling"
+date = "2017-02-13T10:11:10-04:00"
+title = "9. Non-diploid variant calling"
 description = "**Topic 9** | Finding variants in mixed samples"
 
 +++
@@ -452,8 +452,6 @@ Suppose you obtained a virus from some source and you would like to see how it i
 - [Reverse reads](http://www.bx.psu.edu/~anton/share/ng_test_data/bmmb554/hw4/r.fq.gz)
 
 Analyze these files using Galaxy as was explained in this lesson by mapping them against [this reference genome](http://www.bx.psu.edu/~anton/share/ng_test_data/bmmb554/hw4/phix.fa) (again right click to copy the address); see *Hints*). 
-
-Use [this form](https://goo.gl/forms/744Z7LovztR36kj22) to submit your answer. In your answer describe the site(s) you have found. 
 
 #### Hints
 

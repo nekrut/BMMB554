@@ -1,121 +1,57 @@
 <!DOCTYPE html>
-<html lang="en-us">
-<head>
-	<title>Diploid variant calling&middot; BMMB554 | Fall 2016</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="author" content="Anton Nekrutenko">
-	<meta name="description" content="Introduction to data driven life sciences">
-	<meta name="keywords" content="genomes, genetics, ngs, data analysis">
-	<meta name="generator" content="Hugo 0.17" />
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" prefix="og: http://ogp.me/ns#" xmlns:og="http://ogp.me/ns#"><!--<![endif]-->
 
-	<!-- CSS -->
-	<link rel="stylesheet" href="http://nekrut.github.io/BMMB554/css/main.css">
-
-	<!--Favicon-->
-	<link rel="shortcut icon" href="http://nekrut.github.io/BMMB554/favicon.ico" type="image/x-icon">
-
-	<!-- RSS -->
+    <head>
+                <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="**Topic 8** | Finding varinats in the human genome">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="author" content="Anton Nekrutenko">
+  
 	
-
-	<!-- Font Awesome -->
-	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-
-	<!-- Google Fonts -->
-	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
-
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
-</head>
+        <meta property="og:site_name" content="BMMB 554 / 2017">
+        <meta property="og:title" content="BMMB 554 / 2017">
+        <meta property="og:url" content="https://nekrut.github.io/BMMB554/post/topic8/">
+        <meta property="og:description" content="Introduction to data driven life sciences">
+    
+        <meta property="og:type" content="article" />
+        <meta property="og:article:author" content="Anton Nekrutenko" />
+        <meta property="og:article:published_time" content="2017-02-12T11:42:45-04:00" />
+    
+        <meta name="generator" content="Hugo 0.18.1" />
+        <title>8. Diploid variant calling &middot; BMMB 554 / 2017</title>
+        <link rel="canonical" href="https://nekrut.github.io/BMMB554/" />
+        <link rel="alternate" type="application/rss+xml" title="RSS" href="">
+        <link rel="stylesheet" type="text/css" href="https://nekrut.github.io/BMMB554/css/main.css"/>
+        <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200|Montserrat:700" rel="stylesheet" type="text/css">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+        <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    </head>
 
 <body>
-    <header class="site-header">
-	<div class="branding">
-		<a href="http://nekrut.github.io/BMMB554/">
-		<img class="avatar" src="http://nekrut.github.io/BMMB554/img/gxy.png" alt=""/>
-		</a>
-		<h1 class="site-title">
-			<a href="http://nekrut.github.io/BMMB554/">BMMB554 | Fall 2016</a>
-		</h1>
-	</div>
-	<nav class="site-nav">
-		<ul>
-	      	<li><a href="/BMMB554/about/"> Syllabus </a></li>
+<!--[if lt IE 7]><p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chrome/‎">install Google Chrome</a> to experience this site.</p><![endif]-->
 
-	      	<li>
-	<a href="http://nekrut.github.io/BMMB554/" title="">
-		<i class="fa fa-fw fa-home"></i>
-	</a>
-</li>
+    <header id="site-header">
+        <div class="container">
+            <a href="https://nekrut.github.io/BMMB554/" alt="BMMB 554 / 2017"><h1 class="blog-title heading">BMMB 554 / 2017</h1></a>
+            <p class="blog-description">Introduction to data driven life sciences</p>
+        </div>
+    </header>
+<main class="content" role="main">
+	<div class="container">
+		<article class="post">
+	<header class="post-header">
+        <h3 class="p-post-title">8. Diploid variant calling</h3>
+    </header>
 
-
-
-<li>
-	<a href="mailto:aun1@psu.edu" title="Email">
-		<i class="fa fa-fw fa-envelope"></i>
-	</a>
-</li>
-
-
-
-
-
-
-
-
-
-
-
-<li>
-	<a href="https://github.com/nekrut" title="Github">
-		<i class="fa fa-fw fa-github"></i>
-	</a>
-</li>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<li>
-	<a href="https://twitter.com/galaxyproject" title="Twitter">
-		<i class="fa fa-fw fa-twitter"></i>
-	</a>
-</li>
-
-
-
-
-
-
-
-	    </ul>
-	</nav>
-</header>
-
-
-    <div class="content">
-    <article class="feature-image">
-		<header style="background-image: url('http://nekrut.github.io/BMMB554/img/topic8_cover.png')">
-			<h1 class="title">Diploid variant calling</h1>
-		</header>
-
-	<section class="post-content">
-		
+    <section class="post-content">
+        
 
 <p>Today we hear a lot about personalized medicine. Yet the <em>personalization</em> is defined by the genetic make up of the individual. Today we will discuss how this information can be uncovered from the genomic sequencing data. The figure above shows distribution of rare and common variants in 1,092 human genomes described by the <a href="http://www.nature.com/nature/journal/v491/n7422/abs/nature11632.html">1000 Genome Consortium</a>.</p>
 
@@ -166,7 +102,7 @@ READ5:     atcatgacggcaGtagc
 
 <p>The modern variant callers attempt to assign a reliability estimate for each genotype call. This is done using Bayes reasoning (for a great visual explanation see <a href="https://oscarbonilla.com/2009/05/visualizing-bayes-theorem/">blog</a> by Oscar Bonilla). Here we present a SNP-relevant &ldquo;translation&rdquo; on this explanation (with inspiration from <a href="https://github.com/ekg">Erik Garrison</a>).</p>
 
-<p>Suppose in a population you have $A$ individuals (not to be confused with nucleotide <strong>A</strong>; in this case $A$ is a number of individuals) with a variant. You are performing re-sequencing and observe a variant in $B$ (again, a number) of your sequencing reads. We want to estimate the probability of having the real polymorphism in th epopulation given our observations in sequencing reads. The logic is as follows:</p>
+<p>Suppose in a population you have $A$ individuals (not to be confused with nucleotide <strong>A</strong>; in this case $A$ is a number of individuals) with a variant. You are performing re-sequencing and observe a variant in $B$ (again, a number) of your sequencing reads. We want to estimate the probability of having the real polymorphism in the population given our observations in sequencing reads. The logic is as follows:</p>
 
 <ul>
 <li>The probability of having polymorphism <strong>A</strong> in the population is $P(A) = |A|/|U|$</li>
@@ -417,7 +353,7 @@ The examples below are taken from &ldquo;<a href="https://s3.amazonaws.com/gemin
 <p>As we can see from <a href="https://usegalaxy.org/datasets/bbd44e69cb8906b51bb37b9032761321/display/?preview=True">output (Click this link to see it)</a> there are 21 variants that are not annotated in dbSNP.</p>
 
 <blockquote>
-<h4 id="which-variants-are-fount-within-polrmt-gene"><em>Which variants are fount within POLRMT gene?</em></h4>
+<h4 id="which-variants-are-found-within-polrmt-gene"><em>Which variants are found within POLRMT gene?</em></h4>
 </blockquote>
 
 <p>To answer this type:</p>
@@ -508,7 +444,7 @@ The examples below are taken from &ldquo;<a href="https://s3.amazonaws.com/gemin
 <p>Let&rsquo;s try a few examples.</p>
 
 <blockquote>
-<h4 id="at-which-variants-are-every-sample-heterozygous"><em>At which variants are every sample heterozygous?</em></h4>
+<h4 id="at-which-variants-all-samples-are-heterozygous"><em>At which variants all samples are heterozygous?</em></h4>
 </blockquote>
 
 <p>Type</p>
@@ -612,17 +548,57 @@ The examples below are taken from &ldquo;<a href="https://s3.amazonaws.com/gemin
 <li>and so on&hellip;.</li>
 </ul>
 
-	</section>
-    </div>
+    </section>
 
-    <footer class="site-footer">
-	<p class="text">&copy; 2016 - Released under the MIT license<br>Powered by <a href="//gohugo.io/">Hugo</a> with the <a href="//github.com/digitalcraftsman/hugo-type-theme">Type Theme</a></p>
-</footer>
+    <hr>
 
-<script type="text/javascript"
+    <footer class="post-footer">
+        <section class="f-1">
+            
+            
+            <p class="f-post-time"><time datetime="2017-02-12T11:42:45-04:00">February 12, 2017</time></p>
+        </section>
+                        
+        <section class="f-2">
+            <section class="share">
+                <span>Share:
+                <a class="icon-twitter" href="http://twitter.com/share?text=8.%20Diploid%20variant%20calling&url=https%3a%2f%2fnekrut.github.io%2fBMMB554%2fpost%2ftopic8%2f"
+                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="fa fa-twitter"></i>
+                </a>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fnekrut.github.io%2fBMMB554%2fpost%2ftopic8%2f"
+                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="fa fa-facebook"></i>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=https%3a%2f%2fnekrut.github.io%2fBMMB554%2fpost%2ftopic8%2f"
+                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="fa fa-google-plus"></i>
+                </a>
+                </span>
+            </section>
+
+            
+        </section>
+                        
+    </footer>
+</article>
+	</div>
+</main>
+    <footer id="site-footer">
+    <hr>
+        <div class="container">
+            
+            <section><a href="https://nekrut.github.io/BMMB554/">Anton Nekrutenko</a> 2017 | MIT License</section>
+        </div>
+    </footer>
+
+    <script type="text/javascript" src="https://nekrut.github.io/BMMB554/js/fittext.js"></script>
+    <script type="text/javascript">
+      $(".heading").fitText();
+    </script>
+    <script type="text/javascript"
   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
-
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
@@ -649,17 +625,6 @@ MathJax.Hub.Config({
 });
 </script>
 
-
-
-<script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-83364979-1', 'auto');
-ga('send', 'pageview');
-</script>
 
 </body>
 </html>
