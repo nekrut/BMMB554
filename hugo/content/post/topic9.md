@@ -448,19 +448,15 @@ Now you know how to call variants in non-diploid system, so try it on bacteria, 
 
 Suppose you obtained a virus from some source and you would like to see how it is different from its published reference sequence. You have sequenced the virus and obtained two Illumina files (these files are large, so don't open them. Rather copy their addresses (right click) and use them to upload into Galaxy as explained in *Hints* section below):
 
-- [Forward reads](http://www.bx.psu.edu/~anton/share/ng_test_data/bmmb554/hw4/f.fq.gz)
-- [Reverse reads](http://www.bx.psu.edu/~anton/share/ng_test_data/bmmb554/hw4/r.fq.gz)
+- [Forward reads](https://github.com/nekrut/BMMB554/raw/master/hugo/static/f.fq.gz)
+- [Reverse reads](https://github.com/nekrut/BMMB554/raw/master/hugo/static/r.fq.gz)
 
-Analyze these files using Galaxy as was explained in this lesson by mapping them against [this reference genome](http://www.bx.psu.edu/~anton/share/ng_test_data/bmmb554/hw4/phix.fa) (again right click to copy the address); see *Hints*). 
+Analyze these files using Galaxy as was explained in this lesson by mapping them against [this reference genome](https://github.com/nekrut/BMMB554/raw/master/hugo/static/phix.fa.gz) (again right click to copy the address); see *Hints*). 
 
 #### Hints
 
 - You need to upload reads and the reference genome into Galaxy (http://usegalaxy.org) as shown in [this video](https://vimeo.com/120973708)
 - You will be mapping reads against an uploaded reference genome as shown in [this video](https://vimeo.com/123108417).
-
-
-
-
 
 
 

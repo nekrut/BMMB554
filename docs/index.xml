@@ -891,11 +891,11 @@ Child    791   767
 &lt;p&gt;Suppose you obtained a virus from some source and you would like to see how it is different from its published reference sequence. You have sequenced the virus and obtained two Illumina files (these files are large, so don&amp;rsquo;t open them. Rather copy their addresses (right click) and use them to upload into Galaxy as explained in &lt;em&gt;Hints&lt;/em&gt; section below):&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://www.bx.psu.edu/~anton/share/ng_test_data/bmmb554/hw4/f.fq.gz&#34;&gt;Forward reads&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://www.bx.psu.edu/~anton/share/ng_test_data/bmmb554/hw4/r.fq.gz&#34;&gt;Reverse reads&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/nekrut/BMMB554/raw/master/hugo/static/f.fq.gz&#34;&gt;Forward reads&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/nekrut/BMMB554/raw/master/hugo/static/r.fq.gz&#34;&gt;Reverse reads&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Analyze these files using Galaxy as was explained in this lesson by mapping them against &lt;a href=&#34;http://www.bx.psu.edu/~anton/share/ng_test_data/bmmb554/hw4/phix.fa&#34;&gt;this reference genome&lt;/a&gt; (again right click to copy the address); see &lt;em&gt;Hints&lt;/em&gt;).&lt;/p&gt;
+&lt;p&gt;Analyze these files using Galaxy as was explained in this lesson by mapping them against &lt;a href=&#34;https://github.com/nekrut/BMMB554/raw/master/hugo/static/phix.fa.gz&#34;&gt;this reference genome&lt;/a&gt; (again right click to copy the address); see &lt;em&gt;Hints&lt;/em&gt;).&lt;/p&gt;
 
 &lt;h4 id=&#34;hints&#34;&gt;Hints&lt;/h4&gt;
 
