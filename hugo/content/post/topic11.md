@@ -1,14 +1,14 @@
 +++
 menu = ""
-draft = true
+#draft = true
 tags = [
 ]
 categories = [
 ]
 featureimage = "img/topic11_cover.png"
-date = "2016-11-16T09:51:16-05:00"
-description = "**Topic 11** | Reference-based RNA seq"
-title = "Reference-based RNA-seq"
+date = "2017-02-27T09:51:16-05:00"
+description = "**Topic 12** | Reference-based RNA seq"
+title = "12. Reference-based RNA-seq"
 
 +++
 

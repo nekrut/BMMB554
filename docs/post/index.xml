@@ -6,8 +6,535 @@
     <description>Recent content in Posts on BMMB 554 / 2017</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 20 Feb 2017 17:19:07 -0500</lastBuildDate>
+    <lastBuildDate>Mon, 27 Feb 2017 09:51:16 -0500</lastBuildDate>
     <atom:link href="https://nekrut.github.io/BMMB554/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>12. Reference-based RNA-seq</title>
+      <link>https://nekrut.github.io/BMMB554/post/topic11/</link>
+      <pubDate>Mon, 27 Feb 2017 09:51:16 -0500</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/post/topic11/</guid>
+      <description>
+
+&lt;h1 id=&#34;rnaseq-reference-based&#34;&gt;RNAseq: Reference-based&lt;/h1&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;This tutorial is inspired by an exceptional &lt;a href=&#34;http://chagall.med.cornell.edu/RNASEQcourse/&#34;&gt;RNAseq course&lt;/a&gt; at the Weill Cornell Medical College compiled by Friederike Dündar, Luce Skrabanek, and Paul Zumbo and by tutorials produced by Björn Grüning (@bgruening) for Freiburg Galaxy instance. Much of Galaxy-related features described in this section have been developed by Björn Grüning (@bgruening) and configured by Dave Bouvier (@davebx).&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;RNAseq can be roughly divided into two &amp;ldquo;types&amp;rdquo;:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Reference genome-based&lt;/strong&gt; - an assembled genome exists for a species for which an RNAseq experiment is performed. It allows reads to be aligned against the reference genome and significantly improves our ability to reconstruct transcripts. This category would obviously include humans and most model organisms but excludes the majority of truly biologically intereting species (e.g., &lt;a href=&#34;https://en.wikipedia.org/wiki/Hyacinth_macaw&#34;&gt;Hyacinth macaw&lt;/a&gt;);&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Reference genome-free&lt;/strong&gt; - no genome assembly for the species of interest is available. In this case one would need to assemble the reads into transcripts using &lt;em&gt;de novo&lt;/em&gt; approaches. This type of RNAseq is as much of an art as well as science because assembly is heavily parameter-dependent and difficult to do well.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In this lesson we will focus on the &lt;strong&gt;Reference genome-based&lt;/strong&gt; type of RNA seq.&lt;/p&gt;
+
+&lt;h2 id=&#34;experimental-procedures-affect-downstream-analyses&#34;&gt;Experimental procedures affect downstream analyses&lt;/h2&gt;
+
+&lt;p&gt;The &lt;em&gt;Everything&amp;rsquo;s connected&lt;/em&gt; slide by Dündar et al. (2015) explains the overall idea:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/everything_connected.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;There is a variety of ways in which RNA is treated during its conversion to cDNA and eventual preparation of sequencing libraries. In general the experimental workflow includes the following steps:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;RNA purification;&lt;/li&gt;
+&lt;li&gt;Reverse transcription using Reverse Transcriptase (RT), which produces the first strand of cDNA (&amp;ldquo;c&amp;rdquo; stands for &lt;em&gt;complimentary&lt;/em&gt;);&lt;/li&gt;
+&lt;li&gt;Second strand synthesis using DNA polymerase;&lt;/li&gt;
+&lt;li&gt;Library preparation for sequencing.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In listing these basic steps we are ignoring a vast amount of details such as, for example, normalization strategies and procedures needed to deal with rare RNAs or degraded samples (see &lt;a href=&#34;http://nature.com/nmeth/journal/v10/n7/full/nmeth.2483.html&#34;&gt;Adiconis:2013&lt;/a&gt;). Yet, there are two important experimental considerations that would effect the ways in which one analyses data and interprets the results. These are:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Priming for the first cDNA strand synthesis;&lt;/li&gt;
+&lt;li&gt;Stranded versus Non-stranded libraries.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;priming-for-the-first-strand-synthesis&#34;&gt;Priming for the first strand synthesis&lt;/h3&gt;
+
+&lt;p&gt;Reverse Transcriptase (RT) requires a primer. One can leverage the fact that the majority of processed mRNAs are polyadenylated and use oligo-dT primer to (mostly) restrict cDNA synthesis to fully processed mRNAs. Alternatively one can use a mix of random oligonucleotides to prime RT at a multitude of internal sites irrespective of RNA type and maturation status:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/dT_random.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Oligo-dT vs. random priming&lt;/strong&gt;&lt;br&gt;
+Oligo-dT (&lt;strong&gt;A&lt;/strong&gt;) and random priming (&lt;strong&gt;B&lt;/strong&gt;)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Depending on the choice of the approach one would have different types of RNAs included in the final sequencing outcome. For example, if one attempts to study RNAs that are not polyadenylated or not fully processed, it would be unwise to use oligo-dT priming approach.&lt;/p&gt;
+
+&lt;h3 id=&#34;strand-specific-rnaseq&#34;&gt;Strand-specific RNAseq&lt;/h3&gt;
+
+&lt;p&gt;RNAs that are typically targeted in RNAseq experiments are single stranded (e.g., mRNAs) and thus have polarity (5&amp;rsquo; and 3&amp;rsquo; ends that are functionally distinct):&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/dna_rna.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Relationship between DNA and RNA orientation&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;During a typical RNAseq experiment the information about strandedness is lost after both strands of cDNA are synthesized, size selected, and converted into sequencing library. However, this information can be quite useful for various aspects of RNAseq analysis such as transcript reconstruction and quantification. There is a number of methods for creating so called &lt;em&gt;stranded&lt;/em&gt; RNAseq libraries that preserve the strand information (for an excellent overview see Levin et al. &lt;a href=&#34;http://www.nature.com/nmeth/journal/v7/n9/full/nmeth.1491.html&#34;&gt;2010&lt;/a&gt;):&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.nature.com/nmeth/journal/v7/n9/fig_tab/nmeth.1491_F1.html&#34;&gt;&lt;img src=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/stranded_protocols.png&#34; alt=&#34;&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Generation of stranded RNAseq libraries&lt;/strong&gt;&lt;br&gt;
+Different types of stranded library generation protocols from &lt;a href=&#34;http://www.nature.com/nmeth/journal/v7/n9/full/nmeth.1491.html&#34;&gt;Levin:2010&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Depending on the approach and whether one performs single- or paired-end sequencing there are multiple possibilities on how to interpret the results of mapping of these reads onto genome/transcriptome:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;http://sailfish.readthedocs.org/en/master/library_type.html&#34;&gt;&lt;img src=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/lib_type.png&#34; alt=&#34;&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Effects of RNAseq library types&lt;/strong&gt;&lt;br&gt;
+Image and description below is from &lt;a href=&#34;http://sailfish.readthedocs.org/en/master/library_type.html&#34;&gt;Sailfish documentation&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The relative orientation of the reads is only relevant if the library is pair-ended. The possible options are:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;I&lt;/strong&gt; = inward;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;O&lt;/strong&gt; = outward;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;M&lt;/strong&gt; = matching (co-directional).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Library can be stranded (&lt;strong&gt;S&lt;/strong&gt;) or unstranded (&lt;strong&gt;U&lt;/strong&gt;). If this library is stranded than depending on the protocols reads (single reads or forward reads in a paired-end run) may originate from:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;F&lt;/strong&gt; = read 1 in paired-end sequencing or single-end read is derived from the Forward strand;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;R&lt;/strong&gt; = read 1 in paired-end sequencing or single-end read is derived from the Reverse strand.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;So by combining the relative orientation of reads is I, O, or M (if reads are paired), strandedness or the library (S or U), and whether the reads originate from forward and reverse strand (F or R) there can be quite a number of possibilities:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;IU  - (an unstranded paired-end library where the reads face each other)&lt;/li&gt;
+&lt;li&gt;SF  - (a stranded single-end protocol where the reads come from the forward strand)&lt;/li&gt;
+&lt;li&gt;OSR - (a stranded paired-end protocol where the reads face away from each other,
+  read1 comes from reverse strand and read2 comes from the forward strand).
+  and so on&amp;hellip;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;However, in practice, if you use Illumina paired-end RNAseq protocols you are unlikely to uncover many of these possibilities. You will either deal with:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;unstranded RNAseq data (&lt;strong&gt;IU&lt;/strong&gt; type from above. Also called &lt;strong&gt;fr-unstranded&lt;/strong&gt; in TopHat/Cufflinks jargon);&lt;/li&gt;
+&lt;li&gt;stranded RNAseq data produced with Illumina TrueSeq RNAseq kits and &lt;a href=&#34;http://nar.oxfordjournals.org/content/37/18/e123&#34;&gt;dUTP tagging&lt;/a&gt; (&lt;strong&gt;ISR&lt;/strong&gt; type from above or &lt;strong&gt;fr-firststrand&lt;/strong&gt; in TopHat/Cufflinks nomenclature).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The implication of stranded RNAseq is that you can distinguish whether the reads are derived from forward- or reverse-encoded transcripts:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/stranded_result.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Stranded RNAseq data look like this&lt;/strong&gt;&lt;br&gt;
+This example contrasts unstranded and stranded RNAseq experiments. &lt;font color=&#34;red&#34;&gt;Red transcripts&lt;/font&gt; are from + strand and &lt;font color=&#34;blue&#34;&gt;blue&lt;/font&gt; are from - strand. In stranded example reads are clearly stratified between the two strands.  A small number of reads from opposite strand may represent anti-sense transcription. The image from GATC Biotech.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;replicates-biological-or-technical-and-how-many&#34;&gt;Replicates: Biological or Technical and how many?&lt;/h3&gt;
+
+&lt;p&gt;An RNAseq experiment without a sufficient number of replicates will be a waste of money. Replicates are essential to be able to correct for variation due to differences within/among organisms, cells, sequencing machines, library preparation protocols and numerous other potential factors. There are two types of replicates (as described by &lt;a href=&#34;http://chagall.med.cornell.edu/RNASEQcourse/Intro2RNAseq.pdf&#34;&gt;Dündar:2015&lt;/a&gt;):&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Technical replicates&lt;/strong&gt; can be defined as &lt;em&gt;different library preparations from the same RNA sample&lt;/em&gt;. They should account for batch effects from the library preparation such as reverse transcription and PCR amplification. To avoid possible lane effects (e.g., differences in the sample loading, cluster amplification, and efficiency of the sequencing reaction), it is good practice to multiplex the same sample over different lanes of the same flowcell. In most cases, technical variability introduced by the sequencing protocol is quite low and well controlled.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Biological replicates&lt;/strong&gt;. There is an on-going debate over what kinds of samples represent true biological replicates. Obviously, the variability between different samples will be greater between RNA extracted from two unrelated humans than between RNA extracted from two different batches of the same cell line. In the latter case, most of the variation that will eventually be detected was probably introduced by the experimenter (e.g., slightly differing media and plating conditions). Nevertheless, this is variation the researcher is typically not interested in assessing, therefore the ENCODE consortium defines biological replicates as RNA from an independent growth of cells/tissue (ENCODE &lt;a href=&#34;https://genome.ucsc.edu/ENCODE/protocols/dataStandards/ENCODE_RNAseq_Standards_V1.0.pdf&#34;&gt;2011&lt;/a&gt;).&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The number of replicates should be as high as practically possible. Most RNAseq experiments include three replicates and some have as many as 12 (see Schurch et al. &lt;a href=&#34;http://arxiv.org/abs/1505.02017&#34;&gt;2015&lt;/a&gt;).&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;read-mapping&#34;&gt;Read mapping&lt;/h2&gt;
+
+&lt;p&gt;After sequencing is performed you have a collection of sequencing reads for each sample/replicate. In a reference-based RNAseq experiment these need to be mapped against the genome. Because in the case of eukaryotic transcriptome most reads originate from processed mRNAs lacking exons, they cannot be simply mapped back to the genome. Instead they can be separated into two categories:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Reads that map entirely within exons&lt;/li&gt;
+&lt;li&gt;Reads that cannot be mapped within an exon across their entire length because they span two or more exons&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;Spliced&lt;/em&gt; mappers have been developed to efficiently map transcript-derived reads against genome.&lt;/p&gt;
+
+&lt;h3 id=&#34;tophat-tophat2-and-hisat&#34;&gt;TopHat, TopHat2, and HiSat&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://bioinformatics.oxfordjournals.org/content/25/9/1105.abstract&#34;&gt;Tophat&lt;/a&gt; was one of the first tools designed specifically to address this problem by identifying potential exons using reads that do map to the genome, generating possible splices between neighboring exons, and comparing reads that did not initially map to the genome agaisnt these &lt;em&gt;in silico&lt;/em&gt; created junctions:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;http://bioinformatics.oxfordjournals.org/content/25/9/1105/F1.expansion.html&#34;&gt;&lt;img src=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/tophat.png&#34; alt=&#34;&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;TopHat and TopHat2: Mapping RNAseq regions to genome&lt;/strong&gt;&lt;br&gt;
+In TopHat reads are mapped against the genome and are separated into two categories: (1) those that map, and (2) those that initially unmapped (IUM). &amp;ldquo;Piles&amp;rdquo; of reads representing potential exons are extended in search of potential donor/acceptor splice sites and potential splice junctions are reconstructed. IUMs are then mapped to these junctions. Image from &lt;a href=&#34;http://bioinformatics.oxfordjournals.org/content/25/9/1105.full&#34;&gt;Trapnell:2009&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://genomebiology.biomedcentral.com/articles/10.1186/gb-2013-14-4-r36&#34;&gt;&lt;img src=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/tophat2.png&#34; alt=&#34;&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;TopHat has been subsequently improved with the development of TopHat2&lt;/strong&gt;&lt;br&gt;
+Image from &lt;a href=&#34;https://genomebiology.biomedcentral.com/articles/10.1186/gb-2013-14-4-r36&#34;&gt;Kim:2012&lt;/a&gt; summarizes steps involved in aligning of RNAseq reads with TopHat2&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;To further optimize and speed up spliced read alignment Kim at al. &lt;a href=&#34;http://www.nature.com/nmeth/journal/v12/n4/full/nmeth.3317.html&#34;&gt;2015&lt;/a&gt; developed &lt;a href=&#34;http://ccb.jhu.edu/software/hisat2/index.shtml&#34;&gt;HISAT&lt;/a&gt;. It uses a set of &lt;a href=&#34;https://en.wikipedia.org/wiki/FM-index&#34;&gt;FM-indices&lt;/a&gt; consisting one global genome-wide index and a collection of ~48,000 local overlapping 42 kb indices (~55,000 56 kb indices in HiSat2). This allows to find initial seed locations for potential read alignments in the genome using global index and to rapidly refine these alignments using a corresponding local index:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/hisat.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Hierarchical Graph FM index in HiSat/HiSat2&lt;/strong&gt;&lt;br&gt;
+A part of the read (blue arrow) is first mapped to the genome using the global FM index. The HiSat then tries to extend the alignment directly utilizing the genome sequence (violet arrow). In (&lt;strong&gt;a&lt;/strong&gt;) it succeeds and this read aligned as it completely resides within an exon. In (&lt;strong&gt;b&lt;/strong&gt;) the extension hits a mismatch. Now HiSat takes advantage of the local FM index overlapping this location to find the appropriate matting for the remainder of this read (green arrow). The (&lt;strong&gt;c&lt;/strong&gt;) shows a combination these two strategies: the beginning of the read is mapped using global FM index (blue arrow), extended until it reaches the end of the exon (violet arrow), mapped using local FM index (green arrow) and extended again (violet arrow). Image from &lt;a href=&#34;http://www.nature.com/nmeth/journal/v12/n4/full/nmeth.3317.html&#34;&gt;Kim:2015&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;star-mapper&#34;&gt;STAR mapper&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/alexdobin/STAR&#34;&gt;STAR aligner&lt;/a&gt; is a fast alternative for mapping RNAseq reads against genome utilizing uncompressed &lt;a href=&#34;https://en.wikipedia.org/wiki/Suffix_array&#34;&gt;suffix array&lt;/a&gt;. It operates in &lt;a href=&#34;http://bioinformatics.oxfordjournals.org/content/early/2012/10/25/bioinformatics.bts635.abstract&#34;&gt;two stages&lt;/a&gt;. In the first stage it performs seed search:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/star.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;STAR&amp;rsquo;s seed search&lt;/strong&gt;&lt;br&gt;
+Here a read is split between two consecutive exons. STAR starts to look for a &lt;em&gt;maximum mappable prefix&lt;/em&gt; (MMP) from the beginning of the read until it can no longer match continuously. After this point it start to MMP for the unmatched portion of the read (&lt;strong&gt;a&lt;/strong&gt;). In the case of mismatches (&lt;strong&gt;b&lt;/strong&gt;) and unalignable regions (&lt;strong&gt;c&lt;/strong&gt;) MMPs serve as anchors from which to extend alignments. Image from &lt;a href=&#34;http://bioinformatics.oxfordjournals.org/content/early/2012/10/25/bioinformatics.bts635.full.pdf+html&#34;&gt;Dobin:2013&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;At the second stage STAR stitches MMPs to generate read-level alignments that (contrary to MMPs) can contain mismatches and indels. A scoring scheme is used to evaluate and prioritize stitching combinations and to evaluate reads that map to multiple locations. STAR is extremely fast but requires a substantial amount of RAM to run efficiently.&lt;/p&gt;
+
+&lt;h2 id=&#34;transcript-reconstruction&#34;&gt;Transcript reconstruction&lt;/h2&gt;
+
+&lt;p&gt;The previous step - mapping - assigns RNAseq reads to genomic locations and identifies splice junctions from reads that originate from different exons. At transcript reconstruction step this information is taken further in attempt to build transcript models. There is a number of tools for performing this task. A benchmarking paper by &lt;a href=&#34;http://bioinformatics.oxfordjournals.org/content/early/2015/09/03/bioinformatics.btv488.full.pdf+html&#34;&gt;Hayer:2015&lt;/a&gt; attempted to compare performance of existing approaches with one of the outcomes shown below:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;http://bioinformatics.oxfordjournals.org/content/early/2015/09/08/bioinformatics.btv488/F5.large.jpg&#34;&gt;&lt;img src=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/rnaseq_comparison.png&#34; alt=&#34;&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Comparison of transcript reconsruction approaches&lt;/strong&gt;&lt;br&gt;
+Here &lt;em&gt;recall&lt;/em&gt; (the number of correctly constructed forms divided by the total number of real forms) versus &lt;em&gt;precision&lt;/em&gt; (true positives divided by the sum of true positives and false positives) are plotted for seven transcript assemblers tested on two simulated datasets: &lt;em&gt;EnsemblPerfect&lt;/em&gt; and &lt;em&gt;EnsemblRealistic&lt;/em&gt;. The shaded region is indicating suboptimal performance (i.e., the white, unshaded region is &amp;ldquo;good&amp;rdquo;). The figure is from &lt;a href=&#34;http://bioinformatics.oxfordjournals.org/content/early/2015/09/03/bioinformatics.btv488.full.pdf+html&#34;&gt;Hayer:2015&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Based on these results &lt;a href=&#34;http://cole-trapnell-lab.github.io/cufflinks/&#34;&gt;Cufflinks&lt;/a&gt; and &lt;a href=&#34;https://ccb.jhu.edu/software/stringtie/&#34;&gt;StringTie&lt;/a&gt; have satisfactory performence. The following discussion is based on inner workings of StringTie.&lt;/p&gt;
+
+&lt;h3 id=&#34;transcriptome-assembly-with-stringtie&#34;&gt;Transcriptome assembly with StringTie&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://ccb.jhu.edu/software/stringtie/&#34;&gt;StringTie&lt;/a&gt; assembles transcripts from spliced read alignemnts produced by tools such as STAR, TopHat, or HISAT and simultaneously estimates their abundances using counts of reads assigned to each transcript. The following images illustrates details of StringTie workflow:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/stringtie1.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;StringTie workflow&lt;/strong&gt;&lt;br&gt;
+Image from &lt;a href=&#34;http://www.nature.com/nbt/journal/v33/n3/full/nbt.3122.html&#34;&gt;Pertea:2015&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;In essence StringTie builds an alternative splice graph from overlapping reads in a given locus. In such a graph nodes correspond to exons (or, rather, contiguous regions of genome covered by reads; colored regions on the figure above), while edges are represented by reads connecting these exons. Next, it identifies a path within the splice graph that has the highest weight (largest number of reads on edges). Such path would correspond to an assembled transcript at this iteration of the algorithm. Because the edge weight is equal to the number of the reads StringTie estimates the coverage level for this transcript (see below) which can be used to estimate the transcript&amp;rsquo;s abundance. Reads that are associated with the transcript that was just assembled are then removed and the graph is updated to perform the next iteration of the algorithm.&lt;/p&gt;
+
+&lt;h2 id=&#34;transcript-quantification&#34;&gt;Transcript quantification&lt;/h2&gt;
+
+&lt;p&gt;Transcriptome quantification attempts to estimate expression levels of individuals transcripts. This is performed by assigning RNAseq reads to transcripts, counting, and normalization.&lt;/p&gt;
+
+&lt;h3 id=&#34;assigning-reads-to-transcripts&#34;&gt;Assigning reads to transcripts&lt;/h3&gt;
+
+&lt;p&gt;To associate reads with transcripts they (the reads) need to be aligned to the transcriptome. Tools like Cufflinks and StringTie reconstruct transcripts from spliced read alignments generated by other programs (TopHat, HISAT, STAR), so they already have the information about which reads belong to each reconstructed transcript. Other tools such as &lt;a href=&#34;http://www.cs.cmu.edu/~ckingsf/software/sailfish/&#34;&gt;Sailfish&lt;/a&gt;, &lt;a href=&#34;http://pachterlab.github.io/kallisto/&#34;&gt;Kallisto&lt;/a&gt;, and &lt;a href=&#34;http://combine-lab.github.io/salmon/&#34;&gt;Salmon&lt;/a&gt; perform &lt;em&gt;lightweight&lt;/em&gt; alignment of RNAseq reads against existing transcriptome sequences. The goal of lightweight alignment is to quickly distribute the reads across transcripts they likely originate from without worrying too much about producing high quality alignments. The upside of this is that the entire procedure can be performed very quickly. The downside is that these tools require high quality transcriptome as input, which is not a problem if you work with humans or mice, but is a problem if you are studying Hyacinth macaw or any other brilliantly colored creatures.&lt;/p&gt;
+
+&lt;h4 id=&#34;lightweight-alignment&#34;&gt;Lightweight alignment&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://www.cs.cmu.edu/~ckingsf/software/sailfish/&#34;&gt;Sailfish&lt;/a&gt; has been initially designed to utilize &lt;a href=&#34;https://en.wikipedia.org/wiki/K-mer&#34;&gt;&lt;em&gt;k&lt;/em&gt;-mer&lt;/a&gt; matching for finding association between reads and corresponding transcripts:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/sailfish.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Assigning reads to transcripts: Sailfish&lt;/strong&gt;&lt;br&gt;
+Sailfish indexes input transcriptome for a fixed &lt;em&gt;k&lt;/em&gt;-mer length and compares &lt;em&gt;k&lt;/em&gt;-mers derived from RNAseq reads against this index. Image from &lt;a href=&#34;http://www.nature.com/nbt/journal/v32/n5/full/nbt.2862.html&#34;&gt;Patro:2014&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The current version of Sailfish uses &lt;a href=&#34;http://biorxiv.org/content/biorxiv/early/2015/10/22/029652.full.pdf&#34;&gt;quasi-alignment&lt;/a&gt; to extend exact matches found with &lt;em&gt;k&lt;/em&gt;-mers:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/quasi_aln.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Quasi-alignment of reads in Sailfish&lt;/strong&gt;&lt;br&gt;
+In Sailfish version &lt;a href=&#34;https://github.com/kingsfordgroup/sailfish/releases/tag/v0.7.0&#34;&gt;0.7.0&lt;/a&gt; and up transcriptome is concatenated into a single sequence using &lt;code&gt;$&lt;/code&gt; separators from which a &lt;a href=&#34;https://en.wikipedia.org/wiki/Suffix_array&#34;&gt;suffix array&lt;/a&gt; and a &lt;a href=&#34;https://en.wikipedia.org/wiki/Hash_table&#34;&gt;hash table&lt;/a&gt; are constructed. A &lt;em&gt;k&lt;/em&gt;-mer from an RNAseq read (green) is looked up in the hash table, which immediately gives its position in the suffix array allowing to extend the march as described in the legend and the &lt;a href=&#34;http://biorxiv.org/content/biorxiv/early/2015/10/22/029652.full.pdf&#34;&gt;paper&lt;/a&gt;. Image from  &lt;a href=&#34;http://biorxiv.org/content/biorxiv/early/2015/10/22/029652.full.pdf&#34;&gt;Srivastava:2015&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://pachterlab.github.io/kallisto/&#34;&gt;Kallisto&lt;/a&gt; also utilizes &lt;em&gt;k&lt;/em&gt;-mer matching but uses a different data structure. It constructs a &lt;a href=&#34;https://en.wikipedia.org/wiki/De_Bruijn_graph&#34;&gt;De Bruijn graph&lt;/a&gt; from transcriptome input (pane &lt;strong&gt;b&lt;/strong&gt; of the figure below). This graph is different from De Bruijn graphs used for genome assembly in that its nodes are &lt;em&gt;k&lt;/em&gt;-mers and transcripts correspond to paths through the graph. To accommodate multiple transcripts that can lay along the same path (or sub-path) the paths are &amp;ldquo;colored&amp;rdquo; with each transcript given a distinct &amp;ldquo;color&amp;rdquo; (in genome assembly the graph is built from the reads and nodes usually correspond to overlaps between &lt;em&gt;k&lt;/em&gt;-mers forming incoming and outgoing edges). Non-branching sections of the graph that have identical coloring are &amp;ldquo;glued&amp;rdquo; into contigs. Finally a &lt;a href=&#34;https://en.wikipedia.org/wiki/Hash_table&#34;&gt;hash table&lt;/a&gt; is built that stores the position of each transcriptome &lt;em&gt;k&lt;/em&gt;-mer within the graph:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/kallisto.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Assigning reads to transcripts: Kallisto&lt;/strong&gt;&lt;br&gt;
+Here a black read is being associated with a set consisting of red, blue, and green transcripts (&lt;strong&gt;a&lt;/strong&gt;). First, a graph is built from transcriptome (&lt;strong&gt;b&lt;/strong&gt;). Next, by finding common &lt;em&gt;k&lt;/em&gt;-mers between the read and the graph the read is &amp;ldquo;threaded&amp;rdquo; along a path (&lt;strong&gt;c&lt;/strong&gt; and &lt;strong&gt;d&lt;/strong&gt;). The colors along that path would indicate which transcripts it is likely derived from. Specifically, this is done by taking intersection of &amp;ldquo;colors&amp;rdquo; (&lt;strong&gt;c&lt;/strong&gt;). It this case the read is assigned to two transcripts: red and blue. Image from &lt;a href=&#34;http://arxiv.org/pdf/1505.02710v2.pdf&#34;&gt;Bray:2015&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://combine-lab.github.io/salmon/about/&#34;&gt;Salmon&lt;/a&gt; does not use &lt;em&gt;k&lt;/em&gt;-mer matching approach. Instead it creates &lt;a href=&#34;https://github.com/lh3/bwa&#34;&gt;bwa&lt;/a&gt;-like &lt;a href=&#34;https://en.wikipedia.org/wiki/FM-index&#34;&gt;FM-index&lt;/a&gt; and uses it to finds chains of &lt;em&gt;Maximal Exact Matches&lt;/em&gt; (MEMs) and &lt;em&gt;Super Maximal Exact Matches&lt;/em&gt; (SMEMs) between a read and the transcriptome.&lt;br /&gt;
+&lt;a href=&#34;http://biorxiv.org/content/biorxiv/early/2015/06/27/021592.full.pdf&#34;&gt;Patro:2015&lt;/a&gt; define a MEM as &amp;ldquo;&lt;em&gt;a substring that is shared by the query (read) and reference (transcript) that cannot be extended in either direction without introducing a mismatch&lt;/em&gt;&amp;rdquo;. Similraly, a SMEM is defined as a &amp;ldquo;&lt;em&gt;MEM that is not contained within any other MEM on the query.&lt;/em&gt;&amp;rdquo; One of the advantages of utilizing the FM-index is that a new index does not need to re-generated for a search with different set of parameters. In the case of Sailfish and Kallisto an index is dependent on &lt;em&gt;k&lt;/em&gt;-mer length and has to be recomputed every time the &lt;em&gt;k&lt;/em&gt; is changed. The overall schematics of Salmon operation is as follows:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/salmon.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Assigning reads to transcripts: Salmon&lt;/strong&gt;&lt;br&gt;
+Image from &lt;a href=&#34;http://biorxiv.org/content/biorxiv/early/2015/06/27/021592.full.pdf&#34;&gt;Patro:2015&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;estimating-transcript-levels&#34;&gt;Estimating transcript levels&lt;/h3&gt;
+
+&lt;p&gt;Once reads are apportioned across individual transcripts they can be quantified. There are several approaches for quantification.&lt;/p&gt;
+
+&lt;h4 id=&#34;flow-networks&#34;&gt;Flow networks&lt;/h4&gt;
+
+&lt;p&gt;StringTie, which performs assembly and quantification simultaneously converts splice graph into a flow network for which it solves &lt;a href=&#34;https://en.wikipedia.org/wiki/Maximum_flow_problem&#34;&gt;the maximum flow problem&lt;/a&gt;. The maximum flow is such network represents the expression level for a given transcript:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/stringtie2.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;StringTie flow network&lt;/strong&gt;&lt;br&gt;
+Here each exon node from the splice graph is split into &lt;em&gt;in&lt;/em&gt; and &lt;em&gt;out&lt;/em&gt; nodes connected with an edge weighted by the number of reads corresponding to that exon. For example, the first exon is covered by seven reads and so the edge between 1-in and 1-out has a weight of 7. Expression level would correspond to the maximum flow through a path representing a given transcript. Image from &lt;a href=&#34;http://www.nature.com/nbt/journal/v33/n3/full/nbt.3122.html&#34;&gt;Pertea:2015&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&#34;expectation-maximization&#34;&gt;Expectation Maximization&lt;/h4&gt;
+
+&lt;p&gt;The Expectation/Maximization framework (EM) is utilized in a number of tools such as &lt;a href=&#34;http://bio.math.berkeley.edu/eXpress/index.html&#34;&gt;eXpress&lt;/a&gt; and more recently &lt;a href=&#34;http://www.cs.cmu.edu/~ckingsf/software/sailfish/&#34;&gt;Sailfish&lt;/a&gt;, &lt;a href=&#34;http://pachterlab.github.io/kallisto/&#34;&gt;Kallisto&lt;/a&gt;, and &lt;a href=&#34;https://combine-lab.github.io/salmon/about/&#34;&gt;Salmon&lt;/a&gt; (As an alternative strategy Salmon also utilizes &lt;a href=&#34;http://arxiv.org/pdf/1308.5953v1.pdf&#34;&gt;variational Bayesian method&lt;/a&gt;. The principle of EM is nicely illustrated by &lt;a href=&#34;https://liorpachter.wordpress.com/&#34;&gt;Lior Pachter&lt;/a&gt; in his transcript quantification &lt;a href=&#34;http://arxiv.org/pdf/1104.3889v2.pdf&#34;&gt;review&lt;/a&gt;. Suppose, as shown on the image below, there are three transcripts (green, red, and blue). There are five reads associated with these transcripts. One read (&lt;em&gt;d&lt;/em&gt;) is unique to the red transcript, while others correspond to two (&lt;em&gt;b&lt;/em&gt;, &lt;em&gt;c&lt;/em&gt;, &lt;em&gt;e&lt;/em&gt;) or three (&lt;em&gt;a&lt;/em&gt;) transcripts. The EM is an iterative procedure. In the first round transcript abundances are initialized as equal (0.33 each as there are three transcripts) and during expectation reads are apportioned across transcripts based on these abundances. Next, during maximization step transcript abundances are re-calculated as follow. For red transcript we sum up fraction of each read as 0.33 + 0 + 0.5 + 1 + 0.5 for reads a, b, c, d, and e, respectively. We now divide this by the sum of read allocations for each transcript as 2.33 + 1.33 + 1.33 for red, green, and blue transcripts respectively. For all three transcript calculation will look like this:&lt;/p&gt;
+
+&lt;div&gt;
+    $$
+
+\color{red}{red}   =  \frac{0.33 + 0.0 + 0.5 + 1.0 + 0.5}{2.33 + 1.33 + 1.33} = 0.47\\
+
+\color{green}{green} =  \frac{0.33 + 0.5 + 0.0 + 0.0 + 0.5}{2.33 + 1.33 + 1.33} = 0.27\\
+
+\color{blue}{blue}  =  \frac{0.33 + 0.5 + 0.5 + 0.0 + 0.0}{2.33 + 1.33 + 1.33} = 0.27
+   
+    $$
+&lt;/div&gt;
+
+&lt;p&gt;During next expectation stage read are re-apportioned across transcripts and the procedure is repeated until convergence:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/em.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Expectation Maximization (EM)&lt;/strong&gt;&lt;br&gt;
+Image from &lt;a href=&#34;http://arxiv.org/pdf/1104.3889v2.pdf&#34;&gt;Pacher:2011&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;understanding-quantification-metrics&#34;&gt;Understanding quantification metrics&lt;/h3&gt;
+
+&lt;p&gt;As we&amp;rsquo;ve seen above quantification for a transcript is estimated using the number of associated reads. Yet the count is not a very good measure as it will be severely biased by multiple factors such as, for example, transcript length. Thus these counts need to be normalized. Normalization strategies can be roughly divided into two groups:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Normalization for comparison within a &lt;strong&gt;single&lt;/strong&gt; sample;&lt;/li&gt;
+&lt;li&gt;Normalization for comparison among &lt;strong&gt;multiple&lt;/strong&gt; samples/conditions.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In their &lt;a href=&#34;http://chagall.med.cornell.edu/RNASEQcourse/&#34;&gt;tutorial&lt;/a&gt; Dündar et al. have compiled a table summarizing various metrics. Below is description of normalization technique for within sample comparisons (between sample comparison can be found in the next section on differential expression analysis):&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/within_norm.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;RNAseq normalization metrics: Within sample comparisons&lt;/strong&gt;&lt;br&gt;
+Table from Dündar et al. &lt;a href=&#34;http://chagall.med.cornell.edu/RNASEQcourse/&#34;&gt;2015&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;In addition, an excellent overview of these metrics can be found &lt;a href=&#34;https://haroldpimentel.wordpress.com/2014/05/08/what-the-fpkm-a-review-rna-seq-expression-units/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h4 id=&#34;font-color-red-9888-you-should-never-ever-use-rpkm-fpkm-or-tpm-to-compare-expression-levels-across-samples-these-are-relative-measures-consider-yourself-warned-font&#34;&gt;&lt;font color=&#34;red&#34;&gt;&amp;#9888; &lt;strong&gt;You should NEVER EVER use RPKM, FPKM, or TPM to compare expression levels &lt;em&gt;across&lt;/em&gt; samples. These are RELATIVE measures! Consider yourself warned!&lt;/strong&gt;&lt;/font&gt;&lt;/h4&gt;
+
+&lt;h2 id=&#34;finding-expression-differences&#34;&gt;Finding expression differences&lt;/h2&gt;
+
+&lt;p&gt;The goal of differential expression analysis (DE) is to find gene (DGE) or transcript (DTE) differences between conditions, developmental stages, treatments etc. In particular DE has two goals:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Estimate the &lt;em&gt;magnitude&lt;/em&gt; of expression differences;&lt;/li&gt;
+&lt;li&gt;Estimate the &lt;em&gt;significance&lt;/em&gt; of expression differences.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;For this expression is estimated from read counts and attempts are made to correct for variability in measurements using replicates that are absolutely essential accurate results (see below). We begin our short discussion on DE by reproducing a figure from &lt;a href=&#34;http://www.nature.com/nbt/journal/v31/n1/abs/nbt.2450.html&#34;&gt;Trapnell:2013&lt;/a&gt; highlighting some of the challenges associated with judging expression differences from read counts:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/diff.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Differential expression: Read counts and Expression levels&lt;/strong&gt;&lt;br&gt;
+&lt;strong&gt;Change in fragment count for a gene does not necessarily equal a change in expression&lt;/strong&gt;. (&lt;strong&gt;a&lt;/strong&gt;) Simple read-counting schemes sum the fragments incident on a gene’s exons. The exon-union model counts reads falling on any of a gene’s exons, whereas the exon-intersection model counts only reads on constitutive exons. (&lt;strong&gt;b&lt;/strong&gt;) Both of the exon-union and exon intersection counting schemes may incorrectly estimate a change in expression in genes with multiple isoforms. The true expression is estimated by the sum of the length-normalized isoform read counts. The discrepancy between a change in the union or intersection count and a change in gene expression is driven by a change in the abundance of the isoforms with respect to one another. In the top row, the gene generates the same number of reads in conditions A and B, but in condition B, all of the reads come from the shorter of the two isoforms, and thus the true expression for the gene is higher in condition B. The intersection count scheme underestimates the true change in gene expression, and the union scheme fails to detect the change entirely. In the middle row, the intersection count fails to detect a change driven by a shift in the dominant isoform for the gene. The union scheme detects a shift in the wrong direction. In the bottom row, the gene’s expression is constant, but the isoforms undergo a complete switch between conditions A and B. Both simplified counting schemes register a change in count that does not reflect a change in gene expression. Figure from &lt;a href=&#34;http://www.nature.com/nbt/journal/v31/n1/abs/nbt.2450.html&#34;&gt;Trapnell:2013&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The following discussion of DGE logic is reproduced from &lt;a href=&#34;http://chagall.med.cornell.edu/RNASEQcourse/&#34;&gt;Dündar:2015&lt;/a&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;To determine the genes whose read count differences between two conditions are greater than expected by chance, DGE tools must make assumptions about the distribution of read counts. The null hypothesis – that the mean read counts of the samples of condition &lt;strong&gt;A&lt;/strong&gt; are equal to the mean read counts of the samples of condition &lt;strong&gt;B&lt;/strong&gt; – is tested for each gene individually. One of the most popular choices to model the read counts is the &lt;a href=&#34;https://en.wikipedia.org/wiki/Poisson_distribution&#34;&gt;Poisson distribution&lt;/a&gt; because:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;individual reads can be interpreted as binary data (Bernoulli trials): they either originate from gene &lt;em&gt;i&lt;/em&gt; or not;&lt;/li&gt;
+&lt;li&gt;we are trying to model the discrete probability distribution of the number of successes (success = read is present in the sequenced library);&lt;/li&gt;
+&lt;li&gt;the pool of possible reads that could be present is large, while the proportion of reads belonging to
+gene &lt;strong&gt;i&lt;/strong&gt; is quite small.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The nice feature of a Poisson distribution is that variance = mean. Thus, if the RNA-seq experiment gives us a precise estimate of the mean read counts per condition, we implicitly know what kind of variance to expect for read counts that are not truly changing between two conditions. This, in turn, then allows us to identify those genes that show greater differences between the two conditions than expected by chance. While read counts of the same library preparation (&lt;em&gt;technical replicates&lt;/em&gt;) can indeed be well approximated by the Poisson distribution, it has been shown that biological replicates have greater variance (noise) than expected. This &lt;a href=&#34;https://en.wikipedia.org/wiki/Overdispersion&#34;&gt;overdispersion&lt;/a&gt; can be captured with the &lt;a href=&#34;https://en.wikipedia.org/wiki/Negative_binomial_distribution&#34;&gt;negative binomial distribution&lt;/a&gt;, which is a more general form of the Poisson distribution that allows the variance to exceed the mean. The square root of the dispersion is the coefficient of variation – SD/mean – after subtracting the variance we expect due to Poisson sampling.&lt;/p&gt;
+
+&lt;p&gt;In contrast to the Poisson distribution, we now need to estimate two parameters from the read counts: the mean as well as the dispersion. The precision of these estimates strongly depends on the number (and variation) of replicates – the more replicates, the better the grasp on the underlying mean expression values of unchanged genes and the variance that is due to biological variation rather than the experimental treatment. For most RNA-seq experiments, only two to three replicates are available, which is not enough for reliable mean and variance estimates. Some tools therefore compensate for the lack of replication by borrowing information across genes with similar expression values and shrink a given gene’s variance towards the regressed values. These fitted values of the mean and dispersion are then used instead of the raw estimates
+to test for differential gene expression.&lt;/p&gt;
+
+&lt;p&gt;The best performing tools tend to be &lt;a href=&#34;https://bioconductor.org/packages/release/bioc/html/edgeR.html&#34;&gt;edgeR&lt;/a&gt;, &lt;a href=&#34;https://bioconductor.org/packages/release/bioc/html/DESeq2.html&#34;&gt;DESeq/DESeq2&lt;/a&gt;, and &lt;a href=&#34;https://www.bioconductor.org/packages/release/bioc/html/limma.html&#34;&gt;limma-voom&lt;/a&gt; (see Rapaport et al. (&lt;a href=&#34;http://link.springer.com/article/10.1186/gb-2013-14-9-r95&#34;&gt;2013&lt;/a&gt;); Soneson and Delorenzi (&lt;a href=&#34;https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-14-91&#34;&gt;2013&lt;/a&gt;); Schurch et al. (&lt;a href=&#34;http://arxiv.org/abs/1505.02017&#34;&gt;2015&lt;/a&gt;) for reviews of DGE tools). DESeq and limma-voom tend to be more conservative than edgeR (better control of false positives), but edgeR is recommended for experiments with fewer than 12 replicates (Schurch et al., &lt;a href=&#34;http://arxiv.org/abs/1505.02017&#34;&gt;2015&lt;/a&gt;).&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;let-s-try-it&#34;&gt;Let&amp;rsquo;s try it&lt;/h2&gt;
+
+&lt;h3 id=&#34;the-data&#34;&gt;The data&lt;/h3&gt;
+
+&lt;p&gt;In this example we will use a downsampled version of simulated &lt;em&gt;Drosophila melanogaster&lt;/em&gt; RNA-seq data used by Trapnell et al. &lt;a href=&#34;http://www.nature.com/nprot/journal/v7/n3/full/nprot.2012.016.html&#34;&gt;2012&lt;/a&gt;. These include two conditions (&lt;strong&gt;C1&lt;/strong&gt; and &lt;strong&gt;C2&lt;/strong&gt;), each containing three replicates (&lt;strong&gt;R1&lt;/strong&gt;, &lt;strong&gt;R2&lt;/strong&gt;, and &lt;strong&gt;R3&lt;/strong&gt;) sequenced as a paired end library. Thus in total there are 12 fastq datasets.&lt;/p&gt;
+
+&lt;p&gt;Here is what to do to load the data:&lt;/p&gt;
+
+&lt;h4 id=&#34;loading-the-data-and-create-dataset-collections&#34;&gt;Loading the data and create dataset collections&lt;/h4&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Go to the &lt;a href=&#34;https://usegalaxy.org/library/list#folders/Ff4ce53393dae30ee&#34;&gt;data library&lt;/a&gt; and select all fastq files. Then Click &lt;code&gt;to History&lt;/code&gt; button:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/rnaseq_library.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The datasets will appear in your history:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/rnaseq_data_in_history.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Twelve datasets make a lot of clicking necessary. To avoid this annoyance we will combine them into two collections - &lt;strong&gt;c1&lt;/strong&gt; and &lt;strong&gt;c2&lt;/strong&gt; as shown in the video below. Also, see this &lt;a href=&#34;https://github.com/nekrut/galaxy/wiki/Processing-many-samples-at-once&#34;&gt;tutorial&lt;/a&gt; for yet another explanation of dataset collections.&lt;/p&gt;
+
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;//player.vimeo.com/video/163625221&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%;&#34; webkitallowfullscreen mozallowfullscreen allowfullscreen&gt;&lt;/iframe&gt;
+ &lt;/div&gt;
+
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;mapping-reads&#34;&gt;Mapping reads&lt;/h3&gt;
+
+&lt;p&gt;We will map the reads with TopHat2. Select &lt;strong&gt;TopHat&lt;/strong&gt; from &lt;strong&gt;NGS: RNA Analysis&lt;/strong&gt; section of the tool menu (left pane of Galaxy&amp;rsquo;s interface):&lt;/p&gt;
+
+&lt;h4 id=&#34;mapping-with-tophat2&#34;&gt;Mapping with TopHat2&lt;/h4&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;In this case the input to TopHat is &lt;strong&gt;not&lt;/strong&gt; individual datasets, but a collection instead. The &lt;a href=&#34;https://vimeo.com/163625221&#34;&gt;video&lt;/a&gt; above shows how to generate collection. Since we have created two collection as was described above, we will used them as inputs (note that &lt;strong&gt;Is this single-end or paired-end data?&lt;/strong&gt; is set to &lt;code&gt;Paired-end (as collection)&lt;/code&gt;). Make sure that the top part of TopHat interface looks like in the image below. Here the following parameters are set:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Mean Inner Distance between Mate Pairs&lt;/strong&gt; = &lt;code&gt;28&lt;/code&gt; This is because paired reads are 100 bp and mean insert size is 228 bp so that 228 - (100 + 100) = 28&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Use a built in reference genome or own from your history&lt;/strong&gt; = &lt;code&gt;Use a build-in genome&lt;/code&gt; and &lt;code&gt;dm3&lt;/code&gt; is selected. This is because the reads are from &lt;em&gt;D. melanogaster&lt;/em&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;TopHat settings to use&lt;/strong&gt; = &lt;code&gt;Full parameter list&lt;/code&gt; This is done to be able to specify the strandedness of the library.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Library Type&lt;/strong&gt; = &lt;code&gt;FR First Strand&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/tophat_interface.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The same procedure is then repeated for collection &lt;strong&gt;c2&lt;/strong&gt;. In the end it generates a lot of datasets in the history resulting in something resembling an image below. TopHat produces five types of output and because we started with dataset collections every one of the green boxes shown below is actually a collection of outputs for &lt;strong&gt;c1&lt;/strong&gt; and &lt;strong&gt;c2&lt;/strong&gt;, respectively.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/tophat_output.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Let&amp;rsquo;s now take a look at some of the alignments. We will use IGV for this purpose.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;First, let&amp;rsquo;s drill down to actual alignments produced by TopHat. For example, in figure shown above simply click on &lt;strong&gt;TopHat on collection 14: accepted_hits&lt;/strong&gt; and you will see a list of datasets corresponding to alignments of reads derived from each conditions:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/accepted_hits_1.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now, click on &lt;strong&gt;c2-r1x&lt;/strong&gt; and the following will appear:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/accepted_hits_2.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Finally, use &lt;strong&gt;D. melanogaster&lt;/strong&gt; link (highlighted above) and follow the on-screen instructions. By focusing IGV on genomic position &lt;code&gt;chrX:11,897,111-11,920,446&lt;/code&gt; you will be able to see spliced alignments produced by TopHat:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/igv_tophat.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;and &lt;a href=&#34;https://www.broadinstitute.org/igv/Sashimi&#34;&gt;sashimi plots&lt;/a&gt; highlighting potential splice junctions:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/sashimi.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;performing-differential-expression-analysis&#34;&gt;Performing differential expression analysis&lt;/h3&gt;
+
+&lt;p&gt;Using mapped reads produced by TopHat we will perform analysis of differential gene expression using HTSeq/DESeq2 pipeline.&lt;/p&gt;
+
+&lt;h4 id=&#34;gene-based-read-counting-with-htseq-count&#34;&gt;Gene-based read counting with HTseq-count&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://www-huber.embl.de/users/anders/HTSeq/doc/count.html&#34;&gt;&lt;code&gt;HTSeq-count&lt;/code&gt;&lt;/a&gt; is one of the most popular tools for gene quantification. &lt;code&gt;HTseq-count&lt;/code&gt; gives you multiple choices on how to handle read mapping to multiple locations, reads overlapping introns, or reads that overlap more than one genomic feature:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;http://www-huber.embl.de/users/anders/HTSeq/doc/count.html&#34;&gt;&lt;img src=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/htseq_count.png&#34; alt=&#34;&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;HTseq-count&lt;/code&gt; read/feature overlap modes&lt;/strong&gt;&lt;br&gt;
+The &lt;code&gt;htseq-count&lt;/code&gt; script of the HTSeq suite offers three different modes to handle details of read–feature overlaps that are depicted here. The default of featureCounts is the behavior of the union option. Image is from &lt;a href=&#34;http://www-huber.embl.de/users/anders/HTSeq/doc/count.html&#34;&gt;HTseq documentation&lt;/a&gt;; Caption by &lt;a href=&#34;http://chagall.med.cornell.edu/RNASEQcourse/&#34;&gt;Dündar:2015&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Before we can use &lt;code&gt;HTseq-count&lt;/code&gt; we need to download gene annotations for version &lt;code&gt;dm3&lt;/code&gt; of the &lt;em&gt;Drosophila melanogaster&lt;/em&gt; genome. We use version &lt;code&gt;dm3&lt;/code&gt; because it is the same genome we have mapped reads against during the TopHat step.&lt;/p&gt;
+
+&lt;h4 id=&#34;getting-drosophila-malanogaster-gene-annotation-from-ucsc&#34;&gt;Getting &lt;em&gt;Drosophila malanogaster&lt;/em&gt; gene annotation from UCSC&lt;/h4&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Select &lt;strong&gt;UCSC Main&lt;/strong&gt; from &lt;strong&gt;Get Data&lt;/strong&gt; section of the menu. Within the UCSC Genome Browser interface set parameters as shown below. In particular make sure that &lt;strong&gt;assembly&lt;/strong&gt; is set ti &lt;code&gt;dm3&lt;/code&gt; and &lt;strong&gt;output format&lt;/strong&gt; is set to &lt;code&gt;GTF&lt;/code&gt;. Click &lt;strong&gt;get output&lt;/strong&gt;.
+&lt;a href=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/ucsc_dm3.png&#34;&gt;&lt;img src=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/ucsc_dm3.png&#34; alt=&#34;&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;This &lt;a href=&#34;http://www.ensembl.org/info/website/upload/gff.html&#34;&gt;GTF&lt;/a&gt; dataset will be used one of the input for HTseq-count.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;code&gt;HTseq-count&lt;/code&gt; takes two inputs: (1) mapped reads in BAM format and (2) a GTF dataset containing annotation of genes. Using these inputs it will compute the number of reads per gene.&lt;/p&gt;
+
+&lt;h4 id=&#34;using-htseq-count-in-galaxy&#34;&gt;Using HTseq-count in Galaxy&lt;/h4&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;htseq-count&lt;/code&gt; needs strand information to proceed. The strand information is specified as &lt;code&gt;+&lt;/code&gt;, &lt;code&gt;-&lt;/code&gt;, or &lt;code&gt;.&lt;/code&gt; (unknown) in a GTF dataset. &lt;code&gt;htseq-count&lt;/code&gt; does not like &lt;code&gt;.&lt;/code&gt; and will generate an error if such unstranded features appear in data. To prevent these errors from happening we will filter them out from GTF file using &lt;strong&gt;Filter&lt;/strong&gt; tool from &lt;strong&gt;Filter and Sort&lt;/strong&gt; section of tool menu. Here &lt;code&gt;c7 != &amp;quot;.&amp;quot;&lt;/code&gt; means that we need to filter all rows where strand column (column #7) contains a dot:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/filter_gtf.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Select &lt;strong&gt;htseq-count&lt;/strong&gt; from &lt;strong&gt;NGS: RNA analysis&lt;/strong&gt; section on the left side of the menu. Set parameters as shown below. The red arrow points that to enable &lt;code&gt;htseq-count&lt;/code&gt; to see collections, you need to select the &amp;lsquo;folder&amp;rsquo; button. In the case of this particular Galaxy &lt;a href=&#34;https://usegalaxy.org/u/aun1/h/rna-seq-tutorial&#34;&gt;history&lt;/a&gt; we will need to run &lt;code&gt;htseq-count&lt;/code&gt; twice. Once on TopHat alignemnts for collection &lt;strong&gt;c1&lt;/strong&gt; (dataset #37; shown below) and then on alignments for collection &lt;strong&gt;c2&lt;/strong&gt; (dataset # 57).|
+|&lt;img src=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/htseq_count_interface.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This will generate &lt;a href=&#34;https://usegalaxy.org/datasets/bbd44e69cb8906b5d1e80eae6d363142/display/?preview=True&#34;&gt;read counts per gene&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&#34;normalizing-read-counts-and-computing-differential-expression-with-deseq2&#34;&gt;Normalizing read counts and computing differential expression with &lt;code&gt;DESeq2&lt;/code&gt;&lt;/h4&gt;
+
+&lt;p&gt;&lt;code&gt;DESeq2&lt;/code&gt; takes read counts produced by &lt;code&gt;HTseq-count&lt;/code&gt; and apply size factor normalization. Specifically, &lt;code&gt;DESeq2&lt;/code&gt; will:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;For each gene, compute the geometric mean of read counts across all samples;&lt;/li&gt;
+&lt;li&gt;Every gene count in then divided by the geometric mean;&lt;/li&gt;
+&lt;li&gt;The median of these ratios is a sample&amp;rsquo;s size factor used for normalization.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;font color=&#34;red&#34;&gt;&amp;#10148;&lt;/font&gt; &lt;strong&gt;Note&lt;/strong&gt;: For a comprehensive overview of differential gene expression with DESeq2 see &lt;a href=&#34;https://www.bioconductor.org/packages/3.3/bioc/vignettes/DESeq2/inst/doc/DESeq2.pdf&#34;&gt;Love:2016&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h4 id=&#34;deseq2-in-galaxy&#34;&gt;DESeq2 in Galaxy&lt;/h4&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;The &lt;code&gt;DESeq2&lt;/code&gt; Galaxy&amp;rsquo;s interface is shown below. &lt;code&gt;DESeq2&lt;/code&gt; allows to incorporate multiple &lt;em&gt;factors&lt;/em&gt; in the analysis. In our case we only have one factor, which we call &lt;strong&gt;Conditions&lt;/strong&gt;. This is because we are trying to find genes that are differentially expressed between two conditions. The first condition will the first &lt;strong&gt;factor level&lt;/strong&gt;, while condition 2 will be the second &lt;strong&gt;factor level&lt;/strong&gt;. Here the input for this first factor level is set to a collection &lt;code&gt;84: htseq-count on collection 37&lt;/code&gt; and the input for the second input is set to &lt;code&gt;92: htseq-count on collection 57&lt;/code&gt;. Make sure that &lt;strong&gt;Visualising the analysis results&lt;/strong&gt; is set to &lt;code&gt;Yes&lt;/code&gt;:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/deseq2_interface.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This will produce &lt;a href=&#34;https://usegalaxy.org/datasets/bbd44e69cb8906b5d648fe21c36ac662/display/?preview=True&#34;&gt;output&lt;/a&gt; as shown below. The columns are: (&lt;strong&gt;1&lt;/strong&gt;) gene identifier, (&lt;strong&gt;2&lt;/strong&gt;) mean normalised counts, averaged over all samples from both conditions, (&lt;strong&gt;3&lt;/strong&gt;) logarithm (base 2) of the fold change, (&lt;strong&gt;4&lt;/strong&gt;) the standard error estimate for the log2 fold change estimate, (&lt;strong&gt;5&lt;/strong&gt;) &lt;a href=&#34;https://en.wikipedia.org/wiki/Wald_test&#34;&gt;Wald test&lt;/a&gt; statistic, (&lt;strong&gt;6&lt;/strong&gt;) p value for the statistical significance of this change, and (&lt;strong&gt;7&lt;/strong&gt;) &lt;em&gt;p&lt;/em&gt;-value adjusted for multiple testing with the Benjamini-Hochberg procedure which controls false discovery rate (&lt;a href=&#34;https://en.wikipedia.org/wiki/False_discovery_rate&#34;&gt;FDR&lt;/a&gt;). There is only one gene with significant change in gene expression between conditions: &lt;code&gt;CG1803-RC&lt;/code&gt; with &lt;em&gt;p&lt;/em&gt;-value = 1.6x10&lt;sup&gt;-05&lt;/sup&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/deseq2_output.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In addition to the &lt;a href=&#34;https://usegalaxy.org/datasets/bbd44e69cb8906b5d648fe21c36ac662/display/?preview=True&#34;&gt;list of genes&lt;/a&gt; DESeq2 outputs a graphical summary of the result. It includes a number of plots that should be used to evaluate the quality of the experiment. The histogram of &lt;em&gt;p&lt;/em&gt;-values below shows that in our sample there is in fact just one instance of a significant &lt;em&gt;p&lt;/em&gt;-value:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/p_val_hist.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The &lt;a href=&#34;https://en.wikipedia.org/wiki/MA_plot&#34;&gt;MA plot&lt;/a&gt; below shows the relationship between the expression change (M) and average expression strength (A). Genes with adjusted &lt;em&gt;p&lt;/em&gt;-value &amp;lt; 0.1 are in red (there is only one such gene in thi sample at the bottom of the graph):&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/MA_plot.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The Principal Component Analysis (&lt;a href=&#34;https://en.wikipedia.org/wiki/Principal_component_analysis&#34;&gt;PCA&lt;/a&gt;) shows the separation between Condition 1 and 2. This type of plot is useful for visualizing the overall effect of experimental covariates and batch effects (each replicate is plotted as an individual data point):&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/pca.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;A heatmap of sample-to-sample distance matrix gives us an overview over similarities and dissimilarities between samples:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/euc_dist.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;what-s-next&#34;&gt;What&amp;rsquo;s next&lt;/h2&gt;
+
+&lt;p&gt;You will next learn:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;ad hoc&lt;/em&gt; analyses with R using Galaxy&amp;rsquo;s interactive environment. This will allow executing R code directly in Galaxy as it is used in many RNAseq tutorials;&lt;/li&gt;
+&lt;li&gt;reference-free RNAseq with &lt;code&gt;Trinity&lt;/code&gt;;&lt;/li&gt;
+&lt;li&gt;Differential Transcript expression with &lt;code&gt;Sailfish&lt;/code&gt; and &lt;code&gt;DESeq2&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>11. Finding really low frequency variants</title>
