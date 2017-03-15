@@ -1,9 +1,9 @@
 +++
-date = "2016-11-28T16:20:10-05:00"
-title = "Assembly basics"
+date = "2017-03-15T16:20:10-05:00"
+title = "13. Assembly basics"
 description = "**Topic 12** | Challenges of genome (and transcriptome) assembly"
 menu = ""
-draft = true
+#draft = true
 tags = [
 ]
 categories = [
@@ -12,17 +12,26 @@ featureimage = "img/topic12_cover.png"
 
 +++
 
+[![](https://github.com/rrwick/Unicycler/raw/master/misc/illumina_graph_comparison.png)](https://github.com/rrwick/Unicycler)
+
+Previously we have learned about applications on PacBio technology:
+
+{{< speakerdeck 5850fe7ede3b45df816c3eaa502ea3d1 >}}
+
+Assembly problem was featured prominently in this presentation. Today we will cover introductory concepts behind assembly. 
+
+-----
+
 Genome assembly is a difficult task. In trying to explain it I will be relying on two highly regarded sources:
 
 - [Ben Langmead's Teaching Materials](http://www.langmead-lab.org/teaching-materials/)
 - [Pevzner and Compeau Bioinformatics Book](http://www.amazon.com/Bioinformatics-Algorithms-Active-Learning-Approach/dp/0990374602). 
 
-
 # Genomes and reads: Strings and *k*-mers
 
 ## *k*-mer composition
 
-Genomes are strings of text. When we sequence genomes we use sequencing machines that generate reads. For now let's assume that all reads have the same length *k* and every *k*-mer is sequenced only once. We will relax these assumptions at the end. Thus sequencing a genome generates a large list of *k*-mers.  
+Genomes are strings of text. When we sequence genomes we use sequencing machines that generate reads. For now let's assume that all reads have the same length *k* and every *k*-mer is sequenced only once. We will relax these assumptions later in this lecture. Thus sequencing a genome generates a large list of *k*-mers.  
 
 Suppose we are dealing with a *very* short genome `TATGGGGTGC`. Its *k*-mer composition (note the subscript) $Composition_k(Text)$ is the collection of all $k$-mer substrings (including repeated ones). When *k* = 3 we get (basically we split sequence into windows of length 3 sliding window by 1 base every time):
 
@@ -72,6 +81,8 @@ $$
 3   ATG
 4    TGT
 5     GTT
+  -------
+  TAATGTT
 ```
 
 There is nothing in the original 3-mer composition, which starts with `TT`. Let's track back and instead of `TGT` in step 4 insert `TGC`:
@@ -91,6 +102,8 @@ There is nothing in the original 3-mer composition, which starts with `TT`. Let'
 12            ATG
 13             TGT
 14              GTT
+   ----------------
+   TAATGCCATGGATGTT
 ```
 
 We only used 14 3-mers from the total of 15, so our genome is shorter (we have extra parts!). This difficulty is related to the fact that there are three repeated `ATG` motifs in this genome and as a result each `ATG` can be extended by either `TGG`, `TGC`, or `TGT`. 
@@ -224,7 +237,7 @@ Finding overlaps is identical to building a *directed graph* where directed *edg
 >**Directed graph** representing overlapping reads. (Image from [Ben Langmead](http://www.cs.jhu.edu/~langmea/resources/lecture_notes/assembly_scs.pdf)).
 
 
-For example, the following string reconstruction:
+For example, the string reconstruction we have seen earlier (with the difference of inserting `GGG` in line 10):
 
 ```
  1 TAA
@@ -236,12 +249,14 @@ For example, the following string reconstruction:
  7       CAT
  8        ATG
  9         TGG
-10          GGA
-11           GAT
-12            ATG
-13             TGT
-14              GTT
-   TAATGCCATGGATGTT
+10          GGG
+11           GGA
+12            GAT
+13             ATG
+14              TGT
+15               GTT
+   -----------------
+   TAATGCCATGGGATGTT
 ```
 
 can be represented as a following directed graph (or genome path):
@@ -265,7 +280,7 @@ So to determine the sequence of the underlying genome we are looking a path in t
 >
 >**Two Hamiltonian paths for the 15 3-mers**. Edges spelling "genomes" $\texttt{TAATGCCATGGGATGTT}$ and $\texttt{TAATGGGATGCCATGTT}$ are highlighted in black. (Fig. 4.9. from CP). 
 
-The reason for this "duality" is the fact that we have a *repeat*: 3-mer $\texttt{ATG}$ is present twice on our data (red and blue). As we will see later repeats cause a lot of trouble in genome assembly.
+The reason for this "duality" is the fact that we have a *repeat*: 3-mer $\texttt{ATG}$ is present three times in our data (<font color="green">green</font>, <font color="red">red</font>, and <font color="blue">blue</font>). As we will see later repeats cause a lot of trouble in genome assembly.
 
 ## Finding overlaps
 
@@ -741,8 +756,5 @@ As we've seen the third law of assembly is unbeatable. As a result some regions 
 
 >![](/BMMB554/img/t12_contigs.png)
 >
->The following "genomic" segment will be reported in three pieces corresponding to reagions flanking the repeat and repeat itself (Image from [BL](https://github.com/BenLangmead/ads1-slides/blob/master/0580_asm__practice.pdf)).
+>The following "genomic" segment will be reported in three pieces corresponding to regions flanking the repeat and repeat itself (Image from [BL](https://github.com/BenLangmead/ads1-slides/blob/master/0580_asm__practice.pdf)).
 
-# Next
-
-Next topic will cover assembly in practice as we will attempt to put together an *E. coli* genome sequenced with Illumina and Oxford Nanopore. 

@@ -1,121 +1,67 @@
 <!DOCTYPE html>
-<html lang="en-us">
-<head>
-	<title>Assembly basics&middot; BMMB554 | Fall 2016</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="author" content="Anton Nekrutenko">
-	<meta name="description" content="Introduction to data driven life sciences">
-	<meta name="keywords" content="genomes, genetics, ngs, data analysis">
-	<meta name="generator" content="Hugo 0.17" />
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" prefix="og: http://ogp.me/ns#" xmlns:og="http://ogp.me/ns#"><!--<![endif]-->
 
-	<!-- CSS -->
-	<link rel="stylesheet" href="http://nekrut.github.io/BMMB554/css/main.css">
-
-	<!--Favicon-->
-	<link rel="shortcut icon" href="http://nekrut.github.io/BMMB554/favicon.ico" type="image/x-icon">
-
-	<!-- RSS -->
+    <head>
+                <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="**Topic 12** | Challenges of genome (and transcriptome) assembly">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="author" content="Anton Nekrutenko">
+  
 	
-
-	<!-- Font Awesome -->
-	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-
-	<!-- Google Fonts -->
-	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
-
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script>
-</head>
+        <meta property="og:site_name" content="BMMB 554 / 2017">
+        <meta property="og:title" content="BMMB 554 / 2017">
+        <meta property="og:url" content="https://nekrut.github.io/BMMB554/post/topic12/">
+        <meta property="og:description" content="Introduction to data driven life sciences">
+    
+        <meta property="og:type" content="article" />
+        <meta property="og:article:author" content="Anton Nekrutenko" />
+        <meta property="og:article:published_time" content="2017-03-15T16:20:10-05:00" />
+    
+        <meta name="generator" content="Hugo 0.19" />
+        <title>13. Assembly basics &middot; BMMB 554 / 2017</title>
+        <link rel="canonical" href="https://nekrut.github.io/BMMB554/" />
+        <link rel="alternate" type="application/rss+xml" title="RSS" href="">
+        <link rel="stylesheet" type="text/css" href="https://nekrut.github.io/BMMB554/css/main.css"/>
+        <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200|Montserrat:700" rel="stylesheet" type="text/css">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+        <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    </head>
 
 <body>
-    <header class="site-header">
-	<div class="branding">
-		<a href="http://nekrut.github.io/BMMB554/">
-		<img class="avatar" src="http://nekrut.github.io/BMMB554/img/gxy.png" alt=""/>
-		</a>
-		<h1 class="site-title">
-			<a href="http://nekrut.github.io/BMMB554/">BMMB554 | Fall 2016</a>
-		</h1>
-	</div>
-	<nav class="site-nav">
-		<ul>
-	      	<li><a href="/BMMB554/about/"> Syllabus </a></li>
+<!--[if lt IE 7]><p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chrome/‎">install Google Chrome</a> to experience this site.</p><![endif]-->
 
-	      	<li>
-	<a href="http://nekrut.github.io/BMMB554/" title="">
-		<i class="fa fa-fw fa-home"></i>
-	</a>
-</li>
+    <header id="site-header">
+        <div class="container">
+            <a href="https://nekrut.github.io/BMMB554/" alt="BMMB 554 / 2017"><h1 class="blog-title heading">BMMB 554 / 2017</h1></a>
+            <p class="blog-description">Introduction to data driven life sciences</p>
+        </div>
+    </header>
+<main class="content" role="main">
+	<div class="container">
+		<article class="post">
+	<header class="post-header">
+        <h3 class="p-post-title">13. Assembly basics</h3>
+    </header>
 
+    <section class="post-content">
+        
 
+<p><a href="https://github.com/rrwick/Unicycler"><img src="https://github.com/rrwick/Unicycler/raw/master/misc/illumina_graph_comparison.png" alt="" /></a></p>
 
-<li>
-	<a href="mailto:aun1@psu.edu" title="Email">
-		<i class="fa fa-fw fa-envelope"></i>
-	</a>
-</li>
+<p>Previously we have learned about applications on PacBio technology:</p>
 
+<script async class='speakerdeck-embed' data-id='5850fe7ede3b45df816c3eaa502ea3d1' data-ratio='1.33333333333333' src='//speakerdeck.com/assets/embed.js'></script>
 
+<p>Assembly problem was featured prominently in this presentation. Today we will cover introductory concepts behind assembly.</p>
 
-
-
-
-
-
-
-
-
-<li>
-	<a href="https://github.com/nekrut" title="Github">
-		<i class="fa fa-fw fa-github"></i>
-	</a>
-</li>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<li>
-	<a href="https://twitter.com/galaxyproject" title="Twitter">
-		<i class="fa fa-fw fa-twitter"></i>
-	</a>
-</li>
-
-
-
-
-
-
-
-	    </ul>
-	</nav>
-</header>
-
-
-    <div class="content">
-    <article class="feature-image">
-		<header style="background-image: url('http://nekrut.github.io/BMMB554/img/topic12_cover.png')">
-			<h1 class="title">Assembly basics</h1>
-		</header>
-
-	<section class="post-content">
-		
+<hr />
 
 <p>Genome assembly is a difficult task. In trying to explain it I will be relying on two highly regarded sources:</p>
 
@@ -128,7 +74,7 @@
 
 <h2 id="k-mer-composition"><em>k</em>-mer composition</h2>
 
-<p>Genomes are strings of text. When we sequence genomes we use sequencing machines that generate reads. For now let&rsquo;s assume that all reads have the same length <em>k</em> and every <em>k</em>-mer is sequenced only once. We will relax these assumptions at the end. Thus sequencing a genome generates a large list of <em>k</em>-mers.</p>
+<p>Genomes are strings of text. When we sequence genomes we use sequencing machines that generate reads. For now let&rsquo;s assume that all reads have the same length <em>k</em> and every <em>k</em>-mer is sequenced only once. We will relax these assumptions later in this lecture. Thus sequencing a genome generates a large list of <em>k</em>-mers.</p>
 
 <p>Suppose we are dealing with a <em>very</em> short genome <code>TATGGGGTGC</code>. Its <em>k</em>-mer composition (note the subscript) $Composition_k(Text)$ is the collection of all $k$-mer substrings (including repeated ones). When <em>k</em> = 3 we get (basically we split sequence into windows of length 3 sliding window by 1 base every time):</p>
 
@@ -176,6 +122,8 @@ $$
 3   ATG
 4    TGT
 5     GTT
+  -------
+  TAATGTT
 </code></pre>
 
 <p>There is nothing in the original 3-mer composition, which starts with <code>TT</code>. Let&rsquo;s track back and instead of <code>TGT</code> in step 4 insert <code>TGC</code>:</p>
@@ -194,6 +142,8 @@ $$
 12            ATG
 13             TGT
 14              GTT
+   ----------------
+   TAATGCCATGGATGTT
 </code></pre>
 
 <p>We only used 14 3-mers from the total of 15, so our genome is shorter (we have extra parts!). This difficulty is related to the fact that there are three repeated <code>ATG</code> motifs in this genome and as a result each <code>ATG</code> can be extended by either <code>TGG</code>, <code>TGC</code>, or <code>TGT</code>.</p>
@@ -327,7 +277,7 @@ GGCGTCTATATCT
 <p><strong>Directed graph</strong> representing overlapping reads. (Image from <a href="http://www.cs.jhu.edu/~langmea/resources/lecture_notes/assembly_scs.pdf">Ben Langmead</a>).</p>
 </blockquote>
 
-<p>For example, the following string reconstruction:</p>
+<p>For example, the string reconstruction we have seen earlier (with the difference of inserting <code>GGG</code> in line 10):</p>
 
 <pre><code> 1 TAA
  2  AAT
@@ -338,12 +288,14 @@ GGCGTCTATATCT
  7       CAT
  8        ATG
  9         TGG
-10          GGA
-11           GAT
-12            ATG
-13             TGT
-14              GTT
-   TAATGCCATGGATGTT
+10          GGG
+11           GGA
+12            GAT
+13             ATG
+14              TGT
+15               GTT
+   -----------------
+   TAATGCCATGGGATGTT
 </code></pre>
 
 <p>can be represented as a following directed graph (or genome path):</p>
@@ -371,7 +323,7 @@ GGCGTCTATATCT
 <p><strong>Two Hamiltonian paths for the 15 3-mers</strong>. Edges spelling &ldquo;genomes&rdquo; $\texttt{TAATGCCATGGGATGTT}$ and $\texttt{TAATGGGATGCCATGTT}$ are highlighted in black. (Fig. 4.9. from CP).</p>
 </blockquote>
 
-<p>The reason for this &ldquo;duality&rdquo; is the fact that we have a <em>repeat</em>: 3-mer $\texttt{ATG}$ is present twice on our data (red and blue). As we will see later repeats cause a lot of trouble in genome assembly.</p>
+<p>The reason for this &ldquo;duality&rdquo; is the fact that we have a <em>repeat</em>: 3-mer $\texttt{ATG}$ is present three times in our data (<font color="green">green</font>, <font color="red">red</font>, and <font color="blue">blue</font>). As we will see later repeats cause a lot of trouble in genome assembly.</p>
 
 <h2 id="finding-overlaps">Finding overlaps</h2>
 
@@ -889,24 +841,60 @@ An overlap (A) and DeBruijn (B) graphs for the same string.</p>
 <blockquote>
 <p><img src="/BMMB554/img/t12_contigs.png" alt="" /></p>
 
-<p>The following &ldquo;genomic&rdquo; segment will be reported in three pieces corresponding to reagions flanking the repeat and repeat itself (Image from <a href="https://github.com/BenLangmead/ads1-slides/blob/master/0580_asm__practice.pdf">BL</a>).</p>
+<p>The following &ldquo;genomic&rdquo; segment will be reported in three pieces corresponding to regions flanking the repeat and repeat itself (Image from <a href="https://github.com/BenLangmead/ads1-slides/blob/master/0580_asm__practice.pdf">BL</a>).</p>
 </blockquote>
 
-<h1 id="next">Next</h1>
+    </section>
 
-<p>Next topic will cover assembly in practice as we will attempt to put together an <em>E. coli</em> genome sequenced with Illumina and Oxford Nanopore.</p>
+    <hr>
 
-	</section>
-    </div>
+    <footer class="post-footer">
+        <section class="f-1">
+            
+            
+            <p class="f-post-time"><time datetime="2017-03-15T16:20:10-05:00">March 15, 2017</time></p>
+        </section>
+                        
+        <section class="f-2">
+            <section class="share">
+                <span>Share:
+                <a class="icon-twitter" href="http://twitter.com/share?text=13.%20Assembly%20basics&url=https%3a%2f%2fnekrut.github.io%2fBMMB554%2fpost%2ftopic12%2f"
+                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="fa fa-twitter"></i>
+                </a>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fnekrut.github.io%2fBMMB554%2fpost%2ftopic12%2f"
+                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="fa fa-facebook"></i>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=https%3a%2f%2fnekrut.github.io%2fBMMB554%2fpost%2ftopic12%2f"
+                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="fa fa-google-plus"></i>
+                </a>
+                </span>
+            </section>
 
-    <footer class="site-footer">
-	<p class="text">&copy; 2016 - Released under the MIT license<br>Powered by <a href="//gohugo.io/">Hugo</a> with the <a href="//github.com/digitalcraftsman/hugo-type-theme">Type Theme</a></p>
-</footer>
+            
+        </section>
+                        
+    </footer>
+</article>
+	</div>
+</main>
+    <footer id="site-footer">
+    <hr>
+        <div class="container">
+            
+            <section><a href="https://nekrut.github.io/BMMB554/">Anton Nekrutenko</a> 2017 | MIT License</section>
+        </div>
+    </footer>
 
-<script type="text/javascript"
+    <script type="text/javascript" src="https://nekrut.github.io/BMMB554/js/fittext.js"></script>
+    <script type="text/javascript">
+      $(".heading").fitText();
+    </script>
+    <script type="text/javascript"
   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
-
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   tex2jax: {
@@ -933,17 +921,6 @@ MathJax.Hub.Config({
 });
 </script>
 
-
-
-<script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-83364979-1', 'auto');
-ga('send', 'pageview');
-</script>
 
 </body>
 </html>
