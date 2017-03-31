@@ -6,8 +6,439 @@
     <description>Recent content on BMMB 554 / 2017</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 15 Mar 2017 16:20:10 -0500</lastBuildDate>
+    <lastBuildDate>Thu, 30 Mar 2017 10:00:20 -0400</lastBuildDate>
     <atom:link href="https://nekrut.github.io/BMMB554/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>14. Finding DNA/Protein interactions</title>
+      <link>https://nekrut.github.io/BMMB554/post/topic14/</link>
+      <pubDate>Thu, 30 Mar 2017 10:00:20 -0400</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/post/topic14/</guid>
+      <description>
+
+&lt;h1 id=&#34;an-overview-of-chip-seq&#34;&gt;An overview of ChIP seq&lt;/h1&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;This material is based on a variety of sources acknowledged throughout this document. It follows the logic of a comprehensive overview of ChIP-seq methodology compiled by &lt;a href=&#34;http://mahonylab.org/&#34;&gt;Shaun Mahony&lt;/a&gt; at Penn State.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;many-proteins-interact-with-dna&#34;&gt;Many proteins interact with DNA&lt;/h2&gt;
+
+&lt;p&gt;A variety of proteins interact with genomic DNA including histones and various transcription factors and related proteins:&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/t15_prot.jpg&#34; alt=&#34;&#34; /&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;small&gt;Transcription factors (TFs) bind to specific sites (transcription-factor binding sites; TFBS) that are either proximal or distal to a transcription start site. Sets of TFs can operate in functional cis-regulatory modules (CRMs) to achieve specific regulatory properties. Interactions between bound TFs and cofactors stabilize the transcription-initiation machinery to enable gene expression. The regulation that is conferred by sequence-specific binding TFs is highly dependent on the three-dimensional structure of chromatin (From &lt;a href=&#34;http://www.nature.com/nrg/journal/v5/n4/full/nrg1315.html&#34;&gt;Wasserman, Sandelin:2004&lt;/a&gt;).&lt;/small&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;hr&gt;
+
+&lt;h2 id=&#34;the-footprints-of-these-interactions-can-be-captured-and-sequenced&#34;&gt;The footprints of these interactions can be captured and sequenced&lt;/h2&gt;
+
+&lt;p&gt;There interactions can captured via the process of Chromatin Immunoprecipitation (ChIP) initially developed by &lt;a href=&#34;http://www.pnas.org/content/81/14/4275.short&#34;&gt;Gilmore and Lis&lt;/a&gt; in 1984. ChIP-seq makes this procedure genome-wide by combining it with sequencing:&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/t15_chip.jpg&#34; alt=&#34;&#34; /&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;small&gt;Processing of ChIP fragments for Illumuna sequencing (From &lt;a href=&#34;https://www.illumina.com/techniques/sequencing/dna-sequencing/chip-seq.html&#34;&gt;Illumina&lt;/a&gt;)&lt;/small&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;hr&gt;
+
+&lt;h2 id=&#34;resulting-reads-produce-piles&#34;&gt;Resulting reads produce piles&lt;/h2&gt;
+
+&lt;p&gt;After ChIP tags are sequenced, they are mapped to the genome using tools such as &lt;a href=&#34;http://bio-bwa.sourceforge.net/bwa.shtml&#34;&gt;bwa&lt;/a&gt; or &lt;a href=&#34;http://bowtie-bio.sourceforge.net/bowtie2/index.shtml&#34;&gt;bowtie&lt;/a&gt;. Aligned reads are enriched in the genomic regions corresponding to binding sites of proteins used during the IP step. Figure below (&lt;strong&gt;A&lt;/strong&gt;) shows that such piles of enriched reads (from which peaks are defined) are more defined in the case of ChIP-seq (as compared to ChIP-chip where tags are not sequenced but hybridized to &lt;a href=&#34;https://en.wikipedia.org/wiki/Tiling_array&#34;&gt;tiling microarrays&lt;/a&gt;). You can also see enrichment of tags in ChIP-seq experiment compared to input DNA (input DNA is a type of control used in ChIP-seq experiments that is simply a portion of of the sample sequenced without performing IP step). &lt;strong&gt;B&lt;/strong&gt; panel below highlights differences between punctate and diffuse types of ChIP-seq signal. Punctate signal is characteristic of individual transcription factors (such as CTCF transcriptional repressor) or (to a lesser extent) transcriptional complexes such as RNA polymerase II. Broad diffuse signals are common for chromatine (e.g., histones) ChIP-seq experiments.&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/t15_peak_comp.jpg&#34; alt=&#34;&#34; /&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;small&gt;&lt;strong&gt;A&lt;/strong&gt;. Examples of the profiles generated by chromatin immunoprecipitation followed by sequencing (ChIP–seq) or by microarray (ChIP–chip). Shown is a section of the binding profiles of the chromodomain protein Chromator, as measured by ChIP–chip (unlogged intensity ratio; blue) and ChIP–seq (tag density; red) in the Drosophila melanogaster S2 cell line. The tag density profile obtained by ChIP–seq reveals specific positions of Chromator binding with higher spatial resolution and sensitivity. The ChIP–seq input DNA (control experiment) tag density is shown in grey for comparison. &lt;strong&gt;B&lt;/strong&gt;. Examples of different types of ChIP–seq tag density profiles in human T cells. Profiles for different types of proteins and histone marks can have different types of features, such as: sharp binding sites, as shown for the insulator binding protein CTCF (CCCTC-binding factor; red); a mixture of shapes, as shown for RNA polymerase II (orange), which has a sharp peak followed by a broad region of enrichment; medium size broad peaks, as shown for histone H3 trimethylated at lysine 36 (H3K36me3; green), which is associated with transcription elongation over the gene; or large domains, as shown for histone H3 trimethylated at lysine 27 (H3K27me3; blue), which is a repressive mark that is indicative of Polycomb-mediated silencing. BPIL2, bactericidal/permeability-increasing protein-like 2; FBXO7, F box only 7; NPC1, Niemann-Pick disease, type C1; Pros35, proteasome 35 kDa subunit; SYN3, synapsin III. Data for part &lt;strong&gt;B&lt;/strong&gt; are from &lt;a href=&#34;http://www.sciencedirect.com/science/article/pii/S0092867407006009&#34;&gt;Barksi:2007&lt;/a&gt;]. (Image and legend from &lt;a href=&#34;http://www.nature.com/nrg/journal/v10/n10/full/nrg2641.html&#34;&gt;Park:2009&lt;/a&gt;)&lt;/small&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;hr&gt;
+
+&lt;h2 id=&#34;there-are-multiple-types-of-protein-dna-binding-assays&#34;&gt;There are multiple types of protein-DNA binding assays.&lt;/h2&gt;
+
+&lt;p&gt;Figure below describes seven types of protein-DNA binding assays. We will briefly describe them here:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;ChIP-seq&lt;/strong&gt; - we already touched on the main ideas of this protocol. It allows identify approximate location of binding sites (&lt;a href=&#34;http://www.sciencedirect.com/science/article/pii/S0092867407006009&#34;&gt;Barski:2007&lt;/a&gt;).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ChIP-exo&lt;/strong&gt; - here experiment initially proceeds in the same way as standard ChIP-seq. However, before crosslinking is reversed DNA fragments bound to proteins are treated with &lt;a href=&#34;https://www.neb.com/products/m0262-lambda-exonuclease&#34;&gt;lambda exonuclease&lt;/a&gt; in 5&amp;rsquo; - 3&amp;rsquo; direction. This allows to &amp;ldquo;sharpen&amp;rdquo; the signal by polishing protein-bound DNA fragments up to the area covered by the protein. As a result much sharper peaks are produced and position of binding sites can be determined with base-pair resolution (&lt;a href=&#34;http://onlinelibrary.wiley.com/doi/10.1002/0471142727.mb2124s100/abstract&#34;&gt;Rhee &amp;amp; Pugh:2012&lt;/a&gt;).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;PRO-seq&lt;/strong&gt; - here newly synthesized transcripts are labeled with biotin-labeled NTPs. Incorporation of biotinylated NTPs also prevents RNA polymerase from continuing elongation. Pulling down biotinylated RNAs, reverse trainscribing, and sequencing results in data showing position and transcriptional direction of RNA polymerase and also allows to pinpoint precise location of transcription start sites (TSS) (&lt;a href=&#34;http://science.sciencemag.org/content/339/6122/950&#34;&gt;Kwak:2013&lt;/a&gt;).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;MNase-seq&lt;/strong&gt; - is a high resolution assay for identification of nucleosome positions. Here unoccupied DNA is digested by &lt;a href=&#34;https://www.neb.com/products/m0247-micrococcal-nuclease&#34;&gt;MNase&lt;/a&gt; - a non-specific endonuclease - leaving only occupied fragments. Paired-end sequencing of the fragments pinpoints nucleosome positions (&lt;a href=&#34;http://www.nature.com/nature/journal/v446/n7135/abs/nature05632.html&#34;&gt;Albert:2007&lt;/a&gt;).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;DNase-seq&lt;/strong&gt; - is an assay designed to identify nucleosome depleted regions (open chromatin). It uses &lt;a href=&#34;https://www.neb.com/products/m0303-dnase-i-rnase-free&#34;&gt;DNase I&lt;/a&gt; to cleave open DNA. (&lt;a href=&#34;http://www.nature.com/nmeth/journal/v3/n7/abs/nmeth888.html&#34;&gt;Crawford:2006&lt;/a&gt;).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ATAC-seq&lt;/strong&gt; - is similar to DNase-seq but uses Tn5 transposase to introduce sequencing primers directly to open DNA regions (&lt;a href=&#34;https://genomebiology.biomedcentral.com/articles/10.1186/gb-2010-11-12-r119&#34;&gt;Adey:2010&lt;/a&gt;).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/t15_types_of_chip_seq.jpg&#34; alt=&#34;&#34; /&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;small&gt;High-resolution protein–DNA binding assays. (From &lt;a href=&#34;http://www.tandfonline.com/doi/full/10.3109/10409238.2015.1051505&#34;&gt;Mahony and Pugh:2015&lt;/a&gt;).&lt;/small&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;hr&gt;
+
+&lt;h2 id=&#34;the-data-is-exceedingly-noisy&#34;&gt;The data is exceedingly noisy.&lt;/h2&gt;
+
+&lt;p&gt;One thing to keep in mind is that the efficiency of the IP step is ~35% at best and commonly is around 1 - 2% (see Figure below). In this figure the majority of experiments have fraction of reads in peaks (FRiP) score within the 0 to 5% interval. So &amp;ldquo;successful&amp;rdquo; experiment should have FRiP &amp;gt; 1% according to &lt;a href=&#34;http://genome.cshlp.org/content/22/9/1813.full&#34;&gt;ENCODE guidelines&lt;/a&gt;. Look again at the figure above (not below). In pane &lt;strong&gt;A&lt;/strong&gt; there is a comparison between ChIP-seq coverage (red peaks) and input DNA (gray peaks). You can see that gray peaks are widespread. In fact, in a typical experiment we get almost as many reads in control (input DNA) experiment as we do in ChIP experiment. So this methodology merely &lt;em&gt;enriches&lt;/em&gt; reads derived from binding regions.&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/t15_frip.png&#34; alt=&#34;&#34; /&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;small&gt;Number of called peaks vs. ChIP enrichment. Except in special cases, successful experiments identify thousands to tens of thousands of peaks for most TFs and, depending on the peak finder used, numbers in the hundreds or low thousands indicate a failure (Image and legend from &lt;a href=&#34;http://genome.cshlp.org/content/22/9/1813.full&#34;&gt;Landt:2012&lt;/a&gt;).&lt;/small&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;hr&gt;
+
+&lt;h1 id=&#34;analyzing-chip-seq-data&#34;&gt;Analyzing ChIP-seq data&lt;/h1&gt;
+
+&lt;h2 id=&#34;looking-at-data&#34;&gt;Looking at data&lt;/h2&gt;
+
+&lt;p&gt;Before diving into analysis strategies let&amp;rsquo;s get a feel of how the underlying data look like.&lt;/p&gt;
+
+&lt;h3 id=&#34;individual-peaks&#34;&gt;Individual peaks&lt;/h3&gt;
+
+&lt;p&gt;If we align ChIP-seq reads against genome and record coordinates of their 5&amp;rsquo;-ends:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;position  -&amp;gt; 0123456789012345678901234567890123456789
+                       1         2         3
+genome    -&amp;gt; atggacgatatgacagataagagcagataggggatagata
+read1     -&amp;gt;           tgacag
+read2     -&amp;gt;           tgacag
+read3     -&amp;gt;              cagata
+
+5&#39;-end       ----------------------------------------
+histogram -&amp;gt;           #  #
+                       #
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;we will get a type of a histogram. In the example above bar (composed of &lt;code&gt;#&lt;/code&gt; symbols) at position 11 has height 2, because two reads start at this position. Bar at position 13 has height 1 because only a single read begins there. In the case of read data this will look like this (image from &lt;a href=&#34;http://mahonylab.org/&#34;&gt;Shaun Mahony&lt;/a&gt;):&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/t15_hist.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;where - and + are two DNA strands.&lt;/p&gt;
+
+&lt;p&gt;Now to smooth this let&amp;rsquo;s extend peaks by the length of underlying DNA fragments. The fragments are longer than reads and we know their approximate length from out experimental design. For example, if during experimental phase of ChIP-seq protocol we size selected DNA fragment at, say, 200 bp, we will extend reads by that amount. For illustration, let&amp;rsquo;s say that out fragment size is 10 bp (unrealistic but helpful for drawing an example below):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;position  -&amp;gt; 0123456789012345678901234567890123456789
+                       1         2         3
+genome    -&amp;gt; atggacgatatgacagataagagcagataggggatagata
+read1     -&amp;gt;           tgacagATAA
+read2     -&amp;gt;           tgacagATAA
+read3     -&amp;gt;              cagataAGAG
+
+5&#39;-end       ----------------------------------------
+histogram -&amp;gt;           #############
+                       ##########
+                          #######
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;now we extended the reads by expected DNA fragment length (upper case to get to 10 bp) and drew a coverage histogram. In this histogram bar height reflects the number of fragments covering this location. For read data this will look like this (image from &lt;a href=&#34;http://mahonylab.org/&#34;&gt;Shaun Mahony&lt;/a&gt;):&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/t15_cov_hist.png&#34; alt=&#34;&#34; /&gt;.&lt;/p&gt;
+
+&lt;p&gt;The center of the binding size is somewhere between these peaks (we will discuss identification of precise binding location later).&lt;/p&gt;
+
+&lt;h3 id=&#34;all-peaks-in-an-experiment&#34;&gt;All peaks in an experiment&lt;/h3&gt;
+
+&lt;p&gt;If we ignore strandedness (just combine peaks from plus and minus strands) we can aggregate all peaks from the genome by aligning their midpoints and drawing a heatmap:&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/t15_heatmap.png&#34; alt=&#34;&#34; /&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;small&gt;Aligning midpoints of peaks across the entire genome allows assessing signal across the entire experiment (image from &lt;a href=&#34;http://mahonylab.org/&#34;&gt;Shaun Mahony&lt;/a&gt;).&lt;/small&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;hr&gt;
+
+&lt;p&gt;This may be especially informative when comparing results of multiple ChIP experiments:&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/t15_multi_heat.png&#34; alt=&#34;&#34; /&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;&lt;small&gt;Comparison across multiple experiments shows that accessible and inaccessible regions of chromatin have similar binding to Lhx3 and Isl1 factors (image from &lt;a href=&#34;http://mahonylab.org/&#34;&gt;Shaun Mahony&lt;/a&gt;).&lt;/small&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;calling-peaks&#34;&gt;Calling peaks&lt;/h2&gt;
+
+&lt;p&gt;There are several ways for identifying binding events. They are summarized in the figure below:&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/t15_peak_calling.jpg&#34; alt=&#34;&#34; /&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;small&gt;Outline of three ChIP-seq binding event detection methods. Peak-finding methods typically either shift the ChIP-seq tag locations in a 3′ direction by half the expected fragment length, or extend the length of the tag in a 3′ direction to be equal to the expected fragment length. Tags from opposite strands are merged to construct an unstranded tag density landscapes, and binding event locations are predicted from the locations with maximum tag coverage within each region that contains a significant enrichment of ChIP-seq tags (i.e. the peak summit). Peak-pairing methods [e.g. GeneTrack build similar tag density landscapes, but retain strandedness information and typically do not shift or extend the tag locations. Peak locations are determined on each strand separately, and nearby peaks in the correct stranded orientation within a given distance are paired together. Binding event locations are predicted from the peak-pair midpoint locations. Probabilistic binding detection methods aim to estimate the locations of binding events that could have given rise to the observed ChIP-seq tag locations. These methods begin training with initial guesses of binding event locations and a model of how tags are expected to be distributed around real ChIP-seq binding events. During each training step, every ChIP-seq tag is probabilistically associated with nearby binding events, depending on the distance between the tag and the event location. Given these probabilistic tag assignments, binding event locations are updated to achieve a better fit with their associated tags, and the model of how tags are distributed around binding events is updated to reflect the accumulation of tags around all current binding events. During the training process, binding events with few assigned tags are weeded out of the model, and the process eventually converges to a set of final binding locations. (Figure and legend from &lt;a href=&#34;http://www.tandfonline.com/doi/full/10.3109/10409238.2015.1051505&#34;&gt;Mahony and Pugh:2015&lt;/a&gt;).&lt;/small&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&#34;macs&#34;&gt;MACS&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.ncbi.nlm.nih.gov/pubmed?cmd=search&amp;amp;term=18798982&#34;&gt;MACS&lt;/a&gt; (or its current version MACS2) performs several steps for calling peaks from paired treatment/control datasets:&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/t15_macs_workflow.jpg&#34; alt=&#34;&#34; /&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;small&gt;Steps of the MACS workflow (From &lt;a href=&#34;http://www.nature.com/nprot/journal/v7/n9/full/nprot.2012.101.html&#34;&gt;Feng:2012&lt;/a&gt;.&lt;/small&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;hr&gt;
+
+&lt;p&gt;Here is a concise description of these steps:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Removing redundancy&lt;/strong&gt; - MACS retains uniquely mapped reads and removes reads that are repeatedly mapped to the same location. This reduces effects of PCR amplification biases during library preparation.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Build model and estimate fragment size&lt;/strong&gt; - one of the MACS inputs is the fragment size or &lt;em&gt;bandwidth&lt;/em&gt;, which is approximate size of DNA fragments generated during fragmentation step of library preparation. MACS first slides a window sized at twice the bandwidth across the genome and finds instances where read counts enriched by between 10 and 30 fold relative to the genome background. It then randomly samples 1,000 of such regions and build the model. To build the model it separates reads mapping to each of the strands and build two distributions (two modes). The midpoint between the two modes is the middle of the binding size and the distance between the modes is the fragment size &lt;code&gt;d&lt;/code&gt; (see Figure below).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/t15_macs_model.png&#34; alt=&#34;&#34; /&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;&lt;small&gt;Peaks mapped to two strands are treated separately to build two coverage density profiles - two two modes. The distance between the modes is the fragment size &lt;code&gt;d&lt;/code&gt;. This profile is build from 1,000 randomply selected enriched regions (From &lt;a href=&#34;https://www.ncbi.nlm.nih.gov/pubmed?cmd=search&amp;amp;term=18798982&#34;&gt;Zhang:2008&lt;/a&gt;.&lt;/small&gt;
+&lt;hr&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Generate peaks&lt;/strong&gt; - now that &lt;em&gt;d&lt;/em&gt; has been defined MACS slides a window of size &lt;em&gt;2d&lt;/em&gt; across the genome to identify regions significantly enriched in the ChIP sample. MACS assumes that background reads obey &lt;a href=&#34;https://en.wikipedia.org/wiki/Poisson_distribution&#34;&gt;Poisson distribution&lt;/a&gt;. Thus given the number of reads in a given interval within the control sample we can calculate the probability of having observed number of reads in the ChIP sample (e.g., see flood example &lt;a href=&#34;https://en.wikipedia.org/wiki/Poisson_distribution#Examples_of_probability_for_Poisson_distributions&#34;&gt;here&lt;/a&gt;). This procedure is performed for several intervals around the examined location (&lt;em&gt;2d&lt;/em&gt;, 1kb, 5kb, 10kb, and the whole genome) and the maximum value is chosen. One problem with this approach is that it only works if both samples (ChIP and control) are sequenced to the depth, which is not usually happening in practice. To correct with this MACS scales down the larger sample.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Compute False Discovery Rate (FDR)&lt;/strong&gt; - &lt;a href=&#34;http://www.nature.com/nprot/journal/v7/n9/full/nprot.2012.101.html&#34;&gt;Feng:2012&lt;/a&gt; explains computing FDR as follows: &lt;em&gt;&amp;ldquo;When a control sample is available &lt;/em&gt;(and you should really always use it - AN)&lt;em&gt;, MACS can also estimate an empirical FDR for every peak by exchanging the ChIP-seq and control samples and identifying peaks in the control sample using the same set of parameters used for the ChIP-seq sample. Because the control sample should not exhibit read enrichment, any such peaks found by MACS can be regarded as false positives. For a particular P value threshold, the empirical FDR is then calculated as the number of control peaks passing the threshold divided by the number of ChIP-seq peaks passing the same threshold.&amp;rdquo; &lt;/em&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;gps-and-multigps&#34;&gt;GPS and multiGPS&lt;/h3&gt;
+
+&lt;p&gt;Genome positioning system &lt;a href=&#34;https://www.ncbi.nlm.nih.gov/pubmed/20966006&#34;&gt;GPS&lt;/a&gt; is a sophisticated tools for discovering motifs at high resolution (e.g., in cases when multiple adjacent motifs are obscured by overlapping read piles).  Figure below explains the overall idea of the method. Instead of looking at regions enriched for reads, GPS initially assumes that every position in the genome may represent a binding event. It builds a spatial distribution of mapped reads across the genome. It also makes the assumption that in a given ChIP-seq experiment all true binding events will have approximately the same profile based on an empirical model of reads following a bimodal distribution around the binding even (pane &lt;strong&gt;B&lt;/strong&gt; in the figure below). Different genomic locations are then made to &amp;ldquo;compete&amp;rdquo; with each other during an Expectation-Minimization procedure to take ownership of reads mapping to a given location. If the number of reads at a particular binding event drops below a threshold, this event is &amp;ldquo;forgotten&amp;rdquo;.&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/t15_gps.jpg&#34; alt=&#34;&#34; /&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;small&gt;GPS probabilistically models ChIP-Seq read spatial distributions. (a) Protein-DNA interaction events at positions 1 and 2 on the genome result in DNA end sequence reads in the ChIP-Seq protocol. (b) The observed spatial read density (blue: ‘+’ strand, red: ‘−’ strand) from ∼4000 CTCF events aligned with respect to the CTCF motif position at each event &amp;copy; GPS models ChIP-Seq reads as being generated by a mixture of binding events at every genomic base, with each event producing the characteristic spatial read density. (d) A sparse prior on mixture components causes GPS to assign events to as few bases as possible to explain the observed reads (green and orange reads). In GPS, a given read can be explained by more than one event (yellow reads; Figure and legend from &lt;a href=&#34;https://www.ncbi.nlm.nih.gov/pubmed/20966006&#34;&gt;Guo:2010&lt;/a&gt;).&lt;/small&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;hr&gt;
+
+&lt;p&gt;As a result GPS can provide much more fine resolution for binding events as shown by performance metrics in the following figure:&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/t15_gps_stats.jpg&#34; alt=&#34;&#34; /&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;small&gt;GPS improves the effective spatial resolution and accuracy in resolving proximal binding events. (a) Fraction of predicted CTCF binding events with a motif within the given distance with event discovery by GPS, SISSRs, MACS, cisGenome, QuEST, FindPeaks, spp-wtd and spp-mtc. Events shown were predicted by all eight methods and had a CTCF motif within 100 bp. (b) Fraction of binary events recovered vs. the distance between the generated synthetic events for GPS, SISSRs, MACS and QuEST. &amp;copy; Example of a predicted binary CTCF event that contains coordinately located CTCF motifs. (d) Number of GABP events discovered by GPS, SISSRs, MACS, cisGenome, and QuEST in regions that contain clustered GABP motifs within 500 bp (Figure and legend from &lt;a href=&#34;https://www.ncbi.nlm.nih.gov/pubmed/20966006&#34;&gt;Guo:2010&lt;/a&gt;).&lt;/small&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;hr&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003501&#34;&gt;multiGPS&lt;/a&gt; goes further by allowing to interrogate multiple ChIP-seq experiments at once. It uses joint multi-experiment model to consider reads from a collection of experiments. As explained by &lt;a href=&#34;http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003501#s2&#34;&gt;the authors&lt;/a&gt; &amp;ldquo;&lt;em&gt;MultiGPS detects binding events independently in each experiment in each step of its iterative optimization, allowing it to model experiment-specific parameters such as the distribution of reads around binding events and the properties of background noise. The iterative optimization procedure analyzes each experimental condition in turn, using binding event locations from other experiments to form an inter-experiment prior term for a single experiment optimization. MultiGPS therefore encourages the base locations of binding events to align across experiments when appropriate, and automatically produces coherent sets of binding events that are linked across experiments without any potentially noisy windowed analysis. To our knowledge, MultiGPS is the first ChIP-seq analysis approach that uses read data from multiple experiments in a joint and fully integrated method for identifying consistent and accurate binding event locations.&lt;/em&gt;&amp;rdquo;.&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/t15_multigps.gif&#34; alt=&#34;&#34; /&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;&lt;small&gt;Animation showing Expectation-Minimization iterations resulting in convergence on a set of well defined binding sites in three ChIP-seq samples (Image by &lt;a href=&#34;http://mahonylab.org/software/multigps/&#34;&gt;Shaun Mahony&lt;/a&gt;).&lt;/small&gt;
+&lt;hr&gt;&lt;/p&gt;
+
+&lt;p&gt;The fact that multiGPS simultaneously analyzes multiple conditions makes it uniquely suitable for the analysis of differential binding across multiple experiments as it outputs a table containing replicate specific read counts that can be directly analyzed with tools like edgeR, DeSeq, or Limma-Voom. multiGPS integrates with edgeR directly:&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;img src=&#34;https://nekrut.github.io/BMMB554/BMMB554/img/t15_ma.png&#34; alt=&#34;&#34; /&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;&lt;small&gt;[MA-plots] highlighting overall pairwise read enrichment differences across three cell types (ES, pMN, and Endo) ChIP&amp;rsquo;ed for Homeobox protein Cdx2. (Image from &lt;a href=&#34;http://lugh.bmb.psu.edu/software/multigps/example/multiGPS_Cdx2_results.html&#34;&gt;Shaun Mahony&lt;/a&gt;)&lt;/small&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;hr&gt;
+
+&lt;h1 id=&#34;what-s-next&#34;&gt;What&amp;rsquo;s next?&lt;/h1&gt;
+
+&lt;p&gt;It is now time for a practical exercise in which we will discuss various QC steps, interpretation of results, and performing differential binding analysis.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>13. Assembly basics</title>
