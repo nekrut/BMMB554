@@ -13,7 +13,7 @@ tags = [
 
 # An overview of ChIP seq
 
->This material is based on a variety of sources acknowledged throughout this document. It follows the logic of a comprehensive overview of ChIP-seq methodology compiled by [Shaun Mahony](http://mahonylab.org/) at Penn State.
+>This material is based on a variety of sources acknowledged throughout this document. It follows the logic of a comprehensive overview of ChIP-seq methodology compiled by [Shaun Mahony](http://mahonylab.org/) at Penn State. Shaun also has an excellent [presentation](http://lugh.bmb.psu.edu/teaching/ChIP-seq_analysis.pdf) covering this topic. 
 
 ## Many proteins interact with DNA
 
@@ -214,16 +214,9 @@ As a result GPS can provide much more fine resolution for binding events as show
 
 
 
-The fact that multiGPS simultaneously analyzes multiple conditions makes it uniquely suitable for the analysis of differential binding across multiple experiments as it outputs a table containing replicate specific read counts that can be directly analyzed with tools like edgeR, DeSeq, or Limma-Voom. multiGPS integrates with edgeR directly:
-
-<hr>
-|                |
-|----------------|
-|![](/BMMB554/img/t15_ma.png)|
-|<small>[MA-plots] highlighting overall pairwise read enrichment differences across three cell types (ES, pMN, and Endo) ChIP'ed for Homeobox protein Cdx2. (Image from [Shaun Mahony](http://lugh.bmb.psu.edu/software/multigps/example/multiGPS_Cdx2_results.html))</small>|
-<hr>
+The fact that multiGPS simultaneously analyzes multiple conditions makes it uniquely suitable for the analysis of differential binding across multiple experiments as it outputs a table containing replicate specific read counts that can be directly analyzed with tools like edgeR, DeSeq, or Limma-Voom. multiGPS integrates with edgeR directly.
 
 # What's next?
 
-It is now time for a practical exercise in which we will discuss various QC steps, interpretation of results, and performing differential binding analysis.
+It is now time for a practical tutorial in which we will discuss various QC steps, interpretation of results, and performing differential binding analysis. This tutorial can be found [here](https://galaxyproject.org/tutorials/chip/).
 

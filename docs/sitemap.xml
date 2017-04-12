@@ -2,6 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://nekrut.github.io/BMMB554/post/topic16/</loc>
+    <lastmod>2017-04-10T13:49:08-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nekrut.github.io/BMMB554/post/topic15/</loc>
+    <lastmod>2017-04-05T13:49:08-04:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://nekrut.github.io/BMMB554/post/topic14/</loc>
     <lastmod>2017-03-30T10:00:20-04:00</lastmod>
   </url>
@@ -84,13 +94,18 @@
   
   <url>
     <loc>https://nekrut.github.io/BMMB554/</loc>
-    <lastmod>2017-03-30T10:00:20-04:00</lastmod>
+    <lastmod>2017-04-10T13:49:08-04:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://nekrut.github.io/BMMB554/tags/burrows-wheeler-transform/</loc>
     <lastmod>2017-01-30T10:13:02-04:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://nekrut.github.io/BMMB554/categories/</loc>
     <priority>0</priority>
   </url>
   
@@ -144,7 +159,7 @@
   
   <url>
     <loc>https://nekrut.github.io/BMMB554/post/</loc>
-    <lastmod>2017-03-30T10:00:20-04:00</lastmod>
+    <lastmod>2017-04-10T13:49:08-04:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -162,6 +177,7 @@
   
   <url>
     <loc>https://nekrut.github.io/BMMB554/tags/</loc>
+    <lastmod>2017-01-30T10:13:02-04:00</lastmod>
     <priority>0</priority>
   </url>
   

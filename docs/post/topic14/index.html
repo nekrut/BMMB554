@@ -4,7 +4,7 @@
 <!--[if IE 8]><html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--><html class="no-js" prefix="og: http://ogp.me/ns#" xmlns:og="http://ogp.me/ns#"><!--<![endif]-->
 
-    <head>
+<head>
                 <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="description" content="**Topic 14** | ChIP-seq: An itroduction">
@@ -24,7 +24,7 @@
         <meta property="og:article:author" content="Anton Nekrutenko" />
         <meta property="og:article:published_time" content="2017-03-30T10:00:20-04:00" />
     
-        <meta name="generator" content="Hugo 0.19" />
+        <meta name="generator" content="Hugo 0.20" />
         <title>14. Finding DNA/Protein interactions &middot; BMMB 554 / 2017</title>
         <link rel="canonical" href="https://nekrut.github.io/BMMB554/" />
         <link rel="alternate" type="application/rss+xml" title="RSS" href="">
@@ -32,7 +32,10 @@
         <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200|Montserrat:700" rel="stylesheet" type="text/css">
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
         <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-    </head>
+        <script type="text/javascript"
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+</head>
 
 <body>
 <!--[if lt IE 7]><p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chrome/‎">install Google Chrome</a> to experience this site.</p><![endif]-->
@@ -56,7 +59,7 @@
 <h1 id="an-overview-of-chip-seq">An overview of ChIP seq</h1>
 
 <blockquote>
-<p>This material is based on a variety of sources acknowledged throughout this document. It follows the logic of a comprehensive overview of ChIP-seq methodology compiled by <a href="http://mahonylab.org/">Shaun Mahony</a> at Penn State.</p>
+<p>This material is based on a variety of sources acknowledged throughout this document. It follows the logic of a comprehensive overview of ChIP-seq methodology compiled by <a href="http://mahonylab.org/">Shaun Mahony</a> at Penn State. Shaun also has an excellent <a href="http://lugh.bmb.psu.edu/teaching/ChIP-seq_analysis.pdf">presentation</a> covering this topic.</p>
 </blockquote>
 
 <h2 id="many-proteins-interact-with-dna">Many proteins interact with DNA</h2>
@@ -446,33 +449,11 @@ histogram -&gt;           #############
 <p><small>Animation showing Expectation-Minimization iterations resulting in convergence on a set of well defined binding sites in three ChIP-seq samples (Image by <a href="http://mahonylab.org/software/multigps/">Shaun Mahony</a>).</small>
 <hr></p>
 
-<p>The fact that multiGPS simultaneously analyzes multiple conditions makes it uniquely suitable for the analysis of differential binding across multiple experiments as it outputs a table containing replicate specific read counts that can be directly analyzed with tools like edgeR, DeSeq, or Limma-Voom. multiGPS integrates with edgeR directly:</p>
-
-<hr>
-
-<table>
-<thead>
-<tr>
-<th></th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td><img src="/BMMB554/img/t15_ma.png" alt="" /></td>
-</tr>
-
-<tr>
-<td><small>[MA-plots] highlighting overall pairwise read enrichment differences across three cell types (ES, pMN, and Endo) ChIP&rsquo;ed for Homeobox protein Cdx2. (Image from <a href="http://lugh.bmb.psu.edu/software/multigps/example/multiGPS_Cdx2_results.html">Shaun Mahony</a>)</small></td>
-</tr>
-</tbody>
-</table>
-
-<hr>
+<p>The fact that multiGPS simultaneously analyzes multiple conditions makes it uniquely suitable for the analysis of differential binding across multiple experiments as it outputs a table containing replicate specific read counts that can be directly analyzed with tools like edgeR, DeSeq, or Limma-Voom. multiGPS integrates with edgeR directly.</p>
 
 <h1 id="what-s-next">What&rsquo;s next?</h1>
 
-<p>It is now time for a practical exercise in which we will discuss various QC steps, interpretation of results, and performing differential binding analysis.</p>
+<p>It is now time for a practical tutorial in which we will discuss various QC steps, interpretation of results, and performing differential binding analysis. This tutorial can be found <a href="https://galaxyproject.org/tutorials/chip/">here</a>.</p>
 
     </section>
 
@@ -539,17 +520,7 @@ MathJax.Hub.Config({
 });
 </script>
 
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    // Fix <code> tags after MathJax finishes running. This is a
-    // hack to overcome a shortcoming of Markdown. Discussion at
-    // https://github.com/mojombo/jekyll/issues/199
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i = 0; i &lt; all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-});
-</script>
+
 
 
 </body>
