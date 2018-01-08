@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Syllabus on BMMB 554 / 2017</title>
+    <title>Syllabus on BMMB 554 | 2018</title>
     <link>https://nekrut.github.io/BMMB554/tags/syllabus/</link>
-    <description>Recent content in Syllabus on BMMB 554 / 2017</description>
+    <description>Recent content in Syllabus on BMMB 554 | 2018</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <copyright>Anton Nekrutenko | 2018 | CC-BY</copyright>
     <lastBuildDate>Mon, 09 Jan 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://nekrut.github.io/BMMB554/tags/syllabus/index.xml" rel="self" type="application/rss+xml" />
@@ -13,16 +14,15 @@
     
     <item>
       <title>Syllabus</title>
-      <link>https://nekrut.github.io/BMMB554/post/syllabus/</link>
+      <link>https://nekrut.github.io/BMMB554/syllabus/</link>
       <pubDate>Mon, 09 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://nekrut.github.io/BMMB554/post/syllabus/</guid>
+      <guid>https://nekrut.github.io/BMMB554/syllabus/</guid>
       <description>Instructor Anton Nekrutenko
 aun1@psu.edu
 Wartik 505
 Office hours by appointment only
- &amp;#9888; When contacting instructor use the above e-mail and include &amp;ldquo;BMMB554&amp;rdquo; in the subject line (simply click on e-mail address).
- Course description This course is designed as a preparation routine for graduate students in Life Sciences. It has several focus areas including evolution of life sciences as well as in-depth overview of sequencing technologies and their applications.</description>
+ &amp;#9888; When contacting instructor use the above e-mail and include &amp;ldquo;BMMB554&amp;rdquo; in the subject line (simply click on e-mail address).</description>
     </item>
     
   </channel>

@@ -1,11 +1,27 @@
 baseurl = "https://nekrut.github.io/BMMB554/"
 languageCode = "en-us"
-title = "BMMB 554 / 2017"
-theme = "hugo-theme-blueberry-detox"
+title = "BMMB 554 | 2018"
+canonifyurls = true
+theme = "kiera"
+copyright = "Anton Nekrutenko | 2018 | CC-BY"
+
 paginate = 10
 
+summaryLength = 30
+enableEmoji = true
+pygmentsCodeFences = true
+
+
+[author]
+    name = "Anton Nekrutenko"
+    github = "nekrut"
+    gitlab = ""
+    linkedin = ""
+    facebook = ""
+    twitter = "galaxyproject"
+    instagram = ""
 
 [params]
-	author = "Anton Nekrutenko"
-	description = "Introduction to data driven life sciences"
-	
+    tagline = "Introduction to data driven life sciences"
+
+

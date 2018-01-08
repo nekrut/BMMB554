@@ -1,114 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on BMMB 554 / 2017</title>
+    <title>Tags on BMMB 554 | 2018</title>
     <link>https://nekrut.github.io/BMMB554/tags/</link>
-    <description>Recent content in Tags on BMMB 554 / 2017</description>
+    <description>Recent content in Tags on BMMB 554 | 2018</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 30 Jan 2017 10:13:02 -0400</lastBuildDate>
+    <copyright>Anton Nekrutenko | 2018 | CC-BY</copyright>
+    <lastBuildDate>Mon, 09 Jan 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://nekrut.github.io/BMMB554/tags/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Alignment</title>
-      <link>https://nekrut.github.io/BMMB554/tags/alignment/</link>
-      <pubDate>Mon, 30 Jan 2017 10:13:02 -0400</pubDate>
-      
-      <guid>https://nekrut.github.io/BMMB554/tags/alignment/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Burrows Wheeler Transform</title>
-      <link>https://nekrut.github.io/BMMB554/tags/burrows-wheeler-transform/</link>
-      <pubDate>Mon, 30 Jan 2017 10:13:02 -0400</pubDate>
-      
-      <guid>https://nekrut.github.io/BMMB554/tags/burrows-wheeler-transform/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Dna</title>
-      <link>https://nekrut.github.io/BMMB554/tags/dna/</link>
-      <pubDate>Tue, 17 Jan 2017 11:17:20 -0400</pubDate>
-      
-      <guid>https://nekrut.github.io/BMMB554/tags/dna/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Dynamic Programming</title>
-      <link>https://nekrut.github.io/BMMB554/tags/dynamic-programming/</link>
-      <pubDate>Wed, 25 Jan 2017 11:12:04 -0400</pubDate>
-      
-      <guid>https://nekrut.github.io/BMMB554/tags/dynamic-programming/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Genetics</title>
-      <link>https://nekrut.github.io/BMMB554/tags/genetics/</link>
-      <pubDate>Wed, 11 Jan 2017 11:41:14 -0500</pubDate>
-      
-      <guid>https://nekrut.github.io/BMMB554/tags/genetics/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Global Alignment</title>
-      <link>https://nekrut.github.io/BMMB554/tags/global-alignment/</link>
-      <pubDate>Wed, 25 Jan 2017 11:12:04 -0400</pubDate>
-      
-      <guid>https://nekrut.github.io/BMMB554/tags/global-alignment/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>History</title>
-      <link>https://nekrut.github.io/BMMB554/tags/history/</link>
-      <pubDate>Wed, 11 Jan 2017 11:41:14 -0500</pubDate>
-      
-      <guid>https://nekrut.github.io/BMMB554/tags/history/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Local Alignment</title>
-      <link>https://nekrut.github.io/BMMB554/tags/local-alignment/</link>
-      <pubDate>Wed, 25 Jan 2017 11:12:04 -0400</pubDate>
-      
-      <guid>https://nekrut.github.io/BMMB554/tags/local-alignment/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Mapping</title>
-      <link>https://nekrut.github.io/BMMB554/tags/mapping/</link>
-      <pubDate>Mon, 30 Jan 2017 10:13:02 -0400</pubDate>
-      
-      <guid>https://nekrut.github.io/BMMB554/tags/mapping/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Ngs</title>
-      <link>https://nekrut.github.io/BMMB554/tags/ngs/</link>
-      <pubDate>Tue, 17 Jan 2017 11:17:20 -0400</pubDate>
-      
-      <guid>https://nekrut.github.io/BMMB554/tags/ngs/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Sequencing</title>
-      <link>https://nekrut.github.io/BMMB554/tags/sequencing/</link>
-      <pubDate>Tue, 17 Jan 2017 11:17:20 -0400</pubDate>
-      
-      <guid>https://nekrut.github.io/BMMB554/tags/sequencing/</guid>
-      <description></description>
-    </item>
     
     <item>
       <title>Syllabus</title>
