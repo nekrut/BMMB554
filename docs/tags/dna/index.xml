@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dna on BMMB 554 | 2018</title>
+    <link>https://nekrut.github.io/BMMB554/tags/dna/</link>
+    <description>Recent content in Dna on BMMB 554 | 2018</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Anton Nekrutenko | 2018 | CC-BY</copyright>
+    <lastBuildDate>Wed, 11 Jan 2017 11:41:14 -0500</lastBuildDate>
+    
+	<atom:link href="https://nekrut.github.io/BMMB554/tags/dna/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>1. History</title>
+      <link>https://nekrut.github.io/BMMB554/posts/topic1/</link>
+      <pubDate>Wed, 11 Jan 2017 11:41:14 -0500</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/posts/topic1/</guid>
+      <description>Why history? Knowing history is essential for understanding how we arrived to the current state of affairs in our field. It is also full of accidental discoveries and dramatic relationships making it quite interesting to read about.</description>
+    </item>
+    
+  </channel>
+</rss>

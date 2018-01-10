@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Anton Nekrutenko | 2018 | CC-BY</copyright>
-    <lastBuildDate>Mon, 09 Jan 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 08 Jan 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://nekrut.github.io/BMMB554/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +15,7 @@
     <item>
       <title>Syllabus</title>
       <link>https://nekrut.github.io/BMMB554/about/</link>
-      <pubDate>Mon, 09 Jan 2017 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 08 Jan 2018 00:00:00 +0000</pubDate>
       
       <guid>https://nekrut.github.io/BMMB554/about/</guid>
       <description>Instructor Anton Nekrutenko
@@ -23,6 +23,15 @@ aun1@psu.edu
 Wartik 505
 Office hours by appointment only
  IMPORTANT:  When contacting instructor use the above e-mail and include &amp;ldquo;BMMB554&amp;rdquo; in the subject line (you can simply click on e-mail address above as Subject already filled in there).</description>
+    </item>
+    
+    <item>
+      <title>1. History</title>
+      <link>https://nekrut.github.io/BMMB554/posts/topic1/</link>
+      <pubDate>Wed, 11 Jan 2017 11:41:14 -0500</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/posts/topic1/</guid>
+      <description>Why history? Knowing history is essential for understanding how we arrived to the current state of affairs in our field. It is also full of accidental discoveries and dramatic relationships making it quite interesting to read about.</description>
     </item>
     
     <item>

@@ -1,5 +1,5 @@
 +++
-date = "2017-01-09"
+date = "2018-01-08"
 title = "Syllabus"
 menu = "main"
 weight = "10"
@@ -30,6 +30,12 @@ This course is designed as a preparation routine for graduate students in Life S
 
 * Participation = 50%
 * Final project = 50%
+
+----
+
+# Laptop policy
+
+Do not use laptops during lectures unless the instructor tells you to.  
 
 ----
 

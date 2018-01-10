@@ -4,7 +4,17 @@
   
   <url>
     <loc>https://nekrut.github.io/BMMB554/about/</loc>
-    <lastmod>2017-01-09T00:00:00+00:00</lastmod>
+    <lastmod>2018-01-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nekrut.github.io/BMMB554/posts/</loc>
+    <lastmod>2017-01-11T11:41:14-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nekrut.github.io/BMMB554/posts/topic1/</loc>
+    <lastmod>2017-01-11T11:41:14-05:00</lastmod>
   </url>
   
   <url>
@@ -14,12 +24,30 @@
   
   <url>
     <loc>https://nekrut.github.io/BMMB554/</loc>
-    <lastmod>2017-01-09T00:00:00+00:00</lastmod>
+    <lastmod>2018-01-08T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://nekrut.github.io/BMMB554/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://nekrut.github.io/BMMB554/tags/dna/</loc>
+    <lastmod>2017-01-11T11:41:14-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://nekrut.github.io/BMMB554/tags/genetics/</loc>
+    <lastmod>2017-01-11T11:41:14-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://nekrut.github.io/BMMB554/tags/history/</loc>
+    <lastmod>2017-01-11T11:41:14-05:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -31,7 +59,7 @@
   
   <url>
     <loc>https://nekrut.github.io/BMMB554/tags/</loc>
-    <lastmod>2017-01-09T00:00:00+00:00</lastmod>
+    <lastmod>2017-01-11T11:41:14-05:00</lastmod>
     <priority>0</priority>
   </url>
   
