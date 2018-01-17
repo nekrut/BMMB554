@@ -1,13 +1,8 @@
 +++
 #categories = []
-date = "2017-01-11T11:41:14-05:00"
-#draft = true
-featureimage = "img/luria_small.png"
-menu = ""
+date = "2018-01-11"
 tags = ["history","genetics","DNA"]
 title = "1. History"
-description = "**Topic 1** | History: From Genetics to Genomics"
-
 +++
 
 ![](/img/luria_small.png)

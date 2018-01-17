@@ -3,6 +3,7 @@ date = "2018-01-08"
 title = "Syllabus"
 menu = "main"
 weight = "10"
+meta = "false"
 +++
 
 [![](http://imgs.xkcd.com/comics/impostor.png#mid)](https://xkcd.com/451/)

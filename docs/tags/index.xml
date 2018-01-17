@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Anton Nekrutenko | 2018 | CC-BY</copyright>
-    <lastBuildDate>Wed, 11 Jan 2017 11:41:14 -0500</lastBuildDate>
+    <lastBuildDate>Thu, 11 Jan 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://nekrut.github.io/BMMB554/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,16 +15,25 @@
     <item>
       <title>Dna</title>
       <link>https://nekrut.github.io/BMMB554/tags/dna/</link>
-      <pubDate>Wed, 11 Jan 2017 11:41:14 -0500</pubDate>
+      <pubDate>Thu, 11 Jan 2018 00:00:00 +0000</pubDate>
       
       <guid>https://nekrut.github.io/BMMB554/tags/dna/</guid>
       <description></description>
     </item>
     
     <item>
+      <title>Dna Sequencing</title>
+      <link>https://nekrut.github.io/BMMB554/tags/dna-sequencing/</link>
+      <pubDate>Wed, 17 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/tags/dna-sequencing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Genetics</title>
       <link>https://nekrut.github.io/BMMB554/tags/genetics/</link>
-      <pubDate>Wed, 11 Jan 2017 11:41:14 -0500</pubDate>
+      <pubDate>Thu, 11 Jan 2018 00:00:00 +0000</pubDate>
       
       <guid>https://nekrut.github.io/BMMB554/tags/genetics/</guid>
       <description></description>
@@ -33,7 +42,7 @@
     <item>
       <title>History</title>
       <link>https://nekrut.github.io/BMMB554/tags/history/</link>
-      <pubDate>Wed, 11 Jan 2017 11:41:14 -0500</pubDate>
+      <pubDate>Thu, 11 Jan 2018 00:00:00 +0000</pubDate>
       
       <guid>https://nekrut.github.io/BMMB554/tags/history/</guid>
       <description></description>
