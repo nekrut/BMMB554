@@ -4,14 +4,14 @@ date = "2018-01-22"
 draft = true
 menu = ""
 tags = ['DNA sequencing', 'Illumina']
-title = "3. Illumina: Process and Data"
+title = "3. DNA Sequencing: Illumina and PacBio"
 +++
+
+# Illumina
 
 ![](/img/illumina_pseudocolor.png)
 
-## 2: Illumina sequencing
-
-Illumina (originally called "Solexa") uses glass flowcells with oligonucleotides permanently attached to internal surface. These oligonucleotides are complementary to sequencing adapters added to DNA fragments being sequenced during library preparation. The DNA fragements that are "stuck" on the flowcell due to complementary interaction between adapters are amplified via "bridge amplification" to form clusters. Sequencing is performed using reversible terminator chemistry with nucleotides modified to carry dyes specific to each nucleotide. As a result all nucleotides can be added at once and are distinguished by colors. Currently, it is possible to sequence up to 300 bases from each end of the fragment being sequenced. Illumina has the highest throughput (and lowest cost per base) of all existing technologies at this moment. The HiSeq 2500 machine can produce [600 billion nucleotides in 5 days](http://www.illumina.com/systems/hiseq_2500_1500/performance_specifications.html). In this course we will most often work with Illumina data.
+Illumina (originally called "Solexa") uses glass flowcells with oligonucleotides permanently attached to internal surface. These oligonucleotides are complementary to sequencing adapters added to DNA fragments being sequenced during library preparation. The DNA fragments that are "stuck" on the flowcell due to complementary interaction between adapters are amplified via "bridge amplification" to form clusters. Sequencing is performed using reversible terminator chemistry with nucleotides modified to carry dyes specific to each base. As a result all nucleotides can be added at once and are distinguished by color. Currently, it is possible to sequence up to 300 bases from each end of the fragment being sequenced. Illumina has the highest throughput (and lowest cost per base) of all existing technologies at this moment. The NovaSeq 6000 machine can produce [6000 billion nucleotides in 44 hours](https://www.illumina.com/systems/sequencing-platforms.html). In this course we will most often work with Illumina data.
 
 ### Slides
 
@@ -20,8 +20,6 @@ Illumina (originally called "Solexa") uses glass flowcells with oligonucleotides
 ### Video
 
 {{< vimeo 121178846 >}}
-
-Underlying slides are [here](https://speakerdeck.com/nekrut/ngs-technologies-illumina#)
 
 ### Reading
 

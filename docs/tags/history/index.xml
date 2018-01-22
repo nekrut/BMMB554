@@ -7,13 +7,23 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Anton Nekrutenko | 2018 | CC-BY</copyright>
-    <lastBuildDate>Thu, 11 Jan 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 17 Jan 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://nekrut.github.io/BMMB554/tags/history/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>1. History</title>
+      <title>DNA Sequecning: From Sanger to 454</title>
+      <link>https://nekrut.github.io/BMMB554/posts/topic2_1/</link>
+      <pubDate>Wed, 17 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/posts/topic2_1/</guid>
+      <description>The 50s, 60s and the 70s The difficulty with sequencing nucleic acids is nicely summarized by Hutchinson:2007:
+  The chemical properties of different DNA molecules were so similar that it appeared difficult to separate them.</description>
+    </item>
+    
+    <item>
+      <title>History</title>
       <link>https://nekrut.github.io/BMMB554/posts/topic1/</link>
       <pubDate>Thu, 11 Jan 2018 00:00:00 +0000</pubDate>
       

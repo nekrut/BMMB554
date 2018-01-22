@@ -1,10 +1,10 @@
 +++
 categories = []
 date = "2018-01-17"
-draft = true
+#draft = true
 menu = ""
 tags = ['DNA sequencing', 'history']
-title = "2. DNA Sequecning"
+title = "DNA Sequecning: From Sanger to 454"
 +++
 
 ![](/img/illumina_pseudocolor.png)

@@ -2,7 +2,7 @@
 #categories = []
 date = "2018-01-11"
 tags = ["history","genetics","DNA"]
-title = "1. History"
+title = "History"
 +++
 
 ![](/img/luria_small.png)

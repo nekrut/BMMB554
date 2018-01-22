@@ -8,6 +8,12 @@ meta = "false"
 
 [![](http://imgs.xkcd.com/comics/impostor.png#mid)](https://xkcd.com/451/)
 
+# When & Where
+
+Mondays and Wednesdays | 2:30pm | [Thomas](http://www.psumap.com/#Thomas%20Building) 120 
+
+-----
+
 # Instructor
 
 **Anton Nekrutenko**<br>
