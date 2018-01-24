@@ -27,7 +27,16 @@ Office hours by appointment only
     </item>
     
     <item>
-      <title>DNA Sequencing: Illumina and PacBio</title>
+      <title>DNA Sequencing: PabBio, ONT and others</title>
+      <link>https://nekrut.github.io/BMMB554/posts/topic2_3/</link>
+      <pubDate>Wed, 24 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/posts/topic2_3/</guid>
+      <description>PacBio Single Molecule Sequencing PacBio is a fundamentally different approach to DNA sequencing as it allows reading single molecules. Thus it is an example is so called Single Molecule Sequencing or SMS.</description>
+    </item>
+    
+    <item>
+      <title>DNA Sequencing: Illumina</title>
       <link>https://nekrut.github.io/BMMB554/posts/topic2_2/</link>
       <pubDate>Mon, 22 Jan 2018 00:00:00 +0000</pubDate>
       

@@ -9,7 +9,12 @@
   
   <url>
     <loc>https://nekrut.github.io/BMMB554/posts/</loc>
-    <lastmod>2018-01-22T00:00:00+00:00</lastmod>
+    <lastmod>2018-01-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nekrut.github.io/BMMB554/posts/topic2_3/</loc>
+    <lastmod>2018-01-24T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -51,7 +56,7 @@
   
   <url>
     <loc>https://nekrut.github.io/BMMB554/tags/dna-sequencing/</loc>
-    <lastmod>2018-01-22T00:00:00+00:00</lastmod>
+    <lastmod>2018-01-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -70,6 +75,18 @@
   <url>
     <loc>https://nekrut.github.io/BMMB554/tags/illumina/</loc>
     <lastmod>2018-01-22T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://nekrut.github.io/BMMB554/tags/oxford-nanopore/</loc>
+    <lastmod>2018-01-24T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://nekrut.github.io/BMMB554/tags/pacbio/</loc>
+    <lastmod>2018-01-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
