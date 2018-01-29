@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Anton Nekrutenko | 2018 | CC-BY</copyright>
-    <lastBuildDate>Wed, 17 Jan 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 26 Jan 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://nekrut.github.io/BMMB554/tags/history/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Assembly basics</title>
+      <link>https://nekrut.github.io/BMMB554/posts/topic12/</link>
+      <pubDate>Fri, 26 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/posts/topic12/</guid>
+      <description>Genome assembly is a difficult task. In trying to explain it I will be relying on two highly regarded sources:
+ Ben Langmead&amp;rsquo;s Teaching Materials Pevzner and Compeau Bioinformatics Book.</description>
+    </item>
     
     <item>
       <title>DNA Sequecning: From Sanger to 454</title>

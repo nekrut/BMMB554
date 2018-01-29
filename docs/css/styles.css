@@ -216,12 +216,12 @@ a {
 }
 
 .image, figure img, img {
-  width: 100%;
+  max-width: 100%;
   box-shadow: 0 3px 3px #bbbbbb;
 }
 
 .full-image, figure.full img, img[src*="full"] {
-  width: 100%;
+  max-width: 100%;
   box-shadow: 0 3px 3px #bbbbbb;
 }
 
@@ -237,7 +237,7 @@ a {
 }
 
 .mid-image, figure.mid img, img[src*="mid"] {
-  width: 100%;
+  max-width: 100%;
   box-shadow: 0 3px 3px #bbbbbb;
 }
 

@@ -9,7 +9,12 @@
   
   <url>
     <loc>https://nekrut.github.io/BMMB554/posts/</loc>
-    <lastmod>2018-01-24T00:00:00+00:00</lastmod>
+    <lastmod>2018-01-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nekrut.github.io/BMMB554/posts/topic12/</loc>
+    <lastmod>2018-01-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -35,6 +40,12 @@
   <url>
     <loc>https://nekrut.github.io/BMMB554/syllabus/</loc>
     <lastmod>2017-01-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nekrut.github.io/BMMB554/tags/assembly/</loc>
+    <lastmod>2018-01-26T00:00:00+00:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -68,7 +79,7 @@
   
   <url>
     <loc>https://nekrut.github.io/BMMB554/tags/history/</loc>
-    <lastmod>2018-01-17T00:00:00+00:00</lastmod>
+    <lastmod>2018-01-26T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -98,7 +109,7 @@
   
   <url>
     <loc>https://nekrut.github.io/BMMB554/tags/</loc>
-    <lastmod>2018-01-11T00:00:00+00:00</lastmod>
+    <lastmod>2018-01-26T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
