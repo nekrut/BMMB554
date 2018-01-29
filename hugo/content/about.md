@@ -62,10 +62,10 @@ We will cover a breadth of topics. Below is the approximate list. Keep in mind t
 1. History: From Genetics to Genomics
 2. Sequencing: From Sanger to Nanopores I
 2. Sequencing: From Sanger to Nanopores II
-4. Algorithms: Alignment Basics
-5. Algorithms: Aligning many sequences quickly
 5. Algorithms: Assembly I
 5. Algorithms: Assembly II
+4. Algorithms: Alignment Basics
+5. Algorithms: Aligning many sequences quickly
 7. Galaxy: An introduction
 8. Galaxy: Writing your own tools
 8. Managing software with Conda and Bioconda
