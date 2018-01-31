@@ -257,10 +257,6 @@ To understand the magnitude of this problem let's look at slightly modified vers
 
 While this approach to the edit distance problem is correct, it will hardly help us on the genome-wide scale. Just like in case of the change problem dynamic programming is going to save the day.
 
-## Video
-
-{{< vimeo 183583352 >}}
-
 ## Dynamic programming to the rescue
 
 Our goal is to find an optimal **alignment** between two sequences. Note that so far this is the first time we use the term **alignment** in this section. It turns out that in order to find the alignment we first need to learn how to compute edit distances between sequences efficiently. So, suppose we have two sequences that deliberately have different lengths:
@@ -470,10 +466,6 @@ The lower rightmost cell highlighted in red is special. It contains the value fo
 
 <iframe src="https://trinket.io/embed/python3/1bec8f9150?toggleCode=true" width="100%" height="400" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
 
-## Video
-
-{{< vimeo 183583042 >}}
-
 ## From edit distance to alignment
 
 In the previous section we have filled the dynamic programming matrix to find out that the edit distance between the sequences is 2. But in biological applications we are most often interested not in edit distance *per se* but in the actual **alignment** between two sequences. 
@@ -668,7 +660,7 @@ $$
 
 </div>
 
-Let me remind you that our goal is to find where $\it\texttt{P}$ matches $\texttt{T}$. *A priori* we do not know when it may be, so we will start by filling the entire first row with zeroes. This is because the match between $\it\texttt{P}$ and $\texttt{T}$ may start at any point up there. The first column we will initialize the same way we did previously: with increasing sequence of numbers:
+Let me remind you that our goal is to find where $\it\texttt{P}$ matches $\texttt{T}$. *A priori* we do not know when it may be, so we will start by filling the entire first row with zeros. This is because the match between $\it\texttt{P}$ and $\texttt{T}$ may start at any point up there. The first column we will initialize the same way we did previously: with increasing sequence of numbers:
 
 <div>
 $$
@@ -804,10 +796,6 @@ A A C C C T A T G T C A T G C C T T G G A
           | | * | | | | * | | 
           T A C G T C A - G C
 ```
-
-## Video
-
-{{< vimeo 183587535 >}}
 
 ------
 
@@ -1267,14 +1255,4 @@ Here is a Python representation of this approach:
 <iframe src="https://trinket.io/embed/python3/aa05b81499?toggleCode=true" width="100%" height="600" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
 
 This algorithm was developed by [Temple Smith and Michael Waterman](http://dornsife.usc.edu/assets/sites/516/docs/papers/msw_papers/msw-042.pdf) in 1981. This is why it is most often called Smith Waterman local alignment algorithm. 
-
-## Video
-
-{{< vimeo 183588416 >}}
-
-
-------
-
-
-
 

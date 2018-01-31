@@ -462,14 +462,6 @@ $$Edit\ Distance(\alpha\texttt{x},\beta\texttt{y}) = min\begin{cases}
 
 <p>While this approach to the edit distance problem is correct, it will hardly help us on the genome-wide scale. Just like in case of the change problem dynamic programming is going to save the day.</p>
 
-<h2 id="video">Video</h2>
-
-
-<div style="position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;">
-  <iframe src="//player.vimeo.com/video/183583352" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
- </div>
-
-
 <h2 id="dynamic-programming-to-the-rescue">Dynamic programming to the rescue</h2>
 
 <p>Our goal is to find an optimal <strong>alignment</strong> between two sequences. Note that so far this is the first time we use the term <strong>alignment</strong> in this section. It turns out that in order to find the alignment we first need to learn how to compute edit distances between sequences efficiently. So, suppose we have two sequences that deliberately have different lengths:</p>
@@ -678,14 +670,6 @@ $$Edit\ Distance(\epsilon\texttt{G},\epsilon\texttt{G}) = min\begin{cases}
 
 <iframe src="https://trinket.io/embed/python3/1bec8f9150?toggleCode=true" width="100%" height="400" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
 
-<h2 id="video-1">Video</h2>
-
-
-<div style="position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;">
-  <iframe src="//player.vimeo.com/video/183583042" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
- </div>
-
-
 <h2 id="from-edit-distance-to-alignment">From edit distance to alignment</h2>
 
 <p>In the previous section we have filled the dynamic programming matrix to find out that the edit distance between the sequences is 2. But in biological applications we are most often interested not in edit distance <em>per se</em> but in the actual <strong>alignment</strong> between two sequences.</p>
@@ -878,7 +862,7 @@ $$
 
 </div>
 
-<p>Let me remind you that our goal is to find where $\it\texttt{P}$ matches $\texttt{T}$. <em>A priori</em> we do not know when it may be, so we will start by filling the entire first row with zeroes. This is because the match between $\it\texttt{P}$ and $\texttt{T}$ may start at any point up there. The first column we will initialize the same way we did previously: with increasing sequence of numbers:</p>
+<p>Let me remind you that our goal is to find where $\it\texttt{P}$ matches $\texttt{T}$. <em>A priori</em> we do not know when it may be, so we will start by filling the entire first row with zeros. This is because the match between $\it\texttt{P}$ and $\texttt{T}$ may start at any point up there. The first column we will initialize the same way we did previously: with increasing sequence of numbers:</p>
 
 <div>
 $$
@@ -1012,14 +996,6 @@ $$
           | | * | | | | * | | 
           T A C G T C A - G C
 </code></pre>
-
-<h2 id="video-2">Video</h2>
-
-
-<div style="position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;">
-  <iframe src="//player.vimeo.com/video/183587535" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
- </div>
-
 
 <hr />
 
@@ -1487,16 +1463,6 @@ $$D(\alpha\texttt{x},\beta\texttt{y}) = max\begin{cases}
 <iframe src="https://trinket.io/embed/python3/aa05b81499?toggleCode=true" width="100%" height="600" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
 
 <p>This algorithm was developed by <a href="http://dornsife.usc.edu/assets/sites/516/docs/papers/msw_papers/msw-042.pdf">Temple Smith and Michael Waterman</a> in 1981. This is why it is most often called Smith Waterman local alignment algorithm.</p>
-
-<h2 id="video-3">Video</h2>
-
-
-<div style="position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;">
-  <iframe src="//player.vimeo.com/video/183588416" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
- </div>
-
-
-<hr />
 
 
 </article>

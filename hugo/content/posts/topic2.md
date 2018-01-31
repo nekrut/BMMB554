@@ -4,7 +4,7 @@ date = "2018-01-17"
 draft = true
 menu = ""
 tags = ['DNA sequencing', 'history']
-title = "2. DNA Sequecning"
+title = "2. DNA Sequencing"
 +++
 
 ![](/img/illumina_pseudocolor.png)
