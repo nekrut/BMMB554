@@ -40,11 +40,29 @@
     </item>
     
     <item>
+      <title>Dynamic Programming</title>
+      <link>https://nekrut.github.io/BMMB554/tags/dynamic-programming/</link>
+      <pubDate>Wed, 31 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/tags/dynamic-programming/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Genetics</title>
       <link>https://nekrut.github.io/BMMB554/tags/genetics/</link>
       <pubDate>Thu, 11 Jan 2018 00:00:00 +0000</pubDate>
       
       <guid>https://nekrut.github.io/BMMB554/tags/genetics/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Global Alignment</title>
+      <link>https://nekrut.github.io/BMMB554/tags/global-alignment/</link>
+      <pubDate>Wed, 31 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/tags/global-alignment/</guid>
       <description></description>
     </item>
     
@@ -67,6 +85,15 @@
     </item>
     
     <item>
+      <title>Local Alignment</title>
+      <link>https://nekrut.github.io/BMMB554/tags/local-alignment/</link>
+      <pubDate>Wed, 31 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/tags/local-alignment/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Oxford Nanopore</title>
       <link>https://nekrut.github.io/BMMB554/tags/oxford-nanopore/</link>
       <pubDate>Wed, 24 Jan 2018 00:00:00 +0000</pubDate>
@@ -81,6 +108,15 @@
       <pubDate>Wed, 24 Jan 2018 00:00:00 +0000</pubDate>
       
       <guid>https://nekrut.github.io/BMMB554/tags/pacbio/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Smith Waterman</title>
+      <link>https://nekrut.github.io/BMMB554/tags/smith-waterman/</link>
+      <pubDate>Wed, 31 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/tags/smith-waterman/</guid>
       <description></description>
     </item>
     

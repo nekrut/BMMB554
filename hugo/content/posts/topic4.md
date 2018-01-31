@@ -1,6 +1,6 @@
 +++
 categories = []
-date = "2017-01-25T11:12:04-04:00"
+date = "2018-01-31"
 draft = true
 featureimage = "img/topic4_cover.jpg"
 menu = ""
@@ -10,7 +10,7 @@ description = "**Topic 4** | Aligning DNA sequences: From edit distance to local
 
 +++
 
-![](/BMMB554/img/topic4_cover.jpg)
+![](/img/topic4_cover.jpg)
 
 # Sequence alignment
 

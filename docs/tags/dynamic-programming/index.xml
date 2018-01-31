@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dynamic Programming on BMMB 554 | 2018</title>
+    <link>https://nekrut.github.io/BMMB554/tags/dynamic-programming/</link>
+    <description>Recent content in Dynamic Programming on BMMB 554 | 2018</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Anton Nekrutenko | 2018 | CC-BY</copyright>
+    <lastBuildDate>Wed, 31 Jan 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://nekrut.github.io/BMMB554/tags/dynamic-programming/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Sequence alignment: Introductory concepts</title>
+      <link>https://nekrut.github.io/BMMB554/posts/topic3/</link>
+      <pubDate>Wed, 31 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/posts/topic3/</guid>
+      <description>The cover image shows pairwise alignments for human, mouse, and dog KIF3 locus from Dubchak et al. 2000.
+Introduction to dynamic programming (Based on dynamic programming example from InteractivePython).</description>
+    </item>
+    
+  </channel>
+</rss>

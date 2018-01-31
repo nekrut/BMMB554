@@ -9,7 +9,12 @@
   
   <url>
     <loc>https://nekrut.github.io/BMMB554/posts/</loc>
-    <lastmod>2018-01-29T00:00:00+00:00</lastmod>
+    <lastmod>2018-01-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nekrut.github.io/BMMB554/posts/topic3/</loc>
+    <lastmod>2018-01-31T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -72,8 +77,20 @@
   </url>
   
   <url>
+    <loc>https://nekrut.github.io/BMMB554/tags/dynamic-programming/</loc>
+    <lastmod>2018-01-31T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://nekrut.github.io/BMMB554/tags/genetics/</loc>
     <lastmod>2018-01-11T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://nekrut.github.io/BMMB554/tags/global-alignment/</loc>
+    <lastmod>2018-01-31T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -90,6 +107,12 @@
   </url>
   
   <url>
+    <loc>https://nekrut.github.io/BMMB554/tags/local-alignment/</loc>
+    <lastmod>2018-01-31T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://nekrut.github.io/BMMB554/tags/oxford-nanopore/</loc>
     <lastmod>2018-01-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -98,6 +121,12 @@
   <url>
     <loc>https://nekrut.github.io/BMMB554/tags/pacbio/</loc>
     <lastmod>2018-01-24T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://nekrut.github.io/BMMB554/tags/smith-waterman/</loc>
+    <lastmod>2018-01-31T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
