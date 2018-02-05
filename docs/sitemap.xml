@@ -9,7 +9,12 @@
   
   <url>
     <loc>https://nekrut.github.io/BMMB554/posts/</loc>
-    <lastmod>2018-01-31T00:00:00+00:00</lastmod>
+    <lastmod>2018-02-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nekrut.github.io/BMMB554/posts/topic5/</loc>
+    <lastmod>2018-02-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -48,6 +53,12 @@
   </url>
   
   <url>
+    <loc>https://nekrut.github.io/BMMB554/tags/alignment/</loc>
+    <lastmod>2018-02-05T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://nekrut.github.io/BMMB554/tags/assembly/</loc>
     <lastmod>2018-01-29T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -56,6 +67,12 @@
   <url>
     <loc>https://nekrut.github.io/BMMB554/</loc>
     <lastmod>2018-01-08T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://nekrut.github.io/BMMB554/tags/burrows-wheeler-transform/</loc>
+    <lastmod>2018-02-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -113,6 +130,12 @@
   </url>
   
   <url>
+    <loc>https://nekrut.github.io/BMMB554/tags/mapping/</loc>
+    <lastmod>2018-02-05T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://nekrut.github.io/BMMB554/tags/oxford-nanopore/</loc>
     <lastmod>2018-01-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -138,7 +161,7 @@
   
   <url>
     <loc>https://nekrut.github.io/BMMB554/tags/</loc>
-    <lastmod>2018-01-29T00:00:00+00:00</lastmod>
+    <lastmod>2018-02-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

@@ -27,6 +27,15 @@ Office hours by appointment only
     </item>
     
     <item>
+      <title>Aligning many sequences quickly</title>
+      <link>https://nekrut.github.io/BMMB554/posts/topic5/</link>
+      <pubDate>Mon, 05 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/posts/topic5/</guid>
+      <description>Speeding things up The topics we discussed in the past lecture explain fundamental concepts behind analysis of biological sequences. Today, we will be talking about algorithms that allow aligning billions of sequencing reads against reference genomes.</description>
+    </item>
+    
+    <item>
       <title>Sequence alignment: Introductory concepts</title>
       <link>https://nekrut.github.io/BMMB554/posts/topic3/</link>
       <pubDate>Wed, 31 Jan 2018 00:00:00 +0000</pubDate>

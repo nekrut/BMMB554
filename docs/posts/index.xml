@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Anton Nekrutenko | 2018 | CC-BY</copyright>
-    <lastBuildDate>Wed, 31 Jan 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 05 Feb 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://nekrut.github.io/BMMB554/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Aligning many sequences quickly</title>
+      <link>https://nekrut.github.io/BMMB554/posts/topic5/</link>
+      <pubDate>Mon, 05 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/posts/topic5/</guid>
+      <description>Speeding things up The topics we discussed in the past lecture explain fundamental concepts behind analysis of biological sequences. Today, we will be talking about algorithms that allow aligning billions of sequencing reads against reference genomes.</description>
+    </item>
     
     <item>
       <title>Sequence alignment: Introductory concepts</title>
