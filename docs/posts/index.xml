@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Anton Nekrutenko | 2018 | CC-BY</copyright>
-    <lastBuildDate>Mon, 05 Feb 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 12 Feb 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://nekrut.github.io/BMMB554/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Python: The very first try</title>
+      <link>https://nekrut.github.io/BMMB554/posts/python1/</link>
+      <pubDate>Mon, 12 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/posts/python1/</guid>
+      <description>Today we will have an introduction to Python - a general purpose programming language. We will do this by relying on two great resources:
+   Software Carpentry Jupyter          Setting up you screen Open the following browser windows:</description>
+    </item>
     
     <item>
       <title>Aligning many sequences quickly</title>
