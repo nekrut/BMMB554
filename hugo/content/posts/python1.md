@@ -19,7 +19,7 @@ Today we will have an introduction to [Python](https://en.wikipedia.org/wiki/Pyt
 
 Open the following browser windows:
 
- - [Software Carpentry Pythion lesson](http://swcarpentry.github.io/python-novice-gapminder/)
+ - [Software Carpentry PythCon lesson](http://swcarpentry.github.io/python-novice-gapminder/)
  - [Jupyter Notebook](https://mybinder.org/v2/gh/nekrut/BMMB554/master) 
 
  Position your windows so they look something like this:

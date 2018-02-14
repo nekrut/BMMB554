@@ -31,6 +31,15 @@
     </item>
     
     <item>
+      <title>Bam</title>
+      <link>https://nekrut.github.io/BMMB554/tags/bam/</link>
+      <pubDate>Wed, 14 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/tags/bam/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Burrows Wheeler Transform</title>
       <link>https://nekrut.github.io/BMMB554/tags/burrows-wheeler-transform/</link>
       <pubDate>Mon, 05 Feb 2018 00:00:00 +0000</pubDate>
@@ -72,6 +81,24 @@
       <pubDate>Wed, 31 Jan 2018 00:00:00 +0000</pubDate>
       
       <guid>https://nekrut.github.io/BMMB554/tags/dynamic-programming/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Fastq</title>
+      <link>https://nekrut.github.io/BMMB554/tags/fastq/</link>
+      <pubDate>Wed, 14 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/tags/fastq/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Galaxy</title>
+      <link>https://nekrut.github.io/BMMB554/tags/galaxy/</link>
+      <pubDate>Wed, 14 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/tags/galaxy/</guid>
       <description></description>
     </item>
     
@@ -130,6 +157,15 @@
     </item>
     
     <item>
+      <title>Ngs</title>
+      <link>https://nekrut.github.io/BMMB554/tags/ngs/</link>
+      <pubDate>Wed, 14 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/tags/ngs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Oxford Nanopore</title>
       <link>https://nekrut.github.io/BMMB554/tags/oxford-nanopore/</link>
       <pubDate>Wed, 24 Jan 2018 00:00:00 +0000</pubDate>
@@ -162,6 +198,15 @@
       <pubDate>Mon, 12 Feb 2018 00:00:00 +0000</pubDate>
       
       <guid>https://nekrut.github.io/BMMB554/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Sam</title>
+      <link>https://nekrut.github.io/BMMB554/tags/sam/</link>
+      <pubDate>Wed, 14 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/tags/sam/</guid>
       <description></description>
     </item>
     
