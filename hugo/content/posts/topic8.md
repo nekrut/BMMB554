@@ -1,14 +1,10 @@
 +++
-date = "2017-02-12T11:42:45-04:00"
-title = "8. Diploid variant calling"
-tags = [
-]
-categories = [
-]
-featureimage = "img/topic8_cover.png"
+date = "2018-02-19"
+title = "Diploid variant calling"
+tags = ["varinat calling", "ngs"]
 menu = ""
 draft = true
-description = "**Topic 8** | Finding varinats in the human genome"
+
 
 +++
 

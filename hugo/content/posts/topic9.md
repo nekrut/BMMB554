@@ -1,18 +1,17 @@
 +++
-draft = true
-tags = [
-]
-categories = [
-]
-featureimage = "img/topic9_cover.png"
+#draft = true
+tags = ["varimat calling","ngs"]
 menu = ""
-date = "2017-02-13T10:11:10-04:00"
-title = "9. Non-diploid variant calling"
-description = "**Topic 9** | Finding variants in mixed samples"
-
+date = "2018-02-17"
+title = "Variant calling: Pooled and Haploid systems"
 +++
 
-The majority of life on Earth is non-diploid and represented by prokaryotes, viruses and their derivatives such as our own mitochondria or plant's chloroplasts. In non-diploid systems allele frequencies can range anywhere between 0 and 100% and there could be multiple (not just two) alleles per locus. The main challenge associated with non-diploid variant calling is the difficulty in distinguishing between sequencing noise (abundant in all NGS platforms) and true low frequency variants. Some of the early attempts to do this well have been accomplished on human mitochondrial DNA although the same approaches will work equally good on viral and bacterial genomes:
+<iframe width="560" height="315" src="https://www.youtube.com/embed/sCHc3GuQ57w?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+The majority of life on Earth is non-diploid and represented by prokaryotes, viruses and their derivatives such as our own mitochondria or plant's chloroplasts. In non-diploid systems allele frequencies can range anywhere between 0 and 100% and there could be multiple (not just two) alleles per locus. The main challenge associated with non-diploid variant calling is the difficulty in distinguishing between sequencing noise (abundant in all NGS platforms) and true low frequency variants. 
+
+
+Some of the early attempts to do this well have been accomplished on human mitochondrial DNA although the same approaches will work equally good on viral and bacterial genomes:
 
 * 2014 | [Maternal age effect and severe germ-line bottleneck in the inheritance of human mitochondrial DNA](http://www.pnas.org/content/111/43/15474.abstract)
 * 2015 | [Extensive tissue-related and allele-related mtDNA heteroplasmy suggests positive selection for somatic mutations](http://www.pnas.org/content/112/8/2491.abstract).
@@ -26,9 +25,10 @@ There are two ways one can call variants:
 1. By comparing reads against an existing genome assembly
 2. By assembling genome first and then mapping against that assembly
 
->![](/BMMB554/img/ref_vs_assembly.jpg)
->
-> This figure from a manuscript by [Olson:2015](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4493402/) contrasts the two approaches.
+|                             |
+|-----------------------------|
+| ![](/img/ref_vs_assembly.jpg) |
+|<small>This figure from a manuscript by [Olson:2015](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4493402/) contrasts the two approaches.</small>|
 
 In this tutorials we will take the *first* path is which we map reads against an existing assembly. Later in the course (after we learn about assembly approaches) we will try the second approach as well. 
 
@@ -40,33 +40,36 @@ The goal of this example is to detect heteroplasmies (variants within mitochondr
 
 But first lets import data into Galaxy:
 
->![](/BMMB554/img/mt_lib.png)
->
->Select four datasets from [a library](https://usegalaxy.org/library/list#folders/Fe4842bd0c37b03a7) and click **to History**. 
+|                             |
+|-----------------------------|
+| ![](/img/mt_lib.png)        |
+|<small>Select four datasets from [a library](https://usegalaxy.org/library/list#folders/Fe4842bd0c37b03a7) and click **to History**. </small>|
 
 Let's QC the datasets first by running  **NGS: QC and manipulation &#8594; FastQC**:
 
->![](/BMMB554/img/mt_qc.png)
->
->QC'ing reads using [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/). Note that we selected all four datasets at once by pressing the middle button ![](/BMMB554/img/mt_middle_button.png) adjacent to the **Short read data from your current history** widget. 
+|                             |
+|-----------------------------|
+|![](/img/mt_qc.png)          |
+|<small>QC'ing reads using [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/). Note that we selected all four datasets at once by pressing the middle button adjacent to the **Short read data from your current history** widget. </small>|
 
 The data have generally high quality in this example:
 
->![](/BMMB554/img/mt_qc_plot.png)
->
->FastQC plot for one of the mitochondrial datasets shows that qualities are acceptable for 250 bp reads (mostly in the green, which is at or above [phred score](https://en.wikipedia.org/wiki/Phred_quality_scorescore) of 30). 
+|                             |
+|-----------------------------|
+|![](/img/mt_qc_plot.png)     |
+|<small>FastQC plot for one of the mitochondrial datasets shows that qualities are acceptable for 250 bp reads (mostly in the green, which is at or above [phred score](https://en.wikipedia.org/wiki/Phred_quality_scorescore) of 30).</small>|
 
 ## Mapping the reads
 
 Our reads are long (250 bp) and as a result we will be using [bwa mem](https://arxiv.org/pdf/1303.3997v2.pdf) to align them against the reference genome as it has good mapping performance for longer reads (100bp and up).
 
->![](/BMMB554/img/mt_bwa_mem.png)
->
->Running `bwa mem` on our datasets. Look **carefully** at parameter settings:
->
-> * We select `hg38` version of the human genome as the reference
-> * By using the middle button again ![](/BMMB554/img/mt_middle_button.png) we select datasets 1 and 3 as **Select the first set of reads** and datasets 2 and 4 as **Select the second set of reads**. Galaxy will automatically launch two bwa-mem jobs using datasets 1,2 and 3,4 generating two resulting BAM files.
-> * By setting **Set read groups information** to `Set read groups (SAM/BAM specifications) and clicking **Auto-assign** we will ensure that the reads in the resulting BAM dataset are properly set.
+|                             |
+|-----------------------------|
+|![](/img/mt_bwa_mem.png) |
+|<small>Running `bwa mem` on our datasets. Look **carefully** at parameter settings:</small>|
+|<small> - We select `hg38` version of the human genome as the reference </small>|
+|<small> - By using the middle button again we select datasets 1 and 3 as **Select the first set of reads** and datasets 2 and 4 as **Select the second set of reads**. Galaxy will automatically launch two bwa-mem jobs using datasets 1,2 and 3,4 generating two resulting BAM files.</small>|
+|<small> - By setting **Set read groups information** to `Set read groups (SAM/BAM specifications) and clicking **Auto-assign** we will ensure that the reads in the resulting BAM dataset are properly set.</small>|
 
 <hr color="red">
 
@@ -82,9 +85,10 @@ Because we have set read groups, we can now merge the two BAM dataset into one. 
 
 We can BAM dataset using **NGS: Picard** &#8594; **MergeSAMFiles** tool:
 
->![](/BMMB554/img/mt_bam_merging.png)
->
->Merging two BAM datasets into one. Note that two inputs are highlighted. 
+|                             |
+|-----------------------------|
+|![](/img/mt_bam_merging.png) |
+|<small>Merging two BAM datasets into one. Note that two inputs are highlighted.</small>|
 
 ## Removing duplicates
 
@@ -98,9 +102,10 @@ Recall from our [earlier material](/BMMB554/post/topic7/):
 
 Let's use **NGS: Picard** &#8594; **MarkDuplicates** tool:
 
->![](/BMMB554/img/mt_dedup.png)
->
->De-duplicating the merged BAM dataset
+|                             |
+|-----------------------------|
+|![](/img/mt_dedup.png)|
+|<small>De-duplicating the merged BAM dataset</small>|
 
 **MarkDuplicates** produces a BAM dataset with duplicates removed and also a metrics file. Let's take a look at the metrics data:
 
@@ -152,62 +157,50 @@ The last of these is *left-aligned*. In this case gaps (dashes) as moved as far 
 
 Let's perform left alignment using **NGS: Variant Analysis** &#8594; **BamLeftAlign**:
 
->![](/BMMB554/img/mt_left_align.png)
->
->Left-aligning a de-duplicated BAM dataset
+|                             |
+|-----------------------------|
+|![](/img/mt_left_align.png) |
+|<small>Left-aligning a de-duplicated BAM dataset</small>|
 
 ## Filtering reads
 
 Remember that we are trying to call variants in mitochondrial genome. Let focus only on the reads derived from the mitochondrial genome by filtering everything else out. For this we will use **NGS: BamTools** &#8594; **Filter**:
 
->![](/BMMB554/img/mt_filtering.png)
->
->Filtering reads. There are several important point to note here:
->
->- **mapQuality** is set to &#8925; 20 Mapping quality reflects the probability that the read is placed *incorrectly*. It uses [phred scale](https://en.wikipedia.org/wiki/Phred_quality_scorescore). Thus 20 is 1/100 or 1% chance that the read is incorrectly mapped. By setting this parameter to &#8925; 20 we will keep all reads that have 1% or less probability of being mapped incorrectly. 
->- *isPaired* will eliminate singleton (unpaired) reads (make sure **Yes** is clicked on)
->- *isProperPair* will only keep reads that map to the same chromosome and are properly placed (again, make sure **Yes** is clicked)
->- *reference* is set to *chrM* 
+|                             |
+|-----------------------------|
+|![](/img/mt_filtering.png) |
+|<small>Filtering reads. There are several important point to note here:</small>|
+|<small> - **mapQuality** is set to &#8925; 20 Mapping quality reflects the probability that the read is placed *incorrectly*. It uses [phred scale](https://en.wikipedia.org/wiki/Phred_quality_scorescore). Thus 20 is 1/100 or 1% chance that the read is incorrectly mapped. By setting this parameter to &#8925; 20 we will keep all reads that have 1% or less probability of being mapped incorrectly. </small>|
+|<small> - *isPaired* will eliminate singleton (unpaired) reads (make sure **Yes** is clicked on)</small>|
+|<small> - *isProperPair* will only keep reads that map to the same chromosome and are properly placed (again, make sure **Yes** is clicked)</small>|
+|<small> - *reference* is set to *chrM* </small>|
 
 # Calling non-diploid variants with FreeBayes
 
 FreeBayes is widely used for calling variants in diploid systems. However, it can also be used for calling variants in pooled samples where the number of samples is not known. This is the exact scenario we have here: in our sample we have multiple mitochondrial (or bacterial or viral) genomes but we do not know exactly how many. Thus we will use the `--pooled-continuous` option of FreeBayes to generate *frequency-based* variant calls as well as some other options highlighted below (the tool is in **NGS: Variant Analysis** &#8594; **FreeBayes**):
 
->![](/BMMB554/img/mt_freebayes_genome.png)
->
->Set genome to `hg38` (the latest version)
->
->![](/BMMB554/img/mt_freebayes_regions.png)
->
->Set regions to `chrM` from `1` to `16000`. This will simply save us time since we are only interested in mitochondrial variants anyway
->
->![](/BMMB554/img/mt_freebayes_alloptions.png)
-> 
->Choose `Complete list of all samples` from **Choose parameter selection level** drop down.
->
->![](/BMMB554/img/mt_freebayes_popmodel.png)
->
->This is one of the most important parameter choices one needs to make when calling variants in non-diploid systems. Here set **Set population model** to `Yes` and then:
-> 
->* Set **ploidy** to `1`
->* Set **Assume that samples result from pooled sequencing** to `Yes`
->* Set **Output all alleles which pass input filters, regardless of genotyping outcome or model** to `Yes`
->
->![](/BMMB554/img/mt_freebayes_allelic_scope.png)
->
->We will also set **Allelic scope** to `Yes` and restrict variant types to single nucleotide polymorphisms only by:
->
->* Keeping **Ignore SNP alleles** and **Ignore indels alleles** set to `No`
->* Setting **Ignore MNPs** and **Ignore complex events** to `Yes`
->
->Mitochondria has a number of low complexity regions (mononucleotide repeats). Setting these parameters as described above will decrease noise from these regions. 
->
->![](/BMMB554/img/mt_freebayes_inputfilters.png)
->
->Finally, let's set **Input filters** to `Yes` and set:
->
->* **Exclude alignments from analysis if they have a mapping quality less than** to `20` (phred score of 20). This will make FreeBayes to only consider reliably aligned reads.
->* **Exclude alleles from analysis if their supporting base quality less than** to `30` (phred score of 30). This will make FreeBayes to only consider high quality bases.
+|                             |
+|-----------------------------|
+|![](/img/mt_freebayes_genome.png)|
+|<small> Set genome to `hg38` (the latest version)/small>|
+|![](/img/mt_freebayes_regions.png)|
+|<small> Set regions to `chrM` from `1` to `16000`. This will simply save us time since we are only interested in mitochondrial variants anyway/small>|
+|![](/img/mt_freebayes_alloptions.png)|
+|<small> Choose `Complete list of all samples` from **Choose parameter selection level** drop down./small>|
+|![](/img/mt_freebayes_popmodel.png)|
+|<small> This is one of the most important parameter choices one needs to make when calling variants in non-diploid systems. Here set **Set population model** to `Yes` and then:/small>|
+|<small> * Set **ploidy** to `1`/small>|
+|<small> * Set **Assume that samples result from pooled sequencing** to `Yes`/small>|
+|<small> * Set **Output all alleles which pass input filters, regardless of genotyping outcome or model** to `Yes`/small>|
+|![](/img/mt_freebayes_allelic_scope.png)|
+|<small> We will also set **Allelic scope** to `Yes` and restrict variant types to single nucleotide polymorphisms only by:/small>|
+|<small> * Keeping **Ignore SNP alleles** and **Ignore indels alleles** set to `No`/small>|
+|<small> * Setting **Ignore MNPs** and **Ignore complex events** to `Yes`/small>|
+|<small> Mitochondria has a number of low complexity regions (mononucleotide repeats). Setting these parameters as described above will decrease noise from these regions. /small>|
+|![](/img/mt_freebayes_inputfilters.png)|
+|<small> Finally, let's set **Input filters** to `Yes` and set:/small>|
+|<small> * **Exclude alignments from analysis if they have a mapping quality less than** to `20` (phred score of 20). This will make FreeBayes to only consider reliably aligned reads./small>|
+|<small> * **Exclude alleles from analysis if their supporting base quality less than** to `30` (phred score of 30). This will make FreeBayes to only consider high quality bases./small>|
 
 This will produce a [VCF dataset](https://samtools.github.io/hts-specs/VCFv4.2.pdf) shows below (you may need to scroll sideways to see it in full). It lists 30 sites of interest (everything starting with `#` is a comment):
 
@@ -308,9 +301,10 @@ chrM	15326	.	A	G	79542.1	.	AB=0;ABP=0;AC=4;AF=1;AN=4;AO=2574;CIGAR=1X;DP=2586;DP
 
 Even though we selected somewhat stringent input parameters (restricting base quality to a minimum of 30 and mapping quality to a minimum of 20) there is still a lot of just in our data. [Erik Garrison](https://github.com/ekg) has a beautiful illustration of various biases potentially affecting called variants (and making a locus sequence-able):
 
->![](/BMMB554/img/mt_biases.png)
->
->Here you can see that in an ideal case (indicated with a green star) a variant is evenly represent by different areas of sequencing reads (cycle and placement biases) and is balanced across the two strands (strand bias). Allele imbalance is not applicable in our case as it reflects significant deviation from the diploid (50/50) expectation (see [here](/BMMB554/img/freebayes.pdf) for more details).
+|                             |
+|-----------------------------|
+|![](/img/mt_biases.png)      |
+|<small>Here you can see that in an ideal case (indicated with a green star) a variant is evenly represent by different areas of sequencing reads (cycle and placement biases) and is balanced across the two strands (strand bias). Allele imbalance is not applicable in our case as it reflects significant deviation from the diploid (50/50) expectation (see [here](/img/freebayes.pdf) for more details).</small>|
 
 A robust tool set for processing VCF data is provided by [vcflib](https://github.com/vcflib/vcflib) developed by Erik Garrison, the author of FreeBayes. One way to filter VCF is using `INFO` fields of the VCF dataset. If you look at the VCF dataset shown above you will see all comment lines beginning with `##INFO`.  These are `INFO` fields. Each VCF record contains a list of `INFO` tags describing a wide range of properties for each VCF record. You will see that FreeBayes and NVC differ significantly in the number and types of `INFO` fields each of these caller generates. This why the two require different filtering strategies. 
 
@@ -324,9 +318,10 @@ Among numerous types of data generated by FreeBayes let's consider the following
 
 To perform filtering we will use **NGS: VCF Manipulation** &#8594; **VCFfilter**):
 
->![](/BMMB554/img/mt_vcffilter.png)
->
->Filtering FreeBayes VCF for strand bias (`SPR` and `SAP`), placement bias (`EPP`), variant quality (`QUAL`), and depth of coverage (`DP`).
+|                             |
+|-----------------------------|
+|![](/img/mt_vcffilter.png) |
+|<small>Filtering FreeBayes VCF for strand bias (`SPR` and `SAP`), placement bias (`EPP`), variant quality (`QUAL`), and depth of coverage (`DP`).</small>|
 
 The resulting VCF only contains five variants (most comments fields are omitted here):
 
@@ -346,35 +341,29 @@ For visalizaning VCFs Galaxy relies on the two external tools.  The first is cal
 
 VCF.IOBIO can be invoked by expanding a VCF dataset in Galaxy's history by clicking on it:
 
->![](/BMMB554/img/mt_vcf_dataset_collapsed.png)
->
->Clicking on the dataset above will expand it as shown below:
->
->![](/BMMB554/img/mt_vcf_dataset_expanded.png)
->
->At the bottom there is a link "display at vcf.iobio"
->Clicking on this link will start indexing of VCF datasets, which is required to display them. After indexing VCF.IOBIO will open:
->
->![](/BMMB554/img/mt_vcfiobio.png)
->
->Of course there are not that many variants to look at in this example. Nevertheless there are helpful statistics such as Transition/Transversion (Ts/Tn) ratio. 
+|                             |
+|-----------------------------|
+|![](/img/mt_vcf_dataset_collapsed.png)|
+|<small>Clicking on the dataset above will expand it as shown below:</small>|
+|![](/img/mt_vcf_dataset_expanded.png)|
+|<small>At the bottom there is a link "display at vcf.iobio"</small>|
+|<small>Clicking on this link will start indexing of VCF datasets, which is required to display them. After indexing VCF.IOBIO will open:</small>|
+|![](/img/mt_vcfiobio.png)|
+|<small>Of course there are not that many variants to look at in this example. Nevertheless there are helpful statistics such as Transition/Transversion (Ts/Tn) ratio. </small>|
 
 ### IGV
 
 Similarly to VCF.BIOIO expanding a history item representing a VCF dataset will reveal an IGV link:
 
->![](/BMMB554/img/mt_vcf_dataset_expanded.png)
->
->At the bottom there is a link "display at IGV: local Human hg38"
->The difference between "local" and "Human hg38" links is explained in the following video:
->
->{{< vimeo 123414437 >}}
->
->Visualizing our FreeBayes dataset will produce this:
->
->![](/BMMB554/img/mt_igv.png)
->
->Here we focus on one particular variant at position 3,243 for reasons that will become apparent in the next section.
+|                             |
+|-----------------------------|
+|![](/img/mt_vcf_dataset_expanded.png)|
+|<small>At the bottom there is a link "display at IGV: local Human hg38"</small>|
+|<small>The difference between "local" and "Human hg38" links is explained in the following video:</small>|
+| {{< vimeo 123414437 >}} |
+|<small>Visualizing our FreeBayes dataset will produce this:</small>|
+|![](/img/mt_igv.png)|
+|<small>Here we focus on one particular variant at position 3,243 for reasons that will become apparent in the next section.</small>|
 
 ## Digging into the data
 
@@ -382,15 +371,17 @@ Visualizing VCF dataset may be a good way to get an overall idea of the data, bu
 
 Using **NGS: VCF Manipulation** &#8594; **VCFtoTab-delimited** on the filtered VCF dataset:
 
->![](/BMMB554/img/mt_vcfToTab.png)
->
->Make sure **Report data per sample** is set to `Yes`
+|                             |
+|-----------------------------|
+|![](/img/mt_vcfToTab.png) |
+|<small>Make sure **Report data per sample** is set to `Yes`</small>|
 
 This will produce a dataset with *very* many columns:
 
->![](/BMMB554/img/mt_tab.png)
->
->There are 53 columns in this dataset (not all are shown here). 
+|                             |
+|-----------------------------|
+|![](/img/mt_tab.png) |
+|<small>There are 53 columns in this dataset (not all are shown here). </small>|
 
 The columns in this dataset represent INFO and Genotype fields on the original VCF dataset. Let's restrict ourselves to just a few:
 
@@ -403,9 +394,10 @@ The columns in this dataset represent INFO and Genotype fields on the original V
 
 To cut these columns out we will use **Text Manipulation** &#8594; **Cut**
 
->![](/BMMB554/img/mt_cut.png)
->
->Note that column names are pre-ceded with `c`
+|                             |
+|-----------------------------|
+|![](/img/mt_cut.png)
+|<small>Note that column names are pre-ceded with `c`</small>|
 
 This will generate the following dataset:
 
@@ -440,8 +432,213 @@ Thus the *major* allele in mother (`G`) becomes the *minor* allele in child -- a
 
 This entire analysis is available as a [Galaxy history](https://usegalaxy.org/u/aun1/h/non-diploid-freebayes) that you can import into your Galaxy account and play with.
 
-
 Now you know how to call variants in non-diploid system, so try it on bacteria, viruses etc...
+
+# What if your variants are *REALLY* rare?
+
+This page explains how to perform discovery of low frequency variants from duplex sequencing data. As an example we use the _ABL1_ dataset published by [Schmitt and colleagues](http://www.nature.com/nmeth/journal/v12/n5/full/nmeth.3351.html) (SRA accession [SRR1799908](http://www.ncbi.nlm.nih.gov/sra/?term=SRR1799908)). 
+
+# Background
+
+Calling low frequency variants from next generation sequencing (NGS) data is challenging due to significant amount of noise characteristic of these technologies. [Duplex sequencing](http://www.pnas.org/content/109/36/14508.short) (DS) was designed to address this problem by increasing sequencing accuracy by over four orders of magnitude. DS uses randomly generated barcodes to uniquely tag each molecule in a sample. The tagged fragments are then PCR amplified prior to the preparation of a sequencing library, creating fragment families characterized by unique combination of barcodes at both 5’ and 3’ ends:
+
+
+|                             |
+|-----------------------------|
+|[![duplex](/img/ds.png)](http://www.pnas.org/content/109/36/14508/F1.expansion.html)|
+|<small>The logic of duplex sequencing. From [Schmitt:2012](http://www.pnas.org/content/109/36/14508.short).</small>|
+
+The computational analysis of DS data (Part `C` in the figure above) produces two kinds of output:
+
+* Single Strand Consensus Sequences (SSCS; panel `iv` in the figure above);
+* Duplex Consensus Sequences (DCS; panel `v` in the figure above).
+
+The DCSs have the ultimate accuracy, yet the SSCSs can also be very useful when ampliconic DNA is used as an input to a DS experiment. Let us illustrate the utility of SSCSs with the following example. Suppose one is interested in quantifying variants in a virus that has a very low titer in body fluids. Since DS procedure requires a substantial amount of starting DNA (between [between 0.2 and 3 micrograms](http://nature.com/nprot/journal/v9/n11/full/nprot.2014.170.html)) the virus needs to be enriched. This can be done, for example, with a PCR designed to amplify the entire genome of the virus. Yet the problem is that during the amplification heterologous strands will almost certainly realign to some extent forming hetoroduplex molecules:
+
+|                             |
+|-----------------------------|
+|![hd](/img/het.png)|
+|<small>Heteroduplex formation in ampliconic templates. Image by Barbara Arbeithuber from [Stoler:2016](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-1039-4). Here there are two distinct types of viral genomes: carrying `A` and `G`. Because the population of genomes is enriched via PCR, heteroduplex formation takes place, skewing frequency estimates performed using DCSs.</small>|
+
+In the image above there are two alleles: green (A) and red (G). After PCR a fraction of molecules are in heteroduplex state. If this PCR-derived DNA is now used as the starting material for a DS experiment, the heteroduplex molecules will manifest themselves as having an `N` base at this site (because _Du Novo_ interprets disagreements as `N`s during consensus generation). So, DSCs produced from this dataset will have `A`, `G`, and `N` at the polymorphic site. Yet, SSCSs will only have `A` and `G`. Thus SSCS will give a more accurate estimate of the allele frequency at this site in this particular case. In _Du Novo_ SSCSs are generated when the **Output single-strand consensus sequences** option of **Du Novo: Make consensus reads** tool is set to `Yes` (see [here](#generating-duplex-consensus-sequences-dcs)).
+
+## How to use this tutorial
+
+The entire analysis described here is accessible as a [Galaxy history](https://usegalaxy.org/u/aun1/h/duplex-analysis-abl1) (by clicking on this link you can create your own copy and play with it).
+
+|                             |
+|-----------------------------|
+|![History Item](http://galaxyproject.org/duplex/histItem.png)|
+|<small>Each history item has a Rerun ![refresh](http://galaxyproject.org/galaxy101/fa-refresh.png) button. Clicking this button will show you how this tool was run with all parameters filled in exactly.</small>|
+
+This analysis (and consequently the Galaxy's history) can be divided into three parts
+ 1. Consensus generation from initial sequencing reads;
+ 2. Analysis of Duplex Consensus Sequences (DCS);
+ 3. Analysis of Single Strand Consensus Sequences (SSCS):
+
+
+>![steps](/img/steps.png)
+>
+>Analysis outline 
+
+# Start: Generating consensus sequences
+
+The starting point of the analyses are sequencing reads (usually in [fastq](https://en.wikipedia.org/wiki/FASTQ_format) format) produced from a duplex sequencing library.  
+
+## Getting data in and assessing quality
+
+We uploaded [Schmitt:2015](http://www.nature.com/nmeth/journal/v12/n5/full/nmeth.3351.html)) data directly from SRA as shown in [this screencast](https://vimeo.com/121187220). This created two datasets in our galaxy history: one for forward reads and one for reverse. We then evaluated the quality of the data by running FastQC on both datasets (forward and reverse) to obtain the following plots:
+
+   | 
+:--|:---
+![](/img/abl1-f-qc.png) | ![](/img/abl1-r-qc.png)
+**A**. Forward  | **B**. Reverse
+
+One can see that these data are of excellent quality and no additional processing is required before we can start the actual analysis. 
+
+## Generating Duplex Consensus Sequences (DCS)
+
+From tool section **NGS: Du Novo** we ran:
+ 
+1. **Make families** (`Tag length = 12`; `Invariant sequence length = 5`)
+2. **Align families** (This is **the most** time consuming step of the workflow. It may take multiple days to run. The _ABL1_ example took 34 hours and 7 minutes to finish. )
+3. **Make consensus reads** (`Minimum reads per family = 3`; `Minimum base quality = 20`; `FASTQ format = Sanger` ; `Output single-strand consensus sequences = Yes` :point_left: This is particularly important as explained below; also see the following image)
+
+This is the exact image of the **Make consensus reads** interface:
+
+|                             |
+|-----------------------------|
+|![Make consesni](/img/makeCons.png)|
+|<small>Making DCS and SSCS. **Note** that **Output single-strand consensus sequences** is set to `Yes`. [Above](#background) we explained why single-strand consensus sequences (SSCS) may be important in some applications. [Below](#analysis-of-single-strand-consensus-data) we show how they can be used.</small>|
+
+
+## Filtering consensuses
+
+The _Du Novo_ algorithm occasionally inserts`N`and/or [IUPAC notations](https://en.wikipedia.org/wiki/Nucleic_acid_notation) at sites where a definive base cannot be identified according to the major rule consensus. We however do not want such bases when we call variants. The tool **Sequence Content Trimmer** will help with filtering these out. Here are the parameters we used:
+
+
+|                             |
+|-----------------------------|
+|![ContentTrimmer](/img/contentTrimmer.png)
+|<small>Sequence Content Trimmer settings . Where:<br>- `Paired reads = Paired` (because DCSs are reported as forward and reverse)<br>- `Bases to filter on = NRYSWKMBDHV` (all ambiguous nucleotides)<br>- `Frequency threshold = 0.2` (A window /see the next parameter below/ cannot have more than 20% of ambiguous bases)<br>- `Size of the window = 10` (Size of the window)<br>- `Invert filter bases = No`<br>- `Set a minimum read length = 50` (We do not want _very_ short reads)</small>|
+
+## Generating fastq
+
+[The previous step](#filtering-consensuses) filters forward and reverse DCSs and reports them in [FASTA](https://en.wikipedia.org/wiki/FASTA_format) format. Yet the downstream tools require [fastq](https://en.wikipedia.org/wiki/FASTQ_format) format. To address this we convert FASTA into fastq using **Combine FASTA and QUAL** from tool section **NGS: QC and manipulation**. In this case the quality values are filled in with the maximum allowed value of 93 (essentially we fake them here), which is fine as we will not rely on quality scores in the rest of the analysis. 
+
+|                             |
+|-----------------------------|
+|![ContentTrimmer](/img/combineFandQ.png)|
+|<small>Combine FASTA and QUAL. **Note** that here two datasets (#8 and #9) are selected simultaneously because we clicked the multiple datasets button the left of the **FASTA File** dropdown:<br> ![](/img/multiDataset.png)</small>|
+
+## Calling variants
+
+At this point we have trimmed DCSs in fastq format. We can now proceed to calling variants. This involves the following steps:
+
+ 1. [Align against reference genome](#align-against-genome-with-bwa-and-bwa-mem)
+ 2. [Merge results of multiple mappers](#merging) :point_left: This step is only useful if one uses multiple mappers (which we do here to show concordance. But this is not strictly necessary.)
+ 3. [Left aligning indels](#left-aligning-indels)
+ 4. [Tabulate the differences](#tabulating-the-differences)
+
+### Align against genome with **BWA** and **BWA-MEM**
+
+Here we use two mappers for added reliability (this is not necessary in most situations as long as you use the right mapper for input data). To differentiate between results produced by each mapper we assign readgroups (this is done by clicking on **Set read groups information** dropdown). For example, for **BWA-MEM** you would set parameters like this:
+
+|                             |
+|-----------------------------|
+|![](/img/bwa-mem.png)|
+|<small>Running BWA-MEM. **Note** that we are comparing DCSs against human genome version `hg38`, use forward and reverse DCSs are the `first` and `second` set of reads. Readgroup **SM** and **ID** tags are set `bwa-mem`.</small>|
+
+We then repeat essentially the same with **BWA**:
+
+|                             |
+|-----------------------------|
+|![](/img/bwa.png)|
+|<small>Running BWA. **Note** here we use `bwa` as the readgroup **ID** and **SM** tags.</small>|
+
+### Merging
+
+Since we have used two mappers - we have two BAM datasets. Yet because we have set readgroups we can now merge them into a single BAM dataset. This is because the individual reads will be labelled with readgroups (you will see how it will help later). To merge we use **MergeSamFiles** from tool section **NGS: Picard**:
+
+|                             |
+|-----------------------------|
+|![](/img/mergeSamFiles.png)|
+|<small>Merging BAM datasets.</small>|
+
+### Left Aligning indels
+
+To normalize the positional distribution of indels we use **Left Align** utility (**NGS: Variant Analysis**) from [FreeBayes](https://github.com/ekg/freebayes#indels) package. This is necessary to avoid erroneous polymorphisms flanking regions with indels (e.g., in low complexity loci):
+
+|                             |
+|-----------------------------|
+|![](/img/leftAlign.png) |
+|<small>Left aligning indels. **Note** here we use `hg38` as well. Obviously, one must use the same genome built you have aligned against with **BWA-MEM** and **BWA**.</small>|
+
+### Tabulating the differences
+
+To identify sites containing variants we use **Naive Variant Caller (NVC)** (tool section **NGS: Variant Analysis**) which produces a simple count of differences given coverage and base quality per site (remember that our qualities were "faked" during the conversion from FASTA to fastq and cannot be used here). So in the case of _ABL1_ we set parameters as follow:
+
+>![](/img/nvc.png)
+>
+>Finding variants with NVC. Here:<br>- `Using reference genome = hg38` (As mentioned above, needs to be set to the same genome one have mapped against.)<br>- `Restrict to regions: Chromosome = chr9` (_ABL1_ is on chromosome 9. We set this to prevent **NVC** from wandering across the genome to save time.)<br>- `Minimum number of reads needed to consider a REF/ALT = 0` (Trying to maximize the number of sites. We can filter later.)<br>- `Minimum base quality = 20` (This default and is irrelevant because of "faking" quality scores during the conversion from FASTA to fastq).<br>- `Minimum mapping quality = 20` (This is helpful because it prevents reads mapping to multiple locations from being included in the tabulation. Such reads will have mapping quality of 0.)<br>- `Ploidy = 1` (Ploidy is irrelevant here as it is a mixture of multiple genomes)<br>- `Only write out positions with possible alternate alleles = No` (We can filter later)<br>- `Report counts by strand = Yes` (This will be helpful to gauge the strand bias).
+
+The **NVC** generates a [VCF](https://en.wikipedia.org/wiki/Variant_Call_Format) file that can be viewed at genome browsers such as [IGV](https://www.broadinstitute.org/igv/). Yet one rarely finds variants by looking at genome browsers. The next step is to generate a tab-delimited dataset of nucleotide counts using **Variant Annotator** from tool section **NGS: Variant Analysis**. We ran it with the following parameters:
+
+
+|                             |
+|-----------------------------|
+|![](/img/va.png)|
+|<small?Annotating variable sites. Here `Coverage threshold = 10` (To reduce noise) and `Output stranded base counts = Yes` (to see strand bias)</small>|
+
+
+There are 3,264 lines in the output, which is clearly too much. Using **Filter** tool (tool section **Filter and Sort**) with expression `c16 >= 0.01`(because column 16 contains minor allele frequency - MAF - and we are interested in those sites where MAF >= 1%): 
+
+>![](/img/filter.png)
+>
+>Filtering variable sites.
+
+will get that number to only 4 (showing just some of the columns):
+
+Mapper  | Position (chr9)|  Major allele | Minor allele | MAF     |
+:-------|----------:|:-------:|:------:|--------:|
+bwa     | 130,872,141 |  G     |  A    | 0.013 |
+bwa-mem | 130,872,141 |  G     |  A    | 0.013 |
+bwa     | 130,880,141 |  A     |  G    | 0.479 |
+bwa-mem | 130,880,141 |  A     |  G    | 0.479 |
+
+We can see that results of both mappers agree very well. The reason we see these numbers grouped by mappers is because we have set the readgroups while [mapping](#align-against-genome-with-bwa-and-bwa-mem). 
+
+The polymorphism we are interested in (and the one reported by [Schmitt:2015] (http://www.nature.com/nmeth/journal/v12/n5/full/nmeth.3351.html)) is at the position 130,872,141 and has a frequency of 1.3%. The other site (position 130,880,141) is a known common variant [rs2227985](http://www.ncbi.nlm.nih.gov/SNP/snp_ref.cgi?type=rs&rs=rs2227985), which is heterozygous in this sample. 
+
+# Analysis of single strand consensus data
+
+SSCSs are generated when the **Output single-strand consensus sequences** option of **Du Novo: Make consensus reads** tool is set to `Yes` (see [here](#generating-duplex-consensus-sequences-dcs)). Analysis of SSCS data follows almost exactly the same trajectory. The only difference is that these **do not** come as forward and reverse. Instead _Du Novo_ generates a single dataset. With this dataset we go through all the same steps:
+
+* [Filtering consensi](#filtering-consensi)
+* [Generating fastq](#generating-fastq)
+* [Calling variants](#calling-variants)
+ 	- [Aligning against genome](#align-against-genome-with-bwa-and-bwa-mem) (here the difference is that one needs to choose a single end option and use a single dataset as input)
+ 	- [Merging](#merging)
+ 	- [Left aligning indels](#left-aligning-indels)
+ 	- [Tabulating the differences](#tabulating-the-differences)
+
+## Repeating this analysis using workflows
+
+The analysis described above can be rerun using a workflow. Workflow combined all steps into a single entity that only needs to be executed once. We provide two workflows:
+
+* _Du Novo_ analysis from reads (import from [here](https://usegalaxy.org/u/aun1/w/duplex-analysis-from-reads)). This workflow uses fastq reads as input. It should be used if you analyze data for first time. 
+* _Du Novo_ analysis from aligned families (import from [here](https://usegalaxy.org/u/aun1/w/copy-of-duplex-analysis-from-reads)). This workflow starts with aligned families. It should be used for re-analysis of already generated DCS and SSCS data. 
+
+|                             |
+|-----------------------------|
+|[![](/img/fromReads.png)](https://galaxyproject.org/duplex/fromReads.png)|
+|<small>Starting from Reads</small>|
+|![](/img/fromDCS.png)](https://galaxyproject.org/duplex/fromDCS.png)|
+|<small>Starting from DCS/SSCS data</small>|
+
+## If things don't work...
+...you need to complain. Use [Galaxy's BioStar Channel](https://usegalaxy.org/biostar/biostar_redirect) to do this. 
+
 
 
 # Exercise
