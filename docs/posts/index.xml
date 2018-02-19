@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Anton Nekrutenko | 2018 | CC-BY</copyright>
-    <lastBuildDate>Wed, 14 Feb 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 17 Feb 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://nekrut.github.io/BMMB554/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Variant calling: Pooled and Haploid systems</title>
+      <link>https://nekrut.github.io/BMMB554/posts/topic9/</link>
+      <pubDate>Sat, 17 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/posts/topic9/</guid>
+      <description>The majority of life on Earth is non-diploid and represented by prokaryotes, viruses and their derivatives such as our own mitochondria or plant&amp;rsquo;s chloroplasts. In non-diploid systems allele frequencies can range anywhere between 0 and 100% and there could be multiple (not just two) alleles per locus.</description>
+    </item>
     
     <item>
       <title>NGS data: Practicalities</title>

@@ -1,0 +1,1369 @@
+<!doctype html>
+
+<html lang="en-us">
+
+<head>
+  <title>BMMB 554 | 2018</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="The HTML5 Herald" />
+  <meta name="author" content="Anton Nekrutenko" />
+  <meta name="generator" content="Hugo 0.32.3" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab|Ruda" />
+  <link rel="stylesheet" type="text/css" href="https://nekrut.github.io/BMMB554/css/styles.css" />
+</head>
+
+<body>
+  <div id="container">
+    <header>
+      <h1>
+                <a href="https://nekrut.github.io/BMMB554/">BMMB 554 | 2018</a>
+            </h1>
+
+      <ul id="social-media">
+        
+        <li><a href="https://twitter.com/galaxyproject"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+          
+        <li><a href="https://github.com/nekrut"><i class="fa fa-github fa-lg" aria-hidden="true"></i></a></li>
+           
+      </ul>
+      
+      <p><em>Introduction to data driven life sciences</em></p>
+      
+    </header>
+
+    
+<nav>
+    <ul>
+        
+        <li>
+            <a class="" href="https://nekrut.github.io/BMMB554/about/">
+                <i class="fa-li fa  fa-lg"></i><span>Syllabus</span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="" href="https://nekrut.github.io/BMMB554/posts/">
+                <i class="fa-li fa  fa-lg"></i><span>Lectures</span>
+            </a>
+        </li>
+        
+    </ul>
+</nav>
+
+    <main>
+
+
+
+
+<article>
+
+    <h1>Variant calling: Pooled and Haploid systems</h1>
+
+    
+        <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2018-02-17T00:00:00Z">Feb 17, 2018</time>
+        </li>
+        
+        
+
+        
+        <li>
+            <em>
+                
+                    
+                    <a href="https://nekrut.github.io/BMMB554/tags/varimat-calling/">#varimat calling</a>
+                
+                    , 
+                    <a href="https://nekrut.github.io/BMMB554/tags/ngs/">#ngs</a>
+                
+            </em>
+        </li>
+        
+
+        <li>28 min read</li>
+    </ul>
+</aside>
+    
+
+    
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/sCHc3GuQ57w?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+<p>The majority of life on Earth is non-diploid and represented by prokaryotes, viruses and their derivatives such as our own mitochondria or plant&rsquo;s chloroplasts. In non-diploid systems allele frequencies can range anywhere between 0 and 100% and there could be multiple (not just two) alleles per locus. The main challenge associated with non-diploid variant calling is the difficulty in distinguishing between sequencing noise (abundant in all NGS platforms) and true low frequency variants.</p>
+
+<p>Some of the early attempts to do this well have been accomplished on human mitochondrial DNA although the same approaches will work equally good on viral and bacterial genomes:</p>
+
+<ul>
+<li>2014 | <a href="http://www.pnas.org/content/111/43/15474.abstract">Maternal age effect and severe germ-line bottleneck in the inheritance of human mitochondrial DNA</a></li>
+<li>2015 | <a href="http://www.pnas.org/content/112/8/2491.abstract">Extensive tissue-related and allele-related mtDNA heteroplasmy suggests positive selection for somatic mutations</a>.</li>
+</ul>
+
+<p>As an example of non-diploid system we will be using human mitochondrial genome as an example. However, this approach will also work for most bacterial and viral genomes as well.</p>
+
+<h1 id="mapping-and-pre-processing">Mapping and pre-processing</h1>
+
+<p>There are two ways one can call variants:</p>
+
+<ol>
+<li>By comparing reads against an existing genome assembly</li>
+<li>By assembling genome first and then mapping against that assembly</li>
+</ol>
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="https://nekrut.github.io/BMMB554/img/ref_vs_assembly.jpg" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>This figure from a manuscript by <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4493402/">Olson:2015</a> contrasts the two approaches.</small></td>
+</tr>
+</tbody>
+</table>
+
+<p>In this tutorials we will take the <em>first</em> path is which we map reads against an existing assembly. Later in the course (after we learn about assembly approaches) we will try the second approach as well.</p>
+
+<h2 id="finding-variants-in-human-mitochondria">Finding variants in human mitochondria</h2>
+
+<p>The goal of this example is to detect heteroplasmies (variants within mitochondrial DNA). Mitochondria is transmitted maternally and heteroplasmy frequencies may change dramatically and unpredictably during the transmission, due to a germ-line bottleneck <a href="http://www.nature.com/ng/journal/v40/n2/abs/ng.2007.63.html">Cree:2008</a>. As we mentioned above the procedure for finding variants in bacterial or viral genomes will be essentially the same.</p>
+
+<p><a href="https://usegalaxy.org/library/list#folders/Fe4842bd0c37b03a7">A Galaxy Library</a> contains datasets representing a child and a mother. These datasets are obtained by paired-end Illumina sequencing of human genomic DNA enriched for mitochondria. The enrichment was performed using long-range PCR with two primer pairs that amplify the entire mitochondrial genome. This means that these samples still contain a lot of DNA from the nuclear genome, which, in this case, is a contaminant.</p>
+
+<p>But first lets import data into Galaxy:</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="https://nekrut.github.io/BMMB554/img/mt_lib.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Select four datasets from <a href="https://usegalaxy.org/library/list#folders/Fe4842bd0c37b03a7">a library</a> and click <strong>to History</strong>. </small></td>
+</tr>
+</tbody>
+</table>
+
+<p>Let&rsquo;s QC the datasets first by running  <strong>NGS: QC and manipulation &#8594; FastQC</strong>:</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="https://nekrut.github.io/BMMB554/img/mt_qc.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>QC&rsquo;ing reads using <a href="http://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a>. Note that we selected all four datasets at once by pressing the middle button adjacent to the <strong>Short read data from your current history</strong> widget. </small></td>
+</tr>
+</tbody>
+</table>
+
+<p>The data have generally high quality in this example:</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="https://nekrut.github.io/BMMB554/img/mt_qc_plot.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>FastQC plot for one of the mitochondrial datasets shows that qualities are acceptable for 250 bp reads (mostly in the green, which is at or above <a href="https://en.wikipedia.org/wiki/Phred_quality_scorescore">phred score</a> of 30).</small></td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="mapping-the-reads">Mapping the reads</h2>
+
+<p>Our reads are long (250 bp) and as a result we will be using <a href="https://arxiv.org/pdf/1303.3997v2.pdf">bwa mem</a> to align them against the reference genome as it has good mapping performance for longer reads (100bp and up).</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="https://nekrut.github.io/BMMB554/img/mt_bwa_mem.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Running <code>bwa mem</code> on our datasets. Look <strong>carefully</strong> at parameter settings:</small></td>
+</tr>
+
+<tr>
+<td><small> - We select <code>hg38</code> version of the human genome as the reference </small></td>
+</tr>
+
+<tr>
+<td><small> - By using the middle button again we select datasets 1 and 3 as <strong>Select the first set of reads</strong> and datasets 2 and 4 as <strong>Select the second set of reads</strong>. Galaxy will automatically launch two bwa-mem jobs using datasets 1,2 and 3,4 generating two resulting BAM files.</small></td>
+</tr>
+
+<tr>
+<td><small> - By setting <strong>Set read groups information</strong> to `Set read groups (SAM/BAM specifications) and clicking <strong>Auto-assign</strong> we will ensure that the reads in the resulting BAM dataset are properly set.</small></td>
+</tr>
+</tbody>
+</table>
+
+<hr color="red">
+
+<h3 id="font-color-red-9888-reminder-font"><font color="red">&#9888; Reminder</font></h3>
+
+<p>We already learned about read groups. Read again <a href="https://nekrut.github.io/BMMB554/BMMB554/post/topic7/">here</a>.</p>
+
+<hr color="red">
+
+<h2 id="merging-bam-datasets">Merging BAM datasets</h2>
+
+<p>Because we have set read groups, we can now merge the two BAM dataset into one. This is because read groups label each read as belonging to either <em>mother</em> or <em>child</em>.</p>
+
+<p>We can BAM dataset using <strong>NGS: Picard</strong> &#8594; <strong>MergeSAMFiles</strong> tool:</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="https://nekrut.github.io/BMMB554/img/mt_bam_merging.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Merging two BAM datasets into one. Note that two inputs are highlighted.</small></td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="removing-duplicates">Removing duplicates</h2>
+
+<p>Recall from our <a href="https://nekrut.github.io/BMMB554/BMMB554/post/topic7/">earlier material</a>:</p>
+
+<blockquote>
+<p>Preparation of sequencing libraries (at least at the time of writing) for technologies such as Illumina (used in this example) involves PCR amplification. It is required to generate sufficient number of sequencing templates so that a reliable detection can be performed by base callers. Yet PCR has it&rsquo;s biases, which are especially profound in cases of multitemplate PCR used for construction of sequencing libraries (Kanagawa et al. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=PubMed&amp;dopt=Abstract&amp;list_uids=16233530">2003</a>).</p>
+
+<p>Duplicates can be identified based on their outer alignment coordinates or using sequence-based clustering. One of the common ways for identification of duplicate reads is the <code>MarkDuplicates</code> utility from <a href="https://broadinstitute.github.io/picard/command-line-overview.html">Picard</a> package. It is designed to identify both PCR and optical duplicates:</p>
+
+<p>Duplicates are identified as read pairs having identical 5&rsquo; positions (coordinate and strand) for both reads in a mate pair (and optionally, matching unique molecular identifier reads; see BARCODE_TAG option). Optical, or more broadly Sequencing, duplicates are duplicates that appear clustered together spatially during sequencing and can arise from optical/imagine-processing artifacts or from bio-chemical processes during clonal amplification and sequencing; they are identified using the READ_NAME_REGEX and the OPTICAL_DUPLICATE_PIXEL_DISTANCE options. The tool&rsquo;s main output is a new SAM or BAM file in which duplicates have been identified in the SAM flags field, or optionally removed (see REMOVE_DUPLICATE and REMOVE_SEQUENCING_DUPLICATES), and optionally marked with a duplicate type in the &lsquo;DT&rsquo; optional attribute. In addition, it also outputs a metrics file containing the numbers of READ_PAIRS_EXAMINED, UNMAPPED_READS, UNPAIRED_READS, UNPAIRED_READ DUPLICATES, READ_PAIR_DUPLICATES, and READ_PAIR_OPTICAL_DUPLICATES. Usage example: java -jar picard.jar MarkDuplicates I=input.bam \ O=marked_duplicates.bam M=marked_dup_metrics.txt.`</p>
+</blockquote>
+
+<p>Let&rsquo;s use <strong>NGS: Picard</strong> &#8594; <strong>MarkDuplicates</strong> tool:</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="https://nekrut.github.io/BMMB554/img/mt_dedup.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>De-duplicating the merged BAM dataset</small></td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>MarkDuplicates</strong> produces a BAM dataset with duplicates removed and also a metrics file. Let&rsquo;s take a look at the metrics data:</p>
+
+<pre><code>raw_child-ds-	55	27551	55	50	1658	0	0.061026	219628
+raw_mother-ds-	96	54972	96	90	4712	0	0.086459	302063
+</code></pre>
+
+<p>where columns are:</p>
+
+<ul>
+<li>LIBRARY (read group in our case)</li>
+<li>UNPAIRED_READS_EXAMINED</li>
+<li>READ_PAIRS_EXAMINED-</li>
+<li>UNMAPPED_READS</li>
+<li>UNPAIRED_READ_DUPLICATES</li>
+<li>READ_PAIR_DUPLICATES</li>
+<li>READ_PAIR_OPTICAL_DUPLICATES</li>
+<li>PERCENT_DUPLICATION</li>
+<li>ESTIMATED_LIBRARY_SIZE</li>
+</ul>
+
+<p>In other words the two datasets had ~6% and ~9% duplicates, respectively.</p>
+
+<h2 id="left-aligning-indels">Left-aligning indels</h2>
+
+<p>Left aligning of indels (a variant of re-aligning) is extremely important for obtaining accurate variant calls. This concept, while not difficult, requires some explanation. For illustrating how left-aligning works we expanded on an example provided by <a href="http://bioinformatics.oxfordjournals.org/content/31/13/2202.abstract">Tan:2015</a>. Suppose you have a reference sequence and a sequencing read:</p>
+
+<pre><code>Reference GGGCACACACAGGG
+Read      GGGCACACAGGG
+</code></pre>
+
+<p>If you look carefully you will see that the read is simply missing a <code>CA</code> repeat. But it is not apparent to a mapper, so some of possible alignments and corresponding variant calls include:</p>
+
+<pre><code>Alignment                 Variant Call
+
+GGGCACACACAGGG            Ref: CAC
+GGGCAC--ACAGGG            Alt: C
+
+GGGCACACACAGGG            Ref: ACA
+GGGCA--CACAGGG            Alt: A
+
+GGGCACACACAGGG            Ref: GCA
+GGG--CACACAGGG            Alt: G
+</code></pre>
+
+<p>The last of these is <em>left-aligned</em>. In this case gaps (dashes) as moved as far left as possible (for a formal definition of left-alignment and variant normalization see <a href="http://bioinformatics.oxfordjournals.org/content/31/13/2202.abstract">Tan:2015</a>).</p>
+
+<p>Let&rsquo;s perform left alignment using <strong>NGS: Variant Analysis</strong> &#8594; <strong>BamLeftAlign</strong>:</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="https://nekrut.github.io/BMMB554/img/mt_left_align.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Left-aligning a de-duplicated BAM dataset</small></td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="filtering-reads">Filtering reads</h2>
+
+<p>Remember that we are trying to call variants in mitochondrial genome. Let focus only on the reads derived from the mitochondrial genome by filtering everything else out. For this we will use <strong>NGS: BamTools</strong> &#8594; <strong>Filter</strong>:</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="https://nekrut.github.io/BMMB554/img/mt_filtering.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Filtering reads. There are several important point to note here:</small></td>
+</tr>
+
+<tr>
+<td><small> - <strong>mapQuality</strong> is set to &#8925; 20 Mapping quality reflects the probability that the read is placed <em>incorrectly</em>. It uses <a href="https://en.wikipedia.org/wiki/Phred_quality_scorescore">phred scale</a>. Thus 20 is <sup>1</sup>&frasl;<sub>100</sub> or 1% chance that the read is incorrectly mapped. By setting this parameter to &#8925; 20 we will keep all reads that have 1% or less probability of being mapped incorrectly. </small></td>
+</tr>
+
+<tr>
+<td><small> - <em>isPaired</em> will eliminate singleton (unpaired) reads (make sure <strong>Yes</strong> is clicked on)</small></td>
+</tr>
+
+<tr>
+<td><small> - <em>isProperPair</em> will only keep reads that map to the same chromosome and are properly placed (again, make sure <strong>Yes</strong> is clicked)</small></td>
+</tr>
+
+<tr>
+<td><small> - <em>reference</em> is set to <em>chrM</em> </small></td>
+</tr>
+</tbody>
+</table>
+
+<h1 id="calling-non-diploid-variants-with-freebayes">Calling non-diploid variants with FreeBayes</h1>
+
+<p>FreeBayes is widely used for calling variants in diploid systems. However, it can also be used for calling variants in pooled samples where the number of samples is not known. This is the exact scenario we have here: in our sample we have multiple mitochondrial (or bacterial or viral) genomes but we do not know exactly how many. Thus we will use the <code>--pooled-continuous</code> option of FreeBayes to generate <em>frequency-based</em> variant calls as well as some other options highlighted below (the tool is in <strong>NGS: Variant Analysis</strong> &#8594; <strong>FreeBayes</strong>):</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="https://nekrut.github.io/BMMB554/img/mt_freebayes_genome.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small> Set genome to <code>hg38</code> (the latest version)/small&gt;</td>
+</tr>
+
+<tr>
+<td><img src="https://nekrut.github.io/BMMB554/img/mt_freebayes_regions.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small> Set regions to <code>chrM</code> from <code>1</code> to <code>16000</code>. This will simply save us time since we are only interested in mitochondrial variants anyway/small&gt;</td>
+</tr>
+
+<tr>
+<td><img src="https://nekrut.github.io/BMMB554/img/mt_freebayes_alloptions.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small> Choose <code>Complete list of all samples</code> from <strong>Choose parameter selection level</strong> drop down./small&gt;</td>
+</tr>
+
+<tr>
+<td><img src="https://nekrut.github.io/BMMB554/img/mt_freebayes_popmodel.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small> This is one of the most important parameter choices one needs to make when calling variants in non-diploid systems. Here set <strong>Set population model</strong> to <code>Yes</code> and then:/small&gt;</td>
+</tr>
+
+<tr>
+<td><small> * Set <strong>ploidy</strong> to <code>1</code>/small&gt;</td>
+</tr>
+
+<tr>
+<td><small> * Set <strong>Assume that samples result from pooled sequencing</strong> to <code>Yes</code>/small&gt;</td>
+</tr>
+
+<tr>
+<td><small> * Set <strong>Output all alleles which pass input filters, regardless of genotyping outcome or model</strong> to <code>Yes</code>/small&gt;</td>
+</tr>
+
+<tr>
+<td><img src="https://nekrut.github.io/BMMB554/img/mt_freebayes_allelic_scope.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small> We will also set <strong>Allelic scope</strong> to <code>Yes</code> and restrict variant types to single nucleotide polymorphisms only by:/small&gt;</td>
+</tr>
+
+<tr>
+<td><small> * Keeping <strong>Ignore SNP alleles</strong> and <strong>Ignore indels alleles</strong> set to <code>No</code>/small&gt;</td>
+</tr>
+
+<tr>
+<td><small> * Setting <strong>Ignore MNPs</strong> and <strong>Ignore complex events</strong> to <code>Yes</code>/small&gt;</td>
+</tr>
+
+<tr>
+<td><small> Mitochondria has a number of low complexity regions (mononucleotide repeats). Setting these parameters as described above will decrease noise from these regions. /small&gt;</td>
+</tr>
+
+<tr>
+<td><img src="https://nekrut.github.io/BMMB554/img/mt_freebayes_inputfilters.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small> Finally, let&rsquo;s set <strong>Input filters</strong> to <code>Yes</code> and set:/small&gt;</td>
+</tr>
+
+<tr>
+<td><small> * <strong>Exclude alignments from analysis if they have a mapping quality less than</strong> to <code>20</code> (phred score of 20). This will make FreeBayes to only consider reliably aligned reads./small&gt;</td>
+</tr>
+
+<tr>
+<td><small> * <strong>Exclude alleles from analysis if their supporting base quality less than</strong> to <code>30</code> (phred score of 30). This will make FreeBayes to only consider high quality bases./small&gt;</td>
+</tr>
+</tbody>
+</table>
+
+<p>This will produce a <a href="https://samtools.github.io/hts-specs/VCFv4.2.pdf">VCF dataset</a> shows below (you may need to scroll sideways to see it in full). It lists 30 sites of interest (everything starting with <code>#</code> is a comment):</p>
+
+<pre><code>
+Chrom	Pos	ID	Ref	Alt	Qual	Filter	Info	Format	data
+##fileformat=VCFv4.1
+##fileDate=20161108
+##source=freeBayes v0.9.20
+##reference=/galaxy/data/hg38/sam_index/hg38.fa
+##phasing=none
+##commandline=&quot;freebayes --bam localbam_0.bam --fasta-reference /galaxy/data/hg38/sam_index/hg38.fa --vcf /galaxy-repl/main/files/017/782/dataset_17782376.dat --region chrM:1..16000&quot;
+##INFO=&lt;ID=NS,Number=1,Type=Integer,Description=&quot;Number of samples with data&quot;&gt;
+##INFO=&lt;ID=DP,Number=1,Type=Integer,Description=&quot;Total read depth at the locus&quot;&gt;
+##INFO=&lt;ID=DPB,Number=1,Type=Float,Description=&quot;Total read depth per bp at the locus; bases in reads overlapping / bases in haplotype&quot;&gt;
+##INFO=&lt;ID=AC,Number=A,Type=Integer,Description=&quot;Total number of alternate alleles in called genotypes&quot;&gt;
+##INFO=&lt;ID=AN,Number=1,Type=Integer,Description=&quot;Total number of alleles in called genotypes&quot;&gt;
+##INFO=&lt;ID=AF,Number=A,Type=Float,Description=&quot;Estimated allele frequency in the range (0,1]&quot;&gt;
+##INFO=&lt;ID=RO,Number=1,Type=Integer,Description=&quot;Reference allele observation count, with partial observations recorded fractionally&quot;&gt;
+##INFO=&lt;ID=AO,Number=A,Type=Integer,Description=&quot;Alternate allele observations, with partial observations recorded fractionally&quot;&gt;
+##INFO=&lt;ID=PRO,Number=1,Type=Float,Description=&quot;Reference allele observation count, with partial observations recorded fractionally&quot;&gt;
+##INFO=&lt;ID=PAO,Number=A,Type=Float,Description=&quot;Alternate allele observations, with partial observations recorded fractionally&quot;&gt;
+##INFO=&lt;ID=QR,Number=1,Type=Integer,Description=&quot;Reference allele quality sum in phred&quot;&gt;
+##INFO=&lt;ID=QA,Number=A,Type=Integer,Description=&quot;Alternate allele quality sum in phred&quot;&gt;
+##INFO=&lt;ID=PQR,Number=1,Type=Float,Description=&quot;Reference allele quality sum in phred for partial observations&quot;&gt;
+##INFO=&lt;ID=PQA,Number=A,Type=Float,Description=&quot;Alternate allele quality sum in phred for partial observations&quot;&gt;
+##INFO=&lt;ID=SRF,Number=1,Type=Integer,Description=&quot;Number of reference observations on the forward strand&quot;&gt;
+##INFO=&lt;ID=SRR,Number=1,Type=Integer,Description=&quot;Number of reference observations on the reverse strand&quot;&gt;
+##INFO=&lt;ID=SAF,Number=A,Type=Integer,Description=&quot;Number of alternate observations on the forward strand&quot;&gt;
+##INFO=&lt;ID=SAR,Number=A,Type=Integer,Description=&quot;Number of alternate observations on the reverse strand&quot;&gt;
+##INFO=&lt;ID=SRP,Number=1,Type=Float,Description=&quot;Strand balance probability for the reference allele: Phred-scaled upper-bounds estimate of the probability of observing the deviation between SRF and SRR given E(SRF/SRR) ~ 0.5, derived using Hoeffding's inequality&quot;&gt;
+##INFO=&lt;ID=SAP,Number=A,Type=Float,Description=&quot;Strand balance probability for the alternate allele: Phred-scaled upper-bounds estimate of the probability of observing the deviation between SAF and SAR given E(SAF/SAR) ~ 0.5, derived using Hoeffding's inequality&quot;&gt;
+##INFO=&lt;ID=AB,Number=A,Type=Float,Description=&quot;Allele balance at heterozygous sites: a number between 0 and 1 representing the ratio of reads showing the reference allele to all reads, considering only reads from individuals called as heterozygous&quot;&gt;
+##INFO=&lt;ID=ABP,Number=A,Type=Float,Description=&quot;Allele balance probability at heterozygous sites: Phred-scaled upper-bounds estimate of the probability of observing the deviation between ABR and ABA given E(ABR/ABA) ~ 0.5, derived using Hoeffding's inequality&quot;&gt;
+##INFO=&lt;ID=RUN,Number=A,Type=Integer,Description=&quot;Run length: the number of consecutive repeats of the alternate allele in the reference genome&quot;&gt;
+##INFO=&lt;ID=RPP,Number=A,Type=Float,Description=&quot;Read Placement Probability: Phred-scaled upper-bounds estimate of the probability of observing the deviation between RPL and RPR given E(RPL/RPR) ~ 0.5, derived using Hoeffding's inequality&quot;&gt;
+##INFO=&lt;ID=RPPR,Number=1,Type=Float,Description=&quot;Read Placement Probability for reference observations: Phred-scaled upper-bounds estimate of the probability of observing the deviation between RPL and RPR given E(RPL/RPR) ~ 0.5, derived using Hoeffding's inequality&quot;&gt;
+##INFO=&lt;ID=RPL,Number=A,Type=Float,Description=&quot;Reads Placed Left: number of reads supporting the alternate balanced to the left (5') of the alternate allele&quot;&gt;
+##INFO=&lt;ID=RPR,Number=A,Type=Float,Description=&quot;Reads Placed Right: number of reads supporting the alternate balanced to the right (3') of the alternate allele&quot;&gt;
+##INFO=&lt;ID=EPP,Number=A,Type=Float,Description=&quot;End Placement Probability: Phred-scaled upper-bounds estimate of the probability of observing the deviation between EL and ER given E(EL/ER) ~ 0.5, derived using Hoeffding's inequality&quot;&gt;
+##INFO=&lt;ID=EPPR,Number=1,Type=Float,Description=&quot;End Placement Probability for reference observations: Phred-scaled upper-bounds estimate of the probability of observing the deviation between EL and ER given E(EL/ER) ~ 0.5, derived using Hoeffding's inequality&quot;&gt;
+##INFO=&lt;ID=DPRA,Number=A,Type=Float,Description=&quot;Alternate allele depth ratio. Ratio between depth in samples with each called alternate allele and those without.&quot;&gt;
+##INFO=&lt;ID=ODDS,Number=1,Type=Float,Description=&quot;The log odds ratio of the best genotype combination to the second-best.&quot;&gt;
+##INFO=&lt;ID=GTI,Number=1,Type=Integer,Description=&quot;Number of genotyping iterations required to reach convergence or bailout.&quot;&gt;
+##INFO=&lt;ID=TYPE,Number=A,Type=String,Description=&quot;The type of allele, either snp, mnp, ins, del, or complex.&quot;&gt;
+##INFO=&lt;ID=CIGAR,Number=A,Type=String,Description=&quot;The extended CIGAR representation of each alternate allele, with the exception that '=' is replaced by 'M' to ease VCF parsing. Note that INDEL alleles do not have the first matched base (which is provided by default, per the spec) referred to by the CIGAR.&quot;&gt;
+##INFO=&lt;ID=NUMALT,Number=1,Type=Integer,Description=&quot;Number of unique non-reference alleles in called genotypes at this position.&quot;&gt;
+##INFO=&lt;ID=MEANALT,Number=A,Type=Float,Description=&quot;Mean number of unique non-reference allele observations per sample with the corresponding alternate alleles.&quot;&gt;
+##INFO=&lt;ID=LEN,Number=A,Type=Integer,Description=&quot;allele length&quot;&gt;
+##INFO=&lt;ID=MQM,Number=A,Type=Float,Description=&quot;Mean mapping quality of observed alternate alleles&quot;&gt;
+##INFO=&lt;ID=MQMR,Number=1,Type=Float,Description=&quot;Mean mapping quality of observed reference alleles&quot;&gt;
+##INFO=&lt;ID=PAIRED,Number=A,Type=Float,Description=&quot;Proportion of observed alternate alleles which are supported by properly paired read fragments&quot;&gt;
+##INFO=&lt;ID=PAIREDR,Number=1,Type=Float,Description=&quot;Proportion of observed reference alleles which are supported by properly paired read fragments&quot;&gt;
+##INFO=&lt;ID=technology.ILLUMINA,Number=A,Type=Float,Description=&quot;Fraction of observations supporting the alternate observed in reads from ILLUMINA&quot;&gt;
+##FORMAT=&lt;ID=GT,Number=1,Type=String,Description=&quot;Genotype&quot;&gt;
+##FORMAT=&lt;ID=GQ,Number=1,Type=Float,Description=&quot;Genotype Quality, the Phred-scaled marginal (or unconditional) probability of the called genotype&quot;&gt;
+##FORMAT=&lt;ID=GL,Number=G,Type=Float,Description=&quot;Genotype Likelihood, log10-scaled likelihoods of the data given the called genotype for each possible genotype generated from the reference and alternate alleles given the sample ploidy&quot;&gt;
+##FORMAT=&lt;ID=DP,Number=1,Type=Integer,Description=&quot;Read Depth&quot;&gt;
+##FORMAT=&lt;ID=RO,Number=1,Type=Integer,Description=&quot;Reference allele observation count&quot;&gt;
+##FORMAT=&lt;ID=QR,Number=1,Type=Integer,Description=&quot;Sum of quality of the reference observations&quot;&gt;
+##FORMAT=&lt;ID=AO,Number=A,Type=Integer,Description=&quot;Alternate allele observation count&quot;&gt;
+##FORMAT=&lt;ID=QA,Number=A,Type=Integer,Description=&quot;Sum of quality of the alternate observations&quot;&gt;
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	raw_child-ds-	raw_mother-ds-
+chrM	73	.	A	G	33368.5	.	AB=0;ABP=0;AC=4;AF=1;AN=4;AO=1095;CIGAR=1X;DP=1098;DPB=1098;DPRA=0;EPP=107.005;EPPR=5.18177;GTI=0;LEN=1;MEANALT=1.5;MQM=55.7744;MQMR=60;NS=2;NUMALT=1;ODDS=509.945;PAIRED=1;PAIREDR=1;PAO=0;PQA=0;PQR=0;PRO=0;QA=37602;QR=37;RO=1;RPL=359;RPP=284.863;RPPR=5.18177;RPR=736;RUN=1;SAF=507;SAP=16.0213;SAR=588;SRF=0;SRP=5.18177;SRR=1;TYPE=snp;technology.ILLUMINA=1	GT:DP:RO:QR:AO:QA:GL	1/1:273:0:0:273:9187:-827.167,-82.1812,0	1/1:825:1:37:822:28415:-2554.14,-241.429,0
+chrM	263	.	A	G	13774.9	.	AB=0;ABP=0;AC=4;AF=1;AN=4;AO=508;CIGAR=1X;DP=524;DPB=524;DPRA=0;EPP=39.1901;EPPR=0;GTI=0;LEN=1;MEANALT=2.5;MQM=60;MQMR=0;NS=2;NUMALT=1;ODDS=255.818;PAIRED=1;PAIREDR=0;PAO=0;PQA=0;PQR=0;PRO=0;QA=15693;QR=0;RO=0;RPL=373;RPP=245.138;RPPR=0;RPR=135;RUN=1;SAF=219;SAP=23.9556;SAR=289;SRF=0;SRP=0;SRR=0;TYPE=snp;technology.ILLUMINA=1	GT:DP:RO:QR:AO:QA:GL	1/1:154:0:0:150:4661:-419.661,-45.1545,0	1/1:370:0:0:358:11032:-993.047,-107.769,0
+chrM	309	.	CT	CCTC,CC	4399.1	.	AB=0.56535,0.285714;ABP=15.2141,134.229;AC=2,2;AF=0.5,0.5;AN=4;AO=186,94;CIGAR=1M2I1X,1M1X;DP=329;DPB=555.5;DPRA=0,0;EPP=23.6043,97.6311;EPPR=31.9633;GTI=0;LEN=3,1;MEANALT=6,6;MQM=60,59.8085;MQMR=60;NS=2;NUMALT=2;ODDS=89.3381;PAIRED=1,1;PAIREDR=1;PAO=13.3333,13.3333;PQA=339,339;PQR=290;PRO=11.3333;QA=4084,2577;QR=686;RO=30;RPL=114,78;RPP=23.6043,91.8097;RPPR=38.0434;RPR=72,16;RUN=1,1;SAF=0,63;SAP=406.904,26.6655;SAR=186,31;SRF=21;SRP=13.4334;SRR=9;TYPE=complex,snp;technology.ILLUMINA=1,1	GT:DP:RO:QR:AO:QA:GL	1/2:93:6:123:59,23:1308,638:-159.543,-53.5005,-52.9104,-105.161,0,-113.176	1/2:236:24:563:127,71:2776,1939:-368.987,-136.961,-169.835,-200.763,0,-245.13
+chrM	513	.	GCACACACACAC	GCACACACACACAC	3522.72	.	AB=0.647399;ABP=35.6577;AC=3;AF=0.75;AN=4;AO=156;CIGAR=1M2I11M;DP=231;DPB=321.083;DPRA=0;EPP=75.17;EPPR=5.48477;GTI=1;LEN=2;MEANALT=13.5;MQM=60;MQMR=60;NS=2;NUMALT=1;ODDS=3.87694;PAIRED=1;PAIREDR=1;PAO=46.5;PQA=1383.5;PQR=1383.5;PRO=46.5;QA=4585;QR=1403;RO=43;RPL=39;RPP=87.6977;RPPR=3.0608;RPR=117;RUN=1;SAF=111;SAP=63.6445;SAR=45;SRF=26;SRP=7.10075;SRR=17;TYPE=ins;technology.ILLUMINA=1	GT:DP:RO:QR:AO:QA:GL	1/1:58:7:225:44:1251:-105.403,0,-13.0389	0/1:173:36:1178:112:3334:-290.141,0,-96.0932
+chrM	750	.	A	G	51447.4	.	AB=0;ABP=0;AC=4;AF=1;AN=4;AO=1722;CIGAR=1X;DP=1736;DPB=1736;DPRA=0;EPP=3.03048;EPPR=20.3821;GTI=0;LEN=1;MEANALT=3;MQM=59.8868;MQMR=60;NS=2;NUMALT=1;ODDS=753.623;PAIRED=1;PAIREDR=1;PAO=0;PQA=0;PQR=0;PRO=0;QA=57871;QR=122;RO=8;RPL=720;RPP=103.291;RPPR=12.7819;RPR=1002;RUN=1;SAF=1151;SAP=427.217;SAR=571;SRF=1;SRP=12.7819;SRR=7;TYPE=snp;technology.ILLUMINA=1	GT:DP:RO:QR:AO:QA:GL	1/1:436:4:53:429:13615:-1220.76,-116.422,0	1/1:1300:4:69:1293:44256:-3977.02,-373.134,0
+chrM	1438	.	A	G	79172.1	.	AB=0;ABP=0;AC=4;AF=1;AN=4;AO=2474;CIGAR=1X;DP=2480;DPB=2480;DPRA=0;EPP=7.56039;EPPR=3.44459;GTI=0;LEN=1;MEANALT=1.5;MQM=59.8319;MQMR=58;NS=2;NUMALT=1;ODDS=1085.01;PAIRED=1;PAIREDR=1;PAO=0;PQA=0;PQR=0;PRO=0;QA=88621;QR=102;RO=5;RPL=1546;RPP=338.232;RPPR=3.44459;RPR=928;RUN=1;SAF=1055;SAP=119.304;SAR=1419;SRF=3;SRP=3.44459;SRR=2;TYPE=snp;technology.ILLUMINA=1	GT:DP:RO:QR:AO:QA:GL	1/1:551:1:16:550:19482:-1752.13,-161.526,0	1/1:1929:4:86:1924:69139:-6214.93,-560.827,0
+chrM	2487	.	A	C	4432.57	.	AB=0.278634;ABP=775.959;AC=1;AF=0.25;AN=4;AO=621;CIGAR=1X;DP=2340;DPB=2340;DPRA=0;EPP=15.1824;EPPR=99.2128;GTI=1;LEN=1;MEANALT=2.5;MQM=59.3285;MQMR=59.9115;NS=2;NUMALT=1;ODDS=63.7254;PAIRED=1;PAIREDR=1;PAO=0;PQA=0;PQR=0;PRO=0;QA=9402;QR=56614;RO=1707;RPL=281;RPP=15.1824;RPPR=127.637;RPR=340;RUN=1;SAF=0;SAP=1351.49;SAR=621;SRF=1352;SRP=1267.49;SRR=355;TYPE=snp;technology.ILLUMINA=1	GT:DP:RO:QR:AO:QA:GL	0/0:524:405:13274:115:1754:-119.206,0,-1156.18	0/1:1816:1302:43340:506:7648:-607.816,0,-3820.28
+chrM	2706	.	A	G	49482.2	.	AB=0;ABP=0;AC=4;AF=1;AN=4;AO=1889;CIGAR=1X;DP=1969;DPB=1969;DPRA=0;EPP=11.3157;EPPR=6.95112;GTI=0;LEN=1;MEANALT=2.5;MQM=59.9645;MQMR=59.5926;NS=2;NUMALT=1;ODDS=759.158;PAIRED=1;PAIREDR=1;PAO=0;PQA=0;PQR=0;PRO=0;QA=55923;QR=722;RO=27;RPL=810;RPP=86.1918;RPPR=5.02092;RPR=1079;RUN=1;SAF=802;SAP=96.3813;SAR=1087;SRF=18;SRP=9.52472;SRR=9;TYPE=snp;technology.ILLUMINA=1	GT:DP:RO:QR:AO:QA:GL	1/1:408:5:99:391:11529:-1028.82,-99.3894,0	1/1:1561:22:623:1498:44394:-3939.48,-352.569,0
+chrM	3197	.	T	C	135699	.	AB=0;ABP=0;AC=4;AF=1;AN=4;AO=4208;CIGAR=1X;DP=4241;DPB=4241;DPRA=0;EPP=168.325;EPPR=3.13803;GTI=0;LEN=1;MEANALT=3;MQM=59.9943;MQMR=60;NS=2;NUMALT=1;ODDS=2145.76;PAIRED=1;PAIREDR=1;PAO=0;PQA=0;PQR=0;PRO=0;QA=152221;QR=558;RO=17;RPL=2378;RPP=157.977;RPPR=6.20364;RPR=1830;RUN=1;SAF=1641;SAP=445.497;SAR=2567;SRF=8;SRP=3.13803;SRR=9;TYPE=snp;technology.ILLUMINA=1	GT:DP:RO:QR:AO:QA:GL	1/1:1499:6:179:1486:53236:-4775.26,-416.785,0	1/1:2742:11:379:2722:98985:-8874.65,-758.304,0
+chrM	3243	.	A	G	46067	.	AB=0.612338;ABP=290.859;AC=2;AF=0.5;AN=4;AO=1608;CIGAR=1X;DP=2626;DPB=2626;DPRA=0;EPP=31.0126;EPPR=64.3549;GTI=0;LEN=1;MEANALT=2;MQM=59.9627;MQMR=59.815;NS=2;NUMALT=1;ODDS=1288.98;PAIRED=1;PAIREDR=1;PAO=0;PQA=0;PQR=0;PRO=0;QA=53165;QR=35336;RO=1011;RPL=974;RPP=159.119;RPPR=763.402;RPR=634;RUN=1;SAF=558;SAP=329.898;SAR=1050;SRF=383;SRP=131.935;SRR=628;TYPE=snp;technology.ILLUMINA=1	GT:DP:RO:QR:AO:QA:GL	0/1:1068:221:7574:841:27395:-2380.4,0,-596.524	0/1:1558:790:27762:767:25770:-2317.69,0,-2496.98
+chrM	3483	.	G	C	685.467	.	AB=0.254386;ABP=182.214;AC=1;AF=0.25;AN=4;AO=127;CIGAR=1X;DP=550;DPB=550;DPRA=0;EPP=37.6342;EPPR=22.2028;GTI=1;LEN=1;MEANALT=1.5;MQM=59.4646;MQMR=59.8504;NS=2;NUMALT=1;ODDS=25.0865;PAIRED=1;PAIREDR=1;PAO=0;PQA=0;PQR=0;PRO=0;QA=2032;QR=13200;RO=421;RPL=87;RPP=40.7802;RPPR=245.89;RPR=40;RUN=1;SAF=1;SAP=270.17;SAR=126;SRF=321;SRP=254.927;SRR=100;TYPE=snp;technology.ILLUMINA=1	GT:DP:RO:QR:AO:QA:GL	0/0:208:166:5264:40:608:-35.5966,0,-454.8	0/1:342:255:7936:87:1424:-108.297,0,-694.524
+chrM	3488	.	T	A	682.097	.	AB=0.264706;ABP=166.509;AC=1;AF=0.25;AN=4;AO=130;CIGAR=1X;DP=546;DPB=546;DPRA=0;EPP=44.7694;EPPR=34.7681;GTI=1;LEN=1;MEANALT=1;MQM=59.4231;MQMR=59.7139;NS=2;NUMALT=1;ODDS=17.5994;PAIRED=1;PAIREDR=1;PAO=0;PQA=0;PQR=0;PRO=0;QA=2069;QR=13578;RO=416;RPL=90;RPP=44.7694;RPPR=211.806;RPR=40;RUN=1;SAF=0;SAP=285.302;SAR=130;SRF=315;SRP=242.06;SRR=101;TYPE=snp;technology.ILLUMINA=1	GT:DP:RO:QR:AO:QA:GL	0/0:206:166:5535:40:650:-39.5324,0,-479.353	0/1:340:250:8043:90:1419:-109.544,0,-705.868
+chrM	3511	.	A	C	434.289	.	AB=0.260394;ABP=230.901;AC=1;AF=0.25;AN=4;AO=185;CIGAR=1X;DP=752;DPB=752;DPRA=0;EPP=322.569;EPPR=29.1769;GTI=1;LEN=1;MEANALT=3;MQM=59.7838;MQMR=59.7348;NS=2;NUMALT=1;ODDS=57.1305;PAIRED=1;PAIREDR=1;PAO=0;PQA=0;PQR=0;PRO=0;QA=2698;QR=16673;RO=558;RPL=11;RPP=314.869;RPPR=115.475;RPR=174;RUN=1;SAF=1;SAP=396.094;SAR=184;SRF=292;SRP=5.64097;SRR=266;TYPE=snp;technology.ILLUMINA=1	GT:DP:RO:QR:AO:QA:GL	0/0:295:226:6735:66:923:-61.5611,0,-584.793	0/1:457:332:9938:119:1775:-135.644,0,-870.462
+chrM	4769	.	A	G	54711.1	.	AB=0;ABP=0;AC=4;AF=1;AN=4;AO=1746;CIGAR=1X;DP=1752;DPB=1752;DPRA=0;EPP=85.7949;EPPR=5.18177;GTI=0;LEN=1;MEANALT=2.5;MQM=51.2801;MQMR=58;NS=2;NUMALT=1;ODDS=911.774;PAIRED=1;PAIREDR=1;PAO=0;PQA=0;PQR=0;PRO=0;QA=61628;QR=15;RO=1;RPL=549;RPP=525.238;RPPR=5.18177;RPR=1197;RUN=1;SAF=1003;SAP=87.0833;SAR=743;SRF=1;SRP=5.18177;SRR=0;TYPE=snp;technology.ILLUMINA=1	GT:DP:RO:QR:AO:QA:GL	1/1:604:1:15:601:20766:-1867.77,-177.095,0	1/1:1148:0:0:1145:40862:-3677.79,-344.679,0
+chrM	5539	.	A	G	11837	.	AB=0.479167;ABP=6.26751;AC=2;AF=0.5;AN=4;AO=414;CIGAR=1X;DP=864;DPB=864;DPRA=0;EPP=192.358;EPPR=179.441;GTI=0;LEN=1;MEANALT=1.5;MQM=54.1957;MQMR=53.5924;NS=2;NUMALT=1;ODDS=622.768;PAIRED=1;PAIREDR=1;PAO=0;PQA=0;PQR=0;PRO=0;QA=14380;QR=15965;RO=449;RPL=85;RPP=315.283;RPPR=358.189;RPR=329;RUN=1;SAF=309;SAP=221.29;SAR=105;SRF=337;SRP=247.845;SRR=112;TYPE=snp;technology.ILLUMINA=1	GT:DP:RO:QR:AO:QA:GL	0/1:338:249:8721:89:3010:-252.807,0,-766.809	0/1:526:200:7244:325:11370:-1015.56,0,-644.23
+chrM	7028	.	C	T	76141.7	.	AB=0;ABP=0;AC=4;AF=1;AN=4;AO=2473;CIGAR=1X;DP=2499;DPB=2499;DPRA=0;EPP=3.74876;EPPR=34.9902;GTI=0;LEN=1;MEANALT=2.5;MQM=55.905;MQMR=57.6364;NS=2;NUMALT=1;ODDS=1210.59;PAIRED=1;PAIREDR=1;PAO=0;PQA=0;PQR=0;PRO=0;QA=85103;QR=439;RO=22;RPL=1260;RPP=4.94996;RPPR=4.58955;RPR=1213;RUN=1;SAF=1102;SAP=66.5485;SAR=1371;SRF=9;SRP=4.58955;SRR=13;TYPE=snp;technology.ILLUMINA=1	GT:DP:RO:QR:AO:QA:GL	1/1:827:6:107:820:28371:-2543.94,-224.334,0	1/1:1672:16:332:1653:56732:-5076.14,-434.286,0
+chrM	7269	.	G	A	62196.6	.	AB=0;ABP=0;AC=4;AF=1;AN=4;AO=1937;CIGAR=1X;DP=1947;DPB=1947;DPRA=0;EPP=54.8308;EPPR=5.18177;GTI=0;LEN=1;MEANALT=3;MQM=58.2685;MQMR=60;NS=2;NUMALT=1;ODDS=1033.49;PAIRED=1;PAIREDR=1;PAO=0;PQA=0;PQR=0;PRO=0;QA=69240;QR=16;RO=1;RPL=1011;RPP=11.1099;RPPR=5.18177;RPR=926;RUN=1;SAF=933;SAP=8.66151;SAR=1004;SRF=0;SRP=5.18177;SRR=1;TYPE=snp;technology.ILLUMINA=1	GT:DP:RO:QR:AO:QA:GL	1/1:704:1:16:698:24364:-2191.49,-206.139,0	1/1:1243:0:0:1239:44876:-4039.06,-372.976,0
+chrM	8557	.	G	C	2590.97	.	AB=0.267066;ABP=790.051;AC=2;AF=0.5;AN=4;AO=446;CIGAR=1X;DP=1670;DPB=1670;DPRA=0;EPP=44.2196;EPPR=97.7883;GTI=0;LEN=1;MEANALT=3;MQM=57.6951;MQMR=59.5256;NS=2;NUMALT=1;ODDS=125.064;PAIRED=1;PAIREDR=1;PAO=0;PQA=0;PQR=0;PRO=0;QA=6303;QR=38747;RO=1212;RPL=177;RPP=44.2196;RPPR=385.426;RPR=269;RUN=1;SAF=2;SAP=954.193;SAR=444;SRF=906;SRP=648.002;SRR=306;TYPE=snp;technology.ILLUMINA=1	GT:DP:RO:QR:AO:QA:GL	0/1:724:538:17225:181:2490:-182.373,0,-1508.7	0/1:946:674:21522:265:3813:-301.57,0,-1895.55
+chrM	8860	.	A	G	55525	.	AB=0;ABP=0;AC=4;AF=1;AN=4;AO=1846;CIGAR=1X;DP=1861;DPB=1861;DPRA=0;EPP=5.72052;EPPR=6.91895;GTI=0;LEN=1;MEANALT=3;MQM=47.1728;MQMR=58.6;NS=2;NUMALT=1;ODDS=1039.99;PAIRED=1;PAIREDR=1;PAO=0;PQA=0;PQR=0;PRO=0;QA=61929;QR=160;RO=5;RPL=984;RPP=20.5185;RPPR=6.91895;RPR=862;RUN=1;SAF=987;SAP=22.283;SAR=859;SRF=2;SRP=3.44459;SRR=3;TYPE=snp;technology.ILLUMINA=1	GT:DP:RO:QR:AO:QA:GL	1/1:729:0:0:726:24114:-2170.46,-218.548,0	1/1:1132:5:160:1120:37815:-3389.07,-311.012,0
+chrM	9477	.	G	A	34109.5	.	AB=0;ABP=0;AC=4;AF=1;AN=4;AO=1099;CIGAR=1X;DP=1104;DPB=1104;DPRA=0;EPP=9.42988;EPPR=3.0103;GTI=0;LEN=1;MEANALT=2;MQM=59.3794;MQMR=60;NS=2;NUMALT=1;ODDS=565.855;PAIRED=1;PAIREDR=1;PAO=0;PQA=0;PQR=0;PRO=0;QA=38032;QR=67;RO=2;RPL=598;RPP=21.6012;RPPR=7.35324;RPR=501;RUN=1;SAF=542;SAP=3.45487;SAR=557;SRF=1;SRP=3.0103;SRR=1;TYPE=snp;technology.ILLUMINA=1	GT:DP:RO:QR:AO:QA:GL	1/1:401:2:67:398:13308:-1191.76,-109.337,0	1/1:703:0:0:701:24724:-2225.39,-211.022,0
+chrM	9548	.	G	A	26846.1	.	AB=0;ABP=0;AC=4;AF=1;AN=4;AO=942;CIGAR=1X;DP=970;DPB=970;DPRA=0;EPP=3.04718;EPPR=3.73412;GTI=0;LEN=1;MEANALT=3;MQM=59.6921;MQMR=60;NS=2;NUMALT=1;ODDS=502.835;PAIRED=1;PAIREDR=1;PAO=0;PQA=0;PQR=0;PRO=0;QA=29956;QR=66;RO=3;RPL=524;RPP=28.9112;RPPR=3.73412;RPR=418;RUN=1;SAF=487;SAP=5.3708;SAR=455;SRF=3;SRP=9.52472;SRR=0;TYPE=snp;technology.ILLUMINA=1	GT:DP:RO:QR:AO:QA:GL	1/1:364:1:38:350:10822:-970.712,-99.6786,0	1/1:606:2:28:592:19134:-1719.73,-171.045,0
+chrM	11467	.	A	G	164822	.	AB=0;ABP=0;AC=4;AF=1;AN=4;AO=5200;CIGAR=1X;DP=5225;DPB=5225;DPRA=0;EPP=350.339;EPPR=4.78696;GTI=0;LEN=1;MEANALT=2.5;MQM=59.9342;MQMR=53.6364;NS=2;NUMALT=1;ODDS=2859.91;PAIRED=1;PAIREDR=1;PAO=0;PQA=0;PQR=0;PRO=0;QA=187277;QR=283;RO=11;RPL=3887;RPP=2769.75;RPPR=3.20771;RPR=1313;RUN=1;SAF=2257;SAP=199.527;SAR=2943;SRF=6;SRP=3.20771;SRR=5;TYPE=snp;technology.ILLUMINA=1	GT:DP:RO:QR:AO:QA:GL	1/1:2016:2:46:2008:71984:-6474.61,-594.606,0	1/1:3209:9:237:3192:115293:-10355.2,-916.222,0
+chrM	11719	.	G	A	95624.7	.	AB=0;ABP=0;AC=4;AF=1;AN=4;AO=3302;CIGAR=1X;DP=3356;DPB=3356;DPRA=0;EPP=179.466;EPPR=18.4661;GTI=0;LEN=1;MEANALT=2;MQM=59.5924;MQMR=58.2353;NS=2;NUMALT=1;ODDS=1506.69;PAIRED=1;PAIREDR=1;PAO=0;PQA=0;PQR=0;PRO=0;QA=106982;QR=483;RO=17;RPL=1766;RPP=37.7986;RPPR=6.20364;RPR=1536;RUN=1;SAF=1728;SAP=18.6065;SAR=1574;SRF=3;SRP=18.4661;SRR=14;TYPE=snp;technology.ILLUMINA=1	GT:DP:RO:QR:AO:QA:GL	1/1:911:4:122:891:28560:-2559.58,-247.982,0	1/1:2445:13:361:2411:78422:-7025.63,-662.959,0
+chrM	12308	.	A	G	67204.7	.	AB=0;ABP=0;AC=4;AF=1;AN=4;AO=2144;CIGAR=1X;DP=2161;DPB=2161;DPRA=0;EPP=8.55647;EPPR=3.87889;GTI=0;LEN=1;MEANALT=2;MQM=59.9664;MQMR=59.7;NS=2;NUMALT=1;ODDS=949.477;PAIRED=1;PAIREDR=1;PAO=0;PQA=0;PQR=0;PRO=0;QA=75192;QR=257;RO=10;RPL=1284;RPP=185.09;RPPR=3.87889;RPR=860;RUN=1;SAF=1005;SAP=21.1964;SAR=1139;SRF=4;SRP=3.87889;SRR=6;TYPE=snp;technology.ILLUMINA=1	GT:DP:RO:QR:AO:QA:GL	1/1:635:7:216:628:21603:-1924.87,-155.503,0	1/1:1526:3:41:1516:53589:-4819.52,-444.815,0
+chrM	12372	.	G	A	62064	.	AB=0;ABP=0;AC=4;AF=1;AN=4;AO=1984;CIGAR=1X;DP=1992;DPB=1992;DPRA=0;EPP=10.3697;EPPR=4.45795;GTI=0;LEN=1;MEANALT=2;MQM=59.9919;MQMR=60;NS=2;NUMALT=1;ODDS=933.299;PAIRED=1;PAIREDR=1;PAO=0;PQA=0;PQR=0;PRO=0;QA=69281;QR=192;RO=6;RPL=861;RPP=78.1406;RPPR=4.45795;RPR=1123;RUN=1;SAF=1010;SAP=4.42876;SAR=974;SRF=4;SRP=4.45795;SRR=2;TYPE=snp;technology.ILLUMINA=1	GT:DP:RO:QR:AO:QA:GL	1/1:634:5:155:628:21590:-1929.21,-164.556,0	1/1:1358:1:37:1356:47691:-4288.95,-401.925,0
+chrM	13617	.	T	C	28593.6	.	AB=0;ABP=0;AC=4;AF=1;AN=4;AO=901;CIGAR=1X;DP=906;DPB=906;DPRA=0;EPP=251.346;EPPR=3.73412;GTI=0;LEN=1;MEANALT=2;MQM=59.9034;MQMR=60;NS=2;NUMALT=1;ODDS=462.343;PAIRED=1;PAIREDR=1;PAO=0;PQA=0;PQR=0;PRO=0;QA=32868;QR=92;RO=3;RPL=674;RPP=484.564;RPPR=9.52472;RPR=227;RUN=1;SAF=339;SAP=122.861;SAR=562;SRF=2;SRP=3.73412;SRR=1;TYPE=snp;technology.ILLUMINA=1	GT:DP:RO:QR:AO:QA:GL	1/1:303:1:14:301:10938:-983.358,-87.1961,0	1/1:603:2:78:600:21930:-1966.72,-168.809,0
+chrM	14766	.	C	T	60668.6	.	AB=0;ABP=0;AC=4;AF=1;AN=4;AO=2022;CIGAR=1X;DP=2039;DPB=2039;DPRA=0;EPP=13.3243;EPPR=19.0002;GTI=0;LEN=1;MEANALT=2.5;MQM=59.9782;MQMR=60;NS=2;NUMALT=1;ODDS=954.02;PAIRED=1;PAIREDR=1;PAO=0;PQA=0;PQR=0;PRO=0;QA=67719;QR=140;RO=11;RPL=989;RPP=5.08941;RPPR=12.6832;RPR=1033;RUN=1;SAF=1199;SAP=154.837;SAR=823;SRF=1;SRP=19.0002;SRR=10;TYPE=snp;technology.ILLUMINA=1	GT:DP:RO:QR:AO:QA:GL	1/1:637:6:78:628:20191:-1810.35,-169.906,0	1/1:1402:5:62:1394:47528:-4272.15,-401.924,0
+chrM	14793	.	A	G	58080	.	AB=0;ABP=0;AC=4;AF=1;AN=4;AO=1967;CIGAR=1X;DP=1998;DPB=1998;DPRA=0;EPP=8.57532;EPPR=5.80219;GTI=0;LEN=1;MEANALT=3;MQM=59.9736;MQMR=59.2857;NS=2;NUMALT=1;ODDS=930.516;PAIRED=1;PAIREDR=1;PAO=0;PQA=0;PQR=0;PRO=0;QA=64876;QR=104;RO=7;RPL=1133;RPP=101.705;RPPR=3.32051;RPR=834;RUN=1;SAF=1124;SAP=90.1794;SAR=843;SRF=1;SRP=10.7656;SRR=6;TYPE=snp;technology.ILLUMINA=1	GT:DP:RO:QR:AO:QA:GL	1/1:600:4:62:589:19341:-1735.29,-163.219,0	1/1:1398:3:42:1378:45535:-4094.54,-403.304,0
+chrM	15301	.	G	A	76440.4	.	AB=0;ABP=0;AC=4;AF=1;AN=4;AO=2590;CIGAR=1X;DP=2644;DPB=2644;DPRA=0;EPP=3.76487;EPPR=7.94546;GTI=0;LEN=1;MEANALT=3;MQM=60;MQMR=60;NS=2;NUMALT=1;ODDS=1170.15;PAIRED=1;PAIREDR=1;PAO=0;PQA=0;PQR=0;PRO=0;QA=85385;QR=292;RO=11;RPL=1134;RPP=89.9396;RPPR=4.78696;RPR=1456;RUN=1;SAF=1194;SAP=37.2206;SAR=1396;SRF=3;SRP=7.94546;SRR=8;TYPE=snp;technology.ILLUMINA=1	GT:DP:RO:QR:AO:QA:GL	1/1:726:5:116:709:23434:-2098.78,-192.286,0	1/1:1918:6:176:1881:61951:-5559.91,-535.386,0
+chrM	15326	.	A	G	79542.1	.	AB=0;ABP=0;AC=4;AF=1;AN=4;AO=2574;CIGAR=1X;DP=2586;DPB=2586;DPRA=0;EPP=3.76956;EPPR=5.18177;GTI=0;LEN=1;MEANALT=3;MQM=60;MQMR=60;NS=2;NUMALT=1;ODDS=1207.35;PAIRED=1;PAIREDR=1;PAO=0;PQA=0;PQR=0;PRO=0;QA=88636;QR=86;RO=4;RPL=1116;RPP=101.683;RPPR=5.18177;RPR=1458;RUN=1;SAF=1198;SAP=29.7395;SAR=1376;SRF=0;SRP=11.6962;SRR=4;TYPE=snp;technology.ILLUMINA=1	GT:DP:RO:QR:AO:QA:GL	1/1:715:2:50:710:24322:-2184.63,-204.389,0	1/1:1871:2:36:1864:64314:-5785.22,-552.228,0
+
+</code></pre>
+
+<h2 id="filtering-vcf-data">Filtering VCF data</h2>
+
+<p>Even though we selected somewhat stringent input parameters (restricting base quality to a minimum of 30 and mapping quality to a minimum of 20) there is still a lot of just in our data. <a href="https://github.com/ekg">Erik Garrison</a> has a beautiful illustration of various biases potentially affecting called variants (and making a locus sequence-able):</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="https://nekrut.github.io/BMMB554/img/mt_biases.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Here you can see that in an ideal case (indicated with a green star) a variant is evenly represent by different areas of sequencing reads (cycle and placement biases) and is balanced across the two strands (strand bias). Allele imbalance is not applicable in our case as it reflects significant deviation from the diploid (<sup>50</sup>&frasl;<sub>50</sub>) expectation (see <a href="https://nekrut.github.io/BMMB554/img/freebayes.pdf">here</a> for more details).</small></td>
+</tr>
+</tbody>
+</table>
+
+<p>A robust tool set for processing VCF data is provided by <a href="https://github.com/vcflib/vcflib">vcflib</a> developed by Erik Garrison, the author of FreeBayes. One way to filter VCF is using <code>INFO</code> fields of the VCF dataset. If you look at the VCF dataset shown above you will see all comment lines beginning with <code>##INFO</code>.  These are <code>INFO</code> fields. Each VCF record contains a list of <code>INFO</code> tags describing a wide range of properties for each VCF record. You will see that FreeBayes and NVC differ significantly in the number and types of <code>INFO</code> fields each of these caller generates. This why the two require different filtering strategies.</p>
+
+<p>Among numerous types of data generated by FreeBayes let&rsquo;s consider the following variant properties:</p>
+
+<ul>
+<li><code>##INFO=&lt;ID=DP,Number=1,Type=Integer,Description=&quot;Total read depth at the locus&quot;&gt;</code> This is simply the number of reads covering a given site.</li>
+<li><code>##INFO=&lt;ID=SRP,Number=1,Type=Float,Description=&quot;Strand balance probability for the reference allele: Phred-scaled upper-bounds estimate of the probability of observing the deviation between SRF and SRR given E(SRF/SRR) ~ 0.5, derived using Hoeffding's inequality&quot;&gt;</code> The higher this quantity the better the site as it diminishes the chances of the sites having significant strand bias.</li>
+<li><code>##INFO=&lt;ID=SAP,Number=A,Type=Float,Description=&quot;Strand balance probability for the alternate allele: Phred-scaled upper-bounds estimate of the probability of observing the deviation between SAF and SAR given E(SAF/SAR) ~ 0.5, derived using Hoeffding's inequality&quot;&gt;</code> The higher this quantity the better the site as it diminishes the chances of the sites having significant strand bias  (also see <a href="https://groups.google.com/forum/#!topic/freebayes/fX4TOAqXJrA">here</a>).</li>
+<li><code>##INFO=&lt;ID=EPP,Number=A,Type=Float,Description=&quot;End Placement Probability: Phred-scaled upper-bounds estimate of the probability of observing the deviation between EL and ER given E(EL/ER) ~ 0.5, derived using Hoeffding's inequality&quot;&gt;</code> The higher this number the lower the chance of having significant placement bias.</li>
+<li><code>QUAL</code> - phred scaled variant quality.</li>
+</ul>
+
+<p>To perform filtering we will use <strong>NGS: VCF Manipulation</strong> &#8594; <strong>VCFfilter</strong>):</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="https://nekrut.github.io/BMMB554/img/mt_vcffilter.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Filtering FreeBayes VCF for strand bias (<code>SPR</code> and <code>SAP</code>), placement bias (<code>EPP</code>), variant quality (<code>QUAL</code>), and depth of coverage (<code>DP</code>).</small></td>
+</tr>
+</tbody>
+</table>
+
+<p>The resulting VCF only contains five variants (most comments fields are omitted here):</p>
+
+<pre><code>#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	raw_child-ds-	raw_mother-ds-
+chrM	3243	.	A	G	46067	.	AB=0.612338;ABP=290.859;AC=2;AF=0.5;AN=4;AO=1608;CIGAR=1X;DP=2626;DPB=2626;DPRA=0;EPP=31.0126;EPPR=64.3549;GTI=0;LEN=1;MEANALT=2;MQM=59.9627;MQMR=59.815;NS=2;NUMALT=1;ODDS=1288.98;PAIRED=1;PAIREDR=1;PAO=0;PQA=0;PQR=0;PRO=0;QA=53165;QR=35336;RO=1011;RPL=974;RPP=159.119;RPPR=763.402;RPR=634;RUN=1;SAF=558;SAP=329.898;SAR=1050;SRF=383;SRP=131.935;SRR=628;TYPE=snp;technology.ILLUMINA=1	GT:DP:RO:QR:AO:QA:GL	0/1:1068:221:7574:841:27395:-2380.4,0,-596.524	0/1:1558:790:27762:767:25770:-2317.69,0,-2496.98
+chrM	3483	.	G	C	685.467	.	AB=0.254386;ABP=182.214;AC=1;AF=0.25;AN=4;AO=127;CIGAR=1X;DP=550;DPB=550;DPRA=0;EPP=37.6342;EPPR=22.2028;GTI=1;LEN=1;MEANALT=1.5;MQM=59.4646;MQMR=59.8504;NS=2;NUMALT=1;ODDS=25.0865;PAIRED=1;PAIREDR=1;PAO=0;PQA=0;PQR=0;PRO=0;QA=2032;QR=13200;RO=421;RPL=87;RPP=40.7802;RPPR=245.89;RPR=40;RUN=1;SAF=1;SAP=270.17;SAR=126;SRF=321;SRP=254.927;SRR=100;TYPE=snp;technology.ILLUMINA=1	GT:DP:RO:QR:AO:QA:GL	0/0:208:166:5264:40:608:-35.5966,0,-454.8	0/1:342:255:7936:87:1424:-108.297,0,-694.524
+chrM	3488	.	T	A	682.097	.	AB=0.264706;ABP=166.509;AC=1;AF=0.25;AN=4;AO=130;CIGAR=1X;DP=546;DPB=546;DPRA=0;EPP=44.7694;EPPR=34.7681;GTI=1;LEN=1;MEANALT=1;MQM=59.4231;MQMR=59.7139;NS=2;NUMALT=1;ODDS=17.5994;PAIRED=1;PAIREDR=1;PAO=0;PQA=0;PQR=0;PRO=0;QA=2069;QR=13578;RO=416;RPL=90;RPP=44.7694;RPPR=211.806;RPR=40;RUN=1;SAF=0;SAP=285.302;SAR=130;SRF=315;SRP=242.06;SRR=101;TYPE=snp;technology.ILLUMINA=1	GT:DP:RO:QR:AO:QA:GL	0/0:206:166:5535:40:650:-39.5324,0,-479.353	0/1:340:250:8043:90:1419:-109.544,0,-705.868
+chrM	5539	.	A	G	11837	.	AB=0.479167;ABP=6.26751;AC=2;AF=0.5;AN=4;AO=414;CIGAR=1X;DP=864;DPB=864;DPRA=0;EPP=192.358;EPPR=179.441;GTI=0;LEN=1;MEANALT=1.5;MQM=54.1957;MQMR=53.5924;NS=2;NUMALT=1;ODDS=622.768;PAIRED=1;PAIREDR=1;PAO=0;PQA=0;PQR=0;PRO=0;QA=14380;QR=15965;RO=449;RPL=85;RPP=315.283;RPPR=358.189;RPR=329;RUN=1;SAF=309;SAP=221.29;SAR=105;SRF=337;SRP=247.845;SRR=112;TYPE=snp;technology.ILLUMINA=1	GT:DP:RO:QR:AO:QA:GL	0/1:338:249:8721:89:3010:-252.807,0,-766.809	0/1:526:200:7244:325:11370:-1015.56,0,-644.23
+chrM	8557	.	G	C	2590.97	.	AB=0.267066;ABP=790.051;AC=2;AF=0.5;AN=4;AO=446;CIGAR=1X;DP=1670;DPB=1670;DPRA=0;EPP=44.2196;EPPR=97.7883;GTI=0;LEN=1;MEANALT=3;MQM=57.6951;MQMR=59.5256;NS=2;NUMALT=1;ODDS=125.064;PAIRED=1;PAIREDR=1;PAO=0;PQA=0;PQR=0;PRO=0;QA=6303;QR=38747;RO=1212;RPL=177;RPP=44.2196;RPPR=385.426;RPR=269;RUN=1;SAF=2;SAP=954.193;SAR=444;SRF=906;SRP=648.002;SRR=306;TYPE=snp;technology.ILLUMINA=1	GT:DP:RO:QR:AO:QA:GL	0/1:724:538:17225:181:2490:-182.373,0,-1508.7	0/1:946:674:21522:265:3813:-301.57,0,-1895.55
+</code></pre>
+
+<h2 id="looking-at-the-data">Looking at the data</h2>
+
+<p>For visalizaning VCFs Galaxy relies on the two external tools.  The first is called <a href="http://vcf.iobio.io/">VCF.IOBIO</a> and is developed by <a href="http://marthlab.org/">Gabor Marth&rsquo;s group</a> at the University of Utah. The second is called <a href="http://software.broadinstitute.org/software/igv/">IGV</a> developed by Broad Institute.</p>
+
+<h3 id="vcf-iobio">VCF.IOBIO</h3>
+
+<p>VCF.IOBIO can be invoked by expanding a VCF dataset in Galaxy&rsquo;s history by clicking on it:</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="https://nekrut.github.io/BMMB554/img/mt_vcf_dataset_collapsed.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Clicking on the dataset above will expand it as shown below:</small></td>
+</tr>
+
+<tr>
+<td><img src="https://nekrut.github.io/BMMB554/img/mt_vcf_dataset_expanded.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>At the bottom there is a link &ldquo;display at vcf.iobio&rdquo;</small></td>
+</tr>
+
+<tr>
+<td><small>Clicking on this link will start indexing of VCF datasets, which is required to display them. After indexing VCF.IOBIO will open:</small></td>
+</tr>
+
+<tr>
+<td><img src="https://nekrut.github.io/BMMB554/img/mt_vcfiobio.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Of course there are not that many variants to look at in this example. Nevertheless there are helpful statistics such as Transition/Transversion (Ts/Tn) ratio. </small></td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="igv">IGV</h3>
+
+<p>Similarly to VCF.BIOIO expanding a history item representing a VCF dataset will reveal an IGV link:</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="https://nekrut.github.io/BMMB554/img/mt_vcf_dataset_expanded.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>At the bottom there is a link &ldquo;display at IGV: local Human hg38&rdquo;</small></td>
+</tr>
+
+<tr>
+<td><small>The difference between &ldquo;local&rdquo; and &ldquo;Human hg38&rdquo; links is explained in the following video:</small></td>
+</tr>
+
+<tr>
+<td>
+<div style="position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;">
+  <iframe src="//player.vimeo.com/video/123414437" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+ </div>
+</td>
+</tr>
+
+<tr>
+<td><small>Visualizing our FreeBayes dataset will produce this:</small></td>
+</tr>
+
+<tr>
+<td><img src="https://nekrut.github.io/BMMB554/img/mt_igv.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Here we focus on one particular variant at position 3,243 for reasons that will become apparent in the next section.</small></td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="digging-into-the-data">Digging into the data</h2>
+
+<p>Visualizing VCF dataset may be a good way to get an overall idea of the data, but it does not tell a lot of details. For example, above we have visualized site 3,243 using IGV. It is interesting but we need to find out more. One thing we can do is to convert VCF dataset into a tab-delimited representation and play a bit more with it.</p>
+
+<p>Using <strong>NGS: VCF Manipulation</strong> &#8594; <strong>VCFtoTab-delimited</strong> on the filtered VCF dataset:</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="https://nekrut.github.io/BMMB554/img/mt_vcfToTab.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Make sure <strong>Report data per sample</strong> is set to <code>Yes</code></small></td>
+</tr>
+</tbody>
+</table>
+
+<p>This will produce a dataset with <em>very</em> many columns:</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="https://nekrut.github.io/BMMB554/img/mt_tab.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>There are 53 columns in this dataset (not all are shown here). </small></td>
+</tr>
+</tbody>
+</table>
+
+<p>The columns in this dataset represent INFO and Genotype fields on the original VCF dataset. Let&rsquo;s restrict ourselves to just a few:</p>
+
+<ul>
+<li>2 <code>POS</code> - position along mitochondrial genome</li>
+<li>4 <code>REF</code> - reference allele</li>
+<li>5 <code>ALT</code> - alternative allele</li>
+<li>50 <code>SAMPLE</code> - name of the sample</li>
+<li>51 <code>AO</code> - number of alternative observations (how many times do we see the alternative allele at this position in this sample)</li>
+<li>52 <code>DP</code> - depth of coverage at this site for this sample</li>
+</ul>
+
+<p>To cut these columns out we will use <strong>Text Manipulation</strong> &#8594; <strong>Cut</strong></p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="https://nekrut.github.io/BMMB554/img/mt_cut.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Note that column names are pre-ceded with <code>c</code></small></td>
+</tr>
+</tbody>
+</table>
+
+<p>This will generate the following dataset:</p>
+
+<pre><code>POS  REF ALT     SAMPLE       AO    DP
+--------------------------------------
+3243  A   G   raw_child-ds-  841  1068
+3243  A   G   raw_mother-ds- 767  1558
+3483  G   C   raw_child-ds-   40   208
+3483  G   C   raw_mother-ds-  87   342
+3488  T   A   raw_child-ds-   40   206
+3488  T   A   raw_mother-ds-  90   340
+5539  A   G   raw_child-ds-   89   338
+5539  A   G   raw_mother-ds- 325   526
+8557  G   C   raw_child-ds-  181   724
+8557  G   C   raw_mother-ds- 265   946
+
+</code></pre>
+
+<p>Let&rsquo;s look at site 4,243. At this site Mother has 841 <code>G</code>s (since <code>G</code> is an alternative allele) and 1,068-841=227 <code>A</code>s. This child has 767 <code>G</code>s and 1,558-767=791 <code>A</code>s:</p>
+
+<pre><code>Allele     A     G
+-------------------
+Mother   227   841
+Child    791   767
+</code></pre>
+
+<p>Thus the <em>major</em> allele in mother (<code>G</code>) becomes the <em>minor</em> allele in child &ndash; a remarkable frequency change due to mitochondrial bottleneck!</p>
+
+<h1 id="take-a-look-at-the-whole-thing">Take a look at the whole thing</h1>
+
+<p>This entire analysis is available as a <a href="https://usegalaxy.org/u/aun1/h/non-diploid-freebayes">Galaxy history</a> that you can import into your Galaxy account and play with.</p>
+
+<p>Now you know how to call variants in non-diploid system, so try it on bacteria, viruses etc&hellip;</p>
+
+<h1 id="what-if-your-variants-are-really-rare">What if your variants are <em>REALLY</em> rare?</h1>
+
+<p>This page explains how to perform discovery of low frequency variants from duplex sequencing data. As an example we use the <em>ABL1</em> dataset published by <a href="http://www.nature.com/nmeth/journal/v12/n5/full/nmeth.3351.html">Schmitt and colleagues</a> (SRA accession <a href="http://www.ncbi.nlm.nih.gov/sra/?term=SRR1799908">SRR1799908</a>).</p>
+
+<h1 id="background">Background</h1>
+
+<p>Calling low frequency variants from next generation sequencing (NGS) data is challenging due to significant amount of noise characteristic of these technologies. <a href="http://www.pnas.org/content/109/36/14508.short">Duplex sequencing</a> (DS) was designed to address this problem by increasing sequencing accuracy by over four orders of magnitude. DS uses randomly generated barcodes to uniquely tag each molecule in a sample. The tagged fragments are then PCR amplified prior to the preparation of a sequencing library, creating fragment families characterized by unique combination of barcodes at both 5’ and 3’ ends:</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><a href="http://www.pnas.org/content/109/36/14508/F1.expansion.html"><img src="https://nekrut.github.io/BMMB554/img/ds.png" alt="duplex" /></a></td>
+</tr>
+
+<tr>
+<td><small>The logic of duplex sequencing. From <a href="http://www.pnas.org/content/109/36/14508.short">Schmitt:2012</a>.</small></td>
+</tr>
+</tbody>
+</table>
+
+<p>The computational analysis of DS data (Part <code>C</code> in the figure above) produces two kinds of output:</p>
+
+<ul>
+<li>Single Strand Consensus Sequences (SSCS; panel <code>iv</code> in the figure above);</li>
+<li>Duplex Consensus Sequences (DCS; panel <code>v</code> in the figure above).</li>
+</ul>
+
+<p>The DCSs have the ultimate accuracy, yet the SSCSs can also be very useful when ampliconic DNA is used as an input to a DS experiment. Let us illustrate the utility of SSCSs with the following example. Suppose one is interested in quantifying variants in a virus that has a very low titer in body fluids. Since DS procedure requires a substantial amount of starting DNA (between <a href="http://nature.com/nprot/journal/v9/n11/full/nprot.2014.170.html">between 0.2 and 3 micrograms</a>) the virus needs to be enriched. This can be done, for example, with a PCR designed to amplify the entire genome of the virus. Yet the problem is that during the amplification heterologous strands will almost certainly realign to some extent forming hetoroduplex molecules:</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="https://nekrut.github.io/BMMB554/img/het.png" alt="hd" /></td>
+</tr>
+
+<tr>
+<td><small>Heteroduplex formation in ampliconic templates. Image by Barbara Arbeithuber from <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-1039-4">Stoler:2016</a>. Here there are two distinct types of viral genomes: carrying <code>A</code> and <code>G</code>. Because the population of genomes is enriched via PCR, heteroduplex formation takes place, skewing frequency estimates performed using DCSs.</small></td>
+</tr>
+</tbody>
+</table>
+
+<p>In the image above there are two alleles: green (A) and red (G). After PCR a fraction of molecules are in heteroduplex state. If this PCR-derived DNA is now used as the starting material for a DS experiment, the heteroduplex molecules will manifest themselves as having an <code>N</code> base at this site (because <em>Du Novo</em> interprets disagreements as <code>N</code>s during consensus generation). So, DSCs produced from this dataset will have <code>A</code>, <code>G</code>, and <code>N</code> at the polymorphic site. Yet, SSCSs will only have <code>A</code> and <code>G</code>. Thus SSCS will give a more accurate estimate of the allele frequency at this site in this particular case. In <em>Du Novo</em> SSCSs are generated when the <strong>Output single-strand consensus sequences</strong> option of <strong>Du Novo: Make consensus reads</strong> tool is set to <code>Yes</code> (see <a href="#generating-duplex-consensus-sequences-dcs">here</a>).</p>
+
+<h2 id="how-to-use-this-tutorial">How to use this tutorial</h2>
+
+<p>The entire analysis described here is accessible as a <a href="https://usegalaxy.org/u/aun1/h/duplex-analysis-abl1">Galaxy history</a> (by clicking on this link you can create your own copy and play with it).</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="http://galaxyproject.org/duplex/histItem.png" alt="History Item" /></td>
+</tr>
+
+<tr>
+<td><small>Each history item has a Rerun <img src="http://galaxyproject.org/galaxy101/fa-refresh.png" alt="refresh" /> button. Clicking this button will show you how this tool was run with all parameters filled in exactly.</small></td>
+</tr>
+</tbody>
+</table>
+
+<p>This analysis (and consequently the Galaxy&rsquo;s history) can be divided into three parts
+ 1. Consensus generation from initial sequencing reads;
+ 2. Analysis of Duplex Consensus Sequences (DCS);
+ 3. Analysis of Single Strand Consensus Sequences (SSCS):</p>
+
+<blockquote>
+<p><img src="https://nekrut.github.io/BMMB554/img/steps.png" alt="steps" /></p>
+
+<p>Analysis outline</p>
+</blockquote>
+
+<h1 id="start-generating-consensus-sequences">Start: Generating consensus sequences</h1>
+
+<p>The starting point of the analyses are sequencing reads (usually in <a href="https://en.wikipedia.org/wiki/FASTQ_format">fastq</a> format) produced from a duplex sequencing library.</p>
+
+<h2 id="getting-data-in-and-assessing-quality">Getting data in and assessing quality</h2>
+
+<p>We uploaded <a href="http://www.nature.com/nmeth/journal/v12/n5/full/nmeth.3351.html">Schmitt:2015</a>) data directly from SRA as shown in <a href="https://vimeo.com/121187220">this screencast</a>. This created two datasets in our galaxy history: one for forward reads and one for reverse. We then evaluated the quality of the data by running FastQC on both datasets (forward and reverse) to obtain the following plots:</p>
+
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left"></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left"><img src="https://nekrut.github.io/BMMB554/img/abl1-f-qc.png" alt="" /></td>
+<td align="left"><img src="https://nekrut.github.io/BMMB554/img/abl1-r-qc.png" alt="" /></td>
+</tr>
+
+<tr>
+<td align="left"><strong>A</strong>. Forward</td>
+<td align="left"><strong>B</strong>. Reverse</td>
+</tr>
+</tbody>
+</table>
+
+<p>One can see that these data are of excellent quality and no additional processing is required before we can start the actual analysis.</p>
+
+<h2 id="generating-duplex-consensus-sequences-dcs">Generating Duplex Consensus Sequences (DCS)</h2>
+
+<p>From tool section <strong>NGS: Du Novo</strong> we ran:</p>
+
+<ol>
+<li><strong>Make families</strong> (<code>Tag length = 12</code>; <code>Invariant sequence length = 5</code>)</li>
+<li><strong>Align families</strong> (This is <strong>the most</strong> time consuming step of the workflow. It may take multiple days to run. The <em>ABL1</em> example took 34 hours and 7 minutes to finish. )</li>
+<li><strong>Make consensus reads</strong> (<code>Minimum reads per family = 3</code>; <code>Minimum base quality = 20</code>; <code>FASTQ format = Sanger</code> ; <code>Output single-strand consensus sequences = Yes</code> 👈 This is particularly important as explained below; also see the following image)</li>
+</ol>
+
+<p>This is the exact image of the <strong>Make consensus reads</strong> interface:</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="https://nekrut.github.io/BMMB554/img/makeCons.png" alt="Make consesni" /></td>
+</tr>
+
+<tr>
+<td><small>Making DCS and SSCS. <strong>Note</strong> that <strong>Output single-strand consensus sequences</strong> is set to <code>Yes</code>. <a href="#background">Above</a> we explained why single-strand consensus sequences (SSCS) may be important in some applications. <a href="#analysis-of-single-strand-consensus-data">Below</a> we show how they can be used.</small></td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="filtering-consensuses">Filtering consensuses</h2>
+
+<p>The <em>Du Novo</em> algorithm occasionally inserts<code>N</code>and/or <a href="https://en.wikipedia.org/wiki/Nucleic_acid_notation">IUPAC notations</a> at sites where a definive base cannot be identified according to the major rule consensus. We however do not want such bases when we call variants. The tool <strong>Sequence Content Trimmer</strong> will help with filtering these out. Here are the parameters we used:</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="https://nekrut.github.io/BMMB554/img/contentTrimmer.png" alt="ContentTrimmer" /></td>
+</tr>
+
+<tr>
+<td><small>Sequence Content Trimmer settings . Where:<br>- <code>Paired reads = Paired</code> (because DCSs are reported as forward and reverse)<br>- <code>Bases to filter on = NRYSWKMBDHV</code> (all ambiguous nucleotides)<br>- <code>Frequency threshold = 0.2</code> (A window /see the next parameter below/ cannot have more than 20% of ambiguous bases)<br>- <code>Size of the window = 10</code> (Size of the window)<br>- <code>Invert filter bases = No</code><br>- <code>Set a minimum read length = 50</code> (We do not want <em>very</em> short reads)</small></td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="generating-fastq">Generating fastq</h2>
+
+<p><a href="#filtering-consensuses">The previous step</a> filters forward and reverse DCSs and reports them in <a href="https://en.wikipedia.org/wiki/FASTA_format">FASTA</a> format. Yet the downstream tools require <a href="https://en.wikipedia.org/wiki/FASTQ_format">fastq</a> format. To address this we convert FASTA into fastq using <strong>Combine FASTA and QUAL</strong> from tool section <strong>NGS: QC and manipulation</strong>. In this case the quality values are filled in with the maximum allowed value of 93 (essentially we fake them here), which is fine as we will not rely on quality scores in the rest of the analysis.</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="https://nekrut.github.io/BMMB554/img/combineFandQ.png" alt="ContentTrimmer" /></td>
+</tr>
+
+<tr>
+<td><small>Combine FASTA and QUAL. <strong>Note</strong> that here two datasets (#8 and #9) are selected simultaneously because we clicked the multiple datasets button the left of the <strong>FASTA File</strong> dropdown:<br> <img src="https://nekrut.github.io/BMMB554/img/multiDataset.png" alt="" /></small></td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="calling-variants">Calling variants</h2>
+
+<p>At this point we have trimmed DCSs in fastq format. We can now proceed to calling variants. This involves the following steps:</p>
+
+<ol>
+<li><a href="#align-against-genome-with-bwa-and-bwa-mem">Align against reference genome</a></li>
+<li><a href="#merging">Merge results of multiple mappers</a> 👈 This step is only useful if one uses multiple mappers (which we do here to show concordance. But this is not strictly necessary.)</li>
+<li><a href="#left-aligning-indels">Left aligning indels</a></li>
+<li><a href="#tabulating-the-differences">Tabulate the differences</a></li>
+</ol>
+
+<h3 id="align-against-genome-with-bwa-and-bwa-mem">Align against genome with <strong>BWA</strong> and <strong>BWA-MEM</strong></h3>
+
+<p>Here we use two mappers for added reliability (this is not necessary in most situations as long as you use the right mapper for input data). To differentiate between results produced by each mapper we assign readgroups (this is done by clicking on <strong>Set read groups information</strong> dropdown). For example, for <strong>BWA-MEM</strong> you would set parameters like this:</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="https://nekrut.github.io/BMMB554/img/bwa-mem.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Running BWA-MEM. <strong>Note</strong> that we are comparing DCSs against human genome version <code>hg38</code>, use forward and reverse DCSs are the <code>first</code> and <code>second</code> set of reads. Readgroup <strong>SM</strong> and <strong>ID</strong> tags are set <code>bwa-mem</code>.</small></td>
+</tr>
+</tbody>
+</table>
+
+<p>We then repeat essentially the same with <strong>BWA</strong>:</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="https://nekrut.github.io/BMMB554/img/bwa.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Running BWA. <strong>Note</strong> here we use <code>bwa</code> as the readgroup <strong>ID</strong> and <strong>SM</strong> tags.</small></td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="merging">Merging</h3>
+
+<p>Since we have used two mappers - we have two BAM datasets. Yet because we have set readgroups we can now merge them into a single BAM dataset. This is because the individual reads will be labelled with readgroups (you will see how it will help later). To merge we use <strong>MergeSamFiles</strong> from tool section <strong>NGS: Picard</strong>:</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="https://nekrut.github.io/BMMB554/img/mergeSamFiles.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Merging BAM datasets.</small></td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="left-aligning-indels-1">Left Aligning indels</h3>
+
+<p>To normalize the positional distribution of indels we use <strong>Left Align</strong> utility (<strong>NGS: Variant Analysis</strong>) from <a href="https://github.com/ekg/freebayes#indels">FreeBayes</a> package. This is necessary to avoid erroneous polymorphisms flanking regions with indels (e.g., in low complexity loci):</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="https://nekrut.github.io/BMMB554/img/leftAlign.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Left aligning indels. <strong>Note</strong> here we use <code>hg38</code> as well. Obviously, one must use the same genome built you have aligned against with <strong>BWA-MEM</strong> and <strong>BWA</strong>.</small></td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="tabulating-the-differences">Tabulating the differences</h3>
+
+<p>To identify sites containing variants we use <strong>Naive Variant Caller (NVC)</strong> (tool section <strong>NGS: Variant Analysis</strong>) which produces a simple count of differences given coverage and base quality per site (remember that our qualities were &ldquo;faked&rdquo; during the conversion from FASTA to fastq and cannot be used here). So in the case of <em>ABL1</em> we set parameters as follow:</p>
+
+<blockquote>
+<p><img src="https://nekrut.github.io/BMMB554/img/nvc.png" alt="" /></p>
+
+<p>Finding variants with NVC. Here:<br>- <code>Using reference genome = hg38</code> (As mentioned above, needs to be set to the same genome one have mapped against.)<br>- <code>Restrict to regions: Chromosome = chr9</code> (<em>ABL1</em> is on chromosome 9. We set this to prevent <strong>NVC</strong> from wandering across the genome to save time.)<br>- <code>Minimum number of reads needed to consider a REF/ALT = 0</code> (Trying to maximize the number of sites. We can filter later.)<br>- <code>Minimum base quality = 20</code> (This default and is irrelevant because of &ldquo;faking&rdquo; quality scores during the conversion from FASTA to fastq).<br>- <code>Minimum mapping quality = 20</code> (This is helpful because it prevents reads mapping to multiple locations from being included in the tabulation. Such reads will have mapping quality of 0.)<br>- <code>Ploidy = 1</code> (Ploidy is irrelevant here as it is a mixture of multiple genomes)<br>- <code>Only write out positions with possible alternate alleles = No</code> (We can filter later)<br>- <code>Report counts by strand = Yes</code> (This will be helpful to gauge the strand bias).</p>
+</blockquote>
+
+<p>The <strong>NVC</strong> generates a <a href="https://en.wikipedia.org/wiki/Variant_Call_Format">VCF</a> file that can be viewed at genome browsers such as <a href="https://www.broadinstitute.org/igv/">IGV</a>. Yet one rarely finds variants by looking at genome browsers. The next step is to generate a tab-delimited dataset of nucleotide counts using <strong>Variant Annotator</strong> from tool section <strong>NGS: Variant Analysis</strong>. We ran it with the following parameters:</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="https://nekrut.github.io/BMMB554/img/va.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small?Annotating variable sites. Here `Coverage threshold = 10` (To reduce noise) and `Output stranded base counts = Yes` (to see strand bias)</small></td>
+</tr>
+</tbody>
+</table>
+
+<p>There are 3,264 lines in the output, which is clearly too much. Using <strong>Filter</strong> tool (tool section <strong>Filter and Sort</strong>) with expression <code>c16 &gt;= 0.01</code>(because column 16 contains minor allele frequency - MAF - and we are interested in those sites where MAF &gt;= 1%):</p>
+
+<blockquote>
+<p><img src="https://nekrut.github.io/BMMB554/img/filter.png" alt="" /></p>
+
+<p>Filtering variable sites.</p>
+</blockquote>
+
+<p>will get that number to only 4 (showing just some of the columns):</p>
+
+<table>
+<thead>
+<tr>
+<th align="left">Mapper</th>
+<th align="right">Position (chr9)</th>
+<th align="center">Major allele</th>
+<th align="center">Minor allele</th>
+<th align="right">MAF</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">bwa</td>
+<td align="right">130,872,141</td>
+<td align="center">G</td>
+<td align="center">A</td>
+<td align="right">0.013</td>
+</tr>
+
+<tr>
+<td align="left">bwa-mem</td>
+<td align="right">130,872,141</td>
+<td align="center">G</td>
+<td align="center">A</td>
+<td align="right">0.013</td>
+</tr>
+
+<tr>
+<td align="left">bwa</td>
+<td align="right">130,880,141</td>
+<td align="center">A</td>
+<td align="center">G</td>
+<td align="right">0.479</td>
+</tr>
+
+<tr>
+<td align="left">bwa-mem</td>
+<td align="right">130,880,141</td>
+<td align="center">A</td>
+<td align="center">G</td>
+<td align="right">0.479</td>
+</tr>
+</tbody>
+</table>
+
+<p>We can see that results of both mappers agree very well. The reason we see these numbers grouped by mappers is because we have set the readgroups while <a href="#align-against-genome-with-bwa-and-bwa-mem">mapping</a>.</p>
+
+<p>The polymorphism we are interested in (and the one reported by <a href="http://www.nature.com/nmeth/journal/v12/n5/full/nmeth.3351.html">Schmitt:2015</a>) is at the position 130,872,141 and has a frequency of 1.3%. The other site (position 130,880,141) is a known common variant <a href="http://www.ncbi.nlm.nih.gov/SNP/snp_ref.cgi?type=rs&amp;rs=rs2227985">rs2227985</a>, which is heterozygous in this sample.</p>
+
+<h1 id="analysis-of-single-strand-consensus-data">Analysis of single strand consensus data</h1>
+
+<p>SSCSs are generated when the <strong>Output single-strand consensus sequences</strong> option of <strong>Du Novo: Make consensus reads</strong> tool is set to <code>Yes</code> (see <a href="#generating-duplex-consensus-sequences-dcs">here</a>). Analysis of SSCS data follows almost exactly the same trajectory. The only difference is that these <strong>do not</strong> come as forward and reverse. Instead <em>Du Novo</em> generates a single dataset. With this dataset we go through all the same steps:</p>
+
+<ul>
+<li><a href="#filtering-consensi">Filtering consensi</a></li>
+<li><a href="#generating-fastq">Generating fastq</a></li>
+<li><a href="#calling-variants">Calling variants</a>
+
+<ul>
+<li><a href="#align-against-genome-with-bwa-and-bwa-mem">Aligning against genome</a> (here the difference is that one needs to choose a single end option and use a single dataset as input)</li>
+<li><a href="#merging">Merging</a></li>
+<li><a href="#left-aligning-indels">Left aligning indels</a></li>
+<li><a href="#tabulating-the-differences">Tabulating the differences</a></li>
+</ul></li>
+</ul>
+
+<h2 id="repeating-this-analysis-using-workflows">Repeating this analysis using workflows</h2>
+
+<p>The analysis described above can be rerun using a workflow. Workflow combined all steps into a single entity that only needs to be executed once. We provide two workflows:</p>
+
+<ul>
+<li><em>Du Novo</em> analysis from reads (import from <a href="https://usegalaxy.org/u/aun1/w/duplex-analysis-from-reads">here</a>). This workflow uses fastq reads as input. It should be used if you analyze data for first time.</li>
+<li><em>Du Novo</em> analysis from aligned families (import from <a href="https://usegalaxy.org/u/aun1/w/copy-of-duplex-analysis-from-reads">here</a>). This workflow starts with aligned families. It should be used for re-analysis of already generated DCS and SSCS data.</li>
+</ul>
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><a href="https://galaxyproject.org/duplex/fromReads.png"><img src="https://nekrut.github.io/BMMB554/img/fromReads.png" alt="" /></a></td>
+</tr>
+
+<tr>
+<td><small>Starting from Reads</small></td>
+</tr>
+
+<tr>
+<td><img src="https://nekrut.github.io/BMMB554/img/fromDCS.png" alt="" />](<a href="https://galaxyproject.org/duplex/fromDCS.png">https://galaxyproject.org/duplex/fromDCS.png</a>)</td>
+</tr>
+
+<tr>
+<td><small>Starting from DCS/SSCS data</small></td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="if-things-don-t-work">If things don&rsquo;t work&hellip;</h2>
+
+<p>&hellip;you need to complain. Use <a href="https://usegalaxy.org/biostar/biostar_redirect">Galaxy&rsquo;s BioStar Channel</a> to do this.</p>
+
+<h1 id="exercise">Exercise</h1>
+
+<p>Suppose you obtained a virus from some source and you would like to see how it is different from its published reference sequence. You have sequenced the virus and obtained two Illumina files (these files are large, so don&rsquo;t open them. Rather copy their addresses (right click) and use them to upload into Galaxy as explained in <em>Hints</em> section below):</p>
+
+<ul>
+<li><a href="https://github.com/nekrut/BMMB554/raw/master/hugo/static/f.fq.gz">Forward reads</a></li>
+<li><a href="https://github.com/nekrut/BMMB554/raw/master/hugo/static/r.fq.gz">Reverse reads</a></li>
+</ul>
+
+<p>Analyze these files using Galaxy as was explained in this lesson by mapping them against <a href="https://github.com/nekrut/BMMB554/raw/master/hugo/static/phix.fa.gz">this reference genome</a> (again right click to copy the address); see <em>Hints</em>).</p>
+
+<h4 id="hints">Hints</h4>
+
+<ul>
+<li>You need to upload reads and the reference genome into Galaxy (<a href="http://usegalaxy.org">http://usegalaxy.org</a>) as shown in <a href="https://vimeo.com/120973708">this video</a></li>
+<li>You will be mapping reads against an uploaded reference genome as shown in <a href="https://vimeo.com/123108417">this video</a>.</li>
+</ul>
+
+
+</article>
+
+
+<section class="post-nav">
+    <ul>
+        
+        <li>
+            <a href="https://nekrut.github.io/BMMB554/posts/topic7/"><i class="fa fa-chevron-circle-left"></i> NGS data: Practicalities</a>
+        </li>
+        
+        
+    </ul>
+</section>
+    
+
+
+
+
+
+</main>
+    <footer>
+        <h6>Anton Nekrutenko | 2018 | CC-BY </h6>
+    </footer>
+</div>
+<script src="https://nekrut.github.io/BMMB554/js/scripts.js"></script>
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
+</body>
+</html>
+
+
