@@ -331,7 +331,7 @@ $ cd bmmb554_sandbox
 
 <p>in the shell type (obviously omit <code>$</code> as these simply indicate shell prompt and replace <code>/Users/anton/bmmb554_sandbox</code> with directory you created above):</p>
 
-<pre><code>$ run -v /Users/anton/bmmb554_sandbox:/home/jovyan/work -it --rm -p 8888:8888 jupyter/datascience-notebook
+<pre><code>$ docker run -v /Users/anton/bmmb554_sandbox:/home/jovyan/work -it --rm -p 8888:8888 jupyter/datascience-notebook
 </code></pre>
 
 <p>when Container starts it will spit something like this:</p>

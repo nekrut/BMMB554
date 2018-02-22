@@ -110,7 +110,7 @@ Then click **DOCKER CLI** (stands for Docker Command Line Interface) at the bott
 in the shell type (obviously omit `$` as these simply indicate shell prompt and replace `/Users/anton/bmmb554_sandbox` with directory you created above):
 
 ```
-$ run -v /Users/anton/bmmb554_sandbox:/home/jovyan/work -it --rm -p 8888:8888 jupyter/datascience-notebook
+$ docker run -v /Users/anton/bmmb554_sandbox:/home/jovyan/work -it --rm -p 8888:8888 jupyter/datascience-notebook
 ```
 
 when Container starts it will spit something like this:
