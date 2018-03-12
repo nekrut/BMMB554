@@ -51,7 +51,7 @@
     <item>
       <title>Bwa</title>
       <link>https://nekrut.github.io/BMMB554/tags/bwa/</link>
-      <pubDate>Wed, 21 Feb 2018 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 26 Feb 2018 00:00:00 +0000</pubDate>
       
       <guid>https://nekrut.github.io/BMMB554/tags/bwa/</guid>
       <description></description>
@@ -60,7 +60,7 @@
     <item>
       <title>Conda</title>
       <link>https://nekrut.github.io/BMMB554/tags/conda/</link>
-      <pubDate>Wed, 21 Feb 2018 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 26 Feb 2018 00:00:00 +0000</pubDate>
       
       <guid>https://nekrut.github.io/BMMB554/tags/conda/</guid>
       <description></description>
@@ -96,7 +96,7 @@
     <item>
       <title>Docker</title>
       <link>https://nekrut.github.io/BMMB554/tags/docker/</link>
-      <pubDate>Wed, 21 Feb 2018 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 26 Feb 2018 00:00:00 +0000</pubDate>
       
       <guid>https://nekrut.github.io/BMMB554/tags/docker/</guid>
       <description></description>
@@ -123,7 +123,7 @@
     <item>
       <title>Freebayes</title>
       <link>https://nekrut.github.io/BMMB554/tags/freebayes/</link>
-      <pubDate>Wed, 21 Feb 2018 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 26 Feb 2018 00:00:00 +0000</pubDate>
       
       <guid>https://nekrut.github.io/BMMB554/tags/freebayes/</guid>
       <description></description>
@@ -186,7 +186,7 @@
     <item>
       <title>Mapping</title>
       <link>https://nekrut.github.io/BMMB554/tags/mapping/</link>
-      <pubDate>Wed, 21 Feb 2018 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 26 Feb 2018 00:00:00 +0000</pubDate>
       
       <guid>https://nekrut.github.io/BMMB554/tags/mapping/</guid>
       <description></description>
@@ -195,7 +195,7 @@
     <item>
       <title>Ngs</title>
       <link>https://nekrut.github.io/BMMB554/tags/ngs/</link>
-      <pubDate>Sat, 17 Feb 2018 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 12 Mar 2018 00:00:00 +0000</pubDate>
       
       <guid>https://nekrut.github.io/BMMB554/tags/ngs/</guid>
       <description></description>
@@ -267,7 +267,7 @@
     <item>
       <title>Variant Calling</title>
       <link>https://nekrut.github.io/BMMB554/tags/variant-calling/</link>
-      <pubDate>Wed, 21 Feb 2018 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 26 Feb 2018 00:00:00 +0000</pubDate>
       
       <guid>https://nekrut.github.io/BMMB554/tags/variant-calling/</guid>
       <description></description>
@@ -279,6 +279,15 @@
       <pubDate>Sat, 17 Feb 2018 00:00:00 +0000</pubDate>
       
       <guid>https://nekrut.github.io/BMMB554/tags/varimat-calling/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Varinat Calling</title>
+      <link>https://nekrut.github.io/BMMB554/tags/varinat-calling/</link>
+      <pubDate>Mon, 12 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/tags/varinat-calling/</guid>
       <description></description>
     </item>
     

@@ -1,9 +1,9 @@
 +++
-date = "2018-02-19"
+date = "2018-03-12"
 title = "Diploid variant calling"
 tags = ["varinat calling", "ngs"]
 menu = ""
-draft = true
+#draft = true
 
 
 +++
@@ -58,10 +58,9 @@ Suppose in a population you have $A$ individuals (not to be confused with nucleo
  * The probability of seeing a variant given our identification approach (i.e., sequencing) is $P(B) = |B|/|U|$
  * Now, the probability of having a variant and it being observed in our sequencing data is the overlap between $A$ and $B$ sets $P(AB) = |AB|/|U|$. This is presented graphically below:
 
->
 |    |    |     |
 |:----:|:----:|:-----:|
-| ![](/BMMB554/img/pA.png) | ![](/BMMB554/img/pB.png) | ![](/BMMB554/img/pAB.png) |
+| ![](/img/pA.png) | ![](/img/pB.png) | ![](/img/pAB.png) |
 | $P(A)$ Polymorphisms | $P(B)$ <br> Variant calls | $P(AB)$ Polymorphisms + Varinat calls |
 
 Now we can ask the following question: *What is the probability of a having a real polymorphism* $A$ *given our observation of variants in reads* $B$? In other words *what is the probability of* $A$ *given* $B$? Or, as stated in the original [blog](https://oscarbonilla.com/2009/05/visualizing-bayes-theorem/): "*given that we are in region $B$ what is the probability that we are in the region $AB$*?":
@@ -72,20 +71,22 @@ Now we can ask the following question: *What is the probability of a having a re
 
 Now, let's ask an opposite question. Given a true polymorphism $A$ what are the chances that we do detect it (i.e., find ourselves in $AB$)? It will be:
 
-\[
+$$
 	P(B|A) = \frac{P(AB)}{P(A)}
-\]
+$$
 
 So, because we know that $P(A|B) = \frac{P(AB)}{P(B)}$ and we just reasoned that $P(B|A) = \frac{P(AB)}{P(A)}$, we can say that $P(A|B)P(B) = P(B|A)P(A)$ leading us to the [Bayes formula](http://www.math.cornell.edu/~mec/2008-2009/TianyiZheng/Bayes.html):
 
 
-\[
+$$
     P(A|B) = \frac{P(B|A)P(A)}{P(B)}
-\]
+$$
 
 Translating this into "genomics terms" the probability of having a genotype $G$ given sequencing reads $S$ is: $P(G|S) = \frac{P(S|G)P(G)}{P(S)}$. Because in a given calculation of $P(G|S)$ reads are fixed we can re-write the Bayes formula in the following way:
 
- $P(G|S) \approx P(S|G)P(G)$
+$$
+	P(G|S) \approx P(S|G)P(G)
+$$
 
  with $P(S)$ becoming a constant. This leaves us with the need to estimate two things:
 
@@ -124,10 +125,10 @@ This makes it highly unlikely that **AA** is a true genotype of this individual.
 
 Freebayes is a *haplotype-based* variant caller. This implies that instead of looking at an individual positions within an alignment of reads to the reference genome, it looks at a haplotype window, length of which is dynamically determined (see section 3.2. in [FreeBayes manuscript](http://arxiv.org/pdf/1207.3907v2.pdf)):
 
->
->![](/BMMB554/img/freebayes.png)
->
->Looking at a haplotype window makes misalignments tolerable. In this case a low complexity poly(A) stretch is misaligned. As a result looking at individual positions will result in calling multiple spurious varians. In the case of FreeBayes looking at a haplotype identifies two alleles (this is a diploid example) `A(7)` and `A(6)`, while `A(8)` is likely an error. Image by [Erik Garrison](https://github.com/ekg/freebayes)
+|             |
+|-------------|
+|![](/img/freebayes.png)|
+|<small>Looking at a haplotype window makes misalignments tolerable. In this case a low complexity poly(A) stretch is misaligned. As a result looking at individual positions will result in calling multiple spurious varians. In the case of FreeBayes looking at a haplotype identifies two alleles (this is a diploid example) `A(7)` and `A(6)`, while `A(8)` is likely an error. Image by [Erik Garrison](https://github.com/ekg/freebayes)</small>|
 
 # Let's try it
 
@@ -147,15 +148,15 @@ Here is what to do to load the data:
 
 Go to the [data library](https://usegalaxy.org/library/list#folders/F9ff2d127cd7ed6bc) and select both BAM and PED datasets. Then Click **to History** button:
 
-![](/BMMB554/img/library_import.png)
+![](/img/library_import.png)
 
 Galaxy will ask you if you want to import these data into a new history, which you might want (in the case below I called this history `genotyping try`):
 
-![](/BMMB554/img/history_import.png)
+![](/img/history_import.png)
 
 The datasets will appear in your history:
 
-![](/BMMB554/img/library_import_complete.png)
+![](/img/library_import_complete.png)
 
 ## Generating and post-processing FreeBayes calls
 
@@ -165,7 +166,7 @@ Select **FreeBayes** from **NGS: Variant Analysis** section of the tool menu (le
 
 Make sure the top part of the interface looks like shown below. Here we selected `GIAB-Ashkenazim-Trio-hg19` as input and set **Using reference genome** to `hg19` and **Choose parameter selection level** to `5`. The interface should look like this:
 
-![](/BMMB554/img/FreeBayes_settings.png)
+![](/img/FreeBayes_settings.png)
 
 Scrolling down to **Tweak algorithmic features?** click `Yes` and set **Calculate the marginal probability of genotypes and report as GQ in each sample field in the VCF output** to `Yes`. This would help us evaluating the quality of genotype calls.
 
@@ -177,7 +178,7 @@ Depending on how busy Galaxy is this may take a little bit of time (coffee break
 
 Select FreeBayes output as the input for this tool and make sure **Maintain site and allele-level annotations when decomposing** and **Maintain genotype-level annotations when decomposing** are set to `Yes`:
 
-![](/BMMB554/img/vcfallelicprimitives.png)
+![](/img/vcfallelicprimitives.png)
 
 **VCFAllelicPrimities** generated a VCF files containing 37 records (the input VCF only contained 35). This is because a multiple nucleotide polymorphism (`TAGG|CAGA`) at position 618851 have been converted to two:
 
@@ -200,15 +201,15 @@ At this point we are ready to begin annotating variants using [SnpEff](http://sn
 
 Select the latest version of annotation database matching genome version against which reads were mapped and VCF produced. In this case it is `GRCh37.75: hg19`:
 
-![](/BMMB554/img/snpeff.png)
+![](/img/snpeff.png)
 
 SnpEff will generate two outputs: (1) an annotated VCF file and (2) an HTML report. The report contains a number of useful metrics such as distribution of variants across gene features:
 
-![](/BMMB554/img/snpeff_chart.png)
+![](/img/snpeff_chart.png)
 
 or changes to codons:
 
-![](/BMMB554/img/snpeff_codons.png)
+![](/img/snpeff_codons.png)
 
 ### Manipulating variation data with GEMINI
 
@@ -226,11 +227,11 @@ family1	   HG002_NA24385_son	HG003_NA24149_father HG004_NA24143_mother 1  2     
 ```
 So let's load data into GEMINI. Set VCF and PED inputs:
 
-![](/BMMB554/img/gemini_load.png)
+![](/img/gemini_load.png)
 
 This creates a sqlite database. To see the content of the database use **GEMINI_db_info**:
 
-![](/BMMB554/img/gemini_db_info.png)
+![](/img/gemini_db_info.png)
 
 This produce a list of [all tables and fields](https://github.com/nekrut/galaxy/wiki/datasets/gemini_tables.txt) in the database.
 
@@ -250,7 +251,7 @@ SELECT count(*) FROM variants WHERE in_dbsnp == 0
 
 into **The query to be issued to the database** field of the interface:
 
-![](/BMMB554/img/gemini_query1.png)
+![](/img/gemini_query1.png)
 
 As we can see from [output (Click this link to see it)](https://usegalaxy.org/datasets/bbd44e69cb8906b51bb37b9032761321/display/?preview=True) there are 21 variants that are not annotated in dbSNP.
 
@@ -296,7 +297,7 @@ and in the field **Restrictions to apply to genotype values** we will enter:
 gt_types.HG002_NA24385_son <> HOM_REF
 ```
 
-![](/BMMB554/img/gemini_query2.png)
+![](/img/gemini_query2.png)
 
 This produce [a list of sites](https://usegalaxy.org/datasets/bbd44e69cb8906b560921700703d0255/display/?preview=True)
 
@@ -391,15 +392,89 @@ This short tutorial should give you an overall idea on how generate variant data
 
 * If you have a wide screen arrange browsers tabs side by side:
 
-![](/BMMB554/img/side-by-side.png)
+![](/img/side-by-side.png)
 
 * Proceed with tutorial. For example, to repeat the following command from GEMINI tutorial:
 
-![](/BMMB554/img/gemini_command.png)
+![](/img/gemini_command.png)
 
 * Use Galaxy's **GEMINI_load** tool:
 
-![](/BMMB554/img/galaxy_command.png)
+![](/img/galaxy_command.png)
 
 * and so on....
+
+# Why call variants: An example from Tibet
+
+Many residents of the Tibetian Plateau live above 4,000 meters where oxygen concentration is approximately 40% lower than at sea level:
+
+|             |
+|-------------|
+|![](/img/tibet.png)|
+|<small>Tibetan Plateau and surrounding areas (from [Wikipedia](https://en.wikipedia.org/wiki/Tibet))</small>|
+
+Tibetian experience a number of adaptations to high altitudes manifesting in the following phenotypic differences:
+
+- lower hemoglobin concentration [Wu:2005](http://science.sciencemag.org/lookup/ijlink?linkType=ABST&journalCode=jap&resid=98/2/598&atom=%2Fsci%2F329%2F5987%2F75.atom)
+- higher arterial oxygen saturation [Niermeyer:1995](http://science.sciencemag.org/lookup/ijlink?linkType=ABST&journalCode=jap&resid=98/2/598&atom=%2Fsci%2F329%2F5987%2F75.atom)
+- more efficient pulmonary gas exchange [Zhuang:1996](https://www.ncbi.nlm.nih.gov/pubmed/8822225)
+
+What are the genetic causes of these adaptations?
+
+## Sequencing of 50 Human Exomes Reveals Adaptation to High Altitude
+
+[Emilia Huerta-Sanchez and Rasmus Nielsen](http://science.sciencemag.org/content/329/5987/75) decided to investigate this phenomenon using the following experimental design:
+
+### Design
+
+They sequenced exomes from 50 unrelated individuals from two villages (both situated at or above 4,300 m above sea level) in the Tibet Autonomous Region of China. Exomes were enriched using [Numblegen exome capture system](http://sequencing.roche.com/products/nimblegen-seqcap-target-enrichment.html) (approximately 20,000 genes) and sequenced to mean depth of ~18x. 
+
+## #SNPs
+
+18x coverage does not guarantee accurate assignment of individual genotypes. To address this challenge Nielsen et al. devised a Bayesian approach that would (1) estimate reliability for SNP calls and (2) compute population allele frequencies for each site. 
+
+They found:
+
+ - 151,825 SNPs > 50% of probability being variable
+ - 101,668 SNPs > 99% probability of being variable
+
+Sanger sequencing validated 53 out of 56 that had >95% probability of being variable and minor allele frequencies between 3% and 50%.
+
+### Population history of Tibetians and Han Chinese
+
+The Tibetian exome was compared with 40 Han Chinese from Beijing genomes (HCB) from the 1000 Genomes Project. Beijing is approximately 50 m above sea level and the adsolute Majority of Han Chinese live below 2,000 m. The amount of genetic differentiation between Tibetian and Han samples is low ([F<sub>*ST*</sub>](https://en.wikipedia.org/wiki/Fixation_index) = 0.026). In addition, there is also no differentiation between the two Tibetian villages (F<sub>*ST*</sub>=0.014) and so they are treated as a single population. The paper estimated that the Tibetian and Han populations diverged ~2,750 years ago with Tibetian population shrinking and Han population expanding. 
+
+|             |
+|-------------|
+|![](https://d2ufo47lrtsv5s.cloudfront.net/content/sci/329/5987/75/F1.large.jpg?width=800&height=600&carousel=1)|
+|<small>Two-dimensional unfolded site frequency spectrum for SNPs in Tibetan (x axis) and Han (y axis) population samples. The number of SNPs detected is color-coded according to the logarithmic scale plotted on the right. Arrows indicate a pair of intronic SNPs from the EPAS1 gene that show strongly elevated derived allele frequencies in the Tibetan sample compared with the Han sample.</small>|
+
+
+### Finding casual SNPs
+
+With two populations we one can potentially find genes with significant allele frequency differences but we will not be able to tell which of the two populations is affected by selection. To do this we need an outgroup represented by a distantly related population. In this study they've chosen a Danish population as an outgroup. 
+
+|             |
+|-------------|
+|![](https://d2ufo47lrtsv5s.cloudfront.net/content/sci/329/5987/75/F2.large.jpg?width=800&height=600&carousel=1)|
+|<small>Population-specific allele frequency change. (A) The distribution of F<sub>*ST*</sub>-based PBS statistics for the Tibetan branches, according to the number of variable sites in each gene. Outlier genes are indicated in red. (B) The signal of selection on EPAS1: Genomic average F<sub>*ST*</sub>-based branch lengths for Tibetan (T), Han (H), and Danish (D) branches (left) and branch lengths for EPAS1, indicating substantial differentiation along the Tibetan lineage (right).</small>|
+
+### *EPAS1*
+
+The strongest signal was observed for the *EPAS1* gene, which has 9% derived allele frequency in Han Chinese and 87% in Tibetian population. To establish functional link between this site and inhabiting high altitudes authors performed association analysis:  "*Significant associations were discovered for erythrocyte count (F test P = 0.00141) and for hemoglobin concentration (F test P = 0.00131), with significant or marginally significant P values for both traits when each village was tested separately
+The allele at high frequency in the Tibetan sample was associated with lower erythrocyte quantities and correspondingly lower hemoglobin levels (table S4). Because elevated erythrocyte production is a common response to hypoxic stress, it may be that carriers of the “Tibetan” allele of EPAS1 are able to maintain sufficient oxygenation of tissues at high altitude without the need for increased erythrocyte levels. Thus, the hematological differences observed here may not represent the phenotypic target of selection and could instead reflect a side effect of EPAS1-mediated adaptation to hypoxic conditions.*"
+
+## Altitude adaptation in Tibetans caused by introgression of Denisovan-like DNA
+
+[Emilia Huerta-Sanchez and Rasmus Nielsen](http://www.nature.com/nature/journal/v512/n7513/full/nature13408.html)
+
+|             |
+|-------------|
+|![](http://www.nature.com/nature/journal/v512/n7513/images/nature13408-f2.jpg)|
+|<small>Each column is a polymorphic genomic location (95 in total), each row is a phased haplotype (80 Han and 80 Tibetan haplotypes), and the coloured column on the left denotes the population identity of the individuals. Haplotypes of the Denisovan individual are shown in the top two rows (green). The black cells represent the presence of the derived allele and the grey space represents the presence of the ancestral allele (see Methods). The first and last columns correspond to the first and last positions in Supplementary Table 3, respectively. The red and blue arrows indicate the 32 sites in Supplementary Table 3. The blue arrows represent a five-SNP haplotype block defined by the first five SNPs in the 32.7-kb region. Asterisks indicate sites at which Tibetans share a derived allele with the Denisovan individual.</small>|
+
+|             |
+|-------------|
+|![](http://www.nature.com/nature/journal/v512/n7513/images/nature13408-f3.jpg)|
+|<small>The haplotypes were defined from all the SNPs present in the combined 1000 Genomes and Tibetan samples: 515 SNPs in total within the 32.7-kb EPAS1 region. The Denisovan haplotypes were added to the set of the common haplotypes. The R software package pegas23 was used to generate the figure, using pairwise differences as distances. Each pie chart represents one unique haplotype, labelled with Roman numerals, and the radius of the pie chart is proportional to the log2(number of chromosomes with that haplotype) plus a minimum size so that it is easier to see the Denisovan haplotype. The sections in the pie provide the breakdown of the haplotype representation amongst populations. The width of the edges is proportional to the number of pairwise differences between the joined haplotypes; the thinnest edge represents a difference of one mutation. The legend shows all the possible haplotypes among these populations. The numbers (1, 9, 35 and 40) next to an edge (the line connecting two haplotypes) in the bottom right are the number of pairwise differences between the corresponding haplotypes. We added an edge afterwards between the Tibetan haplotype XXXIII and its closest non-Denisovan haplotype (XXI) to indicate its divergence from the other modern human groups. Extended Data Fig. 5a contains all the pairwise differences between the haplotypes presented in this figure. ASW, African Americans from the south western United States; CEU, Utah residents with northern and western European ancestry; GBR, British; FIN, Finnish; JPT, Japanese; LWK, Luhya; CHS, southern Han Chinese; CHB, Han Chinese from Beijing; MXL, Mexican; PUR, Puerto Rican; CLM, Colombian; TSI, Toscani; YRI, Yoruban. Where there is only one line within a pie chart, this indicates that only one population contains the haplotype.</small>|
 

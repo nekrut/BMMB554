@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Anton Nekrutenko | 2018 | CC-BY</copyright>
-    <lastBuildDate>Sat, 17 Feb 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 12 Mar 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://nekrut.github.io/BMMB554/tags/ngs/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Diploid variant calling</title>
+      <link>https://nekrut.github.io/BMMB554/posts/topic8/</link>
+      <pubDate>Mon, 12 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/posts/topic8/</guid>
+      <description>Today we hear a lot about personalized medicine. Yet the personalization is defined by the genetic make up of the individual. Today we will discuss how this information can be uncovered from the genomic sequencing data.</description>
+    </item>
     
     <item>
       <title>Variant calling: Pooled and Haploid systems</title>
