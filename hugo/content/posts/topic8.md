@@ -1,7 +1,7 @@
 +++
 date = "2018-03-12"
 title = "Diploid variant calling"
-tags = ["varinat calling", "ngs"]
+tags = ["variant calling", "ngs"]
 menu = ""
 #draft = true
 
