@@ -43,6 +43,8 @@ Below are links to one such resource:
 
 <script async class="speakerdeck-embed" data-id="12c6f0d527644ad6a048c5bc78dcdcab" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
 
-[Top Ten Worst Graphs](https://www.biostat.wisc.edu/~kbroman/topten_worstgraphs/)
+# By next Monday I need you to:
 
-# 
+- Read [Baym et al. 2016](http://science.sciencemag.org/content/353/6304/1147)
+- Write an introduction to our paper. Use Google Docs and send me a link. I will choose the best and we will discuss why.
+
