@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Rna Seq on BMMB 554 | 2018</title>
+    <link>https://nekrut.github.io/BMMB554/tags/rna-seq/</link>
+    <description>Recent content in Rna Seq on BMMB 554 | 2018</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Anton Nekrutenko | 2018 | CC-BY</copyright>
+    <lastBuildDate>Mon, 19 Mar 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://nekrut.github.io/BMMB554/tags/rna-seq/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Reference-based RNA-seq</title>
+      <link>https://nekrut.github.io/BMMB554/posts/topic11/</link>
+      <pubDate>Mon, 19 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/posts/topic11/</guid>
+      <description>RNAseq: Reference-based  This tutorial is inspired by an exceptional RNAseq course at the Weill Cornell Medical College compiled by Friederike Dündar, Luce Skrabanek, and Paul Zumbo and by tutorials produced by Björn Grüning (@bgruening) for Freiburg Galaxy instance.</description>
+    </item>
+    
+  </channel>
+</rss>

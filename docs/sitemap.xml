@@ -9,7 +9,17 @@
   
   <url>
     <loc>https://nekrut.github.io/BMMB554/posts/</loc>
-    <lastmod>2018-03-12T00:00:00+00:00</lastmod>
+    <lastmod>2018-03-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nekrut.github.io/BMMB554/posts/writing/</loc>
+    <lastmod>2018-03-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nekrut.github.io/BMMB554/posts/topic11/</loc>
+    <lastmod>2018-03-19T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -190,6 +200,12 @@
   </url>
   
   <url>
+    <loc>https://nekrut.github.io/BMMB554/tags/grants/</loc>
+    <lastmod>2018-03-21T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://nekrut.github.io/BMMB554/tags/history/</loc>
     <lastmod>2018-01-29T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -232,6 +248,12 @@
   </url>
   
   <url>
+    <loc>https://nekrut.github.io/BMMB554/tags/papers/</loc>
+    <lastmod>2018-03-21T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://nekrut.github.io/BMMB554/tags/programming/</loc>
     <lastmod>2018-02-12T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -240,6 +262,12 @@
   <url>
     <loc>https://nekrut.github.io/BMMB554/tags/python/</loc>
     <lastmod>2018-02-12T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://nekrut.github.io/BMMB554/tags/rna-seq/</loc>
+    <lastmod>2018-03-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -276,6 +304,12 @@
   <url>
     <loc>https://nekrut.github.io/BMMB554/tags/varimat-calling/</loc>
     <lastmod>2018-02-17T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://nekrut.github.io/BMMB554/tags/writing/</loc>
+    <lastmod>2018-03-21T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

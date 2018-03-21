@@ -7,10 +7,30 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Anton Nekrutenko | 2018 | CC-BY</copyright>
-    <lastBuildDate>Mon, 12 Mar 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 21 Mar 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://nekrut.github.io/BMMB554/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Writing</title>
+      <link>https://nekrut.github.io/BMMB554/posts/writing/</link>
+      <pubDate>Wed, 21 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/posts/writing/</guid>
+      <description>Writing is hard! Writing simply is harder! 
+But there are great resources! Below are links to one such resource:
+ The Title Says It All The Abstract and the Elevator Talk: A Tale of Two Summaries &amp;ldquo;It was a cold and rainy night&amp;rdquo;: Set the Scene with a Good Introduction Who, What, When, Where, How, and Why: The Ingredients in the Recipe for a Successful Methods Section Show Your Cards: The Results Section and the Poker Game If an IRDAM Journal Is What You Choose, Then Sequential Results Are What You Use Put Your Best Figure Forward: Line Graphs and Scattergrams Bars and Pies Make Better Desserts than Figures (also see this) Bring Your Best to the Table The Discussion Section: Your Closing Argument Giving Credit: Citations and References How to Write a Rave Review Top 10 Tips for Responding to Reviewer and Editor Comments Passing the Paternit&amp;eacute; Test (also see this)  Also see:</description>
+    </item>
+    
+    <item>
+      <title>Reference-based RNA-seq</title>
+      <link>https://nekrut.github.io/BMMB554/posts/topic11/</link>
+      <pubDate>Mon, 19 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/posts/topic11/</guid>
+      <description>RNAseq: Reference-based  This tutorial is inspired by an exceptional RNAseq course at the Weill Cornell Medical College compiled by Friederike Dündar, Luce Skrabanek, and Paul Zumbo and by tutorials produced by Björn Grüning (@bgruening) for Freiburg Galaxy instance.</description>
+    </item>
     
     <item>
       <title>Diploid variant calling</title>
