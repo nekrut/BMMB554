@@ -43,6 +43,11 @@ Below are links to one such resource:
 
 <script async class="speakerdeck-embed" data-id="12c6f0d527644ad6a048c5bc78dcdcab" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
 
+# Other things to consired:
+
+ - [Intuitive design](https://www.nature.com/articles/nmeth.4041)
+ - [Martin Krzywinski website](http://mkweb.bcgsc.ca/)
+
 # By next Monday I need you to:
 
 - Read [Baym et al. 2016](http://science.sciencemag.org/content/353/6304/1147)
