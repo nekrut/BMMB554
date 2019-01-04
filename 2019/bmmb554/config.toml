@@ -1,0 +1,49 @@
+baseURL = "https://example.com"
+languageCode = "en-us"
+title = "BMMB554"
+# Uncomment below to enable theme
+theme = "vanilla-bootstrap-hugo-theme"
+#googleAnalytics = "UA-123456789-1"
+
+# Uncomment below to enable syntax highlighting
+pygmentsCodefences = true
+pygmentsCodefencesGuessSyntax = true
+pygmentsStyle = "pygments"
+
+[taxonomies]
+  tag = "tags"
+
+[permalinks]
+  post = "/:filename/"
+
+# See https://feathericons.com/
+# The value of pre is the icon name
+[menu]
+  [[menu.main]]
+    name = "Home"
+    pre = "home"
+    url = "/"
+    weight = 1
+  [[menu.main]]
+    name = "Lectures"
+    pre = "book-open"
+    url = "/post/"
+    weight = 2
+  [[menu.main]]
+    name = "Tags"
+    pre = "tag"
+    url = "/tags/"
+    weight = 3
+  [[menu.main]]
+    name = "Syllabus"
+    pre = "list"
+    url = "/about/"
+    weight = 4
+
+[params]
+  includeBootstrapJs = false
+  showActiveNav = true
+  containerMaxWidth = "700px"
+  dateFormat = "Jan 2, 2006"
+  homeText = "Introduction to Data Driven Life Sciences | Spring 2019"
+  footerText = "Nekrutenko Lab 2019 | CC-BY"

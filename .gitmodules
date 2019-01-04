@@ -1,3 +1,6 @@
 [submodule "hugo/themes/kiera"]
-	path = hugo/themes/kiera
+	path = 2018/themes/kiera
 	url = https://github.com/avianto/hugo-kiera.git
+[submodule "2019/bmmb554/themes/vanilla-bootstrap-hugo-theme"]
+	path = 2019/bmmb554/themes/vanilla-bootstrap-hugo-theme
+	url = https://github.com/zwbetz-gh/vanilla-bootstrap-hugo-theme.git
