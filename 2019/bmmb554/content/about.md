@@ -5,6 +5,13 @@ title: "Syllabus"
 
 [![](http://imgs.xkcd.com/comics/impostor.png)](https://xkcd.com/451/)
 
+## Place and Time
+------
+Boucke Building 216 | Monday, Wednesday 2:30pm - 3:45pm
+
+<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12081.221080223779!2d-77.8618033!3d40.7992851!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x83b4bcab5cf7d65e!2sBoucke+Building!5e0!3m2!1sen!2sus!4v1546882122664" width="400" height="200" frameborder="0" style="border:0" allowfullscreen></iframe>
+
+<br>
 ## Instructor
 ------
 **Anton Nekrutenko**<br>
@@ -15,36 +22,45 @@ Office hours by appointment only
   When contacting instructor use the above e-mail and include "BMMB554" in the subject line (simply click on e-mail address).
 </div>
 
-## Course description
+## Course logistics
 -------
-This course is designed as a preparation routine for graduate students in Life Sciences. It has several focus areas including evolution of life sciences as well as in-depth overview of sequencing technologies and their applications.
+This course **does not use** Canvas. Canvas is a convoluted system with too many features and undefined purpose. Instead, this course is served from [GitHub](https://github.com/nekrut/BMMB554). Each new lecture will be created as a new entry under "Lectures" section of the website.
+
+<div class="alert alert-danger" role="alert">
+  <b>Do not contact</b> me through Canvas! I will not check my Inbox there. Instead, contact me via e-mail as described above.
+</div>
 
 ## Grading
 ------
-* Homework = 50%
-* Final project = 50%
+<div class="progress" style="height: 50px;">
+  <div class="progress-bar bg-danger" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Attendance (25%)</div>
+  <div class="progress-bar bg-success" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">Homework (30%)</div>
+  <div class="progress-bar bg-info" role="progressbar" style="width: 45%" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100">Final Project (45%)</div>
+</div>
+<br>
+A short homework will be given once a week. We will discuss project requirements before the spring break. 
 
 ## Topics
 ------ 
-We will cover a breadth of topics. The course will be divided into several blocks
+We will cover a breadth of topics. The course will be divided into several blocks:
 
-### **Block 1**: A toolset for genomics
+#### **Block 1**: A toolset for genomics
 
 
 {{< bootstrap-table "table table-hover table-primary" >}}
 | # | What  | Why |
 |---|------|--------|
 | 1.1 | **Introduction to this course**     | Who you are and what you want to accomplish   |
-| 1.2 | **The data and the tooling** | Throughout this course we will use a sample dataset. This lecture will introduce this dataset and will explain how to use Jupyter (Collaboratory) notebooks, GitHub, and Markdown   |
-| 1.3 | **Python** | A refresher on Python. Even if you never used Python before you will find this helpful   |
-| 1.4 | **NumPy** | A library for numerical magic |
+| 1.2 | **Jupyter and GitHub** | Throughout this course Jupyter will be our primary framework for data analysis and GitHub will be used for version control |
+| 1.3 | **Python** | Understanding transactional Python for data analysis    |
+| 1.4 | **NumPy and SciPy** | Libraries for numerical magic |
 | 1.5 | **MatPlotLib** | Plotting data in Python |
 | 1.6 | **Pandas and SQL** | Operating on large datasets in Python |
-| 1.7 | **Python and R** | How to take best from of the two worlds | 
+| 1.7 | **Galaxy** | Data processing as scale | 
 {{< /bootstrap-table >}}
 
 
-### **Block 2**: Quantitative refresher
+#### **Block 2**: Quantitative refresher
 
 {{< bootstrap-table "table table-hover table-success" >}}
 | # | What  | Why |
@@ -59,7 +75,7 @@ We will cover a breadth of topics. The course will be divided into several block
 | 2.8 | **Multivariate analysis** | Finding association among multiple variables |
 {{< /bootstrap-table >}}
 
-### **Block 3**: Understanding genomic datasets
+#### **Block 3**: Sources and types of genomic data
 
 {{< bootstrap-table "table table-hover table-warning" >}}
 | # | What  | Why |
@@ -70,10 +86,11 @@ We will cover a breadth of topics. The course will be divided into several block
 | 3.4 | **Transcriptomics** | Measuring shapes |
 | 3.5 | **DNA/Protein interactions** | Assessing gene regulation and genome architecture |
 | 3.6 | **Metagenomics** | Analysis of complex mixtures |
-| 3.7 | **About counts** | NGS data is count data. There are common themes in its analysis approaches |
+| 3.7 | **About counts** | NGS data is count data. There are common themes in read count analysis |
 {{< /bootstrap-table >}}
 
-### **Block 4**: Computational biology basics
+##
+## **Block 4**: Computational biology basics
 
 {{< bootstrap-table "table table-hover table-danger" >}}
 | # | What  | Why |
