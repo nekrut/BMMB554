@@ -1,4 +1,4 @@
-baseurl = "https://nekrut.github.io/BMMB554/"
+baseurl = "/"
 languageCode = "en-us"
 title = "BMMB554"
 # Uncomment below to enable theme
@@ -43,7 +43,7 @@ pygmentsStyle = "pygments"
 [params]
   includeBootstrapJs = false
   showActiveNav = true
-  containerMaxWidth = "700px"
+  containerMaxWidth = "800px"
   dateFormat = "Jan 2, 2006"
   homeText = "Introduction to Data Driven Life Sciences | Spring 2019"
   footerText = "Nekrutenko Lab 2019 | CC-BY"
