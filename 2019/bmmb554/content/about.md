@@ -89,8 +89,7 @@ We will cover a breadth of topics. The course will be divided into several block
 | 3.7 | **About counts** | NGS data is count data. There are common themes in read count analysis |
 {{< /bootstrap-table >}}
 
-##
-## **Block 4**: Computational biology basics
+#### **Block 4**: Computational biology basics
 
 {{< bootstrap-table "table table-hover table-danger" >}}
 | # | What  | Why |
