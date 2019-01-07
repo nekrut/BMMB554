@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Lectures on BMMB554</title>
-    <link>https://example.com/post/</link>
+    <link>https://nekrut.github.io/BMMB554/post/</link>
     <description>Recent content in Lectures on BMMB554</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 07 Jan 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://example.com/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://nekrut.github.io/BMMB554/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Lecture 1: Who you are and what you know</title>
-      <link>https://example.com/lecture1/</link>
+      <link>https://nekrut.github.io/BMMB554/lecture1/</link>
       <pubDate>Mon, 07 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://example.com/lecture1/</guid>
+      <guid>https://nekrut.github.io/BMMB554/lecture1/</guid>
       <description> 
 Introduction In the first class of the semester you will not learn much. It is more about me learning about you and you learning about each other.
 Test 0 It would be helpful for me to know what you know and what you don&amp;rsquo;t. Take the test below. It will not be scored and will have no effect on your grade.

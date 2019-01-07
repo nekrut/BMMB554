@@ -2,30 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on BMMB554</title>
-    <link>https://example.com/tags/</link>
+    <link>https://nekrut.github.io/BMMB554/tags/</link>
     <description>Recent content in Tags on BMMB554</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 07 Jan 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://example.com/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://nekrut.github.io/BMMB554/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Exam0</title>
-      <link>https://example.com/tags/exam0/</link>
+      <link>https://nekrut.github.io/BMMB554/tags/exam0/</link>
       <pubDate>Mon, 07 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://example.com/tags/exam0/</guid>
+      <guid>https://nekrut.github.io/BMMB554/tags/exam0/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Syllabus</title>
-      <link>https://example.com/tags/syllabus/</link>
+      <link>https://nekrut.github.io/BMMB554/tags/syllabus/</link>
       <pubDate>Mon, 07 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://example.com/tags/syllabus/</guid>
+      <guid>https://nekrut.github.io/BMMB554/tags/syllabus/</guid>
       <description></description>
     </item>
     
