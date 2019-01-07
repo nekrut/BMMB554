@@ -26,34 +26,63 @@ This course is designed as a preparation routine for graduate students in Life S
 
 ## Topics
 ------ 
-We will cover a breadth of topics. Below is the approximate list. Keep in mind that this field is very dynamic. To account for that we may skip or extend some of the subjects.
+We will cover a breadth of topics. The course will be divided into several blocks
+
+### **Block 1**: A toolset for genomics
 
 
-1. History: From Genetics to Genomics
-2. Sequencing: From Sanger to Nanopores I
-2. Sequencing: From Sanger to Nanopores II
-4. Algorithms: Alignment Basics
-5. Algorithms: Aligning many sequences quickly
-5. Algorithms: Assembly I
-5. Algorithms: Assembly II
-7. Galaxy: An introduction
-8. Galaxy: Writing your own tools
-10. Re-sequencing I: Introduction and non-diploid case
-11. Re-sequencing II: Diploid genomes
-12. Practicum: Re-sequencing
-13. Transcriptomics I: Refrence-based
-14. Transcriptomics II: Reference-free
-15. Practicum: Transcriptomics
-16. RNA analysis: RiboSeq and ShapeSeq
-17. Practicum: RNA analysis
-18. DNA/Protein interactions I: Approaches
-19. DNA/Protein interactions II: ENCODE Project
-20. Practicum: DNA/Protein interactions
-21. Genome conformation analysis
-22. Practicum: Genome conformation analysis
-23. Metagenomics I: Approaches
-24. Metagenomics II: Community analysis
-25. Practicum: Metagenomics
+{{< bootstrap-table "table table-hover table-primary" >}}
+| # | What  | Why |
+|---|------|--------|
+| 1.1 | **Introduction to this course**     | Who you are and what you want to accomplish   |
+| 1.2 | **The data and the tooling** | Throughout this course we will use a sample dataset. This lecture will introduce this dataset and will explain how to use Jupyter (Collaboratory) notebooks, GitHub, and Markdown   |
+| 1.3 | **Python** | A refresher on Python. Even if you never used Python before you will find this helpful   |
+| 1.4 | **NumPy** | A library for numerical magic |
+| 1.5 | **MatPlotLib** | Plotting data in Python |
+| 1.6 | **Pandas and SQL** | Operating on large datasets in Python |
+| 1.7 | **Python and R** | How to take best from of the two worlds | 
+{{< /bootstrap-table >}}
+
+
+### **Block 2**: Quantitative refresher
+
+{{< bootstrap-table "table table-hover table-success" >}}
+| # | What  | Why |
+|---|------|--------|
+| 2.1 | **Fundamentals** | Probability, Descriptive statistics, Correlation analysis, and Logarithms |
+| 2.2 | **Statistical analyses** | Distributions, Sampling, Significance, Permutation, Bayes Theorem |
+| 2.3 | **Visualization** | Useful versus meaningless |
+| 2.4 | **Linear algebra** | Matrix operations, Eigenvalues and Eigenvectors | 
+| 2.5 | **Discrete data and modeling** | Understanding the data and going upward |
+| 2.6 | **Clustering** | Stratifying the data |
+| 2.7 | **Testing** | How to test your hypotheses |
+| 2.8 | **Multivariate analysis** | Finding association among multiple variables |
+{{< /bootstrap-table >}}
+
+### **Block 3**: Understanding genomic datasets
+
+{{< bootstrap-table "table table-hover table-warning" >}}
+| # | What  | Why |
+|---|------|--------|
+| 3.1 | **DNA (and RNA) sequencing** | From Sanger to Nanopores |
+| 3.2 | **Variation** | Finding and interpreting genetic differences |
+| 3.3 | **Transcriptomics** | Measuring gene expression |
+| 3.4 | **Transcriptomics** | Measuring shapes |
+| 3.5 | **DNA/Protein interactions** | Assessing gene regulation and genome architecture |
+| 3.6 | **Metagenomics** | Analysis of complex mixtures |
+| 3.7 | **About counts** | NGS data is count data. There are common themes in its analysis approaches |
+{{< /bootstrap-table >}}
+
+### **Block 4**: Computational biology basics
+
+{{< bootstrap-table "table table-hover table-danger" >}}
+| # | What  | Why |
+|---|------|--------|
+| 4.1 | **Alignment** | Fundamental concepts, Global and local alignment |
+| 4.2 | **Aligning many sequences quickly** | Mapping in the age of billion-read datasets |
+| 4.3 | **Bloom filters** | Searching in the age of Exobyte databases |
+| 4.4 | **Assembly** | Reconstructing genomes and transcriptomes |
+{{< /bootstrap-table >}}
 
 ## Final Project
 ------
