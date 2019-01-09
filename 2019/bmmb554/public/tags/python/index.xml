@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Lectures on BMMB554</title>
-    <link>https://nekrut.github.io/BMMB554/post/</link>
-    <description>Recent content in Lectures on BMMB554</description>
+    <title>Python on BMMB554</title>
+    <link>https://nekrut.github.io/BMMB554/tags/python/</link>
+    <description>Recent content in Python on BMMB554</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 09 Jan 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://nekrut.github.io/BMMB554/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://nekrut.github.io/BMMB554/tags/python/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -18,18 +18,6 @@
       
       <guid>https://nekrut.github.io/BMMB554/lecture2/</guid>
       <description>Welcome to Notebooks An important assumption for this lecture is that (1) you have a Google account, (2) know how to use Google Drive, and (3) also have an active GitHub account.  When you start an analysis, you don&amp;rsquo;t really know how it will go. Maybe data is bad and there is no real reason to analyze anything at all. Maybe data data outliers that need to be dealt with.</description>
-    </item>
-    
-    <item>
-      <title>Lecture 1: Who you are and what you know</title>
-      <link>https://nekrut.github.io/BMMB554/lecture1/</link>
-      <pubDate>Mon, 07 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://nekrut.github.io/BMMB554/lecture1/</guid>
-      <description> 
-Introduction In the first class of the semester you will not learn much. It is more about me learning about you and you learning about each other.
-Test 0 It would be helpful for me to know what you know and what you don&amp;rsquo;t. Take the test below. It will not be scored and will have no effect on your grade.
-Loading... </description>
     </item>
     
   </channel>
