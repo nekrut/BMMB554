@@ -1,5 +1,5 @@
 ---
-date: "2019-01-07"
+date: "2019-01-09"
 tags: ["jupyter", "github", "python"]
 title: "Lecture 2: Basic machinery = Jupyter + GitHub"
 ---
@@ -20,3 +20,4 @@ When you start an analysis, you don't really know how it will go. Maybe data is 
     <footer class="blockquote-footer">From "<em>The data science design manual</em>" by Steven Skiena.</footer>
   </div>
 </div>
+
