@@ -8,7 +8,7 @@ title: "Lecture 2: Basic machinery = Jupyter + GitHub"
 
 # Welcome to Notebooks 
 
-When you start an analysis, you don't really know how it will go. Maybe data is bad and there no reason to analyze anything. Maybe data data outliers that need to be dealt with. Maybe data is too sparse and cannot be analyzed using standard approaches. Whatever is the case there are multiple steps that depend on each other. Because real analyses contain many such steps it is easy to end up with tangled mess of little scripts that cannot be comprehended even by their own author. As Steven Skiena points out in his book ["The data science design manual"](http://www.data-manual.com/):
+When you start an analysis, you don't really know how it will go. Maybe data is bad and there is no real reason to analyze anything at all. Maybe data data outliers that need to be dealt with. Maybe data is too sparse and cannot be analyzed using standard approaches. Whatever is the case there are multiple steps that depend on each other. Because real analyses contain many such steps it is easy to end up with tangled mess of little scripts that cannot be comprehended even by their own author. As Steven Skiena points out in his book ["The data science design manual"](http://www.data-manual.com/):
 
 <div class="card">
   
