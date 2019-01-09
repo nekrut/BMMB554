@@ -34,7 +34,7 @@ We will start by using [Colaboratory](https://colab.research.google.com) to star
 Go to http://collab.research.google.com:
 
 <div class="card mb-3">
-  <img class="card-img-top" src="img/collab1.png" alt="Card image cap">
+  <img class="card-img-top" src="/BMMB554/img/collab1.png" alt="Card image cap">
   <div class="card-footer">
     	<footer class="blockquote-footer">
     		Default Colaboratory interface.
@@ -45,7 +45,7 @@ Go to http://collab.research.google.com:
 Select "Upload notebook" (you will be prompted for Google sign-in):
 
 <div class="card mb-3">
-  <img class="card-img-top" src="img/colab2.png" alt="Card image cap">
+  <img class="card-img-top" src="/BMMB554/img/colab2.png" alt="Card image cap">
   <div class="card-footer">
     	<footer class="blockquote-footer">
     		Select "Upload notebook".
@@ -56,7 +56,7 @@ Select "Upload notebook" (you will be prompted for Google sign-in):
 Use `https://github.com/nekrut/BMMB554` as the source URL and select `Lecture2_1.ipynb`:
 
 <div class="card mb-3">
-  <img class="card-img-top" src="img/colab3.png" alt="Card image cap">
+  <img class="card-img-top" src="/BMMB554/img/colab3.png" alt="Card image cap">
   <div class="card-footer">
     	<footer class="blockquote-footer">
     		Select <tt>Lecture2_1.ipynb</tt>
@@ -67,7 +67,7 @@ Use `https://github.com/nekrut/BMMB554` as the source URL and select `Lecture2_1
 You will see something like this:
 
 <div class="card mb-3">
-  <img class="card-img-top" src="img/colab4.png" alt="Card image cap">
+  <img class="card-img-top" src="/BMMB554/img/colab4.png" alt="Card image cap">
   <div class="card-footer">
     	<footer class="blockquote-footer">
     		A freshly rendered notebook
@@ -80,7 +80,7 @@ You will see something like this:
 The notebook you just uploaded is immutable - you cannot make any changes to it. To claim it as your own use "Save a copy in Drive..." option:
 
 <div class="card mb-3">
-  <img class="card-img-top" src="img/colab5.png" alt="Card image cap">
+  <img class="card-img-top" src="/BMMB554/img/colab5.png" alt="Card image cap">
   <div class="card-footer">
     	<footer class="blockquote-footer">
     		Make a copy!
@@ -93,7 +93,7 @@ The notebook you just uploaded is immutable - you cannot make any changes to it.
 Once you are dony playing with the notebook - save a copy to your GitHub account by using "Save a copy in GitHub" and following the prompts. Before you can actually do this, you will need to initialize a new repository on GitHub as I will show you during this lecture.
 
 <div class="card mb-3">
-  <img class="card-img-top" src="img/colab6.png" alt="Card image cap">
+  <img class="card-img-top" src="/BMMB554/img/colab6.png" alt="Card image cap">
   <div class="card-footer">
     	<footer class="blockquote-footer">
     		Save to GitHub!
