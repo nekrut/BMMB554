@@ -6,10 +6,20 @@
     <description>Recent content in Python on BMMB554</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 09 Jan 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 14 Jan 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://nekrut.github.io/BMMB554/tags/python/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Lecture 3: Python refresher</title>
+      <link>https://nekrut.github.io/BMMB554/lecture3/</link>
+      <pubDate>Mon, 14 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/lecture3/</guid>
+      <description>What is Python? Python is a modern, general-purpose, object-oriented, high-level programming language.
+This material is heavily inspired by Materials for the course run by the Graduate School of Life Sciences, University of Cambridge with some modifications.  General characteristics of Python:  Clean and Simple: Easy-to-read and intuitive code, easy-to-learn minimalistic syntax, maintainability scales well with size of projects. Expressive: Fewer lines of code, fewer bugs, easier to maintain.</description>
+    </item>
     
     <item>
       <title>Lecture 2: Basic machinery = Jupyter &#43; GitHub</title>
