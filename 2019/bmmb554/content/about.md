@@ -50,9 +50,9 @@ We will cover a breadth of topics. The course will be divided into several block
 {{< bootstrap-table "table table-hover table-primary" >}}
 | # | What  | Why |
 |---|------|--------|
-| 1.1 | **Introduction to this course**     | Who you are and what you want to accomplish   |
-| 1.2 | **Jupyter and GitHub** | Throughout this course Jupyter will be our primary framework for data analysis and GitHub will be used for version control |
-| 1.3 | **Python** | Understanding transactional Python for data analysis    |
+| 1.1 | [**Introduction to this course**](/BMMB554/lecture1/)     | Who you are and what you want to accomplish   |
+| 1.2 | [**Jupyter and GitHub**](/BMMB554/lecture2/) | Throughout this course Jupyter will be our primary framework for data analysis and GitHub will be used for version control |
+| 1.3 | **Python [1](/BMMB554/lecture3/) and [2](/BMMB554/lecture4/)** | Understanding transactional Python for data analysis    |
 | 1.4 | **NumPy and SciPy** | Libraries for numerical magic |
 | 1.5 | **MatPlotLib** | Plotting data in Python |
 | 1.6 | **Pandas and SQL** | Operating on large datasets in Python |

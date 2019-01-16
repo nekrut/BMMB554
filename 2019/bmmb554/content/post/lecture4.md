@@ -75,5 +75,30 @@ Let's use these data to practice file access operation in python. Files can be f
 
  We will use `intro2.ipynb` notebook to process these files
 
+ # Homework
+
+ [Here](/BMMB554/yeast_genes.txt) is a file containing information about yeast genes. It looks like this:
+
+ ```
+#systematic_name	standard_name	chrom	start	end
+21S_rRNA_4	21S_RRNA_4	chrmt	61868	62447
+9S_rRNA_1	9S_RRNA_1	chrmt	1	11
+9S_rRNA_5	9S_RRNA_5	chrmt	85290	85779
+ETS1-1	ETS1-1	chrXII	457733	458432
+ETS1-2	ETS1-2	chrXII	466870	467569
+ETS2-1	ETS2-1	chrXII	451575	451785
+ETS2-2	ETS2-2	chrXII	460712	460922
+HRA1	HRA1	chrI	99305	99868
+ICR1	ICR1	chrIX	393884	397082
+IRT1	IRT1	chrX	605936	607424
+```
+
+For every gene, its location and coordinates are recorded. 
+You should read through the file and store the data into an appropriate structure.
+Then answer these questions:
+
+
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdoTKg6kj7MHoHlffNBQ2CUXYCzIU1JYJDlse-YFov45_O7AQ/viewform?embedded=true" width="800" height="1630" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+
 
 
