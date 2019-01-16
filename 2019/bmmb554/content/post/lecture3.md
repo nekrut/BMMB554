@@ -1,7 +1,7 @@
 ---
 date: "2019-01-14"
 tags: ["python"]
-title: "Lecture 3: Python refresher"
+title: "Lecture 3: Python refresher 1"
 ---
 
 [![](https://imgs.xkcd.com/comics/sigil_cycle.png)](https://xkcd.com/1306/)

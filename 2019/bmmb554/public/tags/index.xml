@@ -6,10 +6,19 @@
     <description>Recent content in Tags on BMMB554</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 07 Jan 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 16 Jan 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://nekrut.github.io/BMMB554/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Conditionals</title>
+      <link>https://nekrut.github.io/BMMB554/tags/conditionals/</link>
+      <pubDate>Wed, 16 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/tags/conditionals/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Exam0</title>
@@ -41,7 +50,7 @@
     <item>
       <title>Python</title>
       <link>https://nekrut.github.io/BMMB554/tags/python/</link>
-      <pubDate>Mon, 14 Jan 2019 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 16 Jan 2019 00:00:00 +0000</pubDate>
       
       <guid>https://nekrut.github.io/BMMB554/tags/python/</guid>
       <description></description>
@@ -53,6 +62,24 @@
       <pubDate>Mon, 07 Jan 2019 00:00:00 +0000</pubDate>
       
       <guid>https://nekrut.github.io/BMMB554/tags/syllabus/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tnseq</title>
+      <link>https://nekrut.github.io/BMMB554/tags/tnseq/</link>
+      <pubDate>Wed, 16 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/tags/tnseq/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Working With Files</title>
+      <link>https://nekrut.github.io/BMMB554/tags/working-with-files/</link>
+      <pubDate>Wed, 16 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/tags/working-with-files/</guid>
       <description></description>
     </item>
     

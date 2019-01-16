@@ -6,13 +6,22 @@
     <description>Recent content in Lectures on BMMB554</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 14 Jan 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 16 Jan 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://nekrut.github.io/BMMB554/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Lecture 3: Python refresher</title>
+      <title>Lecture 4: Python refresher 2</title>
+      <link>https://nekrut.github.io/BMMB554/lecture4/</link>
+      <pubDate>Wed, 16 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/lecture4/</guid>
+      <description>Conditionals, Loops, and Files This material is heavily inspired by Materials for the course run by the Graduate School of Life Sciences, University of Cambridge with some modifications.  Let&amp;rsquo;s get started  Point your browser to http://colab.research.google.com Open notebook 2019/ipynb/intro2.ipynb from https://github.com/nekrut/BMMB554  Case study: Transposon insertion sequencing (TnSeq) Transposon insertion allows genome-wide identification of essential genes. The idea is simple = important genes cannot be disrupted and there will not accept any transposon insertions.</description>
+    </item>
+    
+    <item>
+      <title>Lecture 3: Python refresher 1</title>
       <link>https://nekrut.github.io/BMMB554/lecture3/</link>
       <pubDate>Mon, 14 Jan 2019 00:00:00 +0000</pubDate>
       
