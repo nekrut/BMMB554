@@ -1,0 +1,898 @@
+<!doctype html>
+<html lang="en" class="h-100">
+  <head>
+  <meta name="generator" content="Hugo 0.53" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://nekrut.github.io/BMMB554/css/bootstrap.min.css">
+  
+  
+  <title>Lecture 5: NumPy | BMMB554</title>
+  <style>
+.container {
+  max-width: 800px;
+}
+#nav a {
+  font-weight: bold;
+  color: inherit;
+}
+#nav a.nav-link-active {
+  background-color: #212529;
+  color: #fff;
+}
+#nav-border {
+  border-bottom: 1px solid #212529;
+}
+#main {
+  margin-top: 1em;
+  margin-bottom: 4em;
+}
+#home-jumbotron {
+  background-color: inherit;
+}
+#footer .container {
+  padding: 1em 0;
+}
+#footer a {
+  color: inherit;
+  text-decoration: underline;
+}
+.font-125 {
+  font-size: 125%;
+}
+.tag-btn {
+  margin-bottom: 0.3em;
+}
+pre {
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 16px;
+}
+pre code {
+  padding: 0;
+  font-size: inherit;
+  color: inherit; 
+  background-color: transparent;
+  border-radius: 0;
+}
+code {
+  padding: 2px 4px;
+  font-size: 90%;
+  color: #c7254e;
+  background-color: #f9f2f4;
+  border-radius: 4px;
+}
+img {
+  max-width: 100%;
+}
+</style>
+</head>
+  <body class="d-flex flex-column h-100">
+    <div id="nav-border" class="container">
+  <nav id="nav" class="nav justify-content-center">
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    <a class="nav-link " href="/BMMB554/"><i data-feather="home"></i> Home</a>
+  
+    
+    
+      
+        
+      
+    
+    
+    <a class="nav-link " href="/BMMB554/post/"><i data-feather="book-open"></i> Lectures</a>
+  
+    
+    
+      
+        
+      
+    
+    
+    <a class="nav-link " href="/BMMB554/tags/"><i data-feather="tag"></i> Tags</a>
+  
+    
+    
+      
+        
+      
+    
+    
+    <a class="nav-link " href="/BMMB554/about/"><i data-feather="list"></i> Syllabus</a>
+  
+  </nav>
+</div>
+    <div class="container">
+      <main id="main">
+        
+
+<h1>Lecture 5: NumPy</h1>
+
+
+<i data-feather="calendar"></i> <time datetime="2019-01-23">Jan 23, 2019</time>
+
+  <br>
+  <i data-feather="tag"></i>
+  
+  
+  <a class="btn btn-sm btn-outline-dark tag-btn" href="https://nekrut.github.io/BMMB554/tags/python">python</a>
+  
+  
+  <a class="btn btn-sm btn-outline-dark tag-btn" href="https://nekrut.github.io/BMMB554/tags/numpy">numpy</a>
+  
+
+<br><br>
+
+
+<h1 id="prep">Prep</h1>
+
+<ul>
+<li>Point your browser to <a href="http://colab.research.google.com">http://colab.research.google.com</a></li>
+<li>Open notebook <code>2019/ipynb/numpy.ipynb</code> from <code>https://github.com/nekrut/BMMB554</code></li>
+</ul>
+
+<h1 id="numpy-operations-with-multidimensional-data">Numpy: Operations with multidimensional data</h1>
+
+<p>This notebook is based (with some modifications) on a <a href="https://github.com/jrjohansson/scientific-python-lectures/blob/master/Lecture-2-Numpy.ipynb">NumPy tutorial</a> by J.R. Johansson</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># Import MatPlotlib so we can look at some pretty plots</span>
+<span style="color:#408080;font-style:italic"># The reson for doing this will become clear in out MatPlotLib lecture next week</span>
+<span style="color:#666">%</span>matplotlib inline
+<span style="color:#008000;font-weight:bold">import</span> <span style="color:#00f;font-weight:bold">matplotlib.pyplot</span> <span style="color:#008000;font-weight:bold">as</span> <span style="color:#00f;font-weight:bold">plt</span></code></pre></div>
+<h2 id="introduction">Introduction</h2>
+
+<hr />
+
+<p>The numpy package (module) is used in almost all numerical computation using Python. It is a package that provide high-performance vector, matrix and higher-dimensional data structures for Python. It is implemented in C and Fortran so when calculations are vectorized (formulated with vectors and matrices), performance is very good.</p>
+
+<p>To use numpy you need to import the module, using for example:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#008000;font-weight:bold">from</span> <span style="color:#00f;font-weight:bold">numpy</span> <span style="color:#008000;font-weight:bold">import</span> <span style="color:#666">*</span></code></pre></div>
+<p>In the numpy package the terminology used for vectors, matrices and higher-dimensional data sets is array.</p>
+
+<h2 id="creating-numpy-arrays">Creating numpy arrays</h2>
+
+<hr />
+
+<p>There are a number of ways to initialize new numpy arrays, for example from</p>
+
+<ul>
+<li>a Python list or tuples</li>
+<li>using functions that are dedicated to generating numpy arrays, such as arange, linspace, etc.</li>
+<li>reading data from files</li>
+</ul>
+
+<h3 id="from-lists">From lists</h3>
+
+<p>For example, to create new vector and matrix arrays from Python lists we can use the <code>numpy.array</code> function.</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># a vector: the argument to the array function is a Python list</span>
+vector <span style="color:#666">=</span> array([<span style="color:#666">1</span>,<span style="color:#666">2</span>,<span style="color:#666">3</span>,<span style="color:#666">4</span>])
+
+vector</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([1, 2, 3, 4])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># a matrix: the argument to the array function is a nested Python list</span>
+matrix <span style="color:#666">=</span> array([[<span style="color:#666">1</span>, <span style="color:#666">2</span>], [<span style="color:#666">3</span>, <span style="color:#666">4</span>]])
+
+matrix</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[1, 2],
+       [3, 4]])</pre></div>
+<p>The <code>v</code> and <code>M</code> objects are both of the type ndarray that the numpy module provides:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#008000">type</span>(vector), <span style="color:#008000">type</span>(matrix)</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">(numpy.ndarray, numpy.ndarray)</pre></div>
+<p>The difference between the v and M arrays is only their shapes. We can get information about the shape of an array by using the <code>ndarray.shape</code> property:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">vector<span style="color:#666">.</span>shape</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">(4,)</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">matrix<span style="color:#666">.</span>shape</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">(2, 2)</pre></div>
+<p>The number of elements in the array is available through the <code>ndarray.size</code> property:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">matrix<span style="color:#666">.</span>size</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">4</pre></div>
+<p>Equivalently, we could use the function <code>numpy.shape</code> and <code>numpy.size</code>:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">shape(matrix)</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">(2, 2)</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">size(matrix)</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">4</pre></div>
+<p>So far the <code>numpy.ndarray</code> looks awefully much like a Python list (or nested list). Why not simply use Python lists for computations instead of creating a new array type?</p>
+
+<p>There are several reasons:</p>
+
+<ul>
+<li>Python lists are very general. They can contain any kind of object. They are dynamically typed. They do not support mathematical functions such as matrix and dot multiplications, etc. Implementing such functions for Python lists would not be very efficient because of the dynamic typing.</li>
+<li>Numpy arrays are <strong>statically typed</strong> and <strong>homogeneous</strong>. The type of the elements is determined when the array is created.</li>
+<li>Numpy arrays are memory efficient.</li>
+<li>Because of the static typing, fast implementation of mathematical functions such as multiplication and addition of numpy arrays can be implemented in a compiled language (C and Fortran is used).
+Using the <code>dtype</code> (data type) property of an ndarray, we can see what type the data of an array has:</li>
+</ul>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">matrix<span style="color:#666">.</span>dtype</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">dtype(&#39;int64&#39;)</pre></div>
+<p>We get an error if we try to assign a value of the wrong type to an element in a numpy array:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">matrix[<span style="color:#666">0</span>,<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#ba2121">&#34;hello&#34;</span></code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">---------------------------------------------------------------------------
+
+ValueError                                Traceback (most recent call last)
+
+&lt;ipython-input-12-c3f78341380e&gt; in &lt;module&gt;()
+----&gt; 1 matrix[0,0] = &#34;hello&#34;
+
+
+ValueError: invalid literal for int() with base 10: &#39;hello&#39;</pre></div>
+<p>If we want, we can explicitly define the type of the array data when we create it, using the <code>dtype</code> keyword argument:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">matrix <span style="color:#666">=</span> array([[<span style="color:#666">1</span>, <span style="color:#666">2</span>], [<span style="color:#666">3</span>, <span style="color:#666">4</span>]], dtype<span style="color:#666">=</span><span style="color:#008000">float</span>)
+
+matrix</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[1., 2.],
+       [3., 4.]])</pre></div>
+<p>Common data types that can be used with dtype are: <code>int</code>, <code>float</code>, <code>complex</code>, <code>bool</code>, etc.</p>
+
+<p>We can also explicitly define the bit size of the data types, for example: <code>int64</code>, <code>int16</code>, <code>float128</code>, <code>complex128</code>.</p>
+
+<h3 id="using-array-generating-functions">Using array-generating functions</h3>
+
+<p>For larger arrays it is inpractical to initialize the data manually, using explicit python lists. Instead we can use one of the many functions in numpy that generate arrays of different forms. Some of the more common are:</p>
+
+<p><strong><code>arange</code></strong></p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># create a range</span>
+
+x <span style="color:#666">=</span> arange(<span style="color:#666">0</span>, <span style="color:#666">10</span>, <span style="color:#666">1</span>) <span style="color:#408080;font-style:italic"># arguments: start, stop, step</span>
+
+x</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">x <span style="color:#666">=</span> arange(<span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#666">1</span>, <span style="color:#666">0.1</span>)
+
+x</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([-1.00000000e+00, -9.00000000e-01, -8.00000000e-01, -7.00000000e-01,
+       -6.00000000e-01, -5.00000000e-01, -4.00000000e-01, -3.00000000e-01,
+       -2.00000000e-01, -1.00000000e-01, -2.22044605e-16,  1.00000000e-01,
+        2.00000000e-01,  3.00000000e-01,  4.00000000e-01,  5.00000000e-01,
+        6.00000000e-01,  7.00000000e-01,  8.00000000e-01,  9.00000000e-01])</pre></div>
+<p><strong><code>linspace</code></strong> and <strong><code>logspace</code></strong></p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># using linspace, both end points ARE included</span>
+linspace(<span style="color:#666">0</span>, <span style="color:#666">10</span>, <span style="color:#666">25</span>)</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([ 0.        ,  0.41666667,  0.83333333,  1.25      ,  1.66666667,
+        2.08333333,  2.5       ,  2.91666667,  3.33333333,  3.75      ,
+        4.16666667,  4.58333333,  5.        ,  5.41666667,  5.83333333,
+        6.25      ,  6.66666667,  7.08333333,  7.5       ,  7.91666667,
+        8.33333333,  8.75      ,  9.16666667,  9.58333333, 10.        ])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">logspace(<span style="color:#666">0</span>, <span style="color:#666">10</span>, <span style="color:#666">10</span>, base<span style="color:#666">=</span>e)</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([1.00000000e+00, 3.03773178e+00, 9.22781435e+00, 2.80316249e+01,
+       8.51525577e+01, 2.58670631e+02, 7.85771994e+02, 2.38696456e+03,
+       7.25095809e+03, 2.20264658e+04])</pre></div>
+<p><strong><code>mgrid</code></strong></p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">x, y <span style="color:#666">=</span> mgrid[<span style="color:#666">0</span>:<span style="color:#666">5</span>, <span style="color:#666">0</span>:<span style="color:#666">5</span>]</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">x</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[0, 0, 0, 0, 0],
+       [1, 1, 1, 1, 1],
+       [2, 2, 2, 2, 2],
+       [3, 3, 3, 3, 3],
+       [4, 4, 4, 4, 4]])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">y</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[0, 1, 2, 3, 4],
+       [0, 1, 2, 3, 4],
+       [0, 1, 2, 3, 4],
+       [0, 1, 2, 3, 4],
+       [0, 1, 2, 3, 4]])</pre></div>
+<p><strong>random data</strong></p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#008000;font-weight:bold">from</span> <span style="color:#00f;font-weight:bold">numpy</span> <span style="color:#008000;font-weight:bold">import</span> random</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># uniform random numbers in [0,1]</span>
+random<span style="color:#666">.</span>rand(<span style="color:#666">5</span>,<span style="color:#666">5</span>)</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[0.21945436, 0.62624846, 0.97543708, 0.91659586, 0.05087643],
+       [0.85066713, 0.40131735, 0.92901423, 0.7290399 , 0.4865608 ],
+       [0.99773362, 0.91392274, 0.52564316, 0.31194802, 0.00125373],
+       [0.09657073, 0.63590692, 0.108349  , 0.87094351, 0.77787512],
+       [0.01861538, 0.59028367, 0.71633518, 0.64032698, 0.04627364]])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># standard normal distributed random numbers</span>
+random<span style="color:#666">.</span>randn(<span style="color:#666">5</span>,<span style="color:#666">5</span>)</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[ 0.12878719,  0.45482   ,  1.52306474, -0.48435756, -0.33684215],
+       [-1.73251566,  1.29174573, -0.03475216,  1.33053552, -0.01993783],
+       [-0.25453968, -2.51760018, -0.35529236, -1.85664153, -0.14323059],
+       [-0.26209276, -0.60025684, -1.02809143, -0.47193277, -0.72903407],
+       [-1.14414615,  0.38396338,  0.43796546,  0.24856281, -0.8907877 ]])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#008000;font-weight:bold">import</span> <span style="color:#00f;font-weight:bold">seaborn</span> <span style="color:#008000;font-weight:bold">as</span> <span style="color:#00f;font-weight:bold">sns</span></code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># Let&#39;s plot uniform distribution</span>
+
+x <span style="color:#666">=</span> random<span style="color:#666">.</span>rand(<span style="color:#666">1000</span>)
+sns<span style="color:#666">.</span>set_style(<span style="color:#ba2121">&#39;whitegrid&#39;</span>)
+sns<span style="color:#666">.</span>distplot(x)</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">/usr/local/lib/python3.6/dist-packages/matplotlib/axes/_axes.py:6521: MatplotlibDeprecationWarning: 
+The &#39;normed&#39; kwarg was deprecated in Matplotlib 2.1 and will be removed in 3.1. Use &#39;density&#39; instead.
+  alternative=&#34;&#39;density&#39;&#34;, removal=&#34;3.1&#34;)
+
+
+
+
+
+&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f03f6919eb8&gt;</pre></div>
+<p><img src="/BMMB554/img/output_39_2.png" alt="png" /></p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># Let&#39;s plot normal distribution</span>
+
+x <span style="color:#666">=</span> random<span style="color:#666">.</span>randn(<span style="color:#666">100000</span>)
+sns<span style="color:#666">.</span>set_style(<span style="color:#ba2121">&#39;whitegrid&#39;</span>)
+sns<span style="color:#666">.</span>distplot(x)</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">/usr/local/lib/python3.6/dist-packages/matplotlib/axes/_axes.py:6521: MatplotlibDeprecationWarning: 
+The &#39;normed&#39; kwarg was deprecated in Matplotlib 2.1 and will be removed in 3.1. Use &#39;density&#39; instead.
+  alternative=&#34;&#39;density&#39;&#34;, removal=&#34;3.1&#34;)
+
+
+
+
+
+&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f03f68a1518&gt;</pre></div>
+<p><img src="/BMMB554/img/output_40_2.png" alt="png" /></p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># Let&#39;s plot poisson distribution</span>
+
+x <span style="color:#666">=</span> random<span style="color:#666">.</span>poisson(<span style="color:#666">5</span>, <span style="color:#666">1000</span>)
+sns<span style="color:#666">.</span>set_style(<span style="color:#ba2121">&#39;whitegrid&#39;</span>)
+sns<span style="color:#666">.</span>distplot(x)</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">/usr/local/lib/python3.6/dist-packages/matplotlib/axes/_axes.py:6521: MatplotlibDeprecationWarning: 
+The &#39;normed&#39; kwarg was deprecated in Matplotlib 2.1 and will be removed in 3.1. Use &#39;density&#39; instead.
+  alternative=&#34;&#39;density&#39;&#34;, removal=&#34;3.1&#34;)
+
+
+
+
+
+&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f03f4739470&gt;</pre></div>
+<p><img src="/BMMB554/img/output_41_2.png" alt="png" /></p>
+
+<p><strong><code>diag</code></strong></p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># a diagonal matrix</span>
+diag([<span style="color:#666">1</span>,<span style="color:#666">2</span>,<span style="color:#666">3</span>])</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[1, 0, 0],
+       [0, 2, 0],
+       [0, 0, 3]])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># diagonal with offset from the main diagonal</span>
+diag([<span style="color:#666">1</span>,<span style="color:#666">2</span>,<span style="color:#666">3</span>], k<span style="color:#666">=</span><span style="color:#666">1</span>)</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[0, 1, 0, 0],
+       [0, 0, 2, 0],
+       [0, 0, 0, 3],
+       [0, 0, 0, 0]])</pre></div>
+<p><strong>zeroes</strong> and <strong>ones</strong></p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">zeros((<span style="color:#666">3</span>,<span style="color:#666">3</span>))</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[0., 0., 0.],
+       [0., 0., 0.],
+       [0., 0., 0.]])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ones((<span style="color:#666">3</span>,<span style="color:#666">3</span>))</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[1., 1., 1.],
+       [1., 1., 1.],
+       [1., 1., 1.]])</pre></div>
+<h2 id="file-io">File IO</h2>
+
+<h3 id="comma-separated-values-csv">Comma-separated values (CSV)</h3>
+
+<p>A very common file format for data files is comma-separated values (CSV), or related formats such as TSV (tab-separated values). To read data from such files into Numpy arrays we can use the <code>numpy.genfromtxt</code> function. For example:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="">!</span>wget https:<span style="color:#666">//</span>raw<span style="color:#666">.</span>githubusercontent<span style="color:#666">.</span>com<span style="color:#666">/</span>jrjohansson<span style="color:#666">/</span>scientific<span style="color:#666">-</span>python<span style="color:#666">-</span>lectures<span style="color:#666">/</span>master<span style="color:#666">/</span>stockholm_td_adj<span style="color:#666">.</span>dat</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">--2019-01-23 18:17:43--  https://raw.githubusercontent.com/jrjohansson/scientific-python-lectures/master/stockholm_td_adj.dat
+Resolving raw.githubusercontent.com (raw.githubusercontent.com)... 151.101.0.133, 151.101.64.133, 151.101.128.133, ...
+Connecting to raw.githubusercontent.com (raw.githubusercontent.com)|151.101.0.133|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 2864946 (2.7M) [text/plain]
+Saving to: ‘stockholm_td_adj.dat’
+
+stockholm_td_adj.da 100%[===================&gt;]   2.73M  --.-KB/s    in 0.06s   
+
+2019-01-23 18:17:43 (43.9 MB/s) - ‘stockholm_td_adj.dat’ saved [2864946/2864946]</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="">!</span>head stockholm_td_adj<span style="color:#666">.</span>dat</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">1800  1  1    -6.1    -6.1    -6.1 1
+1800  1  2   -15.4   -15.4   -15.4 1
+1800  1  3   -15.0   -15.0   -15.0 1
+1800  1  4   -19.3   -19.3   -19.3 1
+1800  1  5   -16.8   -16.8   -16.8 1
+1800  1  6   -11.4   -11.4   -11.4 1
+1800  1  7    -7.6    -7.6    -7.6 1
+1800  1  8    -7.1    -7.1    -7.1 1
+1800  1  9   -10.1   -10.1   -10.1 1
+1800  1 10    -9.5    -9.5    -9.5 1</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">data <span style="color:#666">=</span> genfromtxt(<span style="color:#ba2121">&#39;stockholm_td_adj.dat&#39;</span>)</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">data<span style="color:#666">.</span>shape</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">(77431, 7)</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fig, ax <span style="color:#666">=</span> plt<span style="color:#666">.</span>subplots(figsize<span style="color:#666">=</span>(<span style="color:#666">14</span>,<span style="color:#666">4</span>))
+ax<span style="color:#666">.</span>plot(data[:,<span style="color:#666">0</span>]<span style="color:#666">+</span>data[:,<span style="color:#666">1</span>]<span style="color:#666">/</span><span style="color:#666">12.0</span><span style="color:#666">+</span>data[:,<span style="color:#666">2</span>]<span style="color:#666">/</span><span style="color:#666">365</span>, data[:,<span style="color:#666">5</span>])
+ax<span style="color:#666">.</span>axis(<span style="color:#ba2121">&#39;tight&#39;</span>)
+ax<span style="color:#666">.</span>set_title(<span style="color:#ba2121">&#39;tempeatures in Stockholm&#39;</span>)
+ax<span style="color:#666">.</span>set_xlabel(<span style="color:#ba2121">&#39;year&#39;</span>)
+ax<span style="color:#666">.</span>set_ylabel(<span style="color:#ba2121">&#39;temperature (C)&#39;</span>);</code></pre></div>
+<p><img src="/BMMB554/img/output_54_0.png" alt="png" /></p>
+
+<p>Using <code>numpy.savetxt</code> we can store a Numpy array to a file in CSV format:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">M <span style="color:#666">=</span> random<span style="color:#666">.</span>rand(<span style="color:#666">3</span>,<span style="color:#666">3</span>)
+
+M</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[0.15899226, 0.73913852, 0.0858632 ],
+       [0.41821712, 0.11712784, 0.34176831],
+       [0.52685163, 0.12873943, 0.92178189]])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">savetxt(<span style="color:#ba2121">&#34;random-matrix.csv&#34;</span>, M)</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="">!</span>cat random<span style="color:#666">-</span>matrix<span style="color:#666">.</span>csv</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">1.589922582398127782e-01 7.391385219751671620e-01 8.586320111848333436e-02
+4.182171214227743405e-01 1.171278378058918657e-01 3.417683058329642476e-01
+5.268516328643041424e-01 1.287394330466531400e-01 9.217818880426476014e-01</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">savetxt(<span style="color:#ba2121">&#34;random-matrix.csv&#34;</span>, M, fmt<span style="color:#666">=</span><span style="color:#ba2121">&#39;</span><span style="color:#b68;font-weight:bold">%.5f</span><span style="color:#ba2121">&#39;</span>) <span style="color:#408080;font-style:italic"># fmt specifies the format</span>
+
+<span style="">!</span>cat random<span style="color:#666">-</span>matrix<span style="color:#666">.</span>csv</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">0.15899 0.73914 0.08586
+0.41822 0.11713 0.34177
+0.52685 0.12874 0.92178</pre></div>
+<h3 id="numpy-s-native-file-format">Numpy&rsquo;s native file format</h3>
+
+<p>Useful when storing and reading back numpy array data. Use the functions <code>numpy.save</code> and <code>numpy.load</code>:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">save(<span style="color:#ba2121">&#34;random-matrix.npy&#34;</span>, M)
+
+<span style="">!</span>ls <span style="color:#666">-</span>lh <span style="color:#666">*</span></code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">-rw-r--r-- 1 root root   72 Jan 23 18:19 random-matrix.csv
+-rw-r--r-- 1 root root  200 Jan 23 18:19 random-matrix.npy
+-rw-r--r-- 1 root root 2.8M Jan 23 18:17 stockholm_td_adj.dat
+
+sample_data:
+total 55M
+-r-xr-xr-x 1 root root 1.7K Jan  1  2000 anscombe.json
+-rw-r--r-- 1 root root 295K Jan  8 17:14 california_housing_test.csv
+-rw-r--r-- 1 root root 1.7M Jan  8 17:14 california_housing_train.csv
+-rw-r--r-- 1 root root  18M Jan  8 17:15 mnist_test.csv
+-rw-r--r-- 1 root root  35M Jan  8 17:15 mnist_train_small.csv
+-r-xr-xr-x 1 root root  903 Jan  1  2000 README.md</pre></div>
+<h2 id="manipulating-arrays">Manipulating arrays</h2>
+
+<hr />
+
+<h3 id="indexing">Indexing</h3>
+
+<p>We can index elements in an array using square brackets and indices:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># vector, and has only one dimension, taking one index</span>
+vector[<span style="color:#666">0</span>]</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">1</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># matrix is a 2 dimensional array, taking two indices </span>
+matrix[<span style="color:#666">1</span>,<span style="color:#666">1</span>]</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">4.0</pre></div>
+<p>If we omit an index of a multidimensional array it returns the whole row (or, in general, a <code>N-1</code> dimensional array)</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">matrix</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[1., 2.],
+       [3., 4.]])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">matrix[<span style="color:#666">1</span>]</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([3., 4.])</pre></div>
+<p>The same thing can be achieved with using <code>:</code> instead of an index:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">matrix[<span style="color:#666">1</span>,:] <span style="color:#408080;font-style:italic">#row 1</span></code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([3., 4.])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">matrix[:,<span style="color:#666">1</span>] <span style="color:#408080;font-style:italic">#column 1</span></code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([2., 4.])</pre></div>
+<p>We can assign new values to elements in an array using indexing:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">matrix[<span style="color:#666">1</span>,<span style="color:#666">1</span>] <span style="color:#666">=</span> <span style="color:#666">1</span></code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">matrix</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[1., 2.],
+       [3., 1.]])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># also works for rows and columns</span>
+matrix[<span style="color:#666">1</span>,:] <span style="color:#666">=</span> <span style="color:#666">0</span>
+matrix[:,<span style="color:#666">1</span>] <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span></code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">matrix</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[ 1., -1.],
+       [ 0., -1.]])</pre></div>
+<h3 id="index-slicing">Index slicing</h3>
+
+<p>Index slicing is the technical name for the syntax <code>M[lower:upper:step]</code> to extract part of an array:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">A <span style="color:#666">=</span> array([<span style="color:#666">1</span>,<span style="color:#666">2</span>,<span style="color:#666">3</span>,<span style="color:#666">4</span>,<span style="color:#666">5</span>])
+A</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([1, 2, 3, 4, 5])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">A[<span style="color:#666">1</span>:<span style="color:#666">3</span>] <span style="color:#666">=</span> [<span style="color:#666">-</span><span style="color:#666">2</span>,<span style="color:#666">-</span><span style="color:#666">3</span>]
+
+A</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([ 1, -2, -3,  4,  5])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">A[::] <span style="color:#408080;font-style:italic"># lower, upper, step all take the default values</span></code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([ 1, -2, -3,  4,  5])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">A[::<span style="color:#666">2</span>] <span style="color:#408080;font-style:italic"># step is 2, lower and upper defaults to the beginning and end of the array</span></code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([ 1, -3,  5])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">A[:<span style="color:#666">3</span>] <span style="color:#408080;font-style:italic"># first three elements</span></code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([ 1, -2, -3])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">A[<span style="color:#666">3</span>:] <span style="color:#408080;font-style:italic"># elements from index 3</span></code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([4, 5])</pre></div>
+<p>Negative indices counts from the end of the array (positive index from the begining):</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">A <span style="color:#666">=</span> array([<span style="color:#666">1</span>,<span style="color:#666">2</span>,<span style="color:#666">3</span>,<span style="color:#666">4</span>,<span style="color:#666">5</span>])</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">A[<span style="color:#666">-</span><span style="color:#666">1</span>] <span style="color:#408080;font-style:italic"># the last element in the array</span></code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">5</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">A[<span style="color:#666">-</span><span style="color:#666">3</span>:] <span style="color:#408080;font-style:italic"># the last three elements</span></code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([3, 4, 5])</pre></div>
+<p>Index slicing works exactly the same way for multidimensional arrays:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">A <span style="color:#666">=</span> array([[n<span style="color:#666">+</span>m<span style="color:#666">*</span><span style="color:#666">10</span> <span style="color:#008000;font-weight:bold">for</span> n <span style="color:#a2f;font-weight:bold">in</span> <span style="color:#008000">range</span>(<span style="color:#666">5</span>)] <span style="color:#008000;font-weight:bold">for</span> m <span style="color:#a2f;font-weight:bold">in</span> <span style="color:#008000">range</span>(<span style="color:#666">5</span>)])
+
+A</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[ 0,  1,  2,  3,  4],
+       [10, 11, 12, 13, 14],
+       [20, 21, 22, 23, 24],
+       [30, 31, 32, 33, 34],
+       [40, 41, 42, 43, 44]])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># a block from the original array</span>
+A[<span style="color:#666">1</span>:<span style="color:#666">4</span>, <span style="color:#666">1</span>:<span style="color:#666">4</span>]</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[11, 12, 13],
+       [21, 22, 23],
+       [31, 32, 33]])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># strides</span>
+A[::<span style="color:#666">2</span>, ::<span style="color:#666">2</span>]</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[ 0,  2,  4],
+       [20, 22, 24],
+       [40, 42, 44]])</pre></div>
+<h3 id="fancy-indexing">Fancy indexing</h3>
+
+<p>Fancy indexing is the name for when an array or list is used in-place of an index:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">row_indices <span style="color:#666">=</span> [<span style="color:#666">1</span>, <span style="color:#666">2</span>, <span style="color:#666">3</span>]
+A[row_indices]</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[10, 11, 12, 13, 14],
+       [20, 21, 22, 23, 24],
+       [30, 31, 32, 33, 34]])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">col_indices <span style="color:#666">=</span> [<span style="color:#666">1</span>, <span style="color:#666">2</span>, <span style="color:#666">-</span><span style="color:#666">1</span>] <span style="color:#408080;font-style:italic"># remember, index -1 means the last element</span>
+A[row_indices, col_indices]</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([11, 22, 34])</pre></div>
+<p>We can also use index masks: If the index mask is an Numpy array of data type <code>bool</code>, then an element is selected (True) or not (False) depending on the value of the index mask at the position of each element:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">B <span style="color:#666">=</span> array([n <span style="color:#008000;font-weight:bold">for</span> n <span style="color:#a2f;font-weight:bold">in</span> <span style="color:#008000">range</span>(<span style="color:#666">5</span>)])
+B</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([0, 1, 2, 3, 4])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">row_mask <span style="color:#666">=</span> array([True, False, True, False, False])
+B[row_mask]</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([0, 2])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># same thing</span>
+row_mask <span style="color:#666">=</span> array([<span style="color:#666">1</span>,<span style="color:#666">0</span>,<span style="color:#666">1</span>,<span style="color:#666">0</span>,<span style="color:#666">0</span>], dtype<span style="color:#666">=</span><span style="color:#008000">bool</span>)
+B[row_mask]</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([0, 2])</pre></div>
+<p>This feature is very useful to conditionally select elements from an array, using for example comparison operators:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">x <span style="color:#666">=</span> arange(<span style="color:#666">0</span>, <span style="color:#666">10</span>, <span style="color:#666">0.5</span>)
+x</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([0. , 0.5, 1. , 1.5, 2. , 2.5, 3. , 3.5, 4. , 4.5, 5. , 5.5, 6. ,
+       6.5, 7. , 7.5, 8. , 8.5, 9. , 9.5])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">mask <span style="color:#666">=</span> (<span style="color:#666">5</span> <span style="color:#666">&lt;</span> x) <span style="color:#666">*</span> (x <span style="color:#666">&lt;</span> <span style="color:#666">7.5</span>)
+mask</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([False, False, False, False, False, False, False, False, False,
+       False, False,  True,  True,  True,  True, False, False, False,
+       False, False])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">x[mask]</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([5.5, 6. , 6.5, 7. ])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">( <span style="color:#666">5</span> <span style="color:#666">&lt;</span> x ) <span style="color:#666">*</span> (x <span style="color:#666">&lt;</span> <span style="color:#666">7.5</span>)</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([False, False, False, False, False, False, False, False, False,
+       False, False,  True,  True,  True,  True, False, False, False,
+       False, False])</pre></div>
+<h3 id="functions-for-extracting-data-from-arrays-and-creating-arrays">Functions for extracting data from arrays and creating arrays</h3>
+
+<h4 id="where">where</h4>
+
+<p>The index mask can be converted to position index using the where function</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">indices <span style="color:#666">=</span> where(mask)
+
+indices</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">(array([11, 12, 13, 14]),)</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">x[indices] <span style="color:#408080;font-style:italic"># this indexing is equivalent to the fancy indexing x[mask]</span></code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([5.5, 6. , 6.5, 7. ])</pre></div>
+<p>####diag
+With the diag function we can also extract the diagonal and subdiagonals of an array:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">A</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[ 0,  1,  2,  3,  4],
+       [10, 11, 12, 13, 14],
+       [20, 21, 22, 23, 24],
+       [30, 31, 32, 33, 34],
+       [40, 41, 42, 43, 44]])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">diag(A)</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([ 0, 11, 22, 33, 44])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">diag(A, <span style="color:#666">-</span><span style="color:#666">1</span>)</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([10, 21, 32, 43])</pre></div>
+<h4 id="take">take</h4>
+
+<p>The <code>take</code> function is similar to fancy indexing described above:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">v2 <span style="color:#666">=</span> arange(<span style="color:#666">-</span><span style="color:#666">3</span>,<span style="color:#666">3</span>)
+v2</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([-3, -2, -1,  0,  1,  2])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">row_indices <span style="color:#666">=</span> [<span style="color:#666">1</span>, <span style="color:#666">3</span>, <span style="color:#666">5</span>]
+v2[row_indices] <span style="color:#408080;font-style:italic"># fancy indexing</span></code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([-2,  0,  2])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">v2<span style="color:#666">.</span>take(row_indices)</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([-2,  0,  2])</pre></div>
+<p>But take also works on lists and other objects:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">take([<span style="color:#666">-</span><span style="color:#666">3</span>, <span style="color:#666">-</span><span style="color:#666">2</span>, <span style="color:#666">-</span><span style="color:#666">1</span>,  <span style="color:#666">0</span>,  <span style="color:#666">1</span>,  <span style="color:#666">2</span>], row_indices)</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([-2,  0,  2])</pre></div>
+<p>####choose
+Constructs an array by picking elements from several arrays:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">which <span style="color:#666">=</span> [<span style="color:#666">1</span>, <span style="color:#666">0</span>, <span style="color:#666">1</span>, <span style="color:#666">0</span>]
+choices <span style="color:#666">=</span> [[<span style="color:#666">1</span>,<span style="color:#666">2</span>,<span style="color:#666">3</span>,<span style="color:#666">4</span>], [<span style="color:#666">-</span><span style="color:#666">1</span>,<span style="color:#666">-</span><span style="color:#666">2</span>,<span style="color:#666">-</span><span style="color:#666">3</span>,<span style="color:#666">-</span><span style="color:#666">4</span>]]
+
+choose(which, choices)</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([-1,  2, -3,  4])</pre></div>
+<h2 id="linear-algebra">Linear algebra</h2>
+
+<hr />
+
+<p>Vectorizing code is the key to writing efficient numerical calculation with Python/Numpy. That means that as much as possible of a program should be formulated in terms of matrix and vector operations, like matrix-matrix multiplication.</p>
+
+<h3 id="scalar-array-operations">Scalar-array operations</h3>
+
+<p>We can use the usual arithmetic operators to multiply, add, subtract, and divide arrays with scalar numbers.</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">v1 <span style="color:#666">=</span> arange(<span style="color:#666">0</span>, <span style="color:#666">5</span>)</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">v1</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([0, 1, 2, 3, 4])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">v1 <span style="color:#666">*</span> <span style="color:#666">2</span></code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([0, 2, 4, 6, 8])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">v1 <span style="color:#666">+</span> <span style="color:#666">2</span></code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([2, 3, 4, 5, 6])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">A</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[ 0,  1,  2,  3,  4],
+       [10, 11, 12, 13, 14],
+       [20, 21, 22, 23, 24],
+       [30, 31, 32, 33, 34],
+       [40, 41, 42, 43, 44]])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">A <span style="color:#666">*</span> <span style="color:#666">2</span></code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[ 0,  2,  4,  6,  8],
+       [20, 22, 24, 26, 28],
+       [40, 42, 44, 46, 48],
+       [60, 62, 64, 66, 68],
+       [80, 82, 84, 86, 88]])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">A <span style="color:#666">+</span> <span style="color:#666">2</span></code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[ 2,  3,  4,  5,  6],
+       [12, 13, 14, 15, 16],
+       [22, 23, 24, 25, 26],
+       [32, 33, 34, 35, 36],
+       [42, 43, 44, 45, 46]])</pre></div>
+<h3 id="element-wise-array-array-operations">Element-wise array-array operations</h3>
+
+<p>When we add, subtract, multiply and divide arrays with each other, the default behaviour is element-wise operations:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">v1 <span style="color:#666">*</span> v1</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([ 0,  1,  4,  9, 16])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">A <span style="color:#666">*</span> A</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[   0,    1,    4,    9,   16],
+       [ 100,  121,  144,  169,  196],
+       [ 400,  441,  484,  529,  576],
+       [ 900,  961, 1024, 1089, 1156],
+       [1600, 1681, 1764, 1849, 1936]])</pre></div>
+<p>If we multiply arrays with compatible shapes, we get an element-wise multiplication of each row:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">A<span style="color:#666">.</span>shape</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">(5, 5)</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">v1<span style="color:#666">.</span>shape</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">(5,)</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">v1</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([0, 1, 2, 3, 4])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">A</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[ 0,  1,  2,  3,  4],
+       [10, 11, 12, 13, 14],
+       [20, 21, 22, 23, 24],
+       [30, 31, 32, 33, 34],
+       [40, 41, 42, 43, 44]])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">A <span style="color:#666">*</span> v1</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[  0,   1,   4,   9,  16],
+       [  0,  11,  24,  39,  56],
+       [  0,  21,  44,  69,  96],
+       [  0,  31,  64,  99, 136],
+       [  0,  41,  84, 129, 176]])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">v1 <span style="color:#666">*</span> A</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[  0,   1,   4,   9,  16],
+       [  0,  11,  24,  39,  56],
+       [  0,  21,  44,  69,  96],
+       [  0,  31,  64,  99, 136],
+       [  0,  41,  84, 129, 176]])</pre></div>
+<h3 id="matrix-algebra">Matrix algebra</h3>
+
+<p>What about matrix mutiplication? There are two ways. We can either use the dot function, which applies a matrix-matrix, matrix-vector, or inner vector multiplication to its two arguments:</p>
+
+<p>Dot multiplication:</p>
+
+<p>$a\cdot b=\sum_{i=1}^n a_n b_n = a_1 b_1 + a_2 b_2 + &hellip; + a_n b_n$</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">A</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[ 0,  1,  2,  3,  4],
+       [10, 11, 12, 13, 14],
+       [20, 21, 22, 23, 24],
+       [30, 31, 32, 33, 34],
+       [40, 41, 42, 43, 44]])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dot(A,A)</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[ 300,  310,  320,  330,  340],
+       [1300, 1360, 1420, 1480, 1540],
+       [2300, 2410, 2520, 2630, 2740],
+       [3300, 3460, 3620, 3780, 3940],
+       [4300, 4510, 4720, 4930, 5140]])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">t <span style="color:#666">=</span> array([[<span style="color:#666">1</span>,<span style="color:#666">2</span>],[<span style="color:#666">3</span>,<span style="color:#666">4</span>]])</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">t</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[1, 2],
+       [3, 4]])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dot(t,t)</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[ 7, 10],
+       [15, 22]])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">z <span style="color:#666">=</span> array([<span style="color:#666">1</span>,<span style="color:#666">2</span>,<span style="color:#666">3</span>])
+dot(z,z)</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">14</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dot([<span style="color:#666">1</span>,<span style="color:#666">2</span>],[<span style="color:#666">1</span>,<span style="color:#666">3</span>])</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">7</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">v1</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([0, 1, 2, 3, 4])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">dot(A,v1)</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([ 30, 130, 230, 330, 430])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#008000;font-weight:bold">from</span> <span style="color:#00f;font-weight:bold">numpy.linalg</span> <span style="color:#008000;font-weight:bold">import</span> <span style="color:#666">*</span></code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">A</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[ 0,  1,  2,  3,  4],
+       [10, 11, 12, 13, 14],
+       [20, 21, 22, 23, 24],
+       [30, 31, 32, 33, 34],
+       [40, 41, 42, 43, 44]])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">a <span style="color:#666">=</span> array([[[<span style="color:#666">1.</span>, <span style="color:#666">2.</span>], [<span style="color:#666">3.</span>, <span style="color:#666">4.</span>]], [[<span style="color:#666">1</span>, <span style="color:#666">3</span>], [<span style="color:#666">3</span>, <span style="color:#666">5</span>]]])</code></pre></div>
+<h3 id="data-processing">Data processing</h3>
+
+<p>Often it is useful to store datasets in Numpy arrays. Numpy provides a number of functions to calculate statistics of datasets in arrays.</p>
+
+<p>For example, let&rsquo;s calculate some properties from the Stockholm temperature dataset used above.</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># reminder, the tempeature dataset is stored in the data variable:</span>
+shape(data)</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">(77431, 7)</pre></div>
+<p>####mean</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># the temperature data is in column 3</span>
+mean(data[:,<span style="color:#666">3</span>])</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">6.197109684751585</pre></div>
+<p>The daily mean temperature in Stockholm over the last 200 years has been about 6.2 C.</p>
+
+<h4 id="sd-and-variance">SD and variance</h4>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">std(data[:,<span style="color:#666">3</span>]), var(data[:,<span style="color:#666">3</span>])</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">(8.282271621340573, 68.59602320966341)</pre></div>
+<p>####min and max</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># lowest daily average temperature</span>
+data[:,<span style="color:#666">3</span>]<span style="color:#666">.</span><span style="color:#008000">min</span>()</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">-25.8</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># highest daily average temperature</span>
+data[:,<span style="color:#666">3</span>]<span style="color:#666">.</span><span style="color:#008000">max</span>()</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">28.3</pre></div>
+<h4 id="sum-prod-and-trace">sum, prod, and trace</h4>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">d <span style="color:#666">=</span> arange(<span style="color:#666">0</span>, <span style="color:#666">10</span>)
+d</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># sum up all elements</span>
+<span style="color:#008000">sum</span>(d)</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">45</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># product of all elements</span>
+prod(d<span style="color:#666">+</span><span style="color:#666">1</span>)</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">3628800</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">d<span style="color:#666">+</span><span style="color:#666">1</span></code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># cummulative product</span>
+cumprod(d<span style="color:#666">+</span><span style="color:#666">1</span>)</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([      1,       2,       6,      24,     120,     720,    5040,
+         40320,  362880, 3628800])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># same as: diag(A).sum()</span>
+trace(A)</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">110</pre></div>
+<h3 id="calculations-with-higher-dimensional-data">Calculations with higher-dimensional data</h3>
+
+<p>When functions such as min, max, etc. are applied to a multidimensional arrays, it is sometimes useful to apply the calculation to the entire array, and sometimes only on a row or column basis. Using the axis argument we can specify how these functions should behave:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">m <span style="color:#666">=</span> random<span style="color:#666">.</span>rand(<span style="color:#666">3</span>,<span style="color:#666">3</span>)
+m</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[0.33829171, 0.40448773, 0.53537406],
+       [0.70139575, 0.82815424, 0.75878347],
+       [0.52038369, 0.03975169, 0.67270888]])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># global max</span>
+m<span style="color:#666">.</span><span style="color:#008000">max</span>()</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">0.8281542387464986</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># max in each column</span>
+m<span style="color:#666">.</span><span style="color:#008000">max</span>(axis<span style="color:#666">=</span><span style="color:#666">0</span>)</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([0.70139575, 0.82815424, 0.75878347])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># max in each row</span>
+m<span style="color:#666">.</span><span style="color:#008000">max</span>(axis<span style="color:#666">=</span><span style="color:#666">1</span>)</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([0.53537406, 0.82815424, 0.67270888])</pre></div>
+<p>Many other functions and methods in the array and matrix classes accept the same (optional) axis keyword argument.</p>
+
+<h2 id="reshaping-resizing-and-stacking-arrays">Reshaping, resizing and stacking arrays</h2>
+
+<hr />
+
+<p>The shape of an Numpy array can be modified without copying the underlaying data, which makes it a fast operation even for large arrays.</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">A</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[ 0,  1,  2,  3,  4],
+       [10, 11, 12, 13, 14],
+       [20, 21, 22, 23, 24],
+       [30, 31, 32, 33, 34],
+       [40, 41, 42, 43, 44]])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">A<span style="color:#666">.</span>shape</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">(5, 5)</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">n, m <span style="color:#666">=</span> A<span style="color:#666">.</span>shape</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">B <span style="color:#666">=</span> A<span style="color:#666">.</span>reshape((<span style="color:#666">1</span>,n<span style="color:#666">*</span>m))</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">B</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[ 0,  1,  2,  3,  4, 10, 11, 12, 13, 14, 20, 21, 22, 23, 24, 30,
+        31, 32, 33, 34, 40, 41, 42, 43, 44]])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">B[<span style="color:#666">0</span>,<span style="color:#666">0</span>:<span style="color:#666">5</span>] <span style="color:#666">=</span> <span style="color:#666">5</span></code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">B</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[ 5,  5,  5,  5,  5, 10, 11, 12, 13, 14, 20, 21, 22, 23, 24, 30,
+        31, 32, 33, 34, 40, 41, 42, 43, 44]])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">A</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[ 5,  5,  5,  5,  5],
+       [10, 11, 12, 13, 14],
+       [20, 21, 22, 23, 24],
+       [30, 31, 32, 33, 34],
+       [40, 41, 42, 43, 44]])</pre></div>
+<p>We can also use the function <code>flatten</code> to make a higher-dimensional array into a vector. But this function create a copy of the data.</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">B <span style="color:#666">=</span> A<span style="color:#666">.</span>flatten()
+
+B</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([ 5,  5,  5,  5,  5, 10, 11, 12, 13, 14, 20, 21, 22, 23, 24, 30, 31,
+       32, 33, 34, 40, 41, 42, 43, 44])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">B[<span style="color:#666">0</span>:<span style="color:#666">5</span>] <span style="color:#666">=</span> <span style="color:#666">10</span>
+
+B</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([10, 10, 10, 10, 10, 10, 11, 12, 13, 14, 20, 21, 22, 23, 24, 30, 31,
+       32, 33, 34, 40, 41, 42, 43, 44])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">A</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[ 5,  5,  5,  5,  5],
+       [10, 11, 12, 13, 14],
+       [20, 21, 22, 23, 24],
+       [30, 31, 32, 33, 34],
+       [40, 41, 42, 43, 44]])</pre></div>
+<h3 id="adding-a-new-dimension-newaxis">Adding a new dimension: newaxis</h3>
+
+<p>With <code>newaxis</code>, we can insert new dimensions in an array, for example converting a vector to a column or row matrix:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">v <span style="color:#666">=</span> array([<span style="color:#666">1</span>,<span style="color:#666">2</span>,<span style="color:#666">3</span>])</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">shape(v)</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">(3,)</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># make a column matrix of the vector v</span>
+v[:, newaxis]</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[1],
+       [2],
+       [3]])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">v[newaxis,:]</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[1, 2, 3]])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">v[newaxis,:]<span style="color:#666">.</span>shape</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">(1, 3)</pre></div>
+<h3 id="stacking-and-repeating-arrays">Stacking and repeating arrays</h3>
+
+<p>Using function <code>repeat</code>,<code>tile</code>, <code>vstack</code>, <code>hstack</code>, and <code>concatenate</code> we can create larger vectors and matrices from smaller ones:</p>
+
+<p>####tile and repeat</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">a <span style="color:#666">=</span> array([[<span style="color:#666">1</span>, <span style="color:#666">2</span>], [<span style="color:#666">3</span>, <span style="color:#666">4</span>]])</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># repeat each element 3 times</span>
+repeat(a, <span style="color:#666">3</span>)</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># tile the matrix 3 times </span>
+tile(a, <span style="color:#666">3</span>)</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[1, 2, 1, 2, 1, 2],
+       [3, 4, 3, 4, 3, 4]])</pre></div>
+<p>####concatenate</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">b <span style="color:#666">=</span> array([[<span style="color:#666">5</span>, <span style="color:#666">6</span>]])</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">concatenate((a, b), axis<span style="color:#666">=</span><span style="color:#666">0</span>)</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[1, 2],
+       [3, 4],
+       [5, 6]])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">b<span style="color:#666">.</span>T</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[5],
+       [6]])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">concatenate((a, b<span style="color:#666">.</span>T), axis<span style="color:#666">=</span><span style="color:#666">1</span>)</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[1, 2, 5],
+       [3, 4, 6]])</pre></div>
+<p>####vertical and horizontal stack</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">vstack((a,b))</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[1, 2],
+       [3, 4],
+       [5, 6]])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">hstack((a,b<span style="color:#666">.</span>T))</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[1, 2, 5],
+       [3, 4, 6]])</pre></div>
+<h2 id="copy-versus-deep-copy">Copy versus &ldquo;deep copy&rdquo;</h2>
+
+<hr />
+
+<p>To achieve high performance, assignments in Python usually do not copy the underlaying objects. This is important for example when objects are passed between functions, to avoid an excessive amount of memory copying when it is not necessary (technical term: pass by reference).</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">A <span style="color:#666">=</span> array([[<span style="color:#666">1</span>, <span style="color:#666">2</span>], [<span style="color:#666">3</span>, <span style="color:#666">4</span>]])
+
+A</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[1, 2],
+       [3, 4]])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># now B is referring to the same array data as A </span>
+B <span style="color:#666">=</span> A</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># changing B affects A</span>
+B[<span style="color:#666">0</span>,<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#666">10</span>
+
+B</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[10,  2],
+       [ 3,  4]])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">A</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[10,  2],
+       [ 3,  4]])</pre></div>
+<p>If we want to avoid this behavior, so that when we get a new completely independent object B copied from A, then we need to do a so-called &ldquo;deep copy&rdquo; using the function <code>copy</code>:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">B <span style="color:#666">=</span> copy(A)</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># now, if we modify B, A is not affected</span>
+B[<span style="color:#666">0</span>,<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">5</span>
+
+B</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[-5,  2],
+       [ 3,  4]])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">A</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[10,  2],
+       [ 3,  4]])</pre></div>
+<h2 id="iterating-over-array-elements">Iterating over array elements</h2>
+
+<hr />
+
+<p>Generally, we want to avoid iterating over the elements of arrays whenever we can (at all costs). The reason is that in a interpreted language like Python (or MATLAB), iterations are really slow compared to vectorized operations.</p>
+
+<p>However, sometimes iterations are unavoidable. For such cases, the Python <code>for</code> loop is the most convenient way to iterate over an array:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">v <span style="color:#666">=</span> array([<span style="color:#666">1</span>,<span style="color:#666">2</span>,<span style="color:#666">3</span>,<span style="color:#666">4</span>])
+
+<span style="color:#008000;font-weight:bold">for</span> element <span style="color:#a2f;font-weight:bold">in</span> v:
+    <span style="color:#008000;font-weight:bold">print</span>(element)</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">1
+2
+3
+4</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">M <span style="color:#666">=</span> array([[<span style="color:#666">1</span>,<span style="color:#666">2</span>], [<span style="color:#666">3</span>,<span style="color:#666">4</span>]])
+
+<span style="color:#008000;font-weight:bold">for</span> row <span style="color:#a2f;font-weight:bold">in</span> M:
+    <span style="color:#008000;font-weight:bold">print</span>(<span style="color:#ba2121">&#34;row&#34;</span>, row)
+    
+    <span style="color:#008000;font-weight:bold">for</span> element <span style="color:#a2f;font-weight:bold">in</span> row:
+        <span style="color:#008000;font-weight:bold">print</span>(element)</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">row [1 2]
+1
+2
+row [3 4]
+3
+4</pre></div>
+<p>When we need to iterate over each element of an array and modify its elements, it is convenient to use the <code>enumerate</code> function to obtain both the element and its index in the <code>for</code> loop:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#008000;font-weight:bold">for</span> row_idx, row <span style="color:#a2f;font-weight:bold">in</span> <span style="color:#008000">enumerate</span>(M):
+    <span style="color:#008000;font-weight:bold">print</span>(<span style="color:#ba2121">&#34;row_idx&#34;</span>, row_idx, <span style="color:#ba2121">&#34;row&#34;</span>, row)
+    
+    <span style="color:#008000;font-weight:bold">for</span> col_idx, element <span style="color:#a2f;font-weight:bold">in</span> <span style="color:#008000">enumerate</span>(row):
+        <span style="color:#008000;font-weight:bold">print</span>(<span style="color:#ba2121">&#34;col_idx&#34;</span>, col_idx, <span style="color:#ba2121">&#34;element&#34;</span>, element)
+       
+        <span style="color:#408080;font-style:italic"># update the matrix M: square each element</span>
+        M[row_idx, col_idx] <span style="color:#666">=</span> element <span style="color:#666">**</span> <span style="color:#666">2</span></code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">row_idx 0 row [1 2]
+col_idx 0 element 1
+col_idx 1 element 2
+row_idx 1 row [3 4]
+col_idx 0 element 3
+col_idx 1 element 4</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># each element in M is now squared</span>
+M</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[ 1,  4],
+       [ 9, 16]])</pre></div>
+<h2 id="using-arrays-in-conditions">Using arrays in conditions</h2>
+
+<hr />
+
+<p>When using arrays in conditions,for example if statements and other boolean expressions, one needs to use <code>any</code> or <code>all</code>, which requires that any or all elements in the array evalutes to <code>True</code>:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">M</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[ 1,  4],
+       [ 9, 16]])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#008000;font-weight:bold">if</span> (M <span style="color:#666">&gt;</span> <span style="color:#666">5</span>)<span style="color:#666">.</span><span style="color:#008000">any</span>():
+    <span style="color:#008000;font-weight:bold">print</span>(<span style="color:#ba2121">&#34;at least one element in M is larger than 5&#34;</span>)
+<span style="color:#008000;font-weight:bold">else</span>:
+    <span style="color:#008000;font-weight:bold">print</span>(<span style="color:#ba2121">&#34;no element in M is larger than 5&#34;</span>)</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">at least one element in M is larger than 5</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#008000;font-weight:bold">if</span> (M <span style="color:#666">&gt;</span> <span style="color:#666">5</span>)<span style="color:#666">.</span><span style="color:#008000">all</span>():
+    <span style="color:#008000;font-weight:bold">print</span>(<span style="color:#ba2121">&#34;all elements in M are larger than 5&#34;</span>)
+<span style="color:#008000;font-weight:bold">else</span>:
+    <span style="color:#008000;font-weight:bold">print</span>(<span style="color:#ba2121">&#34;all elements in M are not larger than 5&#34;</span>)</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">all elements in M are not larger than 5</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">M[<span style="color:#008000">any</span>(M<span style="color:#666">&gt;</span><span style="color:#666">5</span>,axis<span style="color:#666">=</span><span style="color:#666">1</span>)]</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[ 9, 16]])</pre></div>
+<h2 id="type-casting">Type casting</h2>
+
+<hr />
+
+<p>Since Numpy arrays are statically typed, the type of an array does not change once created. But we can explicitly cast an array of some type to another using the <code>astype</code> functions (see also the similar <code>asarray</code> function). This always create a new array of new type:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">M<span style="color:#666">.</span>dtype</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">dtype(&#39;int64&#39;)</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">M2 <span style="color:#666">=</span> M<span style="color:#666">.</span>astype(<span style="color:#008000">float</span>)
+
+M2</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[ 1.,  4.],
+       [ 9., 16.]])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">M2<span style="color:#666">.</span>dtype</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">dtype(&#39;float64&#39;)</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">M3 <span style="color:#666">=</span> M<span style="color:#666">.</span>astype(<span style="color:#008000">bool</span>)
+
+M3</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[ True,  True],
+       [ True,  True]])</pre></div>
+<h2 id="homework-1-with-numpy">Homework 1 with numpy</h2>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># Get the datasets</span>
+<span style="">!</span>wget https:<span style="color:#666">//</span>nekrut<span style="color:#666">.</span>github<span style="color:#666">.</span>io<span style="color:#666">/</span>BMMB554<span style="color:#666">/</span>yeast_genes<span style="color:#666">.</span>txt</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">--2019-01-23 18:23:32--  https://nekrut.github.io/BMMB554/yeast_genes.txt
+Resolving nekrut.github.io (nekrut.github.io)... 185.199.109.153, 185.199.110.153, 185.199.111.153, ...
+Connecting to nekrut.github.io (nekrut.github.io)|185.199.109.153|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 236742 (231K) [text/plain]
+Saving to: ‘yeast_genes.txt’
+
+yeast_genes.txt     100%[===================&gt;] 231.19K  --.-KB/s    in 0.03s   
+
+2019-01-23 18:23:32 (7.88 MB/s) - ‘yeast_genes.txt’ saved [236742/236742]</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="">!</span>cut <span style="color:#666">-</span>f <span style="color:#666">3</span> yeast_genes<span style="color:#666">.</span>txt <span style="color:#666">|</span> sort <span style="color:#666">|</span> uniq <span style="color:#666">-</span>c</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">    131 chrI
+    485 chrII
+    253 chrIII
+    889 chrIV
+    264 chrIX
+     58 chrmt
+      1 chrom
+    360 chrV
+    161 chrVI
+    642 chrVII
+    340 chrVIII
+    438 chrX
+    375 chrXI
+    644 chrXII
+    551 chrXIII
+    459 chrXIV
+    640 chrXV
+    548 chrXVI</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># First let&#39;s find out how many chromosomes:</span>
+chrom <span style="color:#666">=</span> []
+<span style="color:#008000;font-weight:bold">for</span> line <span style="color:#a2f;font-weight:bold">in</span> <span style="color:#008000">open</span>(<span style="color:#ba2121">&#39;yeast_genes.txt&#39;</span>,<span style="color:#ba2121">&#39;r&#39;</span>):
+  <span style="color:#008000;font-weight:bold">if</span> <span style="color:#a2f;font-weight:bold">not</span> line<span style="color:#666">.</span>startswith(<span style="color:#ba2121">&#39;#&#39;</span>): <span style="color:#408080;font-style:italic"># ignore header</span>
+    chrom<span style="color:#666">.</span>append(line<span style="color:#666">.</span>split(<span style="color:#ba2121">&#39;</span><span style="color:#b62;font-weight:bold">\t</span><span style="color:#ba2121">&#39;</span>)[<span style="color:#666">2</span>]) <span style="color:#408080;font-style:italic">#split line on tabs and access the third [2] element</span>
+<span style="color:#008000">set</span>(chrom)</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">{&#39;chrI&#39;,
+ &#39;chrII&#39;,
+ &#39;chrIII&#39;,
+ &#39;chrIV&#39;,
+ &#39;chrIX&#39;,
+ &#39;chrV&#39;,
+ &#39;chrVI&#39;,
+ &#39;chrVII&#39;,
+ &#39;chrVIII&#39;,
+ &#39;chrX&#39;,
+ &#39;chrXI&#39;,
+ &#39;chrXII&#39;,
+ &#39;chrXIII&#39;,
+ &#39;chrXIV&#39;,
+ &#39;chrXV&#39;,
+ &#39;chrXVI&#39;,
+ &#39;chrmt&#39;}</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># Let&#39;s create two arrays to translate between roman and integer</span>
+<span style="color:#408080;font-style:italic"># The trick here is than index of every element can be used to</span>
+<span style="color:#408080;font-style:italic"># Translate roman into integer</span>
+<span style="color:#408080;font-style:italic"># For example, chr_roman[1] is &#39;chrI&#39;</span>
+
+chr_roman <span style="color:#666">=</span> [<span style="color:#ba2121">&#39;chrmt&#39;</span>,
+ <span style="color:#ba2121">&#39;chrI&#39;</span>,       
+ <span style="color:#ba2121">&#39;chrII&#39;</span>,
+ <span style="color:#ba2121">&#39;chrIII&#39;</span>,
+ <span style="color:#ba2121">&#39;chrIV&#39;</span>,
+ <span style="color:#ba2121">&#39;chrIX&#39;</span>,
+ <span style="color:#ba2121">&#39;chrV&#39;</span>,
+ <span style="color:#ba2121">&#39;chrVI&#39;</span>,
+ <span style="color:#ba2121">&#39;chrVII&#39;</span>,
+ <span style="color:#ba2121">&#39;chrVIII&#39;</span>,
+ <span style="color:#ba2121">&#39;chrX&#39;</span>,
+ <span style="color:#ba2121">&#39;chrXI&#39;</span>,
+ <span style="color:#ba2121">&#39;chrXII&#39;</span>,
+ <span style="color:#ba2121">&#39;chrXIII&#39;</span>,
+ <span style="color:#ba2121">&#39;chrXIV&#39;</span>,
+ <span style="color:#ba2121">&#39;chrXV&#39;</span>,
+ <span style="color:#ba2121">&#39;chrXVI&#39;</span>]</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">chr_roman<span style="color:#666">.</span>index(<span style="color:#ba2121">&#39;chrI&#39;</span>)</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">1</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># Process the dataset</span>
+
+names <span style="color:#666">=</span> [] <span style="color:#408080;font-style:italic"># Initialize array for gene names</span>
+coord <span style="color:#666">=</span> [] <span style="color:#408080;font-style:italic"># Initialize array for coordinate data</span>
+
+<span style="color:#008000;font-weight:bold">for</span> line <span style="color:#a2f;font-weight:bold">in</span> <span style="color:#008000">open</span>(<span style="color:#ba2121">&#39;yeast_genes.txt&#39;</span>,<span style="color:#ba2121">&#39;r&#39;</span>):
+  <span style="color:#008000;font-weight:bold">if</span> <span style="color:#a2f;font-weight:bold">not</span> line<span style="color:#666">.</span>startswith(<span style="color:#ba2121">&#39;#&#39;</span>): <span style="color:#408080;font-style:italic"># ignore header</span>
+    line <span style="color:#666">=</span> line<span style="color:#666">.</span>rstrip() <span style="color:#408080;font-style:italic"># get rid of caret returns</span>
+    fields <span style="color:#666">=</span> line<span style="color:#666">.</span>split(<span style="color:#ba2121">&#39;</span><span style="color:#b62;font-weight:bold">\t</span><span style="color:#ba2121">&#39;</span>) <span style="color:#408080;font-style:italic"># split line on tabs to convert it into a list</span>
+    name <span style="color:#666">=</span> fields[<span style="color:#666">0</span>]
+    chromosome <span style="color:#666">=</span> chr_roman<span style="color:#666">.</span>index(fields[<span style="color:#666">2</span>])
+    start <span style="color:#666">=</span> <span style="color:#008000">int</span>( fields[<span style="color:#666">3</span>] )
+    end <span style="color:#666">=</span> <span style="color:#008000">int</span>( fields[<span style="color:#666">4</span>] )
+    length <span style="color:#666">=</span> end<span style="color:#666">-</span>start<span style="color:#666">+</span><span style="color:#666">1</span> <span style="color:#408080;font-style:italic"># compute the length</span>
+    <span style="color:#008000;font-weight:bold">if</span> name<span style="color:#666">.</span>split(<span style="color:#ba2121">&#39;-&#39;</span>)[<span style="color:#666">0</span>]<span style="color:#666">.</span>endswith(<span style="color:#ba2121">&#39;W&#39;</span>):
+      strand <span style="color:#666">=</span> <span style="color:#666">1</span> <span style="color:#408080;font-style:italic"># encode positive strand as 1</span>
+    <span style="color:#008000;font-weight:bold">elif</span> name<span style="color:#666">.</span>split(<span style="color:#ba2121">&#39;-&#39;</span>)[<span style="color:#666">0</span>]<span style="color:#666">.</span>endswith(<span style="color:#ba2121">&#39;C&#39;</span>):
+      strand <span style="color:#666">=</span> <span style="color:#666">2</span> <span style="color:#408080;font-style:italic"># encode negative strand as 2</span>
+    <span style="color:#008000;font-weight:bold">else</span>:        
+      strand <span style="color:#666">=</span> <span style="color:#666">0</span> <span style="color:#408080;font-style:italic"># encode unknown strand as 0</span>
+    names<span style="color:#666">.</span>append(name)
+    coord<span style="color:#666">.</span>append([chromosome,start,end,length,strand])
+      </code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">coord[:<span style="color:#666">2</span>]</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">[[0, 61868, 62447, 580, 0], [0, 1, 11, 11, 0]]</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">names[:<span style="color:#666">2</span>]</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">[&#39;21S_rRNA_4&#39;, &#39;9S_rRNA_1&#39;]</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="">!</span>head <span style="color:#666">-</span>n <span style="color:#666">3</span> yeast_genes<span style="color:#666">.</span>txt</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">#systematic_name    standard_name   chrom   start   end
+21S_rRNA_4  21S_RRNA_4  chrmt   61868   62447
+9S_rRNA_1   9S_RRNA_1   chrmt   1   11</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># Convert coord array into numpy array</span>
+coord <span style="color:#666">=</span> array(coord)</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">coord[:<span style="color:#666">2</span>]</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([[    0, 61868, 62447,   580,     0],
+       [    0,     1,    11,    11,     0]])</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">coord<span style="color:#666">.</span>dtype</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">dtype(&#39;int64&#39;)</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># Convert names array into numpy array</span>
+names <span style="color:#666">=</span> array(names)</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">names[:<span style="color:#666">2</span>]</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">array([&#39;21S_rRNA_4&#39;, &#39;9S_rRNA_1&#39;], dtype=&#39;&lt;U10&#39;)</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># The number of genes can be inferred from array shape</span>
+coord<span style="color:#666">.</span>shape</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">(7238, 5)</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># You can see that the file as many lines + 1 (header)</span>
+<span style="">!</span>wc <span style="color:#666">-</span>l yeast_genes<span style="color:#666">.</span>txt</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">7239 yeast_genes.txt</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># Longest gene is the max of the dufference between start and end</span>
+<span style="color:#008000">max</span>(coord[:,<span style="color:#666">2</span>] <span style="color:#666">-</span> coord[:,<span style="color:#666">1</span>] <span style="color:#666">+</span> <span style="color:#666">1</span>)</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">14733</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># Or simply the maximum of the length column</span>
+<span style="color:#008000">max</span>(coord[:,<span style="color:#666">3</span>])</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">14733</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># Which gene is that?</span>
+<span style="color:#408080;font-style:italic"># The index of this gene in coord array is:</span>
+argmax(coord[:,<span style="color:#666">3</span>])</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">4740</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># It has the same index in names array:</span>
+names[<span style="color:#666">4740</span>]</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">&#39;YLR106C&#39;</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># Shortest gene</span>
+<span style="color:#008000">min</span>(coord[:,<span style="color:#666">3</span>])</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">1</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># The number of genes on chromsome 10</span>
+shape(extract(coord[:,<span style="color:#666">0</span>] <span style="color:#666">==</span> <span style="color:#666">10</span>,coord))</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">(438,)</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># Longest gene on chromosome 10</span>
+<span style="color:#008000">max</span>(extract(coord[:,<span style="color:#666">0</span>] <span style="color:#666">==</span> <span style="color:#666">10</span>,coord[:,<span style="color:#666">3</span>]))</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">7413</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># The number of genes of chromsome 1 that are on the + strand </span>
+<span style="color:#408080;font-style:italic"># (we encoded &#39;+&#39; as 1)</span>
+size(extract(coord[:,<span style="color:#666">0</span>] <span style="color:#666">==</span> <span style="color:#666">1</span>, coord[:,<span style="color:#666">4</span>] <span style="color:#666">==</span> <span style="color:#666">1</span>))</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">131</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># The number of genes of chromsome 1 that are on the - strand </span>
+<span style="color:#408080;font-style:italic"># (we encoded &#39;-&#39; as 2)</span>
+size(extract(coord[:,<span style="color:#666">0</span>] <span style="color:#666">==</span> <span style="color:#666">2</span>, coord[:,<span style="color:#666">4</span>] <span style="color:#666">==</span> <span style="color:#666">2</span>))</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">485</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># Let&#39;s plot distribution of gene lengths</span>
+sns<span style="color:#666">.</span>set_style(<span style="color:#ba2121">&#39;whitegrid&#39;</span>)
+sns<span style="color:#666">.</span>distplot(coord[:,<span style="color:#666">3</span>])</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">/usr/local/lib/python3.6/dist-packages/matplotlib/axes/_axes.py:6521: MatplotlibDeprecationWarning: 
+The &#39;normed&#39; kwarg was deprecated in Matplotlib 2.1 and will be removed in 3.1. Use &#39;density&#39; instead.
+  alternative=&#34;&#39;density&#39;&#34;, removal=&#34;3.1&#34;)
+
+
+
+
+
+&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f03f238c6a0&gt;</pre></div>
+<p><img src="/BMMB554/img/output_257_2.png" alt="png" /></p>
+
+<h2 id="a-little-fun-with-images">A little fun with images</h2>
+
+<hr />
+
+<p>Images are really arrays</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#008000;font-weight:bold">import</span> <span style="color:#00f;font-weight:bold">matplotlib.pyplot</span> <span style="color:#008000;font-weight:bold">as</span> <span style="color:#00f;font-weight:bold">pl</span>
+<span style="color:#008000;font-weight:bold">import</span> <span style="color:#00f;font-weight:bold">matplotlib.image</span> <span style="color:#008000;font-weight:bold">as</span> <span style="color:#00f;font-weight:bold">mpimg</span>
+<span style="color:#008000;font-weight:bold">import</span> <span style="color:#00f;font-weight:bold">numpy</span> <span style="color:#008000;font-weight:bold">as</span> <span style="color:#00f;font-weight:bold">np</span></code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#008000;font-weight:bold">import</span> <span style="color:#00f;font-weight:bold">imageio</span>
+img<span style="color:#666">=</span><span style="color:#ba2121">&#34;https://nekrut.github.io/BMMB554/img/1N1A6336.CR2.jpg&#34;</span>
+img <span style="color:#666">=</span> imageio<span style="color:#666">.</span>imread(img)</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">img<span style="color:#666">.</span>shape</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">(880, 1320, 3)</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">start_img[<span style="color:#666">0</span>]</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">---------------------------------------------------------------------------
+
+NameError                                 Traceback (most recent call last)
+
+&lt;ipython-input-200-ccafdea59cf4&gt; in &lt;module&gt;()
+----&gt; 1 start_img[0]
+
+
+NameError: name &#39;start_img&#39; is not defined</pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">plt<span style="color:#666">.</span>imshow(img,cmap<span style="color:#666">=</span>plt<span style="color:#666">.</span>cm<span style="color:#666">.</span>gray)
+plt<span style="color:#666">.</span>axis(<span style="color:#ba2121">&#39;off&#39;</span>)</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">(-0.5, 1319.5, 879.5, -0.5)</pre></div>
+<p><img src="/BMMB554/img/output_263_1.png" alt="png" /></p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">flip <span style="color:#666">=</span> np<span style="color:#666">.</span>flipud(img)</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">plt<span style="color:#666">.</span>imshow(flip)
+plt<span style="color:#666">.</span>axis(<span style="color:#ba2121">&#39;off&#39;</span>)</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">(-0.5, 1319.5, 879.5, -0.5)</pre></div>
+<p><img src="/BMMB554/img/output_265_1.png" alt="png" /></p>
+
+
+
+      </main>
+    </div>
+    <footer id="footer" class="mt-auto text-center text-muted">
+  <div class="container">
+    Nekrutenko Lab 2019 | CC-BY
+  </div>
+</footer>
+    <script src="https://nekrut.github.io/BMMB554/js/feather.min.js"></script>
+<script>
+  feather.replace()
+</script>
+
+
+    
+  
+
+  </body>
+</html>
