@@ -1,4 +1,4 @@
-#'chr'	'start'	'end'	'blunt.KKL_35_0_25X.bam'	'cap.KKL_35_0_25X.bam'	'dual_pen.KKL_35_0_25X.bam'	'erm.KKL_35_0_25X.bam'	'pen.KKL_35_0_25X.bam'	'tuf.KKL_35_0_25X.bam'
+#'chr'	'start'	'end'	'blunt'	'cap'	'dual_pen'	'erm'	'pen'	'tuf'
 NC_007795.1	2500004	2500006	4.0	3.0	1.0	1.0	2.0	10.0
 NC_007795.1	2500008	2500010	3.0	11.0	0.0	1.0	2.0	11.0
 NC_007795.1	2500020	2500022	4.0	13.0	8.0	2.0	5.0	13.0

@@ -2872,3 +2872,7 @@ plt.axis('off')
 
 ![png](/BMMB554/img/output_265_1.png)
 
+# Homework 1A
+
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdrWK8lwgiVo2WywctA8DAR_0MDitVvvJNTPcGBAkeB1NdxLA/viewform?embedded=true" width="800" height="1070" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+
