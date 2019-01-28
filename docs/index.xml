@@ -6,10 +6,20 @@
     <description>Recent content on BMMB554</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 23 Jan 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 28 Jan 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://nekrut.github.io/BMMB554/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Lecture 6: Pandas 1</title>
+      <link>https://nekrut.github.io/BMMB554/lecture6/</link>
+      <pubDate>Mon, 28 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/lecture6/</guid>
+      <description>Prep  Point your browser to http://colab.research.google.com Open notebook 2019/ipynb/tnseq_with_pandas.ipynb from https://github.com/nekrut/BMMB554  Introduction to Pandas : Part 1 This tutorial is heavily based on Pandas in 10 min. The original material waas modified by adding TnSeq data as examples.
+Get datasets to play with %%bash wget https://nekrut.github.io/BMMB554/tnseq_untreated.txt.gz wget https://nekrut.github.io/BMMB554/ta_gc.txt2019-01-28 13:53:53 (2.53 MB/s) - &amp;#39;tnseq_untreated.txt.gz&amp;#39; saved [2012967/2012967] 2019-01-28 13:53:56 (2.96 MB/s) - &amp;#39;ta_gc.txt&amp;#39; saved [7315570/7315570] data_file = &amp;#39;tnseq_untreated.txt.gz&amp;#39; The first dataset lists coordinates of TA sites and counts of reads for TnSeq constructs &amp;lsquo;blunt&amp;rsquo;, &amp;lsquo;cap&amp;rsquo;, &amp;lsquo;dual&amp;rsquo;, &amp;lsquo;erm&amp;rsquo;, &amp;lsquo;pen&amp;rsquo;, and &amp;lsquo;tuf&amp;rsquo;:</description>
+    </item>
     
     <item>
       <title>Lecture 5: NumPy</title>
