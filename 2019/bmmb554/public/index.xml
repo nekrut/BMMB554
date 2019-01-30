@@ -6,10 +6,21 @@
     <description>Recent content on BMMB554</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 28 Jan 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 30 Jan 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://nekrut.github.io/BMMB554/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Lecture 7: Pandas 2</title>
+      <link>https://nekrut.github.io/BMMB554/lecture7/</link>
+      <pubDate>Wed, 30 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/lecture7/</guid>
+      <description>Prep  Point your browser to http://colab.research.google.com Open notebook 2019/ipynb/tnseq_with_pandas2.ipynb from https://github.com/nekrut/BMMB554  Introduction to Pandas : Part 1 This tutorial is heavily based on Pandas in 10 min. The original material waas modified by adding TnSeq data as examples.
+Introduction to Pandas : Part 2 This tutorial is heavily based on Pandas in 10 min. The original material waas modified by adding TnSeq data as examples.
+import pandas as pd import numpy as np %matplotlib inline  Get datasets to play with %%bash wget https://nekrut.</description>
+    </item>
     
     <item>
       <title>Lecture 6: Pandas 1</title>

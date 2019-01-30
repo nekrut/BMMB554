@@ -2485,11 +2485,11 @@ chr_roman = ['chrmt',
  'chrII',
  'chrIII',
  'chrIV',
- 'chrIX',
  'chrV',
  'chrVI',
  'chrVII',
  'chrVIII',
+ 'chrIX',
  'chrX',
  'chrXI',
  'chrXII',
@@ -2740,13 +2740,13 @@ max(extract(coord[:,0] == 10,coord[:,3]))
 ```python
 # The number of genes of chromsome 1 that are on the + strand 
 # (we encoded '+' as 1)
-size(extract(coord[:,0] == 1, coord[:,4] == 1))
+size(coord[(coord[:,0] == 1) & (coord[:,4] == 1)], axis=0)
 ```
 
 
 
 
-    131
+    63
 
 
 
@@ -2754,13 +2754,13 @@ size(extract(coord[:,0] == 1, coord[:,4] == 1))
 ```python
 # The number of genes of chromsome 1 that are on the - strand 
 # (we encoded '-' as 2)
-size(extract(coord[:,0] == 2, coord[:,4] == 2))
+size(coord[(coord[:,0] == 1) & (coord[:,4] == 2)], axis=0)
 ```
 
 
 
 
-    485
+    62
 
 
 
