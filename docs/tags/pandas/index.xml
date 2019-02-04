@@ -17,9 +17,8 @@
       <pubDate>Wed, 30 Jan 2019 00:00:00 +0000</pubDate>
       
       <guid>https://nekrut.github.io/BMMB554/lecture7/</guid>
-      <description>Prep  Point your browser to http://colab.research.google.com Open notebook 2019/ipynb/tnseq_with_pandas2.ipynb from https://github.com/nekrut/BMMB554  Introduction to Pandas : Part 1 This tutorial is heavily based on Pandas in 10 min. The original material waas modified by adding TnSeq data as examples.
-Introduction to Pandas : Part 2 This tutorial is heavily based on Pandas in 10 min. The original material waas modified by adding TnSeq data as examples.
-import pandas as pd import numpy as np %matplotlib inline  Get datasets to play with %%bash wget https://nekrut.</description>
+      <description>Prep  Point your browser to http://colab.research.google.com Open notebook 2019/ipynb/tnseq_with_pandas2.ipynb from https://github.com/nekrut/BMMB554  Introduction to Pandas : Part 2 This tutorial is heavily based on Pandas in 10 min. The original material waas modified by adding TnSeq data as examples.
+import pandas as pd import numpy as np %matplotlib inline  Get datasets to play with %%bash wget https://nekrut.github.io/BMMB554/tnseq_untreated.txt.gz wget https://nekrut.github.io/BMMB554/ta_gc.txtdata_file = &amp;#39;tnseq_untreated.txt.gz&amp;#39;# Just two choices for beginning of of gene field !</description>
     </item>
     
     <item>

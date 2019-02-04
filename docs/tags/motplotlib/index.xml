@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Motplotlib on BMMB554</title>
+    <link>https://nekrut.github.io/BMMB554/tags/motplotlib/</link>
+    <description>Recent content in Motplotlib on BMMB554</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 04 Feb 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://nekrut.github.io/BMMB554/tags/motplotlib/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Lecture 8: Plotting in Python</title>
+      <link>https://nekrut.github.io/BMMB554/lecture8/</link>
+      <pubDate>Mon, 04 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/lecture8/</guid>
+      <description>The lecture notes will be posted after the class. For now do this:
+ Point your browser to http://colab.research.google.com Create a new Python3 notebbok Execute the following commans:  # Colaboratory has an old version of seaborn, so let&amp;#39;s upgrade !pip install seaborn --upgrade Import required libraries:
+import seaborn as sns sns.set(style=&amp;#34;ticks&amp;#34;) import pandas as pd import matplotlib.pyplot as plt Import TnSeq datasets:
+%%bash wget https://nekrut.github.io/BMMB554/tnseq_untreated.txt.gz wget https://nekrut.github.io/BMMB554/ta_gc.txt Set datafile name:</description>
+    </item>
+    
+  </channel>
+</rss>

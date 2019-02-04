@@ -6,10 +6,22 @@
     <description>Recent content in Python on BMMB554</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 30 Jan 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 04 Feb 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://nekrut.github.io/BMMB554/tags/python/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Lecture 8: Plotting in Python</title>
+      <link>https://nekrut.github.io/BMMB554/lecture8/</link>
+      <pubDate>Mon, 04 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/lecture8/</guid>
+      <description>The lecture notes will be posted after the class. For now do this:
+ Point your browser to http://colab.research.google.com Create a new Python3 notebbok Execute the following commans:  # Colaboratory has an old version of seaborn, so let&amp;#39;s upgrade !pip install seaborn --upgrade Import required libraries:
+import seaborn as sns sns.set(style=&amp;#34;ticks&amp;#34;) import pandas as pd import matplotlib.pyplot as plt Import TnSeq datasets:
+%%bash wget https://nekrut.github.io/BMMB554/tnseq_untreated.txt.gz wget https://nekrut.github.io/BMMB554/ta_gc.txt Set datafile name:</description>
+    </item>
     
     <item>
       <title>Lecture 7: Pandas 2</title>
@@ -17,9 +29,8 @@
       <pubDate>Wed, 30 Jan 2019 00:00:00 +0000</pubDate>
       
       <guid>https://nekrut.github.io/BMMB554/lecture7/</guid>
-      <description>Prep  Point your browser to http://colab.research.google.com Open notebook 2019/ipynb/tnseq_with_pandas2.ipynb from https://github.com/nekrut/BMMB554  Introduction to Pandas : Part 1 This tutorial is heavily based on Pandas in 10 min. The original material waas modified by adding TnSeq data as examples.
-Introduction to Pandas : Part 2 This tutorial is heavily based on Pandas in 10 min. The original material waas modified by adding TnSeq data as examples.
-import pandas as pd import numpy as np %matplotlib inline  Get datasets to play with %%bash wget https://nekrut.</description>
+      <description>Prep  Point your browser to http://colab.research.google.com Open notebook 2019/ipynb/tnseq_with_pandas2.ipynb from https://github.com/nekrut/BMMB554  Introduction to Pandas : Part 2 This tutorial is heavily based on Pandas in 10 min. The original material waas modified by adding TnSeq data as examples.
+import pandas as pd import numpy as np %matplotlib inline  Get datasets to play with %%bash wget https://nekrut.github.io/BMMB554/tnseq_untreated.txt.gz wget https://nekrut.github.io/BMMB554/ta_gc.txtdata_file = &amp;#39;tnseq_untreated.txt.gz&amp;#39;# Just two choices for beginning of of gene field !</description>
     </item>
     
     <item>

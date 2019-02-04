@@ -9,12 +9,6 @@ title: "Lecture 7: Pandas 2"
  - Point your browser to http://colab.research.google.com
  - Open notebook `2019/ipynb/tnseq_with_pandas2.ipynb` from `https://github.com/nekrut/BMMB554`
 
-
-# Introduction to Pandas : Part 1
--------
-This tutorial is heavily based on [Pandas in 10 min](https://pandas.pydata.org/pandas-docs/stable/10min.html). The original material waas modified by adding TnSeq data as examples. 
-
-
 # Introduction to Pandas : Part 2
 ------
 This tutorial is heavily based on [Pandas in 10 min](https://pandas.pydata.org/pandas-docs/stable/getting_started/10min.html#). The original material waas modified by adding TnSeq data as examples.

@@ -48,6 +48,15 @@
     </item>
     
     <item>
+      <title>Motplotlib</title>
+      <link>https://nekrut.github.io/BMMB554/tags/motplotlib/</link>
+      <pubDate>Mon, 04 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/tags/motplotlib/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Numpy</title>
       <link>https://nekrut.github.io/BMMB554/tags/numpy/</link>
       <pubDate>Wed, 23 Jan 2019 00:00:00 +0000</pubDate>
@@ -66,11 +75,29 @@
     </item>
     
     <item>
+      <title>Plotting</title>
+      <link>https://nekrut.github.io/BMMB554/tags/plotting/</link>
+      <pubDate>Mon, 04 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/tags/plotting/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Python</title>
       <link>https://nekrut.github.io/BMMB554/tags/python/</link>
-      <pubDate>Wed, 30 Jan 2019 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 04 Feb 2019 00:00:00 +0000</pubDate>
       
       <guid>https://nekrut.github.io/BMMB554/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Seaborn</title>
+      <link>https://nekrut.github.io/BMMB554/tags/seaborn/</link>
+      <pubDate>Mon, 04 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/tags/seaborn/</guid>
       <description></description>
     </item>
     
