@@ -17,10 +17,8 @@
       <pubDate>Mon, 04 Feb 2019 00:00:00 +0000</pubDate>
       
       <guid>https://nekrut.github.io/BMMB554/lecture8/</guid>
-      <description>The lecture notes will be posted after the class. For now do this:
- Point your browser to http://colab.research.google.com Create a new Python3 notebbok Execute the following commans:  # Colaboratory has an old version of seaborn, so let&amp;#39;s upgrade !pip install seaborn --upgrade Import required libraries:
-import seaborn as sns sns.set(style=&amp;#34;ticks&amp;#34;) import pandas as pd import matplotlib.pyplot as plt Import TnSeq datasets:
-%%bash wget https://nekrut.github.io/BMMB554/tnseq_untreated.txt.gz wget https://nekrut.github.io/BMMB554/ta_gc.txt Set datafile name:</description>
+      <description>This lecture draws extensively from Seaborn tutorials.  A primer of plotting with Python # If running in colaboratory uncomment and run the folliwing command #!pip install seaborn --upgradeimport seaborn as sns sns.set(style=&amp;#34;ticks&amp;#34;) import pandas as pd import matplotlib.pyplot as plt Why plotting? We will use Ascombe&amp;rsquo;s quartet build into Seaborn to answer this questions
+# Load the example dataset for Anscombe&amp;#39;s quartet df = sns.load_dataset(&amp;#34;anscombe&amp;#34;)df  .dataframe tbody tr th:only-of-type { vertical-align: middle; } .</description>
     </item>
     
   </channel>
