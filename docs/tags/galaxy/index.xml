@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Galaxy on BMMB554</title>
+    <link>https://nekrut.github.io/BMMB554/tags/galaxy/</link>
+    <description>Recent content in Galaxy on BMMB554</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 06 Feb 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://nekrut.github.io/BMMB554/tags/galaxy/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Lecture 9: Galaxy for processing of large datasets</title>
+      <link>https://nekrut.github.io/BMMB554/lecture9/</link>
+      <pubDate>Wed, 06 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/lecture9/</guid>
+      <description>In this section we will look at practical aspects of manipulation of next-generation sequencing data. We will start with Fastq format produced by most sequencing machines and will finish with SAM/BAM format representing mapped reads. The material below is from a Galaxy tutorial for NGS data. However, today let&amp;rsquo;s do the same analysis, but with a different dataset:
+https://zenodo.org/record/2558444
+So we will follow all the same steps, just on a different data.</description>
+    </item>
+    
+  </channel>
+</rss>
