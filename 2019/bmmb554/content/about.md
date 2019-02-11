@@ -54,9 +54,9 @@ We will cover a breadth of topics. The course will be divided into several block
 | 1.2 | [**Jupyter and GitHub**](/BMMB554/lecture2/) | Throughout this course Jupyter will be our primary framework for data analysis and GitHub will be used for version control |
 | 1.3 | **Python [1](/BMMB554/lecture3/) and [2](/BMMB554/lecture4/)** | Understanding transactional Python for data analysis    |
 | 1.4 | **[NumPy and SciPy](/BMMB554/lecture5/)** | Libraries for numerical magic |
-| 1.5 | **Pandas and SQL [1](/BMMB554/lecture6/) and 2** | Operating on large datasets in Python |
-| 1.6 | **MatPlotLib** | Plotting data in Python |
-| 1.7 | **Galaxy** | Data processing as scale | 
+| 1.5 | **Pandas and SQL [1](/BMMB554/lecture6/) and [2](/BMMB554/lecture7)** | Operating on large datasets in Python |
+| 1.6 | [**MatPlotLib & Seaborn**](/BMMB554/lecture8) | Plotting data in Python |
+| 1.7 | [**Galaxy**](/BMMB554/lecture9) | Data processing as scale | 
 {{< /bootstrap-table >}}
 
 
@@ -65,6 +65,7 @@ We will cover a breadth of topics. The course will be divided into several block
 {{< bootstrap-table "table table-hover table-success" >}}
 | # | What  | Why |
 |---|------|--------|
+| 2.0 | [**The data**](/BMMB554/lecture10/) | The nature of sequencing data: A quick overview |
 | 2.1 | **Fundamentals** | Probability, Descriptive statistics, Correlation analysis, and Logarithms |
 | 2.2 | **Statistical analyses** | Distributions, Sampling, Significance, Permutation, Bayes Theorem |
 | 2.3 | **Visualization** | Useful versus meaningless |
