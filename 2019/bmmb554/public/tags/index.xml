@@ -39,6 +39,15 @@
     </item>
     
     <item>
+      <title>Illumina</title>
+      <link>https://nekrut.github.io/BMMB554/tags/illumina/</link>
+      <pubDate>Mon, 11 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/tags/illumina/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Jupyter</title>
       <link>https://nekrut.github.io/BMMB554/tags/jupyter/</link>
       <pubDate>Wed, 09 Jan 2019 00:00:00 +0000</pubDate>
@@ -62,6 +71,24 @@
       <pubDate>Wed, 23 Jan 2019 00:00:00 +0000</pubDate>
       
       <guid>https://nekrut.github.io/BMMB554/tags/numpy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Oxford Nanopore</title>
+      <link>https://nekrut.github.io/BMMB554/tags/oxford-nanopore/</link>
+      <pubDate>Mon, 11 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/tags/oxford-nanopore/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Pacbio</title>
+      <link>https://nekrut.github.io/BMMB554/tags/pacbio/</link>
+      <pubDate>Mon, 11 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/tags/pacbio/</guid>
       <description></description>
     </item>
     
@@ -93,11 +120,29 @@
     </item>
     
     <item>
+      <title>Sanger</title>
+      <link>https://nekrut.github.io/BMMB554/tags/sanger/</link>
+      <pubDate>Mon, 11 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/tags/sanger/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Seaborn</title>
       <link>https://nekrut.github.io/BMMB554/tags/seaborn/</link>
       <pubDate>Mon, 04 Feb 2019 00:00:00 +0000</pubDate>
       
       <guid>https://nekrut.github.io/BMMB554/tags/seaborn/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Sequencing</title>
+      <link>https://nekrut.github.io/BMMB554/tags/sequencing/</link>
+      <pubDate>Mon, 11 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/tags/sequencing/</guid>
       <description></description>
     </item>
     

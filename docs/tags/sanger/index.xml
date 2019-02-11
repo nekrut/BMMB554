@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Sanger on BMMB554</title>
+    <link>https://nekrut.github.io/BMMB554/tags/sanger/</link>
+    <description>Recent content in Sanger on BMMB554</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 11 Feb 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://nekrut.github.io/BMMB554/tags/sanger/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Lecture 10: What is the nature of sequencing data?</title>
+      <link>https://nekrut.github.io/BMMB554/lecture10/</link>
+      <pubDate>Mon, 11 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/lecture10/</guid>
+      <description>The 50s, 60s and the 70s The difficulty with sequencing nucleic acids is nicely summarized by Hutchinson:2007:
+  The chemical properties of different DNA molecules were so similar that it appeared difficult to separate them. The chain length of naturally occurring DNA molecules was much greater than for proteins and made complete sequencing seems unapproachable. The 20 amino acid residues found in proteins have widely varying properties that had proven useful in the separation of peptides.</description>
+    </item>
+    
+  </channel>
+</rss>

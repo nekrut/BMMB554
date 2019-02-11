@@ -30,20 +30,20 @@
     </item>
     
     <item>
-      <title>Galaxy</title>
-      <link>https://nekrut.github.io/BMMB554/tags/galaxy/</link>
-      <pubDate>Wed, 06 Feb 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://nekrut.github.io/BMMB554/tags/galaxy/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Github</title>
       <link>https://nekrut.github.io/BMMB554/tags/github/</link>
       <pubDate>Wed, 09 Jan 2019 00:00:00 +0000</pubDate>
       
       <guid>https://nekrut.github.io/BMMB554/tags/github/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Illumina</title>
+      <link>https://nekrut.github.io/BMMB554/tags/illumina/</link>
+      <pubDate>Mon, 11 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/tags/illumina/</guid>
       <description></description>
     </item>
     
@@ -75,20 +75,29 @@
     </item>
     
     <item>
+      <title>Oxford Nanopore</title>
+      <link>https://nekrut.github.io/BMMB554/tags/oxford-nanopore/</link>
+      <pubDate>Mon, 11 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/tags/oxford-nanopore/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Pacbio</title>
+      <link>https://nekrut.github.io/BMMB554/tags/pacbio/</link>
+      <pubDate>Mon, 11 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/tags/pacbio/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Pandas</title>
       <link>https://nekrut.github.io/BMMB554/tags/pandas/</link>
       <pubDate>Wed, 30 Jan 2019 00:00:00 +0000</pubDate>
       
       <guid>https://nekrut.github.io/BMMB554/tags/pandas/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Permanganate Seq</title>
-      <link>https://nekrut.github.io/BMMB554/tags/permanganate-seq/</link>
-      <pubDate>Wed, 06 Feb 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://nekrut.github.io/BMMB554/tags/permanganate-seq/</guid>
       <description></description>
     </item>
     
@@ -111,11 +120,29 @@
     </item>
     
     <item>
+      <title>Sanger</title>
+      <link>https://nekrut.github.io/BMMB554/tags/sanger/</link>
+      <pubDate>Mon, 11 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/tags/sanger/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Seaborn</title>
       <link>https://nekrut.github.io/BMMB554/tags/seaborn/</link>
       <pubDate>Mon, 04 Feb 2019 00:00:00 +0000</pubDate>
       
       <guid>https://nekrut.github.io/BMMB554/tags/seaborn/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Sequencing</title>
+      <link>https://nekrut.github.io/BMMB554/tags/sequencing/</link>
+      <pubDate>Mon, 11 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/tags/sequencing/</guid>
       <description></description>
     </item>
     
