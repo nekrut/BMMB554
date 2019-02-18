@@ -6,10 +6,19 @@
     <description>Recent content in Tags on BMMB554</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 16 Jan 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 18 Feb 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://nekrut.github.io/BMMB554/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Alignment</title>
+      <link>https://nekrut.github.io/BMMB554/tags/alignment/</link>
+      <pubDate>Mon, 18 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/tags/alignment/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Conditionals</title>
@@ -17,6 +26,15 @@
       <pubDate>Wed, 16 Jan 2019 00:00:00 +0000</pubDate>
       
       <guid>https://nekrut.github.io/BMMB554/tags/conditionals/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Dynamic Programming</title>
+      <link>https://nekrut.github.io/BMMB554/tags/dynamic-programming/</link>
+      <pubDate>Mon, 18 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/tags/dynamic-programming/</guid>
       <description></description>
     </item>
     

@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en" class="h-100">
   <head>
-  <meta name="generator" content="Hugo 0.53" />
+  <meta name="generator" content="Hugo 0.54.0" />
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://nekrut.github.io/BMMB554/css/bootstrap.min.css">
@@ -265,7 +265,7 @@ A short homework will be given once a week. We will discuss project requirements
 </table>
 
 
-<h4 id="block-2-quantitative-refresher"><strong>Block 2</strong>: Quantitative refresher</h4>
+<h4 id="block-2-essential-topics-in-sequence-analysis"><strong>Block 2</strong>: Essential topics in sequence analysis</h4>
 
 
 
@@ -283,125 +283,39 @@ A short homework will be given once a week. We will discuss project requirements
 
 <tbody>
 <tr>
-<td>2.0</td>
+<td>2.1</td>
 <td><a href="/BMMB554/lecture10/"><strong>The data</strong></a></td>
 <td>The nature of sequencing data: A quick overview</td>
 </tr>
 
 <tr>
-<td>2.1</td>
-<td><strong>Fundamentals</strong></td>
-<td>Probability, Descriptive statistics, Correlation analysis, and Logarithms</td>
-</tr>
-
-<tr>
 <td>2.2</td>
-<td><strong>Statistical analyses</strong></td>
-<td>Distributions, Sampling, Significance, Permutation, Bayes Theorem</td>
+<td><a href="/BMMB554/lecture11/"><strong>Alignment</strong></a></td>
+<td>Fundamental concepts, Global and local alignment</td>
 </tr>
 
 <tr>
 <td>2.3</td>
-<td><strong>Visualization</strong></td>
-<td>Useful versus meaningless</td>
+<td><strong>Aligning many sequences quickly</strong></td>
+<td>Mapping in the age of billion-read datasets</td>
 </tr>
 
 <tr>
 <td>2.4</td>
-<td><strong>Linear algebra</strong></td>
-<td>Matrix operations, Eigenvalues and Eigenvectors</td>
+<td><strong>Bloom filters</strong></td>
+<td>Searching in the age of Exobyte databases</td>
 </tr>
 
 <tr>
 <td>2.5</td>
-<td><strong>Discrete data and modeling</strong></td>
-<td>Understanding the data and going upward</td>
-</tr>
-
-<tr>
-<td>2.6</td>
-<td><strong>Clustering</strong></td>
-<td>Stratifying the data</td>
-</tr>
-
-<tr>
-<td>2.7</td>
-<td><strong>Testing</strong></td>
-<td>How to test your hypotheses</td>
-</tr>
-
-<tr>
-<td>2.8</td>
-<td><strong>Multivariate analysis</strong></td>
-<td>Finding association among multiple variables</td>
+<td><strong>Assembly</strong></td>
+<td>Reconstructing genomes and transcriptomes</td>
 </tr>
 </tbody>
 </table>
 
 
-<h4 id="block-3-sources-and-types-of-genomic-data"><strong>Block 3</strong>: Sources and types of genomic data</h4>
-
-
-
-
-
-
-<table class="table table-hover table-warning">
-<thead>
-<tr>
-<th>#</th>
-<th>What</th>
-<th>Why</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>3.1</td>
-<td><strong>DNA (and RNA) sequencing</strong></td>
-<td>From Sanger to Nanopores</td>
-</tr>
-
-<tr>
-<td>3.2</td>
-<td><strong>Variation</strong></td>
-<td>Finding and interpreting genetic differences</td>
-</tr>
-
-<tr>
-<td>3.3</td>
-<td><strong>Transcriptomics</strong></td>
-<td>Measuring gene expression</td>
-</tr>
-
-<tr>
-<td>3.4</td>
-<td><strong>Transcriptomics</strong></td>
-<td>Measuring shapes</td>
-</tr>
-
-<tr>
-<td>3.5</td>
-<td><strong>DNA/Protein interactions</strong></td>
-<td>Assessing gene regulation and genome architecture</td>
-</tr>
-
-<tr>
-<td>3.6</td>
-<td><strong>Metagenomics</strong></td>
-<td>Analysis of complex mixtures</td>
-</tr>
-
-<tr>
-<td>3.7</td>
-<td><strong>About counts</strong></td>
-<td>NGS data is count data. There are common themes in read count analysis</td>
-</tr>
-</tbody>
-</table>
-
-
-<h4 id="block-4-computational-biology-basics"><strong>Block 4</strong>: Computational biology basics</h4>
+<h4 id="block-3-statistical-concepts"><strong>Block 3</strong>: Statistical concepts</h4>
 
 
 
@@ -419,27 +333,101 @@ A short homework will be given once a week. We will discuss project requirements
 
 <tbody>
 <tr>
+<td>3.1</td>
+<td><strong>Fundamentals</strong></td>
+<td>Probability, Descriptive statistics, Correlation analysis, and Logarithms</td>
+</tr>
+
+<tr>
+<td>3.2</td>
+<td><strong>Statistical analyses</strong></td>
+<td>Distributions, Sampling, Significance, Permutation, Bayes Theorem</td>
+</tr>
+
+<tr>
+<td>3.3</td>
+<td><strong>Visualization</strong></td>
+<td>Useful versus meaningless</td>
+</tr>
+
+<tr>
+<td>3.4</td>
+<td><strong>Linear algebra</strong></td>
+<td>Matrix operations, Eigenvalues and Eigenvectors</td>
+</tr>
+
+<tr>
+<td>3.5</td>
+<td><strong>Discrete data and modeling</strong></td>
+<td>Understanding the data and going upward</td>
+</tr>
+
+<tr>
+<td>3.6</td>
+<td><strong>Clustering</strong></td>
+<td>Stratifying the data</td>
+</tr>
+
+<tr>
+<td>3.7</td>
+<td><strong>Testing</strong></td>
+<td>How to test your hypotheses</td>
+</tr>
+
+<tr>
+<td>3.8</td>
+<td><strong>Multivariate analysis</strong></td>
+<td>Finding association among multiple variables</td>
+</tr>
+</tbody>
+</table>
+
+
+<h4 id="block-4-putting-it-all-together-major-types-of-sequence-analysis"><strong>Block 4</strong>: Putting it all together: Major types of sequence analysis</h4>
+
+
+
+
+
+
+<table class="table table-hover table-warning">
+<thead>
+<tr>
+<th>#</th>
+<th>What</th>
+<th>Why</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
 <td>4.1</td>
-<td><strong>Alignment</strong></td>
-<td>Fundamental concepts, Global and local alignment</td>
+<td><strong>Variation</strong></td>
+<td>Finding and interpreting genetic differences using Bayes logic</td>
 </tr>
 
 <tr>
 <td>4.2</td>
-<td><strong>Aligning many sequences quickly</strong></td>
-<td>Mapping in the age of billion-read datasets</td>
+<td><strong>Transcriptomics</strong></td>
+<td>Measuring gene expression: A case for count data</td>
 </tr>
 
 <tr>
 <td>4.3</td>
-<td><strong>Bloom filters</strong></td>
-<td>Searching in the age of Exobyte databases</td>
+<td><strong>Transcriptomics</strong></td>
+<td>Measuring shapes</td>
 </tr>
 
 <tr>
 <td>4.4</td>
-<td><strong>Assembly</strong></td>
-<td>Reconstructing genomes and transcriptomes</td>
+<td><strong>DNA/Protein interactions</strong></td>
+<td>Assessing gene regulation and genome architecture</td>
+</tr>
+
+<tr>
+<td>4.5</td>
+<td><strong>Metagenomics</strong></td>
+<td>Analysis of complex mixtures</td>
 </tr>
 </tbody>
 </table>

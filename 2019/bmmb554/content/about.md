@@ -60,46 +60,47 @@ We will cover a breadth of topics. The course will be divided into several block
 {{< /bootstrap-table >}}
 
 
-#### **Block 2**: Quantitative refresher
+#### **Block 2**: Essential topics in sequence analysis
 
 {{< bootstrap-table "table table-hover table-success" >}}
 | # | What  | Why |
 |---|------|--------|
-| 2.0 | [**The data**](/BMMB554/lecture10/) | The nature of sequencing data: A quick overview |
-| 2.1 | **Fundamentals** | Probability, Descriptive statistics, Correlation analysis, and Logarithms |
-| 2.2 | **Statistical analyses** | Distributions, Sampling, Significance, Permutation, Bayes Theorem |
-| 2.3 | **Visualization** | Useful versus meaningless |
-| 2.4 | **Linear algebra** | Matrix operations, Eigenvalues and Eigenvectors | 
-| 2.5 | **Discrete data and modeling** | Understanding the data and going upward |
-| 2.6 | **Clustering** | Stratifying the data |
-| 2.7 | **Testing** | How to test your hypotheses |
-| 2.8 | **Multivariate analysis** | Finding association among multiple variables |
+| 2.1 | [**The data**](/BMMB554/lecture10/) | The nature of sequencing data: A quick overview |
+| 2.2 | [**Alignment**](/BMMB554/lecture11/) | Fundamental concepts, Global and local alignment |
+| 2.3 | **Aligning many sequences quickly** | Mapping in the age of billion-read datasets |
+| 2.4 | **Bloom filters** | Searching in the age of Exobyte databases |
+| 2.5 | **Assembly** | Reconstructing genomes and transcriptomes |
 {{< /bootstrap-table >}}
 
-#### **Block 3**: Sources and types of genomic data
-
-{{< bootstrap-table "table table-hover table-warning" >}}
-| # | What  | Why |
-|---|------|--------|
-| 3.1 | **DNA (and RNA) sequencing** | From Sanger to Nanopores |
-| 3.2 | **Variation** | Finding and interpreting genetic differences |
-| 3.3 | **Transcriptomics** | Measuring gene expression |
-| 3.4 | **Transcriptomics** | Measuring shapes |
-| 3.5 | **DNA/Protein interactions** | Assessing gene regulation and genome architecture |
-| 3.6 | **Metagenomics** | Analysis of complex mixtures |
-| 3.7 | **About counts** | NGS data is count data. There are common themes in read count analysis |
-{{< /bootstrap-table >}}
-
-#### **Block 4**: Computational biology basics
+#### **Block 3**: Statistical concepts
 
 {{< bootstrap-table "table table-hover table-danger" >}}
 | # | What  | Why |
 |---|------|--------|
-| 4.1 | **Alignment** | Fundamental concepts, Global and local alignment |
-| 4.2 | **Aligning many sequences quickly** | Mapping in the age of billion-read datasets |
-| 4.3 | **Bloom filters** | Searching in the age of Exobyte databases |
-| 4.4 | **Assembly** | Reconstructing genomes and transcriptomes |
+| 3.1 | **Fundamentals** | Probability, Descriptive statistics, Correlation analysis, and Logarithms |
+| 3.2 | **Statistical analyses** | Distributions, Sampling, Significance, Permutation, Bayes Theorem |
+| 3.3 | **Visualization** | Useful versus meaningless |
+| 3.4 | **Linear algebra** | Matrix operations, Eigenvalues and Eigenvectors | 
+| 3.5 | **Discrete data and modeling** | Understanding the data and going upward |
+| 3.6 | **Clustering** | Stratifying the data |
+| 3.7 | **Testing** | How to test your hypotheses |
+| 3.8 | **Multivariate analysis** | Finding association among multiple variables |
 {{< /bootstrap-table >}}
+
+
+#### **Block 4**: Putting it all together: Major types of sequence analysis
+
+{{< bootstrap-table "table table-hover table-warning" >}}
+| # | What  | Why |
+|---|------|--------|
+| 4.1 | **Variation** | Finding and interpreting genetic differences using Bayes logic |
+| 4.2 | **Transcriptomics** | Measuring gene expression: A case for count data |
+| 4.3 | **Transcriptomics** | Measuring shapes |
+| 4.4 | **DNA/Protein interactions** | Assessing gene regulation and genome architecture |
+| 4.5 | **Metagenomics** | Analysis of complex mixtures |
+{{< /bootstrap-table >}}
+
+
 
 ## Final Project
 ------

@@ -5,7 +5,7 @@ date = "2018-01-31"
 featureimage = "img/nyc.jpg"
 menu = ""
 tags = ['dynamic programming','global alignment','local alignment','Smith-Waterman']
-title = "Sequence alignment: Introductory concepts"
+title = "Lecture 11: Sequence alignment: Introductory concepts"
 
 +++
 

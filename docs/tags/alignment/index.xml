@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Alignment on BMMB554</title>
+    <link>https://nekrut.github.io/BMMB554/tags/alignment/</link>
+    <description>Recent content in Alignment on BMMB554</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 18 Feb 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://nekrut.github.io/BMMB554/tags/alignment/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Lecture 11: Sequence alignment - Introductory concepts</title>
+      <link>https://nekrut.github.io/BMMB554/lecture11/</link>
+      <pubDate>Mon, 18 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/lecture11/</guid>
+      <description>The cover image shows pairwise alignments for human, mouse, and dog KIF3 locus from Dubchak et al. 2000.
+Introduction to dynamic programming (Based on dynamic programming examples from InteractivePython) and excellent alignment lecture materials from Ben Langmead.
+In the previous lecture we have seen several ways in which DNA sequence data can be accumulated. Because sequencing machines (especially the ones made by Illumina) generate billions of sequences (called reads) from every run, the real challenge is what one does with all this data once sequencing is done.</description>
+    </item>
+    
+  </channel>
+</rss>

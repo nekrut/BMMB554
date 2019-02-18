@@ -1124,7 +1124,65 @@ This corresponds to the best local alignment between the two sequences:
 
 Here is a Python representation of this approach:
 
-<iframe src="https://trinket.io/embed/python3/aa05b81499?toggleCode=true" width="100%" height="600" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+```python
+import numpy
+
+def exampleCost(xc, yc):
+    ''' Cost function: 2 to match, -6 to gap, -4 to mismatch '''
+    if xc == yc: return 2 # match
+    if xc == '-' or yc == '-': return -6 # gap
+    return -4
+
+def smithWaterman(x, y, s):
+    ''' Calculate local alignment values of sequences x and y using
+        dynamic programming.  Return maximal local alignment value. '''
+    V = numpy.zeros((len(x)+1, len(y)+1), dtype=int)
+    for i in range(1, len(x)+1):
+        for j in range(1, len(y)+1):
+            V[i, j] = max(V[i-1, j-1] + s(x[i-1], y[j-1]), # diagonal
+                          V[i-1, j  ] + s(x[i-1], '-'),    # vertical
+                          V[i  , j-1] + s('-',    y[j-1]), # horizontal
+                          0)                               # empty
+    argmax = numpy.where(V == V.max())
+    return V, int(V[argmax])
+    
+def traceback(V, x, y, s):
+    """ Trace back from given cell in local-alignment matrix V """
+    # get i, j for maximal cell
+    i, j = numpy.unravel_index(numpy.argmax(V), V.shape)
+    xscript, alx, aly, alm = [], [], [], []
+    while (i > 0 or j > 0) and V[i, j] != 0:
+        diag, vert, horz = 0, 0, 0
+        if i > 0 and j > 0:
+            diag = V[i-1, j-1] + s(x[i-1], y[j-1])
+        if i > 0:
+            vert = V[i-1, j] + s(x[i-1], '-')
+        if j > 0:
+            horz = V[i, j-1] + s('-', y[j-1])
+        if diag >= vert and diag >= horz:
+            match = x[i-1] == y[j-1]
+            xscript.append('M' if match else 'R')
+            alm.append('|' if match else ' ')
+            alx.append(x[i-1]); aly.append(y[j-1])
+            i -= 1; j -= 1
+        elif vert >= horz:
+            xscript.append('D')
+            alx.append(x[i-1]); aly.append('-'); alm.append(' ')
+            i -= 1
+        else:
+            xscript.append('I')
+            aly.append(y[j-1]); alx.append('-'); alm.append(' ')
+            j -= 1
+    xscript = (''.join(xscript))[::-1]
+    alignment = '\n'.join(map(lambda x: ''.join(x), [alx[::-1], alm[::-1], aly[::-1]]))
+    return xscript, alignment
+
+x, y = 'GGTATGCTGGCGCTA', 'TATATGCGGCGTTT'
+V, best = smithWaterman(x, y, exampleCost)
+print(V)
+print("Best score=%d, in cell %s" % (best, numpy.unravel_index(numpy.argmax(V), V.shape)))
+print(traceback(V, x, y, exampleCost)[1])
+```
 
 This algorithm was developed by [Temple Smith and Michael Waterman](http://dornsife.usc.edu/assets/sites/516/docs/papers/msw_papers/msw-042.pdf) in 1981. This is why it is most often called Smith Waterman local alignment algorithm. 
 
@@ -1134,9 +1192,9 @@ This algorithm was developed by [Temple Smith and Michael Waterman](http://dorns
 
 -----
 
-# Next...
+# Homework
 
-In the next lecture we will learn about speeding sequence searches with indexing and talk about mappers. 
+Modify the last code snippet of this lecture (loac alignment code) to output seaborn heatrmap visualization of the matrix. Use any colorscheme that is not default. 
 
 
 
