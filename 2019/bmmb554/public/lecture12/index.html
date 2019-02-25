@@ -1,0 +1,1126 @@
+<!doctype html>
+<html lang="en" class="h-100">
+  <head>
+  <meta name="generator" content="Hugo 0.54.0" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://nekrut.github.io/BMMB554/css/bootstrap.min.css">
+  
+  
+  <title>Lecture 12: Mapping many reads quickly | BMMB554</title>
+  <style>
+.container {
+  max-width: 800px;
+}
+#nav a {
+  font-weight: bold;
+  color: inherit;
+}
+#nav a.nav-link-active {
+  background-color: #212529;
+  color: #fff;
+}
+#nav-border {
+  border-bottom: 1px solid #212529;
+}
+#main {
+  margin-top: 1em;
+  margin-bottom: 4em;
+}
+#home-jumbotron {
+  background-color: inherit;
+}
+#footer .container {
+  padding: 1em 0;
+}
+#footer a {
+  color: inherit;
+  text-decoration: underline;
+}
+.font-125 {
+  font-size: 125%;
+}
+.tag-btn {
+  margin-bottom: 0.3em;
+}
+pre {
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 16px;
+}
+pre code {
+  padding: 0;
+  font-size: inherit;
+  color: inherit; 
+  background-color: transparent;
+  border-radius: 0;
+}
+code {
+  padding: 2px 4px;
+  font-size: 90%;
+  color: #c7254e;
+  background-color: #f9f2f4;
+  border-radius: 4px;
+}
+img {
+  max-width: 100%;
+}
+</style>
+
+  <script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+  
+</head>
+  <body class="d-flex flex-column h-100">
+    <div id="nav-border" class="container">
+  <nav id="nav" class="nav justify-content-center">
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    <a class="nav-link " href="/BMMB554/"><i data-feather="home"></i> Home</a>
+  
+    
+    
+      
+        
+      
+    
+    
+    <a class="nav-link " href="/BMMB554/post/"><i data-feather="book-open"></i> Lectures</a>
+  
+    
+    
+      
+        
+      
+    
+    
+    <a class="nav-link " href="/BMMB554/tags/"><i data-feather="tag"></i> Tags</a>
+  
+    
+    
+      
+        
+      
+    
+    
+    <a class="nav-link " href="/BMMB554/about/"><i data-feather="list"></i> Syllabus</a>
+  
+  </nav>
+</div>
+    <div class="container">
+      <main id="main">
+        
+
+<h1>Lecture 12: Mapping many reads quickly</h1>
+
+
+<i data-feather="calendar"></i> <time datetime="2019-02-25">Feb 25, 2019</time>
+
+  <br>
+  <i data-feather="tag"></i>
+  
+  
+  <a class="btn btn-sm btn-outline-dark tag-btn" href="https://nekrut.github.io/BMMB554/tags/mapping">mapping</a>
+  
+  
+  <a class="btn btn-sm btn-outline-dark tag-btn" href="https://nekrut.github.io/BMMB554/tags/bwt">BWT</a>
+  
+
+<br><br>
+
+
+<p><img src="/BMMB554/img/topic5_cover.png" alt="" /></p>
+
+<h1 id="speeding-things-up">Speeding things up</h1>
+
+<p>The topics we discussed in the past lecture explain fundamental concepts behind analysis of biological sequences. Today, we will be talking about algorithms that allow aligning billions of sequencing reads against reference genomes. Similarly to the previous lecture I have borrowed heavily from the <a href="http://www.langmead-lab.org/teaching-materials/">course</a> taught by Ben Langmead at Johns Hopkins. The cover image is from <a href="https://en.wikipedia.org/wiki/Burrows%E2%80%93Wheeler_transform">Wikpedia article</a> on Burrows-Wheeler transform.</p>
+
+<h2 id="the-challenge-of-really-large-datasets">The challenge of really large datasets</h2>
+
+<p>In the previous lecture we have seen how dynamic programming helps aligning sequences. Unfortunately in reality this approach is not practical for aligning billions of sequencing reads that are routinely generated with NGS technologies.</p>
+
+<p>If you recall the previous lecture, we were finding alignments using the following approach:</p>
+
+<div>
+$$
+    \begin{array}{ c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c }
+                    & \epsilon & A & A & C & C & C & T & A & T & G & T & C & A & T & G & C & C & T & T & G & G & A\\
+                    \hline
+                             & 0 & 0 & 0 & 0 & 0 & \color{red}0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
+                    \hline
+                           T & 1 & 1 & 1 & 1 & 1 & 1 & \color{red}0 & 1 & 0 & 1 & 0 & 1 & 1 & 0 & 1 & 1 & 1 & 0 & 0 & 1 & 1 & 1\\
+                    \hline
+                           A & 2 & 1 & 1 & 2 & 2 & 2 & 1 & \color{red}0 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 2 & 2 & 1 & 1 & 1 & 2 & 1\\
+                    \hline
+                           C & 3 & 2 & 2 & 1 & 2 & 2 & 2 & 1 & \color{red}1 & 2 & 2 & 1 & 2 & 2 & 2 & 1 & 2 & 2 & 2 & 2 & 2 & 2\\
+                    \hline
+                           G & 4 & 3 & 3 & 2 & 2 & 3 & 3 & 2 & 2 & \color{red}1 & 2 & 2 & 2 & 3 & 2 & 2 & 2 & 3 & 3 & 2 & 2 & 3\\
+                    \hline
+                           T & 5 & 4 & 4 & 3 & 3 & 3 & 3 & 3 & 2 & 2 & \color{red}1 & 2 & 3 & 2 & 3 & 3 & 3 & 2 & 3 & 3 & 3 & 3\\
+                    \hline
+                           C & 6 & 5 & 5 & 4 & 3 & 3 & 4 & 4 & 3 & 3 & 2 & \color{red}1 & 2 & 3 & 3 & 3 & 3 & 3 & 3 & 4 & 4 & 4\\
+                    \hline
+                           A & 7 & 6 & 5 & 5 & 4 & 4 & 4 & 4 & 4 & 4 & 3 & 2 & \color{red}1 & \color{red}2 & 3 & 4 & 4 & 4 & 4 & 4 & 5 & 4\\
+                    \hline
+                           G & 8 & 7 & 6 & 6 & 5 & 5 & 5 & 5 & 5 & 4 & 4 & 3 & 2 & 2 & \color{red}2 & 3 & 4 & 5 & 5 & 4 & 4 & 5\\
+                    \hline
+                           C & 9 & 8 & 7 & 6 & 6 & 5 & 6 & 6 & 6 & 5 & 5 & 4 & 3 & 3 & 3 & \color{red}2 & 3 & 4 & 5 & 5 & 5 & 5
+
+ \end{array}
+ $$
+
+</div>
+
+<p>The performance of this approach expressed as the <a href="https://en.wikipedia.org/wiki/Big_O_notation">big O notation</a> is:</p>
+
+<p>$\mathcal{O}(mn)$</p>
+
+<p>where $n$ is the read length and $m$ is the genome length. $m$ can be <strong>very</strong> large. For instance, in the case of human genome it is $3\times10^9$. On top of that we <em>very many</em> reads. The latest Illumina HiSeq 2500 machine can produce as much as $6\times10^9$ 100 bp reads. Taking this into account our big O notation becomes:</p>
+
+<p>$\mathcal{O}(dmn)$</p>
+
+<p>where $d\times m\times n = 2\times10^{21}$ ($d$ stands for <em>depth</em>). In other words to compute alignments between a genome and all these reads we need to perform $2\times10^{21}$ cell updates in the dynamic programming matrices even before we start the traceback. On a cluster containing 1,000 3GHz CPUs this will take over <strong>2</strong> years!</p>
+
+<h2 id="mapping-versus-alignment">Mapping versus alignment</h2>
+
+<p>One possible idea on how to speed things up will be to first find most likely locations for each read and them refine alignments as necessary. In other words reads should be <em>mapped</em> by identifying regions of the genomes from which they most likely originate. The term <em>mapping</em> is sometimes used interchangeably with the word &ldquo;alignment&rdquo;. Yet <em>mapping</em> and <em>alignment</em> are somewhat different concepts. <a href="http://lh3lh3.users.sourceforge.net/">Heng Li</a> defines them this way:</p>
+
+<ul>
+<li><strong>Mapping</strong>: assigning a sequencing read to a location within genome. Mapping is said to be correct and it overlaps the true region from which this read has originated.</li>
+<li><strong>Alignment</strong>: detailed placement of every base within a read to a corresponding base within the genome. Alignment is said to be correct is every base if placed correctly.</li>
+</ul>
+
+<p>So let&rsquo;s see how we can find potential read locations quickly. Below is a list of key publications highlighting basic principles of current mapping tools:</p>
+
+<ul>
+<li>2009 | How to map billions of short reads onto genomes? - <a href="http://www.nature.com/nbt/journal/v27/n5/full/nbt0509-455.html">Trapnell &amp; Salzberg</a></li>
+<li>2009 | Bowtie 1 - <a href="http://genomebiology.com/content/10/3/R25">Langmead et al.</a></li>
+<li>2012 | Bowtie 2 - <a href="http://www.nature.com/nmeth/journal/v9/n4/full/nmeth.1923.htm">Langmead and Salzberg</a></li>
+<li>2009 | BWA - <a href="http://bioinformatics.oxfordjournals.org/content/25/14/1754.long">Li and Durbin</a></li>
+<li>2010 | BWA - <a href="http://bioinformatics.oxfordjournals.org/content/26/5/589">Li and Durbin</a></li>
+<li>2013 | BWA-MEM - <a href="http://arxiv.org/abs/1303.3997">Li</a></li>
+<li>2014 | Bioinformatics Algorithms - <a href="http://bioinformaticsalgorithms.com">Compeau and Pevzner</a></li>
+<li>2014 | Johns Hopkins Computational Genomics Course - <a href="http://www.langmead-lab.org/teaching-materials/">Langmead</a></li>
+</ul>
+
+<h3 id="indexing-and-substrings">Indexing and substrings</h3>
+
+<p>Indexing is not a new idea. Most books have an index where a word is <em>mapped</em> back to a page where it is found. This particular type of index is called <em>inverted index</em>. The word <em>inverted</em> implies that there is also a non-inverted or <em>forward</em> index. The image below explain the distinction between the two:</p>
+
+<hr />
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="http://www.bx.psu.edu/~anton/bioinf-images/inverted_index.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Inverted index</small></td>
+</tr>
+
+<tr>
+<td><img src="http://www.bx.psu.edu/~anton/bioinf-images/forward_index.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Forward index. (From <a href="https://en.wikipedia.org/wiki/Search_engine_indexing">Wikipedia</a>).</small></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<p>For what we are interested in (searching for the best location of a read in the reference genome) we will use <em>inverted index</em>. We will refer to it simply as <em>index</em>. So to find a pattern in a string using an index we first need to create that index. To create an index for a string <em>T</em> (i.e., a genome) we will need to:</p>
+
+<ul>
+<li>extract substrings of length <em>L</em> and record where these substrings occur;</li>
+<li>organize the list of substrings and their coordinates and an easily accessible data structure (a <em>map</em>).</li>
+</ul>
+
+<hr />
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="http://www.bx.psu.edu/~anton/bioinf-images/create_index.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Creating an index. From <a href="http://www.cs.jhu.edu/~langmea/resources/lecture_notes/indexing_with_substrings.pdf">Ben Langmead</a></small></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<p>Now that we&rsquo;ve created an index for text <em>T</em> = <code>CGTGCCTACTTACTTACAT</code> we might as well search it. Suppose we now want to find whether a pattern <code>CTACTTAC</code> (we will refer to pattern as to <em>P</em>) is present in <em>T</em>. To do this we need:</p>
+
+<ul>
+<li>extract substrings from <em>P</em>;</li>
+<li>check the index to see if they are present;</li>
+<li>if they are present extend to see if the entire string is matching.</li>
+</ul>
+
+<hr />
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="http://www.bx.psu.edu/~anton/bioinf-images/search_index.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Looking for <em>P</em> in <em>T</em>. The first three substrings don&rsquo;t have a match. Image from <a href="http://www.cs.jhu.edu/~langmea/resources/lecture_notes/indexing_with_substrings.pdf">Ben Langmead</a>.</small></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<p>In the figure above you can see that trying various substrings from <em>P</em> yields three failures and a success with two hits. Of course in our case the <em>T</em> is very short and you can easily see that an index for a realistic fragment of DNA can be very large. For example, an index for human chromosome 1 (~249,000,000 nucleotides) will occupy over 12 GB of space. In these cases a practical solution may be skipping some of the substrings while making the index. For instance, including only every 4th substring (i.e., using interval of <em>4</em>) in a human chromosome 1 index will reduce memory usage to a peak of ~8Gb.</p>
+
+<p>As one can see finding patterns in text using indexes requires finding values for parameters such as substring length and the interval (if we use skipping). These value have significant implications to the speed of the search, memory use, and , importantly, to specificity. The following table shows how choosing different values for substring length and interval affect speed, memory footprint, and specificity for finding pattern <code>GCGCGGTGGCTCACGCCTGTAATCCCAGCACTTTGGGAGGCCGAGGCGGG</code></p>
+
+<p>within human chromosome 1 (data from <a href="http://www.cs.jhu.edu/~langmea/resources/lecture_notes/indexing_with_substrings.pdf">here</a>):</p>
+
+
+
+
+
+
+<table class="table table-striped table-bordered">
+<thead>
+<tr>
+<th align="right">Substring length</th>
+<th align="right">Interval</th>
+<th align="right">Indexing time (s)</th>
+<th align="right">Search time (s)</th>
+<th align="right">Memory usage (Gb)</th>
+<th align="right">Specificity (%)</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="right">4</td>
+<td align="right">4</td>
+<td align="right">59.31</td>
+<td align="right">0.40</td>
+<td align="right">~7.6</td>
+<td align="right">0.12</td>
+</tr>
+
+<tr>
+<td align="right">7</td>
+<td align="right">7</td>
+<td align="right">63.74</td>
+<td align="right">0.06</td>
+<td align="right">~5.0</td>
+<td align="right">1.26</td>
+</tr>
+
+<tr>
+<td align="right">10</td>
+<td align="right">10</td>
+<td align="right">72.52</td>
+<td align="right">0.02</td>
+<td align="right">~3.6</td>
+<td align="right">4.11</td>
+</tr>
+
+<tr>
+<td align="right">18</td>
+<td align="right">18</td>
+<td align="right">40.20</td>
+<td align="right">0.02</td>
+<td align="right">~2.1</td>
+<td align="right">4.37</td>
+</tr>
+
+<tr>
+<td align="right">30</td>
+<td align="right">30</td>
+<td align="right">19.78</td>
+<td align="right">0.00</td>
+<td align="right">~1.6</td>
+<td align="right">11.72</td>
+</tr>
+</tbody>
+</table>
+
+<p>Specificity can be thought of as a proxy for the number of times an index hit can be extended to a true match between <em>T</em> and <em>P</em>. The figure below explain this idea:
+
+<hr />
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="http://www.bx.psu.edu/~anton/bioinf-images/specificity.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Specificity. Matching <code>ord</code> to <code>time_for_such_a_word</code>. Image from <a href="http://www.cs.jhu.edu/~langmea/resources/lecture_notes/indexing_with_substrings.pdf">Ben Langmead</a></small></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<p>here we look for pattern <code>ord</code> within text <code>time_for_such_a_word</code>. The first index hit does not produce a match, while the second does. Decreasing the number of fruitless hits increases specificity and speeds up the search. Intuitively, this is achieved by increasing the substring length.</p>
+
+<p>In summary, we have seen that we can create an index (a map) containing coordinates of substrings from a text <em>T</em>. We can then use this map to find occurrences (if they exist) of pattern <em>P</em> within the <em>T</em>. The map can be represented in variety of ways including sorted lists, hash tables, and trees:</p>
+
+<hr />
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="http://www.bx.psu.edu/~anton/bioinf-images/sorted_list.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small><b>Sorted list</b></small></td>
+</tr>
+
+<tr>
+<td><img src="http://www.bx.psu.edu/~anton/bioinf-images/hash.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small><b>Hash</b></small></td>
+</tr>
+
+<tr>
+<td><img src="http://www.bx.psu.edu/~anton/bioinf-images/trie.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small><b>Trie</b></small></td>
+</tr>
+
+<tr>
+<td><small>Sorted list (top), Hash (middle), and Trie (bottom). From <a href="http://www.cs.jhu.edu/~langmea/resources/lecture_notes/indexing_with_substrings.pdf">Ben Langmead</a> and <a href="https://en.wikipedia.org/wiki/Trie#/media/File:Trie_example.svg">Wikipedia</a>.</small></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<p>What&rsquo;s important here is that sorted lists and especially hash tables provide a quick way to find the initial hit, but they are limited by the choice of the substring size. We&rsquo;ve seen before (the <em>Specificity</em> table above) that the choice of substring size will have profound effects on the performance of the search. Would it be nice if we would not need to make that choice. For this we will continue to <em>Tries and Trees</em> below.</p>
+
+<h3 id="tries-and-trees">Tries and trees</h3>
+
+<p>Let&rsquo;s consider text <em>T</em> = <code>gtccacctagtaccatttgt</code>. Using the logic from previous section we can build an index using substrings of length 2 with interval 2 (skipping every other substring) that would look like this after sorting:</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">Substring</th>
+<th align="center">Offset</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center"><code>ac</code></td>
+<td align="center">4</td>
+</tr>
+
+<tr>
+<td align="center"><code>ag</code></td>
+<td align="center">8</td>
+</tr>
+
+<tr>
+<td align="center"><code>at</code></td>
+<td align="center">14</td>
+</tr>
+
+<tr>
+<td align="center"><code>cc</code></td>
+<td align="center">12</td>
+</tr>
+
+<tr>
+<td align="center"><code>cc</code></td>
+<td align="center">2</td>
+</tr>
+
+<tr>
+<td align="center"><code>ct</code></td>
+<td align="center">6</td>
+</tr>
+
+<tr>
+<td align="center"><code>gt</code></td>
+<td align="center">18</td>
+</tr>
+
+<tr>
+<td align="center"><code>gt</code></td>
+<td align="center">0</td>
+</tr>
+
+<tr>
+<td align="center"><code>ta</code></td>
+<td align="center">10</td>
+</tr>
+
+<tr>
+<td align="center"><code>tt</code></td>
+<td align="center">16</td>
+</tr>
+</tbody>
+</table>
+
+<p>Representing this sorted list as a <em>trie</em> that would map substrings to their positions (offsets) will look like this:</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="http://www.bx.psu.edu/~anton/bioinf-images/substring_trie.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>A trie. Example from <a href="http://www.cs.jhu.edu/~langmea/resources/lecture_notes/indexing_with_substrings.pdf">Ben Langmead</a>.</small></td>
+</tr>
+</tbody>
+</table>
+
+<p>Note that this <em>trie</em> is the smallest tree (<a href="http://stackoverflow.com/questions/4737904/difference-between-tries-and-trees"><em>trie</em> versus <em>tree</em></a> is indeed a bit confusing) representing a collection of substrings that has the following properties:</p>
+
+<ul>
+<li>Each edge is labeled with a character from a given alphabet (in this case <code>A</code>, <code>C</code>, <code>G</code>, and <code>T</code>);</li>
+<li>Each node has a single outgoing edge corresponding to an alphabet character;</li>
+<li>Each <em>key</em> (substrings of length 2 in the above case) is spelled out along a path starting at the root.</li>
+</ul>
+
+<p>While the above example shows how we can quickly find positions for a given substring, it still relies on a fixed substring length. To see how we can deal with this limitation let&rsquo;s introduce the idea of indexing with <em>suffixes</em> rather than with fixed substrings. Consider the following text <em>T</em> = <code>GTTATAGCTGATCGCGGCGTAGCGG</code>. Let&rsquo;s add a special symbol <code>$</code> to the end of this text. For <em>T$</em> a list of all substrings will look like this:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">GTTATAGCTGATCGCGGCGTAGCGG$
+ TTATAGCTGATCGCGGCGTAGCGG$
+  TATAGCTGATCGCGGCGTAGCGG$
+   ATAGCTGATCGCGGCGTAGCGG$
+    TAGCTGATCGCGGCGTAGCGG$
+     AGCTGATCGCGGCGTAGCGG$
+      GCTGATCGCGGCGTAGCGG$
+       CTGATCGCGGCGTAGCGG$
+        TGATCGCGGCGTAGCGG$
+         GATCGCGGCGTAGCGG$
+          ATCGCGGCGTAGCGG$
+           TCGCGGCGTAGCGG$
+            CGCGGCGTAGCGG$
+             GCGGCGTAGCGG$
+              CGGCGTAGCGG$
+               GGCGTAGCGG$
+                GCGTAGCGG$
+                 CGTAGCGG$
+                  GTAGCGG$
+                   TAGCGG$
+                    AGCGG$
+                     GCGG$
+                      CGG$
+                       GG$
+                        G$
+                         $</pre></div>
+<p>Recall that a trie has the following properties:</p>
+
+<ul>
+<li>Each edge is labeled with a character from a given alphabet;</li>
+<li>Each node has a single outgoing edge corresponding to an alphabet character;</li>
+<li>Each substring (in this case a suffix) is spelled out along a path starting at the root.</li>
+</ul>
+
+<p>Let&rsquo;s now use these rules to build a suffix trie for a much simpler text <em>T</em> = <code>abaaba</code>. It is much smaller than the text we used above and so it will be easier to get the point across. First, let&rsquo;s add <code>$</code> and create a list of all suffixes:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">abaaba$
+ baaba$
+  aaba$
+   aba$
+    ba$
+     a$
+      $</pre></div>
+<p>now let&rsquo;s create a trie:</p>
+
+<h3 id="looking-for-substrings-in-a-trie">Looking for substrings in a Trie</h3>
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="http://www.bx.psu.edu/~anton/bioinf-images/suffix_trie_1.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>The green path shows the longest suffix (the entire thing). The blue path is the shortest suffix containing only the terminal character.</small></td>
+</tr>
+
+<tr>
+<td><img src="http://www.bx.psu.edu/~anton/bioinf-images/trie_no_end.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Note, that the trie would look <strong>dramatically</strong> different had we not added the <code>$</code> at the end. The difference is that without the <code>$</code> the trie will <strong>not</strong> have every suffix to be represented by a path from <code>root</code> to a leaf.</small></td>
+</tr>
+
+<tr>
+<td><img src="http://www.bx.psu.edu/~anton/bioinf-images/suffix_trie_2.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>In suffix trie every edge is labeled with a single character and nodes have no labels in our representation. However, you can think of every node as being labeled with a string that spells out all characters occurring along a path from the root up to the that node. For example, the blue node <code>baa</code> spells out characters <code>b</code>, <code>a</code>, and <code>a</code> along a path from the root.</small></td>
+</tr>
+
+<tr>
+<td><img src="http://www.bx.psu.edu/~anton/bioinf-images/suffix_trie_3.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Suffix trie is an ideal data stricture to quickly check if a pattern is or is not present in a text. The following three examples highlight how this can be done. Suppose we want to check if a substring <code>baa</code> is present within text <code>abaaba</code> represented as our suffix trie. We start at the root and take an edge labeled with <code>b</code>. We next proceed through an edge labeled <code>a</code>. At this point there are two outgoing edges: <code>a</code> and <code>$</code>. Since the last character in <code>baa</code> is <code>a</code> we take the edge labeled as <code>a</code>. Because the entire substring <code>baa</code> can be spelled out as a path from the root we conclude that <code>baa</code> is indeed a substring of <code>abaaba</code>.</small></td>
+</tr>
+
+<tr>
+<td><img src="http://www.bx.psu.edu/~anton/bioinf-images/suffix_trie_4.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Now let&rsquo;s do the same for <code>abaaba</code>. Proceeding along the green path spells out all characters. Again, we conclude that <code>abaaba</code> is valid substring. </small></td>
+</tr>
+
+<tr>
+<td><img src="http://www.bx.psu.edu/~anton/bioinf-images/suffix_trie_5.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>But for <code>baabb</code> things look different. We proceed successfully (red path) through <code>b</code>, <code>a</code>, <code>a</code>, and <code>b</code>. However, there is no edge labeled <code>b</code> at <code>baab</code> node. Thus we fall off and conclude that <code>baabb</code> is <strong>not</strong> a substring of <code>abaaba</code>.</small></td>
+</tr>
+
+<tr>
+<td><img src="http://www.bx.psu.edu/~anton/bioinf-images/suffix_trie_6.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>We can also use suffix trie to check if a string is a suffix of a text. You can see that <code>baa</code> is <strong>not</strong> a suffix. This is because although it is valid substring, which traces a path through the trie, such path does not end with an outgoing edge labeled with <code>$</code>.</small></td>
+</tr>
+
+<tr>
+<td><img src="http://www.bx.psu.edu/~anton/bioinf-images/suffix_trie_7.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Here <code>aba</code> is a suffix because one of the outgoing edges from the final node is labeled with <code>$</code>.</small></td>
+</tr>
+
+<tr>
+<td><img src="http://www.bx.psu.edu/~anton/bioinf-images/suffix_trie_8.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Another useful feature of suffix trie is the ability to tell how many times a particular substring if found in a text. Here <code>aba</code> is found twice as the last edge of a path spelling <code>aba</code> leads to a node (<code>n</code>) with two outgoing edges.</small></td>
+</tr>
+
+<tr>
+<td><img src="http://www.bx.psu.edu/~anton/bioinf-images/suffix_trie_9.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Finally, similar logic allows to find the longest repeated substrings within a text. A deepest (furthest from the root) node with multiple outgoing edges wound point to a repetitive substring. Here <code>aba</code> is the longest repeated substring of <code>abaaba</code>.</small></td>
+</tr>
+</tbody>
+</table>
+
+<p>Now that we explained how suffix tries can be used to find substrings in text, let&rsquo;s reduce non-branching paths in tries and convert them to trees:</p>
+
+<h3 id="from-a-trie-to-a-tree">From a Trie to a Tree</h3>
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="http://www.bx.psu.edu/~anton/bioinf-images/suffix_trie_1.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>If we collapse all non-branching paths and concatenate their labels we will get:</small></td>
+</tr>
+
+<tr>
+<td><img src="http://www.bx.psu.edu/~anton/bioinf-images/suffix_tree_1.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Now, let&rsquo;s label every leaf of the tree with offset (position in the text) of the corresponding suffix:</small></td>
+</tr>
+
+<tr>
+<td><img src="http://www.bx.psu.edu/~anton/bioinf-images/suffix_tree_2.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Collapsing non-branching paths has given us a somewhat more compact data structure. Now see how we can use this data structure.</small></td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="looking-for-substrings-in-a-tree">Looking for substrings in a Tree</h3>
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="http://www.bx.psu.edu/~anton/bioinf-images/suffix_tree_3.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Checking the above suffix tree to see if <code>baa</code> is a substring of the text. The logic is exactly the same as with suffix tries, except we now have to account for the fact that along some edges only a portion of the characters within a label will match. In this case matching characters are highlighted with uppercase: <code>BA</code> matches along the first edge along the blue path, and only <code>A</code> matches along the second edge. The conclusion is that <code>baa</code> is a substring of the text.</small></td>
+</tr>
+
+<tr>
+<td><img src="http://www.bx.psu.edu/~anton/bioinf-images/suffix_tree_4.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Now let&rsquo;s see if <code>aba</code> is a suffix of our text. It matches along the blue path and the last node along this path has an outgoing edge labeled with <code>$</code>. Thus it is a suffix.</small></td>
+</tr>
+
+<tr>
+<td><img src="http://www.bx.psu.edu/~anton/bioinf-images/suffix_tree_5.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>And just like with suffix tries we can count occurrences of a substring by counting the number of outgoing edges from the last node.</small></td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="application-of-suffix-trees">Application of suffix trees</h3>
+
+<p>One of the common applications of suffix trees to the genome data analysis is finding (longest) common subsequences between two sequences. <a href="http://mummer.sourceforge.net/manual/">MUMMER</a> implements this approach. The following plot shows a comparison between <em>E. coli</em> K12 and APEC O1 strains. It is computed in 8 seconds using approximately 10 Mb of RAM (K12 and APEC O1 genomes are 4.5 and 4.9. Mb, respectively).</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="http://www.bx.psu.edu/~anton/bioinf-images/mum.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>To find longest common subsequences a suffix tree can be constructed from both sequences at once as shown in the following slide from <a href="http://www.cs.jhu.edu/~langmea/resources/lecture_notes/suffix_trees.pdf">Ben Langmead</a>:</small></td>
+</tr>
+
+<tr>
+<td><img src="http://www.bx.psu.edu/~anton/bioinf-images/lcs.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>While suffix trees allow sequence comparisons to be performed in nearly linear time, they have large memory footprint. At some point this becomes a serious limitation making the use of suffix trees impractical. For example, indexing human genome will require ~47 Gb of memory. </small></td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="suffix-arrays">Suffix arrays</h3>
+
+<p>Suffix array offers a more compact solution to representing text suffixes. It specified a lexicographic ordering of suffixes derived from text <em>T</em>$:</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="http://www.bx.psu.edu/~anton/bioinf-images/sa.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>A suffix array. Image by <a href="http://www.cs.jhu.edu/~langmea/resources/lecture_notes/indexing_with_substrings.pdf">Ben Langmead</a></small></td>
+</tr>
+</tbody>
+</table>
+
+<p>Because one does not need additional pointers required for tree representation, the suffix array (SA) has a significantly smaller memory footprint. For example, SA for human genome will occupy ~12Gb (down from 47Gb required for a suffix tree). Yet there is an even better idea.</p>
+
+<h2 id="burrows-wheeler-transform-and-fm-index">Burrows-Wheeler Transform and FM index</h2>
+
+<p>Burrows-Wheeler (BW) transform is a reversible permutation of a string. For example, for a string:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">abaaba$</pre></div>
+<p>create all rotations:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">$abaaba
+a$abaab
+ba$abaa
+aba$aba
+aaba$ab
+baaba$a
+abaaba$</pre></div>
+<p>sort them lexicographically with <code>$</code> as first character:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">$abaaba
+a$abaab
+aaba$ab
+aba$aba
+abaaba$
+ba$abaa
+baaba$a</pre></div>
+<p>take the last column. It will be the BWT of the original string <code>abaaba$</code>:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">abba$aa</pre></div>
+<p>Below is the entire procedure as one slide:</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="http://www.bx.psu.edu/~anton/bioinf-images/bw.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Burrows-Wheeler transform. Image by <a href="http://www.cs.jhu.edu/~langmea/resources/lecture_notes/indexing_with_substrings.pdf">Ben Langmead</a>.</small></td>
+</tr>
+</tbody>
+</table>
+
+<p>It has three important features that make it ideas for creating searchable compact representations of genomic data:</p>
+
+<ul>
+<li>It can be compressed</li>
+<li>It can be reversed to reconstruct the original string</li>
+<li>It can be used as an index</li>
+</ul>
+
+<h3 id="lf-mapping-of-burrows-wheeler-matrix-bwm">LF mapping of Burrows-Wheeler Matrix (BWM)</h3>
+
+<p>Let&rsquo;s take the original string <code>abaaba</code> add <code>$</code> and list charters ranks:</p>
+
+<p><strong>a</strong><sub>0</sub><strong>b</strong><sub>0</sub><strong>a</strong><sub>1</sub><strong>a</strong><sub>2</sub><strong>b</strong><sub>1</sub><strong>a</strong><sub>3</sub>$</p>
+
+<p>This ranking is done based on the order of the characters in the text (T-ranking). The order of ranked characters is preserved between the first column (F) and the last column (L):</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="http://www.bx.psu.edu/~anton/bioinf-images/lf_a.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>LF mapping: <strong>a</strong><sub>s</sub> has the same order in F and L</small></td>
+</tr>
+
+<tr>
+<td><img src="http://www.bx.psu.edu/~anton/bioinf-images/lf_b.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>LF mapping: <strong>b</strong><sub>s</sub> has the same order in F and L. Image by <a href="http://www.cs.jhu.edu/~langmea/resources/lecture_notes/indexing_with_substrings.pdf">Ben Langmead</a></small></td>
+</tr>
+</tbody>
+</table>
+
+<p>Let&rsquo;s now rank characters in order of their appearance in the sorted list of rotations (B-ranking):</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="http://www.bx.psu.edu/~anton/bioinf-images/bw_b_rank.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Burrows-Wheeler transform with B-rankings. Image by <a href="http://www.cs.jhu.edu/~langmea/resources/lecture_notes/indexing_with_substrings.pdf">Ben Langmead</a></small></td>
+</tr>
+</tbody>
+</table>
+
+<p>A very important implication of this is that we can quickly jump from L to F:</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="http://www.bx.psu.edu/~anton/bioinf-images/f_from_l.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>L/F mapping. Image by <a href="http://www.cs.jhu.edu/~langmea/resources/lecture_notes/indexing_with_substrings.pdf">Ben Langmead</a></small></td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="reversing-btw">Reversing BTW</h3>
+
+<p>Because of the LF mapping property was can also easily reconstruct original text from its BWT:</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="http://www.bx.psu.edu/~anton/bioinf-images/bwt_rev.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>or</small></td>
+</tr>
+
+<tr>
+<td><img src="http://www.bx.psu.edu/~anton/bioinf-images/bwt_rev2.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Reversing BWT. Image by <a href="http://www.cs.jhu.edu/~langmea/resources/lecture_notes/indexing_with_substrings.pdf">Ben Langmead</a></small></td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="searching-bwt">Searching BWT</h3>
+
+<p>Let&rsquo;s try to find is the string <code>aba</code> is present in a &ldquo;genome&rdquo; stored as a BWT.</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><small>We start with suffix of $ab\color{red}a$ shown in red. This gives us a range of characters in the F column (all <strong>a</strong>s)</small></td>
+</tr>
+
+<tr>
+<td><img src="http://www.bx.psu.edu/~anton/bioinf-images/bwt_q1.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>We now extend to $a\color{red}{ba}$ and see how many of <strong>a</strong>s have preceding <strong>b</strong>s:</small></td>
+</tr>
+
+<tr>
+<td><img src="http://www.bx.psu.edu/~anton/bioinf-images/bwt_q2.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Finally we extend to the entire string $\color{red}{aba}$:</small></td>
+</tr>
+
+<tr>
+<td><img src="http://www.bx.psu.edu/~anton/bioinf-images/bwt_q3.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>This tells us the range [3,5) but, as opposed to suffix array, this does not tell us where these matches occur in the actual sequence. We will come back to this problem shortly.</small></td>
+</tr>
+
+<tr>
+<td><img src="http://www.bx.psu.edu/~anton/bioinf-images/bwt_q4.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>The slide below shows what happens when a match is <strong>not</strong> present in the &ldquo;genome&rdquo;:</small></td>
+</tr>
+
+<tr>
+<td><img src="http://www.bx.psu.edu/~anton/bioinf-images/bwt_q5.png" alt="" /></td>
+</tr>
+
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="practicalities-of-using-bwt">Practicalities of using BWT</h3>
+
+<p>As we have seen BWT is <strong>very</strong> compact but has few shortcomings such as, for example, the difficulty is seeing where the matches are in the actual genome as well as some performance limitations. Combining BWT with auxiliary data structures creates <a href="https://en.wikipedia.org/wiki/FM-index">FM-index</a> (where FM stands for Full-text index in Minute space; curiously, the names of FM-index creators are <a href="http://dl.acm.org/citation.cfm?id=796543">Ferrigina and Manzini</a>). The components of FM-index used for aligning reads to a genome are:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">  BWT               Tally        Check    
+                                 points 
+                                                        SA
+  F       L         a b          a b       SA           sample
+  ---------        -----        -----     ----         --------
+  $ abaab a         1 0          1 0       6 $          6
+  a $abaa b         1 1                    5 a$         
+  a aba$a b         1 2                    2 aaba$      2
+  a ba$ab a         2 2          2 2       3 aba$       
+  a baaba $         2 2                    0 abaaba$    0
+&gt; b a$aba a         3 2                    4 ba$        4
+  b aaba$ a         4 2          4 2       1 baaba$</pre></div>
+<p>Where:</p>
+
+<h4 id="bwt">BWT</h4>
+
+<p>BWT - the BWT (L column from above) is stored and the first column (F) can be easily reconstructed as it is simply a list of all characters (4 in the case of DNA) and their counts.</p>
+
+<h4 id="tally">Tally</h4>
+
+<p>Because we do not explicitly store ranks they can simply be obtained by counting occurrences of individual characters from the top of L column. Yet this is computationally expensive. Instead we store a tally table. At every row of the BWT matrix it shows how many times each character has been seen up to this point. For example at row marked with <code>&gt;</code> there were 3 As and 2 Bs up to this point. In reality, to save space, only a subset of Tally entries is stored as <em>Checkpoints</em> recorded in regular intervals as shown above.</p>
+
+<h4 id="sa-sample">SA Sample</h4>
+
+<p>Finally, to find coordinates of matches in the genome offsets from an SA index are stored as SA sample (actual suffixes are not stored). This allows quickly finding location of a match within the genome by a direct look up. Similarly to Checkpoints only a fraction of these is stored to save space.</p>
+
+<p>Thus the final list of components is:</p>
+
+<ul>
+<li>First column = integers corresponding to character type counts. In case of DNA four integers: number of As, Cs, Gs, and Ts.</li>
+<li>Last column = the BWT transform. Size is equal to the length of the original text</li>
+<li>Checkpoints = length of text $\times$ number of character types  $\times$ sampling fraction (how sparse rows are sampled)</li>
+<li>SA sample = length of text $\times$ fraction of the rows kept</li>
+</ul>
+
+<p>For human genome with DNA alphabet of four nucleotides, saving checkpoint every 128<sup>th</sup> row, and saving SA offsets every 32<sup>nd</sup> row we will have:</p>
+
+<ul>
+<li>First column = 16 bytes</li>
+<li>Last column = 2bit $\times$ 3 billion characters = 750 MB</li>
+<li>Checkpoints = 3 billion $\times$ 4 bytes/char &divide; 128 &#x2248; 100 MB</li>
+<li>SA sample = 3 billion $\times$ 4 bytes/char &divide; 32 &#x2248; 400 MB</li>
+</ul>
+
+<hr />
+
+<h2 id="homework-2">Homework #2</h2>
+
+<p>Use Python to:</p>
+
+<ul>
+<li>Create a random DNA sequence of eight (8) nucleotides</li>
+<li>Create a BWT transform for this sequence</li>
+</ul>
+
+<p>Send me a link to collab notebook. <strong>This is due this Friday (Mar 1st, 2019)</strong></p>
+
+
+
+      </main>
+    </div>
+    <footer id="footer" class="mt-auto text-center text-muted">
+  <div class="container">
+    Nekrutenko Lab 2019 | CC-BY
+  </div>
+</footer>
+    <script src="https://nekrut.github.io/BMMB554/js/feather.min.js"></script>
+<script>
+  feather.replace()
+</script>
+
+
+    
+  
+
+  </body>
+</html>
