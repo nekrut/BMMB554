@@ -1,0 +1,1493 @@
+<!doctype html>
+<html lang="en" class="h-100">
+  <head>
+  <meta name="generator" content="Hugo 0.54.0" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://nekrut.github.io/BMMB554/css/bootstrap.min.css">
+  
+  
+  <title>Lecture 13: Assembling reads into genomes | BMMB554</title>
+  <style>
+.container {
+  max-width: 800px;
+}
+#nav a {
+  font-weight: bold;
+  color: inherit;
+}
+#nav a.nav-link-active {
+  background-color: #212529;
+  color: #fff;
+}
+#nav-border {
+  border-bottom: 1px solid #212529;
+}
+#main {
+  margin-top: 1em;
+  margin-bottom: 4em;
+}
+#home-jumbotron {
+  background-color: inherit;
+}
+#footer .container {
+  padding: 1em 0;
+}
+#footer a {
+  color: inherit;
+  text-decoration: underline;
+}
+.font-125 {
+  font-size: 125%;
+}
+.tag-btn {
+  margin-bottom: 0.3em;
+}
+pre {
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 16px;
+}
+pre code {
+  padding: 0;
+  font-size: inherit;
+  color: inherit; 
+  background-color: transparent;
+  border-radius: 0;
+}
+code {
+  padding: 2px 4px;
+  font-size: 90%;
+  color: #c7254e;
+  background-color: #f9f2f4;
+  border-radius: 4px;
+}
+img {
+  max-width: 100%;
+}
+</style>
+
+  <script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+  
+</head>
+  <body class="d-flex flex-column h-100">
+    <div id="nav-border" class="container">
+  <nav id="nav" class="nav justify-content-center">
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    <a class="nav-link " href="/BMMB554/"><i data-feather="home"></i> Home</a>
+  
+    
+    
+      
+        
+      
+    
+    
+    <a class="nav-link " href="/BMMB554/post/"><i data-feather="book-open"></i> Lectures</a>
+  
+    
+    
+      
+        
+      
+    
+    
+    <a class="nav-link " href="/BMMB554/tags/"><i data-feather="tag"></i> Tags</a>
+  
+    
+    
+      
+        
+      
+    
+    
+    <a class="nav-link " href="/BMMB554/about/"><i data-feather="list"></i> Syllabus</a>
+  
+  </nav>
+</div>
+    <div class="container">
+      <main id="main">
+        
+
+<h1>Lecture 13: Assembling reads into genomes</h1>
+
+
+<i data-feather="calendar"></i> <time datetime="2019-02-27">Feb 27, 2019</time>
+
+  <br>
+  <i data-feather="tag"></i>
+  
+  
+  <a class="btn btn-sm btn-outline-dark tag-btn" href="https://nekrut.github.io/BMMB554/tags/assembly">assembly</a>
+  
+  
+  <a class="btn btn-sm btn-outline-dark tag-btn" href="https://nekrut.github.io/BMMB554/tags/debruijn">DeBruijn</a>
+  
+
+<br><br>
+
+
+<p><a href="https://github.com/rrwick/Unicycler"><img src="https://github.com/rrwick/Unicycler/raw/master/misc/illumina_graph_comparison.png" alt="" /></a></p>
+
+<p>Genome assembly is a difficult task. In trying to explain it I will be relying on two primary sources:</p>
+
+<ul>
+<li><a href="http://www.langmead-lab.org/teaching-materials/">Ben Langmead&rsquo;s Teaching Materials</a></li>
+<li><a href="http://www.amazon.com/Bioinformatics-Algorithms-Active-Learning-Approach/dp/0990374602">Pevzner and Compeau Bioinformatics Book</a></li>
+</ul>
+
+<h1 id="genomes-and-reads-strings-and-k-mers">Genomes and reads: Strings and <em>k</em>-mers</h1>
+
+<h2 id="k-mer-composition"><em>k</em>-mer composition</h2>
+
+<p>Genomes are strings of text. When we sequence genomes we use sequencing machines that generate reads. For now let&rsquo;s assume that all reads have the same length <em>k</em> and every <em>k</em>-mer is sequenced only once. We will relax these assumptions later in this lecture. Thus sequencing a genome generates a large list of <em>k</em>-mers.</p>
+
+<p>Suppose we are dealing with a <em>very</em> short genome <code>TATGGGGTGC</code>. Its <em>k</em>-mer composition (note the subscript) $Composition_k(Text)$ is the collection of all $k$-mer substrings (including repeated ones). When <em>k</em> = 3 we get (basically we split sequence into windows of length 3 sliding window by 1 base every time):</p>
+
+<div>
+$$
+Composition_3(\texttt{TATGGGGTGC}) = \texttt{ATG, GGG, GGG, GGT, GTG, TAT, TGC, TGG}
+$$
+</div>
+
+<p>Note that we have listed <em>k</em>-mers in lexicographic order (i.e., how they would appear in a dictionary) rather than in the order of their appearance in $\texttt{TATGGGGTGC}$. We have done this because the correct ordering of the reads is unknown when they are generated (i.e., a sequencing machine does not generate reads in any particular order).</p>
+
+<h2 id="assembly-by-overlap">Assembly by overlap</h2>
+
+<p>In the example above we know what the &ldquo;genome&rdquo; sequence is. In real life we don&rsquo;t know that and our goal is to determine genome sequence given a scrambled collection of <em>k</em>-mers. Let&rsquo;s consider the following collection of 3-mers representing a hypothetical genome:</p>
+
+<div>
+  $$
+\texttt{AAT ATG GTT TAA TGT}
+$$
+</div>
+
+<p>Let&rsquo;s &ldquo;tile&rdquo; <em>k</em>-mers if they overlap in <em>k</em>-1 nucleotides:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">TAA
+ AAT
+  ATG
+   TGT
+    GTT
+-------
+TAATGTT</pre></div>
+<p>Now let&rsquo;s apply it to slightly longer &ldquo;genome&rdquo; with the following 3-mer composition sorted in a lexicographic order:</p>
+
+<div>
+  $$
+  \texttt{AAT ATG ATG ATG CAT CCA GAT GCC GGA GGG GTT TAA TGC TGG TGT}
+$$
+</div> 
+
+<p><code>TAA</code> looks like a great beginning and we are continuing:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">1 TAA
+2  AAT
+3   ATG
+4    TGT
+5     GTT
+  -------
+  TAATGTT</pre></div>
+<p>There is nothing in the original 3-mer composition, which starts with <code>TT</code>. Let&rsquo;s track back and instead of <code>TGT</code> in step 4 insert <code>TGC</code>:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"> 1 TAA
+ 2  AAT
+ 3   ATG
+ 4    TGC
+ 5     GCC
+ 6      CCA
+ 7       CAT
+ 8        ATG
+ 9         TGG
+10          GGA
+11           GAT
+12            ATG
+13             TGT
+14              GTT
+   ----------------
+   TAATGCCATGGATGTT</pre></div>
+<p>We only used 14 3-mers from the total of 15, so our genome is shorter (we have extra parts!). This difficulty is related to the fact that there are three repeated <code>ATG</code> motifs in this genome and as a result each <code>ATG</code> can be extended by either <code>TGG</code>, <code>TGC</code>, or <code>TGT</code>.</p>
+
+<h2 id="the-concept-of-coverage">The concept of coverage</h2>
+
+<p><em>Coverage</em> is the number of reads covering a particular position in the genome. For example, in the following case:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">TAA
+ AAT
+  ATG     &lt;- &#34;reads&#34; (15 bases total)
+   TGT
+    GTT
+-------
+TAATGTT   &lt;- &#34;genome&#34; (7 bases)
+-------
+0123456    </pre></div>
+<p>The <em>Coverage</em> at positions 1 and 6 is <em>1</em>, at positions 1 and 5 is <em>2</em>, and at position 2, 3, and 4 is <em>3</em>. <br>The <em>Average Coverage</em> will be $\frac{15}{7}\approx2\times$</p>
+
+<p>Below is another, slightly more realistic example where average coverage is $\frac{177}{35}\approx7\times$</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">                  CTAGGCCCTCAATTTTT
+                CTCTAGGCCCTCAATTTTT
+              GGCTCTAGGCCCTCATTTTTT
+           CTCGGCTCTAGCCCCTCATTTT
+        TATCTCGACTCTAGGCCCTCA         &lt;- 177 bases
+        TATCTCGACTCTAGGCC
+    TCTATATCTCGGCTCTAGG
+GGCGTCTATATCTCG
+GGCGTCGATATCT
+GGCGTCTATATCT
+-----------------------------------
+GGCGTCTATATCTCGGCTCTAGGCCCTCATTTTTT   &lt;- 35 bases
+-----------------------------------
+|         |         |         |   |
+0         10        20        30  34</pre></div>
+<h1 id="the-first-and-the-second-laws-of-assembly">The First and the Second laws of assembly</h1>
+
+<p>The goal of assembly process is to reconstruct an unknown genome sequence given a collection of scrambled sequencing reads:</p>
+
+<hr />
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">CTAGGCCCTCAATTTTT
+CTCTAGGCCCTCAATTTTT
+GGCTCTAGGCCCTCATTTTTT
+CTCGGCTCTAGCCCCTCATTTT
+TATCTCGACTCTAGGCCCTCA                 &lt;- Reads (Given)
+TATCTCGACTCTAGGCC
+TCTATATCTCGGCTCTAGG
+GGCGTCTATATCTCG
+GGCGTCGATATCT
+GGCGTCTATATCT
+-----------------------------------
+???????????????????????????????????   &lt;- Genome (Unknown)</pre></div>
+<p><small><strong>The goal of assembly process</strong>. Given sequencing reads reconstruct underlying genome sequence. </small></p>
+
+<hr />
+
+<p>We&rsquo;ve seen that this can (in principle) be accomplished by finding overlaps. We also discussed the concept of the coverage.  We can now formulate the two first assembly laws.</p>
+
+<h2 id="the-first-assembly-law-overlaps-imply-co-location">The First Assembly Law: Overlaps imply co-location</h2>
+
+<p>Let&rsquo;s define terms <strong>Prefix</strong> and <strong>Suffix</strong> using string $\texttt{TAA}$ as an example:</p>
+
+<ul>
+<li>$Prefix(\texttt{TAA}) = \texttt{TA}$</li>
+<li>$Suffix(\texttt{TAA}) = \texttt{AA}$</li>
+</ul>
+
+<p>The First law states that if a <em>suffix</em> of one read is similar to a <em>prefix</em> of another read &hellip;</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">TCTATATCTCGGCTCTAGG    &lt;- read 1
+    ||||||| ||||||| 
+    TATCTCGACTCTAGGCC  &lt;- read 2</pre></div>
+<p>&hellip; then they may overlap (may be derived from the same location) within the genome.</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">      TCTATATCTCGGCTCTAGG                  &lt;- read 1
+ -------------------------------------
+ AGCGTTCTATATCTCGGCTCTAGGCCGTGCAGGACGT     &lt;- genome
+ -------------------------------------
+          TATCTCGACTCTAGGCC                &lt;- read 2</pre></div>
+<p>Note that in the above example suffix of the first read is <em>not</em> exactly identical to the prefix of the second read: they differ by a G-to-A substitution. Such differences are quite common in real life and may be caused by:</p>
+
+<ul>
+<li><strong>sequencing errors</strong> - experimental or computational artifacts of DNA sequencing procedures.</li>
+<li><strong>allelic differences</strong> - organisms such as human are diploid (and others, such as wheat are hexaploid) which maternal and paternal genomes being different at a number of genomic sites.</li>
+<li><strong>polymorphic sites</strong> - DNA that is being sequenced is usually isolated from a large number of cells (e.g., white blood cells) or individuals (bacterial and viral cultures). Natural variation present in these cell (or viral particle) populations will manifest itself as these differences.</li>
+</ul>
+
+<h2 id="the-second-assembly-law-the-higher-the-coverage-the-better">The Second Assembly Law: The higher the coverage, the better</h2>
+
+<p>The Second law states that higher coverage leads to more frequent and longer overlaps:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">                   CTAGGCCCTCAATTTTT
+         TATCTCGACTCTAGGCCCTCA         &lt;- Low coverage
+ GGCGTCTATATCT
+ -----------------------------------
+ GGCGTCTATATCTCGGCTCTAGGCCCTCATTTTTT   &lt;- Genome
+ -----------------------------------
+                   CTAGGCCCTCAATTTTT
+                 CTCTAGGCCCTCAATTTTT
+               GGCTCTAGGCCCTCATTTTTT
+            CTCGGCTCTAGCCCCTCATTTT
+         TATCTCGACTCTAGGCCCTCA         &lt;- Higher coverage
+         TATCTCGACTCTAGGCC
+     TCTATATCTCGGCTCTAGG
+ GGCGTCTATATCTCG
+ GGCGTCGATATCT
+ GGCGTCTATATCT</pre></div>
+<h1 id="solving-assembly-problem-with-graphs">Solving assembly problem with graphs</h1>
+
+<p>We can solve assembly challenge using overlaps between sequencing reads. However, to solve this problem effectively we need to first represent all overlaps in a way that would facilitate further analysis. <em>Directed graphs</em> help achieving this.</p>
+
+<h2 id="directed-graphs">Directed graphs</h2>
+
+<p>Finding overlaps is identical to building a <em>directed graph</em> where directed <em>edges</em> connect <em>nodes</em> representing overlapping reads:</p>
+
+<hr />
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="/BMMB554/img/dag.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small><strong>Directed graph</strong> representing overlapping reads. (Image from <a href="http://www.cs.jhu.edu/~langmea/resources/lecture_notes/assembly_scs.pdf">Ben Langmead</a>)</small>.</td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<p>For example, the string reconstruction we have seen earlier (with the difference of inserting <code>GGG</code> in line 10):</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"> 1 TAA
+ 2  AAT
+ 3   ATG
+ 4    TGC
+ 5     GCC
+ 6      CCA
+ 7       CAT
+ 8        ATG
+ 9         TGG
+10          GGG
+11           GGA
+12            GAT
+13             ATG
+14              TGT
+15               GTT
+   -----------------
+   TAATGCCATGGGATGTT</pre></div>
+<p>can be represented as a following directed graph (or genome path):</p>
+
+<hr />
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="/BMMB554/img/4.6.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small><strong>Genome path</strong>. Trimers composing the $\texttt{TAATGCCATGGGATGTT}$ sequence represented as the &ldquo;genome&rdquo; path. (Fig. 4.6 from CP). In this path a suffix of a 3-mer is equal to prefix of the next 3-mer.</small></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<p><strong>However</strong>, we do not know the actual genome! All we have in real life is a collection of reads. Let&rsquo;s first build an overlap graph by connecting two 3-mers if suffix of one is equal to the prefix of the other:</p>
+
+<hr />
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="/BMMB554/img/4.7.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small><strong>Overlap graph</strong>. All possible overlap connections for our 3-mer collection. (Adopted from Fig. 4.7 from CP)</small></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<p>So to determine the sequence of the underlying genome we are looking a path in this graph that visits every node (3-mer) once. Such path is called <a href="https://en.wikipedia.org/wiki/Hamiltonian_path">Hamiltonial path</a> and it may not be unique. For example for our 3-mer collection there two possible Hamiltonian paths:</p>
+
+<hr />
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><small>Path 1</small></td>
+</tr>
+
+<tr>
+<td><img src="/BMMB554/img/4.9a.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Path 2</small></td>
+</tr>
+
+<tr>
+<td><img src="/BMMB554/img/4.9b.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small><strong>Two Hamiltonian paths for the 15 3-mers</strong>. Edges spelling &ldquo;genomes&rdquo; $\texttt{TAATGCCATGGGATGTT}$ and $\texttt{TAATGGGATGCCATGTT}$ are highlighted in black. (Adopted Fig. 4.9. from CP).</small></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<p>The reason for this &ldquo;duality&rdquo; is the fact that we have a <em>repeat</em>: 3-mer $\texttt{ATG}$ is present three times in our data (<font color="green">green</font>, <font color="red">red</font>, and <font color="blue">blue</font>). As we will see later repeats cause a lot of trouble in genome assembly.</p>
+
+<h2 id="finding-overlaps">Finding overlaps</h2>
+
+<p>In the example above we had a collection of 3-mers and were always looking for overlaps of length two. In real life things may not be so &ldquo;regular&rdquo;. Suppose we have two reads:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">Read X CTCTAGGCC
+Read Y TAGGCCCTC</pre></div>
+<p>what is the overlap between these two reads? For now we will define overlap of $length - l$ suffix of Read X matches $length - l$ prefix of Read Y, where $l$ is given. To find these overlap we look in Read Y for instances $length - l$ suffix of Read X. We will start with some minimal match of length $k$. Once a match is found it will be extended to the left to verify that the entire prefix of Read Y matches:</p>
+
+<hr />
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="/BMMB554/img/find_overlap.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small><strong>Finding overlaps</strong> between Read X and Read Y. As a result we represent two two reads are connected nodes:</small></td>
+</tr>
+
+<tr>
+<td><img src="/BMMB554/img/og1.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Number above the edge shows the length of the overlap. (Adopted from <a href="http://www.cs.jhu.edu/~langmea/resources/lecture_notes/assembly_scs.pdf">Ben Langmead</a>).</small></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<p>While with just two reads the problem may seen quite straightforward. Let now consider a set of reads representing a very short genome $\texttt{GTACGTACGAT}$:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">GTACGT
+TACGTA
+CGTACG
+ACGTAC
+GTACGA
+TACGAT</pre></div>
+<p>Building an overlap graph with overlap of $length \geq 4$ will give us the following:</p>
+
+<hr />
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="/BMMB554/img/og2.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>You can see that there is a path through this graph that would spell out the original genome sequence $\texttt{GTACGTACGAT}$:</small></td>
+</tr>
+
+<tr>
+<td><img src="/BMMB554/img/og3.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Here we are lucky enough to have all nodes having a single outgoing edge with the highest number (the length of overlap).</small></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<h2 id="the-shortest-common-superstring-problem">The Shortest Common Superstring Problem</h2>
+
+<p>The problem of reconstructing genome using the overlap graph that we have just illustrated can be initially formulated as the <em>Shortest Common Superstring (SCS)</em> problem. It states: <em>given a collection of strings S, find SCS(S), which is the shortest string that contains all strings from the set S as substrings</em>.</p>
+
+<p>For simplicity let&rsquo;s suppose that we have the following set of strings $S$:</p>
+
+<div>
+  $$
+  S: \texttt{BAA AAB BBA ABA ABB BBB AAA BAB}
+  $$
+</div>
+
+<p>one way of getting a string that would contain all of these as substrings will simply be concatenating them:</p>
+
+<div>
+  $$
+  Concat(S):  \texttt{BAAAABBBAABAABBBBBAAABAB}\ (length = 24)
+$$
+</div>
+
+<p>this, however, is not the <em>shortest</em> superstring that contains all strings from $S$. Instead the SCS is (just trust us here):</p>
+
+<div>
+  $$
+  SCS(S): \texttt{AAABBBABAA}\ (length = 10)
+  $$
+  </div>
+
+<p>It looks like finding SCS for a set of sequencing reads may just be what we need to produce a genome assembly. But how can this work in practice? One potential idea is to order the strings in some way and &ldquo;reduce&rdquo; them into a superstring (following examples are from Ben Langmead):</p>
+
+<hr />
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="/BMMB554/img/scs1.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Let&rsquo;s look at the first two strings. They can be &ldquo;reduced&rdquo; to <code>AAAB</code>:</small></td>
+</tr>
+
+<tr>
+<td><img src="/BMMB554/img/scs2.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>The next two add an <code>A</code>:</small></td>
+</tr>
+
+<tr>
+<td><img src="/BMMB554/img/scs3.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Third and fourth add <code>BB</code>:</small></td>
+</tr>
+
+<tr>
+<td><img src="/BMMB554/img/scs4.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Continuing this we will eventually get <code>AAABABBAABABBABB</code>:</small></td>
+</tr>
+
+<tr>
+<td><img src="/BMMB554/img/scs5.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>But <code>AAABABBAABABBABB</code> is the shortest only for this particular ordering. So let&rsquo;s reorder and try again:</small></td>
+</tr>
+
+<tr>
+<td><img src="/BMMB554/img/scs6.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Now we did better, but maybe we can do even better. (Adopted from <a href="http://www.cs.jhu.edu/~langmea/resources/lecture_notes/assembly_scs.pdf">Ben Langmead</a>).</small></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<p>Ultimately we need to try all possible ordering and pick the shortest among all. Using this approach is we have $S$ strings we will need to do $S!$ tries. This can quickly get impossible. For our set of
+eight strings $8! = 40320$. If we get, say, a 1,000,000 reads from an Illumina machine then the factorial of a million is not going to be an attractive analysis option.</p>
+
+<iframe src="https://trinket.io/embed/python3/7929182ea1" width="100%" height="600" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+
+<h2 id="shortest-common-superstring-greedy-approach">Shortest common superstring: Greedy approach</h2>
+
+<p>As we&rsquo;ve seen it will be impossible to assemble the genome using SCS logic. There is a simplification called <em>Greedy</em> approach to SCS problem. Let&rsquo;s take the following set of &ldquo;reads&rdquo;:</p>
+
+<div>
+  $$
+  S: \texttt{AAA AAB ABB BBA BBB}
+  $$
+</div>
+
+<p>and first build an overlap graph:</p>
+
+<hr />
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="/BMMB554/img/greedy1.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small><strong>An overlap graph</strong> for set $S: \texttt{AAA AAB ABB BBA BBB}$.</small></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<p>Next, we start collapsing the nodes to maximize the overlap (and hence to decrease the length of the SCS we are trying to construct):</p>
+
+<hr />
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><small>In the graph below there are multiple ties: nodes with outgoing edges of identical weights (e.g., edges pointing from <code>ABB</code> to both <code>BBA</code> and <code>BBB</code> have weight of two. Remember, that the weight is the length of overlap between two nodes&rsquo; labels). In this situation we will break ties by randomly picking an edge to traverse. Let&rsquo;s pick <font color="red"><code>AAA</code> &#8594; <code>AAB</code></font>:</td>
+</tr>
+
+<tr>
+<td><img src="/BMMB554/img/greedy2.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>We then merge <code>AAA</code> and <code>AAB</code> into an SCS containing both, which will be <code>AAAB</code>:</small></td>
+</tr>
+
+<tr>
+<td><img src="/BMMB554/img/greedy3.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Now let&rsquo;s pick edge <font color="red"><code>ABB</code> &#8594; <code>BBB</code></font>:</small></td>
+</tr>
+
+<tr>
+<td><img src="/BMMB554/img/greedy4.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Collapse the nodes:</small></td>
+</tr>
+
+<tr>
+<td><img src="/BMMB554/img/greedy5.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Pick <font color="red"><code>ABBB</code> &#8594; <code>BBA</code></font>:</small></td>
+</tr>
+
+<tr>
+<td><img src="/BMMB554/img/greedy6.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Collapse the nodes:</small></td>
+</tr>
+
+<tr>
+<td><img src="/BMMB554/img/greedy7.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Pick <font color="red"><code>AAAB</code> &#8594; <code>ABBBA</code></font>:</small></td>
+</tr>
+
+<tr>
+<td><img src="/BMMB554/img/greedy8.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Collapse again and now we are left with a superstring of length 7:</small></td>
+</tr>
+
+<tr>
+<td><img src="/BMMB554/img/greedy9.png" alt="" /></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<p>The above procedure can be computed <em>very</em> quickly. But there is a catch: it does not guarantee that it will give us truly the shortest superstring. It really depends on how we choose edges. Below is another example of using the same dataset in which we traverse graph an a slightly different way:</p>
+
+<hr />
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><small>We start the same way as before by choosing <font color="red"><code>AAA</code> &#8594; <code>AAB</code></font>:</small></td>
+</tr>
+
+<tr>
+<td><img src="/BMMB554/img/greedy2.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Merge <code>AAA</code> and <code>AAB</code>:</td>
+</tr>
+
+<tr>
+<td><img src="/BMMB554/img/greedy3.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>ut now we pick a different edge <font color="red"><code>ABB</code> &#8594; <code>BBA</code></font>:</small></td>
+</tr>
+
+<tr>
+<td><img src="/BMMB554/img/greedy4_alt.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Collapsing these nodes dramatically changes the graph:</small></td>
+</tr>
+
+<tr>
+<td><img src="/BMMB554/img/greedy5_alt.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Now we pick <font color="red"><code>AAAB</code> &#8594; <code>ABBA</code></font> as this is the edge with the highest weight:</small></td>
+</tr>
+
+<tr>
+<td><img src="/BMMB554/img/greedy6_alt.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Collapsing it produces two nodes that are not connected to each other:</small></td>
+</tr>
+
+<tr>
+<td><img src="/BMMB554/img/greedy7_alt.png" alt="" /></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<p>And the SCS of these two will be a concatenation <code>AAABBABBB</code> of length 9. Thus a greedy approach may produce different answers. However, it is a sufficient approximation as the superstring yielded this way will not be more than ~2.5 times longer than the true SCS (<a href="https://www.amazon.com/Algorithms-Strings-Trees-Sequences-Computational/dp/0521585198">Gusfield</a> 16.17.1).</p>
+
+<iframe src="https://trinket.io/embed/python3/9640ff93fd" width="100%" height="600" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+
+<h1 id="the-third-law-of-assembly-repeats-are-evil">The Third Law of Assembly: Repeats are Evil!</h1>
+
+<p>Let&rsquo;s again apply Greedy SCS to a different &ldquo;genome&rdquo;. Suppose we want to reconstruct the phrase:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">a_long_long_long_time </pre></div>
+<p>from all 6-mers that overlap by at least 3 characters. The list of 6-mers is:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">ng_lon 
+_long_
+a_long
+long_l 
+ong_ti
+ong_lo
+long_t
+g_long
+g_time
+ng_tim</pre></div>
+<p>An overlap graph will look like this:</p>
+
+<hr />
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="/BMMB554/img/long.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small><strong>An overlap graph</strong> for with overlap length $\geq 3$.</small></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<p>If we proceed with Greedy SCS we will follow the following trajectory through the graph:</p>
+
+<hr />
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="/BMMB554/img/long_opt.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>To make things even clearer let&rsquo;s isolate the path:</small></td>
+</tr>
+
+<tr>
+<td><img src="/BMMB554/img/long_opt_focus.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>The total overlap here (the sum of edge weights) is 4+5+5+5+5+5+5+5+5=44</small></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<p>The problem is that but it 4+5+5+5+5+5+5+5+5=44 gives us <code>a_long_long_time</code> as the shortest superstring:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">a_long
+  long_l
+   ong_lo
+    ng_lon
+     g_long
+      _long_
+       long_t
+        ong_ti
+         ng_tim
+          g_time
+----------------
+a_long_long_time</pre></div>
+<p>We are missing one instance of &lsquo;long&rsquo; in this string. The following graph shows the path that would return the <em>correct</em> string:</p>
+
+<hr />
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="/BMMB554/img/long_corr.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>A path yielding the correct string with three repeats. The total overlap here is 5+3+3+5+4+4+5+5+5=39</small></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<p>The above graph with overlap 5+3+3+5+4+4+5+5+5=39 is actually <em>worse</em> than the previous path if our goal is to find the shortest superstring:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">a_long
+ _long_
+    ng_lon
+       long_l
+        ong_lo
+          g_long
+            long_t
+             ong_ti
+              ng_tim
+               g_time
+---------------------
+a_long_long_long_time</pre></div>
+<h2 id="are-we-really-looking-for-the-shortest-superstring">Are we really looking for the shortest superstring?</h2>
+
+<p>As we&rsquo;ve seen above the shortest common superstring (SCS) is:</p>
+
+<ol>
+<li><p><strong>Difficult to obtain</strong> as Greedy SCS algorithm does not guarantee funding it. So the answer we get may be longer that the real genome we are trying to assemble.</p></li>
+
+<li><p><strong>May be shorter than we want</strong> because if the genome contains repeats that are longer than the reads we are using, Greedy SCS will collapse them and make assembly shorter that the genome we are trying to get.</p></li>
+</ol>
+
+<p>Let&rsquo;s talk about an alternative way to represent the relationship between <em>k</em>-mers that may give us a more efficient algorithm.</p>
+
+<h1 id="de-bruijn-graphs">de Bruijn graphs</h1>
+
+<p><a href="https://en.wikipedia.org/wiki/Nicolaas_Govert_de_Bruijn">Nicolaas de Bruijn</a> had a purely theoretical interest of constructing <em>k</em>-universal strings for an arbitrary value of <em>k</em>. A <em>k</em>-universal string contains every possible <em>k</em>-mer only once:</p>
+
+<hr />
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><a href="http://www.nature.com/nbt/journal/v29/n11/abs/nbt.2023.html"><img src="/BMMB554/img/deBruijn.png" alt="" /></a></td>
+</tr>
+
+<tr>
+<td><small><strong>de Bruijn graph</strong>. From <a href="http://www.nature.com/nbt/journal/v29/n11/abs/nbt.2023.html">Compeau:2011</a></small></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<p>This problem is equivalent to a string reconstruction problem we have been talking about above: finding a <em>k</em>-universal string is equivalent to finding a Hamiltonian path in an overlap graph constructed from all <em>k</em>-mers. Yet finding a Hamiltonian path in a really large graph (representing a real genome) is not a tractable problem as we have seen. Instead de Bruijn decided to represent <em>k</em>-mer composition in a graph using a slightly different logic. Again, suppose we have a &ldquo;genome&rdquo; $\texttt{TAATGCCATGGGATGTT}$ split in a collection of 3-mers:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">TAA AAT ATG TGC GCC CCA CAT ATG TGG GGG GGA GAT ATG TGT GTT</pre></div>
+<p>We will assign 3-mers to <em>edges</em> instead or <em>nodes</em>:</p>
+
+<hr />
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="/BMMB554/img/4.12.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small><strong><em>k</em>-mers as edges</strong>. Edges represented by 3-mers connect nodes representing the overlaps. (Adopted from Fig. 4.12 from CP).</small></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<p>This graph can be simplified by gluing identical nodes together:</p>
+
+<hr />
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="/BMMB554/img/4.13a.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><img src="/BMMB554/img/4.13b.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Here the complexity of the graph is reduced by first gluing redundant <font color="red"><code>AT</code></font> nodes</small></td>
+</tr>
+
+<tr>
+<td><img src="/BMMB554/img/4.13c.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><img src="/BMMB554/img/4.13d.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Next, <font color="blue"><code>TG</code></font> nodes are merged</small></td>
+</tr>
+
+<tr>
+<td><img src="/BMMB554/img/4.13e.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><img src="/BMMB554/img/4.13f.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>And, finally the two <font color="green"><code>GG</code></font> nodes are resolved. (Adopted from Fig. 4.13 from CP)</small></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<p>Because we now represent <em>k</em>-mers as edges (rather than nodes), our problem has morphed into finding a path that visits every <em>edge</em> once, or an <a href="https://en.wikipedia.org/wiki/Eulerian_path">Eulerian Path</a>:</p>
+
+<hr />
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="/BMMB554/img/4.15.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small><strong>Eulerian paths for the 15 3-mers</strong>. Numbering of edges provides a way to reconstruct the original &ldquo;genome&rdquo;. (Adopted from Fig. 4.15 from CP)</small></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<h2 id="euler-s-theorem">Euler&rsquo;s Theorem</h2>
+
+<p>Some definitions:</p>
+
+<ul>
+<li><strong>Balanced node</strong> - a node where the number of incoming edges is equal to the number of outgoing edges</li>
+<li><strong>Balanced graph</strong> - a graph where all nodes are balanced</li>
+<li><strong>Strongly connected graph</strong> - any node can be reached from any other node</li>
+</ul>
+
+<p><strong>Euler&rsquo;s Theorem</strong>:</p>
+
+<blockquote>
+<p>Every balanced, strongly connected directed graph is Eulerian.</p>
+</blockquote>
+
+<p>Let&rsquo;s apply Euler&rsquo;s Theorem to a classical problem: The bridges of Köninsberg problem. Here the question is: <em>Can you walk through all of Köninsberg traversing every bridge exactly one time?</em> In other words: <em>Is there a Eulerian path through the city of Köninsberg?</em></p>
+
+<hr />
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="/BMMB554/img/koninsberg.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small><strong>Köninsberg and Euler&rsquo;s Theorem</strong>. (a) A map of old Königsberg, in which each area of the city is labeled with a different color point. (b) The Königsberg Bridge graph, formed by representing each of four land areas as a node and each of the city&rsquo;s seven bridges as an edge. (From <a href="http://www.nature.com/nbt/journal/v29/n11/abs/nbt.2023.html#close">Campeau:2011</a>)</small></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<p>By looking at this graph we can see that it is <em>unblanaced</em>. If one arrives to, say, the <font color="orange">orange</font> node from the <font color="blue">blue</font> node there are two ways to get out. Thus there is no way to see all of the city and traverse every bridge once!</p>
+
+<h2 id="repeats-are-still-a-challenge">Repeats are still a challenge</h2>
+
+<p>Let&rsquo;s look at the de Bruijn graph from above again. But this time let&rsquo;s drop edge numbering and pretend that the genome is now really known to us (as is usually the case in real life):</p>
+
+<hr />
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="/BMMB554/img/dg1.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small><strong>Eulerian paths for the 15 3-mers</strong>.</small></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<p>In the original sequence <code>TAATGCCATGGGATGTT</code> <em>k</em>-mer <font color="red"><code>AT</code></font> is present 3 times and <em>k</em>-mer <font color="blue"><code>TG</code></font> is found twice. Thus <em>multiple</em> Eulerian walks are now possible like this:</p>
+
+<hr />
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="/BMMB554/img/dg2.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small><strong>Possible path #1</strong>. Here after we reach <font color="blue"><code>TG</code></font> node we turn <strong>up</strong>.</small></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<p>The above path spells out:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">TAA
+ AAT
+  ATG
+   TGC
+    GCC
+     CCA
+      CAT
+       ATG
+        TGG
+         GGG
+          GGA
+           GAT
+            ATG
+             TGT
+              GTT
+-----------------
+TAATGCCATGGGATGTT</pre></div>
+<p>Yet there is an alternative:</p>
+
+<hr />
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="/BMMB554/img/dg3.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small><strong>Possible path #2</strong>. Here after we reach <font color="blue"><code>TG</code></font> node we turn <strong>dow</strong>.</small></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<p>Which spells:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">TAA
+ AAT
+  ATG
+   TGG
+    GGG
+     GGA
+      GAT
+       ATG
+        TGC
+         GCC
+          CCA
+           CAT
+            ATG
+             TGT
+              GTT
+-----------------
+TAATGGGATGCCATGTT</pre></div>
+<p>Note how different these are (<code>|</code> = same; <code>*</code> = different):</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">TAATGCCATGGGATGTT
+|||||**|||**|||||
+TAATGGGATGCCATGTT</pre></div>
+<p>and only one of them is correct. <font color="orange">Repeats are evil!</font></p>
+
+<h2 id="k-mer-size-affects-repeat-resolution"><em>k</em>-mer size affects repeat resolution</h2>
+
+<p>In the above example we have used <em>k</em>-mer size of 3. But what if we try 4 or 5? Below are DeBruijn graphs for different values of <em>k</em>:</p>
+
+<hr />
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>$k = 3$</td>
+</tr>
+
+<tr>
+<td><img src="/BMMB554/img/k2.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>This is our original graph</small></td>
+</tr>
+
+<tr>
+<td>$k = 4$</td>
+</tr>
+
+<tr>
+<td><img src="/BMMB554/img/k3.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Here complexity is decreasing, but we still have the problem with having <code>ATG</code> twice.</small></td>
+</tr>
+
+<tr>
+<td>$k = 5$</td>
+</tr>
+
+<tr>
+<td><img src="/BMMB554/img/k4.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>In this case there is only one path. This because our <em>k</em> is larger that the repeat size, so we can resolve it accurately.</small></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<p>This is why technologies producing long sequencing reads stimulate so much enthusiasm - they will allow to resolve and produce accurate assembly of large genomes.</p>
+
+<h1 id="assembly-in-real-life">Assembly in real life</h1>
+
+<p>In this topic we&rsquo;ve learned about two ways of representing the relationship between reads derived from a genome we are trying to assemble:</p>
+
+<ol>
+<li><strong>Overlap graphs</strong> - nodes are reads, edges are overlaps between reads.</li>
+<li><strong>DeBruijn graphs</strong> - nodes are overlaps, edges are reads.</li>
+</ol>
+
+<hr />
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><strong>A</strong>.</td>
+</tr>
+
+<tr>
+<td><img src="/BMMB554/img/4.7.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><strong>B.</strong></td>
+</tr>
+
+<tr>
+<td><img src="/BMMB554/img/4.13f.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>An overlap (A) and DeBruijn (B) graphs for the same string.</small></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<p>Whatever the representation will be it will be messy:</p>
+
+<hr />
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="/BMMB554/img/t12_mess.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>A fragment of a very large DeBruijn graph (Image from <a href="https://github.com/BenLangmead/ads1-slides/blob/master/0580_asm__practice.pdf">BL</a>).</small></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<p>There are multiple reasons for such messiness:</p>
+
+<h3 id="sequence-errors">Sequence errors</h3>
+
+<p>Sequencing machines do not give perfect data. This results in spurious deviations on the graph. Some sequencing technologies such as Oxford Nanopore have very high error rate of ~15%.</p>
+
+<hr />
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="/BMMB554/img/t12_errors.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Graph components resulting from sequencing errors (Image from <a href="https://github.com/BenLangmead/ads1-slides/blob/master/0580_asm__practice.pdf">BL</a>).</small></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<h3 id="ploidy">Ploidy</h3>
+
+<p>As we discussed earlier humans are, for example, diploid and there are multiple differences between maternal and paternal genomes. This creates &ldquo;bubbles&rdquo; on assembly graphs:</p>
+
+<hr />
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="/BMMB554/img/t12_bubble.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>Bubbles due to a heterozygous site  (Image from <a href="https://github.com/BenLangmead/ads1-slides/blob/master/0580_asm__practice.pdf">BL</a>).</small></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<h3 id="repeats">Repeats</h3>
+
+<p>As we&rsquo;ve seen the third law of assembly is unbeatable. As a result some regions of the genome simply cannot be resolved and are reported in segments called <em>contigs</em>:</p>
+
+<hr />
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="/BMMB554/img/t12_contigs.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small>The following &ldquo;genomic&rdquo; segment will be reported in three pieces corresponding to regions flanking the repeat and repeat itself (Image from <a href="https://github.com/BenLangmead/ads1-slides/blob/master/0580_asm__practice.pdf">BL</a>).</small></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<h1 id="homework-3">Homework 3</h1>
+
+<p>Given the following reads:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">GCAC
+CACG
+ACGT
+CGTC
+GTCC
+TCCC
+CCCC
+CCCG
+CCGC
+CGCA
+CACT
+ACTT
+CTTC
+TTCC</pre></div>
+<p>Build a de Bruijn graph with vertices as <em>k</em>-mers and edges as (<em>k</em>+1)-mers where <em>k</em>=2. Reconstruct the &ldquo;genome&rdquo;. Submit a handwritten sheet to me on Monday, March 11.</p>
+
+
+
+      </main>
+    </div>
+    <footer id="footer" class="mt-auto text-center text-muted">
+  <div class="container">
+    Nekrutenko Lab 2019 | CC-BY
+  </div>
+</footer>
+    <script src="https://nekrut.github.io/BMMB554/js/feather.min.js"></script>
+<script>
+  feather.replace()
+</script>
+
+
+    
+  
+
+  </body>
+</html>
