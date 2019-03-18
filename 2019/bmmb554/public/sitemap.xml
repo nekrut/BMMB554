@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://nekrut.github.io/BMMB554/lecture14/</loc>
+    <lastmod>2019-03-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://nekrut.github.io/BMMB554/lecture13/</loc>
     <lastmod>2019-02-27T00:00:00+00:00</lastmod>
   </url>
@@ -75,13 +80,13 @@
   
   <url>
     <loc>https://nekrut.github.io/BMMB554/tags/assembly/</loc>
-    <lastmod>2019-02-27T00:00:00+00:00</lastmod>
+    <lastmod>2019-03-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://nekrut.github.io/BMMB554/</loc>
-    <lastmod>2019-02-27T00:00:00+00:00</lastmod>
+    <lastmod>2019-03-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -99,7 +104,7 @@
   
   <url>
     <loc>https://nekrut.github.io/BMMB554/tags/debruijn/</loc>
-    <lastmod>2019-02-27T00:00:00+00:00</lastmod>
+    <lastmod>2019-03-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -135,7 +140,7 @@
   
   <url>
     <loc>https://nekrut.github.io/BMMB554/post/</loc>
-    <lastmod>2019-02-27T00:00:00+00:00</lastmod>
+    <lastmod>2019-03-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>

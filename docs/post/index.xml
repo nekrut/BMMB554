@@ -6,10 +6,19 @@
     <description>Recent content in Lectures on BMMB554</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 27 Feb 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 18 Mar 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://nekrut.github.io/BMMB554/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Lecture 14: Intro into discrete data</title>
+      <link>https://nekrut.github.io/BMMB554/lecture14/</link>
+      <pubDate>Mon, 18 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/lecture14/</guid>
+      <description>This material is based on Modern Statistics for Modern Biology by Susan Holmes and Wolfgang Huber. It was translated into Python and adopted to Jupyter environment by AN.  # Make sure we have latest seaborn !pip install seaborn --upgrade# Make sure we have latest numpy !pip install numpy --upgradeimport numpy as np import pandas as pd from IPython.display import Image import matplotlib.pyplot as plt import matplotlib.ticker as tickerimport seaborn as sns sns.</description>
+    </item>
     
     <item>
       <title>Lecture 13: Assembling reads into genomes</title>
