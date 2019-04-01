@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Variants on BMMB554</title>
+    <link>https://nekrut.github.io/BMMB554/tags/variants/</link>
+    <description>Recent content in Variants on BMMB554</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 01 Apr 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://nekrut.github.io/BMMB554/tags/variants/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Lecture 15: Calling variants</title>
+      <link>https://nekrut.github.io/BMMB554/lecture15/</link>
+      <pubDate>Mon, 01 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/lecture15/</guid>
+      <description>Calling varinats is complicated!
+ Haploid systems Diploid system Finding really rare variants  Why call varinats? An example from Tibet Many residents of the Tibetian Plateau live above 4,000 meters where oxygen concentration is approximately 40% lower than at sea level:
+ Tibetan Plateau and surrounding areas (from Wikipedia).
+ Tibetian experience a number of adaptations to high altitudes manifesting in the following phenotypic differences:
+ lower hemoglobin concentration Wu:2005 higher arterial oxygen saturation Niermeyer:1995 more efficient pulmonary gas exchange Zhuang:1996  What are the genetic causes of these adaptations?</description>
+    </item>
+    
+  </channel>
+</rss>

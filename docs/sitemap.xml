@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://nekrut.github.io/BMMB554/lecture15/</loc>
+    <lastmod>2019-04-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://nekrut.github.io/BMMB554/lecture14/</loc>
     <lastmod>2019-03-18T00:00:00+00:00</lastmod>
   </url>
@@ -86,7 +91,7 @@
   
   <url>
     <loc>https://nekrut.github.io/BMMB554/</loc>
-    <lastmod>2019-03-18T00:00:00+00:00</lastmod>
+    <lastmod>2019-04-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -140,7 +145,7 @@
   
   <url>
     <loc>https://nekrut.github.io/BMMB554/post/</loc>
-    <lastmod>2019-03-18T00:00:00+00:00</lastmod>
+    <lastmod>2019-04-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -210,6 +215,12 @@
   </url>
   
   <url>
+    <loc>https://nekrut.github.io/BMMB554/tags/snps/</loc>
+    <lastmod>2019-04-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://nekrut.github.io/BMMB554/tags/syllabus/</loc>
     <lastmod>2019-01-07T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -224,6 +235,12 @@
   <url>
     <loc>https://nekrut.github.io/BMMB554/tags/tnseq/</loc>
     <lastmod>2019-01-16T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://nekrut.github.io/BMMB554/tags/variants/</loc>
+    <lastmod>2019-04-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
