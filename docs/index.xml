@@ -6,10 +6,40 @@
     <description>Recent content on BMMB554</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 03 Apr 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 15 Apr 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://nekrut.github.io/BMMB554/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Lecture 19: Important odds and ends</title>
+      <link>https://nekrut.github.io/BMMB554/lecture19/</link>
+      <pubDate>Mon, 15 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/lecture19/</guid>
+      <description> Everything is a distribution All information necessary to get ahead is freely (or almost freely) available. 
+Learn how to speak  Learn how to write  The Title Says It All The Abstract and the Elevator Talk: A Tale of Two Summaries &amp;ldquo;It was a cold and rainy night&amp;rdquo;: Set the Scene with a Good Introduction Who, What, When, Where, How, and Why: The Ingredients in the Recipe for a Successful Methods Section Show Your Cards: The Results Section and the Poker Game If an IRDAM Journal Is What You Choose, Then Sequential Results Are What You Use Put Your Best Figure Forward: Line Graphs and Scattergrams Bars and Pies Make Better Desserts than Figures (also see this) Bring Your Best to the Table The Discussion Section: Your Closing Argument Giving Credit: Citations and References How to Write a Rave Review Top 10 Tips for Responding to Reviewer and Editor Comments Passing the Paternit&amp;eacute; Test (also see this)  Consider academia  </description>
+    </item>
+    
+    <item>
+      <title>Lecture 18: Hybrid assembly of a small genome</title>
+      <link>https://nekrut.github.io/BMMB554/lecture18/</link>
+      <pubDate>Sun, 14 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/lecture18/</guid>
+      <description>The data In this section we will describe practical aspects of genome assembly. As an example data we will use sequencing reads obtained for E. coli strain C-1. Isolated genomic DNA was sequenced on Illumina miSeq and Oxford Nanopore MinION:
+ miSeq data - 9,345,897 250 bp read pairs (library preparation performed on genomic DNA fragmented to main size of 600 bp) minION data - 12,738 2d-reads. Maximum read length was 27,518.</description>
+    </item>
+    
+    <item>
+      <title>Lecture 17: Studying DNA/Protein interactions</title>
+      <link>https://nekrut.github.io/BMMB554/lecture17/</link>
+      <pubDate>Thu, 11 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/lecture17/</guid>
+      <description>An overview of ChIP seq  This material is based on a variety of sources acknowledged throughout this document. It follows the logic of a comprehensive overview of ChIP-seq methodology compiled by Shaun Mahony at Penn State. Shaun also has an excellent presentation covering this topic.
+ Many proteins interact with DNA A variety of proteins interact with genomic DNA including histones and various transcription factors and related proteins:</description>
+    </item>
     
     <item>
       <title>Lecture 16: Reference-based RNA-seq</title>

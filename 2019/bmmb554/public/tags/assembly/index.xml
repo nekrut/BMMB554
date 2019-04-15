@@ -6,10 +6,20 @@
     <description>Recent content in Assembly on BMMB554</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 18 Mar 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 14 Apr 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://nekrut.github.io/BMMB554/tags/assembly/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Lecture 18: Hybrid assembly of a small genome</title>
+      <link>https://nekrut.github.io/BMMB554/lecture18/</link>
+      <pubDate>Sun, 14 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/lecture18/</guid>
+      <description>The data In this section we will describe practical aspects of genome assembly. As an example data we will use sequencing reads obtained for E. coli strain C-1. Isolated genomic DNA was sequenced on Illumina miSeq and Oxford Nanopore MinION:
+ miSeq data - 9,345,897 250 bp read pairs (library preparation performed on genomic DNA fragmented to main size of 600 bp) minION data - 12,738 2d-reads. Maximum read length was 27,518.</description>
+    </item>
     
     <item>
       <title>Lecture 14: Intro into discrete data</title>
