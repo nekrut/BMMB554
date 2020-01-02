@@ -1,0 +1,17 @@
+{{ define "main" }}
+
+<div id="home-jumbotron" class="jumbotron text-center">
+  <h1>{{ .Site.Title }}</h1>
+  <p class="font-125">{{ .Site.Params.homeText | markdownify }}</p>
+</div>
+<div class="card mb-3">
+  <img class="card-img-top" src="img/hyles_lineata.jpg" alt="Card image cap">
+  <div class="card-body">
+  	<p class="card-text">This course will prepare you to analyze genomic data from multiple sources and non-model organisms such as white-lined sphinx pictured above.</p>
+  	<hr>
+    <p class="card-text"><small class="text-muted"><em>Hyles lineata</em> | Medicine bow, Wyoming, USA</small></p>
+  </div>
+</div>
+
+
+{{ end }}

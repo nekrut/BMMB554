@@ -4,3 +4,9 @@
 [submodule "2019/bmmb554/themes/vanilla-bootstrap-hugo-theme"]
 	path = 2019/bmmb554/themes/vanilla-bootstrap-hugo-theme
 	url = https://github.com/zwbetz-gh/vanilla-bootstrap-hugo-theme.git
+[submodule "2020/bmmb554/themes/vanilla-bootstrap-hugo-theme"]
+	path = 2020/bmmb554/themes/vanilla-bootstrap-hugo-theme
+	url = https://github.com/zwbetz-gh/vanilla-bootstrap-hugo-theme.git
+[submodule "2020/bmmb554/themes/vb"]
+	path = 2020/bmmb554/themes/vb
+	url = https://github.com/zwbetz-gh/vanilla-bootstrap-hugo-theme.git

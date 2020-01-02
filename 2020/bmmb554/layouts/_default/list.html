@@ -1,0 +1,17 @@
+{{ define "main" }}
+
+<h1>{{ .Title }}</h1>
+
+<div class="alert alert-danger" role="alert">
+Nothing here yet ;) Will start on Jan 13. 
+</div>
+
+{{ range .Pages }}
+<p>
+  <a class="font-125" href="{{ .RelPermalink }}">{{ .Title }}</a>
+  <br>
+  {{ partial "date-and-tags.html" . }}
+</p>
+{{ end }}
+
+{{ end }}

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>BMMB554</title>
@@ -6,207 +6,23 @@
     <description>Recent content on BMMB554</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 15 Apr 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 02 Jan 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://nekrut.github.io/BMMB554/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Lecture 19: Important odds and ends</title>
-      <link>https://nekrut.github.io/BMMB554/lecture19/</link>
-      <pubDate>Mon, 15 Apr 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://nekrut.github.io/BMMB554/lecture19/</guid>
-      <description> Everything is a distribution All information necessary to get ahead is freely (or almost freely) available. 
-Learn how to speak  Learn how to write  The Title Says It All The Abstract and the Elevator Talk: A Tale of Two Summaries &amp;ldquo;It was a cold and rainy night&amp;rdquo;: Set the Scene with a Good Introduction Who, What, When, Where, How, and Why: The Ingredients in the Recipe for a Successful Methods Section Show Your Cards: The Results Section and the Poker Game If an IRDAM Journal Is What You Choose, Then Sequential Results Are What You Use Put Your Best Figure Forward: Line Graphs and Scattergrams Bars and Pies Make Better Desserts than Figures (also see this) Bring Your Best to the Table The Discussion Section: Your Closing Argument Giving Credit: Citations and References How to Write a Rave Review Top 10 Tips for Responding to Reviewer and Editor Comments Passing the Paternit&amp;eacute; Test (also see this)  Consider academia  </description>
-    </item>
-    
-    <item>
-      <title>Lecture 18: Hybrid assembly of a small genome</title>
-      <link>https://nekrut.github.io/BMMB554/lecture18/</link>
-      <pubDate>Sun, 14 Apr 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://nekrut.github.io/BMMB554/lecture18/</guid>
-      <description>The data In this section we will describe practical aspects of genome assembly. As an example data we will use sequencing reads obtained for E. coli strain C-1. Isolated genomic DNA was sequenced on Illumina miSeq and Oxford Nanopore MinION:
- miSeq data - 9,345,897 250 bp read pairs (library preparation performed on genomic DNA fragmented to main size of 600 bp) minION data - 12,738 2d-reads. Maximum read length was 27,518.</description>
-    </item>
-    
-    <item>
-      <title>Lecture 17: Studying DNA/Protein interactions</title>
-      <link>https://nekrut.github.io/BMMB554/lecture17/</link>
-      <pubDate>Thu, 11 Apr 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://nekrut.github.io/BMMB554/lecture17/</guid>
-      <description>An overview of ChIP seq  This material is based on a variety of sources acknowledged throughout this document. It follows the logic of a comprehensive overview of ChIP-seq methodology compiled by Shaun Mahony at Penn State. Shaun also has an excellent presentation covering this topic.
- Many proteins interact with DNA A variety of proteins interact with genomic DNA including histones and various transcription factors and related proteins:</description>
-    </item>
-    
-    <item>
-      <title>Lecture 16: Reference-based RNA-seq</title>
-      <link>https://nekrut.github.io/BMMB554/lecture16/</link>
-      <pubDate>Wed, 03 Apr 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://nekrut.github.io/BMMB554/lecture16/</guid>
-      <description>RNAseq: Reference-based  This tutorial is inspired by an exceptional RNAseq course at the Weill Cornell Medical College compiled by Friederike Dündar, Luce Skrabanek, and Paul Zumbo and by tutorials produced by Björn Grüning (@bgruening) for Freiburg Galaxy instance. Much of Galaxy-related features described in this section have been developed by Björn Grüning (@bgruening) and configured by Dave Bouvier (@davebx).
- RNAseq can be roughly divided into two &amp;ldquo;types&amp;rdquo;:</description>
-    </item>
-    
-    <item>
-      <title>Lecture 15: Calling variants</title>
-      <link>https://nekrut.github.io/BMMB554/lecture15/</link>
-      <pubDate>Mon, 01 Apr 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://nekrut.github.io/BMMB554/lecture15/</guid>
-      <description>Calling varinats is complicated!
- Haploid systems Diploid system Finding really rare variants  Why call varinats? An example from Tibet Many residents of the Tibetian Plateau live above 4,000 meters where oxygen concentration is approximately 40% lower than at sea level:
- Tibetan Plateau and surrounding areas (from Wikipedia).
- Tibetian experience a number of adaptations to high altitudes manifesting in the following phenotypic differences:
- lower hemoglobin concentration Wu:2005 higher arterial oxygen saturation Niermeyer:1995 more efficient pulmonary gas exchange Zhuang:1996  What are the genetic causes of these adaptations?</description>
-    </item>
-    
-    <item>
-      <title>Lecture 14: Intro into discrete data</title>
-      <link>https://nekrut.github.io/BMMB554/lecture14/</link>
-      <pubDate>Mon, 18 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://nekrut.github.io/BMMB554/lecture14/</guid>
-      <description>This material is based on Modern Statistics for Modern Biology by Susan Holmes and Wolfgang Huber. It was translated into Python and adopted to Jupyter environment by AN.  # Make sure we have latest seaborn !pip install seaborn --upgrade# Make sure we have latest numpy !pip install numpy --upgradeimport numpy as np import pandas as pd from IPython.display import Image import matplotlib.pyplot as plt import matplotlib.ticker as tickerimport seaborn as sns sns.</description>
-    </item>
-    
-    <item>
-      <title>Lecture 13: Assembling reads into genomes</title>
-      <link>https://nekrut.github.io/BMMB554/lecture13/</link>
-      <pubDate>Wed, 27 Feb 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://nekrut.github.io/BMMB554/lecture13/</guid>
-      <description>Genome assembly is a difficult task. In trying to explain it I will be relying on two primary sources:
- Ben Langmead&amp;rsquo;s Teaching Materials Pevzner and Compeau Bioinformatics Book  Genomes and reads: Strings and k-mers k-mer composition Genomes are strings of text. When we sequence genomes we use sequencing machines that generate reads. For now let&amp;rsquo;s assume that all reads have the same length k and every k-mer is sequenced only once.</description>
-    </item>
-    
-    <item>
-      <title>Lecture 12: Mapping many reads quickly</title>
-      <link>https://nekrut.github.io/BMMB554/lecture12/</link>
-      <pubDate>Mon, 25 Feb 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://nekrut.github.io/BMMB554/lecture12/</guid>
-      <description>Speeding things up The topics we discussed in the past lecture explain fundamental concepts behind analysis of biological sequences. Today, we will be talking about algorithms that allow aligning billions of sequencing reads against reference genomes. Similarly to the previous lecture I have borrowed heavily from the course taught by Ben Langmead at Johns Hopkins. The cover image is from Wikpedia article on Burrows-Wheeler transform.
-The challenge of really large datasets In the previous lecture we have seen how dynamic programming helps aligning sequences.</description>
-    </item>
-    
-    <item>
-      <title>Lecture 11: Sequence alignment - Introductory concepts</title>
-      <link>https://nekrut.github.io/BMMB554/lecture11/</link>
-      <pubDate>Mon, 18 Feb 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://nekrut.github.io/BMMB554/lecture11/</guid>
-      <description>The cover image shows pairwise alignments for human, mouse, and dog KIF3 locus from Dubchak et al. 2000.
-Introduction to dynamic programming (Based on dynamic programming examples from InteractivePython) and excellent alignment lecture materials from Ben Langmead.
-In the previous lecture we have seen several ways in which DNA sequence data can be accumulated. Because sequencing machines (especially the ones made by Illumina) generate billions of sequences (called reads) from every run, the real challenge is what one does with all this data once sequencing is done.</description>
-    </item>
-    
-    <item>
-      <title>Lecture 10: What is the nature of sequencing data?</title>
-      <link>https://nekrut.github.io/BMMB554/lecture10/</link>
-      <pubDate>Mon, 11 Feb 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://nekrut.github.io/BMMB554/lecture10/</guid>
-      <description>The 50s, 60s and the 70s The difficulty with sequencing nucleic acids is nicely summarized by Hutchinson:2007:
-  The chemical properties of different DNA molecules were so similar that it appeared difficult to separate them. The chain length of naturally occurring DNA molecules was much greater than for proteins and made complete sequencing seems unapproachable. The 20 amino acid residues found in proteins have widely varying properties that had proven useful in the separation of peptides.</description>
-    </item>
-    
-    <item>
-      <title>Lecture 8: Plotting in Python</title>
-      <link>https://nekrut.github.io/BMMB554/lecture8/</link>
-      <pubDate>Mon, 04 Feb 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://nekrut.github.io/BMMB554/lecture8/</guid>
-      <description>This lecture draws extensively from Seaborn tutorials.  A primer of plotting with Python # If running in colaboratory uncomment and run the folliwing command #!pip install seaborn --upgradeimport seaborn as sns sns.set(style=&amp;#34;ticks&amp;#34;) import pandas as pd import matplotlib.pyplot as plt Why plotting? We will use Ascombe&amp;rsquo;s quartet build into Seaborn to answer this questions
-# Load the example dataset for Anscombe&amp;#39;s quartet df = sns.load_dataset(&amp;#34;anscombe&amp;#34;)df  .dataframe tbody tr th:only-of-type { vertical-align: middle; } .</description>
-    </item>
-    
-    <item>
-      <title>Lecture 7: Pandas 2</title>
-      <link>https://nekrut.github.io/BMMB554/lecture7/</link>
-      <pubDate>Wed, 30 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://nekrut.github.io/BMMB554/lecture7/</guid>
-      <description>Prep  Point your browser to http://colab.research.google.com Open notebook 2019/ipynb/tnseq_with_pandas2.ipynb from https://github.com/nekrut/BMMB554  Introduction to Pandas : Part 2 This tutorial is heavily based on Pandas in 10 min. The original material waas modified by adding TnSeq data as examples.
-import pandas as pd import numpy as np %matplotlib inline  Get datasets to play with %%bash wget https://nekrut.github.io/BMMB554/tnseq_untreated.txt.gz wget https://nekrut.github.io/BMMB554/ta_gc.txtdata_file = &amp;#39;tnseq_untreated.txt.gz&amp;#39;# Just two choices for beginning of of gene field !</description>
-    </item>
-    
-    <item>
-      <title>Lecture 6: Pandas 1</title>
-      <link>https://nekrut.github.io/BMMB554/lecture6/</link>
-      <pubDate>Mon, 28 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://nekrut.github.io/BMMB554/lecture6/</guid>
-      <description>Prep  Point your browser to http://colab.research.google.com Open notebook 2019/ipynb/tnseq_with_pandas.ipynb from https://github.com/nekrut/BMMB554  Introduction to Pandas : Part 1 This tutorial is heavily based on Pandas in 10 min. The original material waas modified by adding TnSeq data as examples.
-Get datasets to play with %%bash wget https://nekrut.github.io/BMMB554/tnseq_untreated.txt.gz wget https://nekrut.github.io/BMMB554/ta_gc.txt2019-01-28 13:53:53 (2.53 MB/s) - &amp;#39;tnseq_untreated.txt.gz&amp;#39; saved [2012967/2012967] 2019-01-28 13:53:56 (2.96 MB/s) - &amp;#39;ta_gc.txt&amp;#39; saved [7315570/7315570] data_file = &amp;#39;tnseq_untreated.txt.gz&amp;#39; The first dataset lists coordinates of TA sites and counts of reads for TnSeq constructs &amp;lsquo;blunt&amp;rsquo;, &amp;lsquo;cap&amp;rsquo;, &amp;lsquo;dual&amp;rsquo;, &amp;lsquo;erm&amp;rsquo;, &amp;lsquo;pen&amp;rsquo;, and &amp;lsquo;tuf&amp;rsquo;:</description>
-    </item>
-    
-    <item>
-      <title>Lecture 5: NumPy</title>
-      <link>https://nekrut.github.io/BMMB554/lecture5/</link>
-      <pubDate>Wed, 23 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://nekrut.github.io/BMMB554/lecture5/</guid>
-      <description>Prep  Point your browser to http://colab.research.google.com Open notebook 2019/ipynb/numpy.ipynb from https://github.com/nekrut/BMMB554  Numpy: Operations with multidimensional data This notebook is based (with some modifications) on a NumPy tutorial by J.R. Johansson
-# Import MatPlotlib so we can look at some pretty plots # The reson for doing this will become clear in out MatPlotLib lecture next week %matplotlib inline import matplotlib.pyplot as plt Introduction The numpy package (module) is used in almost all numerical computation using Python.</description>
-    </item>
-    
-    <item>
-      <title>Lecture 4: Python refresher 2</title>
-      <link>https://nekrut.github.io/BMMB554/lecture4/</link>
-      <pubDate>Wed, 16 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://nekrut.github.io/BMMB554/lecture4/</guid>
-      <description>Conditionals, Loops, and Files This material is heavily inspired by Materials for the course run by the Graduate School of Life Sciences, University of Cambridge with some modifications.  Let&amp;rsquo;s get started  Point your browser to http://colab.research.google.com Open notebook 2019/ipynb/intro2.ipynb from https://github.com/nekrut/BMMB554  Case study: Transposon insertion sequencing (TnSeq) Transposon insertion allows genome-wide identification of essential genes. The idea is simple = important genes cannot be disrupted and there will not accept any transposon insertions.</description>
-    </item>
-    
-    <item>
-      <title>Lecture 3: Python refresher 1</title>
-      <link>https://nekrut.github.io/BMMB554/lecture3/</link>
-      <pubDate>Mon, 14 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://nekrut.github.io/BMMB554/lecture3/</guid>
-      <description>What is Python? Python is a modern, general-purpose, object-oriented, high-level programming language.
-This material is heavily inspired by Materials for the course run by the Graduate School of Life Sciences, University of Cambridge with some modifications.  General characteristics of Python:  Clean and Simple: Easy-to-read and intuitive code, easy-to-learn minimalistic syntax, maintainability scales well with size of projects. Expressive: Fewer lines of code, fewer bugs, easier to maintain.</description>
-    </item>
-    
-    <item>
-      <title>Lecture 2: Basic machinery = Jupyter &#43; GitHub</title>
-      <link>https://nekrut.github.io/BMMB554/lecture2/</link>
-      <pubDate>Wed, 09 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://nekrut.github.io/BMMB554/lecture2/</guid>
-      <description>Welcome to Notebooks An important assumption for this lecture is that (1) you have a Google account, (2) know how to use Google Drive, and (3) also have an active GitHub account.  When you start an analysis, you don&amp;rsquo;t really know how it will go. Maybe data is bad and there is no real reason to analyze anything at all. Maybe data data outliers that need to be dealt with.</description>
-    </item>
-    
-    <item>
-      <title>Lecture 1: Who you are and what you know</title>
-      <link>https://nekrut.github.io/BMMB554/lecture1/</link>
-      <pubDate>Mon, 07 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://nekrut.github.io/BMMB554/lecture1/</guid>
-      <description> 
-Introduction In the first class of the semester you will not learn much. It is more about me learning about you and you learning about each other.
-Test 0 It would be helpful for me to know what you know and what you don&amp;rsquo;t. Take the test below. It will not be scored and will have no effect on your grade.
-Loading... </description>
-    </item>
-    
-    <item>
       <title>Syllabus</title>
       <link>https://nekrut.github.io/BMMB554/about/</link>
-      <pubDate>Wed, 09 Apr 2014 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 02 Jan 2020 00:00:00 +0000</pubDate>
       
       <guid>https://nekrut.github.io/BMMB554/about/</guid>
-      <description>Place and Time Boucke Building 216 | Monday, Wednesday 2:30pm - 3:45pm
- 
-Instructor Anton Nekrutenko
+      <description>Place and Time  Thomas Building 121 | Monday, Wednesday 2:30pm - 3:45pm
+ Instructor  Anton Nekrutenko
 aun1@psu.edu
 Wartik 505
-Office hours by appointment only When contacting instructor use the above e-mail and include &amp;ldquo;BMMB554&amp;rdquo; in the subject line (simply click on e-mail address). 
-Course logistics This course does not use Canvas. Canvas is a convoluted system with too many features and undefined purpose. Instead, this course is served from GitHub.</description>
+Office hours by appointment only
+When contacting instructor use the above e-mail and include &#34;BMMB554&#34; in the subject line (simply click on e-mail address).  Course logistics  This course does not use Canvas. Canvas is a convoluted system with too many features and undefined purpose. Instead, this course is served from GitHub.</description>
     </item>
     
   </channel>

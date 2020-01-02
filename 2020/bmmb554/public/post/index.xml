@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Lectures on BMMB554</title>
+    <link>https://nekrut.github.io/BMMB554/post/</link>
+    <description>Recent content in Lectures on BMMB554</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="https://nekrut.github.io/BMMB554/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+  </channel>
+</rss>
