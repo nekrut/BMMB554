@@ -1,5 +1,5 @@
 ---
-date: "2020-01-14"
+date: "2020-01-15"
 tags: ["jupyter", "github", "python"]
 title: "Lecture 1: Basic machinery = Jupyter + Python"
 ---

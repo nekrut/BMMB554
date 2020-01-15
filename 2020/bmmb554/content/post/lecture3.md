@@ -1,7 +1,8 @@
 ---
-date: "2019-01-14"
+date: "2019-01-15"
 tags: ["python"]
 title: "Lecture 3: Python refresher 1"
+draft: true
 ---
 
 [![](https://imgs.xkcd.com/comics/sigil_cycle.png)](https://xkcd.com/1306/)
