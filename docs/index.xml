@@ -6,10 +6,19 @@
     <description>Recent content on BMMB554</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 02 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 15 Jan 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://nekrut.github.io/BMMB554/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Lecture 1: Basic machinery = Jupyter &#43; Python</title>
+      <link>https://nekrut.github.io/BMMB554/lecture1/</link>
+      <pubDate>Wed, 15 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/lecture1/</guid>
+      <description>Welcome to Notebooks An important assumption for this lecture is that (1) you have a Google account, (2) know how to use Google Drive, and (3) also have an active GitHub account.  When you start an analysis, you don&#39;t really know how it will go. Maybe data is bad and there is no real reason to analyze anything at all. Maybe data data outliers that need to be dealt with.</description>
+    </item>
     
     <item>
       <title>Syllabus</title>
