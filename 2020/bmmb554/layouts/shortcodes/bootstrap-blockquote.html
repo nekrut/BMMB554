@@ -3,8 +3,10 @@
 {{ $quote = replace $quote "</p>" "" }}
 {{ $quote = safeHTML $quote }}
 <blockquote class="blockquote">
-  <p class="mb-0">{{ $quote }}</p>
+<hr>
+  <p class="mb-0 small"><em>{{ $quote }}</em></p>
   {{ with (.Get "author") }}
+  <hr>
   <footer class="blockquote-footer">{{ . }}</footer>
   {{ end }}
 </blockquote>
