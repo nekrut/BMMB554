@@ -1,7 +1,7 @@
 ---
 date: "2020-01-14"
 tags: ["jupyter", "github", "python"]
-title: "Lecture 1: Basic machinery = Jupyter + GitHub"
+title: "Lecture 1: Basic machinery = Jupyter + Python"
 ---
 
 [![](https://imgs.xkcd.com/comics/python.png)](https://xkcd.com/353/)
@@ -76,18 +76,6 @@ The notebook you just uploaded is immutable - you cannot make any changes to it.
 ![](/BMMB554/img/colab5.png)
 
 <small>Make a copy!</small>
-
-------
-
-## Commit a copy to your GitHub account
-
-Once you are dony playing with the notebook - save a copy to your GitHub account by using "Save a copy in GitHub" and following the prompts. Before you can actually do this, you will need to initialize a new repository on GitHub as I will show you during this lecture.
-
-----
-
-![](/BMMB554/img/colab6.png)
-
-<small>Save to GitHub!</small>
 
 ------
 
