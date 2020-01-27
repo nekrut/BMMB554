@@ -46,13 +46,13 @@ Select "Upload notebook" (you will be prompted for Google sign-in):
 
 ------
 
-Use `https://github.com/nekrut/BMMB554` as the source URL and select `intro_jupyter.ipynb`:
+Use `https://github.com/nekrut/BMMB554` as the source URL and select `2020/jptr.ipynb`:
 
 -----
 
 ![](/BMMB554/img/colab3.png)
 
-<small>Select <tt>intro_jupyter.ipynb</tt>.</small>
+<small>Select <tt>2020/jptr.ipynb</tt>.</small>
 
 ------
 
