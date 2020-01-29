@@ -28,6 +28,7 @@ For this we will use two datasets:
 
  1. Log in into Google Drive using your Penn State credentials (obviously if you are outside Penn State just use your Google log in or whatever works)
  2. Start a new **Python 3** notebook in colaboratory
+ 3. Name it an intelligent way (e.g., `seq_data_QC`)
 
 ## Install [Conda](https://docs.conda.io/en/latest/)
 
@@ -132,7 +133,7 @@ To get some idea about the quality of the reads we will install and run [`fastqc
 and now run on all `*.fq.gz` files:
 
 ```
-`fastqc *.fq.gz
+!fastqc *.fq.gz
 ```
 
 `fastqc` generates a separate html report for each file. It is tedious to look through everyone of them. We can aggregate results with [`multiqc`](https://multiqc.info/). Install `multiqc` with this commands:

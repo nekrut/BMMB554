@@ -6,17 +6,28 @@
     <description>Recent content in Lectures on BMMB554</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 27 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 28 Jan 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://nekrut.github.io/BMMB554/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Lecture 3: Defining project and getting data</title>
+      <link>https://nekrut.github.io/BMMB554/lecture3/</link>
+      <pubDate>Tue, 28 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/lecture3/</guid>
+      <description>WarmUp with Python Strings  Open this notebook Make a copy of it in your drive Go through it and execute all cells  The project The goal of our project will be finding a perfect variant caller for non-diploid data (e.g., viral, bacterial, organellar).
+For this we will use two datasets:
+ An HIV resequencing data from the DC cohort study A duplex sequencing dataset from an experimental evolution study  The idea is to use duplex data as the &amp;ldquo;golden standard&amp;rdquo; and then apply the best caller we find to HIV data and see if we can find anything interesting.</description>
+    </item>
+    
+    <item>
       <title>Lecture 2: What is the nature of sequencing data?</title>
-      <link>https://nekrut.github.io/BMMB554/lecture10/</link>
+      <link>https://nekrut.github.io/BMMB554/lecture2/</link>
       <pubDate>Mon, 27 Jan 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://nekrut.github.io/BMMB554/lecture10/</guid>
+      <guid>https://nekrut.github.io/BMMB554/lecture2/</guid>
       <description>The 50s, 60s and the 70s The difficulty with sequencing nucleic acids is nicely summarized by Hutchinson:2007:
   The chemical properties of different DNA molecules were so similar that it appeared difficult to separate them. The chain length of naturally occurring DNA molecules was much greater than for proteins and made complete sequencing seems unapproachable. The 20 amino acid residues found in proteins have widely varying properties that had proven useful in the separation of peptides.</description>
     </item>

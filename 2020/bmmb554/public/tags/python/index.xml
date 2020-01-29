@@ -6,10 +6,21 @@
     <description>Recent content in python on BMMB554</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 15 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 28 Jan 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://nekrut.github.io/BMMB554/tags/python/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Lecture 3: Defining project and getting data</title>
+      <link>https://nekrut.github.io/BMMB554/lecture3/</link>
+      <pubDate>Tue, 28 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/lecture3/</guid>
+      <description>WarmUp with Python Strings  Open this notebook Make a copy of it in your drive Go through it and execute all cells  The project The goal of our project will be finding a perfect variant caller for non-diploid data (e.g., viral, bacterial, organellar).
+For this we will use two datasets:
+ An HIV resequencing data from the DC cohort study A duplex sequencing dataset from an experimental evolution study  The idea is to use duplex data as the &amp;ldquo;golden standard&amp;rdquo; and then apply the best caller we find to HIV data and see if we can find anything interesting.</description>
+    </item>
     
     <item>
       <title>Lecture 1: Basic machinery = Jupyter &#43; Python</title>
