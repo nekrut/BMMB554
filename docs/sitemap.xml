@@ -3,12 +3,37 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://nekrut.github.io/BMMB554/tags/bioconda/</loc>
-    <lastmod>2020-01-28T00:00:00+00:00</lastmod>
+    <loc>https://nekrut.github.io/BMMB554/tags/alignment/</loc>
+    <lastmod>2020-02-02T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://nekrut.github.io/BMMB554/</loc>
+    <lastmod>2020-02-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nekrut.github.io/BMMB554/tags/dynamic-programming/</loc>
+    <lastmod>2020-02-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nekrut.github.io/BMMB554/lecture4/</loc>
+    <lastmod>2020-02-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nekrut.github.io/BMMB554/post/</loc>
+    <lastmod>2020-02-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nekrut.github.io/BMMB554/tags/</loc>
+    <lastmod>2020-02-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nekrut.github.io/BMMB554/tags/bioconda/</loc>
     <lastmod>2020-01-28T00:00:00+00:00</lastmod>
   </url>
   
@@ -33,22 +58,12 @@
   </url>
   
   <url>
-    <loc>https://nekrut.github.io/BMMB554/post/</loc>
-    <lastmod>2020-01-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://nekrut.github.io/BMMB554/tags/python/</loc>
     <lastmod>2020-01-28T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://nekrut.github.io/BMMB554/tags/sra/</loc>
-    <lastmod>2020-01-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://nekrut.github.io/BMMB554/tags/</loc>
     <lastmod>2020-01-28T00:00:00+00:00</lastmod>
   </url>
   
