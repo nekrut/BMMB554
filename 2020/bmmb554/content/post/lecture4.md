@@ -1,10 +1,11 @@
 ---
-date: "2020-02-02"
-tags: ["alignment", "dynamic programming"]
-title: "Lecture 4: Sequence alignment I"
+date: "2020-02-03"
+tags: ["mapping", "suffix tree, BWT"]
+title: "Lecture 4: Mapping Reads I"
 ---
 
 ![](/BMMB554/img/topic5_cover.png)
+
 
 ## WarmUp with Python Numbers
 
@@ -13,6 +14,9 @@ title: "Lecture 4: Sequence alignment I"
  - Go through it and execute all cells
 
 ----
+
+In the previous lecture we uploaded data and performed QC. The outcome of this analysis is a set of Illumina reads that are ready to be mapped. Before we map we should understand the theory behind this process.
+
 
 ## Mapping versus alignment
 

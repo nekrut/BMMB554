@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="https://nekrut.github.io/BMMB554/css/bootstrap.min.css">
   
   
-  <title>Lecture 4: Sequence alignment I | BMMB554</title>
+  <title>Lecture 4: Mapping Reads I | BMMB554</title>
   <style>
 .container {
   max-width: 800px;
@@ -146,19 +146,19 @@ img {
       <main id="main">
         
 
-<h1>Lecture 4: Sequence alignment I</h1>
+<h1>Lecture 4: Mapping Reads I</h1>
 
 
-<i data-feather="calendar"></i> <time datetime="2020-02-02">Feb 2, 2020</time>
+<i data-feather="calendar"></i> <time datetime="2020-02-03">Feb 3, 2020</time>
 
   <br>
   <i data-feather="tag"></i>
   
   
-  <a class="btn btn-sm btn-outline-dark tag-btn" href="https://nekrut.github.io/BMMB554/tags/alignment">alignment</a>
+  <a class="btn btn-sm btn-outline-dark tag-btn" href="https://nekrut.github.io/BMMB554/tags/mapping">mapping</a>
   
   
-  <a class="btn btn-sm btn-outline-dark tag-btn" href="https://nekrut.github.io/BMMB554/tags/dynamic-programming">dynamic programming</a>
+  <a class="btn btn-sm btn-outline-dark tag-btn" href="https://nekrut.github.io/BMMB554/tags/suffix-tree-bwt">suffix tree, BWT</a>
   
 
 <br><br>
@@ -170,6 +170,7 @@ img {
 <li>Go through it and execute all cells</li>
 </ul>
 <hr>
+<p>In the previous lecture we uploaded data and performed QC. The outcome of this analysis is a set of Illumina reads that are ready to be mapped. Before we map we should understand the theory behind this process.</p>
 <h2 id="mapping-versus-alignment">Mapping versus alignment</h2>
 <p>One possible idea on how to speed things up will be to first find most likely locations for each read and them refine alignments as necessary. In other words reads should be <em>mapped</em> by identifying regions of the genomes from which they most likely originate. The term <em>mapping</em> is sometimes used interchangeably with the word &ldquo;alignment&rdquo;. Yet <em>mapping</em> and <em>alignment</em> are somewhat different concepts. <a href="http://lh3lh3.users.sourceforge.net/">Heng Li</a> defines them this way:</p>
 <ul>

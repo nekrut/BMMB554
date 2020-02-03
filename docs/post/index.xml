@@ -6,18 +6,19 @@
     <description>Recent content in Lectures on BMMB554</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 02 Feb 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 03 Feb 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://nekrut.github.io/BMMB554/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Lecture 4: Sequence alignment I</title>
+      <title>Lecture 4: Mapping Reads I</title>
       <link>https://nekrut.github.io/BMMB554/lecture4/</link>
-      <pubDate>Sun, 02 Feb 2020 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 03 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>https://nekrut.github.io/BMMB554/lecture4/</guid>
-      <description>WarmUp with Python Numbers  Open this notebook Make a copy of it in your drive Go through it and execute all cells   Mapping versus alignment One possible idea on how to speed things up will be to first find most likely locations for each read and them refine alignments as necessary. In other words reads should be mapped by identifying regions of the genomes from which they most likely originate.</description>
+      <description>WarmUp with Python Numbers  Open this notebook Make a copy of it in your drive Go through it and execute all cells   In the previous lecture we uploaded data and performed QC. The outcome of this analysis is a set of Illumina reads that are ready to be mapped. Before we map we should understand the theory behind this process.
+Mapping versus alignment One possible idea on how to speed things up will be to first find most likely locations for each read and them refine alignments as necessary.</description>
     </item>
     
     <item>
