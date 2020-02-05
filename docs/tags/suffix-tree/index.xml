@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>suffix tree on BMMB554</title>
+    <link>https://nekrut.github.io/BMMB554/tags/suffix-tree/</link>
+    <description>Recent content in suffix tree on BMMB554</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 03 Feb 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://nekrut.github.io/BMMB554/tags/suffix-tree/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Lecture 4: Mapping Reads I</title>
+      <link>https://nekrut.github.io/BMMB554/lecture4/</link>
+      <pubDate>Mon, 03 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/lecture4/</guid>
+      <description>WarmUp with Python Numbers  Open this notebook Make a copy of it in your drive Go through it and execute all cells   In the previous lecture we uploaded data and performed QC. The outcome of this analysis is a set of Illumina reads that are ready to be mapped. Before we map we should understand the theory behind this process.
+Mapping versus alignment One possible idea on how to speed things up will be to first find most likely locations for each read and them refine alignments as necessary.</description>
+    </item>
+    
+  </channel>
+</rss>

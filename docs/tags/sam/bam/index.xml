@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>mapping on BMMB554</title>
-    <link>https://nekrut.github.io/BMMB554/tags/mapping/</link>
-    <description>Recent content in mapping on BMMB554</description>
+    <title>SAM/BAM on BMMB554</title>
+    <link>https://nekrut.github.io/BMMB554/tags/sam/bam/</link>
+    <description>Recent content in SAM/BAM on BMMB554</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 05 Feb 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://nekrut.github.io/BMMB554/tags/mapping/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://nekrut.github.io/BMMB554/tags/sam/bam/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -20,16 +20,6 @@
       <description>Prep the environment Install conda, configure path and channles:
 !wget -c https://repo.continuum.io/archive/Anaconda3-5.1.0-Linux-x86_64.sh !chmod +x Anaconda3-5.1.0-Linux-x86_64.sh !bash ./Anaconda3-5.1.0-Linux-x86_64.sh -b -f -p /usr/local import sys sys.path.append(&amp;#39;/usr/local/lib/python3.6/site-packages/&amp;#39;) !conda config --add channels defaults !conda config --add channels bioconda !conda config --add channels conda-forge Mount the drive and copy duplex files into notebook filesystem (in my specific case I created bmmb554_data directiory at the root of my drive):
 cp /content/drive/My\ Drive/bmmb554_data/r1* ./ Mapping data with bwa and processing with samtools ls Install bwa [also see Li:2012] :</description>
-    </item>
-    
-    <item>
-      <title>Lecture 4: Mapping Reads I</title>
-      <link>https://nekrut.github.io/BMMB554/lecture4/</link>
-      <pubDate>Mon, 03 Feb 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://nekrut.github.io/BMMB554/lecture4/</guid>
-      <description>WarmUp with Python Numbers  Open this notebook Make a copy of it in your drive Go through it and execute all cells   In the previous lecture we uploaded data and performed QC. The outcome of this analysis is a set of Illumina reads that are ready to be mapped. Before we map we should understand the theory behind this process.
-Mapping versus alignment One possible idea on how to speed things up will be to first find most likely locations for each read and them refine alignments as necessary.</description>
     </item>
     
   </channel>

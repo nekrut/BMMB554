@@ -1,6 +1,6 @@
 ---
 date: "2020-02-03"
-tags: ["mapping", "suffix tree, BWT"]
+tags: ["mapping", "suffix tree", "BWT"]
 title: "Lecture 4: Mapping Reads I"
 ---
 

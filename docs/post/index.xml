@@ -6,10 +6,21 @@
     <description>Recent content in Lectures on BMMB554</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 03 Feb 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 05 Feb 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://nekrut.github.io/BMMB554/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Lecture 5: Mapping Reads II</title>
+      <link>https://nekrut.github.io/BMMB554/lecture5/</link>
+      <pubDate>Wed, 05 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/lecture5/</guid>
+      <description>Prep the environment Install conda, configure path and channles:
+!wget -c https://repo.continuum.io/archive/Anaconda3-5.1.0-Linux-x86_64.sh !chmod +x Anaconda3-5.1.0-Linux-x86_64.sh !bash ./Anaconda3-5.1.0-Linux-x86_64.sh -b -f -p /usr/local import sys sys.path.append(&amp;#39;/usr/local/lib/python3.6/site-packages/&amp;#39;) !conda config --add channels defaults !conda config --add channels bioconda !conda config --add channels conda-forge Mount the drive and copy duplex files into notebook filesystem (in my specific case I created bmmb554_data directiory at the root of my drive):
+cp /content/drive/My\ Drive/bmmb554_data/r1* ./ Mapping data with bwa and processing with samtools ls Install bwa [also see Li:2012] :</description>
+    </item>
     
     <item>
       <title>Lecture 4: Mapping Reads I</title>
