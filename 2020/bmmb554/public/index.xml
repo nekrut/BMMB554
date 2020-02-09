@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>BMMB554</title>
@@ -6,10 +6,42 @@
     <description>Recent content on BMMB554</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 28 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 09 Feb 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://nekrut.github.io/BMMB554/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Lecture 6: Sequence alignment I</title>
+      <link>https://nekrut.github.io/BMMB554/lecture6/</link>
+      <pubDate>Sun, 09 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/lecture6/</guid>
+      <description>The cover image shows pairwise alignments for human, mouse, and dog KIF3 locus from Dubchak et al. 2000.
+WarmUp with Python Loops  Open this notebook Make a copy of it in your drive Go through it and execute all cells  Introduction to dynamic programming (Based on dynamic programming examples from InteractivePython) and excellent alignment lecture materials from Ben Langmead.
+Suppose you are a cashier who&amp;rsquo;s job is, generally speaking, to receive money and to give out change.</description>
+    </item>
+    
+    <item>
+      <title>Lecture 5: Mapping Reads II</title>
+      <link>https://nekrut.github.io/BMMB554/lecture5/</link>
+      <pubDate>Wed, 05 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/lecture5/</guid>
+      <description>Prep the environment Install conda, configure path and channles:
+!wget -c https://repo.continuum.io/archive/Anaconda3-5.1.0-Linux-x86_64.sh !chmod +x Anaconda3-5.1.0-Linux-x86_64.sh !bash ./Anaconda3-5.1.0-Linux-x86_64.sh -b -f -p /usr/local import sys sys.path.append(&amp;#39;/usr/local/lib/python3.6/site-packages/&amp;#39;) !conda config --add channels defaults !conda config --add channels bioconda !conda config --add channels conda-forge Mount the drive and copy duplex files into notebook filesystem (in my specific case I created bmmb554_data directiory at the root of my drive):
+cp /content/drive/My\ Drive/bmmb554_data/r1* ./ Mapping data with bwa and processing with samtools ls Install bwa [also see Li:2012] :</description>
+    </item>
+    
+    <item>
+      <title>Lecture 4: Mapping Reads I</title>
+      <link>https://nekrut.github.io/BMMB554/lecture4/</link>
+      <pubDate>Mon, 03 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/lecture4/</guid>
+      <description>WarmUp with Python Numbers  Open this notebook Make a copy of it in your drive Go through it and execute all cells  In the previous lecture we uploaded data and performed QC. The outcome of this analysis is a set of Illumina reads that are ready to be mapped. Before we map we should understand the theory behind this process.
+Mapping versus alignment One possible idea on how to speed things up will be to first find most likely locations for each read and them refine alignments as necessary.</description>
+    </item>
     
     <item>
       <title>Lecture 3: Defining project and getting data</title>
@@ -38,7 +70,7 @@ For this we will use two datasets:
       <pubDate>Wed, 15 Jan 2020 00:00:00 +0000</pubDate>
       
       <guid>https://nekrut.github.io/BMMB554/lecture1/</guid>
-      <description>Welcome to Notebooks An important assumption for this lecture is that (1) you have a Google account, (2) know how to use Google Drive, and (3) also have an active GitHub account.  When you start an analysis, you don&#39;t really know how it will go. Maybe data is bad and there is no real reason to analyze anything at all. Maybe data data outliers that need to be dealt with.</description>
+      <description>Welcome to Notebooks An important assumption for this lecture is that (1) you have a Google account, (2) know how to use Google Drive, and (3) also have an active GitHub account.  When you start an analysis, you don&amp;rsquo;t really know how it will go. Maybe data is bad and there is no real reason to analyze anything at all. Maybe data data outliers that need to be dealt with.</description>
     </item>
     
     <item>
@@ -47,12 +79,13 @@ For this we will use two datasets:
       <pubDate>Thu, 02 Jan 2020 00:00:00 +0000</pubDate>
       
       <guid>https://nekrut.github.io/BMMB554/about/</guid>
-      <description>Place and Time  Thomas Building 121 | Monday, Wednesday 2:30pm - 3:45pm
- Instructor  Anton Nekrutenko
+      <description>Place and Time Thomas Building 121 | Monday, Wednesday 2:30pm - 3:45pm
+ 
+Instructor Anton Nekrutenko
 aun1@psu.edu
 Wartik 505
-Office hours by appointment only
-When contacting instructor use the above e-mail and include &#34;BMMB554&#34; in the subject line (simply click on e-mail address).  Course logistics  This course does not use Canvas. Canvas is a convoluted system with too many features and undefined purpose. Instead, this course is served from GitHub.</description>
+Office hours by appointment only When contacting instructor use the above e-mail and include &amp;ldquo;BMMB554&amp;rdquo; in the subject line (simply click on e-mail address). 
+Course logistics This course does not use Canvas. Canvas is a convoluted system with too many features and undefined purpose. Instead, this course is served from GitHub.</description>
     </item>
     
   </channel>
