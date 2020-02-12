@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>python on BMMB554</title>
@@ -6,10 +6,20 @@
     <description>Recent content in python on BMMB554</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 28 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 12 Feb 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://nekrut.github.io/BMMB554/tags/python/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Lecture 7: Plotting in Python</title>
+      <link>https://nekrut.github.io/BMMB554/lecture8/</link>
+      <pubDate>Wed, 12 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/lecture8/</guid>
+      <description>This lecture draws extensively from Seaborn tutorials.  A primer of plotting with Python # If running in colaboratory uncomment and run the folliwing command pip install seaborn --upgrade pip install pysqldf from pandasql import sqldf pysqldf = lambda q: sqldf(q, globals()) import seaborn as sns sns.set(style=&amp;#34;ticks&amp;#34;) import pandas as pd import matplotlib.pyplot as plt Why plotting? We will use Ascombe&#39;s quartet build into Seaborn to answer this questions
+# Load the example dataset for Anscombe&amp;#39;s quartet df = sns.</description>
+    </item>
     
     <item>
       <title>Lecture 3: Defining project and getting data</title>
@@ -28,7 +38,7 @@ For this we will use two datasets:
       <pubDate>Wed, 15 Jan 2020 00:00:00 +0000</pubDate>
       
       <guid>https://nekrut.github.io/BMMB554/lecture1/</guid>
-      <description>Welcome to Notebooks An important assumption for this lecture is that (1) you have a Google account, (2) know how to use Google Drive, and (3) also have an active GitHub account.  When you start an analysis, you don&amp;rsquo;t really know how it will go. Maybe data is bad and there is no real reason to analyze anything at all. Maybe data data outliers that need to be dealt with.</description>
+      <description>Welcome to Notebooks An important assumption for this lecture is that (1) you have a Google account, (2) know how to use Google Drive, and (3) also have an active GitHub account.  When you start an analysis, you don&#39;t really know how it will go. Maybe data is bad and there is no real reason to analyze anything at all. Maybe data data outliers that need to be dealt with.</description>
     </item>
     
   </channel>

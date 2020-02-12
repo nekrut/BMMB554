@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>seaborn on BMMB554</title>
+    <link>https://nekrut.github.io/BMMB554/tags/seaborn/</link>
+    <description>Recent content in seaborn on BMMB554</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 12 Feb 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://nekrut.github.io/BMMB554/tags/seaborn/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Lecture 7: Plotting in Python</title>
+      <link>https://nekrut.github.io/BMMB554/lecture8/</link>
+      <pubDate>Wed, 12 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/lecture8/</guid>
+      <description>This lecture draws extensively from Seaborn tutorials.  A primer of plotting with Python # If running in colaboratory uncomment and run the folliwing command pip install seaborn --upgrade pip install pysqldf from pandasql import sqldf pysqldf = lambda q: sqldf(q, globals()) import seaborn as sns sns.set(style=&amp;#34;ticks&amp;#34;) import pandas as pd import matplotlib.pyplot as plt Why plotting? We will use Ascombe&#39;s quartet build into Seaborn to answer this questions
+# Load the example dataset for Anscombe&amp;#39;s quartet df = sns.</description>
+    </item>
+    
+  </channel>
+</rss>

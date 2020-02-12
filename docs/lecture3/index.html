@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en" class="h-100">
   <head>
-  <meta name="generator" content="Hugo 0.58.3" />
+  <meta name="generator" content="Hugo 0.62.1" />
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://nekrut.github.io/BMMB554/css/bootstrap.min.css">
@@ -174,122 +174,96 @@ img {
   
 
 <br><br>
-
-
-<p><img src="https://imgs.xkcd.com/comics/python_environment.png" alt="https://xkcd.com/1987/" /></p>
-
+<p><img src="https://imgs.xkcd.com/comics/python_environment.png" alt="https://xkcd.com/1987/"></p>
 <h2 id="warmup-with-python-strings">WarmUp with Python Strings</h2>
-
 <ul>
 <li>Open <a href="https://drive.google.com/file/d/18IEkP6FF6KH-ftONzrpF9yuzxY0j0mC7/view?usp=sharing">this notebook</a></li>
 <li>Make a copy of it in your drive</li>
 <li>Go through it and execute all cells</li>
 </ul>
-
 <h2 id="the-project">The project</h2>
-
 <p>The goal of our project will be finding a perfect variant caller for non-diploid data (e.g., viral, bacterial, organellar).</p>
-
 <p>For this we will use two datasets:</p>
-
 <ul>
 <li>An HIV resequencing data from the DC cohort <a href="https://doi.org/10.1371/journal.pone.0214820">study</a></li>
 <li>A <a href="https://www.pnas.org/content/109/36/14508.long">duplex sequencing</a> dataset from an experimental evolution <a href="https://doi.org/10.1093/gbe/evz197">study</a></li>
 </ul>
-
 <p>The idea is to use duplex data as the &ldquo;golden standard&rdquo; and then apply the best caller we find to HIV data and see if we can find anything interesting.</p>
-
 <h2 id="prep-the-system">Prep the system</h2>
-
 <ol>
 <li>Log in into Google Drive using your Penn State credentials (obviously if you are outside Penn State just use your Google log in or whatever works)</li>
 <li>Start a new <strong>Python 3</strong> notebook in colaboratory</li>
 <li>Name it an intelligent way (e.g., <code>seq_data_QC</code>)</li>
 </ol>
-
-<h2 id="install-conda-https-docs-conda-io-en-latest">Install <a href="https://docs.conda.io/en/latest/">Conda</a></h2>
-
+<h2 id="install-condahttpsdocscondaioenlatest">Install <a href="https://docs.conda.io/en/latest/">Conda</a></h2>
 <p>Run a cell with the following code</p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="">!</span>wget <span style="color:#666">-</span>c https:<span style="color:#666">//</span>repo<span style="color:#666">.</span>continuum<span style="color:#666">.</span>io<span style="color:#666">/</span>archive<span style="color:#666">/</span>Anaconda3<span style="color:#666">-</span><span style="color:#666">5.1</span><span style="color:#666">.</span><span style="color:#666">0</span><span style="color:#666">-</span>Linux<span style="color:#666">-</span>x86_64<span style="color:#666">.</span>sh
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="">!</span>wget <span style="color:#666">-</span>c https:<span style="color:#666">/</span><span style="color:#666">/</span>repo<span style="color:#666">.</span>continuum<span style="color:#666">.</span>io<span style="color:#666">/</span>archive<span style="color:#666">/</span>Anaconda3<span style="color:#666">-</span><span style="color:#666">5.1</span><span style="color:#666">.</span><span style="color:#666">0</span><span style="color:#666">-</span>Linux<span style="color:#666">-</span>x86_64<span style="color:#666">.</span>sh
 <span style="">!</span>chmod <span style="color:#666">+</span>x Anaconda3<span style="color:#666">-</span><span style="color:#666">5.1</span><span style="color:#666">.</span><span style="color:#666">0</span><span style="color:#666">-</span>Linux<span style="color:#666">-</span>x86_64<span style="color:#666">.</span>sh
-<span style="">!</span>bash <span style="color:#666">./</span>Anaconda3<span style="color:#666">-</span><span style="color:#666">5.1</span><span style="color:#666">.</span><span style="color:#666">0</span><span style="color:#666">-</span>Linux<span style="color:#666">-</span>x86_64<span style="color:#666">.</span>sh <span style="color:#666">-</span>b <span style="color:#666">-</span>f <span style="color:#666">-</span>p <span style="color:#666">/</span>usr<span style="color:#666">/</span>local
+<span style="">!</span>bash <span style="color:#666">.</span><span style="color:#666">/</span>Anaconda3<span style="color:#666">-</span><span style="color:#666">5.1</span><span style="color:#666">.</span><span style="color:#666">0</span><span style="color:#666">-</span>Linux<span style="color:#666">-</span>x86_64<span style="color:#666">.</span>sh <span style="color:#666">-</span>b <span style="color:#666">-</span>f <span style="color:#666">-</span>p <span style="color:#666">/</span>usr<span style="color:#666">/</span>local
 
 <span style="color:#008000;font-weight:bold">import</span> <span style="color:#00f;font-weight:bold">sys</span>
-sys<span style="color:#666">.</span>path<span style="color:#666">.</span>append(<span style="color:#ba2121">&#39;/usr/local/lib/python3.6/site-packages/&#39;</span>)
+sys<span style="color:#666">.</span>path<span style="color:#666">.</span>append(<span style="color:#ba2121"></span><span style="color:#ba2121">&#39;</span><span style="color:#ba2121">/usr/local/lib/python3.6/site-packages/</span><span style="color:#ba2121">&#39;</span>)
 
-<span style="">!</span>conda config <span style="color:#666">--</span>add channels defaults
-<span style="">!</span>conda config <span style="color:#666">--</span>add channels bioconda
-<span style="">!</span>conda config <span style="color:#666">--</span>add channels conda<span style="color:#666">-</span>forge</code></pre></div>
-<p>This code will install and configure <a href="https://docs.conda.io/en/latest/">Conda</a> without colaboratory virtual machine.</p>
-
-<h2 id="get-the-data-from-zenodo-https-zenodo-org">Get the data from <a href="https://zenodo.org/">Zenodo</a></h2>
-
+<span style="">!</span>conda config <span style="color:#666">-</span><span style="color:#666">-</span>add channels defaults
+<span style="">!</span>conda config <span style="color:#666">-</span><span style="color:#666">-</span>add channels bioconda
+<span style="">!</span>conda config <span style="color:#666">-</span><span style="color:#666">-</span>add channels conda<span style="color:#666">-</span>forge
+</code></pre></div><p>This code will install and configure <a href="https://docs.conda.io/en/latest/">Conda</a> without colaboratory virtual machine.</p>
+<h2 id="get-the-data-from-zenodohttpszenodoorg">Get the data from <a href="https://zenodo.org/">Zenodo</a></h2>
 <p>First we will download duplex data from Zenodo repository <a href="https://doi.org/10.5281/zenodo.3565911"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.3565911.svg" alt="DOI"></a></p>
-
 <p>First use <code>wget</code> to get just one file:</p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">!wget https://zenodo.org/record/3565911/files/pbr322.fa</pre></div>
-<p>This is not convenient because you would have to do this five times. So let&rsquo;s install <code>zenodo-get</code> &ndash; a tool for sucking things out of Zenodo (remember that this instance of Jupyter runs in your little personal virtual machine where you can install whatever you want):</p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">!pip install zenodo-get</pre></div>
-<p>Now we can download everything from this Zenodo project:</p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">!zenodo_get.py -d 10.5281/zenodo.3565911</pre></div>
-<p>Once it is done, use <code>ls</code> to look if the files are there.</p>
-
-<h2 id="get-the-data-from-sra-https-www-ncbi-nlm-nih-gov-sra">Get the data from <a href="https://www.ncbi.nlm.nih.gov/sra">SRA</a></h2>
-
-<p>The DC cohort re-sequencing data has been deposited to SRA at NCBI. We will download just one dataset for today&rsquo;s lecture: <code>SRR8525907</code>. We will do this programmatically using <code>sra-toolkit</code>, which we first need to install. This is really why we installed Conda in the first place:</p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">!conda install -y sra-tools</pre></div>
-<p>once finished look at command options of the tool we will be using <code>fasterq-dump</code>:</p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">!fasterq-dump -h</pre></div>
-<p>the option we need is <code>-S</code> (write reads into different files). We also remember that we need to download data with accession <code>SRR8525907</code>:</p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">!fasterq-dump -S -p SRR8525907</pre></div>
-<p>Use <code>ls</code> to look at the files. This will produce two files with extension <code>.fastq</code>.</p>
-
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">!wget https://zenodo.org/record/3565911/files/pbr322.fa
+</code></pre></div><p>This is not convenient because you would have to do this five times. So let's install <code>zenodo-get</code> &ndash; a tool for sucking things out of Zenodo (remember that this instance of Jupyter runs in your little personal virtual machine where you can install whatever you want):</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">!pip install zenodo-get
+</code></pre></div><p>Now we can download everything from this Zenodo project:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">!zenodo_get.py -d 10.5281/zenodo.3565911
+</code></pre></div><p>Once it is done, use <code>ls</code> to look if the files are there.</p>
+<h2 id="get-the-data-from-srahttpswwwncbinlmnihgovsra">Get the data from <a href="https://www.ncbi.nlm.nih.gov/sra">SRA</a></h2>
+<p>The DC cohort re-sequencing data has been deposited to SRA at NCBI. We will download just one dataset for today's lecture: <code>SRR8525907</code>. We will do this programmatically using <code>sra-toolkit</code>, which we first need to install. This is really why we installed Conda in the first place:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">!conda install -y sra-tools
+</code></pre></div><p>once finished look at command options of the tool we will be using <code>fasterq-dump</code>:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">!fasterq-dump -h
+</code></pre></div><p>the option we need is <code>-S</code> (write reads into different files). We also remember that we need to download data with accession <code>SRR8525907</code>:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">!fasterq-dump -S -p SRR8525907
+</code></pre></div><p>Use <code>ls</code> to look at the files. This will produce two files with extension <code>.fastq</code>.</p>
 <h2 id="harmonize-filenames">Harmonize filenames</h2>
-
-<p>First the files we downloaded from SRA are not compressed and there is no good reason to keep then uncompressed. But before we compress them check their sizes with <code>ls -lh</code>. Now let&rsquo;s compress them (<code>*</code> is the wild card):</p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">!gzip *.fastq</pre></div>
-<p>check the sizes of files with <code>ls -lh</code> again to appreciate how much space is saved by compression.</p>
-
-<p>Now let&rsquo;s get all fastq files in our directory to have the same extension:</p>
+<p>First the files we downloaded from SRA are not compressed and there is no good reason to keep then uncompressed. But before we compress them check their sizes with <code>ls -lh</code>. Now let's compress them (<code>*</code> is the wild card):</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">!gzip *.fastq
+</code></pre></div><p>check the sizes of files with <code>ls -lh</code> again to appreciate how much space is saved by compression.</p>
+<p>Now let's get all fastq files in our directory to have the same extension:</p>
 <div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#008000;font-weight:bold">import</span> <span style="color:#00f;font-weight:bold">os</span>
 
 <span style="color:#008000;font-weight:bold">for</span> <span style="color:#008000">file</span> <span style="color:#a2f;font-weight:bold">in</span> os<span style="color:#666">.</span>listdir():
-  <span style="color:#008000;font-weight:bold">if</span> <span style="color:#008000">file</span><span style="color:#666">.</span>endswith(<span style="color:#ba2121">&#39;.fastq.gz&#39;</span>):
-    new_name <span style="color:#666">=</span> <span style="color:#008000">file</span><span style="color:#666">.</span>replace(<span style="color:#ba2121">&#39;fastq.gz&#39;</span>,<span style="color:#ba2121">&#39;fq.gz&#39;</span>)
-    <span style="">!</span>mv {<span style="color:#008000">file</span>} {new_name}</code></pre></div>
-<p>now all files have extension <code>fq.gz</code>!</p>
-
+  <span style="color:#008000;font-weight:bold">if</span> <span style="color:#008000">file</span><span style="color:#666">.</span>endswith(<span style="color:#ba2121"></span><span style="color:#ba2121">&#39;</span><span style="color:#ba2121">.fastq.gz</span><span style="color:#ba2121">&#39;</span>):
+    new_name <span style="color:#666">=</span> <span style="color:#008000">file</span><span style="color:#666">.</span>replace(<span style="color:#ba2121"></span><span style="color:#ba2121">&#39;</span><span style="color:#ba2121">fastq.gz</span><span style="color:#ba2121">&#39;</span>,<span style="color:#ba2121"></span><span style="color:#ba2121">&#39;</span><span style="color:#ba2121">fq.gz</span><span style="color:#ba2121">&#39;</span>)
+    <span style="">!</span>mv {<span style="color:#008000">file</span>} {new_name}
+</code></pre></div><p>now all files have extension <code>fq.gz</code>!</p>
 <h2 id="qcing">QCing</h2>
-
 <p>To get some idea about the quality of the reads we will install and run <a href="http://www.bioinformatics.babraham.ac.uk/projects/fastqc/"><code>fastqc</code></a>. First install:</p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">!conda install -y fastqc</pre></div>
-<p>and now run on all <code>*.fq.gz</code> files:</p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">!fastqc *.fq.gz</pre></div>
-<p><code>fastqc</code> generates a separate html report for each file. It is tedious to look through everyone of them. We can aggregate results with <a href="https://multiqc.info/"><code>multiqc</code></a>. Install <code>multiqc</code> with this commands:</p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">!conda install -y multiqc</pre></div>
-<p>and run in:</p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">!multiqc ./</pre></div>
-<p>it will generate a web page containing a report. You can visualize this web-page directly in your notebook:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">!conda install -y fastqc
+</code></pre></div><p>and now run on all <code>*.fq.gz</code> files:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">!fastqc *.fq.gz
+</code></pre></div><p><code>fastqc</code> generates a separate html report for each file. It is tedious to look through everyone of them. We can aggregate results with <a href="https://multiqc.info/"><code>multiqc</code></a>. Install <code>multiqc</code> with this commands:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">!conda install -y multiqc
+</code></pre></div><p>and run in:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">!multiqc ./
+</code></pre></div><p>it will generate a web page containing a report. You can visualize this web-page directly in your notebook:</p>
 <div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#008000;font-weight:bold">from</span> <span style="color:#00f;font-weight:bold">IPython.display</span> <span style="color:#008000;font-weight:bold">import</span> HTML
-HTML(filename<span style="color:#666">=</span><span style="color:#ba2121">&#34;multiqc_report.html&#34;</span>)</code></pre></div>
-<h2 id="adapter-trimming">Adapter trimming</h2>
-
-<p>It really looks like we need to trim adapters off of some of the sequences. For this purpose we will use <a href="http://www.bioinformatics.babraham.ac.uk/projects/trim_galore/"><code>trim-galore</code></a>. Let&rsquo;s install it first:</p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">!conda install -y trim-galore</pre></div>
-<p>Once it is installed look at command line options using <code>--help</code> flag. Now we can trim the adapters using the following command:</p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">!trim_galore --paired *.fq.gz</pre></div>
-<p>This will generate a new set of fastq files with extension <code>_val_1{1|2}.fq.gz</code>. Before we do anything with these files let&rsquo;s summarize what <code>trim-galore</code> actually did. This is again done with <code>multiqc</code>:</p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">!multiqc -n tg *trimming_report.txt</pre></div>
-<p>and to look at the report execute the following:</p>
+HTML(filename<span style="color:#666">=</span><span style="color:#ba2121"></span><span style="color:#ba2121">&#34;</span><span style="color:#ba2121">multiqc_report.html</span><span style="color:#ba2121">&#34;</span>)
+</code></pre></div><h2 id="adapter-trimming">Adapter trimming</h2>
+<p>It really looks like we need to trim adapters off of some of the sequences. For this purpose we will use <a href="http://www.bioinformatics.babraham.ac.uk/projects/trim_galore/"><code>trim-galore</code></a>. Let's install it first:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">!conda install -y trim-galore
+</code></pre></div><p>Once it is installed look at command line options using <code>--help</code> flag. Now we can trim the adapters using the following command:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">!trim_galore --paired *.fq.gz
+</code></pre></div><p>This will generate a new set of fastq files with extension <code>_val_1{1|2}.fq.gz</code>. Before we do anything with these files let's summarize what <code>trim-galore</code> actually did. This is again done with <code>multiqc</code>:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">!multiqc -n tg *trimming_report.txt
+</code></pre></div><p>and to look at the report execute the following:</p>
 <div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#008000;font-weight:bold">from</span> <span style="color:#00f;font-weight:bold">IPython.display</span> <span style="color:#008000;font-weight:bold">import</span> HTML
-HTML(filename<span style="color:#666">=</span><span style="color:#ba2121">&#34;tg.html&#34;</span>)</code></pre></div>
-<p>you can see that HIV samples were trimmed to a much higher extent than the other datasets.</p>
-
+HTML(filename<span style="color:#666">=</span><span style="color:#ba2121"></span><span style="color:#ba2121">&#34;</span><span style="color:#ba2121">tg.html</span><span style="color:#ba2121">&#34;</span>)
+</code></pre></div><p>you can see that HIV samples were trimmed to a much higher extent than the other datasets.</p>
 <h2 id="saving-your-work">Saving your work</h2>
-
 <p>Now we need to same the trimmed files to Google Drive, so we can use them in the next class. To do this click on the folder icon in the upper left and click &ldquo;<kbd>Mount drive</kbd>&rdquo;. This will ask you execute a code cell and enter an authorization code. No go to your drive and create an appropriately names folder. For example, <code>bmmb554_data</code>. Now copy all trimmed files into this folder:</p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4">cp *val* /content/drive/My\ Drive/bmmb554_data</pre></div>
-<p>your files will magically appear there!</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">cp *val* /content/drive/My\ Drive/bmmb554_data
+</code></pre></div><p>your files will magically appear there!</p>
 
 
 
