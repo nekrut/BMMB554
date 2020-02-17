@@ -824,28 +824,3 @@ As we've seen the third law of assembly is unbeatable. As a result some regions 
 |-----------------|
 |![](/BMMB554/img/t12_contigs.png)|
 |<small>The following "genomic" segment will be reported in three pieces corresponding to regions flanking the repeat and repeat itself (Image from [BL](https://github.com/BenLangmead/ads1-slides/blob/master/0580_asm__practice.pdf)).</small>|
-
------
-
-# Homework 3
-
-Given the following reads:
-
-```
-GCAC
-CACG
-ACGT
-CGTC
-GTCC
-TCCC
-CCCC
-CCCG
-CCGC
-CGCA
-CACT
-ACTT
-CTTC
-TTCC
-```
-
-Build a de Bruijn graph with vertices as *k*-mers and edges as (*k*+1)-mers where *k*=2. Reconstruct the "genome". Submit a handwritten sheet to me on Monday, March 11. 
