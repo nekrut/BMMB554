@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>DeBruijn on BMMB554</title>
+    <link>https://nekrut.github.io/BMMB554/tags/debruijn/</link>
+    <description>Recent content in DeBruijn on BMMB554</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 17 Feb 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://nekrut.github.io/BMMB554/tags/debruijn/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Lecture 8: Assembling reads into genomes</title>
+      <link>https://nekrut.github.io/BMMB554/lecture8/</link>
+      <pubDate>Mon, 17 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/lecture8/</guid>
+      <description>Genome assembly is a difficult task. In trying to explain it I will be relying on two primary sources:
+ Ben Langmead&amp;rsquo;s Teaching Materials Pevzner and Compeau Bioinformatics Book  Genomes and reads: Strings and k-mers k-mer composition Genomes are strings of text. When we sequence genomes we use sequencing machines that generate reads. For now let&amp;rsquo;s assume that all reads have the same length k and every k-mer is sequenced only once.</description>
+    </item>
+    
+  </channel>
+</rss>

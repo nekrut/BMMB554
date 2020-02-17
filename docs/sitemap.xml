@@ -1,45 +1,35 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://nekrut.github.io/BMMB554/tags/assembly/</loc>
+    <lastmod>2020-02-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://nekrut.github.io/BMMB554/</loc>
-    <lastmod>2020-02-12T00:00:00+00:00</lastmod>
+    <lastmod>2020-02-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nekrut.github.io/BMMB554/tags/debruijn/</loc>
+    <lastmod>2020-02-17T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://nekrut.github.io/BMMB554/lecture8/</loc>
-    <lastmod>2020-02-12T00:00:00+00:00</lastmod>
+    <lastmod>2020-02-17T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://nekrut.github.io/BMMB554/post/</loc>
-    <lastmod>2020-02-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://nekrut.github.io/BMMB554/tags/motplotlib/</loc>
-    <lastmod>2020-02-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://nekrut.github.io/BMMB554/tags/plotting/</loc>
-    <lastmod>2020-02-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://nekrut.github.io/BMMB554/tags/python/</loc>
-    <lastmod>2020-02-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://nekrut.github.io/BMMB554/tags/seaborn/</loc>
-    <lastmod>2020-02-12T00:00:00+00:00</lastmod>
+    <lastmod>2020-02-17T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://nekrut.github.io/BMMB554/tags/</loc>
-    <lastmod>2020-02-12T00:00:00+00:00</lastmod>
+    <lastmod>2020-02-17T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -109,6 +99,11 @@
   
   <url>
     <loc>https://nekrut.github.io/BMMB554/lecture3/</loc>
+    <lastmod>2020-01-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nekrut.github.io/BMMB554/tags/python/</loc>
     <lastmod>2020-01-28T00:00:00+00:00</lastmod>
   </url>
   

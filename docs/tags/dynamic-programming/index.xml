@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>dynamic programming on BMMB554</title>
@@ -18,8 +18,8 @@
       
       <guid>https://nekrut.github.io/BMMB554/lecture6/</guid>
       <description>The cover image shows pairwise alignments for human, mouse, and dog KIF3 locus from Dubchak et al. 2000.
-WarmUp with Python Loops  Open this notebook Make a copy of it in your drive Go through it and execute all cells   Introduction to dynamic programming (Based on dynamic programming examples from InteractivePython) and excellent alignment lecture materials from Ben Langmead.
-Suppose you are a cashier who&#39;s job is, generally speaking, to receive money and to give out change.</description>
+WarmUp with Python Loops  Open this notebook Make a copy of it in your drive Go through it and execute all cells  Introduction to dynamic programming (Based on dynamic programming examples from InteractivePython) and excellent alignment lecture materials from Ben Langmead.
+Suppose you are a cashier who&amp;rsquo;s job is, generally speaking, to receive money and to give out change.</description>
     </item>
     
   </channel>

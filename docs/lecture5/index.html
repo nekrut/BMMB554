@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en" class="h-100">
   <head>
-  <meta name="generator" content="Hugo 0.62.1" />
+  <meta name="generator" content="Hugo 0.58.3" />
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://nekrut.github.io/BMMB554/css/bootstrap.min.css">
@@ -162,34 +162,36 @@ img {
   
 
 <br><br>
+
+
 <h2 id="prep-the-environment">Prep the environment</h2>
+
 <p>Install <a href="https://docs.conda.io/en/latest/">conda</a>, configure path and channles:</p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="">!</span>wget <span style="color:#666">-</span>c https:<span style="color:#666">/</span><span style="color:#666">/</span>repo<span style="color:#666">.</span>continuum<span style="color:#666">.</span>io<span style="color:#666">/</span>archive<span style="color:#666">/</span>Anaconda3<span style="color:#666">-</span><span style="color:#666">5.1</span><span style="color:#666">.</span><span style="color:#666">0</span><span style="color:#666">-</span>Linux<span style="color:#666">-</span>x86_64<span style="color:#666">.</span>sh
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="">!</span>wget <span style="color:#666">-</span>c https:<span style="color:#666">//</span>repo<span style="color:#666">.</span>continuum<span style="color:#666">.</span>io<span style="color:#666">/</span>archive<span style="color:#666">/</span>Anaconda3<span style="color:#666">-</span><span style="color:#666">5.1</span><span style="color:#666">.</span><span style="color:#666">0</span><span style="color:#666">-</span>Linux<span style="color:#666">-</span>x86_64<span style="color:#666">.</span>sh
 <span style="">!</span>chmod <span style="color:#666">+</span>x Anaconda3<span style="color:#666">-</span><span style="color:#666">5.1</span><span style="color:#666">.</span><span style="color:#666">0</span><span style="color:#666">-</span>Linux<span style="color:#666">-</span>x86_64<span style="color:#666">.</span>sh
-<span style="">!</span>bash <span style="color:#666">.</span><span style="color:#666">/</span>Anaconda3<span style="color:#666">-</span><span style="color:#666">5.1</span><span style="color:#666">.</span><span style="color:#666">0</span><span style="color:#666">-</span>Linux<span style="color:#666">-</span>x86_64<span style="color:#666">.</span>sh <span style="color:#666">-</span>b <span style="color:#666">-</span>f <span style="color:#666">-</span>p <span style="color:#666">/</span>usr<span style="color:#666">/</span>local
+<span style="">!</span>bash <span style="color:#666">./</span>Anaconda3<span style="color:#666">-</span><span style="color:#666">5.1</span><span style="color:#666">.</span><span style="color:#666">0</span><span style="color:#666">-</span>Linux<span style="color:#666">-</span>x86_64<span style="color:#666">.</span>sh <span style="color:#666">-</span>b <span style="color:#666">-</span>f <span style="color:#666">-</span>p <span style="color:#666">/</span>usr<span style="color:#666">/</span>local
 
 <span style="color:#008000;font-weight:bold">import</span> <span style="color:#00f;font-weight:bold">sys</span>
-sys<span style="color:#666">.</span>path<span style="color:#666">.</span>append(<span style="color:#ba2121"></span><span style="color:#ba2121">&#39;</span><span style="color:#ba2121">/usr/local/lib/python3.6/site-packages/</span><span style="color:#ba2121">&#39;</span>)
+sys<span style="color:#666">.</span>path<span style="color:#666">.</span>append(<span style="color:#ba2121">&#39;/usr/local/lib/python3.6/site-packages/&#39;</span>)
 
-<span style="">!</span>conda config <span style="color:#666">-</span><span style="color:#666">-</span>add channels defaults
-<span style="">!</span>conda config <span style="color:#666">-</span><span style="color:#666">-</span>add channels bioconda
-<span style="">!</span>conda config <span style="color:#666">-</span><span style="color:#666">-</span>add channels conda<span style="color:#666">-</span>forge
-</code></pre></div><p>Mount the drive and copy duplex files into notebook filesystem (in my specific case I created <code>bmmb554_data</code> directiory at the root of my drive):</p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">cp <span style="color:#666">/</span>content<span style="color:#666">/</span>drive<span style="color:#666">/</span>My\ Drive<span style="color:#666">/</span>bmmb554_data<span style="color:#666">/</span>r1<span style="color:#666">*</span> <span style="color:#666">.</span><span style="color:#666">/</span>
-</code></pre></div><h2 id="mapping-data-with-bwa-and-processing-with-samtools">Mapping data with <code>bwa</code> and processing with <code>samtools</code></h2>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ls
-</code></pre></div><p>Install <a href="https://github.com/lh3/bwa">bwa</a> [also see <a href="https://arxiv.org/pdf/1303.3997.pdf">Li:2012</a>]  :</p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="">!</span>conda install <span style="color:#666">-</span>y bwa
-</code></pre></div><p>Upload sequence of pBR322 from Zenodo <a href="https://doi.org/10.5281/zenodo.3637681"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.3637681.svg" alt="DOI"></a></p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="">!</span>wget https:<span style="color:#666">/</span><span style="color:#666">/</span>zenodo<span style="color:#666">.</span>org<span style="color:#666">/</span>record<span style="color:#666">/</span><span style="color:#666">3637681</span><span style="color:#666">/</span>files<span style="color:#666">/</span>pbr322<span style="color:#666">.</span>fa
-</code></pre></div><p>Create bwa index files:</p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="">!</span>bwa index <span style="color:#666">-</span>p plasmid pbr322<span style="color:#666">.</span>fa
-</code></pre></div><p>Let look at bwa command line options:</p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="">!</span>bwa
-</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="">!</span>bwa mem
-</code></pre></div><p>We can speed up process to give <code>bwa</code> more threads to work with. How many threads does our system have:</p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">cat <span style="color:#666">/</span>proc<span style="color:#666">/</span>cpuinfo
-</code></pre></div><p>Our paired end data is represented as two files: forward and reverse. We can feed these to bwa manually by typing their names but since we are inside a python envirtonment we can do this programmatically.</p>
+<span style="">!</span>conda config <span style="color:#666">--</span>add channels defaults
+<span style="">!</span>conda config <span style="color:#666">--</span>add channels bioconda
+<span style="">!</span>conda config <span style="color:#666">--</span>add channels conda<span style="color:#666">-</span>forge</code></pre></div>
+<p>Mount the drive and copy duplex files into notebook filesystem (in my specific case I created <code>bmmb554_data</code> directiory at the root of my drive):</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">cp <span style="color:#666">/</span>content<span style="color:#666">/</span>drive<span style="color:#666">/</span>My\ Drive<span style="color:#666">/</span>bmmb554_data<span style="color:#666">/</span>r1<span style="color:#666">*</span> <span style="color:#666">./</span></code></pre></div>
+<h2 id="mapping-data-with-bwa-and-processing-with-samtools">Mapping data with <code>bwa</code> and processing with <code>samtools</code></h2>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ls</code></pre></div>
+<p>Install <a href="https://github.com/lh3/bwa">bwa</a> [also see <a href="https://arxiv.org/pdf/1303.3997.pdf">Li:2012</a>]  :</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="">!</span>conda install <span style="color:#666">-</span>y bwa</code></pre></div>
+<p>Upload sequence of pBR322 from Zenodo <a href="https://doi.org/10.5281/zenodo.3637681"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.3637681.svg" alt="DOI" /></a></p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="">!</span>wget https:<span style="color:#666">//</span>zenodo<span style="color:#666">.</span>org<span style="color:#666">/</span>record<span style="color:#666">/</span><span style="color:#666">3637681</span><span style="color:#666">/</span>files<span style="color:#666">/</span>pbr322<span style="color:#666">.</span>fa</code></pre></div>
+<p>Create bwa index files:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="">!</span>bwa index <span style="color:#666">-</span>p plasmid pbr322<span style="color:#666">.</span>fa</code></pre></div>
+<p>Let look at bwa command line options:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="">!</span>bwa</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="">!</span>bwa mem</code></pre></div>
+<p>We can speed up process to give <code>bwa</code> more threads to work with. How many threads does our system have:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">cat <span style="color:#666">/</span>proc<span style="color:#666">/</span>cpuinfo</code></pre></div>
+<p>Our paired end data is represented as two files: forward and reverse. We can feed these to bwa manually by typing their names but since we are inside a python envirtonment we can do this programmatically.</p>
 <div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># Get the list of `fq.gz` files</span>
 
 <span style="color:#008000;font-weight:bold">import</span> <span style="color:#00f;font-weight:bold">os</span>
@@ -197,71 +199,59 @@ sys<span style="color:#666">.</span>path<span style="color:#666">.</span>append(
 files <span style="color:#666">=</span> []
 
 <span style="color:#008000;font-weight:bold">for</span> <span style="color:#008000">file</span> <span style="color:#a2f;font-weight:bold">in</span> os<span style="color:#666">.</span>listdir():
-  <span style="color:#008000;font-weight:bold">if</span> <span style="color:#008000">file</span><span style="color:#666">.</span>endswith(<span style="color:#ba2121"></span><span style="color:#ba2121">&#39;</span><span style="color:#ba2121">fq.gz</span><span style="color:#ba2121">&#39;</span>):
+  <span style="color:#008000;font-weight:bold">if</span> <span style="color:#008000">file</span><span style="color:#666">.</span>endswith(<span style="color:#ba2121">&#39;fq.gz&#39;</span>):
     files<span style="color:#666">.</span>append(<span style="color:#008000">file</span>)
-files <span style="color:#666">=</span> <span style="color:#008000">sorted</span>(files)
-</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># It is a list:</span>
+files <span style="color:#666">=</span> <span style="color:#008000">sorted</span>(files)</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># It is a list:</span>
 
-files
-</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># We need toi organize these file names in pairs. In this particular case we want to have a list of two pairs.</span>
+files</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># We need toi organize these file names in pairs. In this particular case we want to have a list of two pairs.</span>
 <span style="color:#408080;font-style:italic"># A flat list can be organzed into a 2 x 2 list using numpy</span>
 
 <span style="color:#008000;font-weight:bold">import</span> <span style="color:#00f;font-weight:bold">numpy</span> <span style="color:#008000;font-weight:bold">as</span> <span style="color:#00f;font-weight:bold">np</span>
 
 pairs <span style="color:#666">=</span> np<span style="color:#666">.</span>reshape(files,(<span style="color:#666">2</span>,<span style="color:#666">2</span>))
-pairs
-</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># To make it more generic we can do this:</span>
+pairs</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># To make it more generic we can do this:</span>
 
-pairs <span style="color:#666">=</span> np<span style="color:#666">.</span>reshape(files,(<span style="color:#008000">len</span>(files)<span style="color:#666">/</span><span style="color:#666">/</span><span style="color:#666">2</span>,<span style="color:#666">2</span>))
-pairs
-</code></pre></div><p>Now we can run bwa to produce sam files:</p>
+pairs <span style="color:#666">=</span> np<span style="color:#666">.</span>reshape(files,(<span style="color:#008000">len</span>(files)<span style="color:#666">//</span><span style="color:#666">2</span>,<span style="color:#666">2</span>))
+pairs</code></pre></div>
+<p>Now we can run bwa to produce sam files:</p>
 <div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># Now let&#39;s create a command line and execute it</span>
 
 <span style="color:#008000;font-weight:bold">for</span> pair <span style="color:#a2f;font-weight:bold">in</span> pairs:
-  cmd <span style="color:#666">=</span> <span style="color:#ba2121"></span><span style="color:#ba2121">&#39;</span><span style="color:#ba2121">bwa mem -t 2 plasmid {} {} &gt; {}.sam</span><span style="color:#ba2121">&#39;</span><span style="color:#666">.</span>format(pair[<span style="color:#666">0</span>],pair[<span style="color:#666">1</span>],pair[<span style="color:#666">0</span>][:<span style="color:#666">5</span>])
+  cmd <span style="color:#666">=</span> <span style="color:#ba2121">&#39;bwa mem -t 2 plasmid {} {} &gt; {}.sam&#39;</span><span style="color:#666">.</span>format(pair[<span style="color:#666">0</span>],pair[<span style="color:#666">1</span>],pair[<span style="color:#666">0</span>][:<span style="color:#666">5</span>])
   <span style="color:#008000;font-weight:bold">print</span>(cmd)
-  <span style="">!</span>{cmd}
-</code></pre></div><p>This generates two sam files:</p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ls
-</code></pre></div><p>Sam format looks like this:</p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="">!</span>head r1<span style="color:#666">-</span>s0<span style="color:#666">.</span>sam
-</code></pre></div><p>Let's look at SAM/BAM format <a href="https://samtools.github.io/hts-specs/SAMv1.pdf">specification</a>. Before we can use BAM file they need to be softed and indexed:</p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="">!</span>conda install <span style="color:#666">-</span>y samtools
-</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="">!</span>samtools view <span style="color:#666">-</span>bh r1<span style="color:#666">-</span>s0<span style="color:#666">.</span>sam <span style="color:#666">&gt;</span> r1<span style="color:#666">-</span>s0<span style="color:#666">.</span>bam
-</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="">!</span>samtools sort r1<span style="color:#666">-</span>s0<span style="color:#666">.</span>bam <span style="color:#666">&gt;</span> r1<span style="color:#666">-</span>s0<span style="color:#666">.</span>sorted<span style="color:#666">.</span>bam
-</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="">!</span>samtools index r1<span style="color:#666">-</span>s0<span style="color:#666">.</span>sorted<span style="color:#666">.</span>bam
-</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ls
-</code></pre></div><p>Alternatively, this can be done in one go using piping. First, let's delete sam and bam files we've produced so far:</p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">rm <span style="color:#666">*</span><span style="color:#666">.</span>sam <span style="color:#666">*</span><span style="color:#666">.</span>bam<span style="color:#666">*</span>
-</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ls
-</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># Rerunning bwa piping output directly into samtools:</span>
+  <span style="">!</span>{cmd}</code></pre></div>
+<p>This generates two sam files:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ls</code></pre></div>
+<p>Sam format looks like this:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="">!</span>head r1<span style="color:#666">-</span>s0<span style="color:#666">.</span>sam</code></pre></div>
+<p>Let&rsquo;s look at SAM/BAM format <a href="https://samtools.github.io/hts-specs/SAMv1.pdf">specification</a>. Before we can use BAM file they need to be softed and indexed:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="">!</span>conda install <span style="color:#666">-</span>y samtools</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="">!</span>samtools view <span style="color:#666">-</span>bh r1<span style="color:#666">-</span>s0<span style="color:#666">.</span>sam <span style="color:#666">&gt;</span> r1<span style="color:#666">-</span>s0<span style="color:#666">.</span>bam</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="">!</span>samtools sort r1<span style="color:#666">-</span>s0<span style="color:#666">.</span>bam <span style="color:#666">&gt;</span> r1<span style="color:#666">-</span>s0<span style="color:#666">.</span>sorted<span style="color:#666">.</span>bam</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="">!</span>samtools index r1<span style="color:#666">-</span>s0<span style="color:#666">.</span>sorted<span style="color:#666">.</span>bam</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ls</code></pre></div>
+<p>Alternatively, this can be done in one go using piping. First, let&rsquo;s delete sam and bam files we&rsquo;ve produced so far:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">rm <span style="color:#666">*.</span>sam <span style="color:#666">*.</span>bam<span style="color:#666">*</span></code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">ls</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#408080;font-style:italic"># Rerunning bwa piping output directly into samtools:</span>
 
 <span style="color:#008000;font-weight:bold">for</span> pair <span style="color:#a2f;font-weight:bold">in</span> pairs:
-  cmd <span style="color:#666">=</span> <span style="color:#ba2121"></span><span style="color:#ba2121">&#39;</span><span style="color:#ba2121">bwa mem -t 2 plasmid {0} {1} | samtools view -bh - | samtools sort - &gt; {2}.bam; samtools index {2}.bam</span><span style="color:#ba2121">&#39;</span><span style="color:#666">.</span>format(pair[<span style="color:#666">0</span>],pair[<span style="color:#666">1</span>],pair[<span style="color:#666">0</span>][:<span style="color:#666">5</span>])
+  cmd <span style="color:#666">=</span> <span style="color:#ba2121">&#39;bwa mem -t 2 plasmid {0} {1} | samtools view -bh - | samtools sort - &gt; {2}.bam; samtools index {2}.bam&#39;</span><span style="color:#666">.</span>format(pair[<span style="color:#666">0</span>],pair[<span style="color:#666">1</span>],pair[<span style="color:#666">0</span>][:<span style="color:#666">5</span>])
   <span style="color:#008000;font-weight:bold">print</span>(cmd)
-  <span style="">!</span>{cmd}
-</code></pre></div><h2 id="assessing-mapping-results">Assessing mapping results</h2>
+  <span style="">!</span>{cmd}</code></pre></div>
+<h2 id="assessing-mapping-results">Assessing mapping results</h2>
+
 <p><code>deepTools</code> is an excellent set of tools for manipulation of mapping data</p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">pip install deeptools
-</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#008000;font-weight:bold">import</span> <span style="color:#00f;font-weight:bold">os</span>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">pip install deeptools</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#008000;font-weight:bold">import</span> <span style="color:#00f;font-weight:bold">os</span>
 <span style="color:#008000;font-weight:bold">for</span> <span style="color:#008000">file</span> <span style="color:#a2f;font-weight:bold">in</span> os<span style="color:#666">.</span>listdir():
-  <span style="color:#008000;font-weight:bold">if</span> <span style="color:#008000">file</span><span style="color:#666">.</span>endswith(<span style="color:#ba2121"></span><span style="color:#ba2121">&#39;</span><span style="color:#ba2121">bam</span><span style="color:#ba2121">&#39;</span>):
-    cmd <span style="color:#666">=</span> <span style="color:#ba2121"></span><span style="color:#ba2121">&#39;</span><span style="color:#ba2121">bamCoverage -b {0}.bam -o {0}.bw</span><span style="color:#ba2121">&#39;</span><span style="color:#666">.</span>format(<span style="color:#008000">file</span>[:<span style="color:#666">-</span><span style="color:#666">4</span>])
-    <span style="">!</span>{cmd}
-</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">pip install pygenometracks
-</code></pre></div><p>Upload annotaion of pBR322 from Zenodo <a href="https://doi.org/10.5281/zenodo.3637681"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.3637681.svg" alt="DOI"></a></p>
+  <span style="color:#008000;font-weight:bold">if</span> <span style="color:#008000">file</span><span style="color:#666">.</span>endswith(<span style="color:#ba2121">&#39;bam&#39;</span>):
+    cmd <span style="color:#666">=</span> <span style="color:#ba2121">&#39;bamCoverage -b {0}.bam -o {0}.bw&#39;</span><span style="color:#666">.</span>format(<span style="color:#008000">file</span>[:<span style="color:#666">-</span><span style="color:#666">4</span>])
+    <span style="">!</span>{cmd}</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">pip install pygenometracks</code></pre></div>
+<p>Upload annotaion of pBR322 from Zenodo <a href="https://doi.org/10.5281/zenodo.3637681"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.3637681.svg" alt="DOI" /></a></p>
+
 <p>Pull in annotaion of pBR322 from Zenodo</p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="">!</span>wget https:<span style="color:#666">/</span><span style="color:#666">/</span>zenodo<span style="color:#666">.</span>org<span style="color:#666">/</span>record<span style="color:#666">/</span><span style="color:#666">3637681</span><span style="color:#666">/</span>files<span style="color:#666">/</span>pBR322<span style="color:#666">.</span>bed
-</code></pre></div><p>The bed file we just uploaded is not sorted. To sort it let's install and use bedtools:</p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="">!</span>sudo apt<span style="color:#666">-</span>get install bedtools
-</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="">!</span>bedtools sort <span style="color:#666">-</span>h <span style="color:#666">-</span>i pBR322<span style="color:#666">.</span>bed <span style="color:#666">&gt;</span> a; mv a pBR322<span style="color:#666">.</span>bed
-</code></pre></div><p>Now, create configuration file for pyGenomeTracks:</p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="">!</span>make_tracks_file <span style="color:#666">-</span><span style="color:#666">-</span>trackFiles pBR322<span style="color:#666">.</span>bed <span style="color:#666">*</span><span style="color:#666">.</span>bw <span style="color:#666">-</span>o tracks<span style="color:#666">.</span>ini
-</code></pre></div><p>And visualize!</p>
-<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="">!</span>pyGenomeTracks <span style="color:#666">-</span><span style="color:#666">-</span>tracks tracks<span style="color:#666">.</span>ini <span style="color:#666">-</span><span style="color:#666">-</span>region pBR322:<span style="color:#666">1</span><span style="color:#666">-</span><span style="color:#666">3000</span> <span style="color:#666">-</span><span style="color:#666">-</span>outFileName nice_image<span style="color:#666">.</span>svg
-</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#008000;font-weight:bold">from</span> <span style="color:#00f;font-weight:bold">IPython.core.display</span> <span style="color:#008000;font-weight:bold">import</span> SVG
-SVG(filename<span style="color:#666">=</span><span style="color:#ba2121"></span><span style="color:#ba2121">&#39;</span><span style="color:#ba2121">nice_image.svg</span><span style="color:#ba2121">&#39;</span>)
-</code></pre></div>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="">!</span>wget https:<span style="color:#666">//</span>zenodo<span style="color:#666">.</span>org<span style="color:#666">/</span>record<span style="color:#666">/</span><span style="color:#666">3637681</span><span style="color:#666">/</span>files<span style="color:#666">/</span>pBR322<span style="color:#666">.</span>bed</code></pre></div>
+<p>The bed file we just uploaded is not sorted. To sort it let&rsquo;s install and use bedtools:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="">!</span>sudo apt<span style="color:#666">-</span>get install bedtools</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="">!</span>bedtools sort <span style="color:#666">-</span>h <span style="color:#666">-</span>i pBR322<span style="color:#666">.</span>bed <span style="color:#666">&gt;</span> a; mv a pBR322<span style="color:#666">.</span>bed</code></pre></div>
+<p>Now, create configuration file for pyGenomeTracks:</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="">!</span>make_tracks_file <span style="color:#666">--</span>trackFiles pBR322<span style="color:#666">.</span>bed <span style="color:#666">*.</span>bw <span style="color:#666">-</span>o tracks<span style="color:#666">.</span>ini</code></pre></div>
+<p>And visualize!</p>
+<div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="">!</span>pyGenomeTracks <span style="color:#666">--</span>tracks tracks<span style="color:#666">.</span>ini <span style="color:#666">--</span>region pBR322:<span style="color:#666">1</span><span style="color:#666">-</span><span style="color:#666">3000</span> <span style="color:#666">--</span>outFileName nice_image<span style="color:#666">.</span>svg</code></pre></div><div class="highlight"><pre style=";-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#008000;font-weight:bold">from</span> <span style="color:#00f;font-weight:bold">IPython.core.display</span> <span style="color:#008000;font-weight:bold">import</span> SVG
+SVG(filename<span style="color:#666">=</span><span style="color:#ba2121">&#39;nice_image.svg&#39;</span>)</code></pre></div>
 
 
       </main>

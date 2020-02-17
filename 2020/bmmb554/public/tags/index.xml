@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on BMMB554</title>
@@ -6,44 +6,26 @@
     <description>Recent content in Tags on BMMB554</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 12 Feb 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 17 Feb 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://nekrut.github.io/BMMB554/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>motplotlib</title>
-      <link>https://nekrut.github.io/BMMB554/tags/motplotlib/</link>
-      <pubDate>Wed, 12 Feb 2020 00:00:00 +0000</pubDate>
+      <title>assembly</title>
+      <link>https://nekrut.github.io/BMMB554/tags/assembly/</link>
+      <pubDate>Mon, 17 Feb 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://nekrut.github.io/BMMB554/tags/motplotlib/</guid>
+      <guid>https://nekrut.github.io/BMMB554/tags/assembly/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>plotting</title>
-      <link>https://nekrut.github.io/BMMB554/tags/plotting/</link>
-      <pubDate>Wed, 12 Feb 2020 00:00:00 +0000</pubDate>
+      <title>DeBruijn</title>
+      <link>https://nekrut.github.io/BMMB554/tags/debruijn/</link>
+      <pubDate>Mon, 17 Feb 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://nekrut.github.io/BMMB554/tags/plotting/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>python</title>
-      <link>https://nekrut.github.io/BMMB554/tags/python/</link>
-      <pubDate>Wed, 12 Feb 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://nekrut.github.io/BMMB554/tags/python/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>seaborn</title>
-      <link>https://nekrut.github.io/BMMB554/tags/seaborn/</link>
-      <pubDate>Wed, 12 Feb 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://nekrut.github.io/BMMB554/tags/seaborn/</guid>
+      <guid>https://nekrut.github.io/BMMB554/tags/debruijn/</guid>
       <description></description>
     </item>
     
@@ -134,6 +116,15 @@
       <pubDate>Tue, 28 Jan 2020 00:00:00 +0000</pubDate>
       
       <guid>https://nekrut.github.io/BMMB554/tags/hiv/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>python</title>
+      <link>https://nekrut.github.io/BMMB554/tags/python/</link>
+      <pubDate>Tue, 28 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/tags/python/</guid>
       <description></description>
     </item>
     
