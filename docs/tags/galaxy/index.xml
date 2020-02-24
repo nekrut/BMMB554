@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>galaxy on BMMB554</title>
+    <link>https://nekrut.github.io/BMMB554/tags/galaxy/</link>
+    <description>Recent content in galaxy on BMMB554</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 24 Feb 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://nekrut.github.io/BMMB554/tags/galaxy/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Lecture 9: Calling variants I</title>
+      <link>https://nekrut.github.io/BMMB554/lecture9/</link>
+      <pubDate>Mon, 24 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/lecture9/</guid>
+      <description>We will call variants in three COVID-19 isolates using several variant calling tools.
+ Go to Galaxy workshop site Create an account Import history from here](https://workshop.usegalaxy.org/u/anton/h/covid-19-data)  This is the list of fields we will be extracting:
+CHROM POS REF ALT DP AF SB DP4 EFF[*].IMPACT EFF[*].FUNCLASS EFF[*].EFFECT EFF[*].GENE EFF[*].</description>
+    </item>
+    
+  </channel>
+</rss>
