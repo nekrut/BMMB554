@@ -8,7 +8,7 @@ We will call variants in three COVID-19 isolates using several variant calling t
 
  1. Go to [Galaxy workshop site](https://workshop.usegalaxy.org)
  2. Create an account
- 3. Import history from here](https://workshop.usegalaxy.org/u/anton/h/covid-19-data)
+ 3. Import history from [here](https://workshop.usegalaxy.org/u/anton/h/covid-19-data)
 
 This is the list of fields we will be extracting:
 

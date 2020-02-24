@@ -18,7 +18,7 @@
       
       <guid>https://nekrut.github.io/BMMB554/lecture9/</guid>
       <description>We will call variants in three COVID-19 isolates using several variant calling tools.
- Go to Galaxy workshop site Create an account Import history from here](https://workshop.usegalaxy.org/u/anton/h/covid-19-data)  This is the list of fields we will be extracting:
+ Go to Galaxy workshop site Create an account Import history from here  This is the list of fields we will be extracting:
 CHROM POS REF ALT DP AF SB DP4 EFF[*].IMPACT EFF[*].FUNCLASS EFF[*].EFFECT EFF[*].GENE EFF[*].</description>
     </item>
     
