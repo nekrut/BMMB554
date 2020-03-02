@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>numpy on BMMB554</title>
+    <link>https://nekrut.github.io/BMMB554/tags/numpy/</link>
+    <description>Recent content in numpy on BMMB554</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 02 Mar 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://nekrut.github.io/BMMB554/tags/numpy/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Lecture 10: NumPy</title>
+      <link>https://nekrut.github.io/BMMB554/lecture10/</link>
+      <pubDate>Mon, 02 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/lecture10/</guid>
+      <description>Prep  Point your browser to http://colab.research.google.com Open notebook 2020/ipynb/numpy.ipynb from https://github.com/nekrut/BMMB554  Numpy: Operations with multidimensional data This notebook is based (with some modifications) on a NumPy tutorial by J.R. Johansson
+# Import MatPlotlib so we can look at some pretty plots # The reson for doing this will become clear in out MatPlotLib lecture next week %matplotlib inline import matplotlib.pyplot as plt Introduction The numpy package (module) is used in almost all numerical computation using Python.</description>
+    </item>
+    
+  </channel>
+</rss>

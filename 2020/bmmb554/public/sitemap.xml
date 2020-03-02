@@ -4,7 +4,32 @@
   
   <url>
     <loc>https://nekrut.github.io/BMMB554/</loc>
-    <lastmod>2020-02-24T00:00:00+00:00</lastmod>
+    <lastmod>2020-03-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nekrut.github.io/BMMB554/lecture10/</loc>
+    <lastmod>2020-03-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nekrut.github.io/BMMB554/post/</loc>
+    <lastmod>2020-03-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nekrut.github.io/BMMB554/tags/numpy/</loc>
+    <lastmod>2020-03-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nekrut.github.io/BMMB554/tags/python/</loc>
+    <lastmod>2020-03-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nekrut.github.io/BMMB554/tags/</loc>
+    <lastmod>2020-03-02T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -23,17 +48,7 @@
   </url>
   
   <url>
-    <loc>https://nekrut.github.io/BMMB554/post/</loc>
-    <lastmod>2020-02-24T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://nekrut.github.io/BMMB554/tags/sequence-variants/</loc>
-    <lastmod>2020-02-24T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://nekrut.github.io/BMMB554/tags/</loc>
     <lastmod>2020-02-24T00:00:00+00:00</lastmod>
   </url>
   
@@ -119,11 +134,6 @@
   
   <url>
     <loc>https://nekrut.github.io/BMMB554/lecture3/</loc>
-    <lastmod>2020-01-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://nekrut.github.io/BMMB554/tags/python/</loc>
     <lastmod>2020-01-28T00:00:00+00:00</lastmod>
   </url>
   

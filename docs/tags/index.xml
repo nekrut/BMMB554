@@ -6,10 +6,28 @@
     <description>Recent content in Tags on BMMB554</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 24 Feb 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 02 Mar 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://nekrut.github.io/BMMB554/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>numpy</title>
+      <link>https://nekrut.github.io/BMMB554/tags/numpy/</link>
+      <pubDate>Mon, 02 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/tags/numpy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>python</title>
+      <link>https://nekrut.github.io/BMMB554/tags/python/</link>
+      <pubDate>Mon, 02 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/tags/python/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>covid-19</title>
@@ -143,15 +161,6 @@
       <pubDate>Tue, 28 Jan 2020 00:00:00 +0000</pubDate>
       
       <guid>https://nekrut.github.io/BMMB554/tags/hiv/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>python</title>
-      <link>https://nekrut.github.io/BMMB554/tags/python/</link>
-      <pubDate>Tue, 28 Jan 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://nekrut.github.io/BMMB554/tags/python/</guid>
       <description></description>
     </item>
     
