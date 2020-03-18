@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>COVID-19 on BMMB554</title>
-    <link>https://nekrut.github.io/BMMB554/tags/covid-19/</link>
-    <description>Recent content in COVID-19 on BMMB554</description>
+    <title>RNAseq on BMMB554</title>
+    <link>https://nekrut.github.io/BMMB554/tags/rnaseq/</link>
+    <description>Recent content in RNAseq on BMMB554</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 17 Mar 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://nekrut.github.io/BMMB554/tags/covid-19/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://nekrut.github.io/BMMB554/tags/rnaseq/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -18,17 +18,6 @@
       
       <guid>https://nekrut.github.io/BMMB554/lecture11/</guid>
       <description>A quick overview of coronavirus molecular biology Given the current situation we will continue this class using SARS-COV-2 as example for all further analyses. So far we have covered variant calling and genome assembly. Next we will be looking into RNAseq. Since SARS-COV-2 is a positive strand RNA virus that pretends to be a typical human transcript, it is a great system to learn about RNAseq. But first we need to learn about the coronavirus molecular biology.</description>
-    </item>
-    
-    <item>
-      <title>Lecture 9: Calling variants I</title>
-      <link>https://nekrut.github.io/BMMB554/lecture9/</link>
-      <pubDate>Mon, 24 Feb 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://nekrut.github.io/BMMB554/lecture9/</guid>
-      <description>We will call variants in three COVID-19 isolates using several variant calling tools.
- Go to Galaxy workshop site Create an account Import history from here  This is the list of fields we will be extracting:
-CHROM POS REF ALT DP AF SB DP4 EFF[*].IMPACT EFF[*].FUNCLASS EFF[*].EFFECT EFF[*].GENE EFF[*].</description>
     </item>
     
   </channel>

@@ -1,0 +1,866 @@
+<!doctype html>
+<html lang="en" class="h-100">
+  <head>
+  <meta name="generator" content="Hugo 0.58.3" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://nekrut.github.io/BMMB554/css/bootstrap.min.css">
+  
+  
+  <title>Lecture 11: Analysis of RNA I: Molecular Biology of SARS-COV-2 | BMMB554</title>
+  <style>
+.container {
+  max-width: 800px;
+}
+#nav a {
+  font-weight: bold;
+  color: inherit;
+}
+#nav a.nav-link-active {
+  background-color: #212529;
+  color: #fff;
+}
+#nav-border {
+  border-bottom: 1px solid #212529;
+}
+#main {
+  margin-top: 1em;
+  margin-bottom: 4em;
+}
+#home-jumbotron {
+  background-color: inherit;
+}
+#footer .container {
+  padding: 1em 0;
+}
+#footer a {
+  color: inherit;
+  text-decoration: underline;
+}
+.font-125 {
+  font-size: 125%;
+}
+.tag-btn {
+  margin-bottom: 0.3em;
+}
+pre {
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 16px;
+}
+pre code {
+  padding: 0;
+  font-size: inherit;
+  color: inherit; 
+  background-color: transparent;
+  border-radius: 0;
+}
+code {
+  padding: 2px 4px;
+  font-size: 90%;
+  color: #c7254e;
+  background-color: #f9f2f4;
+  border-radius: 4px;
+}
+img {
+  max-width: 100%;
+}
+</style>
+
+  <script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+  
+</head>
+  <body class="d-flex flex-column h-100">
+    <div id="nav-border" class="container">
+  <nav id="nav" class="nav justify-content-center">
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    <a class="nav-link " href="/BMMB554/"><i data-feather="home"></i> Home</a>
+  
+    
+    
+      
+        
+      
+    
+    
+    <a class="nav-link " href="/BMMB554/post/"><i data-feather="book-open"></i> Lectures</a>
+  
+    
+    
+      
+        
+      
+    
+    
+    <a class="nav-link " href="/BMMB554/tags/"><i data-feather="tag"></i> Tags</a>
+  
+    
+    
+      
+        
+      
+    
+    
+    <a class="nav-link " href="/BMMB554/about/"><i data-feather="list"></i> Syllabus</a>
+  
+  </nav>
+</div>
+    <div class="container">
+      <main id="main">
+        
+
+<h1>Lecture 11: Analysis of RNA I: Molecular Biology of SARS-COV-2</h1>
+
+
+<i data-feather="calendar"></i> <time datetime="2020-03-17">Mar 17, 2020</time>
+
+  <br>
+  <i data-feather="tag"></i>
+  
+  
+  <a class="btn btn-sm btn-outline-dark tag-btn" href="https://nekrut.github.io/BMMB554/tags/sars-cov-2">SARS-COV-2</a>
+  
+  
+  <a class="btn btn-sm btn-outline-dark tag-btn" href="https://nekrut.github.io/BMMB554/tags/covid-19">COVID-19</a>
+  
+  
+  <a class="btn btn-sm btn-outline-dark tag-btn" href="https://nekrut.github.io/BMMB554/tags/rnaseq">RNAseq</a>
+  
+
+<br><br>
+
+
+<h1 id="a-quick-overview-of-coronavirus-molecular-biology">A quick overview of coronavirus molecular biology</h1>
+
+<p>Given the current situation we will continue this class using SARS-COV-2 as example for all further analyses. So far we have covered variant calling and genome assembly. Next we will be looking into RNAseq. Since SARS-COV-2 is a positive strand RNA virus that pretends to be a typical human transcript, it is a great system to learn about RNAseq. But first we need to learn about the coronavirus molecular biology. This is what we will do in this lecture.</p>
+
+<p>The following summary is based on these publications:</p>
+
+<ul>
+<li><a href="http://dx.doi.org/10.1016/S0065-3527(06)66005-3">Masters:2006</a></li>
+<li><a href="http://dx.doi.org/10.1007/978-1-4939-2438-7_1">Fehr and Perlman:2015</a></li>
+<li><a href="https://www.annualreviews.org/doi/full/10.1146/annurev-virology-100114-055218">Sola:2015</a></li>
+<li><a href="http://dx.doi.org/10.1038/nature17200">Kirchdoerfer:2016</a></li>
+<li><a href="http://dx.doi.org/10.1016/j.cell.2020.02.058">Walls:2020</a></li>
+</ul>
+
+<h2 id="genome-organization">Genome organization</h2>
+
+<p>All coronaviruses contain non-segmented positive strand RNA genome approx. 30 kb in length. It is invariably 5&rsquo;-leader-UTR-replicase-S-E-M-N-3&rsquo;UTR-poly(A). In addition, it contains a variety of accessory proteins interspersed throughout the genome (see Fig. below).</p>
+
+<p><img src="https://media.springernature.com/original/springer-static/image/chp%3A10.1007%2F978-1-4939-2438-7_1/MediaObjects/317916_1_En_1_Fig1_HTML.gif" alt="" /></p>
+
+<p><small>Genomic organization of representative α, β, and γ CoVs. An illustration of the MHV genome is depicted at the top. The expanded regions below show the structural and accessory proteins in the 3′ regions of the HCoV-229E, MHV, SARS-CoV, MERS-CoV and IBV. Size of the genome and individual genes are approximated using the legend at the top of the diagram but are not drawn to scale. HCoV-229E human coronavirus 229E, MHV mouse hepatitis virus, SARS-CoV severe acute respiratory syndrome coronavirus, MERS-CoV Middle East respiratory syndrome coronavirus, IBV infectious bronchitis virus. (From <a href="http://dx.doi.org/10.1007/978-1-4939-2438-7_1">Fehr and Perlman:2015</a>)</small></p>
+
+<p>The long replicase gene encodes a number of non-structural proteins (nsps) and occupies <sup>2</sup>&frasl;<sub>3</sub> or the genome. Because of -1 ribosomal frameshifting within ORFab approx. in 25% of the cases polyprotein pp1ab is produced in place of pp1a. pp1a encodes 11 nsps while pp1ab encodes 15.</p>
+
+<p><img src="https://www.annualreviews.org/na101/home/literatum/publisher/ar/journals/content/virology/2015/virology.2015.2.issue-1/annurev-virology-100114-055218/20151024/images/large/vi20265.f1.jpeg" alt="" /></p>
+
+<p><small>Coronavirus genome structure and gene expression. (a) Coronavirus genome structure. The upper scheme represents the TGEV genome. Labels indicate gene names; L corresponds to the leader sequence. Also represented are the nsps derived from processing of the pp1a and pp1ab polyproteins. PLP1, PLP2, and 3CL protease sites are depicted as inverted triangles with the corresponding color code of each protease. Dark gray rectangles represent transmembrane domains, and light gray rectangles indicate other functional domains. (b) Coronavirus genome strategy of sgmRNA expression. The upper scheme represents the TGEV genome. Short lines represent the nested set of sgmRNAs, each containing a common leader sequence (black) and a specific gene to be translated (dark gray). &copy; Key elements in coronavirus transcription. A TRS precedes each gene (TRS-B) and includes the core sequence (CS-B) and variable 5′ and 3′ flanking sequences. The TRS of the leader (TRS-L), containing the core sequence (CS-L), is present at the 5′ end of the genome, in an exposed location (orange box in the TRS-L loop). Discontinuous transcription occurs during the synthesis of the negative-strand RNA (light blue), when the copy of the TRS-B hybridizes with the TRS-L. Dotted lines indicate the complementarity between positive-strand and negative-strand RNA sequences. Abbreviations: EndoU, endonuclease; ExoN, exonuclease; HEL, helicase; MTase, methyltransferase (green, N7-methyltransferase; dark purple, 2′-O-methyltransferase); nsp, nonstructural protein; PLP, papain-like protease; RdRp, RNA-dependent RNA polymerase; sgmRNA, subgenomic RNA; TGEV, transmissible gastroenteritis virus; TRS, transcription-regulating sequence; UTR, untranslated region. (From <a href="https://www.annualreviews.org/doi/full/10.1146/annurev-virology-100114-055218">Sola:2015</a>). </small></p>
+
+<h2 id="virion-structure">Virion structure</h2>
+
+<p>Coronovirus is a spherical particle approx. 125 nm in diameter. It is covered with S-protein projections giving it an appearance of solar corona - hence the term coronavirus. Inside the envelope is nucleocapsid that has helical symmetry far more typical of (-)-strand RNA viruses. There are four main structure proteins: spike (S), membrane (M), envelope (E), and nucleocapsid (N).</p>
+
+<p><img src="https://ars.els-cdn.com/content/image/1-s2.0-S0065352706660053-gr1.jpg" alt="" /></p>
+
+<p><small>Schematic of the coronavirus virion, with the minimal set of structural proteins (From <a href="http://dx.doi.org/10.1016/S0065-3527(06)66005-3">Masters:2006</a>).</small></p>
+
+<p>Mature S protein is trimer of two subunits: S1 and S2. The two subunits are produced from a single S-precursor by host proteases (see <a href="http://dx.doi.org/10.1038/nature17200">Kirchdoerfer:2016</a>; this however is not the case for all coronaviruses such as SARS-CoV). S1 forms the receptor-binding domain, while S2 forms the stalk.</p>
+
+<p>M protein is the most abundant structural components of the virion and determines its shape. It possibly exists as a dimer.</p>
+
+<p>E protein is least abundant protein of the capsid and possess ion channel activity. In facilitates assembly and release of the virus. In SARS-CoV it is not required for replication but is essential for pathogenesis.</p>
+
+<p>N proteins forms the nucleocapsid. It N- and C-terminal domains are capable of RNA binding. Specifically it binds to transcription regulatory sequences and the genomic packaging signal. It also binds to <code>nsp3</code> and M protein possible tethering viral genome and replicase-transcriptase complex.</p>
+
+<h2 id="entering-the-cell">Entering the cell</h2>
+
+<p>Virion attaches to the cells as a result of interaction between S-protein and a cellular receptor. In case of SARS-CoV-2 (as is in SARS-CoV) angiotensin converting enzyme 2 (ACE2) serves as the receptor binding to C-terminal portion of S1 domain. After receptor binding S protein is cleaved at two sites within the S2 subdomain. The first cleavage separates receptor-binding domain of S from membrane fusion domain. The second cleavage (at S2&rsquo;) exposes the fusion peptide. The SARS-CoV-2 is different from SARS-CoV in that it contains a <a href="https://en.wikipedia.org/wiki/Furin">furin</a> cleavage site that is processed during viral maturation within endoplasmatic reticulum (ER; see <a href="http://dx.doi.org/10.1016/j.cell.2020.02.058">Walls:2020</a>). The fusion peptide inserts into the cellular membrane and triggers joining on the two heptad regions with S2 forming antiparallel six-helix bundle resulting in fusion and release of the genome into the cytoplasm.</p>
+
+<h2 id="replication">Replication</h2>
+
+<p>The above figure shows that in addition to the full length (+)-strand genome there is a number of (+)-strand subgenomic RNAs corresponding to 3&rsquo;-end of the complete viral sequence. All of these <em>subgenomic</em> RNAs (sgRNAs) share the same leader sequence that is present only once at the extreme 5&rsquo;-end of the viral genome. These RNAs are produced via discontinuous RNA synthesis when the RNA-dependent RNA-polymerase (RdRp) switches template:</p>
+
+<iframe title="vimeo-player" src="https://player.vimeo.com/video/133088346" width="640" height="480" frameborder="0" allowfullscreen></iframe>
+
+<p><small>Model for the formation of genome high-order structures regulating N gene transcription. The upper linear scheme represents the coronavirus genome. The red line indicates the leader sequence in the 5′ end of the genome. The hairpin indicates the TRS-L. The gray line with arrowheads represents the nascent negative-sense RNA. The curved blue arrow indicates the template switch to the leader sequence during discontinuous transcription. The orange line represents the copy of the leader added to the nascent RNA after the template switch. The RNA-RNA interactions between the pE (nucleotides 26894 to 26903) and dE (nucleotides 26454 to 26463) and between the B-M in the active domain (nucleotides 26412 to 26421) and the cB-M in the 5′ end of the genome (nucleotides 477 to 486) are represented by solid lines. Dotted lines indicate the complementarity between positive-strand and negative-strand RNA sequences. Abbreviations: AD, active domain secondary structure prediction; B-M, B motif; cB-M, complementary copy of the B-M; cCS-N, complementary copy of the CS-N; CS-L, conserved core sequence of the leader; CS-N, conserved core sequence of the N gene; dE, distal element; pE, proximal element; TRS-L, transcription-regulating sequence of the leader (From <a href="https://www.annualreviews.org/doi/full/10.1146/annurev-virology-100114-055218">Sola:2015</a>).</small></p>
+
+<p>Furthermore <a href="https://www.annualreviews.org/doi/full/10.1146/annurev-virology-100114-055218">Sola:2015</a>) suggest propose the coronavirus transcription model in which transcription initiation complex forms at the 3&rsquo;-end of (+)-strand genomic RNA:</p>
+
+<p><img src="https://www.annualreviews.org/na101/home/literatum/publisher/ar/journals/content/virology/2015/virology.2015.2.issue-1/annurev-virology-100114-055218/20151024/images/large/vi20265.f3.jpeg" alt="" /></p>
+
+<p><small>Three-step model of coronavirus transcription. (1) Complex formation. Proteins binding transcription-regulating sequences are represented by ellipsoids, the leader sequence is indicated with a red bar, and core sequences are indicated with orange boxes. (2) Base-pairing scanning. Negative-strand RNA is shown in light blue; the transcription complex is represented by a hexagon. Vertical lines indicate complementarity between the genomic RNA and the nascent negative strand. (3) Template switch. Due to the complementarity between the newly synthesized negative-strand RNA and the transcription-regulating sequence of the leader, template switch to the leader is made by the transcription complex to complete the copy of the leader sequence (From <a href="https://www.annualreviews.org/doi/full/10.1146/annurev-virology-100114-055218">Sola:2015</a>).</small></p>
+
+<h1 id="so-what-can-we-do">So what can we do?</h1>
+
+<p>Given this information we ask the following questions:</p>
+
+<ol>
+<li>Can we reconstruct individual transcripts given the SARS-CoV data?</li>
+<li>Can we observe and confirm the ribosomal frameshifting?</li>
+<li>Can we identify secondary structures within SARS-CoV RNAs?</li>
+<li>&hellip;. Suggest your own question &hellip;.</li>
+</ol>
+
+<p>Yes, we can do all these things. We will start with question I: transcript reconstruction.</p>
+
+<h1 id="reference-based-rnaseq">Reference-based RNAseq</h1>
+
+<blockquote>
+<p>This tutorial is inspired by an exceptional <a href="http://chagall.med.cornell.edu/RNASEQcourse/">RNAseq course</a> at the Weill Cornell Medical College compiled by Friederike Dündar, Luce Skrabanek, and Paul Zumbo and by tutorials produced by Björn Grüning (@bgruening) for Freiburg Galaxy instance. Much of Galaxy-related features described in this section have been developed by Björn Grüning (@bgruening) and configured by Dave Bouvier (@davebx).</p>
+</blockquote>
+
+<p>RNAseq can be roughly divided into two &ldquo;types&rdquo;:</p>
+
+<ul>
+<li><strong>Reference genome-based</strong> - an assembled genome exists for a species for which an RNAseq experiment is performed. It allows reads to be aligned against the reference genome and significantly improves our ability to reconstruct transcripts. This category would obviously include humans and most model organisms but excludes the majority of truly biologically intereting species (e.g., <a href="https://en.wikipedia.org/wiki/Hyacinth_macaw">Hyacinth macaw</a>);</li>
+<li><strong>Reference genome-free</strong> - no genome assembly for the species of interest is available. In this case one would need to assemble the reads into transcripts using <em>de novo</em> approaches. This type of RNAseq is as much of an art as well as science because assembly is heavily parameter-dependent and difficult to do well.</li>
+</ul>
+
+<p>In this lesson we will focus on the <strong>Reference genome-based</strong> type of RNA seq.</p>
+
+<h2 id="experimental-procedures-affect-downstream-analyses">Experimental procedures affect downstream analyses</h2>
+
+<p>The <em>Everything&rsquo;s connected</em> slide by Dündar et al. (2015) explains the overall idea:</p>
+
+<p><img src="/BMMB554/img/everything_connected.png" alt="" /></p>
+
+<p>There is a variety of ways in which RNA is treated during its conversion to cDNA and eventual preparation of sequencing libraries. In general the experimental workflow includes the following steps:</p>
+
+<ul>
+<li>RNA purification;</li>
+<li>Reverse transcription using Reverse Transcriptase (RT), which produces the first strand of cDNA (&ldquo;c&rdquo; stands for <em>complimentary</em>);</li>
+<li>Second strand synthesis using DNA polymerase;</li>
+<li>Library preparation for sequencing.</li>
+</ul>
+
+<p>In listing these basic steps we are ignoring a vast amount of details such as, for example, normalization strategies and procedures needed to deal with rare RNAs or degraded samples (see <a href="http://nature.com/nmeth/journal/v10/n7/full/nmeth.2483.html">Adiconis:2013</a>). Yet, there are two important experimental considerations that would effect the ways in which one analyses data and interprets the results. These are:</p>
+
+<ul>
+<li>Priming for the first cDNA strand synthesis;</li>
+<li>Stranded versus Non-stranded libraries.</li>
+</ul>
+
+<h3 id="priming-for-the-first-strand-synthesis">Priming for the first strand synthesis</h3>
+
+<p>Reverse Transcriptase (RT) requires a primer. One can leverage the fact that the majority of processed mRNAs are polyadenylated and use oligo-dT primer to (mostly) restrict cDNA synthesis to fully processed mRNAs. Alternatively one can use a mix of random oligonucleotides to prime RT at a multitude of internal sites irrespective of RNA type and maturation status:</p>
+
+<hr />
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="/BMMB554/img/dT_random.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small><strong>Oligo-dT vs. random priming</strong></small><br></td>
+</tr>
+
+<tr>
+<td><small>Oligo-dT (<strong>A</strong>) and random priming (<strong>B</strong>)</small></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<p>Depending on the choice of the approach one would have different types of RNAs included in the final sequencing outcome. For example, if one attempts to study RNAs that are not polyadenylated or not fully processed, it would be unwise to use oligo-dT priming approach.</p>
+
+<h3 id="strand-specific-rnaseq">Strand-specific RNAseq</h3>
+
+<p>RNAs that are typically targeted in RNAseq experiments are single stranded (e.g., mRNAs) and thus have polarity (5&rsquo; and 3&rsquo; ends that are functionally distinct):</p>
+
+<hr />
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="/BMMB554/img/dna_rna.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small><strong>Relationship between DNA and RNA orientation</strong></small></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<p>During a typical RNAseq experiment the information about strandedness is lost after both strands of cDNA are synthesized, size selected, and converted into sequencing library. However, this information can be quite useful for various aspects of RNAseq analysis such as transcript reconstruction and quantification. There is a number of methods for creating so called <em>stranded</em> RNAseq libraries that preserve the strand information (for an excellent overview see Levin et al. <a href="http://www.nature.com/nmeth/journal/v7/n9/full/nmeth.1491.html">2010</a>):</p>
+
+<hr />
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><a href="http://www.nature.com/nmeth/journal/v7/n9/fig_tab/nmeth.1491_F1.html"><img src="/BMMB554/img/stranded_protocols.png" alt="" /></a></td>
+</tr>
+
+<tr>
+<td><small><strong>Generation of stranded RNAseq libraries</strong>. Different types of stranded library generation protocols from <a href="http://www.nature.com/nmeth/journal/v7/n9/full/nmeth.1491.html">Levin:2010</a></small></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<p>Depending on the approach and whether one performs single- or paired-end sequencing there are multiple possibilities on how to interpret the results of mapping of these reads onto genome/transcriptome:</p>
+
+<hr />
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><a href="http://sailfish.readthedocs.org/en/master/library_type.html"><img src="/BMMB554/img/lib_type.png" alt="" /></a></td>
+</tr>
+
+<tr>
+<td><small><strong>Effects of RNAseq library types</strong></small><br></td>
+</tr>
+
+<tr>
+<td><small>Image and description below is from <a href="http://sailfish.readthedocs.org/en/master/library_type.html">Sailfish documentation</a></small></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<p>The relative orientation of the reads is only relevant if the library is pair-ended. The possible options are:</p>
+
+<ul>
+<li><strong>I</strong> = inward;</li>
+<li><strong>O</strong> = outward;</li>
+<li><strong>M</strong> = matching (co-directional).</li>
+</ul>
+
+<p>Library can be stranded (<strong>S</strong>) or unstranded (<strong>U</strong>). If this library is stranded than depending on the protocols reads (single reads or forward reads in a paired-end run) may originate from:</p>
+
+<ul>
+<li><strong>F</strong> = read 1 in paired-end sequencing or single-end read is derived from the Forward strand;</li>
+<li><strong>R</strong> = read 1 in paired-end sequencing or single-end read is derived from the Reverse strand.</li>
+</ul>
+
+<p>So by combining the relative orientation of reads is I, O, or M (if reads are paired), strandedness or the library (S or U), and whether the reads originate from forward and reverse strand (F or R) there can be quite a number of possibilities:</p>
+
+<ul>
+<li>IU  - (an unstranded paired-end library where the reads face each other)</li>
+<li>SF  - (a stranded single-end protocol where the reads come from the forward strand)</li>
+<li>OSR - (a stranded paired-end protocol where the reads face away from each other,
+  read1 comes from reverse strand and read2 comes from the forward strand).
+  and so on&hellip;</li>
+</ul>
+
+<p>However, in practice, if you use Illumina paired-end RNAseq protocols you are unlikely to uncover many of these possibilities. You will either deal with:</p>
+
+<ul>
+<li>unstranded RNAseq data (<strong>IU</strong> type from above. Also called <strong>fr-unstranded</strong> in TopHat/Cufflinks jargon);</li>
+<li>stranded RNAseq data produced with Illumina TrueSeq RNAseq kits and <a href="http://nar.oxfordjournals.org/content/37/18/e123">dUTP tagging</a> (<strong>ISR</strong> type from above or <strong>fr-firststrand</strong> in TopHat/Cufflinks nomenclature).</li>
+</ul>
+
+<p>The implication of stranded RNAseq is that you can distinguish whether the reads are derived from forward- or reverse-encoded transcripts:</p>
+
+<hr />
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="/BMMB554/img/stranded_result.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small><strong>Stranded RNAseq data look like this</strong> This example contrasts unstranded and stranded RNAseq experiments. <font color="red">Red transcripts</font> are from + strand and <font color="blue">blue</font> are from - strand. In stranded example reads are clearly stratified between the two strands.  A small number of reads from opposite strand may represent anti-sense transcription. The image from GATC Biotech.</small></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<h3 id="replicates-biological-or-technical-and-how-many">Replicates: Biological or Technical and how many?</h3>
+
+<p>An RNAseq experiment without a sufficient number of replicates will be a waste of money. Replicates are essential to be able to correct for variation due to differences within/among organisms, cells, sequencing machines, library preparation protocols and numerous other potential factors. There are two types of replicates (as described by <a href="http://chagall.med.cornell.edu/RNASEQcourse/Intro2RNAseq.pdf">Dündar:2015</a>):</p>
+
+<blockquote>
+<ul>
+<li><p><strong>Technical replicates</strong> can be defined as <em>different library preparations from the same RNA sample</em>. They should account for batch effects from the library preparation such as reverse transcription and PCR amplification. To avoid possible lane effects (e.g., differences in the sample loading, cluster amplification, and efficiency of the sequencing reaction), it is good practice to multiplex the same sample over different lanes of the same flowcell. In most cases, technical variability introduced by the sequencing protocol is quite low and well controlled.</p></li>
+
+<li><p><strong>Biological replicates</strong>. There is an on-going debate over what kinds of samples represent true biological replicates. Obviously, the variability between different samples will be greater between RNA extracted from two unrelated humans than between RNA extracted from two different batches of the same cell line. In the latter case, most of the variation that will eventually be detected was probably introduced by the experimenter (e.g., slightly differing media and plating conditions). Nevertheless, this is variation the researcher is typically not interested in assessing, therefore the ENCODE consortium defines biological replicates as RNA from an independent growth of cells/tissue (ENCODE <a href="https://genome.ucsc.edu/ENCODE/protocols/dataStandards/ENCODE_RNAseq_Standards_V1.0.pdf">2011</a>).</p></li>
+</ul>
+
+<p>The number of replicates should be as high as practically possible. Most RNAseq experiments include three replicates and some have as many as 12 (see Schurch et al. <a href="http://arxiv.org/abs/1505.02017">2015</a>).</p>
+</blockquote>
+
+<h2 id="read-mapping">Read mapping</h2>
+
+<p>After sequencing is performed you have a collection of sequencing reads for each sample/replicate. In a reference-based RNAseq experiment these need to be mapped against the genome. Because in the case of eukaryotic transcriptome most reads originate from processed mRNAs lacking exons, they cannot be simply mapped back to the genome. Instead they can be separated into two categories:</p>
+
+<ul>
+<li>Reads that map entirely within exons</li>
+<li>Reads that cannot be mapped within an exon across their entire length because they span two or more exons</li>
+</ul>
+
+<p><em>Spliced</em> mappers have been developed to efficiently map transcript-derived reads against genome.</p>
+
+<h3 id="tophat-tophat2-and-hisat">TopHat, TopHat2, and HiSat</h3>
+
+<p><a href="http://bioinformatics.oxfordjournals.org/content/25/9/1105.abstract">Tophat</a> was one of the first tools designed specifically to address this problem by identifying potential exons using reads that do map to the genome, generating possible splices between neighboring exons, and comparing reads that did not initially map to the genome agaisnt these <em>in silico</em> created junctions:</p>
+
+<hr />
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><a href="http://bioinformatics.oxfordjournals.org/content/25/9/1105/F1.expansion.html"><img src="/BMMB554/img/tophat.png" alt="" /></a></td>
+</tr>
+
+<tr>
+<td><small><strong>TopHat and TopHat2: Mapping RNAseq regions to genome</strong>. In TopHat reads are mapped against the genome and are separated into two categories: (1) those that map, and (2) those that initially unmapped (IUM). &ldquo;Piles&rdquo; of reads representing potential exons are extended in search of potential donor/acceptor splice sites and potential splice junctions are reconstructed. IUMs are then mapped to these junctions. Image from <a href="http://bioinformatics.oxfordjournals.org/content/25/9/1105.full">Trapnell:2009</a>.</small></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><a href="https://genomebiology.biomedcentral.com/articles/10.1186/gb-2013-14-4-r36"><img src="/BMMB554/img/tophat2.png" alt="" /></a></td>
+</tr>
+
+<tr>
+<td><small><strong>TopHat has been subsequently improved with the development of TopHat2</strong>. Image from <a href="https://genomebiology.biomedcentral.com/articles/10.1186/gb-2013-14-4-r36">Kim:2012</a> summarizes steps involved in aligning of RNAseq reads with TopHat2. </small></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<p>To further optimize and speed up spliced read alignment Kim at al. <a href="http://www.nature.com/nmeth/journal/v12/n4/full/nmeth.3317.html">2015</a> developed <a href="http://ccb.jhu.edu/software/hisat2/index.shtml">HISAT</a>. It uses a set of <a href="https://en.wikipedia.org/wiki/FM-index">FM-indices</a> consisting one global genome-wide index and a collection of ~48,000 local overlapping 42 kb indices (~55,000 56 kb indices in HiSat2). This allows to find initial seed locations for potential read alignments in the genome using global index and to rapidly refine these alignments using a corresponding local index:</p>
+
+<hr />
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="/BMMB554/img/hisat.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small><strong>Hierarchical Graph FM index in HiSat/HiSat2</strong>. A part of the read (blue arrow) is first mapped to the genome using the global FM index. The HiSat then tries to extend the alignment directly utilizing the genome sequence (violet arrow). In (<strong>a</strong>) it succeeds and this read aligned as it completely resides within an exon. In (<strong>b</strong>) the extension hits a mismatch. Now HiSat takes advantage of the local FM index overlapping this location to find the appropriate matching for the remainder of this read (green arrow). The (<strong>c</strong>) shows a combination these two strategies: the beginning of the read is mapped using global FM index (blue arrow), extended until it reaches the end of the exon (violet arrow), mapped using local FM index (green arrow) and extended again (violet arrow). Image from <a href="http://www.nature.com/nmeth/journal/v12/n4/full/nmeth.3317.html">Kim:2015</a></small></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<h3 id="star-mapper">STAR mapper</h3>
+
+<p><a href="https://github.com/alexdobin/STAR">STAR aligner</a> is a fast alternative for mapping RNAseq reads against genome utilizing uncompressed <a href="https://en.wikipedia.org/wiki/Suffix_array">suffix array</a>. It operates in <a href="http://bioinformatics.oxfordjournals.org/content/early/2012/10/25/bioinformatics.bts635.abstract">two stages</a>. In the first stage it performs seed search:</p>
+
+<hr />
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="/BMMB554/img/star.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small><strong>STAR&rsquo;s seed search</strong>. Here a read is split between two consecutive exons. STAR starts to look for a <em>maximum mappable prefix</em> (MMP) from the beginning of the read until it can no longer match continuously. After this point it starts to MMP for the unmatched portion of the read (<strong>a</strong>). In the case of mismatches (<strong>b</strong>) and unalignable regions (<strong>c</strong>) MMPs serve as anchors from which to extend alignments. Image from <a href="http://bioinformatics.oxfordjournals.org/content/early/2012/10/25/bioinformatics.bts635.full.pdf+html">Dobin:2013</a>.</small></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<p>At the second stage STAR stitches MMPs to generate read-level alignments that (contrary to MMPs) can contain mismatches and indels. A scoring scheme is used to evaluate and prioritize stitching combinations and to evaluate reads that map to multiple locations. STAR is extremely fast but requires a substantial amount of RAM to run efficiently.</p>
+
+<h2 id="transcript-reconstruction">Transcript reconstruction</h2>
+
+<p>The previous step - mapping - assigns RNAseq reads to genomic locations and identifies splice junctions from reads that originate from different exons. At transcript reconstruction step this information is taken further in attempt to build transcript models. There is a number of tools for performing this task. A benchmarking paper by <a href="http://bioinformatics.oxfordjournals.org/content/early/2015/09/03/bioinformatics.btv488.full.pdf+html">Hayer:2015</a> attempted to compare performance of existing approaches with one of the outcomes shown below:</p>
+
+<hr />
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><a href="http://bioinformatics.oxfordjournals.org/content/early/2015/09/08/bioinformatics.btv488/F5.large.jpg"><img src="/BMMB554/img/rnaseq_comparison.png" alt="" /></a></td>
+</tr>
+
+<tr>
+<td><small><strong>Comparison of transcript reconsruction approaches</strong>. Here <em>recall</em> (the number of correctly constructed forms divided by the total number of real forms) versus <em>precision</em> (true positives divided by the sum of true positives and false positives) are plotted for seven transcript assemblers tested on two simulated datasets: <em>EnsemblPerfect</em> and <em>EnsemblRealistic</em>. The shaded region is indicating suboptimal performance (i.e., the white, unshaded region is &ldquo;good&rdquo;). The figure is from <a href="http://bioinformatics.oxfordjournals.org/content/early/2015/09/03/bioinformatics.btv488.full.pdf+html">Hayer:2015</a>.</small></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<p>Based on these results <a href="http://cole-trapnell-lab.github.io/cufflinks/">Cufflinks</a> and <a href="https://ccb.jhu.edu/software/stringtie/">StringTie</a> have satisfactory performence. The following discussion is based on inner workings of StringTie.</p>
+
+<h3 id="transcriptome-assembly-with-stringtie">Transcriptome assembly with StringTie</h3>
+
+<p><a href="https://ccb.jhu.edu/software/stringtie/">StringTie</a> assembles transcripts from spliced read alignemnts produced by tools such as STAR, TopHat, or HISAT and simultaneously estimates their abundances using counts of reads assigned to each transcript. The following images illustrates details of StringTie workflow:</p>
+
+<hr />
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="/BMMB554/img/stringtie1.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small><strong>StringTie workflow</strong>. Image from <a href="http://www.nature.com/nbt/journal/v33/n3/full/nbt.3122.html">Pertea:2015</a></small></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<p>In essence StringTie builds an alternative splice graph from overlapping reads in a given locus. In such a graph nodes correspond to exons (or, rather, contiguous regions of genome covered by reads; colored regions on the figure above), while edges are represented by reads connecting these exons. Next, it identifies a path within the splice graph that has the highest weight (largest number of reads on edges). Such path would correspond to an assembled transcript at this iteration of the algorithm. Because the edge weight is equal to the number of the reads StringTie estimates the coverage level for this transcript (see below) which can be used to estimate the transcript&rsquo;s abundance. Reads that are associated with the transcript that was just assembled are then removed and the graph is updated to perform the next iteration of the algorithm.</p>
+
+<h2 id="transcript-quantification">Transcript quantification</h2>
+
+<p>Transcriptome quantification attempts to estimate expression levels of individuals transcripts. This is performed by assigning RNAseq reads to transcripts, counting, and normalization.</p>
+
+<h3 id="assigning-reads-to-transcripts">Assigning reads to transcripts</h3>
+
+<p>To associate reads with transcripts they (the reads) need to be aligned to the transcriptome. Tools like Cufflinks and StringTie reconstruct transcripts from spliced read alignments generated by other programs (TopHat, HISAT, STAR), so they already have the information about which reads belong to each reconstructed transcript. Other tools such as <a href="http://www.cs.cmu.edu/~ckingsf/software/sailfish/">Sailfish</a>, <a href="http://pachterlab.github.io/kallisto/">Kallisto</a>, and <a href="http://combine-lab.github.io/salmon/">Salmon</a> perform <em>lightweight</em> alignment of RNAseq reads against existing transcriptome sequences. The goal of lightweight alignment is to quickly distribute the reads across transcripts they likely originate from without worrying too much about producing high quality alignments. The upside of this is that the entire procedure can be performed very quickly. The downside is that these tools require high quality transcriptome as input, which is not a problem if you work with humans or mice, but is a problem if you are studying Hyacinth macaw or any other brilliantly colored creature.</p>
+
+<h4 id="lightweight-alignment">Lightweight alignment</h4>
+
+<p><a href="http://www.cs.cmu.edu/~ckingsf/software/sailfish/">Sailfish</a> has been initially designed to utilize <a href="https://en.wikipedia.org/wiki/K-mer"><em>k</em>-mer</a> matching for finding association between reads and corresponding transcripts:</p>
+
+<hr />
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="/BMMB554/img/sailfish.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small><strong>Assigning reads to transcripts: Sailfish</strong>. Sailfish indexes input transcriptome for a fixed <em>k</em>-mer length and compares <em>k</em>-mers derived from RNAseq reads against this index. Image from <a href="http://www.nature.com/nbt/journal/v32/n5/full/nbt.2862.html">Patro:2014</a></small></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<p>The current version of Sailfish uses <a href="http://biorxiv.org/content/biorxiv/early/2015/10/22/029652.full.pdf">quasi-alignment</a> to extend exact matches found with <em>k</em>-mers:</p>
+
+<hr />
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="/BMMB554/img/quasi_aln.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small><strong>Quasi-alignment of reads in Sailfish</strong>. In Sailfish version <a href="https://github.com/kingsfordgroup/sailfish/releases/tag/v0.7.0">0.7.0</a> and up transcriptome is concatenated into a single sequence using <code>$</code> separators from which a <a href="https://en.wikipedia.org/wiki/Suffix_array">suffix array</a> and a <a href="https://en.wikipedia.org/wiki/Hash_table">hash table</a> are constructed. A <em>k</em>-mer from an RNAseq read (green) is looked up in the hash table, which immediately gives its position in the suffix array allowing to extend the march as described in the legend and the <a href="http://biorxiv.org/content/biorxiv/early/2015/10/22/029652.full.pdf">paper</a>. Image from  <a href="http://biorxiv.org/content/biorxiv/early/2015/10/22/029652.full.pdf">Srivastava:2015</a></small></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<p><a href="http://pachterlab.github.io/kallisto/">Kallisto</a> also utilizes <em>k</em>-mer matching but uses a different data structure. It constructs a <a href="https://en.wikipedia.org/wiki/De_Bruijn_graph">De Bruijn graph</a> from transcriptome input (pane <strong>b</strong> of the figure below). This graph is different from De Bruijn graphs used for genome assembly in that its nodes are <em>k</em>-mers and transcripts correspond to paths through the graph. To accommodate multiple transcripts that can lay along the same path (or sub-path) the paths are &ldquo;colored&rdquo; with each transcript given a distinct &ldquo;color&rdquo; (in genome assembly the graph is built from the reads and nodes usually correspond to overlaps between <em>k</em>-mers forming incoming and outgoing edges). Non-branching sections of the graph that have identical coloring are &ldquo;glued&rdquo; into contigs. Finally a <a href="https://en.wikipedia.org/wiki/Hash_table">hash table</a> is built that stores the position of each transcriptome <em>k</em>-mer within the graph:</p>
+
+<hr />
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="/BMMB554/img/kallisto.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small><strong>Assigning reads to transcripts: Kallisto</strong>. Here a black read is being associated with a set consisting of red, blue, and green transcripts (<strong>a</strong>). First, a graph is built from transcriptome (<strong>b</strong>). Next, by finding common <em>k</em>-mers between the read and the graph the read is &ldquo;threaded&rdquo; along a path (<strong>c</strong> and <strong>d</strong>). The colors along that path would indicate which transcripts it is likely derived from. Specifically, this is done by taking intersection of &ldquo;colors&rdquo; (<strong>c</strong>). It this case the read is assigned to two transcripts: red and blue. Image from <a href="http://arxiv.org/pdf/1505.02710v2.pdf">Bray:2015</a></small></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<p><a href="https://combine-lab.github.io/salmon/about/">Salmon</a> does not use <em>k</em>-mer matching approach. Instead it creates <a href="https://github.com/lh3/bwa">bwa</a>-like <a href="https://en.wikipedia.org/wiki/FM-index">FM-index</a> and uses it to finds chains of <em>Maximal Exact Matches</em> (MEMs) and <em>Super Maximal Exact Matches</em> (SMEMs) between a read and the transcriptome.<br />
+<a href="http://biorxiv.org/content/biorxiv/early/2015/06/27/021592.full.pdf">Patro:2015</a> define a MEM as &ldquo;<em>a substring that is shared by the query (read) and reference (transcript) that cannot be extended in either direction without introducing a mismatch</em>&rdquo;. Similraly, a SMEM is defined as a &ldquo;<em>MEM that is not contained within any other MEM on the query.</em>&rdquo; One of the advantages of utilizing the FM-index is that a new index does not need to re-generated for a search with different set of parameters. In the case of Sailfish and Kallisto an index is dependent on <em>k</em>-mer length and has to be recomputed every time the <em>k</em> is changed. The overall schematics of Salmon operation is as follows:</p>
+
+<hr />
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="/BMMB554/img/salmon.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small><strong>Assigning reads to transcripts: Salmon</strong>. Image from <a href="http://biorxiv.org/content/biorxiv/early/2015/06/27/021592.full.pdf">Patro:2015</a></small></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<h3 id="estimating-transcript-levels">Estimating transcript levels</h3>
+
+<p>Once reads are apportioned across individual transcripts they can be quantified. There are several approaches for quantification.</p>
+
+<h4 id="flow-networks">Flow networks</h4>
+
+<p>StringTie, which performs assembly and quantification simultaneously converts splice graph into a flow network for which it solves <a href="https://en.wikipedia.org/wiki/Maximum_flow_problem">the maximum flow problem</a>. The maximum flow is such network represents the expression level for a given transcript:</p>
+
+<hr />
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="/BMMB554/img/stringtie2.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small><strong>StringTie flow network</strong>. Here each exon node from the splice graph is split into <em>in</em> and <em>out</em> nodes connected with an edge weighted by the number of reads corresponding to that exon. For example, the first exon is covered by seven reads and so the edge between 1-in and 1-out has a weight of 7. Expression level would correspond to the maximum flow through a path representing a given transcript. Image from <a href="http://www.nature.com/nbt/journal/v33/n3/full/nbt.3122.html">Pertea:2015</a></small></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<h4 id="expectation-maximization">Expectation Maximization</h4>
+
+<p>The Expectation/Maximization framework (EM) is utilized in a number of tools such as <a href="http://bio.math.berkeley.edu/eXpress/index.html">eXpress</a> and more recently <a href="http://www.cs.cmu.edu/~ckingsf/software/sailfish/">Sailfish</a>, <a href="http://pachterlab.github.io/kallisto/">Kallisto</a>, and <a href="https://combine-lab.github.io/salmon/about/">Salmon</a> (As an alternative strategy Salmon also utilizes <a href="http://arxiv.org/pdf/1308.5953v1.pdf">variational Bayesian method</a>. The principle of EM is nicely illustrated by <a href="https://liorpachter.wordpress.com/">Lior Pachter</a> in his transcript quantification <a href="http://arxiv.org/pdf/1104.3889v2.pdf">review</a>. Suppose, as shown on the image below, there are three transcripts (green, red, and blue). There are five reads associated with these transcripts. One read (<em>d</em>) is unique to the red transcript, while others correspond to two (<em>b</em>, <em>c</em>, <em>e</em>) or three (<em>a</em>) transcripts. The EM is an iterative procedure. In the first round transcript abundances are initialized as equal (0.33 each as there are three transcripts) and during expectation reads are apportioned across transcripts based on these abundances. Next, during maximization step transcript abundances are re-calculated as follow. For red transcript we sum up fraction of each read as 0.33 + 0 + 0.5 + 1 + 0.5 for reads a, b, c, d, and e, respectively. We now divide this by the sum of read allocations for each transcript as 2.33 + 1.33 + 1.33 for red, green, and blue transcripts respectively. For all three transcript calculation will look like this:</p>
+
+<div>
+    $$
+
+\color{red}{red}   =  \frac{0.33 + 0.0 + 0.5 + 1.0 + 0.5}{2.33 + 1.33 + 1.33} = 0.47\\
+
+\color{green}{green} =  \frac{0.33 + 0.5 + 0.0 + 0.0 + 0.5}{2.33 + 1.33 + 1.33} = 0.27\\
+
+\color{blue}{blue}  =  \frac{0.33 + 0.5 + 0.5 + 0.0 + 0.0}{2.33 + 1.33 + 1.33} = 0.27
+   
+    $$
+</div>
+
+<p>During next expectation stage read are re-apportioned across transcripts and the procedure is repeated until convergence:</p>
+
+<hr />
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="/BMMB554/img/em.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small><strong>Expectation Maximization (EM)</strong>. Image from <a href="http://arxiv.org/pdf/1104.3889v2.pdf">Pacher:2011</a></small></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<h3 id="understanding-quantification-metrics">Understanding quantification metrics</h3>
+
+<p>As we&rsquo;ve seen above quantification for a transcript is estimated using the number of associated reads. Yet the count is not a very good measure as it will be severely biased by multiple factors such as, for example, transcript length. Thus these counts need to be normalized. Normalization strategies can be roughly divided into two groups:</p>
+
+<ul>
+<li>Normalization for comparison within a <strong>single</strong> sample;</li>
+<li>Normalization for comparison among <strong>multiple</strong> samples/conditions.</li>
+</ul>
+
+<p>In their <a href="http://chagall.med.cornell.edu/RNASEQcourse/">tutorial</a> Dündar et al. have compiled a table summarizing various metrics. Below is description of normalization technique for within sample comparisons (between sample comparison can be found in the next section on differential expression analysis):</p>
+
+<hr />
+
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><img src="/BMMB554/img/within_norm.png" alt="" /></td>
+</tr>
+
+<tr>
+<td><small><strong>RNAseq normalization metrics: Within sample comparisons</strong>. Table from Dündar et al. <a href="http://chagall.med.cornell.edu/RNASEQcourse/">2015</a></small></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<p>In addition, an excellent overview of these metrics can be found <a href="https://haroldpimentel.wordpress.com/2014/05/08/what-the-fpkm-a-review-rna-seq-expression-units/">here</a>.</p>
+
+<h4 id="font-color-red-9888-you-should-never-ever-use-rpkm-fpkm-or-tpm-to-compare-expression-levels-across-samples-these-are-relative-measures-consider-yourself-warned-font"><font color="red">&#9888; <strong>You should NEVER EVER use RPKM, FPKM, or TPM to compare expression levels <em>across</em> samples. These are RELATIVE measures! Consider yourself warned!</strong></font></h4>
+
+<h1 id="homework">Homework</h1>
+
+<p>Identify reasonable starting <a href="https://www.ncbi.nlm.nih.gov/guide/taxonomy/">here</a>:</p>
+
+<p><a href="https://forms.gle/BbVTic2HVcpPKRxt7">https://forms.gle/BbVTic2HVcpPKRxt7</a></p>
+
+
+
+      </main>
+    </div>
+    <footer id="footer" class="mt-auto text-center text-muted">
+  <div class="container">
+    Nekrutenko Lab 2020 | CC-BY
+  </div>
+</footer>
+    <script src="https://nekrut.github.io/BMMB554/js/feather.min.js"></script>
+<script>
+  feather.replace()
+</script>
+
+
+    
+  
+
+  </body>
+</html>

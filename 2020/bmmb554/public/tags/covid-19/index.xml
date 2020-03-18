@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>covid-19 on BMMB554</title>
+    <title>COVID-19 on BMMB554</title>
     <link>https://nekrut.github.io/BMMB554/tags/covid-19/</link>
-    <description>Recent content in covid-19 on BMMB554</description>
+    <description>Recent content in COVID-19 on BMMB554</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 24 Feb 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 17 Mar 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://nekrut.github.io/BMMB554/tags/covid-19/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Lecture 11: Analysis of RNA I: Molecular Biology of SARS-COV-2</title>
+      <link>https://nekrut.github.io/BMMB554/lecture11/</link>
+      <pubDate>Tue, 17 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/lecture11/</guid>
+      <description>A quick overview of coronavirus molecular biology Given the current situation we will continue this class using SARS-COV-2 as example for all further analyses. So far we have covered variant calling and genome assembly. Next we will be looking into RNAseq. Since SARS-COV-2 is a positive strand RNA virus that pretends to be a typical human transcript, it is a great system to learn about RNAseq. But first we need to learn about the coronavirus molecular biology.</description>
+    </item>
     
     <item>
       <title>Lecture 9: Calling variants I</title>

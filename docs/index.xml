@@ -6,10 +6,19 @@
     <description>Recent content on BMMB554</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 02 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 17 Mar 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://nekrut.github.io/BMMB554/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Lecture 11: Analysis of RNA I: Molecular Biology of SARS-COV-2</title>
+      <link>https://nekrut.github.io/BMMB554/lecture11/</link>
+      <pubDate>Tue, 17 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/lecture11/</guid>
+      <description>A quick overview of coronavirus molecular biology Given the current situation we will continue this class using SARS-COV-2 as example for all further analyses. So far we have covered variant calling and genome assembly. Next we will be looking into RNAseq. Since SARS-COV-2 is a positive strand RNA virus that pretends to be a typical human transcript, it is a great system to learn about RNAseq. But first we need to learn about the coronavirus molecular biology.</description>
+    </item>
     
     <item>
       <title>Lecture 10: NumPy</title>
@@ -111,12 +120,13 @@ For this we will use two datasets:
       
       <guid>https://nekrut.github.io/BMMB554/about/</guid>
       <description>Place and Time Thomas Building 121 | Monday, Wednesday 2:30pm - 3:45pm
- 
+ This course is now on-line only. It will be held using the folliowing link every Monday and Wednesday 2:30pm - 3:45pm
+
 Instructor Anton Nekrutenko
 aun1@psu.edu
 Wartik 505
 Office hours by appointment only When contacting instructor use the above e-mail and include &amp;ldquo;BMMB554&amp;rdquo; in the subject line (simply click on e-mail address). 
-Course logistics This course does not use Canvas. Canvas is a convoluted system with too many features and undefined purpose. Instead, this course is served from GitHub.</description>
+Course logistics This course does not use Canvas.</description>
     </item>
     
   </channel>
