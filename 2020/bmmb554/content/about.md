@@ -11,6 +11,8 @@ Thomas Building 121 | Monday, Wednesday 2:30pm - 3:45pm
 
 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3020.239212269676!2d-77.86269978459228!3d40.800736879322436!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x1f26fee3d5b72cde!2sThomas%20Building!5e0!3m2!1sen!2sus!4v1577998633725!5m2!1sen!2sus" width="400" height="200" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
 
+This course is now on-line only. It will be help using the folliowing [link](https://psu.zoom.us/j/432588759?pwd=M2NWR2ZtbEs4ZFEwZVByeU9JaFdQQT09) every Monday and Wednesday 2:30pm - 3:45pm
+
 <br>
 
 ## Instructor
