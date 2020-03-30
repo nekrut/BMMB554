@@ -1,7 +1,7 @@
 ---
 date: "2020-01-27"
 tags: ["sequencing", "sanger","illumina","pacbio","oxford nanopore"]
-title: "Lecture 2: What is the nature of sequencing data?"
+title: "What is the nature of sequencing data?"
 ---
 ![png](/BMMB554/img/illumina_pseudocolor.png)
 

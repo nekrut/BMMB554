@@ -1,7 +1,7 @@
 ---
 date: "2020-02-17"
 tags: ["assembly", "DeBruijn"]
-title: "Lecture 8: Assembling reads into genomes"
+title: "Assembling reads into genomes"
 ---
 
 [![](https://github.com/rrwick/Unicycler/raw/master/misc/illumina_graph_comparison.png)](https://github.com/rrwick/Unicycler)

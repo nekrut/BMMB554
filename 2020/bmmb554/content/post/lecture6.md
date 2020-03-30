@@ -1,7 +1,7 @@
 ---
 date: "2020-02-09"
 tags: ["alignment", "dynamic programming"]
-title: "Lecture 6: Sequence alignment I"
+title: "Sequence alignment I"
 ---
 
 ![](/BMMB554/img/topic4_cover.jpg)

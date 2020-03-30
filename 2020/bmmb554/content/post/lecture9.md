@@ -1,7 +1,7 @@
 ---
 date: "2020-02-24"
 tags: ["galaxy", "covid-19", "sequence variants"]
-title: "Lecture 9: Calling variants I"
+title: "Calling variants I"
 ---
 
 We will call variants in three COVID-19 isolates using several variant calling tools.

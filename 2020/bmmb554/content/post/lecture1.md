@@ -1,7 +1,7 @@
 ---
 date: "2020-01-15"
 tags: ["jupyter", "github", "python"]
-title: "Lecture 1: Basic machinery = Jupyter + Python"
+title: "Basic machinery = Jupyter + Python"
 ---
 
 [![](https://imgs.xkcd.com/comics/python.png)](https://xkcd.com/353/)

@@ -1,7 +1,7 @@
 ---
 date: "2020-02-03"
 tags: ["mapping", "suffix tree", "BWT"]
-title: "Lecture 4: Mapping Reads I"
+title: "Mapping Reads I"
 ---
 
 ![](/BMMB554/img/topic5_cover.png)

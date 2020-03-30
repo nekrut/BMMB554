@@ -1,7 +1,7 @@
 ---
 date: "2020-01-28"
 tags: ["python","conda","bioconda","sra","duplex sequencing","HIV"]
-title: "Lecture 3: Defining project and getting data"
+title: "Defining project and getting data"
 ---
 
 ![https://xkcd.com/1987/]( https://imgs.xkcd.com/comics/python_environment.png)

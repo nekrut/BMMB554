@@ -1,7 +1,7 @@
 ---
 date: "2020-03-02"
 tags: ["python", "numpy"]
-title: "Lecture 10: NumPy"
+title: "NumPy"
 ---
 
 

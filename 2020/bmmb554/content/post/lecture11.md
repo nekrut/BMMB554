@@ -1,7 +1,7 @@
 ---
 date: "2020-03-17"
 tags: ["SARS-COV-2","COVID-19","RNAseq"]
-title: "Lecture 11: Analysis of RNA I: Molecular Biology of SARS-COV-2"
+title: "Analysis of RNA I: Molecular Biology of SARS-COV-2"
 ---
 
 # A quick overview of coronavirus molecular biology

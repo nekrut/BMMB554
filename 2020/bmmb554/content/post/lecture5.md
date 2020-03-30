@@ -1,7 +1,7 @@
 ---
 date: "2020-02-05"
 tags: ["mapping", "SAM/BAM"]
-title: "Lecture 5: Mapping Reads II"
+title: "Mapping Reads II"
 ---
 
 ## Prep the environment
