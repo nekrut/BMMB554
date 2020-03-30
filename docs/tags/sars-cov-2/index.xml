@@ -6,13 +6,24 @@
     <description>Recent content in SARS-COV-2 on BMMB554</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 17 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 30 Mar 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://nekrut.github.io/BMMB554/tags/sars-cov-2/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Lecture 11: Analysis of RNA I: Molecular Biology of SARS-COV-2</title>
+      <title>Analysis of RNA II: RiboSeq, and other things</title>
+      <link>https://nekrut.github.io/BMMB554/lecture12/</link>
+      <pubDate>Mon, 30 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://nekrut.github.io/BMMB554/lecture12/</guid>
+      <description>Potentially interesting sites This only works for PSU-based people  Open this spreadsheet.
+It has the following columns:
+ Group: People, to whom variants are assigned Sample: SRA accession CHROM: Reference genome (same for all rows) POS: Position of the variant in the genome (1-based) REF: Reference allele ALT: Alternative allele DP: Read depth AF: Alternative allele frequency SB: Strand bias as calculated by lofreq (0 = no strand bias) DP4: Strand-specific depth for reference and alternate allele observations (Forward reference, reverse reference, forward alternate, reverse alternate) IMPACT: functional impact of the substitution FUNCLASS: type of change EFFECT: effect of the change GENE: gene name CODON: codon type: type of variant (S = SNP, I = Indel, M = MNP ) GENE: gene name SITE: codon within the gene FEL: Is site identified by FEL as being under selection MEME: Is site identified by MEME as being under selection MEME.</description>
+    </item>
+    
+    <item>
+      <title>Analysis of RNA I: Molecular Biology of SARS-COV-2</title>
       <link>https://nekrut.github.io/BMMB554/lecture11/</link>
       <pubDate>Tue, 17 Mar 2020 00:00:00 +0000</pubDate>
       

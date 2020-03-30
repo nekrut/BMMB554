@@ -3,37 +3,42 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://nekrut.github.io/BMMB554/lecture12/</loc>
+    <lastmod>2020-03-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://nekrut.github.io/BMMB554/</loc>
-    <lastmod>2020-03-17T00:00:00+00:00</lastmod>
+    <lastmod>2020-03-30T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://nekrut.github.io/BMMB554/tags/covid-19/</loc>
-    <lastmod>2020-03-17T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://nekrut.github.io/BMMB554/lecture11/</loc>
-    <lastmod>2020-03-17T00:00:00+00:00</lastmod>
+    <lastmod>2020-03-30T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://nekrut.github.io/BMMB554/post/</loc>
-    <lastmod>2020-03-17T00:00:00+00:00</lastmod>
+    <lastmod>2020-03-30T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://nekrut.github.io/BMMB554/tags/rnaseq/</loc>
-    <lastmod>2020-03-17T00:00:00+00:00</lastmod>
+    <lastmod>2020-03-30T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://nekrut.github.io/BMMB554/tags/sars-cov-2/</loc>
-    <lastmod>2020-03-17T00:00:00+00:00</lastmod>
+    <lastmod>2020-03-30T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://nekrut.github.io/BMMB554/tags/</loc>
+    <lastmod>2020-03-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nekrut.github.io/BMMB554/lecture11/</loc>
     <lastmod>2020-03-17T00:00:00+00:00</lastmod>
   </url>
   
@@ -53,12 +58,12 @@
   </url>
   
   <url>
-    <loc>https://nekrut.github.io/BMMB554/tags/galaxy/</loc>
+    <loc>https://nekrut.github.io/BMMB554/lecture9/</loc>
     <lastmod>2020-02-24T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://nekrut.github.io/BMMB554/lecture9/</loc>
+    <loc>https://nekrut.github.io/BMMB554/tags/galaxy/</loc>
     <lastmod>2020-02-24T00:00:00+00:00</lastmod>
   </url>
   
@@ -68,17 +73,17 @@
   </url>
   
   <url>
+    <loc>https://nekrut.github.io/BMMB554/lecture8/</loc>
+    <lastmod>2020-02-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://nekrut.github.io/BMMB554/tags/assembly/</loc>
     <lastmod>2020-02-17T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://nekrut.github.io/BMMB554/tags/debruijn/</loc>
-    <lastmod>2020-02-17T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://nekrut.github.io/BMMB554/lecture8/</loc>
     <lastmod>2020-02-17T00:00:00+00:00</lastmod>
   </url>
   
@@ -98,12 +103,12 @@
   </url>
   
   <url>
-    <loc>https://nekrut.github.io/BMMB554/lecture5/</loc>
+    <loc>https://nekrut.github.io/BMMB554/tags/mapping/</loc>
     <lastmod>2020-02-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://nekrut.github.io/BMMB554/tags/mapping/</loc>
+    <loc>https://nekrut.github.io/BMMB554/lecture5/</loc>
     <lastmod>2020-02-05T00:00:00+00:00</lastmod>
   </url>
   
@@ -138,6 +143,11 @@
   </url>
   
   <url>
+    <loc>https://nekrut.github.io/BMMB554/lecture3/</loc>
+    <lastmod>2020-01-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://nekrut.github.io/BMMB554/tags/duplex-sequencing/</loc>
     <lastmod>2020-01-28T00:00:00+00:00</lastmod>
   </url>
@@ -148,22 +158,12 @@
   </url>
   
   <url>
-    <loc>https://nekrut.github.io/BMMB554/lecture3/</loc>
-    <lastmod>2020-01-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://nekrut.github.io/BMMB554/tags/sra/</loc>
     <lastmod>2020-01-28T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://nekrut.github.io/BMMB554/tags/illumina/</loc>
-    <lastmod>2020-01-27T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://nekrut.github.io/BMMB554/lecture2/</loc>
     <lastmod>2020-01-27T00:00:00+00:00</lastmod>
   </url>
   
@@ -188,17 +188,22 @@
   </url>
   
   <url>
+    <loc>https://nekrut.github.io/BMMB554/lecture2/</loc>
+    <lastmod>2020-01-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nekrut.github.io/BMMB554/lecture1/</loc>
+    <lastmod>2020-01-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://nekrut.github.io/BMMB554/tags/github/</loc>
     <lastmod>2020-01-15T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://nekrut.github.io/BMMB554/tags/jupyter/</loc>
-    <lastmod>2020-01-15T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://nekrut.github.io/BMMB554/lecture1/</loc>
     <lastmod>2020-01-15T00:00:00+00:00</lastmod>
   </url>
   

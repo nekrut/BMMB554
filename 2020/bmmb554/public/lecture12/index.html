@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="https://nekrut.github.io/BMMB554/css/bootstrap.min.css">
   
   
-  <title>SARS-COV-2 | BMMB554</title>
+  <title>Analysis of RNA II: RiboSeq, and other things | BMMB554</title>
   <style>
 .container {
   max-width: 800px;
@@ -146,13 +146,8 @@ img {
       <main id="main">
         
 
-<h1>SARS-COV-2</h1>
+<h1>Analysis of RNA II: RiboSeq, and other things</h1>
 
-
-<p>
-  <a class="font-125" href="/BMMB554/lecture12/">Analysis of RNA II: RiboSeq, and other things</a>
-  <br>
-  
 
 <i data-feather="calendar"></i> <time datetime="2020-03-30">Mar 30, 2020</time>
 
@@ -169,29 +164,61 @@ img {
   <a class="btn btn-sm btn-outline-dark tag-btn" href="https://nekrut.github.io/BMMB554/tags/rnaseq">RNAseq</a>
   
 
-</p>
+<br><br>
 
-<p>
-  <a class="font-125" href="/BMMB554/lecture11/">Analysis of RNA I: Molecular Biology of SARS-COV-2</a>
-  <br>
-  
 
-<i data-feather="calendar"></i> <time datetime="2020-03-17">Mar 17, 2020</time>
+<h1 id="potentially-interesting-sites">Potentially interesting sites</h1>
 
-  <br>
-  <i data-feather="tag"></i>
-  
-  
-  <a class="btn btn-sm btn-outline-dark tag-btn" href="https://nekrut.github.io/BMMB554/tags/sars-cov-2">SARS-COV-2</a>
-  
-  
-  <a class="btn btn-sm btn-outline-dark tag-btn" href="https://nekrut.github.io/BMMB554/tags/covid-19">COVID-19</a>
-  
-  
-  <a class="btn btn-sm btn-outline-dark tag-btn" href="https://nekrut.github.io/BMMB554/tags/rnaseq">RNAseq</a>
-  
+<div class="alert alert-warning" role="alert">
+This only works for PSU-based people
+</div>
 
-</p>
+<p>Open <a href="https://docs.google.com/spreadsheets/d/1bp8G68MGqEbuJxROqpjViyZ5YoKWsmyAl0MO3BxOeR8/edit?usp=sharing">this spreadsheet</a>.</p>
+
+<p>It has the following columns:</p>
+
+<ul>
+<li>Group: People, to whom variants are assigned</li>
+<li>Sample: SRA accession</li>
+<li>CHROM: Reference genome (same for all rows)</li>
+<li>POS: Position of the variant in the genome (1-based)</li>
+<li>REF: Reference allele</li>
+<li>ALT: Alternative allele</li>
+<li>DP: Read depth</li>
+<li>AF: Alternative allele frequency</li>
+<li>SB: Strand bias as calculated by <a href="https://csb5.github.io/lofreq/">lofreq</a> (0 = no strand bias)</li>
+<li>DP4: Strand-specific depth for reference and alternate allele observations (Forward reference, reverse reference, forward alternate, reverse alternate)</li>
+<li>IMPACT: functional impact of the substitution</li>
+<li>FUNCLASS: type of change</li>
+<li>EFFECT: effect of the change</li>
+<li>GENE: gene name</li>
+<li>CODON: codon</li>
+<li>type: type of variant (<code>S</code> = SNP, <code>I</code> = Indel, <code>M</code> = MNP )</li>
+<li>GENE: gene name</li>
+<li>SITE: codon within the gene</li>
+<li>FEL: Is site identified by <a href="https://stevenweaver.github.io/hyphy-site/methods/selection-methods/#fel">FEL</a> as being under selection</li>
+<li>MEME: Is site identified by <a href="https://stevenweaver.github.io/hyphy-site/methods/selection-methods/#meme">MEME</a> as being under selection</li>
+<li>MEME.FRACTION: fraction of branches under selection</li>
+<li>CLASSIFICATION: Type of selection (also see <a href="https://observablehq.com/@spond/natural-selection-analysis-of-sars-cov-2-covid-19">here</a>)</li>
+<li>SYN.SUBS: # synonymous substitutions</li>
+<li>NONSYN.SUBS: # non-synonymous substitutions</li>
+<li>COMPOSITION: composition of the alignment column</li>
+<li>PROPRETIES: amino acid change effect</li>
+<li>gSITE: Genomic coordinate</li>
+</ul>
+
+<h2 id="instructions">Instructions</h2>
+
+<ol>
+<li>Find you group</li>
+<li>Perform additional filtering to create a conservative set of sites</li>
+<li>Find latest papers on the gene of interest</li>
+<li>See if any of the sites may be significant based on published biochemical or structural data.</li>
+</ol>
+
+<h1 id="continuing-rnaseq">Continuing RNAseq</h1>
+
+<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQEFrIAGIGnNO5lDKRfFi6tlUK4ZiEMXqn2TTQ8pKAp_h9h5cqoUBhoCVXCCaeQOVtq_j5r51GFKYfx/embed?start=false&loop=false&delayms=3000" frameborder="0" width="683" height="541" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
 
 
 
