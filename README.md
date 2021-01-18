@@ -1,6 +1,6 @@
 # BMMB554 | Introduction to Data Driven Life Sciences | Spring 2021
 
-[![https://xkcd.com/2333/](https://imgs.xkcd.com/comics/covid_risk_chart.png)](https://xkcd.com/2333/)
+![](/images/dog_mask.png)
 
 ## Place and Time
 
