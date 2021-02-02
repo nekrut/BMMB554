@@ -1,5 +1,8 @@
 # BMMB554 | Introduction to Data Driven Life Sciences | Spring 2021
 
+:heavy_exclamation_mark: Course notes are [here](https://hackmd.io/@0nj-AtnfQ3KFSqVrfVLhvw/Bkbk1pExO/%2F%400nj-AtnfQ3KFSqVrfVLhvw%2Fr1No0l8g_)
+
+
 ![](/images/dog_mask.png)
 
 ## Place and Time
