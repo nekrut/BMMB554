@@ -35,6 +35,29 @@ unzip -u shell-lesson-data.zip
 ```
 8. Let the lecture begin!
 
+## A note on UNIX shortcuts
+
+{%gist tuxfight3r/60051ac67c5f0445efee %}
+
+## A note on package managers (and virtual environments)
+
+![](https://i.imgur.com/TYXUnJj.png)
+
+
+Today we will use a package manager called [`Conda`](https://docs.conda.io/en/latest/). It is used to install software and to manage *virtual environments* (more about virtual environments when we talk about Python programming). Today we will use `Conda`   to install a directory structure visualizer[`tree`](https://en.wikipedia.org/wiki/Tree_(command)):
+
+```bash=
+conda install tree
+```
+
+to make things faster you can also use an alternative implementation of`Conda`called[`mamba`](https://mamba.readthedocs.io/en/latest/):
+
+```bash=
+mamba install tree
+```
+
 ## Quiz 1
+
+> (You will receive instructions at the end of the lecture)
 
 
