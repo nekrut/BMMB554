@@ -140,14 +140,14 @@ Let's start with the cell between $\texttt{G}$ and $\texttt{G}$. Recall that:
 
 $$
 D[i,j] = min\begin{cases} 
-					\color{green}{D[i-1,j] + \delta(x,y)} & \\
+					\color{green}{D[i-1,j] + 1} & \\
 					\color{blue}{D[i,j-1] + 1} & \\
 					\color{red}{D[i-1,j-1] + \delta(x[i-1],y[j-1])}
              \end{cases}
 $$
 
 
-where $\delta(x,y) = 0$ if $x = y$ and $\delta(x,y) = 1$ if $x \neq y$. And now let's color each of the cells corresponding to each part of the above expression:
+where $\delta(x[i-1],y[j-1]) = 0$ if $x[i-1] = y[j-1]$ and $1$ otherwise. And now let's color each of the cells corresponding to each part of the above expression:
 
 $$
 \begin{array}{ c | c | c | c | c | c | c}
@@ -179,7 +179,7 @@ In this specific case:
 
 $$
 D[i,j] = min\begin{cases} 
-					\color{green}{D[i-1,j] + \delta(x,y)}\ or\ 0+0=0 & \\
+					\color{green}{D[i-1,j] + 1}\ or\ 0+0=0 & \\
 					\color{blue}{D[i,j-1] + 1}\ or\ 1+1=2 & \\
 					\color{red}{D[i-1,j-1] + \delta(x[i-1],y[j-1])}\ or\ 1+1=2
              \end{cases}
@@ -214,7 +214,7 @@ G & \color{blue}1 & \color{red}0\\
 \textbf{Note}: sequence\ \texttt{X}\ is\ vertical\ and\ sequence\ \texttt{Y}\ is\ horizontal.
 $$
 
-Using this uncomplicated logic we can fill the entire matrix like this:
+Using this logic we can fill the entire matrix like this:
 
 $$
 \begin{array}{ c | c | c | c | c | c | c}
