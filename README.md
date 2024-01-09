@@ -1,10 +1,6 @@
----
-tags: BMMB554-23
----
+# Introduction to Data Driven Life Sciences | Spring 2024
 
-> Introduction to Data Driven Life Sciences | Spring 2024
-
-# Syllabus
+## Syllabus
 
 [![https://xkcd.com/2054/](https://imgs.xkcd.com/comics/data_pipeline.png)](https://xkcd.com/2054/)
 
@@ -12,9 +8,8 @@ tags: BMMB554-23
 
 [Huck Life Sciences Bldg 005](https://www.map.psu.edu/?id=1134#!m/609644) | Tuesday, Thursday [10:35am - 11:50am EST](https://www.timeanddate.com/)
 
-:::success
-The class is **in person** only. However, for those who are located in Hershey or unable to attend a particular lecture<sup>1</sup> a [**Zoom**](https://psu.zoom.us/j/94723019187) link is provided. 
-:::
+> [!TIP]
+>The class is **in person** only. However, for those who are located in Hershey or unable to attend a particular lecture<sup>1</sup> a [**Zoom**](https://psu.zoom.us/j/94723019187) link is provided. 
 
 > <sup>1</sup>**Notify** the instructor in advance if you are unable to attend a lecture for whatever reason.
 
@@ -51,7 +46,7 @@ The will be divided into several blocks:
 2. Datatypes and major analyses in modern biology
 3. Specific applications
 
-Links to individual lectures will be posted below. We will be using [Galaxy Training Network](https://training.galaxyproject.org) infrastrcture for this course.
+Links to individual lectures will be posted below. We will be using [Galaxy Training Network](https://training.galaxyproject.org) infrastructure for this course.
 
 ----
 
