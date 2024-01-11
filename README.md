@@ -46,13 +46,13 @@ The will be divided into several blocks:
 2. Datatypes and major analyses in modern biology
 3. Specific applications
 
-Links to individual lectures will be posted below. We will be using [Galaxy Training Network](https://training.galaxyproject.org) infrastructure for this course.
+Links to individual lectures will be posted below. We will be using [Galaxy Training Network](https://training.galaxyproject.org) infrastructure for this course. Specifically, we will be using a [dedicated"learning pathway"](https://training.galaxyproject.org/training-material/learning-pathways/data-driven-biology.html). 
 
 ----
 
 - [Lecture 1](https://training.galaxyproject.org/topics/data-science/tutorials/gnmx-lecture1/tutorial.html) - Introduction and History
-- Lecture 2 - Shell I
-- Lecture 3 - Shell II
+- [Lecture 2](https://gxy.io/GTN:T00076) - Shell I
+- [Lecture 3](https://gxy.io/GTN:T00074) - Shell II
 - Lecture 4 - Intermission + History of Sequencing
 - Lecture 5 - Python 1 - Variables, expressions, statements, functions
 - Lecture 6 - Python 2 - Strings and lists and FASTQ
