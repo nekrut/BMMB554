@@ -53,6 +53,8 @@ Links to individual lectures will be posted below. We will be using [Galaxy Trai
 - [Lecture 1](https://training.galaxyproject.org/topics/data-science/tutorials/gnmx-lecture1/tutorial.html) - Introduction and History
 - [Lecture 2](https://gxy.io/GTN:T00076) - Shell I
 - [Lecture 3](https://gxy.io/GTN:T00074) - Shell II
+> [!TIP]
+> For the two lectures above [start binder directly](https://mybinder.org/v2/gh/jupyterlab/jupyterlab-demo/try.jupyter.org?urlpath=lab).
 - Lecture 4 - Intermission + History of Sequencing
 - Lecture 5 - Python 1 - Variables, expressions, statements, functions
 - Lecture 6 - Python 2 - Strings and lists and FASTQ
