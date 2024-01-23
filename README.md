@@ -55,8 +55,8 @@ Links to individual lectures will be posted below. We will be using [Galaxy Trai
 - [Lecture 3](https://gxy.io/GTN:T00074) - Shell II
 > [!TIP]
 > For the two lectures above [start binder directly](https://mybinder.org/v2/gh/jupyterlab/jupyterlab-demo/try.jupyter.org?urlpath=lab).
-- [Lecture 4](https://hackmd.io/RoCggQXDQym63EWWfBTFdg#Lecture-4-Intermission--History-of-Sequencing) - Intermission + History of Sequencing
-- Lecture 5 - Python 1 - Variables, expressions, statements, functions
+- [Lecture 4](https://training.galaxyproject.org/topics/data-science/tutorials/gnmx-lecture2/tutorial.html) - Intermission + History of Sequencing
+- [Lecture 5](https://training.galaxyproject.org/topics/data-science/tutorials/gnmx-lecture2/tutorial.html) - Python 1 - Variables, expressions, statements, functions
 - Lecture 6 - Python 2 - Strings and lists and FASTQ
 - Lecture 7 - Python 3 - A more careful look at lists and dictionaries
 - Lecture 8 - Python 4 - Recap of what we learned so far
