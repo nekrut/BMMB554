@@ -60,7 +60,7 @@ Links to individual lectures will be posted below. We will be using [Galaxy Trai
 - [Lecture 6](https://training.galaxyproject.org/topics/data-science/tutorials/gnmx-lecture3/tutorial.html) - Python 2 - Strings and lists and FASTQ
 - [Lecture 7](https://training.galaxyproject.org/topics/data-science/tutorials/gnmx-lecture4/tutorial.html) - Python 3 - A more careful look at lists and dictionaries
 - [Lecture 8](https://training.galaxyproject.org/topics/data-science/tutorials/gnmx-lecture5/tutorial.html) - Python 4 - Processing files
-- Lecture 9 - Python 5 - Recap
+- [Lecture 9](https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-basics/tutorial.html) - Python 5 - Recap
 - Lecture 10 - Pandas 1 - Basic functionality
 - Lecture 11 - Pandas 2 - Aggregation, sorting, merging]
 - Lecture 12 - Python 6 - Making graphics programmatically
