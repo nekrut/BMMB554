@@ -61,24 +61,23 @@ Links to individual lectures will be posted below. We will be using [Galaxy Trai
 - [Lecture 7](https://training.galaxyproject.org/topics/data-science/tutorials/gnmx-lecture4/tutorial.html) - Python 3 - A more careful look at lists and dictionaries
 - [Lecture 8](https://training.galaxyproject.org/topics/data-science/tutorials/gnmx-lecture5/tutorial.html) - Python 4 - Processing files
 - [Lecture 9](https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-basics/tutorial.html) - Python 5 - Recap (If you feel bored, do [this](https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-advanced-np-pd/tutorial.html))
-- Lecture 10 - Pandas 1 - Basic functionality
-- Lecture 11 - Pandas 2 - Aggregation, sorting, merging
-- Lecture 12 - Python 6 - Making graphics programmatically
-- Lecture 13 - Git/GitHub 1 - Git logic
-- Lecture 14 - GitHub/Git 2 - GitHub magic 
-- Lecture 15 - Introduction to AI
-- Lecture 16 - Illumina sequencing
-- Lecture 17 - Oxford Nanopore
-- Lecture 18 - Class assessment for group projects
-- Lecture 19 - Pacific Biosciences (PacBio)
-- Lecture 20 - Introduction to Galaxy
-- Lecture 21 - Assembly I --- *k*-mers and graphs
-- Lecture 22 - Assembly II --- Assembly from long reads
-- Lecture 23 - Assembly, Projects and what's next
-- Lecture 24 - Sequence alignment
-- Lecture 25 - Finding matches quickly
-- Lecture 26 - Variant calling in microbes + Key features of Galaxy collections
-- Lecture 27 - What is transcriptomics?
+- [Lecture 10](https://training.galaxyproject.org/topics/data-science/tutorials/gnmx-lecture6/tutorial.html) - Pandas - A set of tools for data wrangling
+- Lecture 11 - Python 6 - Making graphics programmatically
+- Lecture 12 - Git/GitHub 1 - Git logic
+- Lecture 13 - GitHub/Git 2 - GitHub magic 
+- Lecture 14 - Introduction to AI
+- Lecture 15 - Illumina sequencing
+- Lecture 16 - Oxford Nanopore
+- Lecture 17 - Class assessment for group projects
+- Lecture 18 - Pacific Biosciences (PacBio)
+- Lecture 19 - Introduction to Galaxy
+- Lecture 20 - Assembly I --- *k*-mers and graphs
+- Lecture 21 - Assembly II --- Assembly from long reads
+- Lecture 22 - Assembly, Projects and what's next
+- Lecture 23 - Sequence alignment
+- Lecture 24 - Finding matches quickly
+- Lecture 25 - Variant calling in microbes + Key features of Galaxy collections
+- Lecture 26 - What is transcriptomics?
 
 -----
 
