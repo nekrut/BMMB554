@@ -63,7 +63,7 @@ Links to individual lectures will be posted below. We will be using [Galaxy Trai
 - [Lecture 9](https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-basics/tutorial.html) - Python 5 - Recap (If you feel bored, do [this](https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-advanced-np-pd/tutorial.html))
 - [Lecture 10](https://training.galaxyproject.org/topics/data-science/tutorials/gnmx-lecture6/tutorial.html) - Pandas - A set of tools for data wrangling
 - Lecture 11 - Python 6 - Making graphics programmatically
-- Lecture 12 - Git/GitHub 1 - Git logic
+- [Lecture 12](https://hackmd.io/@nekrut/S1DM9RKqs/%2FqeVCFCE9Sbi4HqNOZ5d0XQ) - Git/GitHub 1 - Git logic
 - Lecture 13 - GitHub/Git 2 - GitHub magic 
 - Lecture 14 - Introduction to AI
 - Lecture 15 - Illumina sequencing
