@@ -62,7 +62,7 @@ Links to individual lectures will be posted below. We will be using [Galaxy Trai
 - [Lecture 8](https://training.galaxyproject.org/topics/data-science/tutorials/gnmx-lecture5/tutorial.html) - Python 4 - Processing files
 - [Lecture 9](https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-basics/tutorial.html) - Python 5 - Recap (If you feel bored, do [this](https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-advanced-np-pd/tutorial.html))
 - [Lecture 10](https://training.galaxyproject.org/topics/data-science/tutorials/gnmx-lecture6/tutorial.html) - Pandas - A set of tools for data wrangling
-- Lecture 11 - Python 6 - Making graphics programmatically
+- [Lecture 11](https://gallantries.github.io/video-library/videos/statistics/CNN/) - What is Machine Learning: A CNN example 
 - [Lecture 12](https://training.galaxyproject.org/topics/data-science/tutorials/gnmx-lecture7/tutorial.html) - Git/GitHub 1 - Git logic
 - Lecture 13 - GitHub/Git 2 - GitHub magic 
 - Lecture 14 - Introduction to AI
