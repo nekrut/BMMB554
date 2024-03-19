@@ -64,7 +64,7 @@ Links to individual lectures will be posted below. We will be using [Galaxy Trai
 - [Lecture 10](https://training.galaxyproject.org/topics/data-science/tutorials/gnmx-lecture6/tutorial.html) - Pandas - A set of tools for data wrangling
 - [Lecture 11](https://gallantries.github.io/video-library/videos/statistics/CNN/) - What is Machine Learning: A CNN example 
 - [Lecture 12](https://training.galaxyproject.org/topics/data-science/tutorials/gnmx-lecture7/tutorial.html) - Git/GitHub 1 - Git logic
-- [Lecture 13] - How to create your own web-site + [Project discussion](https://www.science.org/doi/10.1126/science.aag0822) 
+- Lecture 13 - How to create your own web-site + [Project discussion](https://www.science.org/doi/10.1126/science.aag0822) 
 - Lecture 14 - How Illumina works + Introduction to Galaxy 
 - Lecture 15 - How Element work + Galaxy History system
 - Lecture 16 - How Pacific Biosciences (PacBio) works + Galaxy workflow system
