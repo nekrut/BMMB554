@@ -9,7 +9,7 @@
 [Huck Life Sciences Bldg 005](https://www.map.psu.edu/?id=1134#!m/609644) | Tuesday, Thursday [10:35am - 11:50am EST](https://www.timeanddate.com/)
 
 > [!TIP]
->The class is **in person** only. However, for those who are located in Hershey or unable to attend a particular lecture<sup>1</sup> a [**Zoom**](https://psu.zoom.us/j/94723019187) link is provided. 
+>The class is **in person** only. However, for those who are located in Hershey or unable to attend a particular lecture<sup>1</sup> a [**Zoom**](https://psu.zoom.us/j/92577317324?pwd=Tm5IRUlBSTZYdWs4U1o1TTgxTDF2UT09)) link is provided. 
 
 > <sup>1</sup>**Notify** the instructor in advance if you are unable to attend a lecture for whatever reason.
 
