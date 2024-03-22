@@ -31,6 +31,6 @@ These numbers correspond to colony labels in Fig S3 os the [supplement](https://
 
 Here:
 
-**Start point** - point with the number that was assignewd to your group (e.g., Point 4 for Manifold4)
+**Start point** - point with the number that was assigned to your group (e.g., Point 4 for Manifold4)
 
 Now all numbers were sequenced. So you objective is to find adaptation trajectory which has the data in SRA.
