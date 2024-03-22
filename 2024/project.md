@@ -1,5 +1,7 @@
 # Analysis project
 
+## Project groups
+
 I have subdivided this class into the following groups:
 
 | Group | MEGA plate starting point | Figure in the paper's [supplement](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5534434/bin/NIHMS874162-supplement-Supplemental_Methods_And_Figures.pdf) |
@@ -10,4 +12,20 @@ I have subdivided this class into the following groups:
 | 4 | Manifold 2 | S3 B |
 | 5 | Manifold 5 | S3 B |
 
-These numbers correspond to colony labels in 
+These numbers correspond to colony labels in Fig S3 os the [supplement](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5534434/bin/NIHMS874162-supplement-Supplemental_Methods_And_Figures.pdf).
+
+## Task 1 
+(due March 26, 2024 in class)
+
+1. Go to NCBI SRA
+2. Find datasets corresponding to `SRP077287`
+3. Download RunInfo table as I showed in class
+4. Look at figure S3A (if you are `Sym`) or figure S3B (if you are any of the `Manifold`s)
+5. Find a colony corresponding to your number (for `Sym` you can pick any trajectory you like)
+6. Write down numbers of colonies corresponding to a progression so that you have a good representatioin of colonies starting from wild type to super-resistant (see image below for an example)
+7. Pull rows corresponding to these numbers from RunInfo table (Step 3)
+8. Upload this into Galaxy
+9. La Fin
+
+
+
