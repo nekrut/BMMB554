@@ -12,7 +12,7 @@ I have subdivided this class into the following groups:
 | 4 | Manifold 2 | S3 B |
 | 5 | Manifold 5 | S3 B |
 
-These numbers correspond to colony labels in Fig S3 os the [supplement](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5534434/bin/NIHMS874162-supplement-Supplemental_Methods_And_Figures.pdf).
+These numbers correspond to colony labels in Fig S3 of the [supplement](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5534434/bin/NIHMS874162-supplement-Supplemental_Methods_And_Figures.pdf).
 
 ## Task 1 
 (due March 26, 2024 in class)
