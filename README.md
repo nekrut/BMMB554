@@ -51,8 +51,6 @@ Links to individual lectures will be posted below. We will be using [Galaxy Trai
 ----
 
 - [Lecture 1](https://training.galaxyproject.org/topics/data-science/tutorials/gnmx-lecture1/tutorial.html) - Introduction and History
-> [!TIP]
-> For lectures 2 - 14 below open Binder at the beginning of each class by clicking on this [link](https://mybinder.org/v2/gh/jupyterlab/jupyterlab-demo/try.jupyter.org?urlpath=lab).
 - [Lecture 2](https://gxy.io/GTN:T00076) - Shell I
 - [Lecture 3](https://gxy.io/GTN:T00074) - Shell II
 - [Lecture 4](https://training.galaxyproject.org/topics/data-science/tutorials/gnmx-lecture2/tutorial.html) - Intermission + History of Sequencing
