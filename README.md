@@ -66,17 +66,12 @@ Links to individual lectures will be posted below. We will be using [Galaxy Trai
 - [Lecture 12](https://training.galaxyproject.org/topics/data-science/tutorials/gnmx-lecture7/tutorial.html) - Git/GitHub 1 - Git logic
 - Lecture 13 - How to create your own web-site using GitHub and Markdown + [Project discussion](https://www.science.org/doi/10.1126/science.aag0822) 
 - Lecture 14 - How Illumina works + [Introduction to Galaxy](https://gxy.io/GTN:T00186)
-- Lecture 15 - [QCing](https://training.galaxyproject.org/training-material/topics/introduction/tutorials/vsi_qc/tutorial.html) and [mapping short reads](https://github.com/nekrut/BMMB554/blob/master/2024/finding_matches.md)
-- Lecture 16 - How Pacific Biosciences (PacBio) works + Galaxy workflow system
-- Lecture 17 - Introduction to Galaxy
-- Lecture 18 - Assembly I --- *k*-mers and graphs
-- Lecture 19 - Assembly II --- Assembly from long reads
-- Lecture 20 - Assembly, Projects and what's next
-- Lecture 21 - Sequence alignment
-- Lecture 22 - Finding matches quickly
-- Lecture 23 - Variant calling in microbes + Key features of Galaxy collections
-- Lecture 24 - What is transcriptomics?
-
+- Lecture 15 - [QCing](https://training.galaxyproject.org/training-material/topics/introduction/tutorials/vsi_qc/tutorial.html) and [algorithmic foundation of mapping](https://github.com/nekrut/BMMB554/blob/master/2024/finding_matches.md)
+- Lecture 16 - [Element Biosciences Sequencing](http://dx.doi.org/10.1038/s41587-023-01750-7) + Mapping and postprocessing of mapped data
+- Lecture 17 - PacBio + Calling varinats in prokaryotic systems
+- Lecture 18 - ONT + Designing and running Galaxy workflows
+- Lecture 19 - Why genomes alignments are difficult
+- Lecture 20 - How Genomes are assembled
 -----
 
 ## ECoS Teaching Statement
