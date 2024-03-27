@@ -67,9 +67,11 @@ Links to individual lectures will be posted below. We will be using [Galaxy Trai
 - Lecture 15 - [QCing](https://training.galaxyproject.org/training-material/topics/introduction/tutorials/vsi_qc/tutorial.html) and [algorithmic foundation of mapping](https://github.com/nekrut/BMMB554/blob/master/2024/finding_matches.md)
 - Lecture 16 - [Element Biosciences Sequencing](http://dx.doi.org/10.1038/s41587-023-01750-7) + Mapping and postprocessing of mapped data
 - Lecture 17 - PacBio + Calling varinats in prokaryotic systems
-- Lecture 18 - ONT + Designing and running Galaxy workflows
-- Lecture 19 - Why genomes alignments are difficult
-- Lecture 20 - How Genomes are assembled
+- Lecture 18 - Analyzing MEGA trajectories
+- Lecture 19 - ONT + Designing and running Galaxy workflows
+- Lecture 20 - Why genome alignments are difficult
+- Lecture 21 - How Genomes are assembled
+
 -----
 
 ## ECoS Teaching Statement
