@@ -65,7 +65,7 @@ Links to individual lectures will be posted below. We will be using [Galaxy Trai
 - Lecture 13 - How to create your own web-site using GitHub and Markdown + [Project discussion](https://www.science.org/doi/10.1126/science.aag0822) 
 - Lecture 14 - How Illumina works + [Introduction to Galaxy](https://gxy.io/GTN:T00186)
 - Lecture 15 - [QCing](https://training.galaxyproject.org/training-material/topics/introduction/tutorials/vsi_qc/tutorial.html) and [algorithmic foundation of mapping](https://github.com/nekrut/BMMB554/blob/master/2024/finding_matches.md)
-- Lecture 16 - [Element Biosciences Sequencing](http://dx.doi.org/10.1038/s41587-023-01750-7) + Mapping and postprocessing of mapped data
+- Lecture 16 - [Element Biosciences Sequencing](http://dx.doi.org/10.1038/s41587-023-01750-7) + Adding yourself to BMMB554 queue + [Mapping and postprocessing of mapped data](https://gxy.io/GTN:T00188)
 - Lecture 17 - PacBio + Calling varinats in prokaryotic systems
 - Lecture 18 - Analyzing MEGA trajectories
 - Lecture 19 - ONT + Designing and running Galaxy workflows
