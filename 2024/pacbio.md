@@ -82,8 +82,6 @@ Older machines were reporting all this info as [Hierarchical Data Format (HDF)](
 
 You can look at a small fragment of the `*.hifi_reads.bam` file in its textual (SAM) representation [here](https://github.com/nekrut/BMMB554/blob/master/2021/data/sample.hifi_reads.sam).
 
-We will begin next class by using Python for visual exploration of these data to see things like this:
-
 ----
 
 ![](https://i.imgur.com/kZXeDom.png)
