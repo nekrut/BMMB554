@@ -105,4 +105,4 @@ The machine, [Onso system](https://www.pacb.com/onso/) will allow up to 200bp re
 
 ## Other sequencing technologies
 
-{%speakerdeck nekrut/other-ngs-technologies %}
+[A brief summary](https://speakerdeck.com/nekrut/other-ngs-technologies) of other sequecning technologies worth mentioning.
