@@ -1,5 +1,5 @@
 ![](https://i.imgur.com/I1Agm07.png)
-> from Science Issues containing [Levene et al. 2003](http://dx.doi.org/10.1126/science.1079700).
+> from a Science issue containing [Levene et al. 2003](http://dx.doi.org/10.1126/science.1079700).
 
 # Pacific Biosciences (PacBio)
 
