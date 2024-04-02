@@ -2,7 +2,7 @@
 
 1. Login into https://usegalaxy.org
 2. Got to the history with the datasets containing accession list
-3. Click on "Workflow" and "Puiblic workflows":
+3. Click on "Workflow" (top of the interface) and select "Public workflows":
      ![image](https://github.com/nekrut/BMMB554/assets/4291636/1f6ad7d5-5b89-4ebe-884e-a307588ace5f)
 4. Find "BMMB554_MAPPING" and click "Run workflow":
      ![image](https://github.com/nekrut/BMMB554/assets/4291636/872f049e-dd5d-43a8-984c-dcb82d9b56ff)
