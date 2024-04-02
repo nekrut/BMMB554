@@ -76,7 +76,7 @@ In addition to sequencing data and base qualities PacBio machines produce kineti
 - Intra Pulse Duration values (IDPs)
 - Pulse width values
 
-Older machines were reporting all this info as [Hierarchical Data Format (HDF)](https://en.wikipedia.org/wiki/Hierarchical_Data_Format). Newer machines are using a special subset of [BAM](https://pacbiofileformats.readthedocs.io/en/12.0/BAM.html) format to report this information. Because of all these additional data PacBio datasets tend to be quite large:
+Older machines were reporting all this info as [Hierarchical Data Format (HDF)](https://en.wikipedia.org/wiki/Hierarchical_Data_Format). Newer machines are using a special subset of [BAM](https://pacbiofileformats.readthedocs.io/en/13.0/BAM.html) format to report this information. Because of all these additional data PacBio datasets tend to be quite large:
 
 ![](https://i.imgur.com/nPJccSr.png)
 
