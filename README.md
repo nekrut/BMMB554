@@ -67,7 +67,7 @@ Links to individual lectures will be posted below. We will be using [Galaxy Trai
 - Lecture 15 - [QCing](https://training.galaxyproject.org/training-material/topics/introduction/tutorials/vsi_qc/tutorial.html) and [algorithmic foundation of mapping](https://github.com/nekrut/BMMB554/blob/master/2024/finding_matches.md)
 - Lecture 16 - [Element Biosciences Sequencing](http://dx.doi.org/10.1038/s41587-023-01750-7) + [Adding yourself to BMMB554 queue](https://github.com/nekrut/BMMB554/blob/master/2024/galaxy_queue.md) + [Mapping and postprocessing of mapped data](https://gxy.io/GTN:T00188)
 - Lecture 17 - [PacBio](https://github.com/nekrut/BMMB554/blob/master/2024/pacbio.md) + Creating a mapping workflow + [Understanding BAM files](https://samtools.github.io/hts-specs/SAMv1.pdf)
-- Lecture 18 - Calling variants in diploid systems
+- Lecture 18 - [Calling variants in non-diploid systems](https://github.com/nekrut/BMMB554/blob/master/2024/nonD_variant_calling.md)
 - Lecture 18 - Analyzing MEGA trajectories
 - Lecture 19 - ONT + Designing and running Galaxy workflows
 - Lecture 20 - Why genome alignments are difficult
