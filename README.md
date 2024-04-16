@@ -68,7 +68,7 @@ Links to individual lectures will be posted below. We will be using [Galaxy Trai
 - Lecture 16 - [Element Biosciences Sequencing](http://dx.doi.org/10.1038/s41587-023-01750-7) + [Adding yourself to BMMB554 queue](https://github.com/nekrut/BMMB554/blob/master/2024/galaxy_queue.md) + [Mapping and postprocessing of mapped data](https://gxy.io/GTN:T00188)
 - Lecture 17 - [PacBio](https://github.com/nekrut/BMMB554/blob/master/2024/pacbio.md) + Creating a mapping workflow + [Understanding BAM files](https://samtools.github.io/hts-specs/SAMv1.pdf)
 - Lecture 18 - [Calling variants in non-diploid systems](https://github.com/nekrut/BMMB554/blob/master/2024/nonD_variant_calling.md)
-- Lecture 18 - [ONT](https://github.com/nekrut/BMMB554/blob/master/2024/ont.md) + First look at MEGA trajectories: Is there anything?
+- Lecture 18 - [ONT](https://github.com/nekrut/BMMB554/blob/master/2024/ont.md) + [First look at MEGA trajectories: Is there anything?](https://github.com/nekrut/BMMB554/blob/master/2024/assessimg_variants.md)
 - Lecture 19 - Alignment: What are the differences between strains? + Drawing trajectories
 - Lecture 20 - Why genome alignments are difficult
 - Lecture 21 - How Genomes are assembled
