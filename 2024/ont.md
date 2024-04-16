@@ -8,7 +8,7 @@ tags: BMMB554-23
 # Lecture 17: Oxford Nanopore
 
 > [!IMPORTANT]
-> This text and figures are based on the offician Oxford nanopоре documentation from the official [nanoporetech](https://community.nanoporetech.com/) site and official [videos](https://www.youtube.com/@OxfordNanoporeTechnologies).
+> This text and figures are based on the Oxford nanopоре documentation from the official [nanoporetech](https://community.nanoporetech.com/) site and official [videos](https://www.youtube.com/@OxfordNanoporeTechnologies).
 
 The basic principle of the Oxford Nanopore Technology (ONT) is straightforward. Molecules are driven through a pore in a membrane. As a molecule moves through membrane it blocks current. In fact the extent of "blockage" is sequence specific generating using current change profiles that can be "translated" into sequence.    
 
