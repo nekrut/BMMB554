@@ -69,7 +69,7 @@ Links to individual lectures will be posted below. We will be using [Galaxy Trai
 - Lecture 17 - [PacBio](https://github.com/nekrut/BMMB554/blob/master/2024/pacbio.md) + Creating a mapping workflow + [Understanding BAM files](https://samtools.github.io/hts-specs/SAMv1.pdf)
 - Lecture 18 - [Calling variants in non-diploid systems](https://github.com/nekrut/BMMB554/blob/master/2024/nonD_variant_calling.md)
 - Lecture 18 - [ONT](https://github.com/nekrut/BMMB554/blob/master/2024/ont.md) + [First look at MEGA trajectories: Is there anything?](https://github.com/nekrut/BMMB554/blob/master/2024/assessimg_variants.md)
-- Lecture 19 - Rerunning based on custom reference, [Alignment: What are the differences between strains?](https://github.com/nekrut/BMMB554/blob/master/2024/alignment.md)
+- Lecture 19 - [Rerunning based on custom reference](https://github.com/nekrut/BMMB554/blob/master/2024/how_to_rerun.md), [Alignment: What are the differences between strains?](https://github.com/nekrut/BMMB554/blob/master/2024/alignment.md)
 - Lecture 20 - Why genome alignments are difficult
 - Lecture 21 - How Genomes are assembled
 
