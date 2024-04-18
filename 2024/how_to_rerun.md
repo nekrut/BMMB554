@@ -5,4 +5,5 @@
 3. Upload the list of accessions corresponding to your set of samples (Sym or ManifoldX)
 4. Import this workflow -> https://usegalaxy.org/u/aun1/w/mega-mapping-custom-ref
 5. Run workflow
+6. Analyze output as described on [this page](https://github.com/nekrut/BMMB554/blob/master/2024/assessimg_variants.md).
    
