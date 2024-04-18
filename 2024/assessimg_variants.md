@@ -14,6 +14,7 @@ Then, enter the data into a [spreadsheet](https://docs.google.com/spreadsheets/d
 
 ## Switch to Jupyter
 
+- Use this [notebook](https://colab.research.google.com/drive/1hnoNGQx7MEORWv7KcQAMzpFIsRxvdYVM?usp=sharing)
 - Import tab-delimited variant data into Pandas
 - Import sample/accession mapping into Pandas
 
