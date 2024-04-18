@@ -23,11 +23,7 @@ A C A T G C C T A
 A C T G C C T A C
 ```
 
-the vertical lines above indicate positions that are identical between the two sequences, while asterisks show differences. It will take six substitutions to turn one sequence into the other. This number -- six substitutions -- is called [*Hamming distance*](https://en.wikipedia.org/wiki/Hamming_distance) or the *minimal* number of substitutions required to turn one string into another. The code below computes the Hamming distance. Try it. You can change `seq1` and `seq2` into whatever you want except that they should have the same length.
-
-
-<iframe src="https://trinket.io/embed/python/99a02b790a?toggleCode=true" width="100%" height="400" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
-
+the vertical lines above indicate positions that are identical between the two sequences, while asterisks show differences. It will take six substitutions to turn one sequence into the other. This number -- six substitutions -- is called [*Hamming distance*](https://en.wikipedia.org/wiki/Hamming_distance) or the *minimal* number of substitutions required to turn one string into another. 
 
 Now in addition to *substitutions* (i.e., changing one character into another) let's allow **insertions** and **deletions**. This will essentially allow us to insert dashes (gaps) between characters:
 
@@ -80,11 +76,7 @@ $$Edit\ Distance(\alpha\texttt{x},\beta\texttt{y}) = min\begin{cases}
              \end{cases}$$
 
 
-where $\delta(x,y) = 0$ if $x = y$ (nucleotides match) and $\delta(x,y) = 1$ if $x \neq y$ (nucleotides do not match). The $\delta(x,y)$ has a particular meaning. If the two nucleotides at the end are equal to each other, there is nothing to be done -- no substitution operation is necessary. If a substitution is necessary however, we will record this by adding 1. When we will be talking about global and local alignment below the power of $\delta(x,y)$ will become even more clear.
-
-We can write an algorithm that would exhaustively evaluate the above expression for all possible suffixes. This algorithm is below. Try executing it. It will take roughly ~30 seconds to find the edit distance between the two sequences used in the beginning of this lecture:
-
-<iframe src="https://trinket.io/embed/python/eff3a798bf?toggleCode=true" width="100%" height="400" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+where $\delta(x,y) = 0$ if $x = y$ (nucleotides match) and $\delta(x,y) = 1$ if $x \neq y$ (nucleotides do not match). The $\delta(x,y)$ has a particular meaning. If the two nucleotides at the end are equal to each other, there is nothing to be done -- no substitution operation is necessary. If a substitution is necessary however, we will record this by adding 1. When we will be talking about global and local alignment below the power of $\delta(x,y)$ will become even more clear. We can write an algorithm that would exhaustively evaluate the above expression for all possible suffixes. It will take roughly ~30 seconds to find the edit distance between the two sequences used in the beginning of this lecture.
 
 The take-home-message here is that it takes a very long time to compute the edit distance between two sequences that are only **nine** nucleotides long! Why is this happening? Figure 1 below shows a small subset of situations the algorithm is evaluating for two very short strings $\texttt{TAG}$ and $\texttt{TAC}$: 
 
@@ -97,9 +89,6 @@ To understand the magnitude of this problem let's look at slightly modified vers
 <iframe src="https://trinket.io/embed/python/8994bfe46e?toggleCode=true" width="100%" height="400" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
 
 While this approach to the edit distance problem is correct, it will hardly help us on the genome-wide scale. Just like in case of the change problem and Manhattan tourist problem dynamic programming is going to save the day.
-
-
-------
 
 # Dynamic programming to the rescue
 
@@ -139,10 +128,7 @@ C
 \textbf{Note}: sequence\ \texttt{X}\ is\ vertical\ and\ sequence\ \texttt{Y}\ is\ horizontal.
 $$
 
-
 Let's fill the first column and first row of the matrix. Because the distance between a string and an empty string is equal to the length of the string (e.g., a distance between string $\texttt{TCG}$ and an empty string is 3) this resulting matrix will look like this:
-
-
 
 $$
 \begin{array}{ c | c | c | c | c | c | c}
@@ -170,7 +156,6 @@ $$
 \textbf{Note}: sequence\ \texttt{X}\ is\ vertical\ and\ sequence\ \texttt{Y}\ is\ horizontal.
 $$
 
-
 Now, let's fill in the cell between $\texttt{G}$ and $\texttt{G}$. Recall that:
 
 $$
@@ -180,7 +165,6 @@ Edit\ Distance(\alpha\texttt{x},\beta\texttt{y}) = min\begin{cases}
 					\color{green}{Edit\ Distance(\alpha,\beta\texttt{y}) + 1}
              \end{cases}
 $$
-
 
 where $\delta(x,y) = 0$ if $x = y$ and $\delta(x,y) = 1$ if $x \neq y$. And now let's color each of the cells corresponding to each part of the above expression:
 
@@ -218,7 +202,6 @@ $$Edit\ Distance(\epsilon\texttt{G},\epsilon\texttt{G}) = min\begin{cases}
 					\color{green}{Edit\ Distance(\epsilon,\epsilon\texttt{G}) + 1\ or\ 1\ +\ 1\ =\ 2}
              \end{cases}
 $$
-
 
 This minimum of 0, 2, and 2 will be 0, so we are putting zero into that cell:
 
@@ -276,12 +259,9 @@ $$
 \textbf{Note}: sequence\ \texttt{X}\ is\ vertical\ and\ sequence\ \texttt{Y}\ is\ horizontal.
 $$
 
-
 The lower rightmost cell highlighted in red is special. It contains the value for the edit distance between the two strings. The following Python script implements this idea. You can see that it is essentially instantaneous:
 
 <iframe src="https://trinket.io/embed/python3/1bec8f9150?toggleCode=true" width="100%" height="400" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
-
-------
 
 # From edit distance to alignment
 
@@ -460,8 +440,6 @@ C\\
 \textbf{Note}: sequence\ \texttt{T}\ is\ horizontal\ while\ \texttt{P}\ is\ vertical.
 $$
 
-</div>
-
 Let me remind you that our goal is to find where $\it\texttt{P}$ matches $\texttt{T}$. *A priori* we do not know when it may be, so we will start by filling the entire first row with zeroes. This is because the match between $\it\texttt{P}$ and $\texttt{T}$ may start at any point up there. The first column we will initialize the same way we did previously: with increasing sequence of numbers:
 
 
@@ -518,7 +496,6 @@ C & 9 & 8 & 7 & 6 & 6 & 5 & 6 & 6 & 6 & 5 & 5 & 4 & 3 & 3 & 3 & 2 & 3 & 4 & 5 & 
 $$
 
 Now that we have filled in the complete matrix let's look at the bottom row. Instead of using the rightmost cell we will find a cell with the lowest number. That would be 2 (highlighted in red):
-
 
 $$
 \begin{array}{ c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c | c }
@@ -584,8 +561,6 @@ A A C C C T A T G T C A T G C C T T G G A
           | | * | | | | * | | 
           T A C G T C A - G C
 ```
-
-------
 
 # Global alignment
 
@@ -726,7 +701,6 @@ $$
 
 Similarly, for the first column we get:
 
-
 $$
 \begin{array}{ c | c | c | c | c | c | c}
   					 & \epsilon & T & A & T & G & T & C & A & T & G & C\\
@@ -824,7 +798,6 @@ The following Python code implements Global alignment approach we have seen abov
 
 <iframe src="https://trinket.io/embed/python3/911a7ddd2e?toggleCode=true" width="100%" height="600" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
 
-
 ## Local alignment
 
 Global alignment discussed above works only in cases when we truly expect sequences to match across their entire lengths. In majority of biological application this is rarely the case. For instance, suppose you want to compare two bacterial genomes to figure out if they have matching sequences. Local alignment algorithm helps with this challenge. Surprisingly, it is almost identical to the approaches we used before. So here is our problem:
@@ -914,9 +887,7 @@ $$
 \textbf{Remember}: sequence\ \texttt{X}\ is\ vertical\ while\ \texttt{Y}\ is\ horizontal.
 $$
 
-
 Filling it completely will yield the following matrix. Note that clues to where the local alignment may be are given off by positive numbers in the sea of 0s:
-
 
 $$
 \begin{array}{ c | c | c | c | c | c | c | c | c | c | c | c | c | c }
@@ -956,9 +927,7 @@ $$
   			       \end{array}
 $$
 
-
 To identify to boundary of the local alignment we need to identify the cell with the **highest** value. This cell has value of $\color{red}{12}$ and is highlighted above. Using traceback procedure we will find:
-
 
 $$
 \begin{array}{ c | c | c | c | c | c | c | c | c | c | c | c | c | c }
@@ -997,7 +966,6 @@ $$
   			              A & 0 & 0 & 4 & 0 & 4 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 2 & 4 & 6\\
   			       \end{array}
 $$
-</div>
 
 This corresponds to the best local alignment between the two sequences:
 
@@ -1076,7 +1044,6 @@ This algorithm was developed by [Temple Smith and Michael Waterman](http://dorns
 ### Lastz
 
 https://github.com/lastz/lastz
-
 
 ### Minimap2
 
