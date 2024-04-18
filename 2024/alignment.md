@@ -84,10 +84,6 @@ The take-home-message here is that it takes a very long time to compute the edit
 
 <small>**Figure 1** | A fraction of situations evaluated by the naïve algorithm for computing the edit distance. Just like in the case of the change problem discussed in the previous lecture a lot of time is wasted on computing distances between suffixes that has been seen more than once (shown in red).</small>
 
-To understand the magnitude of this problem let's look at slightly modified version of the previous Python code below. All we do here is keeping track how many times a particular pair of suffixes (in this case $\texttt{AC}$ and $\texttt{AC}$) are seen by the program. The number is staggering: 48,639. So this algorithm is **extremely** wasteful. 
-
-<iframe src="https://trinket.io/embed/python/8994bfe46e?toggleCode=true" width="100%" height="400" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
-
 While this approach to the edit distance problem is correct, it will hardly help us on the genome-wide scale. Just like in case of the change problem and Manhattan tourist problem dynamic programming is going to save the day.
 
 # Dynamic programming to the rescue
@@ -574,7 +570,7 @@ $$Edit\ Distance(\alpha\texttt{x},\beta\texttt{y}) = min\begin{cases}
 
 Basically we were adding 1 if there was a mismatch (the $\delta$ function) and also adding 1 for every gap. This however is not biologically realistic. If we look at the rates of different rates of mutations in the human genome we will see that they vary dramatically. Let's look at substitutions first:
 
-![](http://www.bx.psu.edu/~anton/bioinf-images/TsTv.png)
+![image](https://github.com/nekrut/BMMB554/assets/4291636/74f99a80-a4ca-4c66-a91a-a936b16830d7)
 
 **Figure 2** | There are two kinds of nucleotide substitutions: Transitions and Transversions. Transitions are substitutions between nucleotides belonging to the same chemical group. For example, a substitution of Adenine, a purine, to Guanine, also a purine, is a transition. Transversions, on the other hand, occur between chemically dissimilar nucleotides. For example, any substitution of a purine to a pyrimidine and vice verse will be a transition. (Image from [Wikipedia](https://en.wikipedia.org/wiki/Transversion))
 
