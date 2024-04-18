@@ -259,9 +259,7 @@ $$
 \textbf{Note}: sequence\ \texttt{X}\ is\ vertical\ and\ sequence\ \texttt{Y}\ is\ horizontal.
 $$
 
-The lower rightmost cell highlighted in red is special. It contains the value for the edit distance between the two strings. The following Python script implements this idea. You can see that it is essentially instantaneous:
-
-<iframe src="https://trinket.io/embed/python3/1bec8f9150?toggleCode=true" width="100%" height="400" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+The lower rightmost cell highlighted in red is special. It contains the value for the edit distance between the two strings. 
 
 # From edit distance to alignment
 
