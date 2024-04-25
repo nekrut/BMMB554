@@ -71,6 +71,5 @@ SRR3722117	CP009273	1631797	C	A	0.25	16	4,8,2,2	ydfJ	.	NONE
 
 ## Task 3: Write up
 
-Put your findings into a Google Doc that will be shared with you. IF YOU DO NOT GET A LINK: EMAIL YOUR INSTRUCTOR!!!
-
+Put your findings into a [Google Doc that was created for this purpose](https://docs.google.com/document/d/1LSAAlINoZfyZIa6GmRQVELaiSDejdAuXfZ-h6DKUWRw/edit?usp=sharing) (accessible only for psu.edu users). 
 
