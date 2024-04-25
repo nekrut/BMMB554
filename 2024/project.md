@@ -69,4 +69,8 @@ SRR3722117	CP009273	1631797	C	A	0.25	16	4,8,2,2	ydfJ	.	NONE
 2. Trace their trajectroies through the time points from beginning to end
 3. Plot the change in frequencies
 
+## Task 3: Write up
+
+Put your findings into a Google Doc that will be shared with you. IF YOU DO NOT GET A LINK: EMAIL YOUR INSTRUCTOR!!!
+
 
