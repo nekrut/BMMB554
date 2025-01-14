@@ -1,4 +1,4 @@
-# Introduction to Data Driven Life Sciences | Spring 2024
+# Introduction to Data Driven Life Sciences | Spring 2025
 
 ## Syllabus
 
@@ -40,19 +40,18 @@ Attendance (33.3%) + Quizzes (33.3%) + Final Project (33.3%)  &#8776; 100%
 
 ## Lectures
 
-The will be divided into several blocks:
-
-1. Fundamentals of data science
-2. Datatypes and major analyses in modern biology
-3. Specific applications
-
-Links to individual lectures will be posted below. We will be using [Galaxy Training Network](https://training.galaxyproject.org) infrastructure for this course. Specifically, we will be using a [dedicated"learning pathway"](https://training.galaxyproject.org/training-material/learning-pathways/data-driven-biology.html). 
+Links to individual lectures will be posted below. 
 
 ----
 
+## Block 1: Shell / Python / Generative-AI 
+
 - [Lecture 1](https://training.galaxyproject.org/topics/data-science/tutorials/gnmx-lecture1/tutorial.html) - Introduction and History
-- [Lecture 2](https://gxy.io/GTN:T00076) - Shell I
-- [Lecture 3](https://gxy.io/GTN:T00074) - Shell II
+- [Lecture 2](https://gxy.io/GTN:T00076) - Shell Review I. History of sequencing and simulation of sequencing process: thinking conceprtually.
+- [Lecture 3](https://gxy.io/GTN:T00074) - Shell Review II. Simulation of sequencing process: implementing it.
+
+<!--
+  
 - [Lecture 4](https://training.galaxyproject.org/topics/data-science/tutorials/gnmx-lecture2/tutorial.html) - Intermission + History of Sequencing
 - [Lecture 5](https://training.galaxyproject.org/topics/data-science/tutorials/gnmx-lecture2/tutorial.html) - Python 1 - Variables, expressions, statements, functions
 - [Lecture 6](https://training.galaxyproject.org/topics/data-science/tutorials/gnmx-lecture3/tutorial.html) - Python 2 - Strings and lists and FASTQ
@@ -72,6 +71,8 @@ Links to individual lectures will be posted below. We will be using [Galaxy Trai
 - Lecture 19 - [Rerunning based on custom reference](https://github.com/nekrut/BMMB554/blob/master/2024/how_to_rerun.md), [Alignment: What are the differences between strains?](https://github.com/nekrut/BMMB554/blob/master/2024/alignment.md)
 - Lecture 20 - [Why genome alignments are difficult](https://github.com/nekrut/BMMB554/blob/master/2024/alignment.md)
 - Lecture 21 - Discussion of the [final project](https://github.com/nekrut/BMMB554/blob/master/2024/project.md). 
+
+-->
 
 -----
 
