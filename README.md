@@ -48,7 +48,7 @@ We will use JupyterLab as our main platform. JupyterLab is an example of a "note
 - [RStudio](https://posit.co/)
 - [ObservableHQ](https://observablehq.com/@d3/gallery?collection=@observablehq/observable-libraries-for-visualization) (learn JavaScript [here](https://eloquentjavascript.net/))
 
-## Lecture setup
+### JupyterLab set up for Shell, Python, and Git lectures
 
 1. Start [JupyterLab](https://mybinder.org/v2/gh/jupyterlab/jupyterlab-demo/try.jupyter.org?urlpath=lab)
 2. Start terminal within JupyterLab instance
