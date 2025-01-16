@@ -38,6 +38,24 @@ This course **does not use** Canvas. Canvas is a convoluted system with too many
 
 Attendance (33.3%) + Quizzes (33.3%) + Final Project (33.3%)  &#8776; 100%
 
+---
+
+## A note on notebook environments
+
+We will use JupyterLab as our main platform. JupyterLab is an example of a "notebook environment." There are several frameworks for interactive data exploration using code snippets. These include:
+
+- [Jupyter](https://jupyter.org/) | [JupyterLite](https://github.com/jupyterlite) | [Google Colab](https://colab.research.google.com)
+- [RStudio](https://posit.co/)
+- [ObservableHQ](https://observablehq.com/@d3/gallery?collection=@observablehq/observable-libraries-for-visualization) (learn JavaScript [here](https://eloquentjavascript.net/))
+
+## Lecture setup
+
+1. Start [JupyterLab](https://mybinder.org/v2/gh/jupyterlab/jupyterlab-demo/try.jupyter.org?urlpath=lab)
+2. Start terminal within JupyterLab instance
+
+![](https://i.imgur.com/qSrZwOI.png)
+
+
 ## Lectures
 
 Links to individual lectures will be posted below. 
@@ -47,7 +65,7 @@ Links to individual lectures will be posted below.
 ## Block 1: Shell / Python / Generative-AI 
 
 - [Lecture 1](https://training.galaxyproject.org/topics/data-science/tutorials/gnmx-lecture1/tutorial.html) - Introduction and History
-- [Lecture 2](https://gxy.io/GTN:T00076) - Shell Review I. History of sequencing and simulation of sequencing process: thinking conceprtually.
+- [Lecture 2](https://gxy.io/GTN:T00076) - Shell Review I. History of sequencing and simulation of sequencing process: thinking conceptually. (Before the lecture set up a Jupyter Lab instance as described [above](https://github.com/nekrut/BMMB554/edit/master/README.md#a-note-on-notebook-environments))
 - [Lecture 3](https://gxy.io/GTN:T00074) - Shell Review II. Simulation of sequencing process: implementing it.
 
 <!--
