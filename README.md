@@ -65,7 +65,7 @@ Links to individual lectures will be posted below.
 ## Block 1: Shell / Python / Generative-AI 
 
 - [Lecture 1](https://training.galaxyproject.org/topics/data-science/tutorials/gnmx-lecture1/tutorial.html) - Introduction and History
-- [Lecture 2](https://gxy.io/GTN:T00076) - Shell Review I. History of sequencing and simulation of sequencing process: thinking conceptually. (Before the lecture set up a Jupyter Lab instance as described [above](https://github.com/nekrut/BMMB554/edit/master/README.md#a-note-on-notebook-environments))
+- [Lecture 2](https://gxy.io/GTN:T00076) - Shell Review I. History of sequencing and simulation of sequencing process: thinking conceptually. (Before the lecture set up a Jupyter Lab instance as described [above](https://github.com/nekrut/BMMB554/edit/master/README.md#a-note-on-notebook-environments))(https://github.com/nekrut/BMMB554/blob/master/README.md#jupyterlab-set-up-for-shell-python-and-git-lectures))
 - [Lecture 3](https://gxy.io/GTN:T00074) - Shell Review II. Simulation of sequencing process: implementing it.
 
 <!--
