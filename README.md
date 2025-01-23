@@ -69,7 +69,7 @@ Links to individual lectures will be posted below.
 | 1 | Jan 14 | [Introduction and History](https://training.galaxyproject.org/topics/data-science/tutorials/gnmx-lecture1/tutorial.html) |   |  |
 | 2 | Jan 16 | [History of sequencing and simulation of sequencing process: thinking conceptually.](https://training.galaxyproject.org/topics/data-science/tutorials/gnmx-lecture2/tutorial.html) | [Shell I](https://gxy.io/GTN:T00076) | Y |
 | 3 | Jan 23 | [Simulation of sequencing process: implementing it.](https://training.galaxyproject.org/topics/data-science/tutorials/gnmx-lecture2/tutorial.html) | [Shell II](https://gxy.io/GTN:T00074) | Y |
-| 4 | Jan 28 | [Python 1 - Variables, expressions, statements, functions](https://training.galaxyproject.org/topics/data-science/tutorials/gnmx-lecture2/tutorial.html) | [Python I](https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-basics/tutorial.html) | Y |
+| 4 | Jan 28 | [Python 1 - Variables, expressions, statements, functions](https://training.galaxyproject.org/topics/data-science/tutorials/gnmx-lecture2/tutorial.html) | Chapters [1](https://greenteapress.com/thinkpython2/html/thinkpython2002.html), [2](https://greenteapress.com/thinkpython2/html/thinkpython2003.html), [3](https://greenteapress.com/thinkpython2/html/thinkpython2004.html) from “Think Python” | Y |
 
 <!--
   
