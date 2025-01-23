@@ -64,9 +64,12 @@ Links to individual lectures will be posted below.
 
 ## Block 1: Shell / Python / Generative-AI 
 
-- [Lecture 1](https://training.galaxyproject.org/topics/data-science/tutorials/gnmx-lecture1/tutorial.html) - Introduction and History
-- [Lecture 2](https://gxy.io/GTN:T00076) - Shell Review I. History of sequencing and simulation of sequencing process: thinking conceptually. (Before the lecture set up a Jupyter Lab instance as described [above](https://github.com/nekrut/BMMB554/blob/master/README.md#jupyterlab-set-up-for-shell-python-and-git-lectures)).
-- [Lecture 3](https://gxy.io/GTN:T00074) - Shell Review II. Simulation of sequencing process: implementing it.
+| Lecture | Date | Topic | Reading **before** lecture | Quiz |
+|----------|--|---------|---------------------------|----|
+| 1 | Jan 14 | [Introduction and History](https://training.galaxyproject.org/topics/data-science/tutorials/gnmx-lecture1/tutorial.html) |   |  |
+| 2 | Jan 16 | [History of sequencing and simulation of sequencing process: thinking conceptually.](https://training.galaxyproject.org/topics/data-science/tutorials/gnmx-lecture2/tutorial.html) | [Shell I](https://gxy.io/GTN:T00076) | Y |
+| 3 | Jan 23 | [Simulation of sequencing process: implementing it.](https://training.galaxyproject.org/topics/data-science/tutorials/gnmx-lecture2/tutorial.html) | [Shell II](https://gxy.io/GTN:T00074) | Y |
+| 4 | Jan 28 | [Python 1 - Variables, expressions, statements, functions](https://training.galaxyproject.org/topics/data-science/tutorials/gnmx-lecture2/tutorial.html) | [Python I](https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-basics/tutorial.html) | Y |
 
 <!--
   
