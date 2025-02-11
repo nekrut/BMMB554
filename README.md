@@ -72,8 +72,8 @@ Links to individual lectures will be posted below.
 | 4/5 | Jan 28/30 | [Python 1 - Variables, expressions, statements, functions](https://training.galaxyproject.org/topics/data-science/tutorials/gnmx-lecture2/tutorial.html) | Chapters [1](https://greenteapress.com/thinkpython2/html/thinkpython2002.html), [2](https://greenteapress.com/thinkpython2/html/thinkpython2003.html), [3](https://greenteapress.com/thinkpython2/html/thinkpython2004.html), [8](https://greenteapress.com/thinkpython2/html/thinkpython2009.html) and [10](https://greenteapress.com/thinkpython2/html/thinkpython2011.html) from "Think Python" | Y |
 | 6 | Feb 4 |  [Python 2 - Strings and lists and FASTQ](https://training.galaxyproject.org/topics/data-science/tutorials/gnmx-lecture3/tutorial.html) |  | N | 
 | 7 | Feb 6 |  [Python 3 - A more careful look at lists and dictionaries](https://training.galaxyproject.org/topics/data-science/tutorials/gnmx-lecture4/tutorial.html) |  | N | 
-| 8 | Feb 11 |  Python 4 - Processing files / Fastq, SAM, BAM, CRAM - What is better for compression? |  | Home assignment | 
-| 9 | Feb 13 | [ Pandas 1 - Creating and using dataframes ](https://training.galaxyproject.org/topics/data-science/tutorials/gnmx-lecture6/tutorial.html) | | N |
+| 8 | Feb 11 |  [Python 4 - Processing files](https://training.galaxyproject.org/topics/data-science/tutorials/gnmx-lecture5/tutorial.html) |  | N | 
+| 9 | Feb 13 | [ Pandas 1 - Creating and using dataframes ](https://training.galaxyproject.org/topics/data-science/tutorials/gnmx-lecture6/tutorial.html) | | Home assignment |
 
 <!--
   
