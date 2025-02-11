@@ -1,51 +1,141 @@
-# Class Notes: FASTQ, SAM/BAM, and CRAM Formats
+# Reading and writing files in Python
 
-## 1. FASTQ Format
+First let's download a file we will be using in your notebooks:
 
-FASTQ is a text-based format for storing biological sequence data along with associated quality scores.
-
-### FASTQ Structure
-Each record consists of four lines:
-1. **Sequence Identifier** (starts with `@`)
-2. **Nucleotide Sequence**
-3. **Quality Score Identifier** (starts with `+`)
-4. **Quality Scores** (ASCII-encoded Phred scores)
-
-Example:
-```plaintext
-@SEQ_ID
-GATTTGGGGTTTCCCAGTCACGAC
-+
-!''*((((***+))%%%++)(%%%%).1
+```python
+!wget https://raw.githubusercontent.com/nekrut/BMMB554/master/2023/data/l9/mt_cds.fa
 ```
 
-### Handling FASTQ Files with `samtools`
-Although `samtools` is mainly for BAM/CRAM handling, it can be used to convert FASTQ to SAM:
-```sh
-samtools import reference.fasta reads.fastq reads.sam
-```
-Alternatively, `seqtk` can be used for FASTQ manipulation:
-```sh
-seqtk seq -A reads.fastq > reads.fasta
+In Python, you can handle files using the built-in `open` function. The `open` function creates a file object, which you can use to read, write, or modify the file.
+
+Here's an example of how to open a file for reading:
+
+```python
+f = open("mt_cds.fa", "r")
 ```
 
-#### Real Example with Small Files
-Create a small FASTQ file:
-```sh
-echo -e "@read1\nACGTACGTACGT\n+\nIIIIIIIIIIII" > small.fastq
-```
-Convert FASTQ to SAM:
-```sh
-samtools import reference.fasta small.fastq small.sam
+After you've opened the file, you can read its contents using the read method:
+
+```python
+contents = f.read()
+print(contents)
 ```
 
----
+You can also read the file line by line using the readline method:
 
-## 2. SAM/BAM Format
+```python
+line = f.readline()
+print(line)
+```
 
-SAM (Sequence Alignment/Map) and BAM (Binary Alignment/Map) store sequence alignment data against a reference genome.
+When you're done reading the file, you should close it using the close method:
 
-### SAM Format Structure
+```python
+f.close()
+```
+
+You can also use the `with` statement to automatically close the file when you're done:
+
+```python
+with open("mt_cds.fa", "r") as f:
+    contents = f.read()
+    print(contents)
+```
+
+You can also write to files using `write` method (note the "w" mode):
+
+```python
+f = open("sample.txt", "w")
+f.write("This is a new line.")
+f.close()
+```
+
+If you open an existing file in write mode, its contents will be overwritten. If you want to append to an existing file instead, you can use the "a" mode:
+
+```python
+f = open("sample.txt", "a")
+f.write("This is another line.")
+f.close()
+```
+
+## [Fasta](https://en.wikipedia.org/wiki/FASTA_format)
+
+```python
+sequences = {}
+with open("mt_cds.fa", "r") as file:
+  header = ""
+  sequence = ""
+  for line in file:
+    line=line.rstrip()
+    if line.startswith('>'):
+      if header != "":
+        sequences[header] = sequence
+        sequence = ""
+      header = line[1:]
+    else:
+      sequence += line
+  if header != "":
+    sequences[header] = sequence
+```
+
+## [FASTQ](https://en.wikipedia.org/wiki/FASTQ_format)
+
+```python
+!wget https://raw.githubusercontent.com/nekrut/BMMB554/master/2023/data/l9/reads.fq
+```
+
+```python
+def read_fastq(file_path):
+    records = []
+    with open(file_path, "r") as f:
+        while True:
+            header = f.readline().strip()
+            if header == "":
+                break
+            sequence = f.readline().strip()
+            quality_header = f.readline().strip()
+            quality = f.readline().strip()
+            records.append((header, sequence, quality))
+    return records
+```
+
+```python
+records = read_fastq("reads.fq")
+for header, sequence, quality_header, quality in records:
+    print(header)
+    print(sequence)
+    print(quality_header)
+    print(quality)
+```
+
+## [SAM](https://en.wikipedia.org/wiki/SAM_(file_format))
+
+```python
+!wget https://raw.githubusercontent.com/nekrut/BMMB554/master/2023/data/l9/sam_example.sam
+```
+
+```python
+def read_sam(file_path):
+    records = []
+    with open(file_path, "r") as f:
+        for line in f:
+            if line.startswith("@"):
+                continue
+            fields = line.strip().split("\t")
+            records.append(fields)
+    return records
+```
+
+```python
+records = read_sam("sam_example.sam")
+for fields in records:
+    print(fields)
+
+## SAM/BAM/CRAM trifecta
+
+### SAM (Sequence Alignment/Map) and BAM (Binary Alignment/Map) store sequence alignment data against a reference genome.
+
+#### SAM Format Structure
 - **Header** (optional, starts with `@`)
 - **Alignment Records** with fields like:
   - Query name
@@ -66,43 +156,6 @@ read1	0	chr1	100	60	50M	*	0	0	ACGTACGT...	IIIIIIII...
 BAM is the compressed binary equivalent of SAM.
 
 [BAM Format Specification](https://samtools.github.io/hts-specs/SAMv1.pdf)
-
-### Handling BAM Files with `samtools`
-#### Convert SAM to BAM
-```sh
-samtools view -b -o reads.bam reads.sam
-```
-#### Sort BAM
-```sh
-samtools sort -o reads.sorted.bam reads.bam
-```
-#### Index BAM
-```sh
-samtools index reads.sorted.bam
-```
-#### View BAM Content
-```sh
-samtools view reads.sorted.bam | head -10
-```
-
-#### Real Example with Small Files
-Create a small SAM file:
-```sh
-echo -e "@SQ\tSN:chr1\tLN:1000\nread1\t0\tchr1\t100\t60\t10M\t*\t0\t0\tACGTACGTAC\tIIIIIIIIII" > small.sam
-```
-Convert to BAM:
-```sh
-samtools view -b -o small.bam small.sam
-```
-Sort and index BAM:
-```sh
-samtools sort -o small.sorted.bam small.bam
-samtools index small.sorted.bam
-```
-
----
-
-## 3. BAM vs. CRAM: Comparison and Advantages
 
 ### CRAM Format Overview
 CRAM is a highly compressed format for storing sequencing alignments. Unlike BAM, which compresses reads independently, CRAM achieves better compression by leveraging an external reference genome.
@@ -125,42 +178,6 @@ CRAM is a highly compressed format for storing sequencing alignments. Unlike BAM
 ### When to Use BAM vs. CRAM
 - Use **BAM** when the reference genome is unavailable or when you need a standalone format.
 - Use **CRAM** for efficient storage and archiving of aligned reads when the reference is accessible.
-
----
-
-## 4. CRAM Format
-
-[CRAM Format Specification](https://samtools.github.io/hts-specs/CRAMv3.pdf)
-
-### Handling CRAM Files with `samtools`
-#### Convert BAM to CRAM
-```sh
-samtools view -C -T reference.fasta -o reads.cram reads.bam
-```
-#### Convert CRAM to BAM
-```sh
-samtools view -b -o reads.bam reads.cram
-```
-#### View CRAM Content
-```sh
-samtools view reads.cram | head -10
-```
-#### Index CRAM
-```sh
-samtools index reads.cram
-```
-
-#### Real Example with Small Files
-Convert BAM to CRAM:
-```sh
-samtools view -C -T reference.fasta -o small.cram small.bam
-```
-View CRAM content:
-```sh
-samtools view small.cram
-```
-
----
 
 ## 5. Compression Comparison: BAM vs. CRAM
 
