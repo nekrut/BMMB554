@@ -73,7 +73,7 @@ Links to individual lectures will be posted below.
 | 6 | Feb 4 |  [Python 2 - Strings and lists and FASTQ](https://training.galaxyproject.org/topics/data-science/tutorials/gnmx-lecture3/tutorial.html) |  | N | 
 | 7 | Feb 6 |  [Python 3 - A more careful look at lists and dictionaries](https://training.galaxyproject.org/topics/data-science/tutorials/gnmx-lecture4/tutorial.html) |  | N | 
 | 8 | Feb 11 |  [Python 4 - Processing files](https://training.galaxyproject.org/topics/data-science/tutorials/gnmx-lecture5/tutorial.html) |  | N | 
-| 9 | Feb 13 | [ Pandas 1 - Creating and using dataframes ](https://training.galaxyproject.org/topics/data-science/tutorials/gnmx-lecture6/tutorial.html) | | Home assignment |
+| 9 | Feb 13 | [ Pandas 1 - Creating and using dataframes ](https://colab.research.google.com/github/nekrut/BMMB554/blob/master/notebooks/pandas.ipynb) | | Home assignment |
 
 <!--
   
