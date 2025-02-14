@@ -3,7 +3,7 @@ Feb 14 - Feb 20, 2025
 
 ## What do you need to do?
 
-You need to repeat analysis of SRA accessions for your organism of intereset. Do do this follow these steps:
+You need to repeat analysis of SRA accessions for your organism of intereset. To do this follow these steps:
 
 ### Run through the example
 
