@@ -35,8 +35,6 @@ To retrieve the NCBI TaxID for the Somali wild ass using the NCBI Taxonomy websi
 5. **Locate the TaxID:**  
    Click on the relevant entry. On the detail page, you will see the organism’s information, including the NCBI Taxonomy ID (TaxID). For the Somali wild ass, the TaxID is typically listed as **9838**.
 
-By following these steps, you can easily find the NCBI TaxID for the Somali wild ass or any other organism.
-
 ### Retrieve a list of SRA datasets for this organism
 
 You can retrieve SRA accessions for an organism using its TaxID by following these steps on the NCBI SRA website:
@@ -74,11 +72,11 @@ ERR6892494,2021-12-19 22:35:26,,0,0,0,0,0,,,ERX6515852,unspecified,WGS,unspecifi
 
 ### Use notebook to analyze this file using 
 
-Analyze this datasert as described in [Pandas + Altair](https://colab.research.google.com/github/nekrut/BMMB554/blob/master/notebooks/pandas.ipynb#scrollTo=390d708a-156d-43bf-845c-014612abb8e4). For this simply replace the filke in [this cell](https://colab.research.google.com/github/nekrut/BMMB554/blob/master/notebooks/pandas.ipynb#scrollTo=aed2724a-99a8-4f83-8f22-125808852ae3&line=2&uniqifier=1) using your new file. Of coursem, you will need to change settings appropriately.
+Analyze the csv file downloaded above as described in [Pandas + Altair](https://colab.research.google.com/github/nekrut/BMMB554/blob/master/notebooks/pandas.ipynb#scrollTo=390d708a-156d-43bf-845c-014612abb8e4). For this simply replace the file in [this cell](https://colab.research.google.com/github/nekrut/BMMB554/blob/master/notebooks/pandas.ipynb#scrollTo=aed2724a-99a8-4f83-8f22-125808852ae3&line=2&uniqifier=1) with your new file. Of course, you will need to change settings appropriately.
 
 ## How to submit it?
 
-Use [this form](https://forms.gle/qDJvn3FDcrb9e1r67) to submit a link to your colab notebook. ⚠️ You need to be logged into Google with **your psu account** to us e this form.
+Use [this form](https://forms.gle/qDJvn3FDcrb9e1r67) to submit a link to your colab notebook. ⚠️ You need to be logged into Google with **your psu account** to use this form.
 
 
 
