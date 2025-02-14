@@ -12,7 +12,7 @@ You need to repeat analysis of SRA accessions for your organism of intereset. To
 
 ### Think of which organism you want to do analsys with
 
-The organism choice is really up to you but you need to know `taxId` of your organism. To get `taxId`:
+The organism choice is really up to you but you need to know `taxId` of your organism. To get `taxId` use example below. IN the example we use an organism called "[Somali wild ass](https://en.wikipedia.org/wiki/Somali_wild_ass)":
 
 To retrieve the NCBI TaxID for the Somali wild ass using the NCBI Taxonomy website, follow these steps:
 
