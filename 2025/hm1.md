@@ -1,4 +1,4 @@
-# Home work 1
+# Home work 1 🐴
 Feb 14 - Feb 20, 2025
 
 ## What do you need to do?
