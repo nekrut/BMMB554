@@ -75,7 +75,7 @@ Links to individual lectures will be posted below.
 | 8 | Feb 11 |  [Python 4 - Processing files](https://training.galaxyproject.org/topics/data-science/tutorials/gnmx-lecture5/tutorial.html) |  | N | 
 | 9 | Feb 13 | [ Pandas 1 - Creating and using dataframes ](https://colab.research.google.com/github/nekrut/BMMB554/blob/master/notebooks/pandas.ipynb) | | Home assignment |
 | 10 | Feb 18 | [ Pandas 2 - Narrow data versus wide data. Melts, pivots, and joins](https://colab.research.google.com/github/nekrut/BMMB554/blob/master/notebooks/pandas.ipynb) | | |
-| 11 | Feb 20 | Data analysis platforms and workflow languages: An ovderview + Defining class project | | ❗ Home assignment due ❗ |
+| 11 | Feb 20 | Data analysis platforms and workflow languages: An overview + Defining class project | | ❗ Home assignment due ❗ |
 
 <!--
   
