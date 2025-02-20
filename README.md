@@ -22,6 +22,7 @@ Office hours by appointment only
 
 > [!NOTE]
 > When contacting instructor use the above e-mail and include "BMMB554" in the subject line (simply click on [e-mail](mailto:aun1@psu.edu?Subject=BMMB554) address. It will invoke an email client with subject line pre-filled).
+> A preferred way of contacting me is using MS teams via my PSU account `aun1@psu.edu`
 
 ## Course logistics
 
