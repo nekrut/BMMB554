@@ -76,7 +76,25 @@ Links to individual lectures will be posted below.
 | 8 | Feb 11 |  [Python 4 - Processing files](https://training.galaxyproject.org/topics/data-science/tutorials/gnmx-lecture5/tutorial.html) |  | N | 
 | 9 | Feb 13 | [ Pandas 1 - Creating and using dataframes ](https://colab.research.google.com/github/nekrut/BMMB554/blob/master/notebooks/pandas.ipynb) | | [Home assignment](https://github.com/nekrut/BMMB554/blob/master/2025/hm1.md) |
 | 10 | Feb 18 | [ Pandas 2 - Narrow data versus wide data. Melts, pivots, and joins](https://colab.research.google.com/github/nekrut/BMMB554/blob/master/notebooks/pandas.ipynb) | | |
-| 11 | Feb 20 | Data analysis platforms and workflow languages: An overview + Defining class project | | ❗ [Home assignment due](https://github.com/nekrut/BMMB554/blob/master/2025/hm1.md) ❗ |
+| 11 | Feb 20 | Creating websites on GitHub infrastrcture | | ❗ [Home assignment due](https://github.com/nekrut/BMMB554/blob/master/2025/hm1.md) ❗ |
+| 12/13 | Feb 27 | What is Galaxy? / Project description |  | N |
+| 14 | Mar 4 | Uploading data from various sources | | |
+| 16 | Mar 6 | Understanding dataset collections | | |
+| 17 | Mar 18 | Workflows: GWL, Nextflow, Snakemake, and WDL | | | 
+| 18 | Mar 20 | Using conditionals and advanced logic in Galaxy workflows | | |
+| 19 | Mar 24 | Executing Galaxy workflows programmatically | | |
+| 20 | Mar 26 | Creating Galaxy tools: BioConda, BioContainers, and Planemo | | | 
+| 21 | Apr 1 | Interactive environments: Why we learned Python in the beginning | | | 
+| 22 | Apr 3 | Mappers and aligners: What's the difference 1 | | |
+| 23 | Apr 8 | Mappers and aligners: What the difference 2 | | |
+| 24 | Apr 10 | Common analyses 1: Resequencing | | |
+| 25 | Apr 15 | Common analyses 2: Genome alignment | | |
+| 26 | Apr 17 | Common analyses 3: Genome assembly | | | 
+| 27 | Apr 22 | Common analyses 4: Protein structure prediction | | | 
+| 28 | Apr 24 | Common analyses 5: Transcriptomics | | |
+| 30 | Apr 29 | Common analyses 6: Metagenomics | | |
+| 31 | May 1 | Project presentations | | | 
+
 
 <!--
   
