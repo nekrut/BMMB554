@@ -77,7 +77,7 @@ Links to individual lectures will be posted below.
 | 9 | Feb 13 | [ Pandas 1 - Creating and using dataframes ](https://colab.research.google.com/github/nekrut/BMMB554/blob/master/notebooks/pandas.ipynb) | | [Home assignment](https://github.com/nekrut/BMMB554/blob/master/2025/hm1.md) |
 | 10 | Feb 18 | [ Pandas 2 - Narrow data versus wide data. Melts, pivots, and joins](https://colab.research.google.com/github/nekrut/BMMB554/blob/master/notebooks/pandas.ipynb) | | |
 | 11 | Feb 20 | Creating websites on GitHub infrastrcture | | ❗ [Home assignment due](https://github.com/nekrut/BMMB554/blob/master/2025/hm1.md) ❗ |
-| 12/13 | Feb 27 | Project description / [Forming project groups](https://forms.gle/ZxCwm57quMKW55Tj6)|  | N |
+| 12/13 | Feb 27 | Project description ([genes](https://docs.google.com/presentation/d/1VkSc9NZkTPKayp4N0XODBTfr1XieK9rVImL751qdweQ/edit?usp=sharing))/ [Forming project groups](https://forms.gle/ZxCwm57quMKW55Tj6)|  | N |
 | 14 | Mar 4 | Galaxy / Datasources / Genome Browsers | | |
 | 16 | Mar 6 | Understanding dataset collections for complex analyses | | |
 | 17 | Mar 18 | Workflows: GWL, Nextflow, Snakemake, and WDL | | | 
