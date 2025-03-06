@@ -61,13 +61,11 @@ Despite the rapidly increasing number of fully assembled genomes few genomes are
 
 ### Genomes of interest
 
-```
-https://github.com/nekrut/BMMB554/raw/refs/heads/master/2025/aGasCar1.fa
-https://github.com/nekrut/BMMB554/raw/refs/heads/master/2025/bTaeGut2.fa
-https://github.com/nekrut/BMMB554/raw/refs/heads/master/2025/fScoJap1.fa
-https://github.com/nekrut/BMMB554/raw/refs/heads/master/2025/mCynVol1.fa
-https://github.com/nekrut/BMMB554/raw/refs/heads/master/2025/mHomSapT2T.fa
-```
+https://github.com/nekrut/BMMB554/raw/refs/heads/master/2025/aGasCar1.fa.gz
+https://github.com/nekrut/BMMB554/raw/refs/heads/master/2025/bTaeGut2.fa.gz
+https://github.com/nekrut/BMMB554/raw/refs/heads/master/2025/fScoJap1.fa.gz
+https://github.com/nekrut/BMMB554/raw/refs/heads/master/2025/mCynVol1.fa.gz
+https://github.com/nekrut/BMMB554/raw/refs/heads/master/2025/mHomSapT2T.fa.gz
 
 These correspond to fragments of genomes from:
 
