@@ -56,6 +56,13 @@ We will use JupyterLab as our main platform. JupyterLab is an example of a "note
 
 ![](https://i.imgur.com/qSrZwOI.png)
 
+### Adding yourself to a Galaxy queue for this class
+
+1. Go to https://usegalaxy.org and log in
+2. Click on this link -> [https://usegalaxy.org/join-training/bmmb554-25/](https://usegalaxy.org/join-training/bmmb554-25/)
+3. You are all set
+
+   
 
 ## Lectures
 
