@@ -81,6 +81,6 @@ These correspond to fragments of genomes from:
 
 ### By March 18
 
-Sketch a very rough flowchart of spets you would take to perform such an analysis: given an amino acid translation of a human ortholog for each of the genes, how do I locate this gene in each of the five genomes?
+Sketch a very rough flowchart of steps you would take to perform such an analysis: given an amino acid translation of a human ortholog for each of the genes, how do I locate this gene in each of the five genomes?
 
 
