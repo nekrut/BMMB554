@@ -6,7 +6,7 @@ Below are the email addresses organized into markdown bullet lists for each part
 
 ---
 
-### Partition 1
+### Group 1
 
 - sfh5867@psu.edu
 - apk6356@psu.edu
@@ -18,7 +18,7 @@ Below are the email addresses organized into markdown bullet lists for each part
 
 ---
 
-### Partition 2
+### Group 2
 
 - mrs6995@psu.edu
 - wbw5279@psu.edu
@@ -29,7 +29,7 @@ Below are the email addresses organized into markdown bullet lists for each part
 
 ---
 
-### Partition 3
+### Group 3
 
 - jal7297@psu.edu
 - zxx5155@psu.edu
@@ -41,7 +41,7 @@ Below are the email addresses organized into markdown bullet lists for each part
 
 ---
 
-### Partition 4
+### Group 4
 
 - pky5070@psu.edu
 - nhk5073@psu.edu
