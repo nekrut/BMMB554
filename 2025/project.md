@@ -2,10 +2,6 @@
 
 ## Groups
 
-Below are the email addresses organized into markdown bullet lists for each partition:
-
----
-
 ### Group 1
 
 - sfh5867@psu.edu
