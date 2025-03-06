@@ -79,7 +79,8 @@ Links to individual lectures will be posted below.
 | 11 | Feb 20 | Creating websites on GitHub infrastrcture | | ❗ [Home assignment due](https://github.com/nekrut/BMMB554/blob/master/2025/hm1.md) ❗ |
 | 12/13 | Feb 27 | Project description ([genes](https://docs.google.com/presentation/d/1VkSc9NZkTPKayp4N0XODBTfr1XieK9rVImL751qdweQ/edit?usp=sharing))/ [Forming project groups](https://forms.gle/ZxCwm57quMKW55Tj6)|  | N |
 | 14 | Mar 4 | Galaxy / Datasources / Genome Browsers | | |
-| 16 | Mar 6 | Understanding dataset collections for complex analyses | | |
+| 14 | Mar 6 | [Project description](https://github.com/nekrut/BMMB554/blob/master/2025/project.md) | [Genome Browsers](https://genome.ucsc.edu/) | | |
+| 16 | Mar 18 | Understanding dataset collections for complex analyses | | |
 | 17 | Mar 18 | Workflows: GWL, Nextflow, Snakemake, and WDL | | | 
 | 18 | Mar 20 | Using conditionals and advanced logic in Galaxy workflows | | |
 | 19 | Mar 24 | Executing Galaxy workflows programmatically | | |
