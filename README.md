@@ -86,8 +86,8 @@ Links to individual lectures will be posted below.
 | 11 | Feb 20 | Creating websites on GitHub infrastrcture | | ❗ [Home assignment due](https://github.com/nekrut/BMMB554/blob/master/2025/hm1.md) ❗ |
 | 12/13 | Feb 27 | Project description ([genes](https://docs.google.com/presentation/d/1VkSc9NZkTPKayp4N0XODBTfr1XieK9rVImL751qdweQ/edit?usp=sharing))/ [Forming project groups](https://forms.gle/ZxCwm57quMKW55Tj6)|  | N |
 | 14 | Mar 4 | Galaxy / Datasources / Genome Browsers | | |
-| 14 | Mar 6 | [Project description](https://github.com/nekrut/BMMB554/blob/master/2025/project.md) | [Genome Browsers](https://genome.ucsc.edu/) | | |
-| 16 | Mar 18 | Understanding dataset collections for complex analyses | | |
+| 14 | Mar 6 | [Project description](https://github.com/nekrut/BMMB554/blob/master/2025/project.md) / [Genome Browsers](https://genome.ucsc.edu/) | | |
+| 16 | Mar 18 | Illumina sequencing / Understanding dataset collections for complex analyses | | |
 | 17 | Mar 18 | Workflows: GWL, Nextflow, Snakemake, and WDL | | | 
 | 18 | Mar 20 | Using conditionals and advanced logic in Galaxy workflows | | |
 | 19 | Mar 24 | Executing Galaxy workflows programmatically | | |
@@ -97,7 +97,7 @@ Links to individual lectures will be posted below.
 | 23 | Apr 8 | Mappers and aligners: What the difference 2 | | |
 | 24 | Apr 10 | Common analyses 1: Resequencing | | |
 | 25 | Apr 15 | Common analyses 2: Epigenetics | | |
-| 26 | Apr 17 | Common analyses 3: Genome assembly | | | 
+| 26 | Apr 17 | ONT + PacBio / Common analyses 3: Genome assembly | | | 
 | 27 | Apr 22 | Common analyses 4: Protein structure prediction | | | 
 | 28 | Apr 24 | Common analyses 5: Transcriptomics | | |
 | 30 | Apr 29 | Common analyses 6: Metagenomics | | |
