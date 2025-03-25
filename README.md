@@ -88,20 +88,21 @@ Links to individual lectures will be posted below.
 | 14 | Mar 4 | Galaxy / Datasources / Genome Browsers | | |
 | 14 | Mar 6 | [Project description](https://github.com/nekrut/BMMB554/blob/master/2025/project.md) / [Genome Browsers](https://genome.ucsc.edu/) | | |
 | 16 | Mar 18 | [Illumina sequencing](https://github.com/nekrut/BMMB554/blob/master/2025/illumina.md) / [Understanding dataset collections for complex analyses](https://gxy.io/GTN:T00146) | | |
-| 17 | Mar 18 | Workflows: GWL, Nextflow, Snakemake, and WDL | | | 
-| 18 | Mar 20 | Using conditionals and advanced logic in Galaxy workflows | | |
-| 19 | Mar 24 | Executing Galaxy workflows programmatically | | |
-| 20 | Mar 26 | Creating Galaxy tools: BioConda, BioContainers, and Planemo | | | 
-| 21 | Apr 1 | Interactive environments: Why we learned Python in the beginning | | | 
-| 22 | Apr 3 | Mappers and aligners: What's the difference 1 | | |
-| 23 | Apr 8 | Mappers and aligners: What the difference 2 | | |
-| 24 | Apr 10 | Common analyses 1: Resequencing | | |
-| 25 | Apr 15 | Common analyses 2: Epigenetics | | |
-| 26 | Apr 17 | ONT + PacBio / Common analyses 3: Genome assembly | | | 
-| 27 | Apr 22 | Common analyses 4: Protein structure prediction | | | 
-| 28 | Apr 24 | Common analyses 5: Transcriptomics | | |
-| 30 | Apr 29 | Common analyses 6: Metagenomics | | |
-| 31 | May 1 | Project presentations | | | 
+| 17 | Mar 20 | Workflows: GWL, Nextflow, Snakemake, and WDL | | | 
+| 18 | Mar 25 | Creating Galaxy workflows from [history](https://usegalaxy.org/u/aun1/h/march-25-class) and creating custom [indexes](https://zenodo.org/record/5119008/files/chrM.fa.gz
+) | | |
+| 19 | Mar 27 | Executing Galaxy workflows programmatically | | |
+| 20 | - | Creating Galaxy tools: BioConda, BioContainers, and Planemo | | | 
+| 21 | - | Interactive environments: Why we learned Python in the beginning | | | 
+| 22 | - | Mappers and aligners: What's the difference 1 | | |
+| 23 | - | Mappers and aligners: What the difference 2 | | |
+| 24 | - | Common analyses 1: Resequencing | | |
+| 25 | - | Common analyses 2: Epigenetics | | |
+| 26 | - | ONT + PacBio / Common analyses 3: Genome assembly | | | 
+| 27 | - | Common analyses 4: Protein structure prediction | | | 
+| 28 | - | Common analyses 5: Transcriptomics | | |
+| 30 | - | Common analyses 6: Metagenomics | | |
+| 31 | - | Project presentations | | | 
 
 
 <!--
