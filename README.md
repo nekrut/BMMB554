@@ -90,7 +90,7 @@ Links to individual lectures will be posted below.
 | 16 | Mar 18 | [Illumina sequencing](https://github.com/nekrut/BMMB554/blob/master/2025/illumina.md) / [Understanding dataset collections for complex analyses](https://gxy.io/GTN:T00146) | | |
 | 17 | Mar 20 | Workflows: GWL, Nextflow, Snakemake, and WDL | | | 
 | 18 | Mar 25 | Creating Galaxy workflows from [history](https://usegalaxy.org/u/aun1/h/march-25-class) and creating custom [indexes](https://zenodo.org/record/5119008/files/chrM.fa.gz) | | |
-| 19 | Mar 27 | Executing Galaxy workflows programmatically | [Project analysis phase I](https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/gene-centric/tutorial.html) | |
+| 19 | Mar 27 | [Project analysis phase I](https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/gene-centric/tutorial.html) |  | |
 | 20 | - | Creating Galaxy tools: BioConda, BioContainers, and Planemo | | | 
 | 21 | - | Interactive environments: Why we learned Python in the beginning | | | 
 | 22 | - | Mappers and aligners: What's the difference 1 | | |
