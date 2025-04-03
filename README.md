@@ -92,7 +92,7 @@ Links to individual lectures will be posted below.
 | 18 | Mar 25 | Creating Galaxy workflows from [history](https://usegalaxy.org/u/aun1/h/march-25-class) and creating custom [indexes](https://zenodo.org/record/5119008/files/chrM.fa.gz) | | |
 | 19 | Mar 27 | [Project analysis phase I](https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/gene-centric/tutorial.html) |  | |
 | 20 | Apr 1 | [How read mapping works?](https://github.com/nekrut/BMMB554/blob/master/2024/finding_matches.md) | | | 
-| 21 | - | Interactive environments: Why we learned Python in the beginning | | | 
+| 21 | - | [Alignment: Global versus local](https://github.com/nekrut/BMMB554/blob/master/2024/alignment.md) | | | 
 | 22 | - | Mappers and aligners: What's the difference 1 | | |
 | 23 | - | Mappers and aligners: What the difference 2 | | |
 | 24 | - | Common analyses 1: Resequencing | | |
