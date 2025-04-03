@@ -39,19 +39,20 @@ In this case the [**edit distance**](https://en.wikipedia.org/wiki/Edit_distance
 
 Before we can develop an algorithm that will help us to compute the edit distance let's develop a general framework that would allow us to think about the problem in exact terms. Let's look at a pair of VERY long sequences. So long, that we do not even see the left end -- it disappears into $\infty$:
 
-$$
-		\color{red}{\texttt{.....A C T G C C T A}}\texttt{ G}\\
-		\color{red}{\texttt{.....A C T G C C T A}}\texttt{ C}\\
-$$
+```
 
-the red parts of the two sequences represent **prefixes** for the last nucleotides shown in black. Let's assume that the edit distance between the two prefixes is known (don't ask how we know, we just do). For simplicity let's "compact" the prefix of the first sequence into $\alpha$ and the prefix of the second sequence into $\beta$:
+.....a c t g c c t a G
+.....a c t g c c t a C
+
+```
+
+the lower case of the two sequences represent **prefixes** for the last nucleotides shown in black. Let's assume that the edit distance between the two prefixes is known (don't ask how we know, we just do). For simplicity let's "compact" the prefix of the first sequence into $\alpha$ and the prefix of the second sequence into $\beta$:
 
 
-$$
-		\alpha \texttt{G}\\
-	    \beta  \texttt{C}
-$$
-
+```
+αG
+βC		   
+```
 
 again, the edit distance between $\alpha$ and $\beta$ is known to us. The three possibilities for computing the edit distance between $\alpha G$ and $\beta C$ are:
 
