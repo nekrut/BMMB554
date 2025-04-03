@@ -787,10 +787,6 @@ T A C G T C A - G C
 T A T G T C A T G C
 ```
 
-The following Python code implements Global alignment approach we have seen above. Note that the first function, `exampleCost`, can be changed to set different value for the penalty matrix. You can play with it here:
-
-<iframe src="https://trinket.io/embed/python3/911a7ddd2e?toggleCode=true" width="100%" height="600" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
-
 ## Local alignment
 
 Global alignment discussed above works only in cases when we truly expect sequences to match across their entire lengths. In majority of biological application this is rarely the case. For instance, suppose you want to compare two bacterial genomes to figure out if they have matching sequences. Local alignment algorithm helps with this challenge. Surprisingly, it is almost identical to the approaches we used before. So here is our problem:
