@@ -53,6 +53,8 @@ For aligning spliced sequences, such as mRNA reads, the base-level alignment alg
 
 How does lastz compare to minimap2? To answer this question we generated random sequence pairs with 1,000, 2,000, 5,000 and 10,000 nucleotides (nt) in lengths and divergences between 0% and 40% in 1% increments. Short indels (ranging from 1 to 5 nucleotides) were introduced at a rate of 1%. Random 1,000 nucleotide flanks were added to each sequence. Scripts used for generation of these sequences can be found at https://github.com/rsharris/echydna. 
 
+Let go to [Galaxy](https://usegalaxy.org), create alignments, and process them using a [Jupyter Notebook](https://colab.research.google.com/drive/1ooQKf7FAWR-rAMNL78XqwEgO_WP5OVHU?usp=sharing).
+
 
 
 
