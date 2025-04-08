@@ -1,11 +1,13 @@
 # Lastz and Minimap2
 
-## A bit abouytr lastz
+## A bit about lastz
 
 
 ## A bit about minimap2
 
 [Minimap Paper](https://doi.org/10.1093/bioinformatics/bty191)
+
+### Seeding
 
 The first step in Minimap2's algorithm is seeding, which involves identifying short, exact matches between the query and the reference sequences. To achieve this efficiently, Minimap2 employs the concept of minimizers.2 A minimizer is defined as the lexicographically smallest k-mer within a window of w consecutive k-mers in a given sequence.11 This method provides a way to sample representative k-mers from the sequences, significantly reducing the number of k-mers that need to be considered for indexing and searching.
 Two key parameters govern the minimizer selection process: -k, which sets the length of the k-mer, and -w, which determines the size of the window. These parameters directly influence the density of minimizers extracted from a sequence. A smaller k-mer length or a smaller window size will result in a higher density of minimizers, potentially increasing the sensitivity of the alignment but also increasing the computational cost. Conversely, larger values for these parameters will lead to a sparser set of minimizers, which can improve speed at the expense of potentially missing some matches.
@@ -34,5 +36,12 @@ Following the chaining step, Minimap2 performs a more detailed base-level alignm
 This base-level alignment is also carried out using dynamic programming. For aligning genomic DNA, Minimap2 often employs an affine gap cost model, which uses separate penalties for opening a gap and for extending an existing gap. This model is biologically more realistic than a simple linear gap cost, as it accounts for the fact that the initiation of a gap is often more costly than extending it. Minimap2 specifically uses a 2-piece affine gap cost function for genomic DNA alignment, applying different gap open and extension costs based on the length of the gap.
 To optimize the speed of this base-level alignment, especially when dealing with very long sequences, Minimap2 utilizes the Suzuki–Kasahara formulation.2 This approach is a difference-based method that overcomes certain limitations associated with traditional implementations of the Smith-Waterman algorithm, allowing for efficient Single Instruction Multiple Data (SIMD) vectorization, regardless of the peak alignment score.
 For aligning spliced sequences, such as mRNA reads, the base-level alignment algorithm in Minimap2 is adapted to account for the presence of introns  The gap costs during chaining and the gap cost function used for the dynamic programming alignment are modified to differentiate between insertions and deletions relative to the reference sequence. Additionally, Minimap2 incorporates a reference-dependent cost to penalize non-canonical splicing junctions, using a modified dynamic programming equation that considers the presence of canonical splice signals (e.g., GT-AG) and less frequent splice signals in the reference genome. In the spliced alignment mode, Minimap2 typically increases the density of minimizers and disables banded alignment, which can make it slower than genomic DNA alignment but improves accuracy in identifying splice junctions 
+
+## Apples and Oranges
+
+How does lastz compare to minimap2? To answer this question we generated random sequence pairs with 1,000, 2,000, 5,000 and 10,000 nucleotides (nt) in lengths and divergences between 0% and 40% in 1% increments. Short indels (ranging from 1 to 5 nucleotides) were introduced at a rate of 1%. Random 1,000 nucleotide flanks were added to each sequence. Scripts used for generation of these sequences can be found at https://github.com/rsharris/echydna. 
+
+
+
 
 
