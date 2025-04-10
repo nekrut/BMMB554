@@ -94,7 +94,7 @@ Links to individual lectures will be posted below.
 | 20 | Apr 1 | [How read mapping works?](https://github.com/nekrut/BMMB554/blob/master/2024/finding_matches.md) | | | 
 | 21 | Apr 3 | [Alignment: Global versus local](https://github.com/nekrut/BMMB554/blob/master/2024/alignment.md) / Class project: [Refining objectives](https://gxy.io/GTN:T00174) | | | 
 | 22 | Apr 8 | Mappers and aligners: [Apples versus Oranges](https://github.com/nekrut/BMMB554/blob/master/2025/apples_oranges.md) | | |
-| 23 | - | Mappers and aligners: What the difference 2 | | |
+| 23 | Apr 10 | [Update on project data](https://www.nature.com/articles/d41586-025-01079-y) / [Running LLMs locally](https://blog.stephenturner.us/p/local-rag-app-open-webui-zotero-library?r=wxa1&utm_campaign=post&utm_medium=web) | | |
 | 24 | - | Common analyses 1: Resequencing | | |
 | 25 | - | Common analyses 2: Epigenetics | | |
 | 26 | - | ONT + PacBio / Common analyses 3: Genome assembly | | | 
