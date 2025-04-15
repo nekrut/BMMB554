@@ -169,3 +169,277 @@ We support four major toolsets for processing of SAM/BAM datasets:
  * [SAMtools](http://www.htslib.org/) - various utilities for manipulating alignments in the SAM/BAM format, including sorting, merging, indexing and generating alignments in a per-position format.
  * [BEDtools](https://bedtools.readthedocs.io/en/latest/) - a toolkit originally written for BED format was expanded for analysis of BAM and VCF datasets.
  * [Picard](https://broadinstitute.github.io/picard/) - a set of Java tools for manipulating high-throughput sequencing data (HTS) data and formats.
+
+## Diploid variant calling
+
+## Key references
+
+- [Genotype and SNP calling from next-generation sequencing data](https://www.nature.com/articles/nrg2986)
+- [A general approach to single-nucleotide polymorphism discovery](https://www.nature.com/articles/ng1299_452)
+- [Haplotype-based variant detection from short-read sequencing](https://arxiv.org/pdf/1207.3907.pdf)
+
+
+
+Variant calling is a complex field that was significantly propelled by advances in DNA sequencing and efforts of large scientific consortia such as the [1000 Genomes](http://www.1000genomes.org). Here we summarize basic ideas central to Genotype and Variant calling. First, let's contrast the two things although they often go together:
+
+ * **Variant calling** - identification of positions where the sequenced sample is different from the reference sequence (or [reference genome graph](https://github.com/vgteam/vg));
+ * **Genotype calling** - identifying individual's genotype at variable sites.
+
+A typical workflow for variation discovery involves the following steps (e.g., see Nielsen et al. [2011](http://www.nature.com/nrg/journal/v12/n6/full/nrg2986.html)):
+
+ 1. Mapping reads against the reference genome
+ 2. Thresholding BAM datasets by, for example, retaining paired, properly mapped reads
+ 3. Performing quality score recalibration
+ 4. Performing realignment
+ 5. Performing variant calling/genotype assignment
+ 6. Performing filtering and genotype quality score recalibration
+ 7. Annotating variants and performing downstream analyses
+
+However, continuing evolution of variant detection methods has made some of these steps obsolete. For instance, omitting quality score recalibration and re-alignment (steps 3 and 4 above) when using haplotype-aware variant callers such as [FreeBayes](https://github.com/ekg/freebayes) does not have an effect on the resulting calls (see Brad Chapman's methodological comparisons at [bcbio](http://bit.ly/1S9kFJN)). Before going forward with an actual genotype calling in Galaxy let's take a look as some basic ideas behind modern variant callers.
+
+Consider a set of sequencing reads derived from a diploid individual:
+
+```
+REFERENCE: atcatgacggcaGtagcatat
+--------------------------------
+READ1:     atcatgacggcaGtagcatat
+READ2:         tgacggcaGtagcatat
+READ3:     atcatgacggcaAtagca
+READ4:            cggcaGtagcatat
+READ5:     atcatgacggcaGtagc
+```
+
+The capitalized position contains a G &#8594; A [transition](https://en.wikipedia.org/wiki/Transition_(genetics)). So, in principle this can be a heterozygous site with two alleles **G** and **A**. A commonly used naïve procedure would define a site as *heterozygous* if there is a non-reference allele with frequency between 20% and 80%. In this case **A** is present in 1/5 or 20% of the cases, so we can say that this is a heterozygous site. Yet it is only represented by a single read and thus is hardly reliable. Here are some of the possibilities that would explain this *variant*. It can be:
+
+ * A true variant
+ * Experimental artifact: A library preparation error (e.g., PCR-derived)
+ * Base calling error
+ * Analysis error: A misalignment (though unlikely in the above example)
+
+## Types of genetic variation
+
+You can have a SNP:
+
+```
+ctcCgag
+ctcTgag
+```
+
+An indel:
+
+```
+atgcttgc
+atg--tgc
+```
+
+Or a structural variant that can an extra block like this
+
+```
+tgcc-------------------------------------agtgc
+tgcc------A very large insertion here----agtgc
+```
+
+or inversion, duplication, and so on...
+
+## Somatic versus germline
+
+All cells have genomes and all can accumulate mutations. However, mutations within *somatic* cells cannot be passed to the next generation:
+
+-----
+
+![](https://i.imgur.com/zECo5Gh.png)
+
+Somatic versus Germilne. Image by [Aaron Quinlan](http://quinlanlab.org/). 
+    
+-----
+
+## Fate of mutations in population
+
+Selection and drift affect the dynamics of mutations in the population:
+
+----
+
+![](https://i.imgur.com/2Aw6sOi.png)
+
+Selection and drift. Image by [Aaron Quinlan](http://quinlanlab.org/). 
+
+-----
+
+In addition, sampling issues such as *Bottleneck* can have dramatic effect on allele frequencies:
+
+-----
+
+![](https://i.imgur.com/rGJ3l1V.png)
+
+Bottleneck effect. Image by [Aaron Quinlan](http://quinlanlab.org/). 
+
+-----
+
+## Humans are diploid
+
+You inherit two haplotypes: one from mom and one from dad:
+
+> (all images from [Aaron Quinlan](http://quinlanlab.org/))
+
+![](https://i.imgur.com/OW79ZPB.png)
+
+Recombination during meiosis breaks the linkage pattern:
+
+![](https://i.imgur.com/ZYMV40T.png)
+
+For mechanical reasons the frequency of recombination is proportional to the physical distance across the chromosome. Before the physical units were known the distance between chromosomal landmarks (e.g., genes) were measured in centimorgans (cM), which is really a measure of recombination frequency:
+
+![](https://i.imgur.com/HpDsHp3.png)
+
+This brings us to the concept of Lunkage (dis)equilibrium. If recombination is equally likely for any genome position, there is linkage equlibrium:
+
+![](https://i.imgur.com/KW4Nd9r.png)
+
+However, we often see a non-random association (linkage) like this:
+
+![](https://i.imgur.com/guxoWjP.png)
+
+Thus genotypes can be predicted (imputed), when some variants are known. 
+
+## Calling heterozygotes is not easy
+
+When finding variants in diploid genomes there are three possible outcomes:
+
+1. Homozygous for the "reference" allele:
+
+![](https://i.imgur.com/TeIwgd1.png)
+
+2. Homozygous for alternative allele
+
+![](https://i.imgur.com/SANFBN4.png)
+
+3. Heterozygous for alternative allele
+
+![](https://i.imgur.com/XfS6Y5r.png)
+
+So, are the following reads derived from homo- or heterozygote?
+
+```
+REFERENCE: atcatgacggcaGtagcatat
+--------------------------------
+READ1:     atcatgacggcaGtagcatat
+READ2:         tgacggcaGtagcatat
+READ3:     atcatgacggcaAtagca
+READ4:            cggcaGtagcatat
+READ5:     atcatgacggcaGtagc
+```
+
+## Coverage is important
+
+In this case we are dealing with discrete events: a site at a given position can be either (1) Reference (<font color="green">Success</font>) or (2) Alternate allele (<font color="red">Failure</font>). These can be modeled as draws from [Binomial distribution](https://en.wikipedia.org/wiki/Binomial_distribution) where the probability of $k$ successes in $n$ trials is:
+
+$$
+P(X=k)=\binom{n}{k} p^k p^{n-k}
+$$
+
+Putting this is biological context given the number of reads ($n$) and probability of seeing reference or alternate (0.5) we can compute the number of successes (reference alleles) using the following python code:
+
+```python=
+binom.rvs(n,p,size=size)
+```
+You can run it in this [notebook](https://colab.research.google.com/github/nekrut/BMMB554/blob/master/2021/ipynb/binomial.ipynb). Let's play with it to see how coverage would affect assessing heterozygous sites.
+
+## Bayes Theorem: Math behind main variant callers
+
+$$
+P(A|B)=\frac{P(B|A)P(A)}{P(B)}
+$$
+
+Suppose at a given site you have the following arrangement:
+
+```
+aaaaaaaccc
+```
+Here $C$ is a SNP and $A$ is Reference (no SNP). In this configuration the probability of having an $A$ is $P(A)=\frac{7}{10}$ and probability of having a $C$ is $P(C)=\frac{3}{10}$
+
+Now, let's suppose that you only observe nucleotides that are shown in UPPER CASE:
+
+```
+aaaaaAACcc
+```
+what is the probability of $AAC$? It is $P(AAC)=\frac{3}{10}$. Now let's make it more interesting. First, let's call $ACC$ observed data ($O$). 
+
+What is the probability of $O$ given $A$: 
+$$
+P(O|A)=\frac{2}{7}
+$$
+
+What is the probability of $O$ given $C$:
+$$
+P(O|C)=\frac{1}{3}
+$$
+
+Now, let's change the direction. What is the probability of having a SNP($C$) or no SNP ($A$) given the observed data:
+$$
+P(A|O)=\frac{2}{3}\\
+P(C|O)=\frac{1}{3}
+$$
+Now, let's go back to Bayes formula again. What is the probability of having $A$ given the observed data $O$:
+$$
+P(A|O)=\frac{P(O|A)P(A)}{P(O)}=\frac{\frac{2}{7}\times\frac{7}{10}}{\frac{3}{10}}=\frac{2}{3}
+$$
+
+What is the probability of having $C$ given the observed data $O$:
+$$
+P(C|O)=\frac{P(O|C)P(C)}{P(O)}=\frac{\frac{1}{3}\times\frac{3}{10}}{\frac{3}{10}}=\frac{1}{3}
+$$
+In this formula:
+- $P(A|O)$ is *poterior probability*
+- $P(A)$ is prior probability of $A$
+
+In generic form this would look like this:
+$$
+P(SNP|Data)=\frac{P(Data|SNP)P(SNP)}{P(Data)}
+$$
+
+Let's look at this example:
+
+```
+ACACGCTAgCTAGCT
+      TAgCT       Q = 20
+     CTAaCT       Q = 10
+        gCTAGC    Q = 50
+```
+
+we need to compute the probability of observed genotype (homozygote for $C$) given the data:
+
+$$
+P(G|D)=\frac{P(D|G)P(G)}{P(D)}
+$$
+
+Here:
+
+- $P(D|G)$ - conditional probability of data given genotype that we would calculate below
+- $P(G)$ - a prior informed by previous studies as well as by properties of the data
+- $P(D)$ - is a constant as it is the same for all genotypes
+
+So ...
+
+$$
+P(D|G)=\prod_{j=1}^{3}(\frac{P(D_j|H_1)}{2}+\frac{P(D_j|H_2)}{2})\\
+P(b1 = G|AG)=\frac{1}{2}((1-10^{-2})+\frac{10^{-2}}{3})\\
+P(b2 = A|AG)=\frac{1}{2}((1-10^{-2})+\frac{10^{-2}}{3})\\
+P(b3 = G|AG)=\frac{1}{2}((1-10^{-2})+\frac{10^{-2}}{3})
+$$
+
+Ultimately:
+
+----
+
+![](https://i.imgur.com/4ZSvZlM.png)
+
+Polybayes formula. Image by [Aaron Quinlan](http://quinlanlab.org/). 
+
+-----
+
+## Haplotype-based variant calling
+
+is implemented is the current *de facto* stabdard tools such as [FreeBayes](https://github.com/freebayes/freebayes) or [GATK](https://gatk.broadinstitute.org/hc/en-us):
+
+![](https://i.imgur.com/CZVQgXW.png)
+
