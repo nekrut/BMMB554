@@ -346,6 +346,8 @@ You can run it in this [notebook](https://colab.research.google.com/github/nekru
 
 ## Bayes Theorem: Math behind main variant callers
 
+> About Bayes -> https://youtu.be/K2proaXGERU?feature=shared
+
 $$
 P(A|B)=\frac{P(B|A)P(A)}{P(B)}
 $$
