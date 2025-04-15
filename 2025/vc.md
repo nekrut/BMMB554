@@ -355,6 +355,7 @@ Suppose at a given site you have the following arrangement:
 ```
 aaaaaaaccc
 ```
+
 Here $C$ is a SNP and $A$ is Reference (no SNP). In this configuration the probability of having an $A$ is $P(A)=\frac{7}{10}$ and probability of having a $C$ is $P(C)=\frac{3}{10}$
 
 Now, let's suppose that you only observe nucleotides that are shown in UPPER CASE:
@@ -362,37 +363,46 @@ Now, let's suppose that you only observe nucleotides that are shown in UPPER CAS
 ```
 aaaaaAACcc
 ```
+
 what is the probability of $AAC$? It is $P(AAC)=\frac{3}{10}$. Now let's make it more interesting. First, let's call $ACC$ observed data ($O$). 
 
 What is the probability of $O$ given $A$: 
+
 $$
 P(O|A)=\frac{2}{7}
 $$
 
 What is the probability of $O$ given $C$:
+
 $$
 P(O|C)=\frac{1}{3}
 $$
 
 Now, let's change the direction. What is the probability of having a SNP($C$) or no SNP ($A$) given the observed data:
+
 $$
 P(A|O)=\frac{2}{3}\\
 P(C|O)=\frac{1}{3}
 $$
+
 Now, let's go back to Bayes formula again. What is the probability of having $A$ given the observed data $O$:
+
 $$
 P(A|O)=\frac{P(O|A)P(A)}{P(O)}=\frac{\frac{2}{7}\times\frac{7}{10}}{\frac{3}{10}}=\frac{2}{3}
 $$
 
 What is the probability of having $C$ given the observed data $O$:
+
 $$
 P(C|O)=\frac{P(O|C)P(C)}{P(O)}=\frac{\frac{1}{3}\times\frac{3}{10}}{\frac{3}{10}}=\frac{1}{3}
 $$
+
 In this formula:
 - $P(A|O)$ is *poterior probability*
 - $P(A)$ is prior probability of $A$
 
 In generic form this would look like this:
+
 $$
 P(SNP|Data)=\frac{P(Data|SNP)P(SNP)}{P(Data)}
 $$
