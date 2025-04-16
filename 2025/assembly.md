@@ -574,3 +574,54 @@ In this case there is only one path. This because our $k$ is larger that the rep
 
 This is why technologies producing long sequencing reads stimulate so much enthusiasm - they will allow to resolve and produce accurate assembly of large genomes. 
 
+## Overlap Graphs versus deBruijn graphs:
+
+The **fundamental difference** between **de Bruijn graphs** and **overlap graphs** in genome assembly lies in **how they represent relationships between sequencing reads**:
+
+### 1. **Unit of Representation**
+
+- **Overlap Graphs**:
+  - Nodes represent **entire sequencing reads**.
+  - Edges represent **overlaps** between the suffix of one read and the prefix of another (typically ≥ a certain length).
+
+- **de Bruijn Graphs**:
+  - Nodes represent **k-mers** (short substrings of length *k* extracted from reads).
+  - Edges represent **(k+1)-mers**, connecting two k-mers if one shifts into the other by one nucleotide.
+
+
+
+### 2. **Graph Construction Philosophy**
+
+- **Overlap Graph**:
+  - Based on **explicit pairwise comparison** of reads to find overlaps.
+  - Scales poorly with large numbers of reads: **O(n²)** comparisons.
+
+- **de Bruijn Graph**:
+  - Based on **k-mer decomposition**, avoiding pairwise comparisons.
+  - Scales well for large datasets; efficient to construct using **hash tables** or **Bloom filters**.
+
+
+
+### 3. **Handling of Repeats**
+
+- **Overlap Graph**:
+  - Better preserves **long-range information**, so can help resolve longer repeats if coverage and read length are sufficient.
+  
+- **de Bruijn Graph**:
+  - More prone to **collapse repeats** shorter than the k-mer size; choice of *k* is critical.
+  - Sensitive to sequencing errors — can fragment the graph if *k* is too large or introduce bubbles if too small.
+
+
+
+### 4. **Assembly Use Case Suitability**
+
+| Use Case        | Overlap Graphs           | de Bruijn Graphs             |
+|-----------------|--------------------------|------------------------------|
+| Long reads      | ✅ Ideal                  | ❌ Inefficient               |
+| Short reads     | ❌ Memory-intensive       | ✅ Efficient and compact     |
+| Error tolerance | ✅ Better error modeling  | ❌ Needs error correction    |
+
+
+
+
+
