@@ -637,7 +637,7 @@ Before we begin, some fundamental terms:
 
 Galaxy histories containing zebra finch assembly are [here](https://galaxyproject.org/projects/vgp/workflows/)
 
-Slides are [here](https://docs.google.com/presentation/d/e/2PACX-1vTQapYPlNKuKjMzRPyAxyPSgWkcNXa2QzD5dUPJ8Dcz9QDsA_jHD5ffBwRdXRHLs9D9-YGc8wMH40z7)
+Slides are [here](https://docs.google.com/presentation/d/1yj8l8KDrHYHnAHDO7m5bYinIVQS90-0NRSJrz4AJVKM/edit?usp=sharing).
 
 <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vTQapYPlNKuKjMzRPyAxyPSgWkcNXa2QzD5dUPJ8Dcz9QDsA_jHD5ffBwRdXRHLs9D9-YGc8wMH40z7/embed?start=false&loop=false&delayms=3000" frameborder="0" width="1365" height="1053" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
 
