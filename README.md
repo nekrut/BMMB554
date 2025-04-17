@@ -96,11 +96,11 @@ Links to individual lectures will be posted below.
 | 22 | Apr 8 | Mappers and aligners: [Apples versus Oranges](https://github.com/nekrut/BMMB554/blob/master/2025/apples_oranges.md) | | |
 | 23 | Apr 10 | [Update on project data](https://www.nature.com/articles/d41586-025-01079-y) / [Running LLMs locally](https://blog.stephenturner.us/p/local-rag-app-open-webui-zotero-library?r=wxa1&utm_campaign=post&utm_medium=web) | | |
 | 24 | Apr 15 | Common analyses 1: [Resequencing](https://github.com/nekrut/BMMB554/blob/master/2025/vc.md) | | |
-| 25 | - | [PacBio](https://github.com/nekrut/BMMB554/blob/master/2024/pacbio.md) / Common analyses 2: [Genome assembly](https://github.com/nekrut/BMMB554/blob/master/2025/assembly.md) | | | 
-| 26 | - | Common analyses 3: Epigenetics | | |
-| 27 | - | Common analyses 4: Protein structure prediction | | | 
-| 28 | - | Common analyses 5: Transcriptomics | | |
-| 30 | - | Common analyses 6: Metagenomics | | |
+| 25 | Apr 17 | [PacBio](https://github.com/nekrut/BMMB554/blob/master/2024/pacbio.md) / Common analyses 2: [Genome assembly](https://github.com/nekrut/BMMB554/blob/master/2025/assembly.md) | | | 
+| 26 | Apr 22 | Clean up: Project / Bayes / etc. | | |
+| 27 | Apr 24 | Bloom filteres | | | 
+| 28 | - | Common analyses 3: Transcriptomics | | |
+| 30 | - | Common analyses 4: Protein structure prediction | | |
 | 31 | - | Project presentations | | | 
 
 
