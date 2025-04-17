@@ -623,7 +623,21 @@ The **fundamental difference** between **de Bruijn graphs** and **overlap graphs
 | Short reads     | ❌ Memory-intensive       | ✅ Efficient and compact     |
 | Error tolerance | ✅ Better error modeling  | ❌ Needs error correction    |
 
-# Practicakl example: assembly of zebra finch
+# Practical example: assembly of zebra finch
+
+Before we begin, some fundamental terms:
+
+- **Contig** - A sequence reconstructed by assembling together sequencing reads
+- **Scaffold** - An ordered collection contigs. The sequence within the gaps between the contigs is usually not known.
+- **N50** - A statistic used for assessing the contiguity of a genome assembly. The contigs in an assembly are sorted by size and added, starting with the largest. The size of the contig is reported that makes the total greater than or equal to 50% of the genome size.
+
+![](https://i.imgur.com/L8SNxGK.png)
+
+<small>Image credit = Mike Schatz</small>
+
+Galaxy histories containing zebra finch assembly are [here](https://galaxyproject.org/projects/vgp/workflows/)
+
+Slides are [here](https://docs.google.com/presentation/d/e/2PACX-1vTQapYPlNKuKjMzRPyAxyPSgWkcNXa2QzD5dUPJ8Dcz9QDsA_jHD5ffBwRdXRHLs9D9-YGc8wMH40z7)
 
 <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vTQapYPlNKuKjMzRPyAxyPSgWkcNXa2QzD5dUPJ8Dcz9QDsA_jHD5ffBwRdXRHLs9D9-YGc8wMH40z7/embed?start=false&loop=false&delayms=3000" frameborder="0" width="1365" height="1053" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
 
