@@ -1,5 +1,11 @@
 ![](https://i.imgur.com/phZHgSu.png)
 
+An assembly graph for zebra finch
+
+![image](https://github.com/user-attachments/assets/121630f2-bc0f-4e72-bc97-d39ac4830a60)
+
+[Penrose tiling](https://en.wikipedia.org/wiki/Penrose_tiling) 
+
 # Assembly
 
 $k$-mer composition
