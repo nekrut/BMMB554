@@ -606,8 +606,6 @@ The **fundamental difference** between **de Bruijn graphs** and **overlap graphs
   - Based on **k-mer decomposition**, avoiding pairwise comparisons.
   - Scales well for large datasets; efficient to construct using **hash tables** or **Bloom filters**.
 
-
-
 ### 3. **Handling of Repeats**
 
 - **Overlap Graph**:
@@ -617,8 +615,6 @@ The **fundamental difference** between **de Bruijn graphs** and **overlap graphs
   - More prone to **collapse repeats** shorter than the k-mer size; choice of *k* is critical.
   - Sensitive to sequencing errors — can fragment the graph if *k* is too large or introduce bubbles if too small.
 
-
-
 ### 4. **Assembly Use Case Suitability**
 
 | Use Case        | Overlap Graphs           | de Bruijn Graphs             |
@@ -627,7 +623,9 @@ The **fundamental difference** between **de Bruijn graphs** and **overlap graphs
 | Short reads     | ❌ Memory-intensive       | ✅ Efficient and compact     |
 | Error tolerance | ✅ Better error modeling  | ❌ Needs error correction    |
 
+# Practicakl example: assembly of zebra finch
 
+<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vTQapYPlNKuKjMzRPyAxyPSgWkcNXa2QzD5dUPJ8Dcz9QDsA_jHD5ffBwRdXRHLs9D9-YGc8wMH40z7/embed?start=false&loop=false&delayms=3000" frameborder="0" width="1365" height="1053" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
 
 
 
