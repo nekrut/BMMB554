@@ -454,13 +454,13 @@ You can run it in this [notebook](https://colab.research.google.com/github/nekru
 
 ---
 
-# 🧬 Bayesian Genotyping Example: Diploid SNP
+# Bayesian Genotyping Example: Diploid SNP
 
 This example shows how **Bayes' theorem** can be used to determine the genotype of a **biallelic SNP** in a **diploid organism**, such as a human.
 
 ---
 
-## 📘 Problem Setup
+## Problem Setup
 
 We want to infer the genotype at a specific SNP site. The possible genotypes are:
 
@@ -472,7 +472,7 @@ We observe sequencing reads that report either allele `A` or `B`, possibly with 
 
 ---
 
-## 🧪 Example Data
+## Example Data
 
 - **Total reads:** 10  
 - **Observed bases:**
@@ -495,7 +495,7 @@ Where:
 
 ---
 
-## 📊 Step-by-Step Computation
+## Step-by-Step Computation
 
 ### 1. Define Priors
 
@@ -562,23 +562,13 @@ P(BB | Data) ≈ ~0
 
 ---
 
-## ✅ Conclusion
+## Conclusion
 
 - **Most likely genotype:** `AA`  
 - **AB** is possible but much less likely  
 - **BB** is extremely unlikely  
 
----
 
-## 🔁 Why Bayesian Genotyping?
-
-Bayesian inference allows:
-
-- Use of **prior knowledge** (e.g., Hardy-Weinberg equilibrium)
-- Accounting for **sequencing errors**
-- Getting **posterior probabilities** instead of just point estimates
-
----
 
 
 
