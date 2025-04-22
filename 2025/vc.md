@@ -455,7 +455,7 @@ Sure! Let’s walk through a **Bayesian approach to genotyping a diploid SNP**, 
 
 ---
 
-## 🧬 Problem Setup
+## The Problem
 
 Imagine we want to determine the genotype at a particular **biallelic SNP** site in a **diploid** organism (e.g., human). The possible genotypes are:
 
@@ -467,7 +467,7 @@ We observe **sequencing reads** that cover this SNP, each reporting a base (eith
 
 ---
 
-## 🧪 Example Data
+## Example Data
 
 Let's say we have:
 
@@ -494,7 +494,7 @@ Where:
 
 ---
 
-## 📊 Step-by-Step Calculation
+## Step-by-Step Calculation
 
 ### Step 1: Define Priors
 
@@ -507,7 +507,7 @@ We assume that each read is an **independent** observation.
 
 Let’s compute \( P(D \mid G) \) for each genotype:
 
-#### 📍 For AA (only A is correct):
+#### For AA (only A is correct):
 - Each A read has probability ≈ 0.99 (correct base)
 - Each B read has probability ≈ 0.01 (error)
 
@@ -515,7 +515,7 @@ Let’s compute \( P(D \mid G) \) for each genotype:
 P(D \mid AA) = (0.99)^7 \cdot (0.01)^3
 \]
 
-#### 📍 For AB (A and B equally likely):
+#### For AB (A and B equally likely):
 - Each read has a 0.5 chance of being from either allele.
 - So:
   - A read: probability = \(0.5 \cdot 0.99 + 0.5 \cdot 0.01 = 0.5\)
@@ -525,7 +525,7 @@ P(D \mid AA) = (0.99)^7 \cdot (0.01)^3
 P(D \mid AB) = (0.5)^{10}
 \]
 
-#### 📍 For BB (only B is correct):
+#### For BB (only B is correct):
 - A read: 0.01 (error)
 - B read: 0.99
 
@@ -566,7 +566,7 @@ This gives approximately:
 
 ---
 
-## ✅ Final Interpretation
+## Final Interpretation
 
 - **Most likely genotype: AA** (92% posterior probability)
 - **AB** is possible but much less likely
@@ -574,7 +574,7 @@ This gives approximately:
 
 ---
 
-## 🔁 Why Bayesian?
+## Why Bayesian?
 
 Bayesian reasoning allows you to:
 - Incorporate prior knowledge (e.g., population frequencies)
