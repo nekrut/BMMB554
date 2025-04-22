@@ -451,143 +451,136 @@ You can run it in this [notebook](https://colab.research.google.com/github/nekru
 
 > About Bayes -> https://youtu.be/K2proaXGERU?feature=shared
 
-Sure! Let’s walk through a **Bayesian approach to genotyping a diploid SNP**, with a detailed explanation of each step.
 
 ---
 
-## The Problem
+# 🧬 Bayesian Genotyping Example: Diploid SNP
 
-Imagine we want to determine the genotype at a particular **biallelic SNP** site in a **diploid** organism (e.g., human). The possible genotypes are:
-
-- **AA** (homozygous reference)
-- **AB** (heterozygous)
-- **BB** (homozygous alternate)
-
-We observe **sequencing reads** that cover this SNP, each reporting a base (either A or B), possibly with errors.
+This example shows how **Bayes' theorem** can be used to determine the genotype of a **biallelic SNP** in a **diploid organism**, such as a human.
 
 ---
 
-## Example Data
+## 📘 Problem Setup
 
-Let's say we have:
+We want to infer the genotype at a specific SNP site. The possible genotypes are:
 
-- **Total reads:** 10
+- `AA` (homozygous reference)  
+- `AB` (heterozygous)  
+- `BB` (homozygous alternate)
+
+We observe sequencing reads that report either allele `A` or `B`, possibly with sequencing errors.
+
+---
+
+## 🧪 Example Data
+
+- **Total reads:** 10  
 - **Observed bases:**
-  - A: 7 reads
-  - B: 3 reads
-- **Sequencing error rate (ε):** 1% = 0.01
+  - `A`: 7 reads  
+  - `B`: 3 reads  
+- **Sequencing error rate (ε):** 0.01
 
-We want to compute the **posterior probability** of each genotype given the data:
+We compute the posterior probability for each genotype:
 
-$$
-P(\text{Genotype} \mid \text{Data})
-$$
-
-using **Bayes’ theorem**:
-
-$$
-P(G \mid D) = \frac{P(D \mid G) \cdot P(G)}{P(D)}
-$$
+\[
+P(\text{Genotype} \mid \text{Data}) = \frac{P(\text{Data} \mid \text{Genotype}) \cdot P(\text{Genotype})}{P(\text{Data})}
+\]
 
 Where:
-- $ G \in \{AA, AB, BB\} $
-- $$ D $$: observed reads
-- $$ P(G) $$: prior probability of genotype
-- $$ P(D \mid G) $$: likelihood
-- $$ P(D) $$: normalization constant
+- \( G \in \{AA, AB, BB\} \)
+- \( D \): observed data
+- \( P(G) \): prior genotype probability
+- \( P(D \mid G) \): likelihood
+- \( P(D) \): normalization constant
 
 ---
 
-## Step-by-Step Calculation
+## 📊 Step-by-Step Computation
 
-### Step 1: Define Priors
+### 1. Define Priors
 
 Assume a uniform prior:
-- $$ P(AA) = P(AB) = P(BB) = 1/3 $$
 
-### Step 2: Compute Likelihoods
-
-We assume that each read is an **independent** observation.
-
-Let’s compute \( P(D \mid G) \) for each genotype:
-
-#### For AA (only A is correct):
-- Each A read has probability ≈ 0.99 (correct base)
-- Each B read has probability ≈ 0.01 (error)
-
-\[
-P(D \mid AA) = (0.99)^7 \cdot (0.01)^3
-\]
-
-#### For AB (A and B equally likely):
-- Each read has a 0.5 chance of being from either allele.
-- So:
-  - A read: probability = \(0.5 \cdot 0.99 + 0.5 \cdot 0.01 = 0.5\)
-  - B read: same thing = 0.5
-
-\[
-P(D \mid AB) = (0.5)^{10}
-\]
-
-#### For BB (only B is correct):
-- A read: 0.01 (error)
-- B read: 0.99
-
-\[
-P(D \mid BB) = (0.01)^7 \cdot (0.99)^3
-\]
+```
+P(AA) = P(AB) = P(BB) = 1/3
+```
 
 ---
 
-### Step 3: Compute Unnormalized Posteriors
+### 2. Compute Likelihoods
 
-Multiply each likelihood by prior:
+We assume each read is independent.
 
-- \( P(AA \mid D) \propto (0.99)^7 \cdot (0.01)^3 \cdot \frac{1}{3} \)
-- \( P(AB \mid D) \propto (0.5)^{10} \cdot \frac{1}{3} \)
-- \( P(BB \mid D) \propto (0.01)^7 \cdot (0.99)^3 \cdot \frac{1}{3} \)
+#### For `AA` (only `A` is correct):
+- `A` read: 0.99  
+- `B` read: 0.01
 
-Let’s compute these numerically:
+```text
+P(D | AA) = (0.99)^7 * (0.01)^3
+```
+
+#### For `AB` (both `A` and `B` are equally likely):
+- Each read has a 50% chance of being correct regardless of base.
+
+```text
+P(D | AB) = (0.5)^10
+```
+
+#### For `BB` (only `B` is correct):
+- `A` read: 0.01  
+- `B` read: 0.99
+
+```text
+P(D | BB) = (0.01)^7 * (0.99)^3
+```
+
+---
+
+### 3. Compute Unnormalized Posterior Probabilities
+
+Multiply each likelihood by the prior:
 
 ```python
-aa = (0.99**7)*(0.01**3)*(1/3)
-ab = (0.5**10)*(1/3)
-bb = (0.01**7)*(0.99**3)*(1/3)
+aa = (0.99**7) * (0.01**3) * (1/3)
+ab = (0.5**10) * (1/3)
+bb = (0.01**7) * (0.99**3) * (1/3)
 
 total = aa + ab + bb
 paa = aa / total
 pab = ab / total
 pbb = bb / total
 
-paa, pab, pbb
+print(paa, pab, pbb)
 ```
 
-This gives approximately:
-
-- \( P(AA \mid D) ≈ 0.92 \)
-- \( P(AB \mid D) ≈ 0.08 \)
-- \( P(BB \mid D) ≈ \text{very small (≈0)} \)
-
----
-
-## Final Interpretation
-
-- **Most likely genotype: AA** (92% posterior probability)
-- **AB** is possible but much less likely
-- **BB** is extremely unlikely given the observed data
+**Result:**
+```text
+P(AA | Data) ≈ 0.92
+P(AB | Data) ≈ 0.08
+P(BB | Data) ≈ ~0
+```
 
 ---
 
-## Why Bayesian?
+## ✅ Conclusion
 
-Bayesian reasoning allows you to:
-- Incorporate prior knowledge (e.g., population frequencies)
-- Explicitly model sequencing error
-- Get **posterior probabilities**, not just point estimates
+- **Most likely genotype:** `AA`  
+- **AB** is possible but much less likely  
+- **BB** is extremely unlikely  
 
 ---
 
-Let me know if you want a version that incorporates **allele frequency priors** from population data (e.g., Hardy-Weinberg), or if you want to visualize this in Python!
+## 🔁 Why Bayesian Genotyping?
+
+Bayesian inference allows:
+
+- Use of **prior knowledge** (e.g., Hardy-Weinberg equilibrium)
+- Accounting for **sequencing errors**
+- Getting **posterior probabilities** instead of just point estimates
+
+---
+
+
 
 Ultimately:
 
