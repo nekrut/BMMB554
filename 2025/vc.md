@@ -478,19 +478,23 @@ Let's say we have:
 - **Sequencing error rate (ε):** 1% = 0.01
 
 We want to compute the **posterior probability** of each genotype given the data:
-\[
+
+$$
 P(\text{Genotype} \mid \text{Data})
-\]
+$$
+
 using **Bayes’ theorem**:
-\[
+
+$$
 P(G \mid D) = \frac{P(D \mid G) \cdot P(G)}{P(D)}
-\]
+$$
+
 Where:
-- \( G \in \{AA, AB, BB\} \)
-- \( D \): observed reads
-- \( P(G) \): prior probability of genotype
-- \( P(D \mid G) \): likelihood
-- \( P(D) \): normalization constant
+- $$ G \in \{AA, AB, BB\} $$
+- $$ D $$: observed reads
+- $$ P(G) $$: prior probability of genotype
+- $$ P(D \mid G) $$: likelihood
+- $$ P(D) $$: normalization constant
 
 ---
 
@@ -499,7 +503,7 @@ Where:
 ### Step 1: Define Priors
 
 Assume a uniform prior:
-- \( P(AA) = P(AB) = P(BB) = 1/3 \)
+- $$ P(AA) = P(AB) = P(BB) = 1/3 $$
 
 ### Step 2: Compute Likelihoods
 
