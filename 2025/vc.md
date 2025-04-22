@@ -490,7 +490,7 @@ P(G \mid D) = \frac{P(D \mid G) \cdot P(G)}{P(D)}
 $$
 
 Where:
-- $$ G \in \{AA, AB, BB\} $$
+- $ G \in \{AA, AB, BB\} $
 - $$ D $$: observed reads
 - $$ P(G) $$: prior probability of genotype
 - $$ P(D \mid G) $$: likelihood
