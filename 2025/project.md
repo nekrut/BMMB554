@@ -59,26 +59,15 @@ Despite the rapidly increasing number of fully assembled genomes few genomes are
 - Group 3: _Ink4a_ [UCSC](https://genome.ucsc.edu/cgi-bin/hgTracks?db=hg38&lastVirtModeType=default&lastVirtModeExtraState=&virtModeType=default&virtMode=0&nonVirtPosition=&position=chr9%3A21967752%2D21995323) [NCBI](https://www.ncbi.nlm.nih.gov/gene/1029/)
 - Group 4: _LRTOMT_ [UCSC](https://genome.ucsc.edu/cgi-bin/hgTracks?db=hg38&lastVirtModeType=default&lastVirtModeExtraState=&virtModeType=default&virtMode=0&nonVirtPosition=&position=chr11%3A72080850%2D72110782) [NCBI](https://www.ncbi.nlm.nih.gov/gene/220074/)
 
-### Genomes of interest
+### Histories with amino acid sequences:
 
-https://github.com/nekrut/BMMB554/raw/refs/heads/master/2025/aGasCar1.fa.gz
-https://github.com/nekrut/BMMB554/raw/refs/heads/master/2025/bTaeGut2.fa.gz
-https://github.com/nekrut/BMMB554/raw/refs/heads/master/2025/fScoJap1.fa.gz
-https://github.com/nekrut/BMMB554/raw/refs/heads/master/2025/mCynVol1.fa.gz
-https://github.com/nekrut/BMMB554/raw/refs/heads/master/2025/mHomSapT2T.fa.gz
+- Group 1: [_XBP-1_](https://usegalaxy.org/u/cartman/h/xbp1) 
+- Group 2: [_GNAS1_](https://usegalaxy.org/u/cartman/h/gnas) 
+- Group 3: [_Ink4a_](https://usegalaxy.org/u/cartman/h/ink4a) 
+- Group 4: [_LRTOMT_](https://usegalaxy.org/u/cartman/h/lrtomt)
 
-These correspond to fragments of genomes from:
+Run the following workflow: https://usegalaxy.org/u/cartman/w/copy-of-comparative-gene-analysis-v3
 
- - `aGasCar1` - _Gastrophryne carolinensis_ (Eastern narrow-mouth toad)
- - `bTaeGut` - _Taeniopygia guttata_ (Zebra finch)
- - `fScoJap` - _Scomber japonicus_ (Chub mackerel)
- - `mCynVol` - _Cynocephalus volans_ (Philippine flying lemur)
- - `mHomSap` - _Homo sapiens_ (Human)
-
-## What you need to do
-
-### By March 18
-
-Sketch a very rough flowchart of steps you would take to perform such an analysis: given an amino acid translation of a human ortholog for each of the genes, how do I locate this gene in each of the five genomes?
+  
 
 
