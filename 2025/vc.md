@@ -451,96 +451,139 @@ You can run it in this [notebook](https://colab.research.google.com/github/nekru
 
 > About Bayes -> https://youtu.be/K2proaXGERU?feature=shared
 
-$$
-P(A|B)=\frac{P(B|A)P(A)}{P(B)}
-$$
+Sure! Let’s walk through a **Bayesian approach to genotyping a diploid SNP**, with a detailed explanation of each step.
 
-Suppose at a given site you have the following arrangement:
+---
 
+## 🧬 Problem Setup
+
+Imagine we want to determine the genotype at a particular **biallelic SNP** site in a **diploid** organism (e.g., human). The possible genotypes are:
+
+- **AA** (homozygous reference)
+- **AB** (heterozygous)
+- **BB** (homozygous alternate)
+
+We observe **sequencing reads** that cover this SNP, each reporting a base (either A or B), possibly with errors.
+
+---
+
+## 🧪 Example Data
+
+Let's say we have:
+
+- **Total reads:** 10
+- **Observed bases:**
+  - A: 7 reads
+  - B: 3 reads
+- **Sequencing error rate (ε):** 1% = 0.01
+
+We want to compute the **posterior probability** of each genotype given the data:
+\[
+P(\text{Genotype} \mid \text{Data})
+\]
+using **Bayes’ theorem**:
+\[
+P(G \mid D) = \frac{P(D \mid G) \cdot P(G)}{P(D)}
+\]
+Where:
+- \( G \in \{AA, AB, BB\} \)
+- \( D \): observed reads
+- \( P(G) \): prior probability of genotype
+- \( P(D \mid G) \): likelihood
+- \( P(D) \): normalization constant
+
+---
+
+## 📊 Step-by-Step Calculation
+
+### Step 1: Define Priors
+
+Assume a uniform prior:
+- \( P(AA) = P(AB) = P(BB) = 1/3 \)
+
+### Step 2: Compute Likelihoods
+
+We assume that each read is an **independent** observation.
+
+Let’s compute \( P(D \mid G) \) for each genotype:
+
+#### 📍 For AA (only A is correct):
+- Each A read has probability ≈ 0.99 (correct base)
+- Each B read has probability ≈ 0.01 (error)
+
+\[
+P(D \mid AA) = (0.99)^7 \cdot (0.01)^3
+\]
+
+#### 📍 For AB (A and B equally likely):
+- Each read has a 0.5 chance of being from either allele.
+- So:
+  - A read: probability = \(0.5 \cdot 0.99 + 0.5 \cdot 0.01 = 0.5\)
+  - B read: same thing = 0.5
+
+\[
+P(D \mid AB) = (0.5)^{10}
+\]
+
+#### 📍 For BB (only B is correct):
+- A read: 0.01 (error)
+- B read: 0.99
+
+\[
+P(D \mid BB) = (0.01)^7 \cdot (0.99)^3
+\]
+
+---
+
+### Step 3: Compute Unnormalized Posteriors
+
+Multiply each likelihood by prior:
+
+- \( P(AA \mid D) \propto (0.99)^7 \cdot (0.01)^3 \cdot \frac{1}{3} \)
+- \( P(AB \mid D) \propto (0.5)^{10} \cdot \frac{1}{3} \)
+- \( P(BB \mid D) \propto (0.01)^7 \cdot (0.99)^3 \cdot \frac{1}{3} \)
+
+Let’s compute these numerically:
+
+```python
+aa = (0.99**7)*(0.01**3)*(1/3)
+ab = (0.5**10)*(1/3)
+bb = (0.01**7)*(0.99**3)*(1/3)
+
+total = aa + ab + bb
+paa = aa / total
+pab = ab / total
+pbb = bb / total
+
+paa, pab, pbb
 ```
-aaaaaaaccc
-```
 
-Here $C$ is a SNP and $A$ is Reference (no SNP). In this configuration the probability of having an $A$ is $P(A)=\frac{7}{10}$ and probability of having a $C$ is $P(C)=\frac{3}{10}$
+This gives approximately:
 
-Now, let's suppose that you only observe nucleotides that are shown in UPPER CASE:
+- \( P(AA \mid D) ≈ 0.92 \)
+- \( P(AB \mid D) ≈ 0.08 \)
+- \( P(BB \mid D) ≈ \text{very small (≈0)} \)
 
-```
-aaaaaAACcc
-```
+---
 
-what is the probability of $AAC$? It is $P(AAC)=\frac{3}{10}$. Now let's make it more interesting. First, let's call $ACC$ observed data ($O$). 
+## ✅ Final Interpretation
 
-What is the probability of $O$ given $A$: 
+- **Most likely genotype: AA** (92% posterior probability)
+- **AB** is possible but much less likely
+- **BB** is extremely unlikely given the observed data
 
-$$
-P(O|A)=\frac{2}{7}
-$$
+---
 
-What is the probability of $O$ given $C$:
+## 🔁 Why Bayesian?
 
-$$
-P(O|C)=\frac{1}{3}
-$$
+Bayesian reasoning allows you to:
+- Incorporate prior knowledge (e.g., population frequencies)
+- Explicitly model sequencing error
+- Get **posterior probabilities**, not just point estimates
 
-Now, let's change the direction. What is the probability of having a SNP($C$) or no SNP ($A$) given the observed data:
+---
 
-$$
-P(A|O)=\frac{2}{3}\\
-P(C|O)=\frac{1}{3}
-$$
-
-Now, let's go back to Bayes formula again. What is the probability of having $A$ given the observed data $O$:
-
-$$
-P(A|O)=\frac{P(O|A)P(A)}{P(O)}=\frac{\frac{2}{7}\times\frac{7}{10}}{\frac{3}{10}}=\frac{2}{3}
-$$
-
-What is the probability of having $C$ given the observed data $O$:
-
-$$
-P(C|O)=\frac{P(O|C)P(C)}{P(O)}=\frac{\frac{1}{3}\times\frac{3}{10}}{\frac{3}{10}}=\frac{1}{3}
-$$
-
-In this formula:
-- $P(A|O)$ is *poterior probability*
-- $P(A)$ is prior probability of $A$
-
-In generic form this would look like this:
-
-$$
-P(SNP|Data)=\frac{P(Data|SNP)P(SNP)}{P(Data)}
-$$
-
-Let's look at this example:
-
-```
-ACACGCTAgCTAGCT
-      TAgCT       Q = 20
-     CTAaCT       Q = 10
-        gCTAGC    Q = 50
-```
-
-we need to compute the probability of observed genotype (homozygote for $C$) given the data:
-
-$$
-P(G|D)=\frac{P(D|G)P(G)}{P(D)}
-$$
-
-Here:
-
-- $P(D|G)$ - conditional probability of data given genotype that we would calculate below
-- $P(G)$ - a prior informed by previous studies as well as by properties of the data
-- $P(D)$ - is a constant as it is the same for all genotypes
-
-So ...
-
-$$
-P(D|G)=\prod_{j=1}^{3}(\frac{P(D_j|H_1)}{2}+\frac{P(D_j|H_2)}{2})\\
-P(b1 = G|AG)=\frac{1}{2}((1-10^{-2})+\frac{10^{-2}}{3})\\
-P(b2 = A|AG)=\frac{1}{2}((1-10^{-2})+\frac{10^{-2}}{3})\\
-P(b3 = G|AG)=\frac{1}{2}((1-10^{-2})+\frac{10^{-2}}{3})
-$$
+Let me know if you want a version that incorporates **allele frequency priors** from population data (e.g., Hardy-Weinberg), or if you want to visualize this in Python!
 
 Ultimately:
 
