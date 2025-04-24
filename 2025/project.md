@@ -88,6 +88,18 @@ If you expand each dataset by clicking on it, you will get access to additional 
 
 ![image](https://github.com/user-attachments/assets/64c40f12-fc58-48b1-9aaa-cd593e94902e)
 
+If you click on the "graph" button - the last button in this row:
+
+![image](https://github.com/user-attachments/assets/f2735c15-ec13-401d-ae9d-a5de72574531)
+
+you will see a series of options in the center pane of Galaxy interface:
+
+![image](https://github.com/user-attachments/assets/593ff784-28ec-4fb8-bdfd-9bf20089e716)
+
+If you click on the "Phylogenetic Tree Visualization" you will see the tree:
+
+![image](https://github.com/user-attachments/assets/0d52d967-2601-4b7e-a814-1233c1619f93)
+
 
 
 
