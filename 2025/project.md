@@ -115,7 +115,10 @@ To generate visualization, simple replace this line:
 dataset_url = "https://usegalaxy.org/api/datasets/f9cad7b01a472135a9e7130a8002d909/display?to_ext=tabular"
 ```
 
-with URL of your dataset.
+with URL of your dataset, then go to "Runtime" and click "Run all":
+
+![image](https://github.com/user-attachments/assets/528c9233-854e-4871-a6b2-80d38fd2f522)
+
 
 
 
