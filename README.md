@@ -98,10 +98,10 @@ Links to individual lectures will be posted below.
 | 24 | Apr 15 | Common analyses 1: [Resequencing](https://github.com/nekrut/BMMB554/blob/master/2025/vc.md) | | |
 | 25 | Apr 17 | [PacBio](https://github.com/nekrut/BMMB554/blob/master/2024/pacbio.md) / Common analyses 2: [Genome assembly](https://github.com/nekrut/BMMB554/blob/master/2025/assembly.md) | | | 
 | 26 | Apr 22 | Clean up: [Project](https://github.com/nekrut/BMMB554/blob/master/2025/project.md) / [Assembly](https://github.com/nekrut/BMMB554/blob/master/2025/assembly.md) / etc. | | |
-| 27 | Apr 24 | Bloom filteres | | | 
+| 27 | Apr 24 | Bloom filteres - a guest lecture by Paul Medvedev | | | 
 | 28 | - | Common analyses 3: Transcriptomics | | |
 | 30 | - | Common analyses 4: Protein structure prediction | | |
-| 31 | - | Project presentations | | | 
+
 
 
 <!--
