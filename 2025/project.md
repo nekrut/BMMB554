@@ -70,6 +70,30 @@ Despite the rapidly increasing number of fully assembled genomes few genomes are
 
 Run the following workflow: https://usegalaxy.org/u/cartman/w/copy-of-comparative-gene-analysis-v3
 
+## Interpreting the results
+
+### Workflow outputs
+
+If all goes well you should get two output datasets in your history:
+
+![image](https://github.com/user-attachments/assets/20080aab-8d94-4fcf-9ee0-0e7485b185ad)
+
+#### Trees
+
+This is a collection of [neghbor-joining](https://doi.org/10.1093/oxfordjournals.molbev.a040454) trees for each input sequence you provided. For example, in the case of *Ink4a* you will get this:
+
+![image](https://github.com/user-attachments/assets/74a9e6e7-04c0-4746-8d33-0014e3ccc281)
+
+If you expand each dataset by clicking on it, you will get access to additional buttons:
+
+![image](https://github.com/user-attachments/assets/64c40f12-fc58-48b1-9aaa-cd593e94902e)
+
+
+
+
+
+
+
   
 
 
