@@ -100,8 +100,22 @@ If you click on the "Phylogenetic Tree Visualization" you will see the tree:
 
 ![image](https://github.com/user-attachments/assets/0d52d967-2601-4b7e-a814-1233c1619f93)
 
+or this:
 
+![image](https://github.com/user-attachments/assets/ef5fd899-4431-4dca-ad3b-c798d6cb53ac)
 
+#### Protting Data
+
+"Plotting Data" is a single dataset containing data that can be visualized using this [notebook](https://colab.research.google.com/drive/1smTpRejBb7c02LiIxMPNVDjOucLAsD81?usp=sharing).  
+
+To generate visualization, simple replace this line:
+
+```python
+# Paste link to the dataset here
+dataset_url = "https://usegalaxy.org/api/datasets/f9cad7b01a472135a9e7130a8002d909/display?to_ext=tabular"
+```
+
+with URL of your dataset.
 
 
 
