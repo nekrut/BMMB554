@@ -100,7 +100,7 @@ Links to individual lectures will be posted below.
 | 26 | Apr 22 | Clean up: [Project](https://github.com/nekrut/BMMB554/blob/master/2025/project.md) / [Assembly](https://github.com/nekrut/BMMB554/blob/master/2025/assembly.md) / etc. | | |
 | 27 | Apr 24 | Bloom filteres - a guest lecture by Paul Medvedev | | | 
 | 28 | - | [Project](https://github.com/nekrut/BMMB554/blob/master/2025/project.md): The expectations for the writeup  | | |
-| 30 | - | Protein structure prediction | | |
+| 30 | - | [Protein structure prediction](https://github.com/nekrut/BMMB554/blob/master/2025/afold.md) / [RNASeq resource](https://chagall.weill.cornell.edu/RNASEQcourse/) | | |
 
 
 
