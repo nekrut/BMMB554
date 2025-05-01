@@ -116,3 +116,24 @@ AlphaFold 3’s advent has broad implications for biology and medicine. Some exc
 In conclusion, AlphaFold 3 represents a significant technological leap. By generalizing protein folding to the prediction of almost any biomolecular complex, it provides the scientific community with a **“structure engine”** that can tackle questions previously unanswerable by computation alone. While not infallible, AF3’s ability to accurately model the architecture of life’s molecular machinery is transforming how researchers approach problems in biology and drug discovery. It stands as a prime example of how AI-driven tools can accelerate scientific discovery, offering a preview of a future where we can compute our way to understanding and engineering complex biological systems ([Accurate structure prediction of biomolecular interactions with AlphaFold 3 | Nature](https://www.nature.com/articles/s41586-024-07487-w#:~:text=residues,learning%20framework)) ([Google DeepMind and Isomorphic Labs introduce AlphaFold 3 AI model](https://blog.google/technology/ai/google-deepmind-isomorphic-alphafold-3-ai-model/#:~:text=In%20a%20paper%20published%20in,we%20have%20doubled%20prediction%20accuracy)).
 
 **Sources:** The description above is based on the AlphaFold 3 Nature publication by DeepMind (Abramson *et al.*, 2024) ([Accurate structure prediction of biomolecular interactions with AlphaFold 3 | Nature](https://www.nature.com/articles/s41586-024-07487-w#:~:text=Here%20we%20describe%20our%20AlphaFold,Together%2C%20these%20results)) ([Accurate structure prediction of biomolecular interactions with AlphaFold 3 | Nature](https://www.nature.com/articles/s41586-024-07487-w#:~:text=Within%20the%20trunk%2C%20MSA%20processing,48%29%20is%20largely)), supplemental materials and expert analyses ([Accurate structure prediction of biomolecular interactions with AlphaFold 3 | Nature](https://www.nature.com/articles/s41586-024-07487-w#:~:text=The%20diffusion%20module%20%28Fig,diffusion%20approach33%20in%20which%20the)) ([Accurate structure prediction of biomolecular interactions with AlphaFold 3 | Nature](https://www.nature.com/articles/s41586-024-07487-w#:~:text=The%20use%20of%20a%20generative,the%20hallucination%20behaviour%20of%20AF3)), as well as commentary on its performance relative to prior methods ([Accurate structure prediction of biomolecular interactions with AlphaFold 3 | Nature](https://www.nature.com/articles/s41586-024-07487-w#:~:text=residues,Together%2C%20these%20results)) ([AlphaFold 3: Exciting Advance yet Unresolved Major Issues Remain | Deep Origin](https://deeporigin.com/blog/alphafold-3-exciting-advance-yet-unresolved-major-issues-remain#:~:text=1,that%20predicts%20raw%20atom%20coordinates)). These sources provide detailed technical validation of AF3’s architecture and capabilities, underscoring the points discussed.
+
+# Running ColabFold in Galaxy
+
+## How does this work?
+
+ColabFold breaks the original AlphaFold pipeline into two independent steps: (1) MSA generation and (2) structure prediction. As a result the Galaxy implementation consists of two distinct tools: “Colabfold MSA” and “Colabfold AlphFold”. At this time the first step is executed at a dedicated server maintained by ColabFold creators in Korea. The alphaFold step is executed on GPU nodes of the Frontera System located at Texas Advanced Computing Center (TACC). 
+
+We are currently working on removing the MSA generation bottleneck, which will allow us to allow much larger job submission in the near future.
+
+## How to use it?
+
+1. Set up a Galaxy account
+2. Fill out request form: Go to http://gxy.io/colabfold 
+3. Upload your sequences
+4. Run ColabFold MSA: Find the “ColabFold MSA” tool in the Galaxy toolbox. For this simply enter “Colabfold” in the search box.
+5. Run ColabFold AlphaFold: Find the tool in the toolbox using the same approach as above. Run  “Colabfold AlphaFold” on the output generated in the previous step.
+
+Execution times on the Frontera system can fluctuate. Sometimes your jobs will run immediately. Sometimes they will run overnight. 
+
+
+
