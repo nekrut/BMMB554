@@ -63,7 +63,7 @@ Despite the rapidly increasing number of fully assembled genomes few genomes are
 
 - Group 1: [_XBP-1_](https://usegalaxy.org/u/cartman/h/xbp1) [paper](https://pubmed.ncbi.nlm.nih.gov/17034899/)
 - Group 2: [_GNAS1_](https://usegalaxy.org/u/cartman/h/gnas) [paper](https://pubmed.ncbi.nlm.nih.gov/16110341/)
-- Group 3: [_Ink4a_](https://usegalaxy.org/u/cartman/h/ink4a) 
+- Group 3: [_Ink4a_](https://usegalaxy.org/u/cartman/h/ink4a) [paper](https://pubmed.ncbi.nlm.nih.gov/17652172/)
 - Group 4: [_LRTOMT_](https://usegalaxy.org/u/cartman/h/lrtomt)
 
 ### Run analysis workflow
