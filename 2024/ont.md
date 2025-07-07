@@ -1,11 +1,3 @@
----
-tags: BMMB554-23
----
-
-![](https://i.imgur.com/VJvUNIu.png)
-
-
-# Lecture 17: Oxford Nanopore
 
 > [!IMPORTANT]
 > This text and figures are based on the Oxford nanopоре documentation from the official [nanoporetech](https://community.nanoporetech.com/) site and official [videos](https://www.youtube.com/@OxfordNanoporeTechnologies).
